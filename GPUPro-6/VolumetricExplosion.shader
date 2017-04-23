@@ -26,7 +26,9 @@ struct DS_OUTPUT
 	float4 vColor : COLOR;
 };
 
-float _Radius;
+#define NUM_CONTROL_POINTS 1
+
+float _Radius = 2.5f;
 float _TimeAlive;
 			
 VS_CONTROL_POINT_OUTPUT VShader(VS_CONTROL_POINT_INPUT data)
@@ -38,7 +40,7 @@ VS_CONTROL_POINT_OUTPUT VShader(VS_CONTROL_POINT_INPUT data)
 	return result;
 }
 
-HS_CONSTANT_DATA_OUTPUT ConstantHShader(InputPatch<VS_CONTROL_POINT_OUTPUT, 1> inputPatch, uint patchId : SV_PrimitiveID)
+HS_CONSTANT_DATA_OUTPUT ConstantHShader(InputPatch<VS_CONTROL_POINT_OUTPUT, NUM_CONTROL_POINTS> inputPatch, uint patchId : SV_PrimitiveID)
 {
 	HS_CONSTANT_DATA_OUTPUT result;
 
@@ -48,16 +50,16 @@ HS_CONSTANT_DATA_OUTPUT ConstantHShader(InputPatch<VS_CONTROL_POINT_OUTPUT, 1> i
 	result.Edges[3] = 
 	result.Inside[0] = 
 	result.Inside[1] = 14.0;
-				
+	
 	return result;
 }
 
 [domain("quad")]
-[partitioning("integer")]
+[partitioning("fractional_odd")]
 [outputtopology("triangle_cw")]
 [outputcontrolpoints(4)]
 [patchconstantfunc("ConstantHShader")]
-HS_CONTROL_POINT_OUTPUT HShader(InputPatch<VS_CONTROL_POINT_OUTPUT, 1> p,
+HS_CONTROL_POINT_OUTPUT HShader(InputPatch<VS_CONTROL_POINT_OUTPUT, NUM_CONTROL_POINTS> p,
 	uint i : SV_OutputControlPointID,
 	uint PatchID : SV_PrimitiveID)
 {
@@ -69,7 +71,7 @@ HS_CONTROL_POINT_OUTPUT HShader(InputPatch<VS_CONTROL_POINT_OUTPUT, 1> p,
 [domain("quad")]
 DS_OUTPUT DShader(HS_CONSTANT_DATA_OUTPUT input,
 	float2 UV : SV_DomainLocation,
-	const OutputPatch<HS_CONTROL_POINT_OUTPUT, 4> quadPatch)
+	const OutputPatch<HS_CONTROL_POINT_OUTPUT, NUM_CONTROL_POINTS> quadPatch)
 {
 	float pi2 = 6.283185307179586476925286766559;
 	float pi = pi2 / 2.0f;
@@ -77,11 +79,11 @@ DS_OUTPUT DShader(HS_CONSTANT_DATA_OUTPUT input,
 	float fi = pi * UV.x;
 	float sinFi, cosFi;
 	sincos(fi, sinFi, cosFi);
-				
+	
 	float theta = pi2 * UV.y;
 	float sinTheta, cosTheta;
 	sincos(theta, sinTheta, cosTheta);
-				
+	
 	float3 spherePosition;
 	spherePosition.x = _Radius * sinFi * cosTheta;
 	spherePosition.y = _Radius * sinFi * sinTheta;
@@ -90,10 +92,10 @@ DS_OUTPUT DShader(HS_CONSTANT_DATA_OUTPUT input,
 	DS_OUTPUT result;
 	result.vPosition = float4(spherePosition, 1);
 	result.vColor = float4(normalize(spherePosition), 1);
-				
+	
 	return result;
 }
-			
+
 float4 SolidColorPShader(DS_OUTPUT data) : SV_Target
 {
 	return data.vColor;
