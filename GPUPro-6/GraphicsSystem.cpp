@@ -3,6 +3,7 @@
 
 #include "RendererSimpleTriTessellator.h"
 #include "RendererSimpleQuadTessellator.h"
+#include "RendererVolumetricExplosion.h"
 
 GraphicsSystem::GraphicsSystem()
 {
@@ -71,8 +72,9 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	//float aspectRatio = screenWidth / screenHeight;
 	//D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, fieldOfView, aspectRatio, screenNear, screenDepth);
 	
-	m_renderer = new RendererSimpleTriTessellator();
-	m_renderer = new RendererSimpleQuadTessellator();
+	//m_renderer = new RendererSimpleTriTessellator();
+	//m_renderer = new RendererSimpleQuadTessellator();
+	m_renderer = new RendererVolumetricExplosion();
 
 	return m_renderer->Initialize(m_device);
 }

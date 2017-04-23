@@ -28,6 +28,9 @@
     <ClCompile Include="SystemsManager.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="RendererVolumetricExplosion.cpp">
+      <Filter>Source\Core\Renderers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -63,6 +66,9 @@
     <ClInclude Include="SystemsManager.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
+    <ClInclude Include="RendererVolumetricExplosion.h">
+      <Filter>Source\Core\Renderers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="4 - Realistic Volumentric Explosions.rc" />
@@ -72,13 +78,13 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="VolumetricExplosion.shader">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="TriTessellation.shader">
       <Filter>Shaders</Filter>
     </None>
     <None Include="QuadTessellation.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="VolumetricExplosion.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

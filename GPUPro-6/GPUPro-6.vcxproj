@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <None Include="VolumetricExplosion.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RendererSimpleQuadTessellator.h" />
     <ClInclude Include="RendererSimpleTriTessellator.h" />
+    <ClInclude Include="RendererVolumetricExplosion.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stdafx.h" />
@@ -189,6 +191,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RendererSimpleQuadTessellator.cpp" />
     <ClCompile Include="RendererSimpleTriTessellator.cpp" />
+    <ClCompile Include="RendererVolumetricExplosion.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -207,7 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TriTessellation.shader" />
-    <None Include="VolumetricExplosion.shader" />
   </ItemGroup>
   <ItemGroup>
     <None Include="QuadTessellation.shader">
