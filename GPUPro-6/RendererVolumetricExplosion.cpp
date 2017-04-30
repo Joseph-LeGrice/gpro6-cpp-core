@@ -18,6 +18,8 @@ Shader* RendererVolumetricExplosion::InitShaders(ID3D11Device* device)
 	if (s->InitVertexShader(filename, "VShader", device) &&
 		s->InitHullShader(filename, "HShader", device) &&
 		s->InitDomainShader(filename, "DShader", device) &&
+		//s->InitGeometryShader(filename, "GShaderTessellation", device) &&
+		//s->InitPixelShader(filename, "SolidColorPShaderGeometry", device))
 		s->InitPixelShader(filename, "SolidColorPShader", device))
 	{
 		return s;
