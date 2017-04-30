@@ -51,9 +51,9 @@ HS_CONSTANT_DATA_OUTPUT ConstantHShader(InputPatch<VS_CONTROL_POINT_OUTPUT, INPU
 {
 	HS_CONSTANT_DATA_OUTPUT result;
 
-	result.Edges[0] = 
-	result.Edges[1] = 
-	result.Edges[2] = 
+	result.Edges[0] =
+	result.Edges[1] =
+	result.Edges[2] =
 	result.Edges[3] = 
 	result.Inside[0] = 
 	result.Inside[1] = 24.0;

@@ -31,6 +31,9 @@
     <ClCompile Include="RendererVolumetricExplosion.cpp">
       <Filter>Source\Core\Renderers</Filter>
     </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
+      <Filter>Source\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -69,6 +72,9 @@
     <ClInclude Include="RendererVolumetricExplosion.h">
       <Filter>Source\Core\Renderers</Filter>
     </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="4 - Realistic Volumentric Explosions.rc" />
@@ -103,6 +109,9 @@
     </Filter>
     <Filter Include="Source\Core\Renderers">
       <UniqueIdentifier>{d8a492ab-22a6-409c-9a4a-ef26d6a50448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Util">
+      <UniqueIdentifier>{3418e153-e1c9-403a-92a1-b2dfc35eca3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
