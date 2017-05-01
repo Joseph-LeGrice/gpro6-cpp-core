@@ -4,6 +4,7 @@
 #include "RendererSimpleTriTessellator.h"
 #include "RendererSimpleQuadTessellator.h"
 #include "RendererVolumetricExplosion.h"
+#include "RendererSimpleTexturedQuad.h"
 
 GraphicsSystem::GraphicsSystem()
 {
@@ -74,7 +75,8 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	
 	//m_renderer = new RendererSimpleTriTessellator();
 	//m_renderer = new RendererSimpleQuadTessellator();
-	m_renderer = new RendererVolumetricExplosion();
+	//m_renderer = new RendererVolumetricExplosion();
+	m_renderer = new RendererSimpleTexturedQuad();
 
 	return m_renderer->Initialize(m_device);
 }

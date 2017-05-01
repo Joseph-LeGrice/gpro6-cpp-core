@@ -40,6 +40,7 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Dev
 	{
 		bool createdVertexShader = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_vertexShader) == S_OK;
 
+		//TODO: Separate Input Layout from Shader
 		D3D11_INPUT_ELEMENT_DESC ied[] =
 		{
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },

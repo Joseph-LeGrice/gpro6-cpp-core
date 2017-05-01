@@ -34,6 +34,7 @@
     <ClCompile Include="PerlinNoise.cpp">
       <Filter>Source\Util</Filter>
     </ClCompile>
+    <ClCompile Include="RendererSimpleTexturedQuad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -75,6 +76,7 @@
     <ClInclude Include="PerlinNoise.h">
       <Filter>Source\Util</Filter>
     </ClInclude>
+    <ClInclude Include="RendererSimpleTexturedQuad.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="4 - Realistic Volumentric Explosions.rc" />
@@ -91,6 +93,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="VolumetricExplosion.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="SimpleTexturedQuad.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

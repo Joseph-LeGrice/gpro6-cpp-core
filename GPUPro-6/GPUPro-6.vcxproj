@@ -177,6 +177,7 @@
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RendererSimpleQuadTessellator.h" />
+    <ClInclude Include="RendererSimpleTexturedQuad.h" />
     <ClInclude Include="RendererSimpleTriTessellator.h" />
     <ClInclude Include="RendererVolumetricExplosion.h" />
     <ClInclude Include="Resource.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RendererSimpleQuadTessellator.cpp" />
+    <ClCompile Include="RendererSimpleTexturedQuad.cpp" />
     <ClCompile Include="RendererSimpleTriTessellator.cpp" />
     <ClCompile Include="RendererVolumetricExplosion.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -219,6 +221,15 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleTexturedQuad.shader">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <FileType>Document</FileType>
     </None>
   </ItemGroup>
