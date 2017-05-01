@@ -16,8 +16,15 @@ Renderer::~Renderer()
 bool Renderer::Initialize(ID3D11Device* device)
 {
 	m_shader = InitShaders(device);
-	m_mesh = InitMesh(device);
-	return m_mesh != nullptr && m_shader != nullptr;
+	if (m_shader != nullptr)
+	{
+		m_mesh = InitMesh(device);
+		if (m_mesh != nullptr)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Renderer::Render(ID3D11DeviceContext* deviceContext)

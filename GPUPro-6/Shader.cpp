@@ -38,17 +38,18 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Dev
 
 	if (vertexShaderCompileResult == S_OK)
 	{
-		device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_vertexShader);
+		bool createdVertexShader = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_vertexShader) == S_OK;
 
 		D3D11_INPUT_ELEMENT_DESC ied[] =
 		{
-			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 		};
-		device->CreateInputLayout(ied, 1, vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &m_inputLayout);
+		bool createdInputLayer = device->CreateInputLayout(ied, 2, vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &m_inputLayout) == S_OK;
 
 		SAFE_RELEASE(vertexShaderBlob);
 
-		return true;
+		return createdVertexShader && createdInputLayer;
 	}
 	else
 	{
@@ -70,10 +71,10 @@ bool Shader::InitHullShader(std::wstring filename, std::string name, ID3D11Devic
 
 	if (hullShaderCompileResult == S_OK)
 	{
-		device->CreateHullShader(hullShaderBlob->GetBufferPointer(), hullShaderBlob->GetBufferSize(), NULL, &m_hullShader);
+		bool createdHullShader = device->CreateHullShader(hullShaderBlob->GetBufferPointer(), hullShaderBlob->GetBufferSize(), NULL, &m_hullShader) == S_OK;
 		SAFE_RELEASE(hullShaderBlob);
 
-		return true;
+		return createdHullShader;
 	}
 	else
 	{
@@ -95,10 +96,10 @@ bool Shader::InitDomainShader(std::wstring filename, std::string name, ID3D11Dev
 
 	if (domainShaderCompileResult == S_OK)
 	{
-		device->CreateDomainShader(domainShaderBlob->GetBufferPointer(), domainShaderBlob->GetBufferSize(), 0, &m_domainShader);
+		bool createdDomainShader = device->CreateDomainShader(domainShaderBlob->GetBufferPointer(), domainShaderBlob->GetBufferSize(), 0, &m_domainShader) == S_OK;
 		SAFE_RELEASE(domainShaderBlob);
 
-		return true;
+		return createdDomainShader;
 	}
 	else
 	{
@@ -120,10 +121,10 @@ bool Shader::InitGeometryShader(std::wstring filename, std::string name, ID3D11D
 
 	if (geomShaderCompileResult == S_OK)
 	{
-		device->CreateGeometryShader(geomShaderBlob->GetBufferPointer(), geomShaderBlob->GetBufferSize(), NULL, &m_geometryShader);
+		bool createdGeometryShader = device->CreateGeometryShader(geomShaderBlob->GetBufferPointer(), geomShaderBlob->GetBufferSize(), NULL, &m_geometryShader) == S_OK;
 		SAFE_RELEASE(geomShaderBlob);
 
-		return true;
+		return createdGeometryShader;
 	}
 	else
 	{
@@ -145,10 +146,10 @@ bool Shader::InitPixelShader(std::wstring filename, std::string name, ID3D11Devi
 
 	if (pixelShaderCompileResult == S_OK)
 	{
-		device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), NULL, &m_pixelShader);
+		bool createdPixelShader = device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), NULL, &m_pixelShader) == S_OK;
 		SAFE_RELEASE(pixelShaderBlob);
 
-		return true;
+		return createdPixelShader;
 	}
 	else
 	{
