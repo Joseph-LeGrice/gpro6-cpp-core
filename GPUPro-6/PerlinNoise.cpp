@@ -89,4 +89,23 @@ namespace PerlinNoise
 								lerp(u, grad(s_permutations[AB + 1], x, y - 1, z - 1),
 										grad(s_permutations[BB + 1], x - 1, y - 1, z - 1))));
 	}
+
+	double octaveNoise(double x, double y, double z, int octaves, double persistence)
+	{
+		double total = 0;
+		double frequency = 1;
+		double amplitude = 1;
+		double maxValue = 0;  // Used for normalizing result to 0.0 - 1.0
+		for (int i = 0; i < octaves; i++) {
+			total += noise(x * frequency, y * frequency, z * frequency) * amplitude;
+
+			maxValue += amplitude;
+
+			amplitude *= persistence;
+			frequency *= 2;
+		}
+
+		return total / maxValue;
+	}
+
 }

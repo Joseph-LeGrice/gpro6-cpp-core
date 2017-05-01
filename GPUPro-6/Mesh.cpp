@@ -82,13 +82,13 @@ bool Mesh::SetIndices(ID3D11Device* device, std::vector<UINT16> &indices)
 
 bool Mesh::SetShaderTexture(ID3D11Device* device, ID3D11Texture2D* texture)
 {
-	//TODO: Seperate this stuff out
+	//TODO: Separate this stuff out
 	D3D11_SAMPLER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_SAMPLER_DESC));
 	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-	desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	desc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 	desc.MipLODBias = 0.0f;
 	desc.MaxAnisotropy = 1;
 	desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;

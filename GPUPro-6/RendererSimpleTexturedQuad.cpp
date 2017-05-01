@@ -2,6 +2,7 @@
 #include "RendererSimpleTexturedQuad.h"
 #include "PerlinNoise.h"
 
+
 RendererSimpleTexturedQuad::RendererSimpleTexturedQuad()
 {
 	m_pTexture = nullptr;
@@ -66,34 +67,50 @@ struct COLOR_DATA
 
 bool RendererSimpleTexturedQuad::InitTexture(ID3D11Device* device, Mesh* m)
 {
+	const int texture_size = 48;
+
 	D3D11_TEXTURE2D_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
 
-	desc.Width = 32;
-	desc.Height = 32;
+	desc.Width = texture_size;
+	desc.Height = texture_size;
 	desc.MipLevels = desc.ArraySize = 1;
 	desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 	desc.SampleDesc.Count = 1;
 	desc.Usage = D3D11_USAGE_DEFAULT;
 	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	
-	COLOR_DATA* color_data = new COLOR_DATA[32*32]; //FIXME: Memory Leak here if something goes wrong?
-	for (int x = 0; x < 32; x++)
+	COLOR_DATA* color_data = new COLOR_DATA[texture_size * texture_size]; //FIXME: Memory Leak here if something goes wrong?
+	//for (int x = 0; x < texture_size; x++)
+	//{
+	//	for (int y = 0; y < texture_size; y++)
+	//	{
+	//		color_data[y * texture_size + x].R = x / 32.0f;
+	//		color_data[y * texture_size + x].G = y / 32.0f;
+	//		color_data[y * texture_size + x].B = 0.0f;
+	//		color_data[y * texture_size + x].A = 1.0f;
+	//	}
+	//}
+
+	for (int x = 0; x < texture_size; x++)
 	{
-		for (int y = 0; y < 32; y++)
+		for (int y = 0; y < texture_size; y++)
 		{
-			color_data[y * 32 + x].R = 1.0f;
-			color_data[y * 32 + x].G = 1.0f;
-			color_data[y * 32 + x].B = 0.0f;
-			color_data[y * 32 + x].A = 1.0f;
+			double noiseVal = PerlinNoise::noise(x * 1.25, y * 3.152, x + 4.5 * y); 
+			//double noiseVal = PerlinNoise::octaveNoise(x, y, x*y, 4, 2.6);
+
+			color_data[y * texture_size + x].R = (FLOAT)noiseVal;
+			color_data[y * texture_size + x].G = (FLOAT)noiseVal;
+			color_data[y * texture_size + x].B = (FLOAT)noiseVal;
+			color_data[y * texture_size + x].A = 1.0f;
 		}
 	}
 
 	D3D11_SUBRESOURCE_DATA data;
 	ZeroMemory(&data, sizeof(D3D11_SUBRESOURCE_DATA));
 	data.pSysMem = color_data;
-	data.SysMemPitch = sizeof(COLOR_DATA) * 32;
-	data.SysMemSlicePitch = sizeof(COLOR_DATA) * 32 * 32;
+	data.SysMemPitch = sizeof(COLOR_DATA) * texture_size;
+	data.SysMemSlicePitch = sizeof(COLOR_DATA) * texture_size * texture_size;
 
 	if (device->CreateTexture2D(&desc, &data, &m_pTexture) == S_OK)
 	{
