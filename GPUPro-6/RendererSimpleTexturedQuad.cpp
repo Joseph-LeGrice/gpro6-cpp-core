@@ -1,23 +1,26 @@
 #include "stdafx.h"
 #include "RendererSimpleTexturedQuad.h"
 #include "PerlinNoise.h"
+#include "PositionUV_InputLayout.h"
 
 
 RendererSimpleTexturedQuad::RendererSimpleTexturedQuad()
 {
 	m_pTexture = nullptr;
+	m_inputLayout = new PositionUV_InputLayout();
 }
 
 
 RendererSimpleTexturedQuad::~RendererSimpleTexturedQuad()
 {
+	SAFE_DELETE(m_inputLayout);
 	SAFE_RELEASE(m_pTexture);
 }
 
 Shader* RendererSimpleTexturedQuad::InitShaders(ID3D11Device* device)
 {
 	Shader* result = new Shader();
-	if (result->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader", device) &&
+	if (result->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader", device, m_inputLayout) &&
 		result->InitPixelShader(L"SimpleTexturedQuad.shader", "PShader", device))
 	{
 		return result;
@@ -67,7 +70,7 @@ struct COLOR_DATA
 
 bool RendererSimpleTexturedQuad::InitTexture(ID3D11Device* device, Mesh* m)
 {
-	const int texture_size = 48;
+	const int texture_size = 64;
 
 	D3D11_TEXTURE2D_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
@@ -96,7 +99,11 @@ bool RendererSimpleTexturedQuad::InitTexture(ID3D11Device* device, Mesh* m)
 	{
 		for (int y = 0; y < texture_size; y++)
 		{
-			double noiseVal = PerlinNoise::noise(x * 1.25, y * 3.152, x + 4.5 * y); 
+			double noiseVal = PerlinNoise::noise(
+				(double)(x * 3.6 + 4 * texture_size * 2.75),
+				(double)(y * 2.5 + 2 * texture_size * 232.75),
+				(double)(x * y * texture_size * 23.45));
+			noiseVal = noiseVal * 0.23 + noiseVal;
 			//double noiseVal = PerlinNoise::octaveNoise(x, y, x*y, 4, 2.6);
 
 			color_data[y * texture_size + x].R = (FLOAT)noiseVal;
@@ -114,7 +121,7 @@ bool RendererSimpleTexturedQuad::InitTexture(ID3D11Device* device, Mesh* m)
 
 	if (device->CreateTexture2D(&desc, &data, &m_pTexture) == S_OK)
 	{
-		if (m->SetShaderTexture(device, m_pTexture))
+		if (m->SetShaderResource(device, m_pTexture))
 		{
 			return true;
 		}

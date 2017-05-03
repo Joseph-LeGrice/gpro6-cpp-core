@@ -1,24 +1,25 @@
 #include "stdafx.h"
 #include "RendererSimpleTriTessellator.h"
+#include "PositionUV_InputLayout.h"
 
 
 RendererSimpleTriTessellator::RendererSimpleTriTessellator()
 {
+	m_inputLayout = new PositionUV_InputLayout();
 }
 
 
 RendererSimpleTriTessellator::~RendererSimpleTriTessellator()
 {
+	SAFE_DELETE(m_inputLayout);
 }
 
 
 Shader* RendererSimpleTriTessellator::InitShaders(ID3D11Device* device)
 {
 	Shader* shader = new Shader();
-
 	std::wstring filename = L"TriTessellation.shader";
-
-	bool vertexShaderCompiled = shader->InitVertexShader(filename, "VShader", device);
+	bool vertexShaderCompiled = shader->InitVertexShader(filename, "VShader", device, m_inputLayout);
 	bool hullShaderCompiled = shader->InitHullShader(filename, "HShader", device);
 	bool domainShaderCompiled = shader->InitDomainShader(filename, "DShader", device);
 	bool geometryShaderCompiled = shader->InitGeometryShader(filename, "GShaderTessellation", device);

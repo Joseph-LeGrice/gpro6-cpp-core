@@ -10,5 +10,7 @@ public:
 protected:
 	Shader* RendererSimpleQuadTessellator::InitShaders(ID3D11Device* device);
 	Mesh* RendererSimpleQuadTessellator::InitMesh(ID3D11Device* device);
+private:
+	InputLayout* m_inputLayout;
 };
 

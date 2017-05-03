@@ -25,7 +25,7 @@ Shader::~Shader()
 }
 
 
-bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Device* device)
+bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Device* device, InputLayout* iLayout)
 {
 	ID3D10Blob* vertexShaderBlob = nullptr;
 	ID3D10Blob* vertexShaderErrorBlob = nullptr;
@@ -39,18 +39,11 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Dev
 	if (vertexShaderCompileResult == S_OK)
 	{
 		bool createdVertexShader = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_vertexShader) == S_OK;
-
-		//TODO: Separate Input Layout from Shader
-		D3D11_INPUT_ELEMENT_DESC ied[] =
-		{
-			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-		};
-		bool createdInputLayer = device->CreateInputLayout(ied, 2, vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &m_inputLayout) == S_OK;
+		bool attachedInputLayout = iLayout->CreateLayout(device, vertexShaderBlob);
 
 		SAFE_RELEASE(vertexShaderBlob);
 
-		return createdVertexShader && createdInputLayer;
+		return createdVertexShader && attachedInputLayout;
 	}
 	else
 	{

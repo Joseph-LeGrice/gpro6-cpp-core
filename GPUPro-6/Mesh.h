@@ -22,13 +22,13 @@ public:
 	void SetTopology(D3D_PRIMITIVE_TOPOLOGY t);
 	bool SetVertices(ID3D11Device* device, std::vector<Vertex> &verts);
 	bool SetIndices(ID3D11Device* device, std::vector<UINT16> &indices);
-	bool SetShaderTexture(ID3D11Device* device, ID3D11Texture2D* texture);
+	bool SetShaderResource(ID3D11Device* device, ID3D11Resource* texture);
 
 private:
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
-	ID3D11ShaderResourceView* m_resource;
+	ID3D11ShaderResourceView* m_resourceView;
 	unsigned int m_numberOfIndices;
 	ID3D11SamplerState* m_sampleState;
 };

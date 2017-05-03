@@ -4,7 +4,7 @@
 
 Mesh::Mesh()
 {
-	m_resource = nullptr;
+	m_resourceView = nullptr;
 	m_sampleState = nullptr;
 	m_vertexBuffer = nullptr;
 	m_indexBuffer = nullptr;
@@ -14,7 +14,7 @@ Mesh::~Mesh()
 {
 	SAFE_RELEASE(m_vertexBuffer);
 	SAFE_RELEASE(m_indexBuffer);
-	SAFE_RELEASE(m_resource);
+	SAFE_RELEASE(m_resourceView);
 	SAFE_RELEASE(m_sampleState);
 }
 
@@ -23,10 +23,10 @@ void Mesh::Render(ID3D11DeviceContext* deviceContext)
 	UINT offset = 0;
 	UINT stride = sizeof(Vertex);
 
-	if (m_resource != nullptr)
+	if (m_resourceView != nullptr)
 	{
 		deviceContext->PSSetSamplers(0, 1, &m_sampleState);
-		deviceContext->PSSetShaderResources(0, 1, &m_resource);
+		deviceContext->PSSetShaderResources(0, 1, &m_resourceView);
 	}
 
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
@@ -80,7 +80,7 @@ bool Mesh::SetIndices(ID3D11Device* device, std::vector<UINT16> &indices)
 	return indexBufferCreationResult == S_OK;
 }
 
-bool Mesh::SetShaderTexture(ID3D11Device* device, ID3D11Texture2D* texture)
+bool Mesh::SetShaderResource(ID3D11Device* device, ID3D11Resource* resource)
 {
 	//TODO: Separate this stuff out
 	D3D11_SAMPLER_DESC desc;
@@ -99,7 +99,7 @@ bool Mesh::SetShaderTexture(ID3D11Device* device, ID3D11Texture2D* texture)
 	desc.MinLOD = 0;
 	desc.MaxLOD = D3D11_FLOAT32_MAX;
 
-	bool createShaderResource = device->CreateShaderResourceView(texture, NULL, &m_resource) == S_OK;
+	bool createShaderResource = device->CreateShaderResourceView(resource, NULL, &m_resourceView) == S_OK;
 	bool createSamplerState = device->CreateSamplerState(&desc, &m_sampleState) == S_OK;
 
 	return createShaderResource && createSamplerState;

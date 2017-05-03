@@ -10,5 +10,9 @@ public:
 protected:
 	virtual Shader* InitShaders(ID3D11Device* device) override;
 	virtual Mesh* InitMesh(ID3D11Device* device) override;
+private:
+	bool Init3DTexture(ID3D11Device* device, Mesh* m);
+	ID3D11Texture3D* m_pTexture;
+	InputLayout* m_inputLayout;
 };
 

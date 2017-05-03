@@ -1,23 +1,24 @@
 #include "stdafx.h"
 #include "RendererSimpleQuadTessellator.h"
+#include "PositionUV_InputLayout.h"
 
 
 RendererSimpleQuadTessellator::RendererSimpleQuadTessellator()
 {
+	m_inputLayout = new PositionUV_InputLayout();
 }
 
 
 RendererSimpleQuadTessellator::~RendererSimpleQuadTessellator()
 {
+	SAFE_DELETE(m_inputLayout);
 }
 
 Shader* RendererSimpleQuadTessellator::InitShaders(ID3D11Device* device)
 {
 	Shader* shader = new Shader();
-
 	std::wstring filename = L"QuadTessellation.shader";
-
-	bool vertexShaderCompiled = shader->InitVertexShader(filename, "VShader", device);
+	bool vertexShaderCompiled = shader->InitVertexShader(filename, "VShader", device, m_inputLayout);
 	bool hullShaderCompiled = shader->InitHullShader(filename, "HShader", device);
 	bool domainShaderCompiled = shader->InitDomainShader(filename, "DShader", device);
 	bool geometryShaderCompiled = shader->InitGeometryShader(filename, "GShaderTessellation", device);
@@ -29,7 +30,7 @@ Shader* RendererSimpleQuadTessellator::InitShaders(ID3D11Device* device)
 	}
 	else
 	{
-		delete shader;
+		SAFE_DELETE(shader);
 		return nullptr;
 	}
 }

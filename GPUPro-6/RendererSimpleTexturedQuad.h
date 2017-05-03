@@ -1,5 +1,7 @@
 #pragma once
 #include "Renderer.h"
+#include "InputLayout.h"
+
 class RendererSimpleTexturedQuad :
 	public Renderer
 {
@@ -14,5 +16,6 @@ private:
 
 	ID3D11ShaderResourceView* m_shaderResourceView;
 	ID3D11Texture2D* m_pTexture;
+	InputLayout* m_inputLayout;
 };
 
