@@ -4,7 +4,6 @@
 
 Mesh::Mesh()
 {
-	m_resourceView = nullptr;
 	m_sampleState = nullptr;
 	m_vertexBuffer = nullptr;
 	m_indexBuffer = nullptr;
@@ -14,7 +13,6 @@ Mesh::~Mesh()
 {
 	SAFE_RELEASE(m_vertexBuffer);
 	SAFE_RELEASE(m_indexBuffer);
-	SAFE_RELEASE(m_resourceView);
 	SAFE_RELEASE(m_sampleState);
 }
 
@@ -22,12 +20,6 @@ void Mesh::Render(ID3D11DeviceContext* deviceContext)
 {
 	UINT offset = 0;
 	UINT stride = sizeof(Vertex);
-
-	if (m_resourceView != nullptr)
-	{
-		deviceContext->PSSetSamplers(0, 1, &m_sampleState);
-		deviceContext->PSSetShaderResources(0, 1, &m_resourceView);
-	}
 
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
@@ -78,29 +70,4 @@ bool Mesh::SetIndices(ID3D11Device* device, std::vector<UINT16> &indices)
 
 	HRESULT indexBufferCreationResult = device->CreateBuffer(&indexBufferDesc, &initialIndexData, &m_indexBuffer);
 	return indexBufferCreationResult == S_OK;
-}
-
-bool Mesh::SetShaderResource(ID3D11Device* device, ID3D11Resource* resource)
-{
-	//TODO: Separate this stuff out
-	D3D11_SAMPLER_DESC desc;
-	ZeroMemory(&desc, sizeof(D3D11_SAMPLER_DESC));
-	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.MipLODBias = 0.0f;
-	desc.MaxAnisotropy = 1;
-	desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-	desc.BorderColor[0] = 0;
-	desc.BorderColor[1] = 0;
-	desc.BorderColor[2] = 0;
-	desc.BorderColor[3] = 0;
-	desc.MinLOD = 0;
-	desc.MaxLOD = D3D11_FLOAT32_MAX;
-
-	bool createShaderResource = device->CreateShaderResourceView(resource, NULL, &m_resourceView) == S_OK;
-	bool createSamplerState = device->CreateSamplerState(&desc, &m_sampleState) == S_OK;
-
-	return createShaderResource && createSamplerState;
 }

@@ -49,6 +49,13 @@
     <ClCompile Include="PositionUV_InputLayout.cpp">
       <Filter>Source\Core\Input Layouts</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceViews.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumetricExplosionResources.cpp">
+      <Filter>Source\Core\Resource Views</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleTextureResources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -105,6 +112,13 @@
     <ClInclude Include="PositionUV_InputLayout.h">
       <Filter>Source\Core\Input Layouts</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceViews.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="VolumetricExplosionResources.h">
+      <Filter>Source\Core\Resource Views</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleTextureResources.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="4 - Realistic Volumentric Explosions.rc" />
@@ -151,6 +165,9 @@
     </Filter>
     <Filter Include="Source\Core\Input Layouts">
       <UniqueIdentifier>{10a46a3a-005a-4ced-9a00-8f3c1632fdbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Resource Views">
+      <UniqueIdentifier>{d270809e-de6a-4621-9e00-fff6077a8706}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
