@@ -2,6 +2,7 @@
 #include "RendererVolumetricExplosion.h"
 #include "PerlinNoise.h"
 #include "PositionUV_InputLayout.h"
+#include "VolumetricExplosionConstantBuffer.h"
 
 
 RendererVolumetricExplosion::RendererVolumetricExplosion()
@@ -54,6 +55,20 @@ Mesh* RendererVolumetricExplosion::InitMesh(ID3D11Device* device)
 	else
 	{
 		delete m;
+		return nullptr;
+	}
+}
+
+ConstantBuffer* RendererVolumetricExplosion::InitConstantBuffer(ID3D11Device* device)
+{
+	ConstantBuffer* buf = new VolumetricExplosionConstantBuffer();
+	if (buf->Initialize(device))
+	{
+		return buf;
+	}
+	else
+	{
+		SAFE_DELETE(buf);
 		return nullptr;
 	}
 }

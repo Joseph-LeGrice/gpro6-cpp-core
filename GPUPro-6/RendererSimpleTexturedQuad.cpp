@@ -2,6 +2,7 @@
 #include "RendererSimpleTexturedQuad.h"
 #include "PerlinNoise.h"
 #include "PositionUV_InputLayout.h"
+#include "VolumetricExplosionConstantBuffer.h"
 
 
 RendererSimpleTexturedQuad::RendererSimpleTexturedQuad()
@@ -56,6 +57,20 @@ Mesh* RendererSimpleTexturedQuad::InitMesh(ID3D11Device* device)
 	else
 	{
 		SAFE_DELETE(m);
+		return nullptr;
+	}
+}
+
+ConstantBuffer* RendererSimpleTexturedQuad::InitConstantBuffer(ID3D11Device* device)
+{
+	ConstantBuffer* buf = new VolumetricExplosionConstantBuffer();
+	if (buf->Initialize(device))
+	{
+		return buf;
+	}
+	else
+	{
+		SAFE_DELETE(buf);
 		return nullptr;
 	}
 }

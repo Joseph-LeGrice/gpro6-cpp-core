@@ -25,7 +25,7 @@ private:
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_deviceContext;
 	ID3D11RenderTargetView * m_rtBackBuffer;
-	D3DXMATRIX m_projectionMatrix;
+	D3DXMATRIX* m_projectionMatrix;
 
 	Renderer* m_renderer;
 };

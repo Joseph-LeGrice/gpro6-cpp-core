@@ -2,6 +2,7 @@
 
 #include "Shader.h"
 #include "Mesh.h"
+#include "ConstantBuffer.h"
 #include "D3D11.h"
 
 
@@ -17,9 +18,11 @@ public:
 protected:
 	virtual Shader* InitShaders(ID3D11Device* device) = 0;
 	virtual Mesh* InitMesh(ID3D11Device* device) = 0;
+	virtual ConstantBuffer* InitConstantBuffer(ID3D11Device* device) = 0;
 
 private:
 	Mesh* m_mesh;
 	Shader* m_shader;
+	ConstantBuffer* m_constBuffer;
 };
 

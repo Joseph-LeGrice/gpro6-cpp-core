@@ -15,7 +15,7 @@ public:
 	bool InitDomainShader(std::wstring filename, std::string name, ID3D11Device* device);
 	bool InitGeometryShader(std::wstring filename, std::string name, ID3D11Device* device);
 	bool InitPixelShader(std::wstring filename, std::string name, ID3D11Device* device);
-
+	
 	void SetCurrent(ID3D11DeviceContext* deviceContext);
 
 private:

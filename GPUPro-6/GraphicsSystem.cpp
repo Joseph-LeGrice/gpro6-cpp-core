@@ -12,6 +12,7 @@ GraphicsSystem::GraphicsSystem()
 	m_device = nullptr;
 	m_deviceContext = nullptr;
 	m_rtBackBuffer = nullptr;
+	m_projectionMatrix = nullptr;
 }
 
 
@@ -91,6 +92,8 @@ void GraphicsSystem::Shutdown()
 	SAFE_RELEASE(m_swapchain);
 	SAFE_RELEASE(m_device);
 	SAFE_RELEASE(m_deviceContext);
+
+	SAFE_DELETE(m_projectionMatrix);
 }
 
 void GraphicsSystem::Render()

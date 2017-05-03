@@ -11,6 +11,8 @@ public:
 protected:
 	virtual Shader* InitShaders(ID3D11Device* device) override;
 	virtual Mesh* InitMesh(ID3D11Device* device) override;
+	virtual ConstantBuffer* InitConstantBuffer(ID3D11Device* device) override;
+
 private:
 	bool InitTexture(ID3D11Device* device, Mesh* m);
 
