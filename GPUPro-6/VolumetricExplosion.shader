@@ -33,10 +33,22 @@ struct GS_OUTPUT
 	float3 height : COLOR;
 };
 
+static int kNumberOfOctaves = 4;
+
+Texture3D _NoiseTex0;
+SamplerState _SampleType;
+
+cbuffer PS_CONSTANT_BUFFER
+{
+	float4x4 g_mvp;
+	float g_time;
+	float g_NoiseScale;
+	float g_NoiseAmplitudeFactor;
+	float g_NoiseFrequencyFactor;
+};
 
 #define INPUT_PATCH_SIZE 1
 #define OUTPUT_PATCH_SIZE 4
-
 			
 VS_CONTROL_POINT_OUTPUT VShader(VS_CONTROL_POINT_INPUT data)
 {
@@ -101,7 +113,7 @@ DS_OUTPUT DShader(HS_CONSTANT_DATA_OUTPUT input,
 	spherePosition.z = 0.0;
 
 	DS_OUTPUT result;
-	result.vPosition = float4(spherePosition, 1);
+	result.vPosition = mul(float4(spherePosition, 1), g_mvp);
 	result.vColor = float4(normalize(spherePosition), 1);
 	
 	return result;
@@ -158,5 +170,45 @@ float4 SolidColorPShaderGeometry(GS_OUTPUT data) : SV_TARGET
 	else
 	{
 		return float4(0.5f, 0.5f, 0.5f, 0.5f);
+	}
+}
+
+float FractalNoise(const float3 posWS)
+{
+	float3 animation = float3(g_time, g_time, g_time);
+	float3 uvw = posWS * g_NoiseScale + animation;
+	
+	float amplitude = 0.5f;
+	float noiseValue = 0.0f;
+
+	[unroll]
+	for (int i = 0; i < kNumberOfOctaves; i++)
+	{
+		noiseValue += amplitude * _NoiseTex0.Sample(_SampleType, uvw).xyz;
+		amplitude *= g_NoiseAmplitudeFactor;
+		uvw *= g_NoiseFrequencyFactor;
+	}
+
+	return noiseValue;
+}
+
+float SphereDistance(float3 pos, float3 spherePos, float radius)
+{
+	float3 relPos = pos - spherePos;
+	return length(relPos) - radius;
+}
+
+float DrawExplosion(float3 posWS, float3 spherePosWS, float radius, float displacementWS, out float displacementOut)
+{
+	displacementOut = FractalNoise(posWS);
+	float dist = SphereDistance(posWS, spherePosWS, radius);
+	return dist - displacementOut * displacementWS;
+}
+
+float4 VolumetricExplosionPShader(DS_OUTPUT data) : SV_Target
+{
+	for (int i = 0; i < 64; i++)
+	{
+
 	}
 }

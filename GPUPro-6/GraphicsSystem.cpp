@@ -12,7 +12,6 @@ GraphicsSystem::GraphicsSystem()
 	m_device = nullptr;
 	m_deviceContext = nullptr;
 	m_rtBackBuffer = nullptr;
-	m_projectionMatrix = nullptr;
 }
 
 
@@ -67,33 +66,36 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	viewportDesc.Height = screenHeight;
 
 	m_deviceContext->RSSetViewports(1, &viewportDesc);
-
-	//float screenNear = 0.1f;
-	//float screenDepth = 100.0f;
-	//float fieldOfView = (float)D3DX_PI / 4.0f;
-	//float aspectRatio = screenWidth / screenHeight;
-	//D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, fieldOfView, aspectRatio, screenNear, screenDepth);
 	
+	m_camera = new Camera(); //TODO: Move the render target stuff into the camera
+	m_camera->Initialize(hwnd, screenWidth, screenHeight);
+
+	m_transform = new Transform();
+
 	//m_renderer = new RendererSimpleTriTessellator();
 	//m_renderer = new RendererSimpleQuadTessellator();
-	//m_renderer = new RendererVolumetricExplosion();
-	m_renderer = new RendererSimpleTexturedQuad();
+	m_renderer = new RendererVolumetricExplosion();
+	//m_renderer = new RendererSimpleTexturedQuad();
 
-	return m_renderer->Initialize(m_device);
+	bool v = m_renderer->Initialize(m_device);
+	D3DMATRIX mvp = m_transform->GetTransformationMatrix() * m_camera->GetView() * m_camera->GetProjection();
+	m_renderer->GetConstantBuffer()->SetModelViewProjectionMatrix(mvp, m_deviceContext);
+	
+	return v;
 }
 
 void GraphicsSystem::Shutdown()
 {
 	m_swapchain->SetFullscreenState(FALSE, NULL);
 
+	SAFE_DELETE(m_camera);
 	SAFE_DELETE(m_renderer);
+	SAFE_DELETE(m_transform);
 
 	SAFE_RELEASE(m_rtBackBuffer);
 	SAFE_RELEASE(m_swapchain);
 	SAFE_RELEASE(m_device);
 	SAFE_RELEASE(m_deviceContext);
-
-	SAFE_DELETE(m_projectionMatrix);
 }
 
 void GraphicsSystem::Render()

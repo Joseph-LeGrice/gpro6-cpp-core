@@ -2,10 +2,19 @@
 #include "glm/glm.hpp"
 #include "VolumetricExplosionConstantBuffer.h"
 
+struct VS_CONSTANT_BUFFER
+{
+	D3DMATRIX MVP;
+	float time;
+	float NoiseScale;
+	float NoiseAmplitudeFactor;
+	float NoiseFrequencyFactor;
+};
 
 VolumetricExplosionConstantBuffer::VolumetricExplosionConstantBuffer()
 {
 	m_buffer = nullptr;
+	D3DXMatrixIdentity(&m_mvp);
 }
 
 
@@ -15,20 +24,8 @@ VolumetricExplosionConstantBuffer::~VolumetricExplosionConstantBuffer()
 
 bool VolumetricExplosionConstantBuffer::Initialize(ID3D11Device* device)
 {
-	struct VS_CONSTANT_BUFFER
-	{
-		float time;
-		float NoiseScale;
-		float NoiseAmplitudeFactor;
-		float NoiseFrequencyFactor;
-	};
-
-	VS_CONSTANT_BUFFER initialData;
-	initialData.time = 0.0f;
-	initialData.NoiseScale = 4.5562;
-	initialData.NoiseAmplitudeFactor = 2.251255;
-	initialData.NoiseFrequencyFactor = 5.2190124;
-
+	VS_CONSTANT_BUFFER initialData = GetBufferData();
+	
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
 	desc.ByteWidth = sizeof(VS_CONSTANT_BUFFER);
@@ -43,7 +40,47 @@ bool VolumetricExplosionConstantBuffer::Initialize(ID3D11Device* device)
 	return device->CreateBuffer(&desc, &data, &m_buffer) == S_OK;
 }
 
+ID3D11Buffer* VolumetricExplosionConstantBuffer::GetVSBuffer()
+{
+	return m_buffer;
+}
+
+ID3D11Buffer* VolumetricExplosionConstantBuffer::GetHSBuffer()
+{
+	return m_buffer;
+}
+
+ID3D11Buffer* VolumetricExplosionConstantBuffer::GetDSBuffer()
+{
+	return m_buffer;
+}
+
+ID3D11Buffer* VolumetricExplosionConstantBuffer::GetGSBuffer()
+{
+	return m_buffer;
+}
+
 ID3D11Buffer* VolumetricExplosionConstantBuffer::GetPSBuffer()
 {
 	return m_buffer;
+}
+
+void VolumetricExplosionConstantBuffer::SetModelViewProjectionMatrix(D3DXMATRIX mvp, ID3D11DeviceContext* context)
+{
+	m_mvp = mvp;
+
+	VS_CONSTANT_BUFFER data = GetBufferData();
+	context->UpdateSubresource(m_buffer, 0, 0, &data, 0, 0);
+}
+
+VS_CONSTANT_BUFFER VolumetricExplosionConstantBuffer::GetBufferData()
+{
+	VS_CONSTANT_BUFFER data;
+	data.MVP = m_mvp;
+	data.time = 0.0f;
+	data.NoiseScale = 4.5562;
+	data.NoiseAmplitudeFactor = 2.251255;
+	data.NoiseFrequencyFactor = 5.2190124;
+
+	return data;
 }

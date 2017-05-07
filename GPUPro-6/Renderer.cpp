@@ -105,3 +105,8 @@ void Renderer::Render(ID3D11DeviceContext* deviceContext)
 	m_mesh->Render(deviceContext);
 }
 
+ConstantBuffer* Renderer::GetConstantBuffer()
+{
+	return m_constBuffer;
+}
+

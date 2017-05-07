@@ -1,6 +1,8 @@
 #pragma once
 
+#include "Camera.h"
 #include "Renderer.h"
+#include "Transform.h"
 
 #include "D3D11.h"
 #include "D3DX11.h"
@@ -25,7 +27,8 @@ private:
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_deviceContext;
 	ID3D11RenderTargetView * m_rtBackBuffer;
-	D3DXMATRIX* m_projectionMatrix;
 
+	Camera* m_camera;
 	Renderer* m_renderer;
+	Transform* m_transform;
 };

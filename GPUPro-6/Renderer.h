@@ -16,6 +16,8 @@ public:
 	bool Initialize(ID3D11Device* device);
 	void Render(ID3D11DeviceContext* deviceContext);
 
+	ConstantBuffer* GetConstantBuffer();
+
 protected:
 	virtual Mesh* InitMesh(ID3D11Device* device) = 0;
 	virtual Shader* InitShaders(ID3D11Device* device) = 0;

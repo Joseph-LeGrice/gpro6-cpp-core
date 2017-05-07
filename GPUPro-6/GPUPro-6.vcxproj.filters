@@ -8,54 +8,62 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="RendererSimpleQuadTessellator.cpp">
-      <Filter>Source\Core\Renderers</Filter>
+      <Filter>Source\Game\Renderers</Filter>
     </ClCompile>
     <ClCompile Include="RendererSimpleTriTessellator.cpp">
-      <Filter>Source\Core\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsSystem.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source\Core</Filter>
+      <Filter>Source\Game\Renderers</Filter>
     </ClCompile>
     <ClCompile Include="SystemsManager.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
     <ClCompile Include="RendererVolumetricExplosion.cpp">
-      <Filter>Source\Core\Renderers</Filter>
+      <Filter>Source\Game\Renderers</Filter>
     </ClCompile>
     <ClCompile Include="PerlinNoise.cpp">
       <Filter>Source\Util</Filter>
     </ClCompile>
     <ClCompile Include="RendererSimpleTexturedQuad.cpp">
-      <Filter>Source\Core\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>Source\Core</Filter>
+      <Filter>Source\Game\Renderers</Filter>
     </ClCompile>
     <ClCompile Include="VolumetricExplosionConstantBuffer.cpp">
       <Filter>Source\Core\Constant Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="InputLayout.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="PositionUV_InputLayout.cpp">
       <Filter>Source\Core\Input Layouts</Filter>
     </ClCompile>
+    <ClCompile Include="VolumetricExplosionResources.cpp">
+      <Filter>Source\Game\Resource Views</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleTextureResources.cpp">
+      <Filter>Source\Game\Resource Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source\Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>Source\Core\Graphics</Filter>
+    </ClCompile>
     <ClCompile Include="ResourceViews.cpp">
+      <Filter>Source\Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSystem.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="VolumetricExplosionResources.cpp">
-      <Filter>Source\Core\Resource Views</Filter>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source\Core\Components</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleTextureResources.cpp" />
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source\Core\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source\Core\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="InputLayout.cpp">
+      <Filter>Source\Core\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -68,57 +76,65 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="RendererSimpleQuadTessellator.h">
-      <Filter>Source\Core\Renderers</Filter>
+      <Filter>Source\Game\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="RendererSimpleTriTessellator.h">
-      <Filter>Source\Core\Renderers</Filter>
+      <Filter>Source\Game\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="Main.h">
       <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsSystem.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="SystemsManager.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="RendererVolumetricExplosion.h">
-      <Filter>Source\Core\Renderers</Filter>
+      <Filter>Source\Game\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="PerlinNoise.h">
       <Filter>Source\Util</Filter>
     </ClInclude>
     <ClInclude Include="RendererSimpleTexturedQuad.h">
-      <Filter>Source\Core\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>Source\Core</Filter>
+      <Filter>Source\Game\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="VolumetricExplosionConstantBuffer.h">
       <Filter>Source\Core\Constant Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="InputLayout.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
     <ClInclude Include="PositionUV_InputLayout.h">
       <Filter>Source\Core\Input Layouts</Filter>
     </ClInclude>
+    <ClInclude Include="VolumetricExplosionResources.h">
+      <Filter>Source\Game\Resource Views</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleTextureResources.h">
+      <Filter>Source\Game\Resource Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Source\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Source\Core\Graphics</Filter>
+    </ClInclude>
     <ClInclude Include="ResourceViews.h">
+      <Filter>Source\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSystem.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="VolumetricExplosionResources.h">
-      <Filter>Source\Core\Resource Views</Filter>
+    <ClInclude Include="Transform.h">
+      <Filter>Source\Core\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleTextureResources.h" />
+    <ClInclude Include="Renderer.h">
+      <Filter>Source\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Source\Core\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Source\Core\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLayout.h">
+      <Filter>Source\Core\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="4 - Realistic Volumentric Explosions.rc" />
@@ -129,16 +145,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TriTessellation.shader">
-      <Filter>Shaders</Filter>
+      <Filter>Source\Game\Shaders</Filter>
     </None>
     <None Include="QuadTessellation.shader">
-      <Filter>Shaders</Filter>
+      <Filter>Source\Game\Shaders</Filter>
     </None>
     <None Include="VolumetricExplosion.shader">
-      <Filter>Shaders</Filter>
+      <Filter>Source\Game\Shaders</Filter>
     </None>
     <None Include="SimpleTexturedQuad.shader">
-      <Filter>Shaders</Filter>
+      <Filter>Source\Game\Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -148,14 +164,8 @@
     <Filter Include="Source">
       <UniqueIdentifier>{a06801e9-534e-4b94-81b7-c375919dae12}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{bd706715-228c-4f37-b930-5ac6be644310}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core">
       <UniqueIdentifier>{bacaaf44-689b-40e3-80ba-c4f8784a12db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Renderers">
-      <UniqueIdentifier>{d8a492ab-22a6-409c-9a4a-ef26d6a50448}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Util">
       <UniqueIdentifier>{3418e153-e1c9-403a-92a1-b2dfc35eca3b}</UniqueIdentifier>
@@ -166,8 +176,26 @@
     <Filter Include="Source\Core\Input Layouts">
       <UniqueIdentifier>{10a46a3a-005a-4ced-9a00-8f3c1632fdbc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Resource Views">
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{7abda553-452c-4ed8-9e9f-08d51fdde717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game\Renderers">
+      <UniqueIdentifier>{d8a492ab-22a6-409c-9a4a-ef26d6a50448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game\Resource Views">
       <UniqueIdentifier>{d270809e-de6a-4621-9e00-fff6077a8706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Graphics">
+      <UniqueIdentifier>{917bb0ed-3282-4863-8d04-e92c5f12bdf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Components">
+      <UniqueIdentifier>{588edc89-56f8-4b77-a28d-b775b7c68302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\DataStructures">
+      <UniqueIdentifier>{2ccb2451-b1de-41ac-92fe-0792a77f771c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game\Shaders">
+      <UniqueIdentifier>{bd706715-228c-4f37-b930-5ac6be644310}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
