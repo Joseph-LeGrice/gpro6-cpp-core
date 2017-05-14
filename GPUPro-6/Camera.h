@@ -15,7 +15,7 @@ private:
 	Matrix4x4 m_viewMatrix;
 	Matrix4x4 m_projectionMatrix;
 
-	Matrix4x4 OrthoProject(float size);
+	Matrix4x4 OrthoProject(float size, float depth);
 	Matrix4x4 PerspProject(float fieldOfView, float aspectRatio, float screenNear, float screenDepth);
 };
 

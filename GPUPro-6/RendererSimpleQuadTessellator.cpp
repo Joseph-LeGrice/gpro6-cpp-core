@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "RendererSimpleQuadTessellator.h"
 #include "PositionUV_InputLayout.h"
+#include "VolumetricExplosionConstantBuffer.h"
 
 
 RendererSimpleQuadTessellator::RendererSimpleQuadTessellator()
@@ -12,6 +13,25 @@ RendererSimpleQuadTessellator::RendererSimpleQuadTessellator()
 RendererSimpleQuadTessellator::~RendererSimpleQuadTessellator()
 {
 	SAFE_DELETE(m_inputLayout);
+}
+
+ResourceViews* RendererSimpleQuadTessellator::InitResourceViews(ID3D11Device* device)
+{
+	return nullptr;
+}
+
+ConstantBuffer* RendererSimpleQuadTessellator::InitConstantBuffer(ID3D11Device* device)
+{
+	VolumetricExplosionConstantBuffer* buf = new VolumetricExplosionConstantBuffer();
+	if (buf->Initialize(device))
+	{
+		return buf;
+	}
+	else
+	{
+		SAFE_DELETE(buf);
+		return nullptr;
+	}
 }
 
 Shader* RendererSimpleQuadTessellator::InitShaders(ID3D11Device* device)

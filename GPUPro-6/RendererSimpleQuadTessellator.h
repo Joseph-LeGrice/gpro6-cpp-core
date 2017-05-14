@@ -8,8 +8,11 @@ public:
 	~RendererSimpleQuadTessellator();
 
 protected:
-	Shader* RendererSimpleQuadTessellator::InitShaders(ID3D11Device* device);
-	Mesh* RendererSimpleQuadTessellator::InitMesh(ID3D11Device* device);
+	virtual Shader* RendererSimpleQuadTessellator::InitShaders(ID3D11Device* device) override;
+	virtual Mesh* RendererSimpleQuadTessellator::InitMesh(ID3D11Device* device) override;
+	virtual ResourceViews* InitResourceViews(ID3D11Device* device) override;
+	virtual ConstantBuffer* InitConstantBuffer(ID3D11Device* device) override;
+
 private:
 	InputLayout* m_inputLayout;
 };

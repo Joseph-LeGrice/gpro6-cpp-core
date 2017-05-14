@@ -29,5 +29,5 @@ void Transform::SetScale(Vector3 scale)
 
 const Matrix4x4 Transform::GetTransformationMatrix()
 {
-	return m_translation * m_scale; // *m_rotation;
+	return m_translation * m_scale * m_rotation;
 }
