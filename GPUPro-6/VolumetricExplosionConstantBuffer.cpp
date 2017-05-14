@@ -71,7 +71,11 @@ ID3D11Buffer* VolumetricExplosionConstantBuffer::GetPSBuffer()
 void VolumetricExplosionConstantBuffer::SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context)
 {
 	VS_CONSTANT_BUFFER data = GetBufferData(mvp);
-	context->UpdateSubresource(m_buffer, 0, NULL, &data, 0, 0);
+
+	D3D11_MAPPED_SUBRESOURCE mappedData;
+	context->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
+	memcpy(mappedData.pData, &data, sizeof(VS_CONSTANT_BUFFER));
+	context->Unmap(m_buffer, 0);
 }
 
 VS_CONSTANT_BUFFER VolumetricExplosionConstantBuffer::GetBufferData(Matrix4x4 transform)
