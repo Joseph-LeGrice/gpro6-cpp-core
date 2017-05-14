@@ -79,6 +79,7 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	m_camera->Initialize(hwnd, screenWidth, screenHeight);
 
 	m_transform = new Transform();
+	m_transform->SetTranslation({ 5.0f, 0.5f, 0.0f });
 
 	//m_renderer = new RendererSimpleTriTessellator();
 	//m_renderer = new RendererSimpleQuadTessellator();
@@ -86,13 +87,13 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	//m_renderer = new RendererSimpleTexturedQuad();
 
 	bool initialized = m_renderer->Initialize(m_device);
-	m_transform->SetTranslation({ 1.0f, 0.5f, 0.0f });
+	
 	Matrix4x4 model = m_transform->GetTransformationMatrix();
-	//Matrix4x4 view = m_camera->GetView();
-	//Matrix4x4 proj = m_camera->GetProjection();
-	const Matrix4x4 mvp = model; // *view * proj;
-	//const Matrix4x4 mvp = Matrix4x4::MatrixTranspose(&model); // *view * proj;
-
+	Matrix4x4 view = m_camera->GetView();
+	Matrix4x4 proj = m_camera->GetProjection();
+	const Matrix4x4 mvp = proj * model;
+	//const Matrix4x4 mvp = model * proj;
+	
 	m_renderer->GetConstantBuffer()->SetModelViewProjectionMatrix(mvp, m_deviceContext);
 	
 	return initialized;
