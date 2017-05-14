@@ -77,11 +77,17 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	m_renderer = new RendererVolumetricExplosion();
 	//m_renderer = new RendererSimpleTexturedQuad();
 
-	bool v = m_renderer->Initialize(m_device);
-	D3DMATRIX mvp = m_transform->GetTransformationMatrix() * m_camera->GetView() * m_camera->GetProjection();
+	bool initialized = m_renderer->Initialize(m_device);
+	m_transform->SetTranslation({ 1.0f, 0.5f, 0.0f });
+	Matrix4x4 model = m_transform->GetTransformationMatrix();
+	//Matrix4x4 view = m_camera->GetView();
+	//Matrix4x4 proj = m_camera->GetProjection();
+	const Matrix4x4 mvp = model; // *view * proj;
+	//const Matrix4x4 mvp = Matrix4x4::MatrixTranspose(&model); // *view * proj;
+
 	m_renderer->GetConstantBuffer()->SetModelViewProjectionMatrix(mvp, m_deviceContext);
 	
-	return v;
+	return initialized;
 }
 
 void GraphicsSystem::Shutdown()

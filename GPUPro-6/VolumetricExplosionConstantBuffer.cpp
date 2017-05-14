@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "glm/glm.hpp"
 #include "VolumetricExplosionConstantBuffer.h"
+#include "Transform.h"
 
 struct VS_CONSTANT_BUFFER
 {
-	D3DMATRIX MVP;
+	Matrix4x4 MVP;
 	float time;
 	float NoiseScale;
 	float NoiseAmplitudeFactor;
@@ -14,7 +15,6 @@ struct VS_CONSTANT_BUFFER
 VolumetricExplosionConstantBuffer::VolumetricExplosionConstantBuffer()
 {
 	m_buffer = nullptr;
-	D3DXMatrixIdentity(&m_mvp);
 }
 
 
@@ -24,7 +24,10 @@ VolumetricExplosionConstantBuffer::~VolumetricExplosionConstantBuffer()
 
 bool VolumetricExplosionConstantBuffer::Initialize(ID3D11Device* device)
 {
-	VS_CONSTANT_BUFFER initialData = GetBufferData();
+	Transform t;
+	Matrix4x4 m = t.GetTransformationMatrix();
+
+	VS_CONSTANT_BUFFER initialData = GetBufferData(m);
 	
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -32,7 +35,7 @@ bool VolumetricExplosionConstantBuffer::Initialize(ID3D11Device* device)
 	desc.Usage = D3D11_USAGE_DYNAMIC;
 	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
+	
 	D3D11_SUBRESOURCE_DATA data;
 	ZeroMemory(&data, sizeof(data));
 	data.pSysMem = &initialData;
@@ -65,18 +68,16 @@ ID3D11Buffer* VolumetricExplosionConstantBuffer::GetPSBuffer()
 	return m_buffer;
 }
 
-void VolumetricExplosionConstantBuffer::SetModelViewProjectionMatrix(D3DXMATRIX mvp, ID3D11DeviceContext* context)
+void VolumetricExplosionConstantBuffer::SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context)
 {
-	m_mvp = mvp;
-
-	VS_CONSTANT_BUFFER data = GetBufferData();
-	context->UpdateSubresource(m_buffer, 0, 0, &data, 0, 0);
+	VS_CONSTANT_BUFFER data = GetBufferData(mvp);
+	context->UpdateSubresource(m_buffer, 0, NULL, &data, 0, 0);
 }
 
-VS_CONSTANT_BUFFER VolumetricExplosionConstantBuffer::GetBufferData()
+VS_CONSTANT_BUFFER VolumetricExplosionConstantBuffer::GetBufferData(Matrix4x4 transform)
 {
 	VS_CONSTANT_BUFFER data;
-	data.MVP = m_mvp;
+	data.MVP = transform;
 	data.time = 0.0f;
 	data.NoiseScale = 4.5562;
 	data.NoiseAmplitudeFactor = 2.251255;

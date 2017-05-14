@@ -4,20 +4,30 @@
 
 Transform::Transform()
 {
-	D3DXMatrixTranslation(&m_translation, 0.0f, 0.0f, 0.0f);
-	D3DXMatrixRotationYawPitchRoll(&m_rotation, 0.0f, 0.0f, 0.0f);
-	D3DXMatrixScaling(&m_scale, 1.0f, 1.5f, 1.0f);
-
-	//D3DXMatrixIdentity(&m_translation);
-	//D3DXMatrixIdentity(&m_rotation);
-	//D3DXMatrixIdentity(&m_scale);
+	Matrix4x4::MatrixIdentity(&m_translation);
+	Matrix4x4::MatrixIdentity(&m_scale);
+	Matrix4x4::MatrixIdentity(&m_rotation);
 }
 
 Transform::~Transform()
 {
 }
 
-const D3DXMATRIX Transform::GetTransformationMatrix()
+void Transform::SetTranslation(Vector3 position)
+{	
+	m_translation.M41 = position.X;
+	m_translation.M42 = position.Y;
+	m_translation.M43 = position.Z;
+}
+
+void Transform::SetScale(Vector3 scale)
 {
-	return m_rotation * m_scale * m_translation;
+	m_scale.M11 = scale.X;
+	m_scale.M22 = scale.Y;
+	m_scale.M33 = scale.Z;
+}
+
+const Matrix4x4 Transform::GetTransformationMatrix()
+{
+	return m_translation * m_scale; // *m_rotation;
 }

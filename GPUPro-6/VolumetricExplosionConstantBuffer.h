@@ -15,11 +15,10 @@ public:
 	virtual ID3D11Buffer* GetDSBuffer() override;
 	virtual ID3D11Buffer* GetGSBuffer() override;
 	virtual ID3D11Buffer* GetPSBuffer() override;
-	virtual void SetModelViewProjectionMatrix(D3DXMATRIX mvp, ID3D11DeviceContext* context) override;
+	virtual void SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context) override;
 
 private:
 	ID3D11Buffer* m_buffer;
-	D3DXMATRIX m_mvp;
-	VS_CONSTANT_BUFFER GetBufferData();
+	VS_CONSTANT_BUFFER GetBufferData(Matrix4x4 transform);
 };
 

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "D3DX11.h"
-#include "D3DX10.h"
+#include "Matrix.h"
 
 class Camera
 {
@@ -9,11 +8,11 @@ public:
 	Camera();
 	~Camera();
 	void Initialize(HWND hwnd, int screenWidth, int screenHeight);
-	const D3DXMATRIX GetView();
-	const D3DXMATRIX GetProjection();
+	const Matrix4x4 GetView();
+	const Matrix4x4 GetProjection();
 
 private:
-	D3DXMATRIX m_viewMatrix;
-	D3DXMATRIX m_projectionMatrix;
+	Matrix4x4 m_viewMatrix;
+	Matrix4x4 m_projectionMatrix;
 };
 

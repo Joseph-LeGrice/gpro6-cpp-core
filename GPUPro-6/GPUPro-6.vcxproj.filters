@@ -135,6 +135,12 @@
     <ClInclude Include="InputLayout.h">
       <Filter>Source\Core\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="4 - Realistic Volumentric Explosions.rc" />

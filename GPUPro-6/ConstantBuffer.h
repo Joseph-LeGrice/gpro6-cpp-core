@@ -1,6 +1,7 @@
 #pragma once
 #include "D3DX11.h"
 #include "D3DX10.h"
+#include "Matrix.h"
 
 class ConstantBuffer
 {
@@ -9,7 +10,7 @@ public:
 	~ConstantBuffer();
 
 	virtual bool Initialize(ID3D11Device* device) = 0;
-	virtual void SetModelViewProjectionMatrix(D3DXMATRIX mvp, ID3D11DeviceContext* context) = 0;
+	virtual void SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context) = 0;
 	virtual ID3D11Buffer* GetVSBuffer();
 	virtual ID3D11Buffer* GetHSBuffer();
 	virtual ID3D11Buffer* GetDSBuffer();

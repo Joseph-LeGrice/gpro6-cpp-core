@@ -176,6 +176,7 @@
     <ClInclude Include="InputLayout.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="GraphicsSystem.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Renderer.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="SystemsManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vector3.h" />
     <ClInclude Include="VolumetricExplosionConstantBuffer.h" />
     <ClInclude Include="PositionUV_InputLayout.h" />
     <ClInclude Include="VolumetricExplosionResources.h" />

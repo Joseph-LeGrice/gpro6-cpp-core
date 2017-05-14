@@ -1,6 +1,6 @@
 #pragma once
-#include "D3DX11.h"
-#include "D3DX10.h"
+#include "Vector3.h"
+#include "Matrix.h"
 
 class Transform
 {
@@ -8,11 +8,15 @@ public:
 	Transform();
 	~Transform();
 
-	const D3DXMATRIX GetTransformationMatrix();
+	void SetTranslation(Vector3 position);
+	//void SetRotation(Quaternion rot); //TODO: Quaternions
+	void SetScale(Vector3 scale);
+
+	const Matrix4x4 GetTransformationMatrix();
 
 private:
-	D3DXMATRIX m_scale;
-	D3DXMATRIX m_rotation;
-	D3DXMATRIX m_translation;
+	Matrix4x4 m_scale;
+	Matrix4x4 m_rotation;
+	Matrix4x4 m_translation;
 };
 
