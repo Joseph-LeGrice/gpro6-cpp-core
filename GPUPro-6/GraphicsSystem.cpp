@@ -6,6 +6,8 @@
 #include "RendererVolumetricExplosion.h"
 #include "RendererSimpleTexturedQuad.h"
 
+#define DEBUG
+
 GraphicsSystem::GraphicsSystem()
 {
 	m_swapchain = nullptr;
@@ -36,10 +38,16 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	scd.Windowed = TRUE;
 	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
+#if defined(DEBUG)
+	UINT creationFlags = D3D11_CREATE_DEVICE_DEBUG;
+#else
+	UINT creationFlags = NULL;
+#endif
+
 	D3D11CreateDeviceAndSwapChain(NULL,
 		D3D_DRIVER_TYPE_HARDWARE,
 		NULL,
-		NULL,
+		creationFlags,
 		NULL,
 		NULL,
 		D3D11_SDK_VERSION,
