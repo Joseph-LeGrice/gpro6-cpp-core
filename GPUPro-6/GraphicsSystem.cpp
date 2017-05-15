@@ -71,6 +71,8 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	viewportDesc.TopLeftY = 0;
 	viewportDesc.Width = screenWidth;
 	viewportDesc.Height = screenHeight;
+	viewportDesc.MinDepth = 0.0f;
+	viewportDesc.MaxDepth = 1.0f;
 
 	m_deviceContext->RSSetViewports(1, &viewportDesc);
 	
@@ -79,7 +81,7 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 
 	m_transform = new Transform();
 	m_transform->SetTranslation({ 0.0f, 0.0f, -5.0f });
-	m_transform->SetScale({ 2.0f, 2.0f, 1.0f });
+	m_transform->SetScale({ 1.0f, 1.0f, 1.0f });
 
 	//m_renderer = new RendererSimpleTriTessellator();
 	//m_renderer = new RendererSimpleQuadTessellator();

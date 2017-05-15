@@ -108,9 +108,13 @@ DS_OUTPUT DShader(HS_CONSTANT_DATA_OUTPUT input,
 	sincos(theta, sinTheta, cosTheta);
 	
 	float3 spherePosition;
-	spherePosition.x = radius * sinFi * cosTheta;
-	spherePosition.y = radius * sinFi * sinTheta;
-	spherePosition.z = 0.0;
+	spherePosition.x = radius * cosTheta * sinFi; 
+	spherePosition.y = radius * sinTheta * sinFi;
+	spherePosition.z = radius * cosFi;
+
+	//spherePosition.x = radius * sinFi * sinTheta;
+	//spherePosition.y = radius * sinFi * cosTheta;
+	//spherePosition.z = 0.0;
 
 	DS_OUTPUT result;
 	result.vPosition = mul(float4(spherePosition, 1), g_mvp);
