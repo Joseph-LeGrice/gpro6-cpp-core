@@ -80,7 +80,7 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	m_camera->Initialize(hwnd, screenWidth, screenHeight);
 
 	m_transform = new Transform();
-	m_transform->SetTranslation({ 0.0f, 0.0f, -5.0f });
+	m_transform->SetTranslation({ 0.0f, 0.0f, 5.0f });
 	m_transform->SetScale({ 1.0f, 1.0f, 1.0f });
 
 	//m_renderer = new RendererSimpleTriTessellator();
