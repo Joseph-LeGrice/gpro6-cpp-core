@@ -2,3 +2,12 @@ GPUPro-6/Debug/
 ipch/
 GPUPro6.opensdf
 GPUPro6.sdf
+x64/*
+x86/*
+gpupro-6/x64/*
+gpupro-6/x86/*
+Game/x64/*
+Game/x86/*
+GPUPro6.VC.VC.opendb
+GPUPro6.VC.db
+GPUPro6.VC.VC.db

@@ -19,6 +19,7 @@ GraphicsSystem::GraphicsSystem()
 
 GraphicsSystem::~GraphicsSystem()
 {
+	Shutdown();
 }
 
 
@@ -85,8 +86,8 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 
 	//m_renderer = new RendererSimpleTriTessellator();
 	//m_renderer = new RendererSimpleQuadTessellator();
-	m_renderer = new RendererVolumetricExplosion();
-	//m_renderer = new RendererSimpleTexturedQuad();
+	//m_renderer = new RendererVolumetricExplosion();
+	m_renderer = new RendererSimpleTexturedQuad();
 
 	bool initialized = m_renderer->Initialize(m_device);
 	
@@ -97,7 +98,7 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	const Matrix4x4 mvp = proj * model;
 	//const Matrix4x4 mvp = model;
 	
-	m_renderer->GetConstantBuffer()->SetModelViewProjectionMatrix(mvp, m_deviceContext);
+	//m_renderer->GetConstantBuffer()->SetModelViewProjectionMatrix(mvp, m_deviceContext);
 	
 	return initialized;
 }

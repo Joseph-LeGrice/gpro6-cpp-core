@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -81,9 +78,6 @@
     <ClInclude Include="RendererSimpleTriTessellator.h">
       <Filter>Source\Game\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="Main.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="SystemsManager.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
@@ -139,6 +133,9 @@
       <Filter>Source\Util</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
+      <Filter>Source\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilityMacros.h">
       <Filter>Source\Util</Filter>
     </ClInclude>
   </ItemGroup>
