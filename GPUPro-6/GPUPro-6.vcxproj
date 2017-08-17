@@ -172,7 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Matrix.h" />
@@ -190,7 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GraphicsSystem.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />

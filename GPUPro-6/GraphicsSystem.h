@@ -18,14 +18,18 @@ public:
 	GraphicsSystem();
 	~GraphicsSystem();
 
+	const ID3D11Device* GetGraphicsDevice();
+	const ID3D11DeviceContext* GetGraphicsDeviceContext();
+
 	bool Initialize(HWND hwnd, int screenWidth, int screenHeight);
 	void Shutdown();
 	void Render();
 
 private:
-	IDXGISwapChain* m_swapchain;
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_deviceContext;
+
+	IDXGISwapChain* m_swapchain;
 	ID3D11RenderTargetView * m_rtBackBuffer;
 
 	Camera* m_camera;

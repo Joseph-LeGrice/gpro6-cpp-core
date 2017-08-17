@@ -1,10 +1,11 @@
 #pragma once
 
 #include "D3D11.h"
+#include "Component.h"
 #include "Material.h"
 
 
-class Renderer
+class Renderer : Component
 {
 public:
 	Renderer();

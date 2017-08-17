@@ -34,6 +34,12 @@
     <ClCompile Include="Material.cpp">
       <Filter>Source\Core\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -83,6 +89,12 @@
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Source\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Source\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,16 @@ GraphicsSystem::~GraphicsSystem()
 }
 
 
+const ID3D11Device* GraphicsSystem::GetGraphicsDevice()
+{
+	return m_device;
+}
+
+const ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
+{
+	return m_deviceContext;
+}
+
 bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 {
 	// Initialize Direct3D

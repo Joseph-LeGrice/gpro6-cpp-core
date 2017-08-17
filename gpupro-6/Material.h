@@ -19,7 +19,6 @@ private:
 	bool InitializeBuffers(ID3D11Device* device);
 	bool CompileShader(ID3D11Device* device);
 
-private:
 	std::vector<Mesh*>* m_meshes;
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;
