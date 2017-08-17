@@ -1,11 +1,6 @@
 #include "stdafx.h"
 #include "GraphicsSystem.h"
 
-#include "RendererSimpleTriTessellator.h"
-#include "RendererSimpleQuadTessellator.h"
-#include "RendererVolumetricExplosion.h"
-#include "RendererSimpleTexturedQuad.h"
-
 #define DEBUG
 
 GraphicsSystem::GraphicsSystem()
@@ -87,7 +82,7 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	//m_renderer = new RendererSimpleTriTessellator();
 	//m_renderer = new RendererSimpleQuadTessellator();
 	//m_renderer = new RendererVolumetricExplosion();
-	m_renderer = new RendererSimpleTexturedQuad();
+	//m_renderer = new RendererSimpleTexturedQuad();
 
 	bool initialized = m_renderer->Initialize(m_device);
 	

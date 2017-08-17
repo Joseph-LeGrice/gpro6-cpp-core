@@ -3,18 +3,25 @@
 #include "D3DX10.h"
 #include "Matrix.h"
 
+typedef struct VS_CONSTANT_BUFFER;
+
 class ConstantBuffer
 {
 public:
 	ConstantBuffer();
 	~ConstantBuffer();
 
-	virtual bool Initialize(ID3D11Device* device) = 0;
-	virtual void SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context) = 0;
-	virtual ID3D11Buffer* GetVSBuffer();
-	virtual ID3D11Buffer* GetHSBuffer();
-	virtual ID3D11Buffer* GetDSBuffer();
-	virtual ID3D11Buffer* GetGSBuffer();
-	virtual ID3D11Buffer* GetPSBuffer();
+	bool Initialize(ID3D11Device* device);
+	void SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context);
+	ID3D11Buffer* GetVSBuffer();
+	ID3D11Buffer* GetHSBuffer();
+	ID3D11Buffer* GetDSBuffer();
+	ID3D11Buffer* GetGSBuffer();
+	ID3D11Buffer* GetPSBuffer();
+
+
+private:
+	ID3D11Buffer* m_buffer;
+	VS_CONSTANT_BUFFER GetBufferData(Matrix4x4 transform);
 };
 

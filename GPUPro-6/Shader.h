@@ -1,7 +1,6 @@
 #pragma once
 
 #include "D3D11.h"
-#include "InputLayout.h"
 #include <string>
 
 class Shader
@@ -10,7 +9,7 @@ public:
 	Shader();
 	~Shader();
 
-	bool InitVertexShader(std::wstring filename, std::string name, ID3D11Device* device, InputLayout* iLayout);
+	bool InitVertexShader(std::wstring filename, std::string name, ID3D11Device* device);
 	bool InitHullShader(std::wstring filename, std::string name, ID3D11Device* device);
 	bool InitDomainShader(std::wstring filename, std::string name, ID3D11Device* device);
 	bool InitGeometryShader(std::wstring filename, std::string name, ID3D11Device* device);

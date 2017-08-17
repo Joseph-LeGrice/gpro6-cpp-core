@@ -153,10 +153,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\gpupro-6\RendererSimpleQuadTessellator.h" />
+    <ClInclude Include="..\gpupro-6\RendererSimpleTexturedQuad.h" />
+    <ClInclude Include="..\gpupro-6\RendererSimpleTriTessellator.h" />
+    <ClInclude Include="..\gpupro-6\RendererVolumetricExplosion.h" />
+    <ClInclude Include="..\gpupro-6\SimpleTextureResources.h" />
+    <ClInclude Include="..\gpupro-6\VolumetricExplosionResources.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\gpupro-6\RendererSimpleQuadTessellator.cpp" />
+    <ClCompile Include="..\gpupro-6\RendererSimpleTexturedQuad.cpp" />
+    <ClCompile Include="..\gpupro-6\RendererSimpleTriTessellator.cpp" />
+    <ClCompile Include="..\gpupro-6\RendererVolumetricExplosion.cpp" />
+    <ClCompile Include="..\gpupro-6\SimpleTextureResources.cpp" />
+    <ClCompile Include="..\gpupro-6\VolumetricExplosionResources.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -169,6 +181,24 @@
     <ProjectReference Include="..\gpupro-6\GPUPro-6.vcxproj">
       <Project>{ddaa2792-10db-4f52-9c1b-63ede21b57f3}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\gpupro-6\QuadTessellation.shader">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\gpupro-6\SimpleTexturedQuad.shader">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\gpupro-6\TriTessellation.shader" />
+    <None Include="..\gpupro-6\VolumetricExplosion.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

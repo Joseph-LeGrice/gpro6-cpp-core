@@ -18,17 +18,18 @@ public:
 	Mesh();
 	~Mesh();
 
-	void Render(ID3D11DeviceContext* deviceContext);
 	void SetTopology(D3D_PRIMITIVE_TOPOLOGY t);
-	bool SetVertices(ID3D11Device* device, std::vector<Vertex> &verts);
-	bool SetIndices(ID3D11Device* device, std::vector<UINT16> &indices);
-	
+	void SetVertices(std::vector<Vertex> &verts);
+	void SetIndices(std::vector<UINT16> &indices);
+	const D3D_PRIMITIVE_TOPOLOGY GetTopology();
+	const std::vector<Vertex>* GetVertices();
+	const std::vector<UINT16>* GetIndices();
+
 private:
-	ID3D11Buffer* m_vertexBuffer;
-	ID3D11Buffer* m_indexBuffer;
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
-	
+	const std::vector<Vertex>* m_vertices;
+	const std::vector<UINT16>* m_indices;
+
 	unsigned int m_numberOfIndices;
-	ID3D11SamplerState* m_sampleState;
 };
 

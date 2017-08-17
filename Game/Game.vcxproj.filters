@@ -9,6 +9,18 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{23cff4d1-1bab-422b-af8e-100e14abcd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Renderers">
+      <UniqueIdentifier>{54baf847-c998-4d5a-9dd5-01342062f69d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Resource Views">
+      <UniqueIdentifier>{e0b03f9e-8931-4441-9f74-9f5bfacb46b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Shaders">
+      <UniqueIdentifier>{e48f7ac7-c266-49be-a66e-3d7a24c3f8d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -20,6 +32,24 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\gpupro-6\RendererSimpleQuadTessellator.h">
+      <Filter>Source Files\Game\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gpupro-6\RendererSimpleTexturedQuad.h">
+      <Filter>Source Files\Game\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gpupro-6\RendererSimpleTriTessellator.h">
+      <Filter>Source Files\Game\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gpupro-6\RendererVolumetricExplosion.h">
+      <Filter>Source Files\Game\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gpupro-6\SimpleTextureResources.h">
+      <Filter>Source Files\Game\Resource Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gpupro-6\VolumetricExplosionResources.h">
+      <Filter>Source Files\Game\Resource Views</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -28,5 +58,37 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\gpupro-6\RendererSimpleQuadTessellator.cpp">
+      <Filter>Source Files\Game\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gpupro-6\RendererSimpleTexturedQuad.cpp">
+      <Filter>Source Files\Game\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gpupro-6\RendererSimpleTriTessellator.cpp">
+      <Filter>Source Files\Game\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gpupro-6\RendererVolumetricExplosion.cpp">
+      <Filter>Source Files\Game\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gpupro-6\SimpleTextureResources.cpp">
+      <Filter>Source Files\Game\Resource Views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gpupro-6\VolumetricExplosionResources.cpp">
+      <Filter>Source Files\Game\Resource Views</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\gpupro-6\VolumetricExplosion.shader">
+      <Filter>Source Files\Game\Shaders</Filter>
+    </None>
+    <None Include="..\gpupro-6\TriTessellation.shader">
+      <Filter>Source Files\Game\Shaders</Filter>
+    </None>
+    <None Include="..\gpupro-6\QuadTessellation.shader">
+      <Filter>Source Files\Game\Shaders</Filter>
+    </None>
+    <None Include="..\gpupro-6\SimpleTexturedQuad.shader">
+      <Filter>Source Files\Game\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
