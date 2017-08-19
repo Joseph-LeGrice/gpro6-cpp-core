@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Camera.h"
-#include "D3DX10.h"
 #include <math.h>
 
 Camera::Camera()
@@ -9,7 +8,7 @@ Camera::Camera()
 	Matrix4x4::MatrixIdentity(&m_viewMatrix);
 }
 
-void Camera::Initialize(HWND hwnd, float viewportWidth, float viewportHeight)
+void Camera::Initialize(float viewportWidth, float viewportHeight)
 {
 	float screenNear = 0.1f;
 	float screenDepth = 100.0f;

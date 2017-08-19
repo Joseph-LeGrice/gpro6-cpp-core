@@ -7,7 +7,7 @@ class Camera
 public:
 	Camera();
 	~Camera();
-	void Initialize(HWND hwnd, float viewportWidth, float viewportHeight);
+	void Initialize(float viewportWidth, float viewportHeight);
 	const Matrix4x4 GetView();
 	const Matrix4x4 GetProjection();
 

@@ -11,9 +11,6 @@ public:
 	Renderer();
 	~Renderer();
 
-	virtual bool Initialize(ID3D11Device* device) = 0;
-	virtual void Render(ID3D11DeviceContext* deviceContext) = 0;
-
 	void SetMaterial(const Material&);
 	const Material* GetMaterial();
 

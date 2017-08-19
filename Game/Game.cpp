@@ -5,6 +5,13 @@
 #include "Game.h"
 #include "GameSystem.h"
 
+#include "SceneGraph.h"
+#include "Entity.h"
+#include "MeshRenderer.h"
+#include "SceneManagementSystem.h"
+#include "Material.h"
+#include "Mesh.h"
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -13,5 +20,49 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
+	GameSystem::InitializeAllSystems();
+
+	Material* m = Material::Create();
+	Mesh* mesh = new Mesh();
+
+	MeshRenderer* mr = new MeshRenderer();
+	mr->SetMaterial(*m);
+	mr->SetMesh(mesh);
+
+	Entity* testQuadEntity = new Entity();
+	testQuadEntity->AddComponent((Component*)mr);
+
+	SceneGraph* currentScene = GameSystem::SceneManager()->GetSceneGraph();
+	currentScene->AddRootEntity(testQuadEntity);
+
 	return GameSystem::Run();
 }
+
+
+//void init()
+//{
+//
+//	m_camera = new Camera(); //TODO: Move the viewport + render target stuff into the camera
+//	m_camera->Initialize(hwnd, screenWidth, screenHeight);
+//
+//	m_transform = new Transform();
+//	m_transform->SetTranslation({ 0.0f, 0.0f, 5.0f });
+//	m_transform->SetScale({ 1.0f, 1.0f, 1.0f });
+//
+//	m_renderer = new RendererSimpleTriTessellator();
+//	m_renderer = new RendererSimpleQuadTessellator();
+//	m_renderer = new RendererVolumetricExplosion();
+//	m_renderer = new RendererSimpleTexturedQuad();
+//
+//	bool initialized = m_renderer->Initialize(m_device);
+//
+//	Matrix4x4 model = m_transform->GetTransformationMatrix();
+//	Matrix4x4 view = m_camera->GetView();
+//	Matrix4x4 proj = m_camera->GetProjection();
+//	const Matrix4x4 mvp = model * proj;
+//	const Matrix4x4 mvp = proj * model;
+//	const Matrix4x4 mvp = model;
+//
+//	m_renderer->GetConstantBuffer()->SetModelViewProjectionMatrix(mvp, m_deviceContext);
+//
+//}
