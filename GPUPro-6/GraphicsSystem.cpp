@@ -6,7 +6,13 @@
 
 GraphicsSystem::~GraphicsSystem()
 {
-	Shutdown();
+
+	m_swapchain->SetFullscreenState(FALSE, NULL);
+
+	SAFE_RELEASE(m_rtBackBuffer);
+	SAFE_RELEASE(m_swapchain);
+	SAFE_RELEASE(m_device);
+	SAFE_RELEASE(m_deviceContext);
 }
 
 
@@ -82,20 +88,10 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 	return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer);
 }
 
-void GraphicsSystem::Shutdown()
-{
-	m_swapchain->SetFullscreenState(FALSE, NULL);
-
-	SAFE_RELEASE(m_rtBackBuffer);
-	SAFE_RELEASE(m_swapchain);
-	SAFE_RELEASE(m_device);
-	SAFE_RELEASE(m_deviceContext);
-}
-
 void GraphicsSystem::Render(const std::vector<Material*>* m_materials)
 {
 	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
-	
+
 	for each (Material* m in *m_materials)
 	{
 		m->Render(m_deviceContext);

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameSystem.h"
 #include "GraphicsSystem.h"
+#include "SceneManagementSystem.h"
 #include "MaterialManagementSystem.h"
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam);
@@ -14,6 +15,9 @@ GameSystem::GameSystem()
 
 GameSystem::~GameSystem()
 {
+	SAFE_DELETE(m_sceneManagerSystem);
+	SAFE_DELETE(m_materialManagementSystem);
+	SAFE_DELETE(m_graphicsSystem);
 }
 
 GraphicsSystem* GameSystem::Graphics()
@@ -21,9 +25,25 @@ GraphicsSystem* GameSystem::Graphics()
 	return s_instance.Graphics();
 }
 
-MaterialManagementSystem* GameSystem::Materials()
+MaterialManagementSystem* GameSystem::MaterialManager()
 {
 	return s_instance.m_materialManagementSystem;
+}
+
+SceneManagementSystem* GameSystem::SceneManager()
+{
+	return s_instance.m_sceneManagerSystem;
+}
+
+void GameSystem::InitializeAllSystems()
+{
+	int screenWidth = 0;
+	int screenHeight = 0;
+	s_instance.InitializeWindows(screenWidth, screenHeight);
+
+	s_instance.m_graphicsSystem = GraphicsSystem::InitializeGraphics(s_instance.m_hwnd, screenWidth, screenHeight);
+	s_instance.m_materialManagementSystem = new MaterialManagementSystem();
+	s_instance.m_sceneManagerSystem = new SceneManagementSystem();
 }
 
 int GameSystem::Run()
@@ -33,13 +53,6 @@ int GameSystem::Run()
 
 int GameSystem::GameLoop()
 {
-	int screenWidth = 0;
-	int screenHeight = 0;
-	InitializeWindows(screenWidth, screenHeight);
-
-	m_graphicsSystem = GraphicsSystem::InitializeGraphics(m_hwnd, screenWidth, screenHeight);
-	m_materialManagementSystem = new MaterialManagementSystem();
-
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
 

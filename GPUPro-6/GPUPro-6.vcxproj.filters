@@ -46,6 +46,9 @@
     <ClCompile Include="GameSystem.cpp">
       <Filter>Source\Core\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManagementSystem.cpp">
+      <Filter>Source\Core\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -106,6 +109,9 @@
       <Filter>Source\Core\Systems</Filter>
     </ClInclude>
     <ClInclude Include="GameSystem.h">
+      <Filter>Source\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManagementSystem.h">
       <Filter>Source\Core\Systems</Filter>
     </ClInclude>
   </ItemGroup>

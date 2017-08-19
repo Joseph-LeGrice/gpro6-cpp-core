@@ -16,7 +16,7 @@ Material::~Material()
 Material* Material::Create()
 {
 	Material* newMaterial = new Material();
-	GameSystem::Materials()->RegisterInstancedMaterial(newMaterial);
+	GameSystem::MaterialManager()->RegisterInstancedMaterial(newMaterial);
 	return newMaterial;
 }
 

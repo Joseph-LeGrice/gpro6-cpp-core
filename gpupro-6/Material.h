@@ -8,6 +8,8 @@
 class Material
 {
 public:
+	~Material();
+
 	static Material* Create();
 
 	bool Initialize(ID3D11Device* device);
@@ -19,7 +21,6 @@ private:
 	bool CompileShader(ID3D11Device* device);
 
 	Material();
-	~Material();
 
 	std::vector<Mesh*>* m_meshes;
 	ID3D11Buffer* m_vertexBuffer;

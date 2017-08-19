@@ -2,14 +2,19 @@
 
 class GraphicsSystem;
 class MaterialManagementSystem;
+class SceneManagementSystem;
 
 class GameSystem
 {
 public:
-	static GraphicsSystem* Graphics();
-	static MaterialManagementSystem* Materials();
+	~GameSystem();
 
+	static void InitializeAllSystems();
 	static int Run();
+
+	static GraphicsSystem* Graphics();
+	static MaterialManagementSystem* MaterialManager();
+	static SceneManagementSystem* SceneManager();
 
 private:
 	static GameSystem s_instance;
@@ -19,7 +24,6 @@ private:
 	LPCWSTR m_applicationName;
 
 	GameSystem();
-	~GameSystem();
 
 	int GameLoop();
 	void InitializeWindows(int& screenWidth, int& screenHeight);
@@ -27,5 +31,6 @@ private:
 
 	GraphicsSystem* m_graphicsSystem;
 	MaterialManagementSystem* m_materialManagementSystem;
+	SceneManagementSystem* m_sceneManagerSystem;
 };
 
