@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Material.h"
-
+#include "GameSystem.h"
+#include "MaterialManagementSystem.h"
 
 Material::Material()
 {
@@ -10,6 +11,13 @@ Material::Material()
 
 Material::~Material()
 {
+}
+
+Material* Material::Create()
+{
+	Material* newMaterial = new Material();
+	GameSystem::Materials()->RegisterInstancedMaterial(newMaterial);
+	return newMaterial;
 }
 
 bool Material::Initialize(ID3D11Device* device)
