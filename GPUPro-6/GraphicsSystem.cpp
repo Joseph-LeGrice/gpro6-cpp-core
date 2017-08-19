@@ -28,7 +28,7 @@ const ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
 	return m_deviceContext;
 }
 
-bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
+void GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 {
 	// Initialize Direct3D
 	DXGI_SWAP_CHAIN_DESC scd;
@@ -81,40 +81,11 @@ bool GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	viewportDesc.MaxDepth = 1.0f;
 
 	m_deviceContext->RSSetViewports(1, &viewportDesc);
-	
-	m_camera = new Camera(); //TODO: Move the viewport + render target stuff into the camera
-	m_camera->Initialize(hwnd, screenWidth, screenHeight);
-
-	m_transform = new Transform();
-	m_transform->SetTranslation({ 0.0f, 0.0f, 5.0f });
-	m_transform->SetScale({ 1.0f, 1.0f, 1.0f });
-
-	//m_renderer = new RendererSimpleTriTessellator();
-	//m_renderer = new RendererSimpleQuadTessellator();
-	//m_renderer = new RendererVolumetricExplosion();
-	//m_renderer = new RendererSimpleTexturedQuad();
-
-	bool initialized = m_renderer->Initialize(m_device);
-	
-	Matrix4x4 model = m_transform->GetTransformationMatrix();
-	Matrix4x4 view = m_camera->GetView();
-	Matrix4x4 proj = m_camera->GetProjection();
-	//const Matrix4x4 mvp = model * proj;
-	const Matrix4x4 mvp = proj * model;
-	//const Matrix4x4 mvp = model;
-	
-	//m_renderer->GetConstantBuffer()->SetModelViewProjectionMatrix(mvp, m_deviceContext);
-	
-	return initialized;
 }
 
 void GraphicsSystem::Shutdown()
 {
 	m_swapchain->SetFullscreenState(FALSE, NULL);
-
-	SAFE_DELETE(m_camera);
-	SAFE_DELETE(m_renderer);
-	SAFE_DELETE(m_transform);
 
 	SAFE_RELEASE(m_rtBackBuffer);
 	SAFE_RELEASE(m_swapchain);
@@ -125,6 +96,6 @@ void GraphicsSystem::Shutdown()
 void GraphicsSystem::Render()
 {
 	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
-	m_renderer->Render(m_deviceContext);
+	//TODO: Rendering here
 	m_swapchain->Present(0, 0);
 }

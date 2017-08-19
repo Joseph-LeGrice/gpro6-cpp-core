@@ -13,12 +13,6 @@
     <ClCompile Include="ConstantBuffer.cpp">
       <Filter>Source\Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsSystem.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source\Core\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source\Core\Components</Filter>
     </ClCompile>
@@ -40,6 +34,18 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsSystem.cpp">
+      <Filter>Source\Core\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph.cpp">
+      <Filter>Source\Core\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManagementSystem.cpp">
+      <Filter>Source\Core\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem.cpp">
+      <Filter>Source\Core\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -59,12 +65,6 @@
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Source\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsSystem.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Source\Core\Components</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Source\Core\Components</Filter>
@@ -96,6 +96,18 @@
     <ClInclude Include="Component.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
+    <ClInclude Include="GraphicsSystem.h">
+      <Filter>Source\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph.h">
+      <Filter>Source\Core\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManagementSystem.h">
+      <Filter>Source\Core\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem.h">
+      <Filter>Source\Core\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="4 - Realistic Volumentric Explosions.rc" />
@@ -125,6 +137,12 @@
     </Filter>
     <Filter Include="Source\Core\DataStructures">
       <UniqueIdentifier>{2ccb2451-b1de-41ac-92fe-0792a77f771c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Systems">
+      <UniqueIdentifier>{141e4971-efcc-4e58-9737-f86f902af57c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Scene">
+      <UniqueIdentifier>{1e496b6e-b5f5-4859-b3b7-fce83aa86230}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

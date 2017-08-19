@@ -1,9 +1,5 @@
 #pragma once
 
-#include "Camera.h"
-#include "Renderer.h"
-#include "Transform.h"
-
 #include "D3D11.h"
 #include "D3DX11.h"
 #include "D3DX10.h"
@@ -11,6 +7,8 @@
 #pragma comment (lib, "d3d11.lib")
 #pragma comment (lib, "d3dx11.lib")
 #pragma comment (lib, "d3dx10.lib")
+
+class SceneGraph;
 
 class GraphicsSystem
 {
@@ -21,7 +19,7 @@ public:
 	const ID3D11Device* GetGraphicsDevice();
 	const ID3D11DeviceContext* GetGraphicsDeviceContext();
 
-	bool Initialize(HWND hwnd, int screenWidth, int screenHeight);
+	void Initialize(HWND hwnd, int screenWidth, int screenHeight);
 	void Shutdown();
 	void Render();
 
@@ -31,8 +29,4 @@ private:
 
 	IDXGISwapChain* m_swapchain;
 	ID3D11RenderTargetView * m_rtBackBuffer;
-
-	Camera* m_camera;
-	Renderer* m_renderer;
-	Transform* m_transform;
 };
