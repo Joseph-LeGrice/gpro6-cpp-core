@@ -16,17 +16,19 @@ class Material;
 class GraphicsSystem
 {
 public:
-	GraphicsSystem();
-	~GraphicsSystem();
-
 	const ID3D11Device* GetGraphicsDevice();
 	const ID3D11DeviceContext* GetGraphicsDeviceContext();
 
-	void Initialize(HWND hwnd, int screenWidth, int screenHeight);
+	static GraphicsSystem* InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight);
+
 	void Shutdown();
-	void Render(std::vector<Material*>&);
+	void Render(const std::vector<Material*>*);
 
 private:
+	GraphicsSystem(ID3D11Device* gfxDevice, ID3D11DeviceContext* gfxDeviceContext, IDXGISwapChain* gfxSwapChain, ID3D11RenderTargetView* gfxBackBuffer) :
+		m_device(gfxDevice), m_deviceContext(gfxDeviceContext), m_swapchain(gfxSwapChain), m_rtBackBuffer(gfxBackBuffer) { }
+	~GraphicsSystem();
+
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_deviceContext;
 

@@ -4,15 +4,6 @@
 
 #define DEBUG
 
-GraphicsSystem::GraphicsSystem()
-{
-	m_swapchain = nullptr;
-	m_device = nullptr;
-	m_deviceContext = nullptr;
-	m_rtBackBuffer = nullptr;
-}
-
-
 GraphicsSystem::~GraphicsSystem()
 {
 	Shutdown();
@@ -29,8 +20,13 @@ const ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
 	return m_deviceContext;
 }
 
-void GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
+GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight)
 {
+	ID3D11Device* gfxDevice;
+	ID3D11DeviceContext* gfxDeviceContext;
+	IDXGISwapChain* gfxSwapchain;
+	ID3D11RenderTargetView * gfxBackBuffer;
+	
 	// Initialize Direct3D
 	DXGI_SWAP_CHAIN_DESC scd;
 	ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
@@ -59,17 +55,17 @@ void GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 		NULL,
 		D3D11_SDK_VERSION,
 		&scd,
-		&m_swapchain,
-		&m_device,
+		&gfxSwapchain,
+		&gfxDevice,
 		NULL,
-		&m_deviceContext);
+		&gfxDeviceContext);
 
 	// Initialize Render Targets
 	ID3D11Texture2D* pBackBuffer;
-	m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-	m_device->CreateRenderTargetView(pBackBuffer, NULL, &m_rtBackBuffer);
+	gfxSwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
+	gfxDevice->CreateRenderTargetView(pBackBuffer, NULL, &gfxBackBuffer);
 	pBackBuffer->Release();
-	m_deviceContext->OMSetRenderTargets(1, &m_rtBackBuffer, NULL);
+	gfxDeviceContext->OMSetRenderTargets(1, &gfxBackBuffer, NULL);
 
 	// Initialize Viewport
 	D3D11_VIEWPORT viewportDesc;
@@ -81,7 +77,9 @@ void GraphicsSystem::Initialize(HWND hwnd, int screenWidth, int screenHeight)
 	viewportDesc.MinDepth = 0.0f;
 	viewportDesc.MaxDepth = 1.0f;
 
-	m_deviceContext->RSSetViewports(1, &viewportDesc);
+	gfxDeviceContext->RSSetViewports(1, &viewportDesc);
+
+	return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer);
 }
 
 void GraphicsSystem::Shutdown()
@@ -94,11 +92,11 @@ void GraphicsSystem::Shutdown()
 	SAFE_RELEASE(m_deviceContext);
 }
 
-void GraphicsSystem::Render(std::vector<Material*>& m_materials)
+void GraphicsSystem::Render(const std::vector<Material*>* m_materials)
 {
 	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 	
-	for each (Material* m in m_materials)
+	for each (Material* m in *m_materials)
 	{
 		m->Render(m_deviceContext);
 	}
