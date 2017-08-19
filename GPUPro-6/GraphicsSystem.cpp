@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GraphicsSystem.h"
+#include "Material.h"
 
 #define DEBUG
 
@@ -93,9 +94,14 @@ void GraphicsSystem::Shutdown()
 	SAFE_RELEASE(m_deviceContext);
 }
 
-void GraphicsSystem::Render()
+void GraphicsSystem::Render(std::vector<Material*>& m_materials)
 {
 	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
-	//TODO: Rendering here
+	
+	for each (Material* m in m_materials)
+	{
+		m->Render(m_deviceContext);
+	}
+
 	m_swapchain->Present(0, 0);
 }

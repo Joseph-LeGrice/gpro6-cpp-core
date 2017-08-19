@@ -24,6 +24,11 @@ GameSystem::~GameSystem()
 {
 }
 
+void GameSystem::Initialize(HWND g_hwnd, int screenWidth, int screenHeight)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
 GraphicsSystem* GameSystem::Graphics()
 {
 	return Instance().Graphics();

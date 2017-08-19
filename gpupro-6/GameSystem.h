@@ -15,7 +15,7 @@ private:
 
 	GameSystem();
 	~GameSystem();
-
+	void Initialize(HWND g_hwnd, int screenWidth, int screenHeight);
 	GraphicsSystem* m_graphicsSystem;
 	MaterialManagementSystem* m_materialManagementSystem;
 };

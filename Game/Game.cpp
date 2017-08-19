@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "Game.h"
-#include "GraphicsSystem.h"
+#include "GameSystem.h"
 
 HINSTANCE g_hInstance;  
 HWND g_hwnd;
@@ -26,36 +26,31 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	InitializeWindows(screenWidth, screenHeight);
 
-	GraphicsSystem graphicsSystem;
-	if (graphicsSystem.Initialize(g_hwnd, screenWidth, screenHeight))
-	{
-		MSG msg;
-		ZeroMemory(&msg, sizeof(MSG));
+	//TODO!!!
+	//GameSystem graphicsSystem;
+	//graphicsSystem.Initialize(g_hwnd, screenWidth, screenHeight);
 
-		while (true)
-		{
-			if (PeekMessage(&msg, g_hwnd, 0, 0, PM_REMOVE))
-			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
+	MSG msg;
+	ZeroMemory(&msg, sizeof(MSG));
 
-				if (msg.message == WM_QUIT)
-				{
-					break;
-				}
-			}
+	//while (true)
+	//{
+	//	if (PeekMessage(&msg, g_hwnd, 0, 0, PM_REMOVE))
+	//	{
+	//		TranslateMessage(&msg);
+	//		DispatchMessage(&msg);
 
-			graphicsSystem.Render();
-		}
+	//		if (msg.message == WM_QUIT)
+	//		{
+	//			break;
+	//		}
+	//	}
 
-		ShutdownWindows();
-		return msg.wParam;
-	}
-	else
-	{
-		ShutdownWindows();
-		return -1;
-	}
+	//	graphicsSystem.Render();
+	//}
+
+	ShutdownWindows();
+	return msg.wParam;
 }
 
 void InitializeWindows(int& screenWidth, int& screenHeight)

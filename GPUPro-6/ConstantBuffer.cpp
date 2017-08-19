@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Transform.h"
 #include "ConstantBuffer.h"
 
 struct VS_CONSTANT_BUFFER
@@ -23,8 +22,8 @@ ConstantBuffer::~ConstantBuffer()
 
 bool ConstantBuffer::Initialize(ID3D11Device* device)
 {
-	Transform t;
-	Matrix4x4 m = t.GetTransformationMatrix();
+	Matrix4x4 m;
+	Matrix4x4::MatrixIdentity(&m);
 
 	VS_CONSTANT_BUFFER initialData = GetBufferData(m);
 
