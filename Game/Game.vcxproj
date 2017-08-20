@@ -153,20 +153,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\gpupro-6\RendererSimpleQuadTessellator.h" />
-    <ClInclude Include="..\gpupro-6\RendererSimpleTexturedQuad.h" />
-    <ClInclude Include="..\gpupro-6\RendererSimpleTriTessellator.h" />
-    <ClInclude Include="..\gpupro-6\RendererVolumetricExplosion.h" />
     <ClInclude Include="..\gpupro-6\SimpleTextureResources.h" />
     <ClInclude Include="..\gpupro-6\VolumetricExplosionResources.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\gpupro-6\RendererSimpleQuadTessellator.cpp" />
-    <ClCompile Include="..\gpupro-6\RendererSimpleTexturedQuad.cpp" />
-    <ClCompile Include="..\gpupro-6\RendererSimpleTriTessellator.cpp" />
-    <ClCompile Include="..\gpupro-6\RendererVolumetricExplosion.cpp" />
     <ClCompile Include="..\gpupro-6\SimpleTextureResources.cpp" />
     <ClCompile Include="..\gpupro-6\VolumetricExplosionResources.cpp" />
     <ClCompile Include="Game.cpp" />

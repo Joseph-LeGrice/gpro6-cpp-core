@@ -12,9 +12,6 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{23cff4d1-1bab-422b-af8e-100e14abcd36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game\Renderers">
-      <UniqueIdentifier>{54baf847-c998-4d5a-9dd5-01342062f69d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game\Resource Views">
       <UniqueIdentifier>{e0b03f9e-8931-4441-9f74-9f5bfacb46b0}</UniqueIdentifier>
     </Filter>
@@ -32,18 +29,6 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\gpupro-6\RendererSimpleQuadTessellator.h">
-      <Filter>Source Files\Game\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\gpupro-6\RendererSimpleTexturedQuad.h">
-      <Filter>Source Files\Game\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\gpupro-6\RendererSimpleTriTessellator.h">
-      <Filter>Source Files\Game\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\gpupro-6\RendererVolumetricExplosion.h">
-      <Filter>Source Files\Game\Renderers</Filter>
-    </ClInclude>
     <ClInclude Include="..\gpupro-6\SimpleTextureResources.h">
       <Filter>Source Files\Game\Resource Views</Filter>
     </ClInclude>
@@ -57,18 +42,6 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gpupro-6\RendererSimpleQuadTessellator.cpp">
-      <Filter>Source Files\Game\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gpupro-6\RendererSimpleTexturedQuad.cpp">
-      <Filter>Source Files\Game\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gpupro-6\RendererSimpleTriTessellator.cpp">
-      <Filter>Source Files\Game\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\gpupro-6\RendererVolumetricExplosion.cpp">
-      <Filter>Source Files\Game\Renderers</Filter>
     </ClCompile>
     <ClCompile Include="..\gpupro-6\SimpleTextureResources.cpp">
       <Filter>Source Files\Game\Resource Views</Filter>
