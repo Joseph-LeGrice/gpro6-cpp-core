@@ -23,7 +23,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GameSystem::InitializeAllSystems();
 
 	Material* m = Material::Create();
-	m->CompileShader(L"TriTessellation.shader");
+	m->CompileShader(L"SimpleTexturedQuad.shader");
 
 	// Quad Mesh
 	std::vector<Vertex> verts;
@@ -39,7 +39,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	indices.push_back(0);
 
 	Mesh* mesh = new Mesh();
-	mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST);
+	mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 	mesh->SetVertices(verts);
 	mesh->SetIndices(indices);
 

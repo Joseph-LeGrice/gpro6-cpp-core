@@ -69,10 +69,10 @@ void Material::CompileShader(std::wstring filename)
 	m_shader = new Shader();
 	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice(); 
 	bool vertexShaderCompiled = m_shader->InitVertexShader(filename, "VShader", device);
-	bool hullShaderCompiled = m_shader->InitHullShader(filename, "HShader", device);
-	bool domainShaderCompiled = m_shader->InitDomainShader(filename, "DShader", device);
-	bool geometryShaderCompiled = m_shader->InitGeometryShader(filename, "GShaderTessellation", device);
-	bool pixelShaderCompiled = m_shader->InitPixelShader(filename, "SolidColorPShaderGeometry", device);
+	bool hullShaderCompiled = true; // = m_shader->InitHullShader(filename, "HShader", device);
+	bool domainShaderCompiled = true; //= m_shader->InitDomainShader(filename, "DShader", device);
+	bool geometryShaderCompiled = true; // = m_shader->InitGeometryShader(filename, "GShaderTessellation", device);
+	bool pixelShaderCompiled = m_shader->InitPixelShader(filename, "PShader", device);
 
 	if (vertexShaderCompiled && hullShaderCompiled && domainShaderCompiled && geometryShaderCompiled && pixelShaderCompiled)
 	{
