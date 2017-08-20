@@ -1,121 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="PerlinNoise.cpp">
-      <Filter>Source\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source\Core\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>Source\Core\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source\Core\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source\Core\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source\Core\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshRenderer.cpp">
-      <Filter>Source\Core\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>Source\Core\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsSystem.cpp">
-      <Filter>Source\Core\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGraph.cpp">
-      <Filter>Source\Core\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialManagementSystem.cpp">
-      <Filter>Source\Core\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem.cpp">
-      <Filter>Source\Core\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManagementSystem.cpp">
-      <Filter>Source\Core\Systems</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Resource.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="PerlinNoise.h">
-      <Filter>Source\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Source\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>Source\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Source\Core\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source\Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Source\Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>Source\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>Source\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="UtilityMacros.h">
-      <Filter>Source\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
-      <Filter>Source\Core\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Source\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsSystem.h">
-      <Filter>Source\Core\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph.h">
-      <Filter>Source\Core\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialManagementSystem.h">
-      <Filter>Source\Core\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSystem.h">
-      <Filter>Source\Core\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManagementSystem.h">
-      <Filter>Source\Core\Systems</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="4 - Realistic Volumentric Explosions.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -123,32 +8,130 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="GraphicsSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManagementSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManagementSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="GraphicsSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManagementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManagementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilityMacros.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraph.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Source">
-      <UniqueIdentifier>{a06801e9-534e-4b94-81b7-c375919dae12}</UniqueIdentifier>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{5c0db4db-7336-4d84-ab2a-1fcd77c90e7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core">
-      <UniqueIdentifier>{bacaaf44-689b-40e3-80ba-c4f8784a12db}</UniqueIdentifier>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{3f7ee8db-9aaf-489e-a12e-b89af640a04c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Util">
-      <UniqueIdentifier>{3418e153-e1c9-403a-92a1-b2dfc35eca3b}</UniqueIdentifier>
+    <Filter Include="Components">
+      <UniqueIdentifier>{6fc18b86-cec5-48c5-bcbd-1083704dbd4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Graphics">
-      <UniqueIdentifier>{917bb0ed-3282-4863-8d04-e92c5f12bdf5}</UniqueIdentifier>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{ec9336a8-8ae8-4a61-a0d8-b57c4b6ce841}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Components">
-      <UniqueIdentifier>{588edc89-56f8-4b77-a28d-b775b7c68302}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\DataStructures">
-      <UniqueIdentifier>{2ccb2451-b1de-41ac-92fe-0792a77f771c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Systems">
-      <UniqueIdentifier>{141e4971-efcc-4e58-9737-f86f902af57c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Core\Scene">
-      <UniqueIdentifier>{1e496b6e-b5f5-4859-b3b7-fce83aa86230}</UniqueIdentifier>
+    <Filter Include="DataStructures">
+      <UniqueIdentifier>{8f41650d-a265-4153-bd49-c214cb41a35a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
