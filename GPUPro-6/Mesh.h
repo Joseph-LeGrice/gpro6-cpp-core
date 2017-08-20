@@ -21,6 +21,7 @@ public:
 	void SetTopology(D3D_PRIMITIVE_TOPOLOGY t);
 	void SetVertices(std::vector<Vertex> &verts);
 	void SetIndices(std::vector<UINT16> &indices);
+	//TODO: Mesh Normals
 	const D3D_PRIMITIVE_TOPOLOGY GetTopology();
 	const std::vector<Vertex>* GetVertices();
 	const std::vector<UINT16>* GetIndices();

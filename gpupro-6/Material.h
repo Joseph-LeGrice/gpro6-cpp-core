@@ -12,13 +12,13 @@ public:
 
 	static Material* Create();
 
-	bool Initialize(ID3D11Device* device);
-	void Render(ID3D11DeviceContext* deviceContext);
+	void Render();
 	void RegisterMesh(Mesh* mesh);
+	void CompileShader(std::wstring shaderFilename);
 
 private:
-	bool InitializeBuffers(ID3D11Device* device);
-	bool CompileShader(ID3D11Device* device);
+	bool Initialize();
+	bool InitializeBuffers();
 
 	Material();
 

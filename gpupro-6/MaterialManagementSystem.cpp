@@ -10,6 +10,10 @@ MaterialManagementSystem::MaterialManagementSystem()
 
 MaterialManagementSystem::~MaterialManagementSystem()
 {
+	for each (Material* m in m_instancedMaterials)
+	{
+		SAFE_DELETE(m);
+	}
 }
 
 const std::vector<Material*>* MaterialManagementSystem::GetAllMaterials()

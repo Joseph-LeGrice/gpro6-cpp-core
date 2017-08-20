@@ -23,10 +23,28 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GameSystem::InitializeAllSystems();
 
 	Material* m = Material::Create();
+	m->CompileShader(L"TriTessellation.shader");
+
+	// Quad Mesh
+	std::vector<Vertex> verts;
+	verts.push_back({ -0.5f, -0.5f, 0.0f });
+	verts.push_back({ -0.5f,  0.5f, 0.0f });
+	verts.push_back({ 0.5f,  0.5f, 0.0f });
+	verts.push_back({ 0.5f, -0.5f, 0.0f });
+
+	std::vector<UINT16> indices;
+	indices.push_back(3);
+	indices.push_back(2);
+	indices.push_back(1);
+	indices.push_back(0);
+
 	Mesh* mesh = new Mesh();
+	mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST);
+	mesh->SetVertices(verts);
+	mesh->SetIndices(indices);
 
 	MeshRenderer* mr = new MeshRenderer();
-	mr->SetMaterial(*m);
+	mr->SetMaterial(m);
 	mr->SetMesh(mesh);
 
 	Entity* testQuadEntity = new Entity();

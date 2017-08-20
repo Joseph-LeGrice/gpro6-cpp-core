@@ -14,4 +14,5 @@ MeshRenderer::~MeshRenderer()
 void MeshRenderer::SetMesh(Mesh* mesh)
 {
 	m_mesh = mesh;
+	GetMaterial()->RegisterMesh(m_mesh);
 }

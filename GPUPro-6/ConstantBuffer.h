@@ -11,7 +11,7 @@ public:
 	ConstantBuffer();
 	~ConstantBuffer();
 
-	bool Initialize(ID3D11Device* device);
+	bool Initialize();
 	void SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context);
 	ID3D11Buffer* GetVSBuffer();
 	ID3D11Buffer* GetHSBuffer();

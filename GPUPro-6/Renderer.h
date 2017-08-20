@@ -11,10 +11,10 @@ public:
 	Renderer();
 	~Renderer();
 
-	void SetMaterial(const Material&);
-	const Material* GetMaterial();
+	void SetMaterial(Material*);
+	Material* GetMaterial();
 
 private:
-	const Material* m_material;
+	Material* m_material;
 };
 

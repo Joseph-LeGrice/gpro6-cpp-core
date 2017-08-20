@@ -18,8 +18,8 @@ class GraphicsSystem
 public:
 	~GraphicsSystem();
 
-	const ID3D11Device* GetGraphicsDevice();
-	const ID3D11DeviceContext* GetGraphicsDeviceContext();
+	ID3D11Device* GetGraphicsDevice();
+	ID3D11DeviceContext* GetGraphicsDeviceContext();
 
 	static GraphicsSystem* InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight);
 

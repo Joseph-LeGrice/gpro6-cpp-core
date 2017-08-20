@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Camera.h"
 #include <math.h>
+#include "D3DX10.h"
 
 Camera::Camera()
 {

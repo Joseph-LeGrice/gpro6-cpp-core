@@ -22,7 +22,7 @@ GameSystem::~GameSystem()
 
 GraphicsSystem* GameSystem::Graphics()
 {
-	return s_instance.Graphics();
+	return s_instance.m_graphicsSystem;
 }
 
 MaterialManagementSystem* GameSystem::MaterialManager()

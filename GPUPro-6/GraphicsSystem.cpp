@@ -16,12 +16,12 @@ GraphicsSystem::~GraphicsSystem()
 }
 
 
-const ID3D11Device* GraphicsSystem::GetGraphicsDevice()
+ID3D11Device* GraphicsSystem::GetGraphicsDevice()
 {
 	return m_device;
 }
 
-const ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
+ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
 {
 	return m_deviceContext;
 }
@@ -94,7 +94,7 @@ void GraphicsSystem::Render(const std::vector<Material*>* m_materials)
 
 	for each (Material* m in *m_materials)
 	{
-		m->Render(m_deviceContext);
+		m->Render();
 	}
 
 	m_swapchain->Present(0, 0);

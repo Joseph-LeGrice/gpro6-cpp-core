@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "ConstantBuffer.h"
+#include "GameSystem.h"
+#include "GraphicsSystem.h"
 
 struct VS_CONSTANT_BUFFER
 {
@@ -20,8 +22,10 @@ ConstantBuffer::~ConstantBuffer()
 {
 }
 
-bool ConstantBuffer::Initialize(ID3D11Device* device)
+bool ConstantBuffer::Initialize()
 {
+	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
+
 	Matrix4x4 m;
 	Matrix4x4::MatrixIdentity(&m);
 
