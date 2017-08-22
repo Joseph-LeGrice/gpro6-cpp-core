@@ -127,19 +127,19 @@ void Material::Render()
 			deviceContext->VSSetConstantBuffers(0, 1, &constVSBuf);
 		}
 
-		ID3D11Buffer* constHSBuf = m_constBuffer->GetVSBuffer();
+		ID3D11Buffer* constHSBuf = m_constBuffer->GetHSBuffer();
 		if (constHSBuf != nullptr)
 		{
 			deviceContext->HSSetConstantBuffers(0, 1, &constHSBuf);
 		}
 
-		ID3D11Buffer* constDSBuf = m_constBuffer->GetVSBuffer();
+		ID3D11Buffer* constDSBuf = m_constBuffer->GetDSBuffer();
 		if (constDSBuf != nullptr)
 		{
 			deviceContext->DSSetConstantBuffers(0, 1, &constDSBuf);
 		}
 
-		ID3D11Buffer* constGSBuf = m_constBuffer->GetVSBuffer();
+		ID3D11Buffer* constGSBuf = m_constBuffer->GetGSBuffer();
 		if (constGSBuf != nullptr)
 		{
 			deviceContext->GSSetConstantBuffers(0, 1, &constGSBuf);
@@ -172,18 +172,18 @@ void Material::Render()
 	}
 
 	D3D11_MAPPED_SUBRESOURCE vertexData;
-	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &vertexData);
+	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
 	if (vertexBufferAcquireResult == S_OK)
 	{
-		memcpy(vertexData.pData, allVerts.data(), sizeof(allVerts.data()));
+		memcpy(vertexData.pData, &allVerts[0], sizeof(Vertex) * allVerts.size());
 		deviceContext->Unmap(m_vertexBuffer, 0);
 	}
 
 	D3D11_MAPPED_SUBRESOURCE indexBufferData;
-	HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &indexBufferData);
+	HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);
 	if (indexBufferAcquireResult == S_OK)
 	{
-		memcpy(indexBufferData.pData, allIndices.data(), sizeof(allIndices.data()));
+		memcpy(indexBufferData.pData, &allIndices[0], sizeof(UINT16) * allIndices.size());
 		deviceContext->Unmap(m_indexBuffer, 0);
 	}
 

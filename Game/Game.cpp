@@ -33,10 +33,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	verts.push_back({ 0.5f, -0.5f, 0.0f });
 
 	std::vector<UINT16> indices;
-	indices.push_back(3);
-	indices.push_back(2);
 	indices.push_back(1);
+	indices.push_back(2);
 	indices.push_back(0);
+	indices.push_back(2);
+	indices.push_back(3);
 
 	Mesh* mesh = new Mesh();
 	mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);

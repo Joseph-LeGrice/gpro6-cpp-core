@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{f270847f-d87f-4511-a6cd-1705a0ca20f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -28,5 +31,19 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QuadTessellation.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="SimpleTexturedQuad.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="TriTessellation.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="VolumetricExplosion.shader">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

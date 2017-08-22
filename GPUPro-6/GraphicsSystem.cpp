@@ -47,13 +47,9 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 	scd.Windowed = TRUE;
 	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
-#if defined(DEBUG)
 	UINT creationFlags = D3D11_CREATE_DEVICE_DEBUG;
-#else
-	UINT creationFlags = NULL;
-#endif
 
-	D3D11CreateDeviceAndSwapChain(NULL,
+	HRESULT createDeviceResult = D3D11CreateDeviceAndSwapChain(NULL,
 		D3D_DRIVER_TYPE_HARDWARE,
 		NULL,
 		creationFlags,

@@ -170,6 +170,12 @@
       <Project>{ddaa2792-10db-4f52-9c1b-63ede21b57f3}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="QuadTessellation.shader" />
+    <None Include="SimpleTexturedQuad.shader" />
+    <None Include="TriTessellation.shader" />
+    <None Include="VolumetricExplosion.shader" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -26,6 +26,7 @@ private:
 	GameSystem();
 
 	int GameLoop();
+	void ProcessInput();
 	void InitializeWindows(int& screenWidth, int& screenHeight);
 	void ShutdownWindows();
 

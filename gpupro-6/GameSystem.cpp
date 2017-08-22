@@ -3,6 +3,9 @@
 #include "GraphicsSystem.h"
 #include "SceneManagementSystem.h"
 #include "MaterialManagementSystem.h"
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam);
 
@@ -53,27 +56,45 @@ int GameSystem::Run()
 
 int GameSystem::GameLoop()
 {
-	MSG msg;
-	ZeroMemory(&msg, sizeof(MSG));
+	using clock = std::chrono::high_resolution_clock;
+
+	constexpr std::chrono::nanoseconds timeStep(16ms);
+	std::chrono::nanoseconds lag(0ns);
+	auto lastTime = clock::now();
 
 	while (true)
 	{
-		if (PeekMessage(&msg, m_hwnd, 0, 0, PM_REMOVE)) // TODO: Create and move this to an InputManager
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+		ProcessInput();
 
-			if (msg.message == WM_QUIT)
-			{
-				break;
-			}
+		auto deltaTime = clock::now() - lastTime;
+		lag += std::chrono::duration_cast<std::chrono::nanoseconds>(deltaTime);
+		lastTime = clock::now();
+
+		while (lag >= timeStep)
+		{
+			lag -= timeStep;
+			//TODO: Update
 		}
 
 		const std::vector<Material*>* allMats = m_materialManagementSystem->GetAllMaterials();
 		m_graphicsSystem->Render(allMats);
 	}
 
-	return msg.wParam;
+	return 0;
+}
+
+void GameSystem::ProcessInput()
+{
+	MSG msg;
+	ZeroMemory(&msg, sizeof(MSG));
+
+	if (PeekMessage(&msg, m_hwnd, 0, 0, PM_REMOVE)) // TODO: Create and move this to an InputManager
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+
+		//if (msg.message == WM_QUIT)
+	}
 }
 
 void GameSystem::InitializeWindows(int& screenWidth, int& screenHeight)
