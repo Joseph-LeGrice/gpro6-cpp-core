@@ -11,7 +11,7 @@ public:
 	ConstantBuffer();
 	~ConstantBuffer();
 
-	bool Initialize();
+	bool Initialize(ID3D11Device* device);
 	void SetBuffers();
 	void UpdateBuffers();
 	void ConstantBuffer::SetViewProjectionMatrix(Matrix4x4 vp);

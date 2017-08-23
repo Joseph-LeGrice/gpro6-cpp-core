@@ -33,10 +33,7 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 	ID3D11DeviceContext* gfxDeviceContext;
 	IDXGISwapChain* gfxSwapchain;
 	ID3D11RenderTargetView * gfxBackBuffer;
-	 
-	ConstantBuffer* cp = new ConstantBuffer();
-	cp->Initialize();
-
+	
 	// Initialize Direct3D
 	DXGI_SWAP_CHAIN_DESC scd;
 	ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
@@ -84,6 +81,9 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 	viewportDesc.MaxDepth = 1.0f;
 
 	gfxDeviceContext->RSSetViewports(1, &viewportDesc);
+
+	ConstantBuffer* cp = new ConstantBuffer();
+	cp->Initialize(gfxDevice);
 
 	return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer, cp);
 }

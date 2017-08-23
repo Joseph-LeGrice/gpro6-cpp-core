@@ -25,10 +25,8 @@ ConstantBuffer::~ConstantBuffer()
 {
 }
 
-bool ConstantBuffer::Initialize()
+bool ConstantBuffer::Initialize(ID3D11Device* device)
 {
-	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
-
 	Matrix4x4 m;
 	Matrix4x4::MatrixIdentity(&m);
 
