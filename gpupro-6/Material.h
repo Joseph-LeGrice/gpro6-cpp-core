@@ -1,10 +1,13 @@
 #pragma once
 
 #include "D3D11.h"
+#include <string>
+#include <vector>
 
 class Mesh;
 class Shader;
 class ConstantBuffer;
+struct MeshInfo;
 
 class Material
 {
@@ -14,7 +17,8 @@ public:
 	static Material* Create();
 
 	void Render(ConstantBuffer*);
-	void RegisterMeshInfo(MeshInfo mesh);
+	void DeregisterMeshInfo(MeshInfo* mesh);
+	void RegisterMeshInfo(MeshInfo* mesh);
 	void CompileShader(std::wstring shaderFilename);
 
 private:
@@ -23,7 +27,7 @@ private:
 
 	Material();
 
-	std::vector<MeshInfo>* m_meshes;
+	std::vector<MeshInfo*>* m_meshes;
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;
 	Shader* m_shader;

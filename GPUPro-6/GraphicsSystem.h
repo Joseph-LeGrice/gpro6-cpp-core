@@ -12,6 +12,7 @@
 
 class SceneGraph;
 class Material;
+class ConstantBuffer;
 
 class GraphicsSystem
 {

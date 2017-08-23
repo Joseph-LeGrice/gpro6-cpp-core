@@ -32,7 +32,7 @@ bool ConstantBuffer::Initialize()
 	Matrix4x4 m;
 	Matrix4x4::MatrixIdentity(&m);
 
-	VS_CONSTANT_BUFFER initialData = GetBufferData(m);
+	VS_CONSTANT_BUFFER initialData = GetBufferData();
 
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));

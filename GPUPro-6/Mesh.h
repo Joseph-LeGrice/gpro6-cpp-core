@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "D3D11.h"
+#include "Matrix.h"
 
 struct Vertex
 {

@@ -3,6 +3,7 @@
 
 Renderer::Renderer()
 {
+	m_material = nullptr;
 }
 
 Renderer::~Renderer()
@@ -11,6 +12,7 @@ Renderer::~Renderer()
 
 void Renderer::SetMaterial(Material* mat)
 {
+	this->OnMaterialUpdated(m_material, mat);
 	m_material = mat;
 }
 

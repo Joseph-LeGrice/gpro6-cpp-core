@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <algorithm>
 #include "Material.h"
 #include "GameSystem.h"
 #include "Mesh.h"
@@ -10,7 +11,7 @@
 Material::Material()
 {
 	m_shader = nullptr;
-	m_meshes = new std::vector<MeshInfo>();
+	m_meshes = new std::vector<MeshInfo*>();
 }
 
 
@@ -40,7 +41,13 @@ bool Material::Initialize()
 }
 
 
-void Material::RegisterMeshInfo(MeshInfo meshInfo)
+void Material::DeregisterMeshInfo(MeshInfo* mesh)
+{
+	m_meshes->erase(std::remove(m_meshes->begin(), m_meshes->end(), mesh), m_meshes->end());
+}
+
+
+void Material::RegisterMeshInfo(MeshInfo* meshInfo)
 {
 	m_meshes->push_back(meshInfo);
 }
@@ -116,12 +123,12 @@ void Material::Render(ConstantBuffer* constBuf)
 
 	std::vector<Vertex> allVerts;
 	std::vector<UINT16> allIndices;
-	for each (MeshInfo m in *m_meshes)
+	for each (MeshInfo* m in *m_meshes)
 	{
-		const std::vector<Vertex>* verts = m.m_mesh->GetVertices();
+		const std::vector<Vertex>* verts = m->m_mesh->GetVertices();
 		allVerts.insert(allVerts.end(), verts->begin(), verts->end());
 
-		const std::vector<UINT16>* indices = m.m_mesh->GetIndices();
+		const std::vector<UINT16>* indices = m->m_mesh->GetIndices();
 		allIndices.insert(allIndices.end(), indices->begin(), indices->end());
 	}
 
@@ -142,11 +149,11 @@ void Material::Render(ConstantBuffer* constBuf)
 	}
 
 	int currentIndex = 0;
-	for each (MeshInfo m in *m_meshes)
+	for each (MeshInfo* m in *m_meshes)
 	{
-		constBuf->SetWorldMatrix(m.m_transform);
-		int numberOfVerts = m.m_mesh->GetIndices()->size();
-		deviceContext->IASetPrimitiveTopology(m.m_mesh->GetTopology());
+		constBuf->SetWorldMatrix(m->m_transform);
+		int numberOfVerts = m->m_mesh->GetIndices()->size();
+		deviceContext->IASetPrimitiveTopology(m->m_mesh->GetTopology());
 		deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
 		currentIndex += numberOfVerts;
 	}

@@ -14,6 +14,9 @@ public:
 	void SetMaterial(Material*);
 	Material* GetMaterial();
 
+protected:
+	virtual void OnMaterialUpdated(Material* oldMaterial, Material* newMaterial) = 0;
+
 private:
 	Material* m_material;
 };

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GraphicsSystem.h"
 #include "Material.h"
+#include "ConstantBuffer.h"
 
 #define DEBUG
 
