@@ -6,6 +6,11 @@
 MeshRenderer::MeshRenderer()
 {
 	m_meshInfo = new MeshInfo();
+	Matrix4x4::MatrixIdentity(&m_meshInfo->m_transform);
+
+	m_meshInfo->m_transform.M41 = 0.0f;
+	m_meshInfo->m_transform.M42 = 0.0f;
+	m_meshInfo->m_transform.M43 = 5.0f;
 }
 
 

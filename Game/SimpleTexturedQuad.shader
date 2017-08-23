@@ -10,6 +10,12 @@ struct VS_OUTPUT
 	float2 uv : TEXCOORD0;
 };
 
+cbuffer PS_CONSTANT_BUFFER
+{
+	float4x4 g_world;
+	float4x4 g_viewProjection;
+};
+
 
 //Texture2D Texture;
 //SamplerState SampleType;
@@ -17,7 +23,7 @@ struct VS_OUTPUT
 VS_OUTPUT VShader(VS_INPUT data)
 {
 	VS_OUTPUT result;
-	result.vPosition = float4(data.vPosition, 1);
+	result.vPosition = mul(float4(data.vPosition, 1), mul(g_world, g_viewProjection));
 	result.uv = data.uv;
 	return result;
 }

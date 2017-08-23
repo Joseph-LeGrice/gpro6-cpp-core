@@ -152,6 +152,8 @@ void Material::Render(ConstantBuffer* constBuf)
 	for each (MeshInfo* m in *m_meshes)
 	{
 		constBuf->SetWorldMatrix(m->m_transform);
+		constBuf->UpdateBuffers();
+
 		int numberOfVerts = m->m_mesh->GetIndices()->size();
 		deviceContext->IASetPrimitiveTopology(m->m_mesh->GetTopology());
 		deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);

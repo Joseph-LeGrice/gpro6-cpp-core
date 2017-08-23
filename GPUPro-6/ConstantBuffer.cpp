@@ -7,10 +7,6 @@ struct VS_CONSTANT_BUFFER
 {
 	Matrix4x4 WorldMatrix;
 	Matrix4x4 ViewProjectionMatrix;
-	float time;
-	float NoiseScale;
-	float NoiseAmplitudeFactor;
-	float NoiseFrequencyFactor;
 };
 
 ConstantBuffer::ConstantBuffer()
@@ -71,7 +67,7 @@ void ConstantBuffer::UpdateBuffers()
 	D3D11_MAPPED_SUBRESOURCE mappedData;
 
 	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
-	HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DYNAMIC, &mappedData);
+	HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 	if (bufferMapResult == S_OK)
 	{
 		VS_CONSTANT_BUFFER data = GetBufferData();
@@ -85,10 +81,6 @@ VS_CONSTANT_BUFFER ConstantBuffer::GetBufferData()
 	VS_CONSTANT_BUFFER data;
 	data.WorldMatrix = m_wMatrix; 
 	data.ViewProjectionMatrix = m_vpMatrix;
-	data.time = 0.0f;
-	data.NoiseScale = 4.5562;
-	data.NoiseAmplitudeFactor = 2.251255;
-	data.NoiseFrequencyFactor = 5.2190124;
 
 	return data;
 }

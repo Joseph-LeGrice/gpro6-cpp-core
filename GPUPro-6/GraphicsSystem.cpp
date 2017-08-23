@@ -2,6 +2,7 @@
 #include "GraphicsSystem.h"
 #include "Material.h"
 #include "ConstantBuffer.h"
+#include "Camera.h"
 
 #define DEBUG
 
@@ -85,12 +86,20 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 	ConstantBuffer* cp = new ConstantBuffer();
 	cp->Initialize(gfxDevice);
 
-	return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer, cp);
+	Camera* cam = new Camera();
+	cam->Initialize(screenWidth, screenHeight);
+
+	return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer, cp, cam);
 }
 
 void GraphicsSystem::Render(const std::vector<Material*>* m_materials)
 {
+	m_constantBuffer->SetBuffers();
 	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
+
+	Matrix4x4 viewMatrix = m_camera->GetView();
+	Matrix4x4 projMatrix = m_camera->GetProjection();
+	m_constantBuffer->SetViewProjectionMatrix(viewMatrix * projMatrix);
 
 	for each (Material* m in *m_materials)
 	{
