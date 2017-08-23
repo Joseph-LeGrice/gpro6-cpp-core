@@ -34,3 +34,8 @@ private:
 	unsigned int m_numberOfIndices;
 };
 
+struct MeshInfo
+{
+	Mesh* m_mesh;
+	Matrix4x4 m_transform;
+};

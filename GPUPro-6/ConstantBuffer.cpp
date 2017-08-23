@@ -5,7 +5,8 @@
 
 struct VS_CONSTANT_BUFFER
 {
-	Matrix4x4 MVP;
+	Matrix4x4 WorldMatrix;
+	Matrix4x4 ViewProjectionMatrix;
 	float time;
 	float NoiseScale;
 	float NoiseAmplitudeFactor;
@@ -14,6 +15,8 @@ struct VS_CONSTANT_BUFFER
 
 ConstantBuffer::ConstantBuffer()
 {
+	Matrix4x4::MatrixIdentity(&m_wMatrix);
+	Matrix4x4::MatrixIdentity(&m_vpMatrix);
 	m_buffer = nullptr;
 }
 
@@ -45,45 +48,45 @@ bool ConstantBuffer::Initialize()
 	return device->CreateBuffer(&desc, &data, &m_buffer) == S_OK;
 }
 
-ID3D11Buffer* ConstantBuffer::GetVSBuffer()
+void ConstantBuffer::SetViewProjectionMatrix(Matrix4x4 vp)
 {
-	return m_buffer;
+	m_vpMatrix = vp;
 }
 
-ID3D11Buffer* ConstantBuffer::GetHSBuffer()
+void ConstantBuffer::SetWorldMatrix(Matrix4x4 w)
 {
-	return m_buffer;
+	m_wMatrix = w;
 }
 
-ID3D11Buffer* ConstantBuffer::GetDSBuffer()
+void ConstantBuffer::SetBuffers()
 {
-	return m_buffer;
+	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
+	deviceContext->VSSetConstantBuffers(0, 1, &m_buffer);
+	deviceContext->HSSetConstantBuffers(0, 1, &m_buffer);
+	deviceContext->DSSetConstantBuffers(0, 1, &m_buffer);
+	deviceContext->GSSetConstantBuffers(0, 1, &m_buffer);
+	deviceContext->PSSetConstantBuffers(0, 1, &m_buffer);
 }
 
-ID3D11Buffer* ConstantBuffer::GetGSBuffer()
+void ConstantBuffer::UpdateBuffers()
 {
-	return m_buffer;
-}
-
-ID3D11Buffer* ConstantBuffer::GetPSBuffer()
-{
-	return m_buffer;
-}
-
-void ConstantBuffer::SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context)
-{
-	VS_CONSTANT_BUFFER data = GetBufferData(mvp);
-
 	D3D11_MAPPED_SUBRESOURCE mappedData;
-	context->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
-	memcpy(mappedData.pData, &data, sizeof(VS_CONSTANT_BUFFER));
-	context->Unmap(m_buffer, 0);
+
+	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
+	HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DYNAMIC, &mappedData);
+	if (bufferMapResult == S_OK)
+	{
+		VS_CONSTANT_BUFFER data = GetBufferData();
+		memcpy(mappedData.pData, &data, sizeof(VS_CONSTANT_BUFFER));
+		deviceContext->Unmap(m_buffer, 0);
+	}
 }
 
-VS_CONSTANT_BUFFER ConstantBuffer::GetBufferData(Matrix4x4 transform)
+VS_CONSTANT_BUFFER ConstantBuffer::GetBufferData()
 {
 	VS_CONSTANT_BUFFER data;
-	data.MVP = transform;
+	data.WorldMatrix = m_wMatrix; 
+	data.ViewProjectionMatrix = m_vpMatrix;
 	data.time = 0.0f;
 	data.NoiseScale = 4.5562;
 	data.NoiseAmplitudeFactor = 2.251255;
@@ -91,3 +94,4 @@ VS_CONSTANT_BUFFER ConstantBuffer::GetBufferData(Matrix4x4 transform)
 
 	return data;
 }
+

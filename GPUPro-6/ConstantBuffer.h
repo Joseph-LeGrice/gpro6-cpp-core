@@ -12,16 +12,16 @@ public:
 	~ConstantBuffer();
 
 	bool Initialize();
-	void SetModelViewProjectionMatrix(Matrix4x4 mvp, ID3D11DeviceContext* context);
-	ID3D11Buffer* GetVSBuffer();
-	ID3D11Buffer* GetHSBuffer();
-	ID3D11Buffer* GetDSBuffer();
-	ID3D11Buffer* GetGSBuffer();
-	ID3D11Buffer* GetPSBuffer();
-
+	void SetBuffers();
+	void UpdateBuffers();
+	void ConstantBuffer::SetViewProjectionMatrix(Matrix4x4 vp);
+	void ConstantBuffer::SetWorldMatrix(Matrix4x4 w);
 
 private:
+	Matrix4x4 m_vpMatrix;
+	Matrix4x4 m_wMatrix;
 	ID3D11Buffer* m_buffer;
-	VS_CONSTANT_BUFFER GetBufferData(Matrix4x4 transform);
+
+	VS_CONSTANT_BUFFER GetBufferData();
 };
 

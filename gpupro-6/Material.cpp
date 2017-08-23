@@ -1,21 +1,22 @@
 #include "stdafx.h"
 #include "Material.h"
 #include "GameSystem.h"
+#include "Mesh.h"
+#include "ConstantBuffer.h"
 #include "MaterialManagementSystem.h"
 #include "GraphicsSystem.h"
+#include "Shader.h"
 
 Material::Material()
 {
 	m_shader = nullptr;
-	m_constBuffer = nullptr;
-	m_meshes = new std::vector<Mesh*>();
+	m_meshes = new std::vector<MeshInfo>();
 }
 
 
 Material::~Material()
 {
 	SAFE_DELETE(m_shader);
-	SAFE_DELETE(m_constBuffer);
 }
 
 Material* Material::Create()
@@ -35,27 +36,13 @@ Material* Material::Create()
 
 bool Material::Initialize()
 {
-	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
-	m_constBuffer = new ConstantBuffer(); //todo: Move constant buffer out of material
-	bool initializeConstantBuffer = m_constBuffer->Initialize();
-	bool initializedBuffers = InitializeBuffers();
-
-	if (initializeConstantBuffer && initializedBuffers)
-	{
-		return true;
-	}
-	else
-	{
-		SAFE_DELETE(m_constBuffer);
-		SAFE_DELETE(m_shader);
-		return false;
-	}
+	return InitializeBuffers();
 }
 
 
-void Material::RegisterMesh(Mesh* mesh)
+void Material::RegisterMeshInfo(MeshInfo meshInfo)
 {
-	m_meshes->push_back(mesh);
+	m_meshes->push_back(meshInfo);
 }
 
 
@@ -116,42 +103,9 @@ bool Material::InitializeBuffers()
 }
 
 
-void Material::Render()
+void Material::Render(ConstantBuffer* constBuf)
 {
 	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
-	if (m_constBuffer != nullptr)
-	{
-		ID3D11Buffer* constVSBuf = m_constBuffer->GetVSBuffer();
-		if (constVSBuf != nullptr)
-		{
-			deviceContext->VSSetConstantBuffers(0, 1, &constVSBuf);
-		}
-
-		ID3D11Buffer* constHSBuf = m_constBuffer->GetHSBuffer();
-		if (constHSBuf != nullptr)
-		{
-			deviceContext->HSSetConstantBuffers(0, 1, &constHSBuf);
-		}
-
-		ID3D11Buffer* constDSBuf = m_constBuffer->GetDSBuffer();
-		if (constDSBuf != nullptr)
-		{
-			deviceContext->DSSetConstantBuffers(0, 1, &constDSBuf);
-		}
-
-		ID3D11Buffer* constGSBuf = m_constBuffer->GetGSBuffer();
-		if (constGSBuf != nullptr)
-		{
-			deviceContext->GSSetConstantBuffers(0, 1, &constGSBuf);
-		}
-
-		ID3D11Buffer* constPSBuf = m_constBuffer->GetPSBuffer();
-		if (constPSBuf != nullptr)
-		{
-			deviceContext->PSSetConstantBuffers(0, 1, &constPSBuf);
-		}
-	}
-
 	m_shader->SetCurrent(deviceContext);
 
 	UINT offset = 0;
@@ -162,12 +116,12 @@ void Material::Render()
 
 	std::vector<Vertex> allVerts;
 	std::vector<UINT16> allIndices;
-	for each (Mesh* m in *m_meshes)
+	for each (MeshInfo m in *m_meshes)
 	{
-		const std::vector<Vertex>* verts = m->GetVertices();
+		const std::vector<Vertex>* verts = m.m_mesh->GetVertices();
 		allVerts.insert(allVerts.end(), verts->begin(), verts->end());
 
-		const std::vector<UINT16>* indices = m->GetIndices();
+		const std::vector<UINT16>* indices = m.m_mesh->GetIndices();
 		allIndices.insert(allIndices.end(), indices->begin(), indices->end());
 	}
 
@@ -188,10 +142,11 @@ void Material::Render()
 	}
 
 	int currentIndex = 0;
-	for each (Mesh* m in *m_meshes)
+	for each (MeshInfo m in *m_meshes)
 	{
-		int numberOfVerts = m->GetIndices()->size();
-		deviceContext->IASetPrimitiveTopology(m->GetTopology());
+		constBuf->SetWorldMatrix(m.m_transform);
+		int numberOfVerts = m.m_mesh->GetIndices()->size();
+		deviceContext->IASetPrimitiveTopology(m.m_mesh->GetTopology());
 		deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
 		currentIndex += numberOfVerts;
 	}

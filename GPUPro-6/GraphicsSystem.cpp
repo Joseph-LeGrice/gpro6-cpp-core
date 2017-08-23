@@ -32,7 +32,10 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 	ID3D11DeviceContext* gfxDeviceContext;
 	IDXGISwapChain* gfxSwapchain;
 	ID3D11RenderTargetView * gfxBackBuffer;
-	
+	 
+	ConstantBuffer* cp = new ConstantBuffer();
+	cp->Initialize();
+
 	// Initialize Direct3D
 	DXGI_SWAP_CHAIN_DESC scd;
 	ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
@@ -81,7 +84,7 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 
 	gfxDeviceContext->RSSetViewports(1, &viewportDesc);
 
-	return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer);
+	return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer, cp);
 }
 
 void GraphicsSystem::Render(const std::vector<Material*>* m_materials)
@@ -90,7 +93,7 @@ void GraphicsSystem::Render(const std::vector<Material*>* m_materials)
 
 	for each (Material* m in *m_materials)
 	{
-		m->Render();
+		m->Render(m_constantBuffer);
 	}
 
 	m_swapchain->Present(0, 0);
