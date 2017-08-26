@@ -15,14 +15,14 @@ void Mesh::SetTopology(D3D_PRIMITIVE_TOPOLOGY t)
 	m_topology = t;
 }
 
-void Mesh::SetVertices(std::vector<Vertex> &verts)
+void Mesh::SetVertices(std::vector<Vertex>* verts)
 {
-	m_vertices = &verts;
+	m_vertices = verts;
 }
 
-void Mesh::SetIndices(std::vector<UINT16> &indices)
+void Mesh::SetIndices(std::vector<UINT16>* indices)
 {
-	m_indices = &indices;
+	m_indices = indices;
 }
 
 const D3D_PRIMITIVE_TOPOLOGY Mesh::GetTopology()

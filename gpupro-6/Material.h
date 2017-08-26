@@ -6,6 +6,7 @@
 
 class Mesh;
 class Shader;
+class ShaderResource;
 class ConstantBuffer;
 struct MeshInfo;
 
@@ -17,19 +18,24 @@ public:
 	static Material* Create();
 
 	void Render(ConstantBuffer*);
+	
+	void SetShader(Shader* shader);
+	
 	void DeregisterMeshInfo(MeshInfo* mesh);
 	void RegisterMeshInfo(MeshInfo* mesh);
-	void CompileShader(std::wstring shaderFilename);
 
 private:
 	bool Initialize();
 	bool InitializeBuffers();
 
 	Material();
+	Material(const Material&);
 
-	std::vector<MeshInfo*>* m_meshes;
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;
+	std::vector<MeshInfo*>* m_meshes;
+
 	Shader* m_shader;
+	std::vector<ShaderResource*>* m_shaderResources;
 };
 

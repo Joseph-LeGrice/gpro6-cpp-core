@@ -9,21 +9,23 @@ class GameSystem
 public:
 	~GameSystem();
 
-	static void InitializeAllSystems();
+	static bool InitializeAllSystems();
 	static int Run();
+	static void Shutdown();
 
 	static GraphicsSystem* Graphics();
 	static MaterialManagementSystem* MaterialManager();
 	static SceneManagementSystem* SceneManager();
 
 private:
-	static GameSystem s_instance;
+	static GameSystem* s_instance;
 
 	HINSTANCE m_hInstance;
 	HWND m_hwnd;
 	LPCWSTR m_applicationName;
 
 	GameSystem();
+	GameSystem(const GameSystem&);
 
 	int GameLoop();
 	void ProcessInput();

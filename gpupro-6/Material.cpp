@@ -52,29 +52,9 @@ void Material::RegisterMeshInfo(MeshInfo* meshInfo)
 	m_meshes->push_back(meshInfo);
 }
 
-
-void Material::CompileShader(std::wstring filename)
+void Material::SetShader(Shader* s)
 {
-	if (m_shader != nullptr)
-	{
-		SAFE_DELETE(m_shader);
-	}
-
-	m_shader = new Shader();
-	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice(); 
-	bool vertexShaderCompiled = m_shader->InitVertexShader(filename, "VShader", device);
-	bool hullShaderCompiled = true; // = m_shader->InitHullShader(filename, "HShader", device);
-	bool domainShaderCompiled = true; //= m_shader->InitDomainShader(filename, "DShader", device);
-	bool geometryShaderCompiled = true; // = m_shader->InitGeometryShader(filename, "GShaderTessellation", device);
-	bool pixelShaderCompiled = m_shader->InitPixelShader(filename, "PShader", device);
-
-	if (vertexShaderCompiled && hullShaderCompiled && domainShaderCompiled && geometryShaderCompiled && pixelShaderCompiled)
-	{
-	}
-	else
-	{
-		SAFE_DELETE(m_shader);
-	}
+	m_shader = s;
 }
 
 bool Material::InitializeBuffers()
@@ -112,12 +92,12 @@ bool Material::InitializeBuffers()
 
 void Material::Render(ConstantBuffer* constBuf)
 {
-	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
-	m_shader->SetCurrent(deviceContext);
+	m_shader->SetCurrent();
 
 	UINT offset = 0;
 	UINT stride = sizeof(Vertex);
 
+	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 

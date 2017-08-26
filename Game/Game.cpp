@@ -5,12 +5,15 @@
 #include "Game.h"
 #include "GameSystem.h"
 
+#include "Shader.h"
 #include "SceneGraph.h"
 #include "Entity.h"
 #include "MeshRenderer.h"
 #include "SceneManagementSystem.h"
 #include "Material.h"
 #include "Mesh.h"
+#include "Texture2D_ShaderResource.h"
+#include "TextureSampler.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -20,41 +23,95 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-	GameSystem::InitializeAllSystems();
+	bool allOK = true;
 
-	Material* m = Material::Create();
-	m->CompileShader(L"SimpleTexturedQuad.shader");
+	// --- To Clean up:
+	MeshRenderer* mr = nullptr;
+	Shader* s = nullptr;
+	Mesh* mesh = nullptr;
+	Entity* testQuadEntity = nullptr;
+	TextureSampler* ts = nullptr;
 
-	// Quad Mesh
-	std::vector<Vertex> verts;
-	verts.push_back({ -0.5f, -0.5f, 0.0f });
-	verts.push_back({ -0.5f,  0.5f, 0.0f });
-	verts.push_back({ 0.5f,  0.5f, 0.0f });
-	verts.push_back({ 0.5f, -0.5f, 0.0f });
+	std::vector<Vertex>* verts = new std::vector<Vertex>();
+	verts->push_back({ -0.5f, -0.5f, 0.0f, 0.0f, 0.0f });
+	verts->push_back({ -0.5f,  0.5f, 0.0f, 0.0f, 1.0f });
+	verts->push_back({ 0.5f,  0.5f, 0.0f, 1.0f, 1.0f });
+	verts->push_back({ 0.5f, -0.5f, 0.0f, 1.0f, 0.0f });
 
-	std::vector<UINT16> indices;
-	indices.push_back(1);
-	indices.push_back(2);
-	indices.push_back(0);
-	indices.push_back(2);
-	indices.push_back(3);
+	std::vector<UINT16>* indices = new std::vector<UINT16>();
+	indices->push_back(1);
+	indices->push_back(2);
+	indices->push_back(0);
+	indices->push_back(2);
+	indices->push_back(3);
+	// ---
 
-	Mesh* mesh = new Mesh();
-	mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-	mesh->SetVertices(verts);
-	mesh->SetIndices(indices);
+	allOK &= GameSystem::InitializeAllSystems();
+	if (allOK)
+	{
+		Texture2D_ShaderResource* t = new Texture2D_ShaderResource();
+		allOK &= t->Initialize();
+		if (allOK)
+		{
+			s = new Shader();
+			allOK &= s->Initialize(L"SimpleTexturedQuad.shader");
+			if (allOK)
+			{
+				ts = new TextureSampler();
+				allOK &= ts->Initialize();
+				if (allOK)
+				{
+					s->AddShaderResource((ShaderResource*)t);
+					s->AddTextureSampler(ts);
 
-	MeshRenderer* mr = new MeshRenderer();
-	mr->SetMaterial(m);
-	mr->SetMesh(mesh);
+					Material* m = Material::Create();
+					allOK &= m != nullptr;
+					if (allOK)
+					{
+						m->SetShader(s);
 
-	Entity* testQuadEntity = new Entity();
-	testQuadEntity->AddComponent((Component*)mr);
+						// Quad Mesh
+						mesh = new Mesh();
+						mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+						mesh->SetVertices(verts);
+						mesh->SetIndices(indices);
 
-	SceneGraph* currentScene = GameSystem::SceneManager()->GetSceneGraph();
-	currentScene->AddRootEntity(testQuadEntity);
+						mr = new MeshRenderer();
+						mr->SetMesh(mesh);
+						mr->SetMaterial(m);
 
-	return GameSystem::Run();
+						testQuadEntity = new Entity();
+						testQuadEntity->AddComponent((Component*)mr);
+
+						SceneGraph* currentScene = GameSystem::SceneManager()->GetSceneGraph();
+						currentScene->AddRootEntity(testQuadEntity);
+					}
+				}
+			}
+		}
+	}
+
+	int returnCode = -1;
+	if (allOK)
+	{
+		returnCode = GameSystem::Run();
+	}
+
+	GameSystem::Shutdown();
+
+	SAFE_DELETE(s);
+	SAFE_DELETE(mesh);
+	SAFE_DELETE(testQuadEntity);
+	SAFE_DELETE(mr);
+	SAFE_DELETE(ts);
+
+	verts->clear();
+	SAFE_DELETE(verts);
+	
+	indices->clear();
+	SAFE_DELETE(indices);
+
+	return returnCode;
 }
 
 

@@ -9,7 +9,7 @@ using namespace std::chrono_literals;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam);
 
-GameSystem GameSystem::s_instance = GameSystem();
+GameSystem* GameSystem::s_instance = new GameSystem();
 
 GameSystem::GameSystem()
 {
@@ -25,33 +25,40 @@ GameSystem::~GameSystem()
 
 GraphicsSystem* GameSystem::Graphics()
 {
-	return s_instance.m_graphicsSystem;
+	return s_instance->m_graphicsSystem;
 }
 
 MaterialManagementSystem* GameSystem::MaterialManager()
 {
-	return s_instance.m_materialManagementSystem;
+	return s_instance->m_materialManagementSystem;
 }
 
 SceneManagementSystem* GameSystem::SceneManager()
 {
-	return s_instance.m_sceneManagerSystem;
+	return s_instance->m_sceneManagerSystem;
 }
 
-void GameSystem::InitializeAllSystems()
+bool GameSystem::InitializeAllSystems()
 {
 	int screenWidth = 0;
 	int screenHeight = 0;
-	s_instance.InitializeWindows(screenWidth, screenHeight);
+	s_instance->InitializeWindows(screenWidth, screenHeight);
 
-	s_instance.m_graphicsSystem = GraphicsSystem::InitializeGraphics(s_instance.m_hwnd, screenWidth, screenHeight);
-	s_instance.m_materialManagementSystem = new MaterialManagementSystem();
-	s_instance.m_sceneManagerSystem = new SceneManagementSystem();
+	s_instance->m_graphicsSystem = GraphicsSystem::InitializeGraphics(s_instance->m_hwnd, screenWidth, screenHeight);
+	s_instance->m_materialManagementSystem = new MaterialManagementSystem();
+	s_instance->m_sceneManagerSystem = new SceneManagementSystem();
+
+	return s_instance->m_graphicsSystem != nullptr;
 }
 
 int GameSystem::Run()
 {
-	return s_instance.GameLoop();
+	return s_instance->GameLoop();
+}
+
+void GameSystem::Shutdown()
+{
+	SAFE_DELETE(s_instance);
 }
 
 int GameSystem::GameLoop()

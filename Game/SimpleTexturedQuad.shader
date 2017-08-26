@@ -17,8 +17,8 @@ cbuffer PS_CONSTANT_BUFFER
 };
 
 
-//Texture2D Texture;
-//SamplerState SampleType;
+Texture2D Texture;
+SamplerState SampleType;
 
 VS_OUTPUT VShader(VS_INPUT data)
 {
@@ -30,5 +30,5 @@ VS_OUTPUT VShader(VS_INPUT data)
 
 float4 PShader(VS_OUTPUT data) : SV_TARGET
 {
-	return float4(1, 0, 0, 1); // Texture.Sample(SampleType, data.uv.xy);
+	return Texture.Sample(SampleType, data.uv.xy);
 }

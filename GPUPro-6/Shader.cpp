@@ -3,6 +3,13 @@
 
 #include "D3DX11.h"
 
+#include "GameSystem.h"
+#include "GraphicsSystem.h"
+#include "TextureSampler.h"
+#include "ShaderResource.h"
+#include <algorithm>
+#include <vector>
+
 Shader::Shader()
 {
 	m_inputLayout = nullptr;
@@ -11,6 +18,8 @@ Shader::Shader()
 	m_geometryShader = nullptr;
 	m_hullShader = nullptr;
 	m_domainShader = nullptr;
+	m_shaderResources = new std::vector<ShaderResource*>();
+	m_textureSamplers = new std::vector<TextureSampler*>();
 }
 
 
@@ -22,8 +31,98 @@ Shader::~Shader()
 	SAFE_RELEASE(m_domainShader);
 	SAFE_RELEASE(m_geometryShader);
 	SAFE_RELEASE(m_pixelShader);
+	
+	m_textureSamplers->clear();
+	SAFE_DELETE(m_textureSamplers);
+
+	m_shaderResources->clear();
+	SAFE_DELETE(m_shaderResources);
 }
 
+
+bool Shader::Initialize(std::wstring filename)
+{
+	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
+	bool vertexShaderCompiled = InitVertexShader(filename, "VShader", device);
+	bool hullShaderCompiled = true; // = m_shader->InitHullShader(filename, "HShader", device);
+	bool domainShaderCompiled = true; //= m_shader->InitDomainShader(filename, "DShader", device);
+	bool geometryShaderCompiled = true; // = m_shader->InitGeometryShader(filename, "GShaderTessellation", device);
+	bool pixelShaderCompiled = InitPixelShader(filename, "PShader", device);
+
+	return (vertexShaderCompiled && hullShaderCompiled && domainShaderCompiled && geometryShaderCompiled && pixelShaderCompiled);
+}
+
+void Shader::SetCurrent()
+{
+	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
+	deviceContext->IASetInputLayout(m_inputLayout);
+	deviceContext->VSSetShader(m_vertexShader, NULL, 0);
+
+	if (m_hullShader != nullptr && m_domainShader != nullptr)
+	{
+		deviceContext->HSSetShader(m_hullShader, NULL, 0);
+		deviceContext->DSSetShader(m_domainShader, NULL, 0);
+	}
+
+	if (m_geometryShader != nullptr)
+	{
+		deviceContext->GSSetShader(m_geometryShader, 0, 0);
+	}
+
+	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
+
+	if (m_shaderResources->size() > 0)
+	{
+		std::vector<ID3D11ShaderResourceView*> allResources;
+		for each (ShaderResource* sr in *m_shaderResources)
+		{
+			ID3D11ShaderResourceView* resource = sr->GetResourceView();
+			allResources.push_back(resource);
+		}
+		deviceContext->VSSetShaderResources(0, allResources.size(), &allResources[0]);
+		//deviceContext->HSSetShaderResources(0, allResources.size(), &allResources[0]);
+		//deviceContext->DSSetShaderResources(0, allResources.size(), &allResources[0]);
+		//deviceContext->GSSetShaderResources(0, allResources.size(), &allResources[0]);
+		deviceContext->PSSetShaderResources(0, allResources.size(), &allResources[0]);
+	}
+
+	if (m_textureSamplers->size() > 0)
+	{
+		std::vector<ID3D11SamplerState*> allSamplers;
+		for each (TextureSampler* ts in *m_textureSamplers)
+		{
+			ID3D11SamplerState* sampler = ts->GetSampler();
+			allSamplers.push_back(sampler);
+		}
+		deviceContext->VSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+		//deviceContext->HSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+		//deviceContext->DSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+		//deviceContext->GSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+		deviceContext->PSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+	}
+}
+
+
+void Shader::AddShaderResource(ShaderResource* r)
+{
+	m_shaderResources->push_back(r);
+}
+
+void Shader::RemoveShaderResource(ShaderResource* r)
+{
+	m_shaderResources->erase(std::remove(m_shaderResources->begin(), m_shaderResources->end(), r), m_shaderResources->end());
+}
+
+
+void Shader::AddTextureSampler(TextureSampler* ts)
+{
+	m_textureSamplers->push_back(ts);
+}
+
+void Shader::RemoveTextureSampler(TextureSampler* ts)
+{
+	m_textureSamplers->erase(std::remove(m_textureSamplers->begin(), m_textureSamplers->end(), ts), m_textureSamplers->end());
+}
 
 bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Device* device)
 {
@@ -155,23 +254,4 @@ bool Shader::InitPixelShader(std::wstring filename, std::string name, ID3D11Devi
 	{
 		return false;
 	}
-}
-
-void Shader::SetCurrent(ID3D11DeviceContext* deviceContext)
-{
-	deviceContext->IASetInputLayout(m_inputLayout);
-	deviceContext->VSSetShader(m_vertexShader, NULL, 0);
-	
-	if (m_hullShader != nullptr && m_domainShader != nullptr)
-	{
-		deviceContext->HSSetShader(m_hullShader, NULL, 0);
-		deviceContext->DSSetShader(m_domainShader, NULL, 0);
-	}
-
-	if (m_geometryShader != nullptr)
-	{
-		deviceContext->GSSetShader(m_geometryShader, 0, 0);
-	}
-
-	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 }

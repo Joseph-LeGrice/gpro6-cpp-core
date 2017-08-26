@@ -54,6 +54,11 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderResource.cpp" />
+    <ClCompile Include="Texture2D_ShaderResource.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureSampler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -113,6 +118,11 @@
     <ClInclude Include="Entity.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderResource.h" />
+    <ClInclude Include="Texture2D_ShaderResource.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureSampler.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
