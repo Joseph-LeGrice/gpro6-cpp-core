@@ -8,7 +8,6 @@ public:
 	ShaderResource();
 	~ShaderResource();
 
-	virtual bool Initialize() = 0;
 	virtual ID3D11ShaderResourceView* GetResourceView() = 0;
 
 private:

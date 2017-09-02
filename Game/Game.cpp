@@ -24,6 +24,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
 	bool allOK = true;
+	int returnCode = -1;
 
 	// --- To Clean up:
 	MeshRenderer* mr = nullptr;
@@ -46,59 +47,65 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	indices->push_back(3);
 	// ---
 
-	allOK &= GameSystem::InitializeAllSystems();
-	if (allOK)
+	try
 	{
-		Texture2D_ShaderResource* t = new Texture2D_ShaderResource();
-		allOK &= t->Initialize();
+		allOK &= GameSystem::InitializeAllSystems();
 		if (allOK)
 		{
-			s = new Shader();
-			allOK &= s->Initialize(L"SimpleTexturedQuad.shader");
+			Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\TestImage.png");
+			allOK &= t != nullptr;
 			if (allOK)
 			{
-				ts = new TextureSampler();
-				allOK &= ts->Initialize();
+				s = new Shader();
+				allOK &= s->Initialize(L"SimpleTexturedQuad.shader");
 				if (allOK)
 				{
-					s->AddShaderResource((ShaderResource*)t);
-					s->AddTextureSampler(ts);
-
-					Material* m = Material::Create();
-					allOK &= m != nullptr;
+					ts = new TextureSampler();
+					allOK &= ts->Initialize();
 					if (allOK)
 					{
-						m->SetShader(s);
+						s->AddShaderResource((ShaderResource*)t);
+						s->AddTextureSampler(ts);
 
-						// Quad Mesh
-						mesh = new Mesh();
-						mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-						mesh->SetVertices(verts);
-						mesh->SetIndices(indices);
+						Material* m = Material::Create();
+						allOK &= m != nullptr;
+						if (allOK)
+						{
+							m->SetShader(s);
 
-						mr = new MeshRenderer();
-						mr->SetMesh(mesh);
-						mr->SetMaterial(m);
+							// Quad Mesh
+							mesh = new Mesh();
+							mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+							mesh->SetVertices(verts);
+							mesh->SetIndices(indices);
 
-						testQuadEntity = new Entity();
-						testQuadEntity->AddComponent((Component*)mr);
-						testQuadEntity->SetScale({ 2.5f, 2.5f, 2.5f });
+							mr = new MeshRenderer();
+							mr->SetMesh(mesh);
+							mr->SetMaterial(m);
 
-						SceneGraph* currentScene = GameSystem::SceneManager()->GetSceneGraph();
-						currentScene->AddRootEntity(testQuadEntity);
+							testQuadEntity = new Entity();
+							testQuadEntity->AddComponent((Component*)mr);
+							testQuadEntity->SetScale({ 2.5f, 2.5f, 2.5f });
+
+							SceneGraph* currentScene = GameSystem::SceneManager()->GetSceneGraph();
+							currentScene->AddRootEntity(testQuadEntity);
+						}
 					}
 				}
 			}
 		}
-	}
 
-	int returnCode = -1;
-	if (allOK)
+		if (allOK)
+		{
+			returnCode = GameSystem::Run();
+		}
+
+		GameSystem::Shutdown();
+	}
+	catch(...)
 	{
-		returnCode = GameSystem::Run();
-	}
 
-	GameSystem::Shutdown();
+	}
 
 	SAFE_DELETE(s);
 	SAFE_DELETE(mesh);

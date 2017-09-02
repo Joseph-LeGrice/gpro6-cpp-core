@@ -7,7 +7,7 @@ ImagingFactory* ImagingFactory::s_instance = nullptr;
 
 struct WICTranslate
 {
-	WICPixelFormatGUID guid;
+	GUID guid;
 	DXGI_FORMAT format;
 };
 
@@ -31,38 +31,38 @@ static WICTranslate g_WICFormats[] = {
 	{ GUID_WICPixelFormat96bppRGBFloat,			DXGI_FORMAT_R32G32B32_FLOAT } // Windows 8 WIC
 };
 
-HRESULT ImagingFactory::GetPixelDataFromFile(_In_ std::wstring filepath, _Out_ DXGI_FORMAT& pixelFormat, _Out_ BYTE* pbBuffer, _Out_ UINT& bpp, UINT& width, UINT& height)
+HRESULT ImagingFactory::GetPixelDataFromFile(_In_ std::wstring filepath, _Out_ BYTE** pbBuffer, _Out_ DXGI_FORMAT& pixelFormat, _Out_ UINT& bpp, UINT& width, UINT& height)
 {
 	Initialize();
-	return s_instance->GetPixelDataFromFileInternal(filepath, pixelFormat, pbBuffer, bpp, width, height);
+	return s_instance->GetPixelDataFromFileInternal(filepath, pbBuffer, pixelFormat, bpp, width, height);
 }
 
-HRESULT ImagingFactory::GetPixelDataFromFileInternal(_In_ std::wstring filepath, _Out_ DXGI_FORMAT& pixelFormat, _Out_ BYTE* pbBuffer, _Out_ UINT& bpp, UINT& width, UINT& height)
+HRESULT ImagingFactory::GetPixelDataFromFileInternal(_In_ std::wstring filepath, _Out_ BYTE** pbBuffer, _Out_ DXGI_FORMAT& pixelFormat, _Out_ UINT& bpp, UINT& width, UINT& height)
 {
-	IWICBitmapDecoder* bitmapDecoder;
-	IWICBitmapFrameDecode* bitmapFrame;
-	WICPixelFormatGUID* bitmapPixelFormat;
+	IWICBitmapDecoder* bitmapDecoder = nullptr;
+	IWICBitmapFrameDecode* bitmapFrame = nullptr;
+	WICPixelFormatGUID bitmapPixelFormat;
 
-	HRESULT hr = m_factory->CreateDecoderFromFilename(filepath.c_str(), NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &bitmapDecoder);
+	HRESULT hr = m_factory->CreateDecoderFromFilename(filepath.c_str(), 0, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &bitmapDecoder);
 	if (SUCCEEDED(hr))
 	{
 		hr = bitmapDecoder->GetFrame(0, &bitmapFrame);
 		if (SUCCEEDED(hr))
 		{
-			hr = bitmapFrame->GetPixelFormat(bitmapPixelFormat);
+			hr = bitmapFrame->GetPixelFormat(&bitmapPixelFormat);
 			if (SUCCEEDED(hr))
 			{
 				hr = bitmapFrame->GetSize(&width, &height);
 				if (SUCCEEDED(hr))
 				{
-					UINT bitsPerPixel = GetBitsPerPixel(*bitmapPixelFormat);
+					UINT bitsPerPixel = GetBitsPerPixel(bitmapPixelFormat);
 					UINT bufferStride = width * bitsPerPixel;
 					const UINT bufferSize = bufferStride * height;
 					BYTE* buf = new BYTE[bufferSize];
 
 					bpp = bitsPerPixel;
-					pbBuffer = buf;
-					pixelFormat = GetNativeFormat(*bitmapPixelFormat);
+					*pbBuffer = buf;
+					pixelFormat = GetNativeFormat(bitmapPixelFormat);
 					hr = bitmapFrame->CopyPixels(NULL, bufferStride, bufferSize, buf);
 				}
 			}
@@ -71,18 +71,18 @@ HRESULT ImagingFactory::GetPixelDataFromFileInternal(_In_ std::wstring filepath,
 	
 	SAFE_RELEASE(bitmapDecoder);
 	SAFE_RELEASE(bitmapFrame);
-	SAFE_DELETE(bitmapPixelFormat);
 
 	return hr;
 }
 
-DXGI_FORMAT ImagingFactory::GetNativeFormat(WICPixelFormatGUID bitmapPixelFormat)
+DXGI_FORMAT ImagingFactory::GetNativeFormat(const GUID& bitmapPixelFormat)
 {
 	for (size_t i = 0; i < _countof(g_WICFormats); i++)
 	{
-		if (memcmp(&g_WICFormats[i].guid, &bitmapPixelFormat, sizeof(WICPixelFormatGUID) == 0))
+		GUID thisGuid = g_WICFormats[i].guid;
+		if (thisGuid == bitmapPixelFormat)
 		{
-			return g_WICFormats->format;
+			return g_WICFormats[i].format;
 		}
 	}
 	return DXGI_FORMAT_UNKNOWN;
@@ -121,7 +121,7 @@ ImagingFactory::~ImagingFactory()
 
 HRESULT ImagingFactory::Initialize()
 {
-	if (s_instance != nullptr)
+	if (s_instance == nullptr)
 	{
 		s_instance = new ImagingFactory();
 		HRESULT hr = CoCreateInstance(CLSID_WICImagingFactory, NULL, CLSCTX_INPROC_SERVER, IID_IWICImagingFactory, (LPVOID*)&s_instance->m_factory);

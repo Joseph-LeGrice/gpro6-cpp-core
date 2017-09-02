@@ -18,21 +18,12 @@ Texture2D_ShaderResource::~Texture2D_ShaderResource()
 	SAFE_RELEASE(m_resourceView);
 }
 
-struct COLOR_DATA
-{
-	FLOAT R;
-	FLOAT G;
-	FLOAT B;
-	FLOAT A;
-};
-
 Texture2D_ShaderResource* Texture2D_ShaderResource::CreateFromFile(std::wstring filepath)
 {
-	UINT width, height;
+	BYTE* pbBuffer = nullptr;
+	UINT bpp, width, height;
 	DXGI_FORMAT pixelFormat;
-	BYTE* pbBuffer;
-	UINT bpp;
-	HRESULT hr = ImagingFactory::GetPixelDataFromFile(filepath, pixelFormat, pbBuffer, bpp, width, height);
+	HRESULT hr = ImagingFactory::GetPixelDataFromFile(filepath, &pbBuffer, pixelFormat, bpp, width, height);
 
 	if (SUCCEEDED(hr))
 	{
@@ -49,7 +40,7 @@ Texture2D_ShaderResource* Texture2D_ShaderResource::CreateFromFile(std::wstring 
 
 		D3D11_SUBRESOURCE_DATA data;
 		ZeroMemory(&data, sizeof(D3D11_SUBRESOURCE_DATA));
-		data.pSysMem = &pbBuffer;
+		data.pSysMem = pbBuffer;
 		data.SysMemPitch = width * bpp;
 		data.SysMemSlicePitch = width * height * bpp;
 
@@ -84,8 +75,20 @@ ID3D11ShaderResourceView* Texture2D_ShaderResource::GetResourceView()
 	return m_resourceView;
 }
 
+/*
 
-bool Texture2D_ShaderResource::Initialize()
+TODO: Reimplement this with COLOR_DATA being a bit more standardised somewhere else
+	  Actually when we come back to this we could adopt more of a 'procedural texture' approach where we can update the texture at arbitrary points throughout runtime.
+
+struct COLOR_DATA
+{
+	FLOAT R;
+	FLOAT G;
+	FLOAT B;
+	FLOAT A;
+}; 
+
+Texture2D_ShaderResource Texture2D_ShaderResource::CreateFromData(COLOR_DATA[] data)
 {
 	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
 	const int texture_size = 64;
@@ -160,3 +163,4 @@ bool Texture2D_ShaderResource::Initialize()
 
 	return createdEverything;
 }
+*/
