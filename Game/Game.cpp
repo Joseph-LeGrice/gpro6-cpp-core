@@ -82,6 +82,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 						testQuadEntity = new Entity();
 						testQuadEntity->AddComponent((Component*)mr);
+						testQuadEntity->SetScale({ 2.5f, 2.5f, 2.5f });
 
 						SceneGraph* currentScene = GameSystem::SceneManager()->GetSceneGraph();
 						currentScene->AddRootEntity(testQuadEntity);

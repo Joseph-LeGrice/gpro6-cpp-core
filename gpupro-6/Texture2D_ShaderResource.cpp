@@ -3,12 +3,12 @@
 #include "Texture2D_ShaderResource.h"
 #include "GameSystem.h"
 #include "GraphicsSystem.h"
+#include "ImagingFactory.h"
 
 Texture2D_ShaderResource::Texture2D_ShaderResource()
 {
 	m_pTexture = nullptr;
 	m_resourceView = nullptr;
-	m_sampler = nullptr;
 }
 
 
@@ -16,7 +16,6 @@ Texture2D_ShaderResource::~Texture2D_ShaderResource()
 {
 	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_resourceView);
-	SAFE_RELEASE(m_sampler);
 }
 
 struct COLOR_DATA
@@ -26,6 +25,59 @@ struct COLOR_DATA
 	FLOAT B;
 	FLOAT A;
 };
+
+Texture2D_ShaderResource* Texture2D_ShaderResource::CreateFromFile(std::wstring filepath)
+{
+	UINT width, height;
+	DXGI_FORMAT pixelFormat;
+	BYTE* pbBuffer;
+	UINT bpp;
+	HRESULT hr = ImagingFactory::GetPixelDataFromFile(filepath, pixelFormat, pbBuffer, bpp, width, height);
+
+	if (SUCCEEDED(hr))
+	{
+		D3D11_TEXTURE2D_DESC desc;
+		ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
+		desc.Width = width;
+		desc.Height = height;
+		desc.MipLevels = 1;
+		desc.ArraySize = 1;
+		desc.Format = pixelFormat;
+		desc.SampleDesc.Count = 1;
+		desc.Usage = D3D11_USAGE_DEFAULT;
+		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+
+		D3D11_SUBRESOURCE_DATA data;
+		ZeroMemory(&data, sizeof(D3D11_SUBRESOURCE_DATA));
+		data.pSysMem = &pbBuffer;
+		data.SysMemPitch = width * bpp;
+		data.SysMemSlicePitch = width * height * bpp;
+
+		Texture2D_ShaderResource* newTexture2D = new Texture2D_ShaderResource();
+		ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
+		bool createdEverything = false;
+		HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &newTexture2D->m_pTexture);
+		if (createTextureResult == S_OK)
+		{
+			HRESULT createResourceViewResult = device->CreateShaderResourceView(newTexture2D->m_pTexture, NULL, &newTexture2D->m_resourceView);
+			if (createResourceViewResult == S_OK)
+			{
+				createdEverything = true;
+			}
+		}
+
+		if (!createdEverything)
+		{
+			SAFE_DELETE(newTexture2D)
+		}
+
+		return newTexture2D;
+	}
+	else
+	{
+		return nullptr;
+	}
+}
 
 ID3D11ShaderResourceView* Texture2D_ShaderResource::GetResourceView()
 {

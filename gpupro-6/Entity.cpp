@@ -13,10 +13,7 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	for each (Component* c in *m_components)
-	{
-		SAFE_DELETE(c);
-	}
+	m_components->clear();
 	SAFE_DELETE(m_components);
 }
 
