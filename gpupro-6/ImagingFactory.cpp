@@ -1,12 +1,17 @@
 #include "stdafx.h"
 #include "ImagingFactory.h"
 
-#include <wincodec.h>
 #include <map>
 
 ImagingFactory* ImagingFactory::s_instance = nullptr;
 
-std::map<WICPixelFormatGUID, DXGI_FORMAT> m_formatMap = {
+struct WICTranslate
+{
+	WICPixelFormatGUID guid;
+	DXGI_FORMAT format;
+};
+
+static WICTranslate g_WICFormats[] = {
 	{ GUID_WICPixelFormat128bppRGBAFloat,		DXGI_FORMAT_R32G32B32A32_FLOAT },
 	{ GUID_WICPixelFormat64bppRGBAHalf,			DXGI_FORMAT_R16G16B16A16_FLOAT },
 	{ GUID_WICPixelFormat64bppRGBA,				DXGI_FORMAT_R16G16B16A16_UNORM },
@@ -26,13 +31,13 @@ std::map<WICPixelFormatGUID, DXGI_FORMAT> m_formatMap = {
 	{ GUID_WICPixelFormat96bppRGBFloat,			DXGI_FORMAT_R32G32B32_FLOAT } // Windows 8 WIC
 };
 
-HRESULT ImagingFactory::GetPixelDataFromFile(_In_ std::wstring filepath, _Out_ DXGI_FORMAT& pixelFormat, _Out_ BYTE* pbBuffer, _Out_ UINT& bufSize, UINT& width, UINT& height)
+HRESULT ImagingFactory::GetPixelDataFromFile(_In_ std::wstring filepath, _Out_ DXGI_FORMAT& pixelFormat, _Out_ BYTE* pbBuffer, _Out_ UINT& bpp, UINT& width, UINT& height)
 {
 	Initialize();
-	return s_instance->GetPixelDataFromFileInternal(filepath, pixelFormat, pbBuffer, bufSize, width, height);
+	return s_instance->GetPixelDataFromFileInternal(filepath, pixelFormat, pbBuffer, bpp, width, height);
 }
 
-HRESULT ImagingFactory::GetPixelDataFromFileInternal(_In_ std::wstring filepath, _Out_ DXGI_FORMAT& pixelFormat, _Out_ BYTE* pbBuffer, _Out_ UINT& bufSize, UINT& width, UINT& height)
+HRESULT ImagingFactory::GetPixelDataFromFileInternal(_In_ std::wstring filepath, _Out_ DXGI_FORMAT& pixelFormat, _Out_ BYTE* pbBuffer, _Out_ UINT& bpp, UINT& width, UINT& height)
 {
 	IWICBitmapDecoder* bitmapDecoder;
 	IWICBitmapFrameDecode* bitmapFrame;
@@ -50,12 +55,12 @@ HRESULT ImagingFactory::GetPixelDataFromFileInternal(_In_ std::wstring filepath,
 				hr = bitmapFrame->GetSize(&width, &height);
 				if (SUCCEEDED(hr))
 				{
-					UINT bpp = GetBitsPerPixel(*bitmapPixelFormat);
-					UINT bufferStride = width * bpp;
+					UINT bitsPerPixel = GetBitsPerPixel(*bitmapPixelFormat);
+					UINT bufferStride = width * bitsPerPixel;
 					const UINT bufferSize = bufferStride * height;
 					BYTE* buf = new BYTE[bufferSize];
 
-					bufSize = bufferSize;
+					bpp = bitsPerPixel;
 					pbBuffer = buf;
 					pixelFormat = GetNativeFormat(*bitmapPixelFormat);
 					hr = bitmapFrame->CopyPixels(NULL, bufferStride, bufferSize, buf);
@@ -71,9 +76,16 @@ HRESULT ImagingFactory::GetPixelDataFromFileInternal(_In_ std::wstring filepath,
 	return hr;
 }
 
-DXGI_FORMAT& ImagingFactory::GetNativeFormat(WICPixelFormatGUID bitmapPixelFormat)
+DXGI_FORMAT ImagingFactory::GetNativeFormat(WICPixelFormatGUID bitmapPixelFormat)
 {
-	return m_formatMap[bitmapPixelFormat];
+	for (size_t i = 0; i < _countof(g_WICFormats); i++)
+	{
+		if (memcmp(&g_WICFormats[i].guid, &bitmapPixelFormat, sizeof(WICPixelFormatGUID) == 0))
+		{
+			return g_WICFormats->format;
+		}
+	}
+	return DXGI_FORMAT_UNKNOWN;
 }
 
 UINT ImagingFactory::GetBitsPerPixel(WICPixelFormatGUID bitmapPixelFormat)
