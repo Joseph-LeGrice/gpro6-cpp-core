@@ -1,37 +1,61 @@
 #include "stdafx.h"
+
 #include "SceneGraph.h"
 #include "Entity.h"
+#include "Component.h"
 
 SceneGraph::SceneGraph()
 {
-	m_componentMap = std::unordered_map<std::type_index, std::vector<Component*>>();
 	m_rootEntities = std::vector<Entity*>();
+	m_allComponents = std::vector<Component*>();
 }
 
 SceneGraph::~SceneGraph()
 {
-}
-
-
-void SceneGraph::AddRootEntity(Entity* newEntity)
-{
-	m_rootEntities.push_back(newEntity);
-	RebuildComponentMap();
-}
-
-
-void SceneGraph::RebuildComponentMap() //TODO: Speed up!
-{
-	m_componentMap.clear();
-	for each (Entity* e in m_rootEntities)
+	for (size_t i = 0; i < m_rootEntities.size(); i++)
 	{
-		for each (Component* c in *e->GetAllComponents())
-		{
-			if (!m_componentMap.count(typeid(c)))
-			{
-				m_componentMap[typeid(c)] = std::vector<Component*>();
-			}
-			m_componentMap[typeid(c)].push_back(c);
-		}
+		SAFE_DELETE(m_rootEntities[i]);
+	}
+	m_rootEntities.clear();
+}
+
+void SceneGraph::InitializeScene()
+{
+	for (size_t i=0; i<m_allComponents.size(); i++)
+	{
+		m_allComponents[i]->Init();
 	}
 }
+
+void SceneGraph::UpdateScene()
+{
+	for (size_t i = 0; i < m_allComponents.size(); i++)
+	{
+		m_allComponents[i]->Tick();
+	}
+}
+
+void SceneGraph::DestroyScene()
+{
+	for (size_t i = 0; i < m_allComponents.size(); i++)
+	{
+		m_allComponents[i]->DeInit();
+	}
+}
+
+//
+//void SceneGraph::RebuildComponentMap() //TODO: Speed up!
+//{
+//	m_componentMap.clear();
+//	for each (Entity* e in m_rootEntities)
+//	{
+//		for each (Component* c in *e->GetAllComponents())
+//		{
+//			if (!m_componentMap.count(typeid(c)))
+//			{
+//				m_componentMap[typeid(c)] = std::vector<Component*>();
+//			}
+//			m_componentMap[typeid(c)].push_back(c);
+//		}
+//	}
+//}

@@ -16,11 +16,12 @@ MeshRenderer::MeshRenderer()
 
 MeshRenderer::~MeshRenderer()
 {
+	SAFE_DELETE(m_mesh);
 }
 
-void MeshRenderer::SetMesh(Mesh* mesh)
+void MeshRenderer::SetMesh(Mesh** mesh)
 {
-	m_meshInfo->m_mesh = mesh;
+	m_meshInfo->m_mesh = *mesh;
 }
 
 void MeshRenderer::OnMaterialUpdated(Material* oldMaterial, Material* newMaterial)

@@ -20,6 +20,7 @@ public:
 private:
 	static GameSystem* s_instance;
 
+	bool m_running;
 	HINSTANCE m_hInstance;
 	HWND m_hwnd;
 	LPCWSTR m_applicationName;

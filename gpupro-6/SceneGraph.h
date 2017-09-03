@@ -1,23 +1,27 @@
 #pragma once
 
-#include "Component.h"
-
-#include <typeindex>
 #include <unordered_map>
 #include <vector>
 
 class Entity;
+class Component;
+
+typedef std::vector<Entity*> EntityList;
+typedef std::vector<Component*> ComponentList; 
 
 class SceneGraph
 {
+	friend Entity;
+
 public:
 	SceneGraph();
 	~SceneGraph();
 
-	void AddRootEntity(Entity* newEntity);
+	void InitializeScene();
+	void UpdateScene();
+	void DestroyScene();
 
 private:
-	void RebuildComponentMap();
-	std::unordered_map<std::type_index, std::vector<Component*>> m_componentMap;
-	std::vector<Entity*> m_rootEntities;
+	EntityList m_rootEntities;
+	ComponentList m_allComponents;
 };

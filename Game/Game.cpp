@@ -76,19 +76,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							// Quad Mesh
 							mesh = new Mesh();
 							mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-							mesh->SetVertices(verts);
-							mesh->SetIndices(indices);
+							mesh->SetVertices(&verts);
+							mesh->SetIndices(&indices);
 
-							mr = new MeshRenderer();
-							mr->SetMesh(mesh);
+							testQuadEntity = &Entity::Instantiate();
+							mr = &testQuadEntity->AddComponent<MeshRenderer>();
+							mr->SetMesh(&mesh);
 							mr->SetMaterial(m);
 
-							testQuadEntity = new Entity();
-							testQuadEntity->AddComponent((Component*)mr);
 							testQuadEntity->SetScale({ 2.5f, 2.5f, 2.5f });
-
-							SceneGraph* currentScene = GameSystem::SceneManager()->GetSceneGraph();
-							currentScene->AddRootEntity(testQuadEntity);
 						}
 					}
 				}
@@ -106,12 +102,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 
 	}
-
-	SAFE_DELETE(s);
-	SAFE_DELETE(mesh);
-	SAFE_DELETE(testQuadEntity);
-	SAFE_DELETE(mr);
-	SAFE_DELETE(ts);
 
 	verts->clear();
 	SAFE_DELETE(verts);

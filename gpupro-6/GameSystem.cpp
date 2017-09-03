@@ -3,6 +3,7 @@
 #include "GraphicsSystem.h"
 #include "SceneManagementSystem.h"
 #include "MaterialManagementSystem.h"
+#include "SceneGraph.h"
 #include <chrono>
 
 using namespace std::chrono_literals;
@@ -69,7 +70,10 @@ int GameSystem::GameLoop()
 	std::chrono::nanoseconds lag(0ns);
 	auto lastTime = clock::now();
 
-	while (true)
+	m_sceneManagerSystem->GetSceneGraph()->InitializeScene();
+
+	m_running = true;
+	while (m_running)
 	{
 		ProcessInput();
 
@@ -80,12 +84,14 @@ int GameSystem::GameLoop()
 		while (lag >= timeStep)
 		{
 			lag -= timeStep;
-			//TODO: Update
+			m_sceneManagerSystem->GetSceneGraph()->UpdateScene();
 		}
 
 		const std::vector<Material*>* allMats = m_materialManagementSystem->GetAllMaterials();
 		m_graphicsSystem->Render(allMats);
 	}
+
+	m_sceneManagerSystem->GetSceneGraph()->DestroyScene();
 
 	return 0;
 }
@@ -100,7 +106,10 @@ void GameSystem::ProcessInput()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 
-		//if (msg.message == WM_QUIT)
+		if (msg.message == WM_QUIT)
+		{
+			m_running = false;
+		}
 	}
 }
 

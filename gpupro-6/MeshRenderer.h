@@ -10,7 +10,7 @@ public:
 	MeshRenderer();
 	~MeshRenderer();
 
-	void SetMesh(Mesh* mesh);
+	void SetMesh(Mesh** mesh);
 
 protected:
 	virtual void OnMaterialUpdated(Material* oldMaterial, Material* newMaterial) override;
