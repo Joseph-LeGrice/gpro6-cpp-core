@@ -32,11 +32,8 @@ Shader::~Shader()
 	SAFE_RELEASE(m_geometryShader);
 	SAFE_RELEASE(m_pixelShader);
 	
-	m_textureSamplers->clear();
-	SAFE_DELETE(m_textureSamplers);
-
-	m_shaderResources->clear();
-	SAFE_DELETE(m_shaderResources);
+	SAFE_DELETE_VECTOR_HEAP(m_textureSamplers);
+	SAFE_DELETE_VECTOR_HEAP(m_shaderResources);
 }
 
 

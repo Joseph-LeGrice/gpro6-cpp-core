@@ -64,13 +64,13 @@ void GameSystem::Shutdown()
 
 int GameSystem::GameLoop()
 {
+	m_sceneManagerSystem->GetSceneGraph()->InitScene(); 
+	
 	using clock = std::chrono::high_resolution_clock;
 
 	constexpr std::chrono::nanoseconds timeStep(16ms);
 	std::chrono::nanoseconds lag(0ns);
 	auto lastTime = clock::now();
-
-	m_sceneManagerSystem->GetSceneGraph()->InitializeScene();
 
 	m_running = true;
 	while (m_running)
@@ -91,7 +91,7 @@ int GameSystem::GameLoop()
 		m_graphicsSystem->Render(allMats);
 	}
 
-	m_sceneManagerSystem->GetSceneGraph()->DestroyScene();
+	m_sceneManagerSystem->GetSceneGraph()->DeInitScene();
 
 	return 0;
 }

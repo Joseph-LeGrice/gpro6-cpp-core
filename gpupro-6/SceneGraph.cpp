@@ -12,14 +12,10 @@ SceneGraph::SceneGraph()
 
 SceneGraph::~SceneGraph()
 {
-	for (size_t i = 0; i < m_rootEntities.size(); i++)
-	{
-		SAFE_DELETE(m_rootEntities[i]);
-	}
-	m_rootEntities.clear();
+	SAFE_DELETE_VECTOR_STACK(m_rootEntities);
 }
 
-void SceneGraph::InitializeScene()
+void SceneGraph::InitScene()
 {
 	for (size_t i=0; i<m_allComponents.size(); i++)
 	{
@@ -35,27 +31,10 @@ void SceneGraph::UpdateScene()
 	}
 }
 
-void SceneGraph::DestroyScene()
+void SceneGraph::DeInitScene()
 {
 	for (size_t i = 0; i < m_allComponents.size(); i++)
 	{
 		m_allComponents[i]->DeInit();
 	}
 }
-
-//
-//void SceneGraph::RebuildComponentMap() //TODO: Speed up!
-//{
-//	m_componentMap.clear();
-//	for each (Entity* e in m_rootEntities)
-//	{
-//		for each (Component* c in *e->GetAllComponents())
-//		{
-//			if (!m_componentMap.count(typeid(c)))
-//			{
-//				m_componentMap[typeid(c)] = std::vector<Component*>();
-//			}
-//			m_componentMap[typeid(c)].push_back(c);
-//		}
-//	}
-//}

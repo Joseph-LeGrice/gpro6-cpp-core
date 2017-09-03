@@ -11,7 +11,7 @@ public:
 	~MaterialManagementSystem();
 
 	const std::vector<Material*>* GetAllMaterials();
-	const void RegisterInstancedMaterial(Material*);
+	const void RegisterInstancedMaterial(Material&);
 
 private:
 	std::vector<Material*> m_instancedMaterials;

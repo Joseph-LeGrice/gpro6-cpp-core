@@ -17,9 +17,9 @@ public:
 	SceneGraph();
 	~SceneGraph();
 
-	void InitializeScene();
+	void InitScene();
 	void UpdateScene();
-	void DestroyScene();
+	void DeInitScene();
 
 private:
 	EntityList m_rootEntities;

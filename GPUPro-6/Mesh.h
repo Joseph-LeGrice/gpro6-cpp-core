@@ -20,17 +20,17 @@ public:
 	~Mesh();
 
 	void SetTopology(D3D_PRIMITIVE_TOPOLOGY t);
-	void SetVertices(std::vector<Vertex>** verts);
-	void SetIndices(std::vector<UINT16>** indices);
+	void SetVertices(std::vector<Vertex> verts);
+	void SetIndices(std::vector<UINT16> indices);
 	//TODO: Mesh Normals
 	const D3D_PRIMITIVE_TOPOLOGY GetTopology();
-	const std::vector<Vertex>* GetVertices();
-	const std::vector<UINT16>* GetIndices();
+	const std::vector<Vertex> GetVertices();
+	const std::vector<UINT16> GetIndices();
 
 private:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
-	const std::vector<Vertex>* m_vertices;
-	const std::vector<UINT16>* m_indices;
+	std::vector<Vertex> m_vertices;
+	std::vector<UINT16> m_indices;
 
 	unsigned int m_numberOfIndices;
 };

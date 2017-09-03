@@ -25,7 +25,7 @@ Material* Material::Create()
 	Material* newMaterial = new Material();
 	if (newMaterial->Initialize())
 	{
-		GameSystem::MaterialManager()->RegisterInstancedMaterial(newMaterial);
+		GameSystem::MaterialManager()->RegisterInstancedMaterial(*newMaterial);
 		return newMaterial;
 	}
 	else
@@ -105,11 +105,11 @@ void Material::Render(ConstantBuffer* constBuf)
 	std::vector<UINT16> allIndices;
 	for each (MeshInfo* m in *m_meshes)
 	{
-		const std::vector<Vertex>* verts = m->m_mesh->GetVertices();
-		allVerts.insert(allVerts.end(), verts->begin(), verts->end());
+		const std::vector<Vertex> verts = m->m_mesh->GetVertices();
+		allVerts.insert(allVerts.end(), verts.begin(), verts.end());
 
-		const std::vector<UINT16>* indices = m->m_mesh->GetIndices();
-		allIndices.insert(allIndices.end(), indices->begin(), indices->end());
+		const std::vector<UINT16> indices = m->m_mesh->GetIndices();
+		allIndices.insert(allIndices.end(), indices.begin(), indices.end());
 	}
 
 	D3D11_MAPPED_SUBRESOURCE vertexData;
@@ -134,7 +134,7 @@ void Material::Render(ConstantBuffer* constBuf)
 		constBuf->SetWorldMatrix(m->m_transform);
 		constBuf->UpdateBuffers();
 
-		int numberOfVerts = m->m_mesh->GetIndices()->size();
+		int numberOfVerts = m->m_mesh->GetIndices().size();
 		deviceContext->IASetPrimitiveTopology(m->m_mesh->GetTopology());
 		deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
 		currentIndex += numberOfVerts;

@@ -9,5 +9,8 @@ public:
 	virtual void Init();
 	virtual void Tick();
 	virtual void DeInit();
+
+private:
+	Component(const Component&);
 };
 

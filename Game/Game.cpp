@@ -26,27 +26,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	bool allOK = true;
 	int returnCode = -1;
 
-	// --- To Clean up:
-	MeshRenderer* mr = nullptr;
-	Shader* s = nullptr;
-	Mesh* mesh = nullptr;
-	Entity* testQuadEntity = nullptr;
-	TextureSampler* ts = nullptr;
-
-	std::vector<Vertex>* verts = new std::vector<Vertex>();
-	verts->push_back({ -0.5f, -0.5f, 0.0f, 0.0f, 0.0f });
-	verts->push_back({ -0.5f,  0.5f, 0.0f, 0.0f, 1.0f });
-	verts->push_back({ 0.5f,  0.5f, 0.0f, 1.0f, 1.0f });
-	verts->push_back({ 0.5f, -0.5f, 0.0f, 1.0f, 0.0f });
-
-	std::vector<UINT16>* indices = new std::vector<UINT16>();
-	indices->push_back(1);
-	indices->push_back(2);
-	indices->push_back(0);
-	indices->push_back(2);
-	indices->push_back(3);
-	// ---
-
 	try
 	{
 		allOK &= GameSystem::InitializeAllSystems();
@@ -56,11 +35,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			allOK &= t != nullptr;
 			if (allOK)
 			{
-				s = new Shader();
+				Shader* s = new Shader();
 				allOK &= s->Initialize(L"SimpleTexturedQuad.shader");
 				if (allOK)
 				{
-					ts = new TextureSampler();
+					TextureSampler* ts = new TextureSampler();
 					allOK &= ts->Initialize();
 					if (allOK)
 					{
@@ -74,13 +53,26 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							m->SetShader(s);
 
 							// Quad Mesh
-							mesh = new Mesh();
+							Mesh* mesh = mesh = new Mesh();
 							mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-							mesh->SetVertices(&verts);
-							mesh->SetIndices(&indices);
+							
+							std::vector<Vertex> verts = std::vector<Vertex>();
+							verts.push_back({ -0.5f, -0.5f, 0.0f, 0.0f, 0.0f });
+							verts.push_back({ -0.5f,  0.5f, 0.0f, 0.0f, 1.0f });
+							verts.push_back({ 0.5f,  0.5f, 0.0f, 1.0f, 1.0f });
+							verts.push_back({ 0.5f, -0.5f, 0.0f, 1.0f, 0.0f });
+							mesh->SetVertices(verts);
 
-							testQuadEntity = &Entity::Instantiate();
-							mr = &testQuadEntity->AddComponent<MeshRenderer>();
+							std::vector<UINT16> indices = std::vector<UINT16>();
+							indices.push_back(1);
+							indices.push_back(2);
+							indices.push_back(0);
+							indices.push_back(2);
+							indices.push_back(3); 
+							mesh->SetIndices(indices);
+
+							Entity* testQuadEntity = &Entity::Instantiate();
+							MeshRenderer* mr = &testQuadEntity->AddComponent<MeshRenderer>();
 							mr->SetMesh(&mesh);
 							mr->SetMaterial(m);
 
@@ -102,12 +94,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 
 	}
-
-	verts->clear();
-	SAFE_DELETE(verts);
-	
-	indices->clear();
-	SAFE_DELETE(indices);
 
 	return returnCode;
 }

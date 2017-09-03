@@ -38,6 +38,7 @@ private:
 	ComponentMap m_componentMap;
 
 	Entity();
+	Entity(const Entity&);
 };
 
 template<class T>
