@@ -61,6 +61,7 @@ Texture2D_ShaderResource* Texture2D_ShaderResource::CreateFromFile(std::wstring 
 		{
 			SAFE_DELETE(newTexture2D)
 		}
+		delete[] pbBuffer;
 
 		return newTexture2D;
 	}
