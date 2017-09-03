@@ -19,6 +19,7 @@ ConstantBuffer::ConstantBuffer()
 
 ConstantBuffer::~ConstantBuffer()
 {
+	SAFE_RELEASE(m_buffer);
 }
 
 bool ConstantBuffer::Initialize(ID3D11Device* device)
