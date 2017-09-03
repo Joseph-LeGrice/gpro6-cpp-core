@@ -37,6 +37,11 @@ HRESULT ImagingFactory::GetPixelDataFromFile(_In_ std::wstring filepath, _Out_ B
 	return s_instance->GetPixelDataFromFileInternal(filepath, pbBuffer, pixelFormat, bpp, width, height);
 }
 
+void ImagingFactory::DestroyFactory()
+{
+	SAFE_DELETE(s_instance);
+}
+
 HRESULT ImagingFactory::GetPixelDataFromFileInternal(_In_ std::wstring filepath, _Out_ BYTE** pbBuffer, _Out_ DXGI_FORMAT& pixelFormat, _Out_ UINT& bpp, UINT& width, UINT& height)
 {
 	IWICBitmapDecoder* bitmapDecoder = nullptr;

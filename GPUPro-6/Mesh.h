@@ -33,6 +33,8 @@ private:
 	std::vector<UINT16> m_indices;
 
 	unsigned int m_numberOfIndices;
+
+	Mesh(const Mesh&) = delete;
 };
 
 struct MeshInfo

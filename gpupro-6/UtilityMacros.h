@@ -4,7 +4,7 @@
 {\
 	for (size_t i=0; i<obj.size(); ++i)\
 	{\
-		SAFE_DELETE(obj[i]);\
+		SAFE_DELETE(obj.at(i));\
 	}\
 }\
 

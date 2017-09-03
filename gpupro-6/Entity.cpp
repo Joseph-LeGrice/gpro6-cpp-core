@@ -6,6 +6,13 @@
 
 #include <algorithm>
 
+Entity& Entity::Instantiate()
+{
+	Entity* e = new Entity();
+	GameSystem::SceneManager()->GetSceneGraph()->RegisterEntity(*e);
+	return *e;
+}
+
 Entity::Entity()
 {
 	Matrix4x4::MatrixIdentity(&m_translation);
@@ -17,26 +24,17 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	SceneGraph* currentSceneGraph = GameSystem::SceneManager()->GetSceneGraph();
-	ComponentList currentSceneGraphComponents = currentSceneGraph->m_allComponents;
+}
+
+ComponentList Entity::GetAllComponents()
+{
+	ComponentList result = ComponentList();
 	for (ComponentMap::iterator it = m_componentMap.begin(); it != m_componentMap.end(); ++it)
 	{
 		ComponentList thisList = it->second;
-		for (size_t i = 0; i < thisList.size(); ++i)
-		{
-			Component* thisComponent = thisList[i];
-			currentSceneGraphComponents.erase(std::remove(currentSceneGraphComponents.begin(), currentSceneGraphComponents.end(), thisComponent), currentSceneGraphComponents.end());
-			SAFE_DELETE(thisComponent);
-		}
+		result.insert(result.end(), thisList.begin(), thisList.end());
 	}
-	m_componentMap.clear();
-}
-
-Entity& Entity::Instantiate()
-{
-	Entity* e = new Entity();
-	GameSystem::SceneManager()->GetSceneGraph()->m_rootEntities.push_back(e);
-	return *e;
+	return result;
 }
 
 void Entity::SetTranslation(Vector3 position)

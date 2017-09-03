@@ -24,4 +24,9 @@ public:
 private:
 	EntityList m_rootEntities;
 	ComponentList m_allComponents;
+
+	void RegisterEntity(Entity& e); 
+	void DeleteEntity(Entity& e);
+	void RegisterComponent(Component& c);
+	void DeleteComponent(Component& c);
 };

@@ -9,7 +9,6 @@ class Renderer : Component
 {
 public:
 	Renderer();
-	~Renderer();
 
 	void SetMaterial(Material*);
 	Material* GetMaterial();

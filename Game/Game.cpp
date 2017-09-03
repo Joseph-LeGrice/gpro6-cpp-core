@@ -14,6 +14,7 @@
 #include "Mesh.h"
 #include "Texture2D_ShaderResource.h"
 #include "TextureSampler.h"
+#include "ImagingFactory.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -53,7 +54,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							m->SetShader(s);
 
 							// Quad Mesh
-							Mesh* mesh = mesh = new Mesh();
+							Mesh* mesh = new Mesh();
 							mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 							
 							std::vector<Vertex> verts = std::vector<Vertex>();
@@ -73,7 +74,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 							Entity* testQuadEntity = &Entity::Instantiate();
 							MeshRenderer* mr = &testQuadEntity->AddComponent<MeshRenderer>();
-							mr->SetMesh(&mesh);
+							mr->SetMesh(*mesh);
 							mr->SetMaterial(m);
 
 							testQuadEntity->SetScale({ 2.5f, 2.5f, 2.5f });
@@ -94,6 +95,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 
 	}
+
+	ImagingFactory::DestroyFactory();
 
 	return returnCode;
 }

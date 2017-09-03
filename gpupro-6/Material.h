@@ -21,21 +21,18 @@ public:
 	
 	void SetShader(Shader* shader);
 	
-	void DeregisterMeshInfo(MeshInfo* mesh);
-	void RegisterMeshInfo(MeshInfo* mesh);
+	void DeregisterMeshInfo(MeshInfo& mesh);
+	void RegisterMeshInfo(MeshInfo& mesh);
 
 private:
 	bool Initialize();
 	bool InitializeBuffers();
 
 	Material();
-	Material(const Material&);
-
+	Material(const Material&) = delete;
 	ID3D11Buffer* m_vertexBuffer;
 	ID3D11Buffer* m_indexBuffer;
-	std::vector<MeshInfo*>* m_meshes;
 
 	Shader* m_shader;
-	std::vector<ShaderResource*>* m_shaderResources;
-};
+	std::vector<MeshInfo*> m_meshes;};
 

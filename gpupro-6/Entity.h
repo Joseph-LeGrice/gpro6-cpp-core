@@ -24,6 +24,7 @@ public:
 	template<class T> T& AddComponent(); 
 	template<class T> T& GetComponent();
 	template<class T> ComponentList& GetComponents();
+	ComponentList GetAllComponents();
 
 	const Matrix4x4 GetTransformationMatrix();
 	void SetTranslation(Vector3 position);
@@ -38,7 +39,7 @@ private:
 	ComponentMap m_componentMap;
 
 	Entity();
-	Entity(const Entity&);
+	Entity(const Entity&) = delete;
 };
 
 template<class T>

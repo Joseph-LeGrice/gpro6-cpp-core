@@ -1,22 +1,22 @@
 #pragma once
-#include "Renderer.h"
 
-struct MeshInfo;
+#include "Renderer.h"
+#include "Mesh.h"
+
 
 class MeshRenderer :
 	public Renderer
 {
 public:
 	MeshRenderer();
-	~MeshRenderer();
+	virtual ~MeshRenderer() override;
 
-	void SetMesh(Mesh** mesh);
+	void SetMesh(Mesh& mesh);
 
 protected:
 	virtual void OnMaterialUpdated(Material* oldMaterial, Material* newMaterial) override;
 
 private:
-	Mesh* m_mesh;
-	MeshInfo* m_meshInfo;
+	MeshInfo m_meshInfo;
 };
 

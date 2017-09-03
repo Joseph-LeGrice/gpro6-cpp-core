@@ -1,8 +1,7 @@
 #pragma once
 
 #include <vector>
-
-typedef class Material;
+#include "Material.h"
 
 class MaterialManagementSystem
 {

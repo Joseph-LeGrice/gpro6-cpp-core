@@ -4,13 +4,13 @@ class Component
 {
 public:
 	Component();
-	~Component();
+	virtual ~Component();
 
 	virtual void Init();
 	virtual void Tick();
 	virtual void DeInit();
 
 private:
-	Component(const Component&);
+	Component(const Component&) = delete;
 };
 

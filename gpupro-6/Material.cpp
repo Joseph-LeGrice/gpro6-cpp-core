@@ -11,12 +11,16 @@
 Material::Material()
 {
 	m_shader = nullptr;
-	m_meshes = new std::vector<MeshInfo*>();
-}
+	m_indexBuffer = nullptr;
+	m_vertexBuffer = nullptr;
 
+	m_meshes = std::vector<MeshInfo*>();
+}
 
 Material::~Material()
 {
+	SAFE_RELEASE(m_vertexBuffer);
+	SAFE_RELEASE(m_indexBuffer);
 	SAFE_DELETE(m_shader);
 }
 
@@ -41,15 +45,15 @@ bool Material::Initialize()
 }
 
 
-void Material::DeregisterMeshInfo(MeshInfo* mesh)
+void Material::DeregisterMeshInfo(MeshInfo& mesh)
 {
-	m_meshes->erase(std::remove(m_meshes->begin(), m_meshes->end(), mesh), m_meshes->end());
+	m_meshes.erase(std::remove(m_meshes.begin(), m_meshes.end(), &mesh), m_meshes.end());
 }
 
 
-void Material::RegisterMeshInfo(MeshInfo* meshInfo)
+void Material::RegisterMeshInfo(MeshInfo& meshInfo)
 {
-	m_meshes->push_back(meshInfo);
+	m_meshes.push_back(&meshInfo);
 }
 
 void Material::SetShader(Shader* s)
@@ -103,7 +107,7 @@ void Material::Render(ConstantBuffer* constBuf)
 
 	std::vector<Vertex> allVerts;
 	std::vector<UINT16> allIndices;
-	for each (MeshInfo* m in *m_meshes)
+	for each (MeshInfo* m in m_meshes)
 	{
 		const std::vector<Vertex> verts = m->m_mesh->GetVertices();
 		allVerts.insert(allVerts.end(), verts.begin(), verts.end());
@@ -129,7 +133,7 @@ void Material::Render(ConstantBuffer* constBuf)
 	}
 
 	int currentIndex = 0;
-	for each (MeshInfo* m in *m_meshes)
+	for each (MeshInfo* m in m_meshes)
 	{
 		constBuf->SetWorldMatrix(m->m_transform);
 		constBuf->UpdateBuffers();

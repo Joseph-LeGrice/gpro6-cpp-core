@@ -7,6 +7,7 @@ class ImagingFactory
 {
 public:
 	static HRESULT GetPixelDataFromFile(_In_ std::wstring filepath, _Out_ BYTE** pbBuffer, _Out_ DXGI_FORMAT& pixelFormat, _Out_ UINT& bpp, UINT& width, UINT& height);
+	static void DestroyFactory();
 
 private:
 	static ImagingFactory* s_instance;
