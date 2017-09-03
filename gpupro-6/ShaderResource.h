@@ -5,12 +5,14 @@
 class ShaderResource
 {
 public:
-	ShaderResource();
-	~ShaderResource();
+	virtual ~ShaderResource();
 
 	virtual ID3D11ShaderResourceView* GetResourceView() = 0;
 
+protected:
+	ShaderResource();
+
 private:
-	ShaderResource(const ShaderResource&);
+	ShaderResource(const ShaderResource&) = delete;
 };
 

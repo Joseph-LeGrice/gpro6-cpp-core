@@ -7,7 +7,7 @@
 class Texture2D_ShaderResource : ShaderResource
 {
 public:
-	~Texture2D_ShaderResource();
+	virtual ~Texture2D_ShaderResource() override;
 
 	static Texture2D_ShaderResource* CreateFromFile(std::wstring filepath);
 	virtual ID3D11ShaderResourceView* GetResourceView() override;
