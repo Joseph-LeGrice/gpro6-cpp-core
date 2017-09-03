@@ -7,10 +7,9 @@
 class MeshRenderer :
 	public Renderer
 {
-public:
-	MeshRenderer();
-	virtual ~MeshRenderer() override;
+	friend Entity;
 
+public:
 	void SetMesh(Mesh& mesh);
 
 protected:
@@ -18,5 +17,8 @@ protected:
 
 private:
 	MeshInfo m_meshInfo;
+
+	MeshRenderer();
+	virtual ~MeshRenderer() override;
 };
 

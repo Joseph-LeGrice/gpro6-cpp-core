@@ -13,6 +13,11 @@ Entity& Entity::Instantiate()
 	return *e;
 }
 
+void Entity::Destroy(Entity& e)
+{
+	GameSystem::SceneManager()->GetSceneGraph()->DeleteEntity(e);
+}
+
 Entity::Entity()
 {
 	Matrix4x4::MatrixIdentity(&m_translation);

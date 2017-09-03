@@ -29,6 +29,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	try
 	{
+		//MeshRenderer* m = new MeshRenderer();
+
 		allOK &= GameSystem::InitializeAllSystems();
 		if (allOK)
 		{

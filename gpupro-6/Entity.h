@@ -9,15 +9,17 @@
 #include <type_traits>
 #include <unordered_map>
 
+class SceneGraph;
 typedef std::vector<Component*> ComponentList;
 typedef std::unordered_map<std::type_index, ComponentList> ComponentMap;
 
 class Entity
 {
+	friend SceneGraph;
+
 public:
-	~Entity();
-	
 	static Entity& Instantiate();
+	static void Destroy(Entity& e);
 
 	// TODO: Add Child / Parent
 	
@@ -39,6 +41,7 @@ private:
 	ComponentMap m_componentMap;
 
 	Entity();
+	~Entity();
 	Entity(const Entity&) = delete;
 };
 
