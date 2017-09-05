@@ -108,7 +108,7 @@ void GraphicsSystem::Render(Camera& cam, const std::vector<Material*>* m_materia
 
 	Matrix4x4 viewMatrix = cam.GetView();
 	Matrix4x4 projMatrix = cam.GetProjection();
-	m_constantBuffer->SetViewProjectionMatrix(viewMatrix * projMatrix);
+	m_constantBuffer->SetViewProjectionMatrix(projMatrix * viewMatrix);
 
 	for each (Material* m in *m_materials)
 	{
