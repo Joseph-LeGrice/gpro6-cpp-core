@@ -1,21 +1,28 @@
 #pragma once
 
 #include "Matrix.h"
+#include "Component.h"
 
-class Camera
+class Camera : 
+	public Component
 {
+	friend Entity;
+
 public:
-	Camera();
-	~Camera();
-	void Initialize(float viewportWidth, float viewportHeight);
 	const Matrix4x4 GetView();
 	const Matrix4x4 GetProjection();
 
+protected:
+	Camera();
+	virtual ~Camera();
+
 private:
-	Matrix4x4 m_viewMatrix;
 	Matrix4x4 m_projectionMatrix;
 
 	Matrix4x4 OrthoProject(float size, float depth, float aspectRatio);
 	Matrix4x4 PerspProject(float fieldOfView, float aspectRatio, float screenNear, float screenDepth);
+
+	virtual void Init() override;
+
 };
 

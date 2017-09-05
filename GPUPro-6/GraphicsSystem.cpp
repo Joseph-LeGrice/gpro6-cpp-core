@@ -10,9 +10,7 @@ GraphicsSystem::~GraphicsSystem()
 {
 	m_swapchain->SetFullscreenState(FALSE, NULL);
 
-	SAFE_DELETE(m_camera);
 	SAFE_DELETE(m_constantBuffer);
-
 	SAFE_RELEASE(m_rtBackBuffer);
 	SAFE_RELEASE(m_swapchain);
 	SAFE_RELEASE(m_device);
@@ -95,10 +93,7 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 
 			if (createdConstantBuffer)
 			{
-				Camera* cam = new Camera();
-				cam->Initialize(screenWidth, screenHeight);
-
-				return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer, cp, cam);
+				return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer, cp, screenWidth, screenHeight);
 			}
 		}
 	}
@@ -106,13 +101,13 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 	return nullptr;
 }
 
-void GraphicsSystem::Render(const std::vector<Material*>* m_materials)
+void GraphicsSystem::Render(Camera& cam, const std::vector<Material*>* m_materials)
 {
 	m_constantBuffer->SetBuffers();
 	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
-	Matrix4x4 viewMatrix = m_camera->GetView();
-	Matrix4x4 projMatrix = m_camera->GetProjection();
+	Matrix4x4 viewMatrix = cam.GetView();
+	Matrix4x4 projMatrix = cam.GetProjection();
 	m_constantBuffer->SetViewProjectionMatrix(viewMatrix * projMatrix);
 
 	for each (Material* m in *m_materials)
@@ -121,4 +116,14 @@ void GraphicsSystem::Render(const std::vector<Material*>* m_materials)
 	}
 
 	m_swapchain->Present(0, 0);
+}
+
+float GraphicsSystem::GetViewportWidth()
+{
+	return m_viewportWidth;
+}
+
+float GraphicsSystem::GetViewportHeight()
+{
+	return m_viewportHeight;
 }

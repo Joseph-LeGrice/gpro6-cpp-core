@@ -61,3 +61,8 @@ const Matrix4x4 Entity::GetTransformationMatrix()
 {
 	return m_translation * m_scale * m_rotation;
 }
+
+Matrix4x4 Entity::GetTranslation()
+{
+	return m_translation;
+}

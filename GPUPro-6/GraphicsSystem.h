@@ -12,8 +12,8 @@
 
 class SceneGraph;
 class Material;
-class Camera;
 class ConstantBuffer;
+class Camera;
 
 class GraphicsSystem
 {
@@ -25,11 +25,13 @@ public:
 
 	static GraphicsSystem* InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight);
 
-	void Render(const std::vector<Material*>*);
+	void Render(Camera&, const std::vector<Material*>*);
+	float GetViewportWidth();
+	float GetViewportHeight();
 
 private:
-	GraphicsSystem(ID3D11Device* gfxDevice, ID3D11DeviceContext* gfxDeviceContext, IDXGISwapChain* gfxSwapChain, ID3D11RenderTargetView* gfxBackBuffer, ConstantBuffer* constantBuf, Camera* cam) :
-		m_device(gfxDevice), m_deviceContext(gfxDeviceContext), m_swapchain(gfxSwapChain), m_rtBackBuffer(gfxBackBuffer), m_constantBuffer(constantBuf), m_camera(cam) { }
+	GraphicsSystem(ID3D11Device* gfxDevice, ID3D11DeviceContext* gfxDeviceContext, IDXGISwapChain* gfxSwapChain, ID3D11RenderTargetView* gfxBackBuffer, ConstantBuffer* constantBuf, float vpWidth, float vpHeight) :
+		m_device(gfxDevice), m_deviceContext(gfxDeviceContext), m_swapchain(gfxSwapChain), m_rtBackBuffer(gfxBackBuffer), m_constantBuffer(constantBuf), m_viewportWidth(vpWidth), m_viewportHeight(vpHeight) { }
 	
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_deviceContext;
@@ -37,6 +39,7 @@ private:
 	IDXGISwapChain* m_swapchain;
 	ID3D11RenderTargetView * m_rtBackBuffer;
 
-	Camera* m_camera;
 	ConstantBuffer* m_constantBuffer;
+
+	float m_viewportWidth, m_viewportHeight;
 };

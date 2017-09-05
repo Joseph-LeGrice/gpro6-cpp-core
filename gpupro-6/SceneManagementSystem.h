@@ -9,7 +9,7 @@ public:
 	~SceneManagementSystem();
 
 	SceneGraph* GetSceneGraph();
-
+	
 private:
 	SceneGraph* m_sceneGraph;
 };

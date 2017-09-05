@@ -15,6 +15,7 @@
 #include "Texture2D_ShaderResource.h"
 #include "TextureSampler.h"
 #include "ImagingFactory.h"
+#include "Camera.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -58,7 +59,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							// Quad Mesh
 							Mesh* mesh = new Mesh();
 							mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-							
+
 							std::vector<Vertex> verts = std::vector<Vertex>();
 							verts.push_back({ -0.5f, -0.5f, 0.0f, 0.0f, 0.0f });
 							verts.push_back({ -0.5f,  0.5f, 0.0f, 0.0f, 1.0f });
@@ -71,7 +72,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							indices.push_back(2);
 							indices.push_back(0);
 							indices.push_back(2);
-							indices.push_back(3); 
+							indices.push_back(3);
 							mesh->SetIndices(indices);
 
 							Entity* testQuadEntity = &Entity::Instantiate();
@@ -81,6 +82,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 5.0f });
 							testQuadEntity->SetScale({ 2.5f, 2.5f, 2.5f });
+
+							// Camera
+							Entity* cameraEntity = &Entity::Instantiate();
+							cameraEntity->AddComponent<Camera>();
+
+							cameraEntity->SetTranslation({ 0.25f, 0.25f, 0.0f });
 						}
 					}
 				}

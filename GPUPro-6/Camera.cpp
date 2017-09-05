@@ -1,28 +1,22 @@
 #include "stdafx.h"
 #include "Camera.h"
+
 #include <math.h>
+#include "Entity.h"
+#include "GameSystem.h"
+#include "GraphicsSystem.h"
+#include "SceneManagementSystem.h"
+#include "SceneGraph.h"
 #include "D3DX10.h"
 
 Camera::Camera()
 {
 	Matrix4x4::MatrixIdentity(&m_projectionMatrix);
-	Matrix4x4::MatrixIdentity(&m_viewMatrix);
-}
-
-void Camera::Initialize(float viewportWidth, float viewportHeight)
-{
-	float screenNear = 0.1f;
-	float screenDepth = 100.0f;
-	float fieldOfView = (float)D3DX_PI / 2.0f;
-
-	float aspectRatio = viewportWidth / viewportHeight;
-	m_projectionMatrix = PerspProject(fieldOfView, aspectRatio, screenNear, screenDepth);
-	//m_projectionMatrix = OrthoProject(5.0f, 50.0f, aspectRatio);
 }
 
 const Matrix4x4 Camera::GetView()
 {
-	return m_viewMatrix;
+	return GetEntity().GetTranslation();
 }
 
 const Matrix4x4 Camera::GetProjection()
@@ -68,6 +62,22 @@ Matrix4x4 Camera::PerspProject(float fieldOfViewRadians, float aspectRatio, floa
 	result.M44 = 0;
 
 	return result;
+}
+
+void Camera::Init()
+{
+	float viewportWidth = GameSystem::Graphics()->GetViewportWidth();
+	float viewportHeight = GameSystem::Graphics()->GetViewportHeight();
+
+	float screenNear = 0.1f;
+	float screenDepth = 100.0f;
+	float fieldOfView = (float)D3DX_PI / 2.0f;
+
+	float aspectRatio = viewportWidth / viewportHeight;
+	m_projectionMatrix = PerspProject(fieldOfView, aspectRatio, screenNear, screenDepth);
+	//m_projectionMatrix = OrthoProject(5.0f, 50.0f, aspectRatio);
+
+	GameSystem::SceneManager()->GetSceneGraph()->RegisterCamera(*this);
 }
 
 Camera::~Camera()

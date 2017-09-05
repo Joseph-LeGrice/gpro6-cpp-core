@@ -87,8 +87,9 @@ int GameSystem::GameLoop()
 			m_sceneManagerSystem->GetSceneGraph()->UpdateScene();
 		}
 
+		Camera& cam = m_sceneManagerSystem->GetSceneGraph()->GetCamera();
 		const std::vector<Material*>* allMats = m_materialManagementSystem->GetAllMaterials();
-		m_graphicsSystem->Render(allMats);
+		m_graphicsSystem->Render(cam, allMats);
 	}
 
 	m_sceneManagerSystem->GetSceneGraph()->DeInitScene();

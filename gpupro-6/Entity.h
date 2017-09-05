@@ -29,6 +29,7 @@ public:
 	ComponentList GetAllComponents();
 
 	const Matrix4x4 GetTransformationMatrix();
+	Matrix4x4 GetTranslation();
 	void SetTranslation(Vector3 position);
 	//void SetRotation(Quaternion rot); //TODO: Quaternions
 	void SetScale(Vector3 scale);

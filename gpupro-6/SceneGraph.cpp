@@ -19,6 +19,11 @@ SceneGraph::~SceneGraph()
 	}
 }
 
+Camera& SceneGraph::GetCamera()
+{
+	return *m_camera;
+}
+
 void SceneGraph::InitScene()
 {
 	for (size_t i=0; i<m_allComponents.size(); i++)
@@ -41,6 +46,11 @@ void SceneGraph::DeInitScene()
 	{
 		m_allComponents[i]->DeInit();
 	}
+}
+
+void SceneGraph::RegisterCamera(Camera& cam)
+{
+	m_camera = &cam;
 }
 
 void SceneGraph::RegisterEntity(Entity& e)
