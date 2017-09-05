@@ -51,6 +51,7 @@ T& Entity::AddComponent()
 	static_assert(std::is_base_of<Component, T>::value, "Type passed to AddComponent must be a Component.");
 
 	T* c = new T();
+	c->m_entity = this;
 	if (!m_componentMap.count(typeid(c)))
 	{
 		m_componentMap[typeid(c)] = std::vector<Component*>();

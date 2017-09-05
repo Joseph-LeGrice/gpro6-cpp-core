@@ -118,7 +118,7 @@ void Material::Render(ConstantBuffer* constBuf)
 
 	D3D11_MAPPED_SUBRESOURCE vertexData;
 	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
-	if (vertexBufferAcquireResult == S_OK)
+	if (SUCCEEDED(vertexBufferAcquireResult))
 	{
 		memcpy(vertexData.pData, &allVerts[0], sizeof(Vertex) * allVerts.size());
 		deviceContext->Unmap(m_vertexBuffer, 0);
@@ -126,7 +126,7 @@ void Material::Render(ConstantBuffer* constBuf)
 
 	D3D11_MAPPED_SUBRESOURCE indexBufferData;
 	HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);
-	if (indexBufferAcquireResult == S_OK)
+	if (SUCCEEDED(indexBufferAcquireResult))
 	{
 		memcpy(indexBufferData.pData, &allIndices[0], sizeof(UINT16) * allIndices.size());
 		deviceContext->Unmap(m_indexBuffer, 0);

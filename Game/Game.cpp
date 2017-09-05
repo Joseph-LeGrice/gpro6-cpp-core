@@ -79,6 +79,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							mr->SetMesh(*mesh);
 							mr->SetMaterial(m);
 
+							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 5.0f });
 							testQuadEntity->SetScale({ 2.5f, 2.5f, 2.5f });
 						}
 					}

@@ -12,13 +12,16 @@ class MeshRenderer :
 public:
 	void SetMesh(Mesh& mesh);
 
+	virtual void Tick() override;
+
 protected:
+	MeshRenderer();
+
 	virtual void OnMaterialUpdated(Material* oldMaterial, Material* newMaterial) override;
 
 private:
 	MeshInfo m_meshInfo;
 
-	MeshRenderer();
 	virtual ~MeshRenderer() override;
 };
 

@@ -1,20 +1,24 @@
 #include "stdafx.h"
+
+#include "Entity.h"
+#include "Component.h"
 #include "MeshRenderer.h"
+
 
 MeshRenderer::MeshRenderer()
 {
 	m_meshInfo = MeshInfo();
 	Matrix4x4::MatrixIdentity(&m_meshInfo.m_transform);
-
-	m_meshInfo.m_transform.M41 = 0.0f;
-	m_meshInfo.m_transform.M42 = 0.0f;
-	m_meshInfo.m_transform.M43 = 5.0f;
 }
-
 
 MeshRenderer::~MeshRenderer()
 {
 	SAFE_DELETE(m_meshInfo.m_mesh);
+}
+
+void MeshRenderer::Tick()
+{
+	m_meshInfo.m_transform = GetEntity().GetTransformationMatrix();
 }
 
 void MeshRenderer::SetMesh(Mesh& mesh)

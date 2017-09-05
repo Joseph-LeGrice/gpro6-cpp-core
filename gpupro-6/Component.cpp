@@ -6,7 +6,6 @@
 Component::Component()
 {
 }
-
 Component::~Component()
 {
 }
@@ -24,4 +23,9 @@ void Component::Tick()
 void Component::DeInit()
 {
 	std::cout << "Component Deinit" << std::endl;
+}
+
+Entity& Component::GetEntity()
+{
+	return *m_entity;
 }
