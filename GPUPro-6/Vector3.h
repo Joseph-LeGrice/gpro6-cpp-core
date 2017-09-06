@@ -7,3 +7,9 @@ struct Vector3
 	FLOAT Y;
 	FLOAT Z;
 };
+
+struct Vector2
+{
+	FLOAT X;
+	FLOAT Y;
+};

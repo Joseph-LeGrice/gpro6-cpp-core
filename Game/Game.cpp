@@ -30,8 +30,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	try
 	{
-		//MeshRenderer* m = new MeshRenderer();
-
 		allOK &= GameSystem::InitializeAllSystems();
 		if (allOK)
 		{
@@ -60,12 +58,26 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							Mesh* mesh = new Mesh();
 							mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-							std::vector<Vertex> verts = std::vector<Vertex>();
-							verts.push_back({ -0.5f, -0.5f, 0.0f, 0.0f, 0.0f });
-							verts.push_back({ -0.5f,  0.5f, 0.0f, 0.0f, 1.0f });
-							verts.push_back({ 0.5f,  0.5f, 0.0f, 1.0f, 1.0f });
-							verts.push_back({ 0.5f, -0.5f, 0.0f, 1.0f, 0.0f });
+							std::vector<Vector3> verts = std::vector<Vector3>();
+							verts.push_back({ -0.5f, -0.5f, 0.0f });
+							verts.push_back({ -0.5f,  0.5f, 0.0f });
+							verts.push_back({  0.5f,  0.5f, 0.0f });
+							verts.push_back({  0.5f, -0.5f, 0.0f });
 							mesh->SetVertices(verts);
+
+							std::vector<Vector3> normals = std::vector<Vector3>();
+							normals.push_back({ 0.0f, 0.0f, 1.0f });
+							normals.push_back({ 0.0f, 0.0f, 1.0f });
+							normals.push_back({ 0.0f, 0.0f, 1.0f });
+							normals.push_back({ 0.0f, 0.0f, 1.0f });
+							mesh->SetNormals(normals);
+
+							std::vector<Vector2> uvs = std::vector<Vector2>();
+							uvs.push_back({ 0.0f, 1.0f });
+							uvs.push_back({ 0.0f, 0.0f });
+							uvs.push_back({ 1.0f, 0.0f });
+							uvs.push_back({ 1.0f, 1.0f });
+							mesh->SetUVs(uvs);
 
 							std::vector<UINT16> indices = std::vector<UINT16>();
 							indices.push_back(1);
@@ -80,14 +92,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							mr->SetMesh(*mesh);
 							mr->SetMaterial(m);
 
-							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 5.0f });
-							testQuadEntity->SetScale({ 2.5f, 2.5f, 2.5f });
+							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 11.0f });
+							testQuadEntity->SetScale({ 2.5f, 2.5f, 1.0f });
 
 							// Camera
 							Entity* cameraEntity = &Entity::Instantiate();
 							cameraEntity->AddComponent<Camera>();
 
-							cameraEntity->SetTranslation({ 5.25f, 2.25f, 0.0f });
+							cameraEntity->SetTranslation({ 0.0f, 0.0f, 0.0f });
 						}
 					}
 				}
@@ -110,32 +122,3 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	return returnCode;
 }
-
-
-//void init()
-//{
-//
-//	m_camera = new Camera(); //TODO: Move the viewport + render target stuff into the camera
-//	m_camera->Initialize(hwnd, screenWidth, screenHeight);
-//
-//	m_transform = new Transform();
-//	m_transform->SetTranslation({ 0.0f, 0.0f, 5.0f });
-//	m_transform->SetScale({ 1.0f, 1.0f, 1.0f });
-//
-//	m_renderer = new RendererSimpleTriTessellator();
-//	m_renderer = new RendererSimpleQuadTessellator();
-//	m_renderer = new RendererVolumetricExplosion();
-//	m_renderer = new RendererSimpleTexturedQuad();
-//
-//	bool initialized = m_renderer->Initialize(m_device);
-//
-//	Matrix4x4 model = m_transform->GetTransformationMatrix();
-//	Matrix4x4 view = m_camera->GetView();
-//	Matrix4x4 proj = m_camera->GetProjection();
-//	const Matrix4x4 mvp = model * proj;
-//	const Matrix4x4 mvp = proj * model;
-//	const Matrix4x4 mvp = model;
-//
-//	m_renderer->GetConstantBuffer()->SetModelViewProjectionMatrix(mvp, m_deviceContext);
-//
-//}

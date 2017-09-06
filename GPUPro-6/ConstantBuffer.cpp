@@ -5,6 +5,7 @@
 
 struct VS_CONSTANT_BUFFER
 {
+	Matrix4x4 MVP;
 	Matrix4x4 WorldMatrix;
 	Matrix4x4 ViewProjectionMatrix;
 };
@@ -12,7 +13,8 @@ struct VS_CONSTANT_BUFFER
 ConstantBuffer::ConstantBuffer()
 {
 	Matrix4x4::MatrixIdentity(&m_wMatrix);
-	Matrix4x4::MatrixIdentity(&m_vpMatrix);
+	Matrix4x4::MatrixIdentity(&m_vMatrix);
+	Matrix4x4::MatrixIdentity(&m_pMatrix);
 	m_buffer = nullptr;
 }
 
@@ -43,9 +45,14 @@ bool ConstantBuffer::Initialize(ID3D11Device* device)
 	return device->CreateBuffer(&desc, &data, &m_buffer) == S_OK;
 }
 
-void ConstantBuffer::SetViewProjectionMatrix(Matrix4x4 vp)
+void ConstantBuffer::SetViewMatrix(Matrix4x4 v)
 {
-	m_vpMatrix = vp;
+	m_vMatrix = v;
+}
+
+void ConstantBuffer::SetProjectionMatrix(Matrix4x4 p)
+{
+	m_pMatrix = p;
 }
 
 void ConstantBuffer::SetWorldMatrix(Matrix4x4 w)
@@ -80,8 +87,9 @@ void ConstantBuffer::UpdateBuffers()
 VS_CONSTANT_BUFFER ConstantBuffer::GetBufferData()
 {
 	VS_CONSTANT_BUFFER data;
+	data.MVP = m_pMatrix * m_vMatrix * m_wMatrix;
 	data.WorldMatrix = m_wMatrix; 
-	data.ViewProjectionMatrix = m_vpMatrix;
+	data.ViewProjectionMatrix = m_vMatrix * m_pMatrix;
 
 	return data;
 }

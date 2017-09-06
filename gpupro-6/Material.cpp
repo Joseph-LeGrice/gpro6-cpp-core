@@ -82,7 +82,7 @@ bool Material::InitializeBuffers()
 	D3D11_BUFFER_DESC vertexBufferDesc;
 	ZeroMemory(&vertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
 	vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	vertexBufferDesc.ByteWidth = sizeof(Vertex) * VERTEX_BUFER_SIZE;
+	vertexBufferDesc.ByteWidth = sizeof(VertexData) * VERTEX_BUFER_SIZE;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	vertexBufferDesc.MiscFlags = 0;
@@ -99,17 +99,17 @@ void Material::Render(ConstantBuffer* constBuf)
 	m_shader->SetCurrent();
 
 	UINT offset = 0;
-	UINT stride = sizeof(Vertex);
+	UINT stride = sizeof(VertexData);
 
 	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
-	std::vector<Vertex> allVerts;
+	std::vector<VertexData> allVerts;
 	std::vector<UINT16> allIndices;
 	for each (MeshInfo* m in m_meshes)
 	{
-		const std::vector<Vertex> verts = m->m_mesh->GetVertices();
+		const std::vector<VertexData> verts = m->m_mesh->GetVertices();
 		allVerts.insert(allVerts.end(), verts.begin(), verts.end());
 
 		const std::vector<UINT16> indices = m->m_mesh->GetIndices();
@@ -120,7 +120,7 @@ void Material::Render(ConstantBuffer* constBuf)
 	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
 	if (SUCCEEDED(vertexBufferAcquireResult))
 	{
-		memcpy(vertexData.pData, &allVerts[0], sizeof(Vertex) * allVerts.size());
+		memcpy(vertexData.pData, &allVerts[0], sizeof(VertexData) * allVerts.size());
 		deviceContext->Unmap(m_vertexBuffer, 0);
 	}
 

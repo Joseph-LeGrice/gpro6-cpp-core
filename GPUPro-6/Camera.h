@@ -20,7 +20,8 @@ private:
 	Matrix4x4 m_projectionMatrix;
 
 	Matrix4x4 OrthoProject(float size, float depth, float aspectRatio);
-	Matrix4x4 PerspProject(float fieldOfView, float aspectRatio, float screenNear, float screenDepth);
+	Matrix4x4 PerspProjectGL(float fieldOfView, float aspectRatio, float screenNear, float screenDepth);
+	Matrix4x4 PerspProjectDX(float fieldOfView, float aspectRatio, float screenNear, float screenDepth);
 
 	virtual void Init() override;
 

@@ -1,7 +1,8 @@
 struct VS_INPUT
 {
 	float3 vPosition : POSITION;
-	float2 uv : TEXCOORD0;
+	float3 normal : NORMAL;
+	float2 uv : TEXCOORD;
 };
 
 struct VS_OUTPUT
@@ -12,6 +13,7 @@ struct VS_OUTPUT
 
 cbuffer PS_CONSTANT_BUFFER
 {
+	float4x4 g_mvp;
 	float4x4 g_world;
 	float4x4 g_viewProjection;
 };
@@ -23,7 +25,7 @@ SamplerState SampleType;
 VS_OUTPUT VShader(VS_INPUT data)
 {
 	VS_OUTPUT result;
-	result.vPosition = mul(float4(data.vPosition, 1), mul(g_world, g_viewProjection));
+	result.vPosition = mul(float4(data.vPosition, 1), g_mvp);
 	result.uv = data.uv;
 	return result;
 }

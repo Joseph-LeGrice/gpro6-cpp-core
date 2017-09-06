@@ -14,11 +14,13 @@ public:
 	bool Initialize(ID3D11Device* device);
 	void SetBuffers();
 	void UpdateBuffers();
-	void ConstantBuffer::SetViewProjectionMatrix(Matrix4x4 vp);
-	void ConstantBuffer::SetWorldMatrix(Matrix4x4 w);
+	void SetProjectionMatrix(Matrix4x4 vp);
+	void SetViewMatrix(Matrix4x4 vp);
+	void SetWorldMatrix(Matrix4x4 w);
 
 private:
-	Matrix4x4 m_vpMatrix;
+	Matrix4x4 m_vMatrix;
+	Matrix4x4 m_pMatrix;
 	Matrix4x4 m_wMatrix;
 	ID3D11Buffer* m_buffer;
 
