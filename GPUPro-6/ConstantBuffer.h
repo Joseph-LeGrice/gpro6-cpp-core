@@ -1,7 +1,7 @@
 #pragma once
 #include "D3DX11.h"
 #include "D3DX10.h"
-#include "Matrix.h"
+#include "Matrix4x4.h"
 
 typedef struct VS_CONSTANT_BUFFER;
 

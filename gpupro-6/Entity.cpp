@@ -20,9 +20,9 @@ void Entity::Destroy(Entity& e)
 
 Entity::Entity()
 {
-	Matrix4x4::MatrixIdentity(m_translation);
-	Matrix4x4::MatrixIdentity(m_scale);
-	Matrix4x4::MatrixIdentity(m_rotation);
+	Matrix4x4::Identity(m_translation);
+	Matrix4x4::Identity(m_scale);
+	Matrix4x4::Identity(m_rotation);
 
 	m_componentMap = std::unordered_map<std::type_index, std::vector<Component*>>();
 }

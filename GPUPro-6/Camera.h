@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Matrix.h"
+#include "Matrix4x4.h"
 #include "Component.h"
 
 class Camera : 
@@ -21,7 +21,6 @@ private:
 
 	Matrix4x4 OrthoProject(float size, float depth, float aspectRatio);
 	Matrix4x4 PerspProjectGL(float fieldOfView, float aspectRatio, float screenNear, float screenDepth);
-	Matrix4x4 PerspProjectDX(float fieldOfView, float aspectRatio, float screenNear, float screenDepth);
 
 	virtual void Init() override;
 

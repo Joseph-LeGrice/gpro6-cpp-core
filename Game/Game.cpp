@@ -99,7 +99,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							Entity* cameraEntity = &Entity::Instantiate();
 							cameraEntity->AddComponent<Camera>();
 
-							cameraEntity->SetTranslation({ 0.0f, 0.0f, 0.0f });
+							cameraEntity->SetTranslation({ 0.0f, 0.0f, -25.0f });
 						}
 					}
 				}
