@@ -12,9 +12,9 @@ struct VS_CONSTANT_BUFFER
 
 ConstantBuffer::ConstantBuffer()
 {
-	Matrix4x4::MatrixIdentity(&m_wMatrix);
-	Matrix4x4::MatrixIdentity(&m_vMatrix);
-	Matrix4x4::MatrixIdentity(&m_pMatrix);
+	Matrix4x4::MatrixIdentity(m_wMatrix);
+	Matrix4x4::MatrixIdentity(m_vMatrix);
+	Matrix4x4::MatrixIdentity(m_pMatrix);
 	m_buffer = nullptr;
 }
 
@@ -27,7 +27,7 @@ ConstantBuffer::~ConstantBuffer()
 bool ConstantBuffer::Initialize(ID3D11Device* device)
 {
 	Matrix4x4 m;
-	Matrix4x4::MatrixIdentity(&m);
+	Matrix4x4::MatrixIdentity(m);
 
 	VS_CONSTANT_BUFFER initialData = GetBufferData();
 

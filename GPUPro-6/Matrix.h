@@ -74,21 +74,26 @@ struct Matrix4x4
 		return result;
 	}
 
-	static void MatrixIdentity(Matrix4x4* m)
+	static void MatrixIdentity(Matrix4x4& m)
 	{
-		m->M11 = 1; m->M21 = 0; m->M31 = 0; m->M41 = 0;
-		m->M12 = 0; m->M22 = 1; m->M32 = 0; m->M42 = 0;
-		m->M13 = 0; m->M23 = 0; m->M33 = 1; m->M43 = 0;
-		m->M14 = 0; m->M24 = 0; m->M34 = 0; m->M44 = 1;
+		m.M11 = 1; m.M21 = 0; m.M31 = 0; m.M41 = 0;
+		m.M12 = 0; m.M22 = 1; m.M32 = 0; m.M42 = 0;
+		m.M13 = 0; m.M23 = 0; m.M33 = 1; m.M43 = 0;
+		m.M14 = 0; m.M24 = 0; m.M34 = 0; m.M44 = 1;
 	}
 
-	static Matrix4x4 MatrixTranspose(Matrix4x4* m)
+	static Matrix4x4 MatrixTranspose(Matrix4x4& m)
 	{
 		Matrix4x4 result;
-		result.M11 = m->M11; result.M21 = m->M12; result.M31 = m->M13; result.M41 = m->M14;
-		result.M12 = m->M21; result.M22 = m->M22; result.M32 = m->M23; result.M42 = m->M24;
-		result.M13 = m->M31; result.M23 = m->M32; result.M33 = m->M33; result.M43 = m->M34;
-		result.M14 = m->M41; result.M24 = m->M42; result.M34 = m->M43; result.M44 = m->M44;
+		result.M11 = m.M11; result.M21 = m.M12; result.M31 = m.M13; result.M41 = m.M14;
+		result.M12 = m.M21; result.M22 = m.M22; result.M32 = m.M23; result.M42 = m.M24;
+		result.M13 = m.M31; result.M23 = m.M32; result.M33 = m.M33; result.M43 = m.M34;
+		result.M14 = m.M41; result.M24 = m.M42; result.M34 = m.M43; result.M44 = m.M44;
 		return result;
 	}
+
+	//static Matrix4x4 MatrixInverse(Matrix4x4& m)
+	//{
+
+	//}
 };

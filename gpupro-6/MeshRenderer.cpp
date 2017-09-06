@@ -8,7 +8,7 @@
 MeshRenderer::MeshRenderer()
 {
 	m_meshInfo = MeshInfo();
-	Matrix4x4::MatrixIdentity(&m_meshInfo.m_transform);
+	Matrix4x4::MatrixIdentity(m_meshInfo.m_transform);
 }
 
 MeshRenderer::~MeshRenderer()

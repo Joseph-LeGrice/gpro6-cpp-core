@@ -92,7 +92,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							mr->SetMesh(*mesh);
 							mr->SetMaterial(m);
 
-							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 11.0f });
+							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 5.0f });
 							testQuadEntity->SetScale({ 2.5f, 2.5f, 1.0f });
 
 							// Camera

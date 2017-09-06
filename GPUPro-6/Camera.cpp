@@ -11,7 +11,7 @@
 
 Camera::Camera()
 {
-	Matrix4x4::MatrixIdentity(&m_projectionMatrix);
+	Matrix4x4::MatrixIdentity(m_projectionMatrix);
 }
 
 const Matrix4x4 Camera::GetView()
@@ -29,7 +29,7 @@ Matrix4x4 Camera::OrthoProject(float size, float depth, float aspectRatio)
 	float halfSize = 0.5f * size;
 
 	Matrix4x4 result;
-	Matrix4x4::MatrixIdentity(&result);
+	Matrix4x4::MatrixIdentity(result);
 
 	result.M11 = 2 / size;
 	result.M22 = aspectRatio * 2 / size;
@@ -45,7 +45,7 @@ Matrix4x4 Camera::OrthoProject(float size, float depth, float aspectRatio)
 Matrix4x4 Camera::PerspProjectGL(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
 {
 	Matrix4x4 result;
-	Matrix4x4::MatrixIdentity(&result);
+	Matrix4x4::MatrixIdentity(result);
 
 	float t = tan(fieldOfViewRadians / 2) * screenNear;
 	float b = -t;
@@ -67,7 +67,7 @@ Matrix4x4 Camera::PerspProjectGL(float fieldOfViewRadians, float aspectRatio, fl
 Matrix4x4 Camera::PerspProjectDX(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
 {
 	Matrix4x4 result;
-	Matrix4x4::MatrixIdentity(&result);
+	Matrix4x4::MatrixIdentity(result);
 
 	result.M11 = atan(fieldOfViewRadians / 2);
 	result.M22 = atan((fieldOfViewRadians * aspectRatio) / 2);
