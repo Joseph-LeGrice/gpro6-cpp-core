@@ -16,9 +16,6 @@ struct VertexData
 class Mesh
 {
 public:
-	Mesh();
-	~Mesh();
-
 	void SetTopology(D3D_PRIMITIVE_TOPOLOGY t);
 	void SetVertices(std::vector<Vector3> verts);
 	void SetNormals(std::vector<Vector3> normals);
@@ -38,12 +35,10 @@ private:
 	std::vector<VertexData> m_vertexData;
 
 	unsigned int m_numberOfIndices;
-
-	Mesh(const Mesh&) = delete;
 };
 
 struct MeshInfo
 {
-	Mesh* m_mesh;
+	Mesh m_mesh;
 	Matrix4x4 m_transform;
 };

@@ -81,10 +81,5 @@ struct Matrix3x3
 	{
 		return m.M11 * m.M22 * m.M33 - m.M13 * m.M22 * m.M31;
 	}
-
-	static Matrix3x3 Inverse(Matrix3x3& m)
-	{
-
-	}
 };
 

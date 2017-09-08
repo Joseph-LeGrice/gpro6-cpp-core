@@ -109,10 +109,10 @@ void Material::Render(ConstantBuffer* constBuf)
 	std::vector<UINT16> allIndices;
 	for each (MeshInfo* m in m_meshes)
 	{
-		const std::vector<VertexData> verts = m->m_mesh->GetVertices();
+		const std::vector<VertexData> verts = m->m_mesh.GetVertices();
 		allVerts.insert(allVerts.end(), verts.begin(), verts.end());
 
-		const std::vector<UINT16> indices = m->m_mesh->GetIndices();
+		const std::vector<UINT16> indices = m->m_mesh.GetIndices();
 		allIndices.insert(allIndices.end(), indices.begin(), indices.end());
 	}
 
@@ -138,8 +138,8 @@ void Material::Render(ConstantBuffer* constBuf)
 		constBuf->SetWorldMatrix(m->m_transform);
 		constBuf->UpdateBuffers();
 
-		int numberOfVerts = m->m_mesh->GetIndices().size();
-		deviceContext->IASetPrimitiveTopology(m->m_mesh->GetTopology());
+		int numberOfVerts = m->m_mesh.GetIndices().size();
+		deviceContext->IASetPrimitiveTopology(m->m_mesh.GetTopology());
 		deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
 		currentIndex += numberOfVerts;
 	}

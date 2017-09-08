@@ -206,18 +206,26 @@ struct Matrix4x4
 
 	static Matrix4x4 Inverse(Matrix4x4& m)
 	{
-		Matrix4x4 minors = Matrix4x4::MatrixOfMinors(m);
-
-		minors.M14 *= -1; minors.M24 *=  1; minors.M34 *= -1; minors.M44 *=  1;
-		minors.M11 *=  1; minors.M21 *= -1; minors.M31 *=  1; minors.M41 *= -1;
-		minors.M12 *= -1; minors.M22 *=  1; minors.M32 *= -1; minors.M42 *=  1;
-		minors.M13 *=  1; minors.M23 *= -1; minors.M33 *=  1; minors.M43 *= -1;
-
-		Matrix4x4 adjugate = Matrix4x4::Transpose(minors);
 		float determinant = Matrix4x4::Determinant(m);
+		if (determinant > 0.0f)
+		{
+			Matrix4x4 minors = Matrix4x4::MatrixOfMinors(m);
 
-		Matrix4x4 inverse = adjugate * (1.0f / determinant);
-		Matrix4x4 identity = m * inverse;
-		return inverse;
+			minors.M14 *= -1; minors.M24 *=  1; minors.M34 *= -1; minors.M44 *=  1;
+			minors.M11 *=  1; minors.M21 *= -1; minors.M31 *=  1; minors.M41 *= -1;
+			minors.M12 *= -1; minors.M22 *=  1; minors.M32 *= -1; minors.M42 *=  1;
+			minors.M13 *=  1; minors.M23 *= -1; minors.M33 *=  1; minors.M43 *= -1;
+
+			Matrix4x4 adjugate = Matrix4x4::Transpose(minors);
+			Matrix4x4 inverse = adjugate * (1.0f / determinant);
+			
+			// Matrix4x4 identity = m * inverse;
+
+			return inverse;
+		}
+		else
+		{
+			return m;
+		}
 	}
 };

@@ -1,19 +1,6 @@
 #include "stdafx.h"
 #include "Mesh.h"
 
-
-Mesh::Mesh()
-{
-	m_uvs = std::vector<Vector2>();
-	m_indices = std::vector<UINT16>();
-	m_normals = std::vector<Vector3>();
-	m_vertexPositions = std::vector<Vector3>();
-}
-
-Mesh::~Mesh()
-{
-}
-
 void Mesh::SetTopology(D3D_PRIMITIVE_TOPOLOGY t)
 {
 	m_topology = t;

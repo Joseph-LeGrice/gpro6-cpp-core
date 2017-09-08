@@ -66,6 +66,7 @@
     <ClCompile Include="ImagingFactory.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="MeshHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Matrix3x3.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="MeshHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

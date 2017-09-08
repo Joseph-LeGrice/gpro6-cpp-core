@@ -10,7 +10,7 @@ class MeshRenderer :
 	friend Entity;
 
 public:
-	void SetMesh(Mesh& mesh);
+	void SetMesh(Mesh mesh);
 
 	virtual void Tick() override;
 

@@ -16,6 +16,7 @@
 #include "TextureSampler.h"
 #include "ImagingFactory.h"
 #include "Camera.h"
+#include "MeshHelper.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -55,41 +56,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							m->SetShader(s);
 
 							// Quad Mesh
-							Mesh* mesh = new Mesh();
-							mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
-							std::vector<Vector3> verts = std::vector<Vector3>();
-							verts.push_back({ -0.5f, -0.5f, 0.0f });
-							verts.push_back({ -0.5f,  0.5f, 0.0f });
-							verts.push_back({  0.5f,  0.5f, 0.0f });
-							verts.push_back({  0.5f, -0.5f, 0.0f });
-							mesh->SetVertices(verts);
-
-							std::vector<Vector3> normals = std::vector<Vector3>();
-							normals.push_back({ 0.0f, 0.0f, 1.0f });
-							normals.push_back({ 0.0f, 0.0f, 1.0f });
-							normals.push_back({ 0.0f, 0.0f, 1.0f });
-							normals.push_back({ 0.0f, 0.0f, 1.0f });
-							mesh->SetNormals(normals);
-
-							std::vector<Vector2> uvs = std::vector<Vector2>();
-							uvs.push_back({ 0.0f, 1.0f });
-							uvs.push_back({ 0.0f, 0.0f });
-							uvs.push_back({ 1.0f, 0.0f });
-							uvs.push_back({ 1.0f, 1.0f });
-							mesh->SetUVs(uvs);
-
-							std::vector<UINT16> indices = std::vector<UINT16>();
-							indices.push_back(1);
-							indices.push_back(2);
-							indices.push_back(0);
-							indices.push_back(2);
-							indices.push_back(3);
-							mesh->SetIndices(indices);
+							Mesh mesh = MeshHelper::CreateQuad();
 
 							Entity* testQuadEntity = &Entity::Instantiate();
 							MeshRenderer* mr = &testQuadEntity->AddComponent<MeshRenderer>();
-							mr->SetMesh(*mesh);
+							mr->SetMesh(mesh);
 							mr->SetMaterial(m);
 
 							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 5.0f });
@@ -98,8 +69,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							// Camera
 							Entity* cameraEntity = &Entity::Instantiate();
 							cameraEntity->AddComponent<Camera>();
-
-							cameraEntity->SetTranslation({ 0.0f, 0.0f, -25.0f });
+							cameraEntity->SetTranslation({ 20.0f, 10.0f, -10 });
 						}
 					}
 				}
