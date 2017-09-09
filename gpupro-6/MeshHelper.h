@@ -10,7 +10,8 @@ public:
 	~MeshHelper() = delete;
 
 	static Mesh CreateQuad();
-	static Mesh CreateSphere();
+	static Mesh CreateSphereICO();
+	static Mesh CreateSphereUV();
 	static Mesh CreateCube();
 };
 

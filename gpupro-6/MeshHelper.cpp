@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "MeshHelper.h"
 
+#include <math.h>
+#include "MathHelper.h"
 
 Mesh MeshHelper::CreateQuad()
 {
@@ -39,9 +41,83 @@ Mesh MeshHelper::CreateQuad()
 	return result;
 }
 
-Mesh MeshHelper::CreateSphere()
+Mesh MeshHelper::CreateSphereICO()
 {
 	Mesh result;
+
+	std::vector<Vector3> verts = std::vector<Vector3>();
+	std::vector<Vector3> norms = std::vector<Vector3>();
+	std::vector<Vector2> uvs = std::vector<Vector2>();
+	std::vector<UINT16> indices = std::vector<UINT16>();
+
+
+	result.SetVertices(verts);
+	result.SetNormals(norms);
+	result.SetUVs(uvs);
+	result.SetIndices(indices);
+
+	return result;
+}
+
+Mesh MeshHelper::CreateSphereUV()
+{
+	Mesh result;
+
+	std::vector<Vector3> verts = std::vector<Vector3>();
+	std::vector<Vector3> norms = std::vector<Vector3>();
+	std::vector<Vector2> uvs = std::vector<Vector2>();
+	std::vector<UINT16> indices = std::vector<UINT16>();
+
+	float radius = 1.0f;
+	size_t latitude = 5;
+	size_t longitude = 5;
+
+	for (size_t latSlice = 0; latSlice < latitude; ++latSlice)
+	{
+		float theta = (float)latSlice / latitude * 2 * PI;
+		for (size_t lonSlice = 0; lonSlice < longitude; ++lonSlice)
+		{
+			float phi = (float)lonSlice / longitude * PI;
+
+			float x = radius * cos(theta) * sin(phi);
+			float y = radius * sin(theta) * sin(phi);
+			float z = radius * cos(phi);
+			verts.push_back({ x, y, z });
+			norms.push_back({ x, y, z });
+
+			float u = (float)lonSlice / longitude;
+			float v = (float)latSlice / latitude;
+			uvs.push_back({ u, v });
+		}
+	}
+
+	for (size_t latSlice = 0; latSlice < latitude - 1; ++latSlice)
+	{
+		for (size_t lonSlice = 0; lonSlice < longitude - 1; ++lonSlice)
+		{
+			int offset = latSlice * latitude;
+			int v1 = lonSlice + offset;
+			int v2 = lonSlice + 1 + offset;
+
+			int nextOffset = (latSlice + 1) * latitude;
+			int v3 = lonSlice + nextOffset;
+			int v4 = lonSlice + 1 + nextOffset;
+
+			indices.push_back(v1);
+			indices.push_back(v2);
+			indices.push_back(v3);
+
+			indices.push_back(v2);
+			indices.push_back(v4);
+			indices.push_back(v3);
+		}
+	}
+
+	result.SetVertices(verts);
+	result.SetNormals(norms);
+	result.SetUVs(uvs);
+	result.SetIndices(indices);
+
 	return result;
 }
 
