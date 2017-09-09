@@ -149,6 +149,9 @@
     <ClInclude Include="MathHelper.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
