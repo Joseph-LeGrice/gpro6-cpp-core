@@ -56,8 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							m->SetShader(s);
 
 							// Quad Mesh
-							Mesh mesh_broken = MeshHelper::CreateSphereUV();
-							Mesh mesh = MeshHelper::CreateQuad();
+							Mesh mesh = MeshHelper::CreateSphereUV();
 
 							Entity* testQuadEntity = &Entity::Instantiate();
 							MeshRenderer* mr = &testQuadEntity->AddComponent<MeshRenderer>();

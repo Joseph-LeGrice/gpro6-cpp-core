@@ -62,6 +62,7 @@ Mesh MeshHelper::CreateSphereICO()
 Mesh MeshHelper::CreateSphereUV()
 {
 	Mesh result;
+	result.SetTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();

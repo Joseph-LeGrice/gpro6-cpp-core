@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Mesh.h"
 
+Mesh::Mesh()
+{
+	m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+}
+
 void Mesh::SetTopology(D3D_PRIMITIVE_TOPOLOGY t)
 {
 	m_topology = t;

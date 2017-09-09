@@ -16,6 +16,8 @@ struct VertexData
 class Mesh
 {
 public:
+	Mesh();
+
 	void SetTopology(D3D_PRIMITIVE_TOPOLOGY t);
 	void SetVertices(std::vector<Vector3> verts);
 	void SetNormals(std::vector<Vector3> normals);
@@ -33,8 +35,6 @@ private:
 	std::vector<Vector2> m_uvs;
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
-
-	unsigned int m_numberOfIndices;
 };
 
 struct MeshInfo
