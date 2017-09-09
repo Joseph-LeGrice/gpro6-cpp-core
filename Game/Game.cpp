@@ -64,12 +64,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							mr->SetMaterial(m);
 
 							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 5.0f });
-							testQuadEntity->SetScale({ 2.5f, 2.5f, 1.0f });
+							testQuadEntity->SetScale({ 5.0f, 5.0f, 5.0f });
 
 							// Camera
 							Entity* cameraEntity = &Entity::Instantiate();
 							cameraEntity->AddComponent<Camera>();
-							cameraEntity->SetTranslation({ 20.0f, 10.0f, -10 });
+							cameraEntity->SetTranslation({ 0.0f, 0.0f, -10 });
 						}
 					}
 				}

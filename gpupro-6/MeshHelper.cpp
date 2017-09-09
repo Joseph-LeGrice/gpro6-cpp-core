@@ -70,24 +70,25 @@ Mesh MeshHelper::CreateSphereUV()
 	std::vector<UINT16> indices = std::vector<UINT16>();
 
 	float radius = 1.0f;
-	size_t latitude = 5;
-	size_t longitude = 5;
+	size_t latitude = 8;
+	size_t longitude = 9;
 
 	for (size_t latSlice = 0; latSlice < latitude; ++latSlice)
 	{
-		float theta = (float)latSlice / latitude * 2 * PI;
+		float phi = (float)latSlice / (latitude - 1.0f) * PI;
 		for (size_t lonSlice = 0; lonSlice < longitude; ++lonSlice)
 		{
-			float phi = (float)lonSlice / longitude * PI;
+			float progression = (float)lonSlice / (longitude - 1.0f);
+			float theta = progression * 2.0f * PI;
 
 			float x = radius * cos(theta) * sin(phi);
-			float y = radius * sin(theta) * sin(phi);
-			float z = radius * cos(phi);
+			float y = radius * cos(phi); 
+			float z = radius * sin(theta) * sin(phi);
 			verts.push_back({ x, y, z });
 			norms.push_back({ x, y, z });
 
-			float u = (float)lonSlice / longitude;
-			float v = (float)latSlice / latitude;
+			float u = (float)lonSlice / (longitude - 1.0f);
+			float v = (float)latSlice / (latitude - 1.0f);
 			uvs.push_back({ u, v });
 		}
 	}
