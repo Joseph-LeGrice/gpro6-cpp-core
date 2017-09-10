@@ -2,7 +2,9 @@
 
 #include "Matrix4x4.h"
 #include "Vector3.h"
+#include "Vector4.h"
 #include "Component.h"
+#include "Quaternion.h"
 
 #include <vector>
 #include <typeindex>
@@ -31,13 +33,17 @@ public:
 	const Matrix4x4 GetTransformationMatrix();
 	Matrix4x4 GetTranslation();
 	void SetTranslation(Vector3 position);
-	//void SetRotation(Quaternion rot); //TODO: Quaternions
+	void SetRotation(Quaternion rot);
 	void SetScale(Vector3 scale);
 
 private:
-	Matrix4x4 m_scale;
-	Matrix4x4 m_rotation;
-	Matrix4x4 m_translation;
+	Vector4 m_position;
+	Vector4 m_scale;
+	Quaternion m_rotation;
+
+	//Matrix4x4 m_scale;
+	//Matrix4x4 m_rotation;
+	//Matrix4x4 m_translation;
 
 	ComponentMap m_componentMap;
 

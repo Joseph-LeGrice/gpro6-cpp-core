@@ -1,3 +1,3 @@
 #pragma once
 
-#define PI 3.1415926535897f;
+const float PI = 3.1415926535897f;

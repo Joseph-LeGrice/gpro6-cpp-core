@@ -152,6 +152,12 @@
     <ClInclude Include="Vector2.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

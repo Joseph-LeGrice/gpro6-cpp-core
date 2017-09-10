@@ -16,7 +16,9 @@
 #include "TextureSampler.h"
 #include "ImagingFactory.h"
 #include "Camera.h"
+#include "Quaternion.h"
 #include "MeshHelper.h"
+#include "MathHelper.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -56,20 +58,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							m->SetShader(s);
 
 							// Quad Mesh
-							Mesh mesh = MeshHelper::CreateSphereUV();
+							Mesh mesh = MeshHelper::CreateQuad();
 
 							Entity* testQuadEntity = &Entity::Instantiate();
 							MeshRenderer* mr = &testQuadEntity->AddComponent<MeshRenderer>();
 							mr->SetMesh(mesh);
 							mr->SetMaterial(m);
 
+							testQuadEntity->SetRotation(Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.5f * PI));
 							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 5.0f });
 							testQuadEntity->SetScale({ 5.0f, 5.0f, 5.0f });
 
 							// Camera
 							Entity* cameraEntity = &Entity::Instantiate();
-							cameraEntity->AddComponent<Camera>();
-							cameraEntity->SetTranslation({ 0.0f, 0.0f, -10 });
+							cameraEntity->AddComponent<Camera>(); 
+							cameraEntity->SetTranslation({ 0.0f, 0.0f, -30 });
 						}
 					}
 				}

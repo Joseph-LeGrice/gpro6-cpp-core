@@ -18,6 +18,11 @@ struct Matrix4x4
 	float M41; float M42; float M43; float M44;
 #endif
 
+	Matrix4x4() 
+	{
+		Identity(*this);
+	}
+
 	Matrix4x4 operator+(const Matrix4x4 other)
 	{
 		Matrix4x4 result;
@@ -75,6 +80,19 @@ struct Matrix4x4
 
 		return result;
 	}
+
+	//Vector4 operator*(const Vector4 vec)
+	//{
+	//	Vector4 result;
+
+	//	result.X = M11 * vec.X + M21 * vec.Y + M31 * vec.Z + M41 * vec.W;
+	//	result.Y = M12 * vec.X + M22 * vec.Y + M32 * vec.Z + M42 * vec.W;
+	//	result.Z = M13 * vec.X + M23 * vec.Y + M33 * vec.Z + M43 * vec.W;
+	//	result.W = M14 * vec.X + M24 * vec.Y + M34 * vec.Z + M44 * vec.W;
+
+	//	return result;
+	//}
+
 
 	static void Identity(Matrix4x4& m)
 	{

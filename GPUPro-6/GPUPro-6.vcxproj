@@ -219,6 +219,7 @@
     <ClInclude Include="MeshHelper.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PerlinNoise.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneGraph.h" />
@@ -232,6 +233,7 @@
     <ClInclude Include="UtilityMacros.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

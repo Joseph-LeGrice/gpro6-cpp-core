@@ -20,10 +20,6 @@ void Entity::Destroy(Entity& e)
 
 Entity::Entity()
 {
-	Matrix4x4::Identity(m_translation);
-	Matrix4x4::Identity(m_scale);
-	Matrix4x4::Identity(m_rotation);
-
 	m_componentMap = std::unordered_map<std::type_index, std::vector<Component*>>();
 }
 
@@ -44,25 +40,29 @@ ComponentList Entity::GetAllComponents()
 
 void Entity::SetTranslation(Vector3 position)
 {
-	m_translation.M41 = position.X;
-	m_translation.M42 = position.Y;
-	m_translation.M43 = position.Z;
+	m_position = position;
 }
 
+void Entity::SetRotation(Quaternion rot)
+{
+	m_rotation = rot;
+}
 
 void Entity::SetScale(Vector3 scale)
 {
-	m_scale.M11 = scale.X;
-	m_scale.M22 = scale.Y;
-	m_scale.M33 = scale.Z;
+	m_scale = scale;
 }
 
 const Matrix4x4 Entity::GetTransformationMatrix()
 {
-	return m_translation * m_scale * m_rotation;
+	return m_position.GetTranslationMatrix() * m_scale.GetScaleMatrix() * m_rotation.GetMatrix();
 }
 
 Matrix4x4 Entity::GetTranslation()
 {
-	return m_translation;
+	Matrix4x4 translation;
+	translation.M41 = m_position.X;
+	translation.M42 = m_position.Y;
+	translation.M43 = m_position.Z;
+	return translation;
 }
