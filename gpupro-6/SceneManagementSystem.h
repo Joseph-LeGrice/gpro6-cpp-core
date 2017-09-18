@@ -1,5 +1,4 @@
 #pragma once
-#include "GameSystem.h"
 #include "ISystem.h"
 
 class SceneGraph;

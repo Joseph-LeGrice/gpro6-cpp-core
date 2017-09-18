@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Entity.h"
-#include "GameSystem.h"
 #include "SceneManagementSystem.h"
 #include "SceneGraph.h"
 

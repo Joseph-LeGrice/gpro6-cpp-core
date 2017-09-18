@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "TextureSampler.h"
-#include "GameSystem.h"
 #include "GraphicsSystem.h"
 
 

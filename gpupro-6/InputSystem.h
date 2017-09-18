@@ -1,9 +1,9 @@
 #pragma once
-class InputSystem
-{
-public:
-	InputSystem();
-	~InputSystem();
+#include "ISystem.h"
 
+class InputSystem : public ISystem
+{
+	REGISTER_SUBSYSTEM(InputSystem)
+public:
 };
 

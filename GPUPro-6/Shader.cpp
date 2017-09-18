@@ -3,7 +3,6 @@
 
 #include "D3DX11.h"
 
-#include "GameSystem.h"
 #include "GraphicsSystem.h"
 #include "TextureSampler.h"
 #include "ShaderResource.h"

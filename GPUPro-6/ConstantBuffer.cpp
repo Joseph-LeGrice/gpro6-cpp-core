@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ConstantBuffer.h"
-#include "GameSystem.h"
 #include "GraphicsSystem.h"
 
 struct VS_CONSTANT_BUFFER

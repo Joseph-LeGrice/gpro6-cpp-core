@@ -75,7 +75,9 @@
     <ClCompile Include="InputSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="ISystem.cpp" />
+    <ClCompile Include="ISystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -171,7 +173,9 @@
     <ClInclude Include="InputSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="ISystem.h" />
+    <ClInclude Include="ISystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

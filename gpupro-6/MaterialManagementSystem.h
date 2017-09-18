@@ -1,6 +1,5 @@
 #pragma once
 
-#include "GameSystem.h"
 #include <vector>
 #include "Material.h"
 #include "ISystem.h"

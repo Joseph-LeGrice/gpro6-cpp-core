@@ -4,7 +4,6 @@
 #include "D3DX11.h"
 #include "D3DX10.h"
 
-#include "GameSystem.h"
 #include <vector>
 #include "ISystem.h"
 

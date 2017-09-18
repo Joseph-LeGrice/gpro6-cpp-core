@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include <algorithm>
 #include "Material.h"
-#include "GameSystem.h"
 #include "Mesh.h"
 #include "ConstantBuffer.h"
 #include "MaterialManagementSystem.h"

@@ -52,13 +52,3 @@ static T* GameSystem::GetSystem()
 	return (T*)s_instance->m_subsystems[typeId];
 }
 
-#define REGISTER_SUBSYSTEM(x) \
-public: \
-static x* Instance() \
-{ \
-	static_assert(std::is_base_of<ISystem, x>::value, "Must be Sub-Class of ISystem"); \
-	return GameSystem::GetSystem<x>(); \
-} \
-x(const x&) = delete; \
-x(); \
-virtual ~x();

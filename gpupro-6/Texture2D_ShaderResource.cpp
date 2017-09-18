@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "PerlinNoise.h"
 #include "Texture2D_ShaderResource.h"
-#include "GameSystem.h"
 #include "GraphicsSystem.h"
 #include "ImagingFactory.h"
 
