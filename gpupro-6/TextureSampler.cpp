@@ -30,7 +30,7 @@ bool TextureSampler::Initialize()
 	desc.MinLOD = 0;
 	desc.MaxLOD = 0;
 
-	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
+	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 	HRESULT createSamplerResult = device->CreateSamplerState(&desc, &m_sampler);
 	return createSamplerResult == S_OK;
 }

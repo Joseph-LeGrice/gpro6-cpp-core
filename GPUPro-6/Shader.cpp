@@ -39,7 +39,7 @@ Shader::~Shader()
 
 bool Shader::Initialize(std::wstring filename)
 {
-	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
+	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 	bool vertexShaderCompiled = InitVertexShader(filename, "VShader", device);
 	bool hullShaderCompiled = true; // = m_shader->InitHullShader(filename, "HShader", device);
 	bool domainShaderCompiled = true; //= m_shader->InitDomainShader(filename, "DShader", device);
@@ -51,7 +51,7 @@ bool Shader::Initialize(std::wstring filename)
 
 void Shader::SetCurrent()
 {
-	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 	deviceContext->IASetInputLayout(m_inputLayout);
 	deviceContext->VSSetShader(m_vertexShader, NULL, 0);
 

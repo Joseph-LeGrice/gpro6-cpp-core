@@ -60,7 +60,7 @@ T& Entity::AddComponent()
 		m_componentMap[typeid(c)] = std::vector<Component*>();
 	}
 	m_componentMap[typeid(c)].push_back((Component*)c);
-	GameSystem::SceneManager()->GetSceneGraph()->m_allComponents.push_back((Component*)c);
+	SceneManagementSystem::Instance()->GetSceneGraph()->m_allComponents.push_back((Component*)c);
 
 	return *c;
 }

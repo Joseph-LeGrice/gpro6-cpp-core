@@ -45,7 +45,7 @@ Texture2D_ShaderResource* Texture2D_ShaderResource::CreateFromFile(std::wstring 
 		data.SysMemSlicePitch = width * height * bpp;
 
 		Texture2D_ShaderResource* newTexture2D = new Texture2D_ShaderResource();
-		ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
+		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 		bool createdEverything = false;
 		HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &newTexture2D->m_pTexture);
 		if (createTextureResult == S_OK)
@@ -91,7 +91,7 @@ struct COLOR_DATA
 
 Texture2D_ShaderResource Texture2D_ShaderResource::CreateFromData(COLOR_DATA[] data)
 {
-	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
+	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 	const int texture_size = 64;
 
 	D3D11_TEXTURE2D_DESC desc;

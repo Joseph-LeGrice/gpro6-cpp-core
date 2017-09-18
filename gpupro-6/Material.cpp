@@ -29,7 +29,7 @@ Material* Material::Create()
 	Material* newMaterial = new Material();
 	if (newMaterial->Initialize())
 	{
-		GameSystem::MaterialManager()->RegisterInstancedMaterial(*newMaterial);
+		MaterialManagementSystem::Instance()->RegisterInstancedMaterial(*newMaterial);
 		return newMaterial;
 	}
 	else
@@ -63,7 +63,7 @@ void Material::SetShader(Shader* s)
 
 bool Material::InitializeBuffers()
 {
-	ID3D11Device* device = GameSystem::Graphics()->GetGraphicsDevice();
+	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 	
 	int INDEX_BUFFER_SIZE = 1024;
 	int VERTEX_BUFER_SIZE = 1024;
@@ -101,7 +101,7 @@ void Material::Render(ConstantBuffer* constBuf)
 	UINT offset = 0;
 	UINT stride = sizeof(VertexData);
 
-	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 

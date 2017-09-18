@@ -69,6 +69,13 @@
     <ClCompile Include="MeshHelper.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="TimeSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ISystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -158,6 +165,13 @@
     <ClInclude Include="Vector4.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="TimeSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

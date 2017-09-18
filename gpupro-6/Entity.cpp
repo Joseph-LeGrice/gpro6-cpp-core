@@ -9,13 +9,13 @@
 Entity& Entity::Instantiate()
 {
 	Entity* e = new Entity();
-	GameSystem::SceneManager()->GetSceneGraph()->RegisterEntity(*e);
+	SceneManagementSystem::Instance()->GetSceneGraph()->RegisterEntity(*e);
 	return *e;
 }
 
 void Entity::Destroy(Entity& e)
 {
-	GameSystem::SceneManager()->GetSceneGraph()->DeleteEntity(e);
+	SceneManagementSystem::Instance()->GetSceneGraph()->DeleteEntity(e);
 }
 
 Entity::Entity()

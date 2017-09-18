@@ -6,6 +6,15 @@
 
 #define DEBUG
 
+GraphicsSystem::GraphicsSystem()
+{
+	m_constantBuffer = nullptr;
+	m_rtBackBuffer = nullptr;
+	m_swapchain = nullptr;
+	m_device = nullptr;
+	m_deviceContext = nullptr;
+}
+
 GraphicsSystem::~GraphicsSystem()
 {
 	m_swapchain->SetFullscreenState(FALSE, NULL);
@@ -28,13 +37,8 @@ ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
 	return m_deviceContext;
 }
 
-GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight)
-{
-	ID3D11Device* gfxDevice;
-	ID3D11DeviceContext* gfxDeviceContext;
-	IDXGISwapChain* gfxSwapchain;
-	ID3D11RenderTargetView * gfxBackBuffer;
-	
+bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight)
+{	
 	// Initialize Direct3D
 	DXGI_SWAP_CHAIN_DESC scd;
 	ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
@@ -59,22 +63,22 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 		NULL,
 		D3D11_SDK_VERSION,
 		&scd,
-		&gfxSwapchain,
-		&gfxDevice,
+		&m_swapchain,
+		&m_device,
 		NULL,
-		&gfxDeviceContext);
+		&m_deviceContext);
 
 	if (createDeviceResult == S_OK)
 	{
 		// Initialize Render Targets
 		ID3D11Texture2D* pBackBuffer;
-		gfxSwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-		HRESULT createdRenderTarget = gfxDevice->CreateRenderTargetView(pBackBuffer, NULL, &gfxBackBuffer);
+		m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
+		HRESULT createdRenderTarget = m_device->CreateRenderTargetView(pBackBuffer, NULL, &m_rtBackBuffer);
 
 		if (createdRenderTarget == S_OK)
 		{
 			pBackBuffer->Release();
-			gfxDeviceContext->OMSetRenderTargets(1, &gfxBackBuffer, NULL);
+			m_deviceContext->OMSetRenderTargets(1, &m_rtBackBuffer, NULL);
 
 			// Initialize Viewport
 			D3D11_VIEWPORT viewportDesc;
@@ -86,19 +90,16 @@ GraphicsSystem* GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, i
 			viewportDesc.MinDepth = 0.0f;
 			viewportDesc.MaxDepth = 1.0f;
 
-			gfxDeviceContext->RSSetViewports(1, &viewportDesc);
+			m_deviceContext->RSSetViewports(1, &viewportDesc);
 
-			ConstantBuffer* cp = new ConstantBuffer();
-			bool createdConstantBuffer = cp->Initialize(gfxDevice);
+			m_constantBuffer = new ConstantBuffer();
+			bool createdConstantBuffer = m_constantBuffer->Initialize(m_device);
 
-			if (createdConstantBuffer)
-			{
-				return new GraphicsSystem(gfxDevice, gfxDeviceContext, gfxSwapchain, gfxBackBuffer, cp, screenWidth, screenHeight);
-			}
+			return createdConstantBuffer;
 		}
 	}
 	
-	return nullptr;
+	return false;
 }
 
 void GraphicsSystem::Render(Camera& cam, const std::vector<Material*>* m_materials)

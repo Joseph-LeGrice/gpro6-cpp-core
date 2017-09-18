@@ -1,5 +1,10 @@
 #pragma once
 
+#include <type_traits>
+#include <typeindex>
+#include <unordered_map>
+
+class ISystem;
 class GraphicsSystem;
 class MaterialManagementSystem;
 class SceneManagementSystem;
@@ -13,12 +18,12 @@ public:
 	static int Run();
 	static void Shutdown();
 
-	static GraphicsSystem* Graphics();
-	static MaterialManagementSystem* MaterialManager();
-	static SceneManagementSystem* SceneManager();
+	template <class T>
+	static T* GetSystem();
 
 private:
 	static GameSystem* s_instance;
+	
 
 	bool m_running;
 	HINSTANCE m_hInstance;
@@ -33,8 +38,27 @@ private:
 	void InitializeWindows(int& screenWidth, int& screenHeight);
 	void ShutdownWindows();
 
-	GraphicsSystem* m_graphicsSystem;
-	MaterialManagementSystem* m_materialManagementSystem;
-	SceneManagementSystem* m_sceneManagerSystem;
+	std::unordered_map<std::type_index, ISystem*> m_subsystems;
 };
 
+template <class T>
+static T* GameSystem::GetSystem()
+{
+	std::type_index typeId = typeid(T);
+	if (!s_instance->m_subsystems.count(typeId))
+	{
+		s_instance->m_subsystems[typeId] = new T();
+	}
+	return (T*)s_instance->m_subsystems[typeId];
+}
+
+#define REGISTER_SUBSYSTEM(x) \
+public: \
+static x* Instance() \
+{ \
+	static_assert(std::is_base_of<ISystem, x>::value, "Must be Sub-Class of ISystem"); \
+	return GameSystem::GetSystem<x>(); \
+} \
+x(const x&) = delete; \
+x(); \
+virtual ~x();

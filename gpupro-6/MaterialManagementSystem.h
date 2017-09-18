@@ -1,14 +1,15 @@
 #pragma once
 
+#include "GameSystem.h"
 #include <vector>
 #include "Material.h"
+#include "ISystem.h"
 
-class MaterialManagementSystem
+class MaterialManagementSystem : public ISystem
 {
-public:
-	MaterialManagementSystem();
-	~MaterialManagementSystem();
+	REGISTER_SUBSYSTEM(MaterialManagementSystem)
 
+public:
 	const std::vector<Material*>* GetAllMaterials();
 	const void RegisterInstancedMaterial(Material&);
 

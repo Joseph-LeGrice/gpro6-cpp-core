@@ -1,13 +1,13 @@
 #pragma once
+#include "GameSystem.h"
+#include "ISystem.h"
 
 class SceneGraph;
 
-class SceneManagementSystem
+class SceneManagementSystem : public ISystem
 {
+	REGISTER_SUBSYSTEM(SceneManagementSystem)
 public:
-	SceneManagementSystem();
-	~SceneManagementSystem();
-
 	SceneGraph* GetSceneGraph();
 	
 private:

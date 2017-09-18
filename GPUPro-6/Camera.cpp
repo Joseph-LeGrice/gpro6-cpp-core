@@ -3,7 +3,6 @@
 
 #include <math.h>
 #include "Entity.h"
-#include "GameSystem.h"
 #include "GraphicsSystem.h"
 #include "SceneManagementSystem.h"
 #include "SceneGraph.h"
@@ -66,8 +65,8 @@ Matrix4x4 Camera::PerspProject(float fieldOfViewRadians, float aspectRatio, floa
 
 void Camera::Init()
 {
-	float viewportWidth = GameSystem::Graphics()->GetViewportWidth();
-	float viewportHeight = GameSystem::Graphics()->GetViewportHeight();
+	float viewportWidth = GraphicsSystem::Instance()->GetViewportWidth();
+	float viewportHeight = GraphicsSystem::Instance()->GetViewportHeight();
 
 	float screenNear = 0.1f;
 	float screenDepth = 100.0f;
@@ -77,7 +76,7 @@ void Camera::Init()
 	m_projectionMatrix = PerspProject(fieldOfView, aspectRatio, screenNear, screenDepth);
 	//m_projectionMatrix = OrthoProject(0.1f, 50.0f, aspectRatio);
 
-	GameSystem::SceneManager()->GetSceneGraph()->RegisterCamera(*this);
+	SceneManagementSystem::Instance()->GetSceneGraph()->RegisterCamera(*this);
 }
 
 Camera::~Camera()

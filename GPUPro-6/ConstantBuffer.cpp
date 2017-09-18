@@ -62,7 +62,7 @@ void ConstantBuffer::SetWorldMatrix(Matrix4x4 w)
 
 void ConstantBuffer::SetBuffers()
 {
-	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 	deviceContext->VSSetConstantBuffers(0, 1, &m_buffer);
 	deviceContext->HSSetConstantBuffers(0, 1, &m_buffer);
 	deviceContext->DSSetConstantBuffers(0, 1, &m_buffer);
@@ -74,7 +74,7 @@ void ConstantBuffer::UpdateBuffers()
 {
 	D3D11_MAPPED_SUBRESOURCE mappedData;
 
-	ID3D11DeviceContext* deviceContext = GameSystem::Graphics()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 	HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 	if (bufferMapResult == S_OK)
 	{

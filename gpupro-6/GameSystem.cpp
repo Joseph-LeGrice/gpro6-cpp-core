@@ -19,24 +19,10 @@ GameSystem::GameSystem()
 
 GameSystem::~GameSystem()
 {
-	SAFE_DELETE(m_sceneManagerSystem);
-	SAFE_DELETE(m_materialManagementSystem);
-	SAFE_DELETE(m_graphicsSystem);
-}
-
-GraphicsSystem* GameSystem::Graphics()
-{
-	return s_instance->m_graphicsSystem;
-}
-
-MaterialManagementSystem* GameSystem::MaterialManager()
-{
-	return s_instance->m_materialManagementSystem;
-}
-
-SceneManagementSystem* GameSystem::SceneManager()
-{
-	return s_instance->m_sceneManagerSystem;
+	for (auto it = m_subsystems.begin(); it != m_subsystems.end(); ++it)
+	{
+		SAFE_DELETE(it->second);
+	}
 }
 
 bool GameSystem::InitializeAllSystems()
@@ -44,12 +30,7 @@ bool GameSystem::InitializeAllSystems()
 	int screenWidth = 0;
 	int screenHeight = 0;
 	s_instance->InitializeWindows(screenWidth, screenHeight);
-
-	s_instance->m_graphicsSystem = GraphicsSystem::InitializeGraphics(s_instance->m_hwnd, screenWidth, screenHeight);
-	s_instance->m_materialManagementSystem = new MaterialManagementSystem();
-	s_instance->m_sceneManagerSystem = new SceneManagementSystem();
-
-	return s_instance->m_graphicsSystem != nullptr;
+	return GraphicsSystem::Instance()->InitializeGraphics(s_instance->m_hwnd, screenWidth, screenHeight);
 }
 
 int GameSystem::Run()
@@ -64,7 +45,11 @@ void GameSystem::Shutdown()
 
 int GameSystem::GameLoop()
 {
-	m_sceneManagerSystem->GetSceneGraph()->InitScene(); 
+	SceneManagementSystem* sceneManager = SceneManagementSystem::Instance();
+	MaterialManagementSystem* materialManager = MaterialManagementSystem::Instance();
+	GraphicsSystem* graphicsSystem = GraphicsSystem::Instance();
+
+	sceneManager->GetSceneGraph()->InitScene();
 	
 	using clock = std::chrono::high_resolution_clock;
 
@@ -84,15 +69,15 @@ int GameSystem::GameLoop()
 		while (lag >= timeStep)
 		{
 			lag -= timeStep;
-			m_sceneManagerSystem->GetSceneGraph()->UpdateScene();
+			sceneManager->GetSceneGraph()->UpdateScene();
 		}
 
-		Camera& cam = m_sceneManagerSystem->GetSceneGraph()->GetCamera();
-		const std::vector<Material*>* allMats = m_materialManagementSystem->GetAllMaterials();
-		m_graphicsSystem->Render(cam, allMats);
+		Camera& cam = sceneManager->GetSceneGraph()->GetCamera();
+		const std::vector<Material*>* allMats = materialManager->GetAllMaterials();
+		graphicsSystem->Render(cam, allMats);
 	}
 
-	m_sceneManagerSystem->GetSceneGraph()->DeInitScene();
+	sceneManager->GetSceneGraph()->DeInitScene();
 
 	return 0;
 }
