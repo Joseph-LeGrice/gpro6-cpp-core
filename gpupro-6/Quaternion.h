@@ -1,5 +1,6 @@
 #pragma once
 
+#include <math.h>
 #include "Vector3.h"
 
 struct Quaternion
@@ -13,22 +14,67 @@ struct Quaternion
 		V = {0.0, 0.0, 0.0};
 	}
 
+	// TODO: Quaternion.LookAt
+
 	static Quaternion FromAxisAngle(Vector3 axis, float angle)
 	{
 		Quaternion q;
 		q.V = axis * sinf(angle / 2.0f);
 		q.W = cosf(angle / 2.0f);
+		q.Normalize();
 		return q;
 	}
 
 	Matrix4x4 GetMatrix()
 	{
-		Matrix4x4 result;
-		result.M11 =    W; result.M21 = -V.Z; result.M31 = -V.Y; result.M41 =  V.X;
-		result.M12 =  V.Z; result.M22 =    W; result.M32 = -V.X; result.M42 =  V.Y;
-		result.M13 = -V.Y; result.M23 =  V.X; result.M33 =    W; result.M43 =  V.Z;
-		result.M14 = -V.X; result.M24 = -V.Y; result.M34 = -V.Z; result.M44 =    W;
+		//Orthonormal basis
+
+		float x = V.X * 2.0F;
+		float y = V.Y * 2.0F;
+		float z = V.Z * 2.0F;
+		float xx = V.X * x;
+		float yy = V.Y * y;
+		float zz = V.Z * z;
+		float xy = V.X * y;
+		float xz = V.X * z;
+		float yz = V.Y * z;
+		float wx = W * x;
+		float wy = W * y;
+		float wz = W * z;
+
+		Matrix4x4 result; 
+		result.M11 = 1.0f - (yy + zz);
+		result.M12 = xy + wz;
+		result.M13 = xz - wy;
+		result.M14 = 0.0F;
+
+		result.M21 = xy - wz;
+		result.M22 = 1.0f - (xx + zz);
+		result.M23 = yz + wx;
+		result.M24 = 0.0F;
+
+		result.M31 = xz + wy;
+		result.M32 = yz - wx;
+		result.M33 = 1.0f - (xx + yy);
+		result.M34 = 0.0F;
+		
+		result.M41 = 0.0f;
+		result.M42 = 0.0f;
+		result.M43 = 0.0f;
+		result.M44 = 1.0f;
 		return result;
+	}
+
+	void Normalize()
+	{
+		FLOAT mag = Magnitude();
+		W /= mag;
+		V /= mag;
+	}
+
+	FLOAT Magnitude()
+	{
+		return sqrt(pow(W, 2) + pow(V.X, 2) + pow(V.Y, 2) + pow(V.Z, 2));
 	}
 
 	Quaternion operator+(Quaternion other)

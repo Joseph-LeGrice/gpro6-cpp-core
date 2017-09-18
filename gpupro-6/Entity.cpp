@@ -21,6 +21,7 @@ void Entity::Destroy(Entity& e)
 Entity::Entity()
 {
 	m_componentMap = std::unordered_map<std::type_index, std::vector<Component*>>();
+	m_scale = { 1.0f, 1.0f, 1.0f };
 }
 
 Entity::~Entity()
@@ -60,9 +61,5 @@ const Matrix4x4 Entity::GetTransformationMatrix()
 
 Matrix4x4 Entity::GetTranslation()
 {
-	Matrix4x4 translation;
-	translation.M41 = m_position.X;
-	translation.M42 = m_position.Y;
-	translation.M43 = m_position.Z;
-	return translation;
+	return m_position.GetTranslationMatrix();
 }

@@ -41,10 +41,6 @@ private:
 	Vector4 m_scale;
 	Quaternion m_rotation;
 
-	//Matrix4x4 m_scale;
-	//Matrix4x4 m_rotation;
-	//Matrix4x4 m_translation;
-
 	ComponentMap m_componentMap;
 
 	Entity();

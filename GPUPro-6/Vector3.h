@@ -8,6 +8,18 @@ struct Vector3
 	FLOAT Y;
 	FLOAT Z;
 
+	Vector3()
+	{
+		X = 0.0f;
+		Y = 0.0f;
+		Z = 0.0f;
+	}
+
+	Vector3(FLOAT x, FLOAT y, FLOAT z) : X(x), Y(y), Z(z)
+	{
+		
+	}
+
 	Vector3 operator+(const Vector3& other)
 	{
 		Vector3 result;
