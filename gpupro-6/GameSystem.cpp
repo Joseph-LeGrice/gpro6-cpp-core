@@ -3,10 +3,8 @@
 #include "GraphicsSystem.h"
 #include "SceneManagementSystem.h"
 #include "MaterialManagementSystem.h"
+#include "TimeSystem.h"
 #include "SceneGraph.h"
-#include <chrono>
-
-using namespace std::chrono_literals;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam);
 
@@ -45,36 +43,28 @@ void GameSystem::Shutdown()
 
 int GameSystem::GameLoop()
 {
+	TimeSystem* time = TimeSystem::Instance();
 	SceneManagementSystem* sceneManager = SceneManagementSystem::Instance();
 	MaterialManagementSystem* materialManager = MaterialManagementSystem::Instance();
 	GraphicsSystem* graphicsSystem = GraphicsSystem::Instance();
 
 	sceneManager->GetSceneGraph()->InitScene();
 	
-	using clock = std::chrono::high_resolution_clock;
-
-	constexpr std::chrono::nanoseconds timeStep(16ms);
-	std::chrono::nanoseconds lag(0ns);
-	auto lastTime = clock::now();
-
 	m_running = true;
 	while (m_running)
 	{
 		ProcessInput();
 
-		auto deltaTime = clock::now() - lastTime;
-		lag += std::chrono::duration_cast<std::chrono::nanoseconds>(deltaTime);
-		lastTime = clock::now();
-
-		while (lag >= timeStep)
+		while (time->ShouldAdvanceFixedStep())
 		{
-			lag -= timeStep;
 			sceneManager->GetSceneGraph()->UpdateScene();
 		}
 
 		Camera& cam = sceneManager->GetSceneGraph()->GetCamera();
 		const std::vector<Material*>* allMats = materialManager->GetAllMaterials();
 		graphicsSystem->Render(cam, allMats);
+
+		time->AdvanceFrame();
 	}
 
 	sceneManager->GetSceneGraph()->DeInitScene();
