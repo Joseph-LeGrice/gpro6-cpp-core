@@ -5,8 +5,10 @@ class SceneGraph;
 
 class SceneManagementSystem : public ISystem
 {
-	REGISTER_SUBSYSTEM(SceneManagementSystem)
+	REGISTER_SUBSYSTEM(SceneManagementSystem);
+
 public:
+	virtual void VariableTick() override;
 	SceneGraph* GetSceneGraph();
 	
 private:

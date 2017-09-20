@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <iostream>
 #include "TimeSystem.h"
 
 using namespace std::chrono;

@@ -13,6 +13,11 @@ SceneManagementSystem::~SceneManagementSystem()
 	SAFE_DELETE(m_sceneGraph);
 }
 
+void SceneManagementSystem::VariableTick()
+{
+	m_sceneGraph->UpdateScene();
+}
+
 SceneGraph* SceneManagementSystem::GetSceneGraph()
 {
 	return m_sceneGraph;

@@ -16,7 +16,8 @@ public:
 
 	static bool InitializeAllSystems();
 	static int Run();
-	static void Shutdown();
+	static void Quit();
+	static void ShutdownWindows();
 
 	template <class T>
 	static T* GetSystem();
@@ -25,17 +26,15 @@ private:
 	static GameSystem* s_instance;
 	
 	bool m_running;
-	HINSTANCE m_hInstance;
-	HWND m_hwnd;
-	LPCWSTR m_applicationName;
+	static HINSTANCE s_hInstance;
+	static HWND s_hwnd;
+	static LPCWSTR s_applicationName;
 
 	GameSystem();
 	GameSystem(const GameSystem&);
 
 	int GameLoop();
-	void ProcessInput();
 	void InitializeWindows(int& screenWidth, int& screenHeight);
-	void ShutdownWindows();
 
 	std::unordered_map<std::type_index, ISystem*> m_subsystems;
 };

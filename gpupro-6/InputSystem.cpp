@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "InputSystem.h"
 
-
 InputSystem::InputSystem()
 {
 }
@@ -9,4 +8,42 @@ InputSystem::InputSystem()
 
 InputSystem::~InputSystem()
 {
+}
+
+
+void InputSystem::SetHWND(HWND hwnd)
+{
+	m_hwnd = hwnd;
+}
+
+void InputSystem::VariableTick()
+{
+	MSG msg;
+	ZeroMemory(&msg, sizeof(MSG));
+
+	if (PeekMessage(&msg, m_hwnd, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+
+		if (msg.message == WM_QUIT)
+		{
+			GameSystem::Quit();
+		}
+	}
+}
+
+LRESULT CALLBACK InputSystem::WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
+{
+	switch (umessage)
+	{
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			return 0;
+		case WM_CLOSE:
+			PostQuitMessage(0);
+			return 0;
+		default:
+			return DefWindowProc(hwnd, umessage, wparam, lparam);
+	}
 }

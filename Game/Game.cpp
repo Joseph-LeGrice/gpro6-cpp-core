@@ -83,8 +83,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			returnCode = GameSystem::Run();
 		}
-
-		GameSystem::Shutdown();
 	}
 	catch(...)
 	{
@@ -92,6 +90,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
 	ImagingFactory::DestroyFactory();
+	GameSystem::ShutdownWindows();
 
 	return returnCode;
 }
