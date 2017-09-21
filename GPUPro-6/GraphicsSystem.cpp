@@ -3,6 +3,9 @@
 #include "Material.h"
 #include "ConstantBuffer.h"
 #include "Camera.h"
+#include "SceneManagementSystem.h"
+#include "MaterialManagementSystem.h"
+#include "SceneGraph.h"
 
 #define DEBUG
 
@@ -102,22 +105,6 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 	return false;
 }
 
-void GraphicsSystem::Render(Camera& cam, const std::vector<Material*>* m_materials)
-{
-	m_constantBuffer->SetBuffers();
-	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
-
-	m_constantBuffer->SetViewMatrix(cam.GetView());
-	m_constantBuffer->SetProjectionMatrix(cam.GetProjection());
-
-	for each (Material* m in *m_materials)
-	{
-		m->Render(m_constantBuffer);
-	}
-
-	m_swapchain->Present(0, 0);
-}
-
 float GraphicsSystem::GetViewportWidth()
 {
 	return m_viewportWidth;
@@ -126,4 +113,23 @@ float GraphicsSystem::GetViewportWidth()
 float GraphicsSystem::GetViewportHeight()
 {
 	return m_viewportHeight;
+}
+
+void GraphicsSystem::VariableTick()
+{
+	Camera& cam = SceneManagementSystem::Instance()->GetSceneGraph()->GetCamera();
+	const std::vector<Material*>* allMats = MaterialManagementSystem::Instance()->GetAllMaterials();
+
+	m_constantBuffer->SetBuffers();
+	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
+
+	m_constantBuffer->SetViewMatrix(cam.GetView());
+	m_constantBuffer->SetProjectionMatrix(cam.GetProjection());
+
+	for each (Material* m in *allMats)
+	{
+		m->Render(m_constantBuffer);
+	}
+
+	m_swapchain->Present(0, 0);
 }
