@@ -15,7 +15,6 @@ SceneManagementSystem::~SceneManagementSystem()
 
 void SceneManagementSystem::VariableTick()
 {
-	m_sceneGraph->UpdateScene();
 }
 
 SceneGraph* SceneManagementSystem::GetSceneGraph()

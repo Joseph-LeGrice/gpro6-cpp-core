@@ -7,29 +7,34 @@
 
 MeshRenderer::MeshRenderer()
 {
-	m_meshInfo = MeshInfo();
-	Matrix4x4::Identity(m_meshInfo.m_transform);
+	m_meshIndex = -1;
 }
 
 MeshRenderer::~MeshRenderer()
 {
 }
 
-void MeshRenderer::Tick()
-{
-	m_meshInfo.m_transform = GetEntity().GetTransformationMatrix();
-}
-
 void MeshRenderer::SetMesh(Mesh mesh)
 {
-	m_meshInfo.m_mesh = mesh;
+	Material* currentMat = GetMaterial();
+	if (currentMat != nullptr)
+	{
+		if (m_meshIndex > -1)
+		{
+			currentMat->DeregisterMeshInfo(m_meshIndex);
+		}
+		m_meshIndex = currentMat->RegisterMeshInfo(mesh);
+	}
 }
 
 void MeshRenderer::OnMaterialUpdated(Material* oldMaterial, Material* newMaterial)
 {
-	if (oldMaterial != nullptr)
+	if (oldMaterial != nullptr && m_meshIndex > -1)
 	{
-		oldMaterial->DeregisterMeshInfo(m_meshInfo);
+		Mesh* m = oldMaterial->GetMeshInfo(m_meshIndex);
+		size_t newIndex = newMaterial->RegisterMeshInfo(*m);
+
+		oldMaterial->DeregisterMeshInfo(m_meshIndex);
+		m_meshIndex = newIndex;
 	}
-	newMaterial->RegisterMeshInfo(m_meshInfo);
 }

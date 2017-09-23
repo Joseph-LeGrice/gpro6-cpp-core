@@ -54,7 +54,6 @@ int GameSystem::GameLoop()
 	GraphicsSystem* graphicsSystem = GraphicsSystem::Instance();
 
 	InputSystem::Instance()->SetHWND(s_hwnd);
-	sceneManager->GetSceneGraph()->InitScene();
 	
 	m_running = true;
 	while (m_running)
@@ -79,8 +78,6 @@ int GameSystem::GameLoop()
 
 		time->AdvanceFrame();
 	}
-
-	sceneManager->GetSceneGraph()->DeInitScene();
 
 	return 0;
 }

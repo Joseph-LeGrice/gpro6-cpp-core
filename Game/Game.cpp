@@ -65,14 +65,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							mr->SetMesh(mesh);
 							mr->SetMaterial(m);
 
-							testQuadEntity->SetRotation(Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI));
-							testQuadEntity->SetTranslation({ 0.0f, 0.0f, 5.0f });
-							testQuadEntity->SetScale({ 5.0f, 5.0f, 5.0f });
+							Transform t = testQuadEntity->GetTransform();
+							t.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+							t.m_position = { 0.0f, 0.0f, 5.0f };
+							t.m_scale = { 5.0f, 5.0f, 5.0f };
 
 							// Camera
 							Entity* cameraEntity = &Entity::Instantiate();
 							cameraEntity->AddComponent<Camera>(); 
-							cameraEntity->SetTranslation({ 0.0f, 0.0f, -10 });
+							Transform cameraTransform = cameraEntity->GetTransform();
+							cameraTransform.m_position = { 0.0f, 0.0f, -10 };
 						}
 					}
 				}

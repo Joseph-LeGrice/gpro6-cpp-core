@@ -13,9 +13,9 @@ Camera::Camera()
 	Matrix4x4::Identity(m_projectionMatrix);
 }
 
-const Matrix4x4 Camera::GetView()
+const Matrix4x4 Camera::GetView(Entity& e)
 {
-	return Matrix4x4::Inverse(GetEntity().GetTranslation());
+	return Matrix4x4::Inverse(e.GetTransform().m_position.GetTranslationMatrix());
 }
 
 const Matrix4x4 Camera::GetProjection()

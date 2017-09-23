@@ -12,8 +12,27 @@
 #include <unordered_map>
 
 class SceneGraph;
-typedef std::vector<Component*> ComponentList;
-typedef std::unordered_map<std::type_index, ComponentList> ComponentMap;
+typedef std::vector<size_t> IndexList;
+typedef std::unordered_map<std::type_index, IndexList> IndexMap;
+
+struct Transform
+{
+	// TODO: Child / Parent functionality
+	
+	Vector4 m_position;
+	Vector4 m_scale;
+	Quaternion m_rotation;
+
+	Transform()
+	{
+		m_scale = { 1.0f, 1.0f, 1.0f };
+	}
+
+	Matrix4x4 GetTransformationMatrix()
+	{
+		return m_position.GetTranslationMatrix() * m_scale.GetScaleMatrix() * m_rotation.GetMatrix();
+	}
+};
 
 class Entity
 {
@@ -23,25 +42,15 @@ public:
 	static Entity& Instantiate();
 	static void Destroy(Entity& e);
 
-	// TODO: Add Child / Parent
+	template<class T> T& AddComponent();
+	template<class T> void RemoveComponent();
+	IndexList GetIndicesForComponent(std::type_index);
 	
-	template<class T> T& AddComponent(); 
-	template<class T> T& GetComponent();
-	template<class T> ComponentList& GetComponents();
-	ComponentList GetAllComponents();
-
-	const Matrix4x4 GetTransformationMatrix();
-	Matrix4x4 GetTranslation();
-	void SetTranslation(Vector3 position);
-	void SetRotation(Quaternion rot);
-	void SetScale(Vector3 scale);
+	Transform& GetTransform();
 
 private:
-	Vector4 m_position;
-	Vector4 m_scale;
-	Quaternion m_rotation;
-
-	ComponentMap m_componentMap;
+	Transform m_transform;
+	IndexMap m_componentIndexMap;
 
 	Entity();
 	~Entity();
@@ -51,41 +60,13 @@ private:
 template<class T>
 T& Entity::AddComponent()
 {
-	static_assert(std::is_base_of<Component, T>::value, "Type passed to AddComponent must be a Component.");
-
-	T* c = new T();
-	c->m_entity = this;
-	if (!m_componentMap.count(typeid(c)))
-	{
-		m_componentMap[typeid(c)] = std::vector<Component*>();
-	}
-	m_componentMap[typeid(c)].push_back((Component*)c);
-	SceneManagementSystem::Instance()->GetSceneGraph()->m_allComponents.push_back((Component*)c);
-
-	return *c;
+	size_t index = SceneManagementSystem::Instance()->GetSceneGraph()->AddComponent<T>();
+	m_componentIndexMap[typeid(T)].push_back(index);
+	return *SceneManagementSystem::Instance()->GetSceneGraph()->GetComponent<T>(index);
 }
 
 template<class T>
-ComponentList& Entity::GetComponents()
+void Entity::RemoveComponent()
 {
-	static_assert(std::is_base_of<Component, T>::value, "Type passed to GetComponents must be a Component.");
-	
-	if (m_componentMap->count(typeid(c)) && m_componentMap[typeid(c)].size() > 0)
-	{
-		return &m_componentMap[typeid(c)];
-	}
-	return nullptr;
-}
-
-template<class T>
-T& Entity::GetComponent()
-{
-	static_assert(std::is_base_of<Component, T>::value, "Type passed to GetComponent must be a Component.");
-
-	std::vector<Component*> allComponents = GetComponents<T>();
-	if (allComponents != nullptr)
-	{
-		return (T)allComponents[0];
-	}
-	return nullptr;
+	//SceneManagementSystem::Instance()->GetSceneGraph()->Remo<T>(index);
 }

@@ -31,15 +31,6 @@ public:
 
 private:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
-	std::vector<Vector3> m_vertexPositions;
-	std::vector<Vector3> m_normals;
-	std::vector<Vector2> m_uvs;
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
-};
-
-struct MeshInfo
-{
-	Mesh m_mesh;
-	Matrix4x4 m_transform;
 };

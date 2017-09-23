@@ -12,8 +12,6 @@ Material::Material()
 	m_shader = nullptr;
 	m_indexBuffer = nullptr;
 	m_vertexBuffer = nullptr;
-
-	m_meshes = std::vector<MeshInfo*>();
 }
 
 Material::~Material()
@@ -44,15 +42,24 @@ bool Material::Initialize()
 }
 
 
-void Material::DeregisterMeshInfo(MeshInfo& mesh)
+void Material::DeregisterMeshInfo(size_t index)
 {
-	m_meshes.erase(std::remove(m_meshes.begin(), m_meshes.end(), &mesh), m_meshes.end());
+	size_t lastIndex = m_meshes.size() - 1;
+	m_meshes[index] = m_meshes[lastIndex];
+	m_meshes.resize(lastIndex);
 }
 
 
-void Material::RegisterMeshInfo(MeshInfo& meshInfo)
+Mesh* Material::GetMeshInfo(size_t index)
 {
-	m_meshes.push_back(&meshInfo);
+	return &m_meshes[index];
+}
+
+size_t Material::RegisterMeshInfo(Mesh& m)
+{
+	size_t size = m_meshes.size();
+	m_meshes.resize(size + 1, m);
+	return size;
 }
 
 void Material::SetShader(Shader* s)
@@ -106,12 +113,12 @@ void Material::Render(ConstantBuffer* constBuf)
 
 	std::vector<VertexData> allVerts;
 	std::vector<UINT16> allIndices;
-	for each (MeshInfo* m in m_meshes)
+	for each (Mesh m in m_meshes)
 	{
-		const std::vector<VertexData> verts = m->m_mesh.GetVertices();
+		const std::vector<VertexData> verts = m.GetVertices();
 		allVerts.insert(allVerts.end(), verts.begin(), verts.end());
 
-		const std::vector<UINT16> indices = m->m_mesh.GetIndices();
+		const std::vector<UINT16> indices = m.GetIndices();
 		allIndices.insert(allIndices.end(), indices.begin(), indices.end());
 	}
 
@@ -132,13 +139,13 @@ void Material::Render(ConstantBuffer* constBuf)
 	}
 
 	int currentIndex = 0;
-	for each (MeshInfo* m in m_meshes)
+	for each (Mesh m in m_meshes)
 	{
-		constBuf->SetWorldMatrix(m->m_transform);
+		//constBuf->SetWorldMatrix(m.m_transform);
 		constBuf->UpdateBuffers();
 
-		int numberOfVerts = m->m_mesh.GetIndices().size();
-		deviceContext->IASetPrimitiveTopology(m->m_mesh.GetTopology());
+		int numberOfVerts = m.GetIndices().size();
+		deviceContext->IASetPrimitiveTopology(m.GetTopology());
 		deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
 		currentIndex += numberOfVerts;
 	}

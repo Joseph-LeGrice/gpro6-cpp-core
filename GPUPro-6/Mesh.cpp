@@ -13,22 +13,32 @@ void Mesh::SetTopology(D3D_PRIMITIVE_TOPOLOGY t)
 
 void Mesh::SetVertices(std::vector<Vector3> verts)
 {
-	m_vertexPositions = verts;
+	m_vertexData.resize(verts.size());
+	for (size_t i = 0; i < verts.size(); ++i)
+	{
+		m_vertexData[i].vertexPosition = verts[i];
+	}
 }
 
 void Mesh::SetNormals(std::vector<Vector3> normals)
 {
-	if (m_vertexPositions.size() == normals.size())
+	if (m_vertexData.size() == normals.size())
 	{
-		m_normals = normals;
+		for (size_t i = 0; i < normals.size(); ++i)
+		{
+			m_vertexData[i].normal = normals[i];
+		}
 	}
 }
 
 void Mesh::SetUVs(std::vector<Vector2> uvs)
 {
-	if (m_vertexPositions.size() == uvs.size())
+	if (m_vertexData.size() == uvs.size())
 	{
-		m_uvs = uvs;
+		for (size_t i = 0; i < uvs.size(); ++i)
+		{
+			m_vertexData[i].uv = uvs[i];
+		}
 	}
 }
 
@@ -44,26 +54,6 @@ const D3D_PRIMITIVE_TOPOLOGY Mesh::GetTopology()
 
 const std::vector<VertexData> Mesh::GetVertices()
 {
-	m_vertexData = std::vector<VertexData>();
-	for (size_t i = 0; i < m_vertexPositions.size(); ++i)
-	{
-		VertexData vd;
-		ZeroMemory(&vd, sizeof(VertexData));
-
-		vd.vertexPosition = m_vertexPositions[i];
-
-		if (m_normals.size() == m_vertexPositions.size())
-		{
-			vd.normal = m_normals[i];
-		}
-
-		if (m_uvs.size() == m_vertexPositions.size())
-		{
-			vd.uv = m_uvs[i];
-		}
-
-		m_vertexData.push_back(vd);
-	}
 	return m_vertexData;
 }
 

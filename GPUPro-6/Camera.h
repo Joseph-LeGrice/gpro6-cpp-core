@@ -9,12 +9,12 @@ class Camera :
 	friend Entity;
 
 public:
-	const Matrix4x4 GetView();
+	Camera();
+	virtual ~Camera();
+	const Matrix4x4 GetView(Entity&);
 	const Matrix4x4 GetProjection();
 
 protected:
-	Camera();
-	virtual ~Camera();
 
 private:
 	Matrix4x4 m_projectionMatrix;

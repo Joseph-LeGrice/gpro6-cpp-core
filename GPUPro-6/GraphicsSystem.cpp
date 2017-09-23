@@ -107,7 +107,7 @@ void GraphicsSystem::Render(Camera& cam, const std::vector<Material*>* m_materia
 	m_constantBuffer->SetBuffers();
 	m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
-	m_constantBuffer->SetViewMatrix(cam.GetView());
+	//FIXME: m_constantBuffer->SetViewMatrix(cam.GetView());
 	m_constantBuffer->SetProjectionMatrix(cam.GetProjection());
 
 	for each (Material* m in *m_materials)

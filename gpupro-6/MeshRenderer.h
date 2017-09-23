@@ -7,21 +7,16 @@
 class MeshRenderer :
 	public Renderer
 {
-	friend Entity;
-
 public:
-	void SetMesh(Mesh mesh);
-
-	virtual void Tick() override;
-
-protected:
 	MeshRenderer();
+	virtual ~MeshRenderer() override;
+	
+	void SetMesh(Mesh mesh);
+protected:
 
 	virtual void OnMaterialUpdated(Material* oldMaterial, Material* newMaterial) override;
 
 private:
-	MeshInfo m_meshInfo;
-
-	virtual ~MeshRenderer() override;
+	size_t m_meshIndex;
 };
 

@@ -17,48 +17,28 @@ void Entity::Destroy(Entity& e)
 	SceneManagementSystem::Instance()->GetSceneGraph()->DeleteEntity(e);
 }
 
+IndexList Entity::GetIndicesForComponent(std::type_index ti)
+{
+	if (m_componentIndexMap.count(ti))
+	{
+		return m_componentIndexMap[ti];
+	}
+	else
+	{
+		return std::vector<size_t>();
+	}
+}
+
+Transform& Entity::GetTransform()
+{
+	return m_transform;
+}
+
 Entity::Entity()
 {
-	m_componentMap = std::unordered_map<std::type_index, std::vector<Component*>>();
-	m_scale = { 1.0f, 1.0f, 1.0f };
+
 }
 
 Entity::~Entity()
 {
-}
-
-ComponentList Entity::GetAllComponents()
-{
-	ComponentList result = ComponentList();
-	for (ComponentMap::iterator it = m_componentMap.begin(); it != m_componentMap.end(); ++it)
-	{
-		ComponentList thisList = it->second;
-		result.insert(result.end(), thisList.begin(), thisList.end());
-	}
-	return result;
-}
-
-void Entity::SetTranslation(Vector3 position)
-{
-	m_position = position;
-}
-
-void Entity::SetRotation(Quaternion rot)
-{
-	m_rotation = rot;
-}
-
-void Entity::SetScale(Vector3 scale)
-{
-	m_scale = scale;
-}
-
-const Matrix4x4 Entity::GetTransformationMatrix()
-{
-	return m_position.GetTranslationMatrix() * m_scale.GetScaleMatrix() * m_rotation.GetMatrix();
-}
-
-Matrix4x4 Entity::GetTranslation()
-{
-	return m_position.GetTranslationMatrix();
 }
