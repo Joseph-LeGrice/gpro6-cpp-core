@@ -49,11 +49,6 @@ void GameSystem::Quit()
 int GameSystem::GameLoop()
 {
 	TimeSystem* time = TimeSystem::Instance();
-	SceneManagementSystem* sceneManager = SceneManagementSystem::Instance();
-	MaterialManagementSystem* materialManager = MaterialManagementSystem::Instance();
-	GraphicsSystem* graphicsSystem = GraphicsSystem::Instance();
-
-	InputSystem::Instance()->SetHWND(s_hwnd);
 	
 	m_running = true;
 	while (m_running)
@@ -71,10 +66,6 @@ int GameSystem::GameLoop()
 			auto sys = it->second;
 			sys->VariableTick();
 		}
-
-		Camera& cam = sceneManager->GetSceneGraph()->GetCamera();
-		const std::vector<Material*>* allMats = materialManager->GetAllMaterials();
-		graphicsSystem->Render(cam, allMats);
 
 		time->AdvanceFrame();
 	}
@@ -125,6 +116,7 @@ void GameSystem::InitializeWindows(int& screenWidth, int& screenHeight)
 		NULL,
 		s_hInstance,
 		NULL);
+	InputSystem::Instance()->SetHWND(s_hwnd);
 
 	ShowWindow(s_hwnd, SW_SHOW);
 	SetForegroundWindow(s_hwnd);
