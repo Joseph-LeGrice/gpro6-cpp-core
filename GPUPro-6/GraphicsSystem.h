@@ -24,9 +24,9 @@ public:
 	ID3D11Device* GetGraphicsDevice();
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
 
-	bool InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight);
+	virtual void VariableTick() override;
 
-	void Render(Camera&, const std::vector<Material*>*);
+	bool InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight);
 	float GetViewportWidth();
 	float GetViewportHeight();
 
