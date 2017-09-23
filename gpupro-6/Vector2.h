@@ -41,6 +41,11 @@ struct Vector2
 	void operator*=(const float other) { X *= other; Y *= other; }
 	void operator/=(const float other) { X /= other; Y /= other; }
 
+	static Vector2 Zero()
+	{
+		return{ 0, 0 };
+	}
+
 	FLOAT Magnitude()
 	{
 		return sqrt(X * X + Y * Y);

@@ -5,11 +5,9 @@ InputSystem::InputSystem()
 {
 }
 
-
 InputSystem::~InputSystem()
 {
 }
-
 
 void InputSystem::SetHWND(HWND hwnd)
 {
@@ -30,7 +28,20 @@ void InputSystem::VariableTick()
 		{
 			GameSystem::Quit();
 		}
+
+		m_mouseInput.HandleInput(msg);
+		m_keyboardInput.HandleInput(msg);
 	}
+}
+
+MouseInput& InputSystem::GetMouse()
+{
+	return m_mouseInput;
+}
+
+KeyboardInput& InputSystem::GetKeyboard()
+{
+	return m_keyboardInput;
 }
 
 LRESULT CALLBACK InputSystem::WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
