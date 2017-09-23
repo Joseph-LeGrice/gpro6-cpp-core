@@ -188,6 +188,9 @@
     <ClInclude Include="KeyboardInput.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="Logging.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

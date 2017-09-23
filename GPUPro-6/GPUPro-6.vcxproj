@@ -222,6 +222,7 @@
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="KeyboardInput.h" />
+    <ClInclude Include="Logging.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialManagementSystem.h" />
     <ClInclude Include="MathHelper.h" />
