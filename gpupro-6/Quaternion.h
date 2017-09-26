@@ -67,7 +67,7 @@ struct Quaternion
 		return result;
 	}
 
-	static Quaternion Normalize(Quaternion& q)
+	static void Normalize(Quaternion& q)
 	{
 		FLOAT mag = Magnitude(q);
 		q.W /= mag;
