@@ -180,7 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameSystem.cpp" />
@@ -193,10 +192,8 @@
     <ClCompile Include="MaterialManagementSystem.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshHelper.cpp" />
-    <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="MouseInput.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SceneGraph.cpp" />
     <ClCompile Include="SceneManagementSystem.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -213,11 +210,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Component.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GraphicsSystem.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="ImagingFactory.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="ISystem.h" />
@@ -230,11 +227,9 @@
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshHelper.h" />
-    <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="MouseInput.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Quaternion.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="SceneManagementSystem.h" />
