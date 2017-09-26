@@ -18,11 +18,6 @@ struct Matrix4x4
 	float M41; float M42; float M43; float M44;
 #endif
 
-	Matrix4x4() 
-	{
-		Identity(*this);
-	}
-
 	Matrix4x4 operator+(const Matrix4x4 other)
 	{
 		Matrix4x4 result;
