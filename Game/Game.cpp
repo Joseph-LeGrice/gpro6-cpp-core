@@ -36,7 +36,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		allOK &= GameSystem::InitializeAllSystems();
 		if (allOK)
 		{
-			Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\TestImage.png");
+			Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
 			allOK &= t != nullptr;
 			if (allOK)
 			{
