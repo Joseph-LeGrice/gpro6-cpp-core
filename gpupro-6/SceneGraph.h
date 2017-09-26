@@ -5,83 +5,51 @@
 #include <typeindex>
 #include <typeinfo>
 #include <type_traits>
+#include <sstream>
 
-class Entity;
-class Camera;
-class Component;
+#include "Camera.h"
+#include "Mesh.h"
+#include "Transform.h"
 
-typedef std::vector<Entity*> EntityList;
+template<typename T>
+struct ComponentArray
+{
+	std::vector<T> m_components;
 
-typedef std::vector<Component> ComponentRefList; 
-typedef std::unordered_map<std::type_index, ComponentRefList> ComponentRefMap;
+	size_t InsertComponent(T& newComp = T())
+	{
+		static_assert(std::is_pod<T>::value, "Component must be a POD type!");
+		
+		size_t newIndex = m_components.size();
+		m_components.resize(newIndex + 1, newComp);
+		return newIndex;
+	}
+
+	void RemoveComponent(size_t index)
+	{
+	 	size_t lastIndex = m_components.size() - 1;
+		m_components[index] = m_components[lastIndex];
+		m_components.resize(lastIndex);
+	}
+
+	T* GetArrayPointer()
+	{
+		return m_components.data();
+	}
+
+	size_t GetArraySize()
+	{
+		return m_components.size();
+	}
+};
 
 class SceneGraph
 {
-	friend Entity;
-	friend Camera;
-
 public:
 	SceneGraph();
 	~SceneGraph();
 
-	Camera& GetCamera();
-
-	template<class T> size_t AddComponent();
-	//template<class T> void RemoveComponent(size_t);
-	template<class T> T* GetComponent(size_t);
-	template<class T> ComponentRefList* GetComponents();
-
-private:
-	ComponentRefMap m_componentMap;
-
-	EntityList m_rootEntities;
-	Camera* m_camera;
-
-	void RegisterCamera(Camera& cam);
-	void RegisterEntity(Entity& e); 
-	void DeleteEntity(Entity& e);
+	ComponentArray<Mesh> m_meshes;
+	ComponentArray<Camera> m_cameras;
+	ComponentArray<Transform> m_transforms;
 };
-
-
-template<class T>
-size_t SceneGraph::AddComponent()
-{
-	std::type_index ti = std::type_index(typeid(T));
-	if (!m_componentMap.count(ti))
-	{
-		m_componentMap[ti] = std::vector<Component>();
-	}
-
-	size_t index = m_componentMap[ti].size();
-	
-	T c = T();
-	m_componentMap[ti].push_back(c);
-
-	return index;
-}
-
-template<class T>
-ComponentRefList* SceneGraph::GetComponents()
-{
-	static_assert(std::is_base_of<Component, T>::value, "Type passed to GetComponents must be a Component.");
-
-	std::type_index ti = std::type_index(typeid(T));
-	if (m_componentMap.count(ti) && m_componentMap[ti].size() > 0)
-	{
-		return &m_componentMap[ti];
-	}
-	return nullptr;
-}
-
-template<class T>
-T* SceneGraph::GetComponent(size_t index)
-{
-	static_assert(std::is_base_of<Component, T>::value, "Type passed to GetComponent must be a Component.");
-
-	ComponentRefList* allComponents = GetComponents<T>();
-	if (allComponents != nullptr)
-	{
-		return (T*)&allComponents[0];
-	}
-	return nullptr;
-}
