@@ -16,10 +16,9 @@ struct ComponentArray
 {
 	std::vector<T> m_components;
 
-	size_t InsertComponent(T& newComp = T())
+	size_t InsertComponent(T& newComp = T::New())
 	{
 		static_assert(std::is_pod<T>::value, "Component must be a POD type!");
-		
 		size_t newIndex = m_components.size();
 		m_components.resize(newIndex + 1, newComp);
 		return newIndex;

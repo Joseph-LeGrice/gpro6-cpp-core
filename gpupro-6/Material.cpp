@@ -115,23 +115,20 @@ void Material::Render(ConstantBuffer* constBuf)
 	SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
 	Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
 
-	std::vector<VertexData> allVerts;
-	std::vector<UINT16> allIndices;
+	PODArray<VertexData> allVerts = PODArray<VertexData>::New();
+	PODArray<UINT16> allIndices = PODArray<UINT16>::New();
 	for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 	{
 		Mesh& m = allMeshes[it->first];
-		const std::vector<VertexData> verts = m.GetVertices();
-		allVerts.insert(allVerts.end(), verts.begin(), verts.end());
-
-		const std::vector<UINT16> indices = m.GetIndices();
-		allIndices.insert(allIndices.end(), indices.begin(), indices.end());
+		PODArray<VertexData>::Append(allVerts, m.m_vertexData);
+		PODArray<UINT16>::Append(allIndices, m.m_indices);
 	}
 
 	D3D11_MAPPED_SUBRESOURCE vertexData;
 	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
 	if (SUCCEEDED(vertexBufferAcquireResult))
 	{
-		memcpy(vertexData.pData, &allVerts[0], sizeof(VertexData) * allVerts.size());
+		memcpy(vertexData.pData, &allVerts[0], sizeof(VertexData) * PODArray<VertexData>::Size(allVerts));
 		deviceContext->Unmap(m_vertexBuffer, 0);
 	}
 
@@ -139,9 +136,12 @@ void Material::Render(ConstantBuffer* constBuf)
 	HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);
 	if (SUCCEEDED(indexBufferAcquireResult))
 	{
-		memcpy(indexBufferData.pData, &allIndices[0], sizeof(UINT16) * allIndices.size());
+		memcpy(indexBufferData.pData, PODArray<UINT16>::GetArrayPointer(allIndices), sizeof(UINT16) * PODArray<UINT16>::Size(allIndices));
 		deviceContext->Unmap(m_indexBuffer, 0);
 	}
+
+	PODArray<VertexData>::Free(allVerts);
+	PODArray<UINT16>::Free(allIndices);
 
 	Transform* allTransforms = sg->m_transforms.GetArrayPointer();
 	
@@ -155,8 +155,8 @@ void Material::Render(ConstantBuffer* constBuf)
 			constBuf->SetWorldMatrix(Transform::GetTransformationMatrix(t));
 			constBuf->UpdateBuffers();
 
-			int numberOfVerts = m.GetIndices().size();
-			deviceContext->IASetPrimitiveTopology(m.GetTopology());
+			size_t numberOfVerts = PODArray<UINT16>::Size(m.m_indices);
+			deviceContext->IASetPrimitiveTopology(m.m_topology);
 			deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
 			currentIndex += numberOfVerts;
 		}

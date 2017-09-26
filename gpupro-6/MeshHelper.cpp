@@ -6,29 +6,29 @@
 
 Mesh MeshHelper::CreateQuad()
 {
-	Mesh result;
-	result.SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	Mesh result = Mesh::New();
+	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	verts.push_back({ -1.0f, -1.0f, 0.0f });
 	verts.push_back({ -1.0f,  1.0f, 0.0f });
 	verts.push_back({  1.0f,  1.0f, 0.0f });
 	verts.push_back({  1.0f, -1.0f, 0.0f });
-	result.SetVertices(verts);
+	result.SetVertices(result, verts);
 
 	std::vector<Vector3> normals = std::vector<Vector3>();
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
-	result.SetNormals(normals);
+	result.SetNormals(result, normals);
 
 	std::vector<Vector2> uvs = std::vector<Vector2>();
 	uvs.push_back({ 0.0f, 1.0f });
 	uvs.push_back({ 0.0f, 0.0f });
 	uvs.push_back({ 1.0f, 0.0f });
 	uvs.push_back({ 1.0f, 1.0f });
-	result.SetUVs(uvs);
+	result.SetUVs(result, uvs);
 
 	std::vector<UINT16> indices = std::vector<UINT16>();
 	indices.push_back(1);
@@ -36,7 +36,7 @@ Mesh MeshHelper::CreateQuad()
 	indices.push_back(0);
 	indices.push_back(2);
 	indices.push_back(3);
-	result.SetIndices(indices);
+	result.SetIndices(result, indices);
 
 	return result;
 }
@@ -51,10 +51,10 @@ Mesh MeshHelper::CreateSphereICO()
 	std::vector<UINT16> indices = std::vector<UINT16>();
 
 
-	result.SetVertices(verts);
-	result.SetNormals(norms);
-	result.SetUVs(uvs);
-	result.SetIndices(indices);
+	result.SetVertices(result, verts);
+	result.SetNormals(result, norms);
+	result.SetUVs(result, uvs);
+	result.SetIndices(result, indices);
 
 	return result;
 }
@@ -62,7 +62,7 @@ Mesh MeshHelper::CreateSphereICO()
 Mesh MeshHelper::CreateSphereUV()
 {
 	Mesh result;
-	result.SetTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	result.m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();
@@ -115,10 +115,10 @@ Mesh MeshHelper::CreateSphereUV()
 		}
 	}
 
-	result.SetVertices(verts);
-	result.SetNormals(norms);
-	result.SetUVs(uvs);
-	result.SetIndices(indices);
+	result.SetVertices(result, verts);
+	result.SetNormals(result, norms);
+	result.SetUVs(result, uvs);
+	result.SetIndices(result, indices);
 
 	return result;
 }
@@ -126,7 +126,7 @@ Mesh MeshHelper::CreateSphereUV()
 Mesh MeshHelper::CreateCube()
 {
 	Mesh result;
-	result.SetTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();
@@ -239,9 +239,9 @@ Mesh MeshHelper::CreateCube()
 	indices.push_back(17);
 	indices.push_back(19);
 
-	result.SetVertices(verts);
-	result.SetNormals(norms);
-	result.SetUVs(uvs);
-	result.SetIndices(indices);
+	result.SetVertices(result, verts);
+	result.SetNormals(result, norms);
+	result.SetUVs(result, uvs);
+	result.SetIndices(result, indices);
 	return result;
 }
