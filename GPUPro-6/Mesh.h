@@ -6,6 +6,7 @@
 
 #include "Vector2.h"
 #include "Vector3.h"
+#include "PODArray.h"
 
 struct VertexData
 {
@@ -14,23 +15,60 @@ struct VertexData
 	Vector2 uv;
 };
 
-class Mesh
+struct Mesh
 {
-public:
-	Mesh();
-
-	void SetTopology(D3D_PRIMITIVE_TOPOLOGY t);
-	void SetVertices(std::vector<Vector3> verts);
-	void SetNormals(std::vector<Vector3> normals);
-	void SetUVs(std::vector<Vector2> uvs);
-	void SetIndices(std::vector<UINT16> indices);
-
-	const D3D_PRIMITIVE_TOPOLOGY GetTopology();
-	const std::vector<VertexData> GetVertices();
-	const std::vector<UINT16> GetIndices();
-
-private:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
-	std::vector<UINT16> m_indices;
-	std::vector<VertexData> m_vertexData;
+	PODArray<UINT16> m_indices;
+	PODArray<VertexData> m_vertexData;
+
+	static Mesh New()
+	{
+		Mesh m;
+		m.m_indices = PODArray<UINT16>::New();
+		m.m_vertexData = PODArray<VertexData>::New();
+		m.m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+		return m;
+	}
+
+	static void Mesh::Free(Mesh& m)
+	{
+		PODArray<UINT16>::Free(m.m_indices);
+		PODArray<VertexData>::Free(m.m_vertexData);
+	}
+
+	static void Mesh::SetVertices(Mesh& m, std::vector<Vector3> verts)
+	{
+		PODArray<VertexData>::Resize(m.m_vertexData, verts.size());
+		for (size_t i = 0; i < verts.size(); ++i)
+		{
+			m.m_vertexData[i].vertexPosition = verts[i];
+		}
+	}
+
+	static void Mesh::SetNormals(Mesh& m, std::vector<Vector3> normals)
+	{
+		if (PODArray<VertexData>::Size(m.m_vertexData) == normals.size())
+		{
+			for (size_t i = 0; i < normals.size(); ++i)
+			{
+				m.m_vertexData[i].normal = normals[i];
+			}
+		}
+	}
+
+	static void Mesh::SetUVs(Mesh& m, std::vector<Vector2> uvs)
+	{
+		if (PODArray<VertexData>::Size(m.m_vertexData) == uvs.size())
+		{
+			for (size_t i = 0; i < uvs.size(); ++i)
+			{
+				m.m_vertexData[i].uv = uvs[i];
+			}
+		}
+	}
+
+	static void Mesh::SetIndices(Mesh& m, std::vector<UINT16> indices)
+	{
+		PODArray<UINT16>::PopulateWithVector(m.m_indices, indices);
+	}
 };
