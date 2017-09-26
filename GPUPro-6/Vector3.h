@@ -8,18 +8,6 @@ struct Vector3
 	FLOAT Y;
 	FLOAT Z;
 
-	Vector3()
-	{
-		X = 0.0f;
-		Y = 0.0f;
-		Z = 0.0f;
-	}
-
-	Vector3(FLOAT x, FLOAT y, FLOAT z) : X(x), Y(y), Z(z)
-	{
-		
-	}
-
 	Vector3 operator+(const Vector3& other)
 	{
 		Vector3 result;
@@ -54,17 +42,32 @@ struct Vector3
 	void operator*=(const float other) { X *= other; Y *= other; Z *= other; }
 	void operator/=(const float other) { X /= other; Y /= other; Z /= other; }
 
-	FLOAT Magnitude()
+	static Vector3 New(FLOAT x, FLOAT y, FLOAT z)
 	{
-		return sqrt(X * X + Y * Y + Z * Z);
+		return { x, y, z };
 	}
 
-	void Normalize()
+	static Vector3 Zero()
 	{
-		FLOAT mag = Magnitude();
-		X /= mag;
-		Y /= mag;
-		Z /= mag;
+		return{ 0.0f, 0.0f, 0.0f };
+	}
+
+	static Vector3 One()
+	{
+		return{ 1.0f, 1.0f, 1.0f };
+	}
+	
+	static FLOAT Magnitude(Vector3& v)
+	{
+		return sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
+	}
+
+	static void Normalize(Vector3& v)
+	{
+		FLOAT mag = Magnitude(v);
+		v.X /= mag;
+		v.Y /= mag;
+		v.Z /= mag;
 	}
 
 	static FLOAT Dot(Vector3 a, Vector3 b)

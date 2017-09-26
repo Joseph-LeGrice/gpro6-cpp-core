@@ -10,44 +10,33 @@ struct Vector4
 	FLOAT Z;
 	FLOAT W;
 
-	Vector4()
+	static Vector4 FromVector3(Vector3 v3)
 	{
-		X = 0.0f;
-		Y = 0.0f;
-		Z = 0.0f;
-		W = 1.0f;
+		Vector4 v4;
+		v4.X = v3.X;
+		v4.Y = v3.Y;
+		v4.Z = v3.Z;
+		v4.W = 1.0f;
+		return v4;
 	}
 
-	Vector4(float x, float y, float z) : X(x), Y(y), Z(z)
-	{
-		W = 1.0f;
-	}
-
-	Vector4(Vector3 v3)
-	{
-		X = v3.X;
-		Y = v3.Y;
-		Z = v3.Z;
-		W = 1.0f;
-	}
-
-	Matrix4x4 GetTranslationMatrix()
+	static Matrix4x4 GetTranslationMatrix(Vector4& v)
 	{
 		Matrix4x4 translation;
-		translation.M41 = X;
-		translation.M42 = Y;
-		translation.M43 = Z;
-		translation.M44 = W;
+		translation.M41 = v.X;
+		translation.M42 = v.Y;
+		translation.M43 = v.Z;
+		translation.M44 = v.W;
 		return translation;
 	}
 
-	Matrix4x4 GetScaleMatrix()
+	static Matrix4x4 GetScaleMatrix(Vector4& v)
 	{
 		Matrix4x4 scale;
-		scale.M11 = X;
-		scale.M22 = Y;
-		scale.M33 = Z;
-		scale.M44 = W;
+		scale.M11 = v.X;
+		scale.M22 = v.Y;
+		scale.M33 = v.Z;
+		scale.M44 = v.W;
 		return scale;
 	}
 };

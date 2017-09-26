@@ -8,10 +8,12 @@ struct Quaternion
 	FLOAT W;
 	Vector3 V;
 
-	Quaternion()
+	static Quaternion Identity()
 	{
-		W = 1.0f;
-		V = {0.0, 0.0, 0.0};
+		Quaternion q;
+		q.W = 1.0f;
+		q.V = { 0.0, 0.0, 0.0 };
+		return q;
 	}
 
 	// TODO: Quaternion.LookAt
@@ -21,26 +23,26 @@ struct Quaternion
 		Quaternion q;
 		q.V = axis * sinf(angle / 2.0f);
 		q.W = cosf(angle / 2.0f);
-		q.Normalize();
+		Quaternion::Normalize(q);
 		return q;
 	}
 
-	Matrix4x4 GetMatrix()
+	static Matrix4x4 GetMatrix(Quaternion& q)
 	{
 		//Orthonormal basis
 
-		float x = V.X * 2.0F;
-		float y = V.Y * 2.0F;
-		float z = V.Z * 2.0F;
-		float xx = V.X * x;
-		float yy = V.Y * y;
-		float zz = V.Z * z;
-		float xy = V.X * y;
-		float xz = V.X * z;
-		float yz = V.Y * z;
-		float wx = W * x;
-		float wy = W * y;
-		float wz = W * z;
+		float x  = q.V.X * 2.0F;
+		float y  = q.V.Y * 2.0F;
+		float z  = q.V.Z * 2.0F;
+		float xx = q.V.X * x;
+		float yy = q.V.Y * y;
+		float zz = q.V.Z * z;
+		float xy = q.V.X * y;
+		float xz = q.V.X * z;
+		float yz = q.V.Y * z;
+		float wx = q.W * x;
+		float wy = q.W * y;
+		float wz = q.W * z;
 
 		Matrix4x4 result; 
 		result.M11 = 1.0f - (yy + zz);
@@ -65,16 +67,16 @@ struct Quaternion
 		return result;
 	}
 
-	void Normalize()
+	static Quaternion Normalize(Quaternion& q)
 	{
-		FLOAT mag = Magnitude();
-		W /= mag;
-		V /= mag;
+		FLOAT mag = Magnitude(q);
+		q.W /= mag;
+		q.V /= mag;
 	}
 
-	FLOAT Magnitude()
+	static FLOAT Magnitude(Quaternion& q)
 	{
-		return sqrt(pow(W, 2) + pow(V.X, 2) + pow(V.Y, 2) + pow(V.Z, 2));
+		return sqrt(pow(q.W, 2) + pow(q.V.X, 2) + pow(q.V.Y, 2) + pow(q.V.Z, 2));
 	}
 
 	Quaternion operator+(Quaternion other)
