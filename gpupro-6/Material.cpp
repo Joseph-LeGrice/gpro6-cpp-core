@@ -6,6 +6,10 @@
 #include "MaterialManagementSystem.h"
 #include "GraphicsSystem.h"
 #include "Shader.h"
+#include "SceneManagementSystem.h"
+#include "SceneGraph.h"
+#include "Entity.h"
+#include "Transform.h"
 
 Material::Material()
 {
@@ -42,24 +46,21 @@ bool Material::Initialize()
 }
 
 
-void Material::DeregisterMeshInfo(size_t index)
+void Material::DeregisterMeshInfo(size_t meshIndex, size_t transformIndex)
 {
-	size_t lastIndex = m_meshes.size() - 1;
-	m_meshes[index] = m_meshes[lastIndex];
-	m_meshes.resize(lastIndex);
+	size_t lastIndex = m_renderMap[meshIndex].size() - 1;
+	m_renderMap[meshIndex][transformIndex] = m_renderMap[meshIndex][lastIndex];
+	m_renderMap[meshIndex].resize(lastIndex);
 }
 
 
-Mesh* Material::GetMeshInfo(size_t index)
+void Material::RegisterMeshInfo(size_t meshIndex, size_t transformIndex)
 {
-	return &m_meshes[index];
-}
-
-size_t Material::RegisterMeshInfo(Mesh& m)
-{
-	size_t size = m_meshes.size();
-	m_meshes.resize(size + 1, m);
-	return size;
+	if (!m_renderMap.count(meshIndex))
+	{
+		m_renderMap[meshIndex] = std::vector<size_t>();
+	}
+	m_renderMap[meshIndex].push_back(transformIndex);
 }
 
 void Material::SetShader(Shader* s)
@@ -111,10 +112,14 @@ void Material::Render(ConstantBuffer* constBuf)
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
+	SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
+	Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
+
 	std::vector<VertexData> allVerts;
 	std::vector<UINT16> allIndices;
-	for each (Mesh m in m_meshes)
+	for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 	{
+		Mesh& m = allMeshes[it->first];
 		const std::vector<VertexData> verts = m.GetVertices();
 		allVerts.insert(allVerts.end(), verts.begin(), verts.end());
 
@@ -138,15 +143,22 @@ void Material::Render(ConstantBuffer* constBuf)
 		deviceContext->Unmap(m_indexBuffer, 0);
 	}
 
+	Transform* allTransforms = sg->m_transforms.GetArrayPointer();
+	
 	int currentIndex = 0;
-	for each (Mesh m in m_meshes)
+	for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 	{
-		//constBuf->SetWorldMatrix(m.m_transform);
-		constBuf->UpdateBuffers();
+		Mesh& m = allMeshes[it->first];
+		for (auto transformIt = it->second.begin(); transformIt != it->second.end(); ++transformIt)
+		{
+			Transform& t = allTransforms[*transformIt];
+			constBuf->SetWorldMatrix(Transform::GetTransformationMatrix(t));
+			constBuf->UpdateBuffers();
 
-		int numberOfVerts = m.GetIndices().size();
-		deviceContext->IASetPrimitiveTopology(m.GetTopology());
-		deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
-		currentIndex += numberOfVerts;
+			int numberOfVerts = m.GetIndices().size();
+			deviceContext->IASetPrimitiveTopology(m.GetTopology());
+			deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+			currentIndex += numberOfVerts;
+		}
 	}
 }

@@ -3,11 +3,14 @@
 #include "D3D11.h"
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 class Mesh;
 class Shader;
 class ShaderResource;
 class ConstantBuffer;
+
+typedef std::unordered_map<size_t, std::vector<size_t>> MeshTransformMap;
 
 class Material
 {
@@ -20,9 +23,8 @@ public:
 	
 	void SetShader(Shader* shader);
 	
-	void DeregisterMeshInfo(size_t);
-	Mesh* GetMeshInfo(size_t);
-	size_t RegisterMeshInfo(Mesh&);
+	void DeregisterMeshInfo(size_t meshIndex, size_t transformIndex);
+	void RegisterMeshInfo(size_t meshIndex, size_t transformIndex);
 
 private:
 	bool Initialize();
@@ -34,5 +36,5 @@ private:
 	ID3D11Buffer* m_indexBuffer;
 
 	Shader* m_shader;
-	std::vector<Mesh> m_meshes;};
-
+	MeshTransformMap m_renderMap;
+};
