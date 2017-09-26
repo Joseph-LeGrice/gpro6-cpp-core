@@ -30,6 +30,8 @@ struct Camera
 		return c;
 	}
 
+	static void Free(Camera& c) { }
+
 	static Matrix4x4 Camera::OrthoProject(float size, float depth, float aspectRatio)
 	{
 		float halfSize = 0.5f * size;

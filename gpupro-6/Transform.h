@@ -21,6 +21,8 @@ struct Transform
 		return t;
 	}
 
+	static void Free(Transform& t) { }
+
 	static Matrix4x4 GetTransformationMatrix(Transform t)
 	{
 		return Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)) *

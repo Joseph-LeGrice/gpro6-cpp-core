@@ -12,13 +12,37 @@
 #include "Transform.h"
 
 template<typename T>
+struct has_cleanup
+{
+private:
+	typedef char YES;
+	typedef int NO;
+
+	template<typename C> static YES HasCleanup(decltype(&C::Free));
+	template<typename C> static NO HasCleanup(...);
+public:
+	enum { value = sizeof(HasCleanup<T>(0)) == sizeof(char) };
+};
+
+template<typename T>
 struct ComponentArray
 {
 	std::vector<T> m_components;
 
+	~ComponentArray()
+	{
+		for (auto it = m_components.begin(); it != m_components.end(); ++it)
+		{
+			it->Free(*it);
+		}
+	}
+
 	size_t InsertComponent(T& newComp = T::New())
 	{
 		static_assert(std::is_pod<T>::value, "Component must be a POD type!");
+		static_assert(has_cleanup<T>::value, "Components must provide a 'Free()' method!");
+		// TODO: Properly define a contract for components using SFINAE!
+
 		size_t newIndex = m_components.size();
 		m_components.resize(newIndex + 1, newComp);
 		return newIndex;
