@@ -1,28 +1,73 @@
 #pragma once
 
+#include "GraphicsSystem.h"
 #include "Matrix4x4.h"
-#include "Component.h"
 
-class Camera : 
-	public Component
+struct Camera
 {
-	friend Entity;
-
-public:
-	Camera();
-	virtual ~Camera();
-	const Matrix4x4 GetView(Entity&);
-	const Matrix4x4 GetProjection();
-
-protected:
-
-private:
 	Matrix4x4 m_projectionMatrix;
 
-	Matrix4x4 OrthoProject(float size, float depth, float aspectRatio);
-	Matrix4x4 PerspProject(float fieldOfView, float aspectRatio, float screenNear, float screenDepth);
+	static Camera New(bool isOrtho = false)
+	{
+		float viewportWidth = GraphicsSystem::Instance()->GetViewportWidth();
+		float viewportHeight = GraphicsSystem::Instance()->GetViewportHeight();
+		float aspectRatio = viewportWidth / viewportHeight; 
+		
+		Camera c;
+		if (isOrtho)
+		{
+			c.m_projectionMatrix = OrthoProject(0.1f, 50.0f, aspectRatio);
+		}
+		else
+		{
+			float screenNear = 0.1f;
+			float screenDepth = 100.0f;
+			float fieldOfView = (float)D3DX_PI / 2.0f;
 
-	virtual void Init() override;
+			c.m_projectionMatrix = PerspProject(fieldOfView, aspectRatio, screenNear, screenDepth);
+		}
 
+		return c;
+	}
+
+	static Matrix4x4 Camera::OrthoProject(float size, float depth, float aspectRatio)
+	{
+		float halfSize = 0.5f * size;
+
+		Matrix4x4 result;
+		Matrix4x4::Identity(result);
+
+		result.M11 = 2 / size;
+		result.M22 = aspectRatio * 2 / size;
+		result.M33 = 2 / (2 * depth);
+
+		// For lower-left Camera Anchor:
+		//result.M41 = -1;
+		//result.M42 = -1;
+
+		return result;
+	}
+
+	static Matrix4x4 Camera::PerspProject(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
+	{
+		Matrix4x4 result;
+		Matrix4x4::Identity(result);
+
+		float t = tan(fieldOfViewRadians / 2) * screenNear;
+		float b = -t;
+		float r = t * aspectRatio;
+		float l = -t * aspectRatio;
+
+		result.M11 = (2 * screenNear) / (r - l);
+		result.M22 = (2 * screenNear) / (t - b);
+		result.M31 = -(l + r) / (r - l);
+		result.M32 = -(b + t) / (t - b);
+		result.M33 = (screenFar + screenNear) / (screenFar - screenNear);
+		result.M34 = 1;
+		result.M43 = -(2 * screenFar * screenNear) / (screenFar - screenNear);
+		result.M44 = 0;
+
+		return result;
+	}
 };
 

@@ -130,7 +130,7 @@ void GraphicsSystem::VariableTick()
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
 		//FIXME: m_constantBuffer->SetViewMatrix(cam.GetView());
-		m_constantBuffer->SetProjectionMatrix(cam.GetProjection());
+		m_constantBuffer->SetProjectionMatrix(cam.m_projectionMatrix);
 
 		for each (Material* m in *allMats)
 		{

@@ -21,9 +21,6 @@
     <ClCompile Include="GameSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
