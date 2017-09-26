@@ -46,16 +46,16 @@ struct Vector2
 		return{ 0, 0 };
 	}
 
-	FLOAT Magnitude()
+	static FLOAT Magnitude(Vector2& v)
 	{
-		return sqrt(X * X + Y * Y);
+		return sqrt(v.X * v.X + v.Y * v.Y);
 	}
 
-	void Normalize()
+	static void Normalize(Vector2& v)
 	{
-		FLOAT mag = Magnitude();
-		X /= mag;
-		Y /= mag;
+		FLOAT mag = Magnitude(v);
+		v.X /= mag;
+		v.Y /= mag;
 	}
 
 	static FLOAT Dot(Vector2 a, Vector2 b)
