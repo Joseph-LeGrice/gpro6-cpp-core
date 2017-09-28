@@ -36,9 +36,6 @@
     <ClCompile Include="PerlinNoise.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Texture2D_ShaderResource.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -171,6 +168,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="PODArray.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexData.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
