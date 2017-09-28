@@ -23,6 +23,7 @@ struct Vector4
 	static Matrix4x4 GetTranslationMatrix(Vector4& v)
 	{
 		Matrix4x4 translation;
+		Matrix4x4::Identity(translation);
 		translation.M41 = v.X;
 		translation.M42 = v.Y;
 		translation.M43 = v.Z;
@@ -33,6 +34,7 @@ struct Vector4
 	static Matrix4x4 GetScaleMatrix(Vector4& v)
 	{
 		Matrix4x4 scale;
+		Matrix4x4::Identity(scale);
 		scale.M11 = v.X;
 		scale.M22 = v.Y;
 		scale.M33 = v.Z;

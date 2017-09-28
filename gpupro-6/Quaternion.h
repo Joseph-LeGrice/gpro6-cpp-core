@@ -44,7 +44,9 @@ struct Quaternion
 		float wy = q.W * y;
 		float wz = q.W * z;
 
-		Matrix4x4 result; 
+		Matrix4x4 result;
+		Matrix4x4::Identity(result);
+
 		result.M11 = 1.0f - (yy + zz);
 		result.M12 = xy + wz;
 		result.M13 = xz - wy;
