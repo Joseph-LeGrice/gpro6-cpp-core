@@ -73,6 +73,9 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 
 	if (SUCCEEDED(createDeviceResult))
 	{
+		m_viewportWidth = (FLOAT)screenWidth;
+		m_viewportHeight = (FLOAT)screenHeight;
+
 		// Initialize Render Targets
 		ID3D11Texture2D* pBackBuffer;
 		m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
@@ -88,8 +91,8 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 			ZeroMemory(&viewportDesc, sizeof(D3D11_VIEWPORT));
 			viewportDesc.TopLeftX = 0;
 			viewportDesc.TopLeftY = 0;
-			viewportDesc.Width = (FLOAT)screenWidth;
-			viewportDesc.Height = (FLOAT)screenHeight;
+			viewportDesc.Width = m_viewportWidth;
+			viewportDesc.Height = m_viewportHeight;
 			viewportDesc.MinDepth = 0.0f;
 			viewportDesc.MaxDepth = 1.0f;
 
