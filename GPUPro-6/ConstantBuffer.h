@@ -20,9 +20,9 @@ public:
 	bool Initialize(ID3D11Device* device);
 	void SetBuffers();
 	void UpdateBuffers();
-	void SetProjectionMatrix(Matrix4x4 vp);
-	void SetViewMatrix(Matrix4x4 vp);
-	void SetWorldMatrix(Matrix4x4 w);
+	void SetProjectionMatrix(const Matrix4x4& vp);
+	void SetViewMatrix(const Matrix4x4& vp);
+	void SetWorldMatrix(const Matrix4x4& w);
 
 private:
 	Matrix4x4 m_vMatrix;

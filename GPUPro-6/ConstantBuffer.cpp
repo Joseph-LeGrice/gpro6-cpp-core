@@ -37,17 +37,17 @@ bool ConstantBuffer::Initialize(ID3D11Device* device)
 	return SUCCEEDED(device->CreateBuffer(&desc, &data, &m_buffer));
 }
 
-void ConstantBuffer::SetViewMatrix(Matrix4x4 v)
+void ConstantBuffer::SetViewMatrix(const Matrix4x4& v)
 {
 	m_vMatrix = v;
 }
 
-void ConstantBuffer::SetProjectionMatrix(Matrix4x4 p)
+void ConstantBuffer::SetProjectionMatrix(const Matrix4x4& p)
 {
 	m_pMatrix = p;
 }
 
-void ConstantBuffer::SetWorldMatrix(Matrix4x4 w)
+void ConstantBuffer::SetWorldMatrix(const Matrix4x4& w)
 {
 	m_wMatrix = w;
 }
