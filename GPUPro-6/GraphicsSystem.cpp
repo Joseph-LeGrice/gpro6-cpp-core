@@ -117,9 +117,12 @@ float GraphicsSystem::GetViewportHeight()
 
 void GraphicsSystem::VariableTick()
 {
-	ComponentArray<Camera> rc = SceneManagementSystem::Instance()->GetSceneGraph()->m_cameras;
-	Camera* allCameras = rc.GetArrayPointer();
-	size_t allCamerasSize = rc.GetArraySize();
+	ComponentArray<Transform>& tca = SceneManagementSystem::Instance()->GetSceneGraph()->m_transforms;
+	Transform* allTransforms = tca.GetArrayPointer();
+
+	ComponentArray<Camera>& cca = SceneManagementSystem::Instance()->GetSceneGraph()->m_cameras;
+	Camera* allCameras = cca.GetArrayPointer();
+	size_t allCamerasSize = cca.GetArraySize();
 
 	const std::vector<Material*>* allMats = MaterialManagementSystem::Instance()->GetAllMaterials();
 
@@ -129,7 +132,8 @@ void GraphicsSystem::VariableTick()
 		m_constantBuffer->SetBuffers();
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
-		//FIXME: m_constantBuffer->SetViewMatrix(cam.GetView());
+		Transform& t = allTransforms[cam.m_transformIndex];
+		m_constantBuffer->SetViewMatrix(Transform::GetViewMatrix(t));
 		m_constantBuffer->SetProjectionMatrix(cam.m_projectionMatrix);
 
 		for each (Material* m in *allMats)

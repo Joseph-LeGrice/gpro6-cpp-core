@@ -5,6 +5,7 @@
 
 struct Camera
 {
+	size_t m_transformIndex; //TODO: Turn into Entity index and have this set automatically when you call AddComponent on an entity!
 	Matrix4x4 m_projectionMatrix;
 
 	static Camera New(bool isOrtho = false)
