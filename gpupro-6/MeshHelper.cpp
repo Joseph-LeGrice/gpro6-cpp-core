@@ -97,13 +97,13 @@ Mesh MeshHelper::CreateSphereUV()
 	{
 		for (size_t lonSlice = 0; lonSlice < longitude - 1; ++lonSlice)
 		{
-			int offset = latSlice * latitude;
-			int v1 = lonSlice + offset;
-			int v2 = lonSlice + 1 + offset;
+			UINT16 offset = (UINT16)(latSlice * latitude);
+			UINT16 v1 = (UINT16)(lonSlice + offset);
+			UINT16 v2 = (UINT16)(lonSlice + 1 + offset);
 
-			int nextOffset = (latSlice + 1) * latitude;
-			int v3 = lonSlice + nextOffset;
-			int v4 = lonSlice + 1 + nextOffset;
+			UINT16 nextOffset = (UINT16)((latSlice + 1) * latitude);
+			UINT16 v3 = (UINT16)(lonSlice + nextOffset);
+			UINT16 v4 = (UINT16)(lonSlice + 1 + nextOffset);
 
 			indices.push_back(v1);
 			indices.push_back(v2);

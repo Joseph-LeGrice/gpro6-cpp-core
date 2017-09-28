@@ -76,11 +76,11 @@ void Shader::SetCurrent()
 			ID3D11ShaderResourceView* resource = sr->GetResourceView();
 			allResources.push_back(resource);
 		}
-		deviceContext->VSSetShaderResources(0, allResources.size(), &allResources[0]);
+		deviceContext->VSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
 		//deviceContext->HSSetShaderResources(0, allResources.size(), &allResources[0]);
 		//deviceContext->DSSetShaderResources(0, allResources.size(), &allResources[0]);
 		//deviceContext->GSSetShaderResources(0, allResources.size(), &allResources[0]);
-		deviceContext->PSSetShaderResources(0, allResources.size(), &allResources[0]);
+		deviceContext->PSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
 	}
 
 	if (m_textureSamplers->size() > 0)
@@ -91,11 +91,11 @@ void Shader::SetCurrent()
 			ID3D11SamplerState* sampler = ts->GetSampler();
 			allSamplers.push_back(sampler);
 		}
-		deviceContext->VSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+		deviceContext->VSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
 		//deviceContext->HSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
 		//deviceContext->DSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
 		//deviceContext->GSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
-		deviceContext->PSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+		deviceContext->PSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
 	}
 }
 

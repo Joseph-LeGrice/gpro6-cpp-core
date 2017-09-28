@@ -14,7 +14,7 @@
 class SceneGraph;
 class Material;
 class ConstantBuffer;
-class Camera;
+struct Camera;
 
 class GraphicsSystem : public ISystem
 {

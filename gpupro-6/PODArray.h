@@ -67,7 +67,7 @@ struct PODArray
 		return poda.m_arraySize;
 	}
 
-	T& operator[](int index)
+	T& operator[](size_t index)
 	{
 		if (index >= 0 && index < m_arraySize)
 		{
