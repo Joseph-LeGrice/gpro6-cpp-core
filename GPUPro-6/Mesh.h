@@ -1,19 +1,8 @@
 #pragma once
 
-#include <vector>
-#include "D3D11.h"
 #include "Matrix4x4.h"
-
-#include "Vector2.h"
-#include "Vector3.h"
+#include "VertexData.h"
 #include "PODArray.h"
-
-struct VertexData
-{
-	Vector3 vertexPosition;
-	Vector3 normal;
-	Vector2 uv;
-};
 
 struct Mesh
 {
