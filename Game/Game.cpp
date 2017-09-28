@@ -76,7 +76,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 							cameraTransform.m_position = Vector3::New(0.0f, 0.0f, -10.0f);
 							size_t cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
 
-							Camera camera = Camera();
+							Camera camera = Camera::New();
 							camera.m_transformIndex = cameraTransformIndex;
 							size_t cameraIndex = sg.m_cameras.InsertComponent(camera);
 						}
