@@ -71,14 +71,14 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 		NULL,
 		&m_deviceContext);
 
-	if (createDeviceResult == S_OK)
+	if (SUCCEEDED(createDeviceResult))
 	{
 		// Initialize Render Targets
 		ID3D11Texture2D* pBackBuffer;
 		m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
 		HRESULT createdRenderTarget = m_device->CreateRenderTargetView(pBackBuffer, NULL, &m_rtBackBuffer);
 
-		if (createdRenderTarget == S_OK)
+		if (SUCCEEDED(createdRenderTarget))
 		{
 			pBackBuffer->Release();
 			m_deviceContext->OMSetRenderTargets(1, &m_rtBackBuffer, NULL);

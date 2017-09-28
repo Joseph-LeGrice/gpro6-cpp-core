@@ -131,10 +131,10 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Dev
 		SAFE_RELEASE(vertexShaderErrorBlob);
 	}
 
-	if (vertexShaderCompileResult == S_OK)
+	if (SUCCEEDED(vertexShaderCompileResult))
 	{
-		bool createdVertexShader = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_vertexShader) == S_OK;
-		if (createdVertexShader)
+		HRESULT createdVertexShader  = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_vertexShader);
+		if (SUCCEEDED(createdVertexShader))
 		{
 			D3D11_INPUT_ELEMENT_DESC ied[] =
 			{
@@ -142,11 +142,11 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Dev
 				{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 				{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 			};
-			bool attachedInputLayout = device->CreateInputLayout(ied, 3, vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &m_inputLayout) == S_OK;
+			HRESULT attachedInputLayout = device->CreateInputLayout(ied, 3, vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &m_inputLayout);
 
 			SAFE_RELEASE(vertexShaderBlob);
 
-			return attachedInputLayout;
+			return SUCCEEDED(attachedInputLayout);
 		}
 	}
 
@@ -165,12 +165,12 @@ bool Shader::InitHullShader(std::wstring filename, std::string name, ID3D11Devic
 		SAFE_RELEASE(hullShaderErrorBlob);
 	}
 
-	if (hullShaderCompileResult == S_OK)
+	if (SUCCEEDED(hullShaderCompileResult))
 	{
-		bool createdHullShader = device->CreateHullShader(hullShaderBlob->GetBufferPointer(), hullShaderBlob->GetBufferSize(), NULL, &m_hullShader) == S_OK;
+		HRESULT createdHullShader = device->CreateHullShader(hullShaderBlob->GetBufferPointer(), hullShaderBlob->GetBufferSize(), NULL, &m_hullShader);
 		SAFE_RELEASE(hullShaderBlob);
 
-		return createdHullShader;
+		return SUCCEEDED(createdHullShader);
 	}
 	else
 	{
@@ -190,12 +190,12 @@ bool Shader::InitDomainShader(std::wstring filename, std::string name, ID3D11Dev
 		SAFE_RELEASE(domainShaderErrorBlob);
 	}
 
-	if (domainShaderCompileResult == S_OK)
+	if (SUCCEEDED(domainShaderCompileResult))
 	{
-		bool createdDomainShader = device->CreateDomainShader(domainShaderBlob->GetBufferPointer(), domainShaderBlob->GetBufferSize(), 0, &m_domainShader) == S_OK;
+		HRESULT createdDomainShader = device->CreateDomainShader(domainShaderBlob->GetBufferPointer(), domainShaderBlob->GetBufferSize(), 0, &m_domainShader);
 		SAFE_RELEASE(domainShaderBlob);
 
-		return createdDomainShader;
+		return SUCCEEDED(createdDomainShader);
 	}
 	else
 	{
@@ -215,12 +215,12 @@ bool Shader::InitGeometryShader(std::wstring filename, std::string name, ID3D11D
 		SAFE_RELEASE(geomShaderErrorBlob);
 	}
 
-	if (geomShaderCompileResult == S_OK)
+	if (SUCCEEDED(geomShaderCompileResult))
 	{
-		bool createdGeometryShader = device->CreateGeometryShader(geomShaderBlob->GetBufferPointer(), geomShaderBlob->GetBufferSize(), NULL, &m_geometryShader) == S_OK;
+		HRESULT createdGeometryShader = device->CreateGeometryShader(geomShaderBlob->GetBufferPointer(), geomShaderBlob->GetBufferSize(), NULL, &m_geometryShader);
 		SAFE_RELEASE(geomShaderBlob);
 
-		return createdGeometryShader;
+		return SUCCEEDED(createdGeometryShader);
 	}
 	else
 	{
@@ -240,12 +240,12 @@ bool Shader::InitPixelShader(std::wstring filename, std::string name, ID3D11Devi
 		SAFE_RELEASE(pixelShaderErrorBlob);
 	}
 
-	if (pixelShaderCompileResult == S_OK)
+	if (SUCCEEDED(pixelShaderCompileResult))
 	{
-		bool createdPixelShader = device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), NULL, &m_pixelShader) == S_OK;
+		HRESULT createdPixelShader = device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), NULL, &m_pixelShader);
 		SAFE_RELEASE(pixelShaderBlob);
 
-		return createdPixelShader;
+		return SUCCEEDED(createdPixelShader);
 	}
 	else
 	{

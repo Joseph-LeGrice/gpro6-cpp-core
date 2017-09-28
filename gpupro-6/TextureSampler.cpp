@@ -31,7 +31,7 @@ bool TextureSampler::Initialize()
 
 	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 	HRESULT createSamplerResult = device->CreateSamplerState(&desc, &m_sampler);
-	return createSamplerResult == S_OK;
+	return SUCCEEDED(createSamplerResult);
 }
 
 ID3D11SamplerState* TextureSampler::GetSampler()

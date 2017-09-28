@@ -10,7 +10,7 @@ struct Vector4
 	FLOAT Z;
 	FLOAT W;
 
-	static Vector4 FromVector3(Vector3 v3)
+	static Vector4 FromVector3(Vector3& v3)
 	{
 		Vector4 v4;
 		v4.X = v3.X;

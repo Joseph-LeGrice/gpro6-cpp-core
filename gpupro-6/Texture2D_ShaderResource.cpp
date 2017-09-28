@@ -47,10 +47,10 @@ Texture2D_ShaderResource* Texture2D_ShaderResource::CreateFromFile(std::wstring 
 		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 		bool createdEverything = false;
 		HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &newTexture2D->m_pTexture);
-		if (createTextureResult == S_OK)
+		if (SUCCEEDED(createTextureResult))
 		{
 			HRESULT createResourceViewResult = device->CreateShaderResourceView(newTexture2D->m_pTexture, NULL, &newTexture2D->m_resourceView);
-			if (createResourceViewResult == S_OK)
+			if (SUCCEEDED(createResourceViewResult))
 			{
 				createdEverything = true;
 			}
@@ -145,10 +145,10 @@ Texture2D_ShaderResource Texture2D_ShaderResource::CreateFromData(COLOR_DATA[] d
 
 	bool createdEverything = false;
 	HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &m_pTexture);
-	if (createTextureResult == S_OK)
+	if (SUCCEEDED(createTextureResult))
 	{
 		HRESULT createResourceViewResult = device->CreateShaderResourceView(m_pTexture, NULL, &m_resourceView);
-		if (createResourceViewResult == S_OK)
+		if (SUCCEEDED(createResourceViewResult))
 		{
 			createdEverything = true;
 		}

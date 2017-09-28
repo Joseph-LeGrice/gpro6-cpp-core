@@ -41,7 +41,7 @@ bool ConstantBuffer::Initialize(ID3D11Device* device)
 	ZeroMemory(&data, sizeof(data));
 	data.pSysMem = &initialData;
 
-	return device->CreateBuffer(&desc, &data, &m_buffer) == S_OK;
+	return SUCCEEDED(device->CreateBuffer(&desc, &data, &m_buffer));
 }
 
 void ConstantBuffer::SetViewMatrix(Matrix4x4 v)
@@ -75,7 +75,7 @@ void ConstantBuffer::UpdateBuffers()
 
 	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 	HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
-	if (bufferMapResult == S_OK)
+	if (SUCCEEDED(bufferMapResult))
 	{
 		VS_CONSTANT_BUFFER data = GetBufferData();
 		memcpy(mappedData.pData, &data, sizeof(VS_CONSTANT_BUFFER));

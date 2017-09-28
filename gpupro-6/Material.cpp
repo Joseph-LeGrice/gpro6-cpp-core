@@ -84,8 +84,7 @@ bool Material::InitializeBuffers()
 	indexBufferDesc.MiscFlags = 0;
 
 	HRESULT indexBufferCreationResult = device->CreateBuffer(&indexBufferDesc, NULL, &m_indexBuffer);
-	bool indexBufferCreated = indexBufferCreationResult == S_OK;
-
+	
 	D3D11_BUFFER_DESC vertexBufferDesc;
 	ZeroMemory(&vertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
 	vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
@@ -95,9 +94,8 @@ bool Material::InitializeBuffers()
 	vertexBufferDesc.MiscFlags = 0;
 
 	HRESULT vertexBufferCreation = device->CreateBuffer(&vertexBufferDesc, NULL, &m_vertexBuffer);
-	bool vertexBufferCreated = vertexBufferCreation == S_OK;
 
-	return indexBufferCreated && vertexBufferCreated;
+	return SUCCEEDED(indexBufferCreationResult) && SUCCEEDED(vertexBufferCreation);
 }
 
 

@@ -23,10 +23,15 @@ struct Transform
 
 	static void Free(Transform& t) { }
 
-	static Matrix4x4 GetTransformationMatrix(Transform t)
+	static Matrix4x4 GetTransformationMatrix(Transform& t)
 	{
 		return Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)) *
 			Vector4::GetScaleMatrix(Vector4::FromVector3(t.m_scale)) *
 			Quaternion::GetMatrix(t.m_rotation);
+	}
+
+	static Matrix4x4 GetViewMatrix(Transform& t)
+	{
+		return Matrix4x4::Inverse(Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)));
 	}
 };
