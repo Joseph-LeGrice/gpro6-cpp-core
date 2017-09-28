@@ -128,7 +128,7 @@ void Material::Render(ConstantBuffer* constBuf)
 	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
 	if (SUCCEEDED(vertexBufferAcquireResult))
 	{
-		memcpy(vertexData.pData, &allVerts[0], sizeof(VertexData) * PODArray<VertexData>::Size(allVerts));
+		memcpy(vertexData.pData, PODArray<VertexData>::GetArrayPointer(allVerts), sizeof(VertexData) * PODArray<VertexData>::Size(allVerts));
 		deviceContext->Unmap(m_vertexBuffer, 0);
 	}
 

@@ -41,7 +41,8 @@ struct Mesh
 		PODArray<VertexData>::Resize(m.m_vertexData, verts.size());
 		for (size_t i = 0; i < verts.size(); ++i)
 		{
-			m.m_vertexData[i].vertexPosition = verts[i];
+			void* dst = &m.m_vertexData[i].vertexPosition;
+			memcpy(dst, &verts.at(i), sizeof(Vector3));
 		}
 	}
 
@@ -51,7 +52,8 @@ struct Mesh
 		{
 			for (size_t i = 0; i < normals.size(); ++i)
 			{
-				m.m_vertexData[i].normal = normals[i];
+				void* dst = &m.m_vertexData[i].normal;
+				memcpy(dst, &normals.at(i), sizeof(Vector3));
 			}
 		}
 	}
@@ -62,7 +64,8 @@ struct Mesh
 		{
 			for (size_t i = 0; i < uvs.size(); ++i)
 			{
-				m.m_vertexData[i].uv = uvs[i];
+				void* dst = &m.m_vertexData[i].uv;
+				memcpy(dst, &uvs.at(i), sizeof(Vector2));
 			}
 		}
 	}

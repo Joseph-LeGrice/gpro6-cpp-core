@@ -15,7 +15,7 @@ Mesh MeshHelper::CreateQuad()
 	verts.push_back({  1.0f,  1.0f, 0.0f });
 	verts.push_back({  1.0f, -1.0f, 0.0f });
 	result.SetVertices(result, verts);
-
+		
 	std::vector<Vector3> normals = std::vector<Vector3>();
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
@@ -43,7 +43,7 @@ Mesh MeshHelper::CreateQuad()
 
 Mesh MeshHelper::CreateSphereICO()
 {
-	Mesh result;
+	Mesh result = Mesh::New();
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();
@@ -125,7 +125,7 @@ Mesh MeshHelper::CreateSphereUV()
 
 Mesh MeshHelper::CreateCube()
 {
-	Mesh result;
+	Mesh result = Mesh::New();
 	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
