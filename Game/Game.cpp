@@ -7,18 +7,17 @@
 
 #include "Transform.h"
 #include "Shader.h"
-#include "SceneGraph.h"
 #include "Entity.h"
+#include "SceneGraph.h"
 #include "SceneManagementSystem.h"
-#include "Material.h"
 #include "Mesh.h"
+#include "Material.h"
 #include "Texture2D_ShaderResource.h"
 #include "TextureSampler.h"
 #include "ImagingFactory.h"
 #include "Camera.h"
 #include "Quaternion.h"
 #include "MeshHelper.h"
-#include "MathHelper.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
