@@ -17,7 +17,7 @@ struct Camera
 		Camera c;
 		if (isOrtho)
 		{
-			c.m_projectionMatrix = OrthoProject(0.1f, 50.0f, aspectRatio);
+			c.m_projectionMatrix = Camera::OrthoProject(0.1f, 50.0f, aspectRatio);
 		}
 		else
 		{
@@ -25,7 +25,7 @@ struct Camera
 			float screenDepth = 100.0f;
 			float fieldOfView = (float)D3DX_PI / 2.0f;
 
-			c.m_projectionMatrix = PerspProject(fieldOfView, aspectRatio, screenNear, screenDepth);
+			c.m_projectionMatrix = Camera::PerspProject(fieldOfView, aspectRatio, screenNear, screenDepth);
 		}
 
 		return c;
