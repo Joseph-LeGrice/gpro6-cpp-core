@@ -11,6 +11,7 @@ struct PODArray
 		static_assert(std::is_pod<T>::value, "T Must be POD Type in PODArray<T>");
 
 		PODArray<T> poda;
+		poda.m_capacity = 0;
 		poda.m_arraySize = 0;
 		poda.m_arrayPointer = nullptr;
 
@@ -66,9 +67,9 @@ struct PODArray
 		return poda.m_arraySize;
 	}
 
-	T operator[](int index)
+	T& operator[](int index)
 	{
-		if (index < m_arraySize)
+		if (index >= 0 && index < m_arraySize)
 		{
 			return m_arrayPointer[index];
 		}
