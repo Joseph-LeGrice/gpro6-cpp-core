@@ -133,10 +133,8 @@ HRESULT ImagingFactory::Initialize()
 		if (FAILED(hr))
 		{
 			SAFE_DELETE(s_instance);
+			return E_FAIL;
 		}
 	}
-	else
-	{
-		return S_OK;
-	}
+	return S_OK;
 }

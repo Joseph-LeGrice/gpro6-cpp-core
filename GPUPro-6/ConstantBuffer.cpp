@@ -2,13 +2,6 @@
 #include "ConstantBuffer.h"
 #include "GraphicsSystem.h"
 
-struct VS_CONSTANT_BUFFER
-{
-	Matrix4x4 MVP;
-	Matrix4x4 WorldMatrix;
-	Matrix4x4 ViewProjectionMatrix;
-};
-
 ConstantBuffer::ConstantBuffer()
 {
 	Matrix4x4::Identity(m_wMatrix);

@@ -3,7 +3,13 @@
 #include "D3DX10.h"
 #include "Matrix4x4.h"
 
-typedef struct VS_CONSTANT_BUFFER;
+
+struct VS_CONSTANT_BUFFER
+{
+	Matrix4x4 MVP;
+	Matrix4x4 WorldMatrix;
+	Matrix4x4 ViewProjectionMatrix;
+};
 
 class ConstantBuffer
 {

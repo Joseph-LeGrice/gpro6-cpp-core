@@ -5,7 +5,7 @@
 #include <vector>
 #include <unordered_map>
 
-class Mesh;
+struct Mesh;
 class Shader;
 class ShaderResource;
 class ConstantBuffer;

@@ -88,8 +88,8 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 			ZeroMemory(&viewportDesc, sizeof(D3D11_VIEWPORT));
 			viewportDesc.TopLeftX = 0;
 			viewportDesc.TopLeftY = 0;
-			viewportDesc.Width = screenWidth;
-			viewportDesc.Height = screenHeight;
+			viewportDesc.Width = (FLOAT)screenWidth;
+			viewportDesc.Height = (FLOAT)screenHeight;
 			viewportDesc.MinDepth = 0.0f;
 			viewportDesc.MaxDepth = 1.0f;
 

@@ -75,7 +75,7 @@ int GameSystem::GameLoop()
 
 void GameSystem::InitializeWindows(int& screenWidth, int& screenHeight)
 {
-	DEVMODE dmScreenSettings;
+	//DEVMODE dmScreenSettings;
 	int posX, posY;
 
 	s_hInstance = GetModuleHandle(NULL);

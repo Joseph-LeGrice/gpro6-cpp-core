@@ -5,8 +5,8 @@
 
 struct MouseButtonTranslate
 {
-	UINT8 buttonDownCode;
-	UINT8 buttonUpCode;
+	UINT16 buttonDownCode;
+	UINT16 buttonUpCode;
 };
 
 const size_t c_numberOfButtons = 3;
@@ -37,7 +37,7 @@ bool MouseInput::GetMouseButton(int buttonIndex)
 	if (buttonIndex < c_numberOfButtons)
 	{
 		UINT8 flag = 1 << buttonIndex;
-		return m_thisMouseButtonState & flag == buttonIndex;
+		return (m_thisMouseButtonState & flag) == buttonIndex;
 	}
 	else
 	{
@@ -51,8 +51,8 @@ bool MouseInput::GetMouseButtonDownThisFrame(int buttonIndex)
 	if (buttonIndex < c_numberOfButtons)
 	{
 		UINT8 flag = 1 << buttonIndex;
-		return m_thisMouseButtonState & flag == flag &&
-			m_lastMouseButtonState & flag == 0;
+		return (m_thisMouseButtonState & flag) == flag &&
+			(m_lastMouseButtonState & flag) == 0;
 	}
 	else
 	{
@@ -66,8 +66,8 @@ bool MouseInput::GetMouseButtonUpThisFrame(int buttonIndex)
 	if (buttonIndex < c_numberOfButtons)
 	{
 		UINT8 flag = 1 << buttonIndex;
-		return m_thisMouseButtonState & flag == 0 &&
-			m_lastMouseButtonState & flag == flag;
+		return (m_thisMouseButtonState & flag) == 0 &&
+			(m_lastMouseButtonState & flag) == flag;
 	}
 	else
 	{
@@ -102,8 +102,8 @@ void MouseInput::HandleInput(MSG m)
 	if (m.message == WM_MOUSEMOVE)
 	{
 		Vector2 thisPosition = {
-			GET_X_LPARAM(m.lParam),
-			GET_Y_LPARAM(m.lParam)
+			(float)GET_X_LPARAM(m.lParam),
+			(float)GET_Y_LPARAM(m.lParam)
 		};
 		m_deltaMousePosition = thisPosition - m_mousePosition;
 		m_mousePosition = thisPosition;
