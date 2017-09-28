@@ -115,6 +115,7 @@ void Material::Render(ConstantBuffer* constBuf)
 
 	PODArray<VertexData> allVerts = PODArray<VertexData>::New();
 	PODArray<UINT16> allIndices = PODArray<UINT16>::New();
+
 	for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 	{
 		Mesh& m = allMeshes[it->first];
@@ -126,7 +127,7 @@ void Material::Render(ConstantBuffer* constBuf)
 	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
 	if (SUCCEEDED(vertexBufferAcquireResult))
 	{
-		memcpy(vertexData.pData, PODArray<VertexData>::GetArrayPointer(allVerts), sizeof(VertexData) * PODArray<VertexData>::Size(allVerts));
+		memcpy(vertexData.pData, &allVerts[0], sizeof(VertexData) * PODArray<VertexData>::Size(allVerts));
 		deviceContext->Unmap(m_vertexBuffer, 0);
 	}
 
@@ -134,7 +135,7 @@ void Material::Render(ConstantBuffer* constBuf)
 	HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);
 	if (SUCCEEDED(indexBufferAcquireResult))
 	{
-		memcpy(indexBufferData.pData, PODArray<UINT16>::GetArrayPointer(allIndices), sizeof(UINT16) * PODArray<UINT16>::Size(allIndices));
+		memcpy(indexBufferData.pData, &allIndices[0], sizeof(UINT16) * PODArray<UINT16>::Size(allIndices));
 		deviceContext->Unmap(m_indexBuffer, 0);
 	}
 
@@ -143,7 +144,7 @@ void Material::Render(ConstantBuffer* constBuf)
 
 	Transform* allTransforms = sg->m_transforms.GetArrayPointer();
 	
-	int currentIndex = 0;
+	UINT16 currentIndex = 0;
 	for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 	{
 		Mesh& m = allMeshes[it->first];
@@ -153,7 +154,7 @@ void Material::Render(ConstantBuffer* constBuf)
 			constBuf->SetWorldMatrix(Transform::GetTransformationMatrix(t));
 			constBuf->UpdateBuffers();
 
-			size_t numberOfVerts = PODArray<UINT16>::Size(m.m_indices);
+			UINT16 numberOfVerts = (UINT16)PODArray<UINT16>::Size(m.m_indices);
 			deviceContext->IASetPrimitiveTopology(m.m_topology);
 			deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
 			currentIndex += numberOfVerts;
