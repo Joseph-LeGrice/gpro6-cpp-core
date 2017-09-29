@@ -18,6 +18,7 @@
 #include "Camera.h"
 #include "Quaternion.h"
 #include "MeshHelper.h"
+#include "MathHelper.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,

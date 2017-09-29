@@ -142,7 +142,7 @@ void Material::Render(ConstantBuffer* constBuf)
 	PODArray<VertexData>::Free(allVerts);
 	PODArray<UINT16>::Free(allIndices);
 
-	Transform* allTransforms = sg->m_transforms.GetArrayPointer();
+	Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
 	
 	UINT16 currentIndex = 0;
 	for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
@@ -151,6 +151,7 @@ void Material::Render(ConstantBuffer* constBuf)
 		for (auto transformIt = it->second.begin(); transformIt != it->second.end(); ++transformIt)
 		{
 			Transform& t = allTransforms[*transformIt];
+			t.m_position = Vector3::New(0,0,0);
 			constBuf->SetWorldMatrix(Transform::GetTransformationMatrix(t));
 			constBuf->UpdateBuffers();
 

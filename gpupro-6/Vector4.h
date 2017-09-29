@@ -10,7 +10,7 @@ struct Vector4
 	FLOAT Z;
 	FLOAT W;
 
-	static Vector4 FromVector3(Vector3& v3)
+	static Vector4 FromVector3(const Vector3& v3)
 	{
 		Vector4 v4;
 		v4.X = v3.X;
@@ -20,7 +20,7 @@ struct Vector4
 		return v4;
 	}
 
-	static Matrix4x4 GetTranslationMatrix(Vector4& v)
+	static Matrix4x4 GetTranslationMatrix(const Vector4& v)
 	{
 		Matrix4x4 translation;
 		Matrix4x4::Identity(translation);
@@ -31,7 +31,7 @@ struct Vector4
 		return translation;
 	}
 
-	static Matrix4x4 GetScaleMatrix(Vector4& v)
+	static Matrix4x4 GetScaleMatrix(const Vector4& v)
 	{
 		Matrix4x4 scale;
 		Matrix4x4::Identity(scale);

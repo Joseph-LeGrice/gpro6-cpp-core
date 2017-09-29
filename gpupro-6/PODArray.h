@@ -14,19 +14,27 @@ struct PODArray
 		poda.m_capacity = 0;
 		poda.m_arraySize = 0;
 		poda.m_arrayPointer = nullptr;
-
-		PODArray<T>::Reallocate(poda, initialCapacity);
+		
+		T newT;
+		ZeroMemory(&newT, sizeof(T));
+		PODArray<T>::Reallocate(poda, initialCapacity, newT);
 
 		return poda;
 	}
 
-	static void PopulateWithVector(PODArray<T>& poda, std::vector<T> v)
+	static void PopulateWithVector(PODArray<T>& poda, const std::vector<T>& v)
 	{
 		Resize(poda, v.size());
 		memcpy(poda.m_arrayPointer, v.data(), poda.m_arraySize * sizeof(T));
 	}
 
-	static void Append(PODArray<T>& poda, PODArray<T>& toAppend)
+	static void Push_Back(PODArray<T>& poda, T& newElement)
+	{
+		size_t newSize = poda.m_arraySize + 1;
+		Resize(poda, newSize, newElement);
+	}
+
+	static void Append(PODArray<T>& poda, const PODArray<T>& toAppend)
 	{
 		size_t originalSize = poda.m_arraySize;
 		size_t newSize = poda.m_arraySize + toAppend.m_arraySize;
@@ -36,15 +44,28 @@ struct PODArray
 
 	static void Resize(PODArray<T>& poda, size_t newSize)
 	{
+		T newObject;
+		ZeroMemory(&newObject, sizeof(T));
+		Resize(poda, newSize, newObject);
+	}
+	
+	static void Resize(PODArray<T>& poda, size_t newSize, T& newObject)
+	{
 		if (newSize >= poda.m_capacity)
 		{
-			Reallocate(poda, 2 * poda.m_capacity);
+			Reallocate(poda, 2 * poda.m_capacity, newObject);
 		}
 
 		for (size_t indexToClear = poda.m_arraySize; indexToClear > newSize; indexToClear--)
 		{
 			ZeroMemory(&poda.m_arrayPointer[indexToClear], sizeof(T));
 		}
+
+		for (size_t newElementIndex = poda.m_arraySize; newElementIndex < newSize; newElementIndex++)
+		{
+			memcpy(&poda.m_arrayPointer[newElementIndex], &newObject, sizeof(T));
+		}
+
 		poda.m_arraySize = newSize;
 	}
 
@@ -57,7 +78,7 @@ struct PODArray
 		}
 	}
 
-	static const T* GetArrayPointer(PODArray& poda)
+	static T* const GetArrayPointer(PODArray& poda)
 	{
 		return poda.m_arrayPointer;
 	}
@@ -84,7 +105,7 @@ private:
 	size_t m_capacity;
 	size_t m_arraySize;
 
-	static void Reallocate(PODArray& poda, size_t newCapacity)
+	static void Reallocate(PODArray& poda, size_t newCapacity, T& newObject)
 	{
 		T* newArrayPointer = nullptr;
 		if (newCapacity > 0)
@@ -98,11 +119,6 @@ private:
 			memcpy(newArrayPointer, poda.m_arrayPointer, newArraySize * sizeof(T));
 		}
 		
-		for (size_t newElementIndex = newArraySize; newElementIndex < newCapacity; newElementIndex++)
-		{
-			ZeroMemory(&newArrayPointer[newElementIndex], sizeof(T));
-		}
-
 		Free(poda);
 
 		poda.m_capacity = newCapacity;

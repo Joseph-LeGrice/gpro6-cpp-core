@@ -79,7 +79,7 @@ void GameSystem::InitializeWindows(int& screenWidth, int& screenHeight)
 	int posX, posY;
 
 	s_hInstance = GetModuleHandle(NULL);
-	s_applicationName = L"Engine";
+	s_applicationName = L"Game";
 
 	WNDCLASSEX wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;

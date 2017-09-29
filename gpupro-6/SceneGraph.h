@@ -27,24 +27,30 @@ public:
 template<typename T>
 struct ComponentArray
 {
-	std::vector<T> m_components;
+	PODArray<T> m_components;
+
+	ComponentArray()
+	{
+		m_components = PODArray<T>::New();
+	}
 
 	~ComponentArray()
 	{
-		for (auto it = m_components.begin(); it != m_components.end(); ++it)
+		for (size_t i = 0; i < PODArray<T>::Size(m_components); ++i)
 		{
-			it->Free(*it);
+			T::Free(m_components[i]);
 		}
+		PODArray<T>::Free(m_components);
 	}
 
-	size_t InsertComponent(T& newComp = T::New())
+	size_t InsertComponent(T& newComp)
 	{
 		static_assert(std::is_pod<T>::value, "Component must be a POD type!");
 		static_assert(has_cleanup<T>::value, "Components must provide a 'Free()' method!");
 		// TODO: Properly define a contract for components using SFINAE!
 
-		size_t newIndex = m_components.size();
-		m_components.resize(newIndex + 1, newComp);
+		size_t newIndex = PODArray<T>::Size(m_components);
+		PODArray<T>::Push_Back(m_components, newComp);
 		return newIndex;
 	}
 
@@ -52,17 +58,17 @@ struct ComponentArray
 	{
 	 	size_t lastIndex = m_components.size() - 1;
 		m_components[index] = m_components[lastIndex];
-		m_components.resize(lastIndex);
+		PODArray<T>::Resize(m_components, lastIndex);
 	}
 
-	T* GetArrayPointer()
+	T* const GetArrayPointer()
 	{
-		return m_components.data();
+		return PODArray<T>::GetArrayPointer(m_components);
 	}
 
 	size_t GetArraySize()
 	{
-		return m_components.size();
+		return PODArray<T>::Size(m_components);
 	}
 };
 

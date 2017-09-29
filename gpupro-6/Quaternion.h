@@ -27,7 +27,7 @@ struct Quaternion
 		return q;
 	}
 
-	static Matrix4x4 GetMatrix(Quaternion& q)
+	static Matrix4x4 GetMatrix(const Quaternion& q)
 	{
 		//Orthonormal basis
 
@@ -76,7 +76,7 @@ struct Quaternion
 		q.V /= mag;
 	}
 
-	static FLOAT Magnitude(Quaternion& q)
+	static FLOAT Magnitude(const Quaternion& q)
 	{
 		return sqrt(pow(q.W, 2) + pow(q.V.X, 2) + pow(q.V.Y, 2) + pow(q.V.Z, 2));
 	}
