@@ -34,12 +34,12 @@ void InputSystem::VariableTick()
 	}
 }
 
-MouseInput& InputSystem::GetMouse()
+const MouseInput& InputSystem::GetMouse()
 {
 	return m_mouseInput;
 }
 
-KeyboardInput& InputSystem::GetKeyboard()
+const KeyboardInput& InputSystem::GetKeyboard()
 {
 	return m_keyboardInput;
 }

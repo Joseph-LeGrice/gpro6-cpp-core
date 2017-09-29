@@ -11,8 +11,8 @@ public:
 	void SetHWND(HWND hwnd);
 	virtual void VariableTick() override;
 
-	MouseInput& GetMouse();
-	KeyboardInput& GetKeyboard();
+	const MouseInput& GetMouse();
+	const KeyboardInput& GetKeyboard();
 
 	static LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam);
 

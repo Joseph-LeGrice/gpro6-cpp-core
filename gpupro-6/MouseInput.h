@@ -8,11 +8,11 @@ public:
 	~MouseInput();
 	MouseInput(const MouseInput&) = delete;
 
-	Vector2 GetMousePosition();
-	Vector2 GetDeltaMousePosition();
-	bool GetMouseButton(int buttonIndex);
-	bool GetMouseButtonDownThisFrame(int buttonIndex);
-	bool GetMouseButtonUpThisFrame(int buttonIndex);
+	const Vector2& GetMousePosition() const;
+	const Vector2& GetDeltaMousePosition() const;
+	bool GetMouseButton(int buttonIndex) const;
+	bool GetMouseButtonDownThisFrame(int buttonIndex) const;
+	bool GetMouseButtonUpThisFrame(int buttonIndex) const;
 
 	void HandleInput(MSG m);
 

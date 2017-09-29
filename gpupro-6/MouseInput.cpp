@@ -22,17 +22,17 @@ MouseInput::MouseInput()
 	m_thisMouseButtonState = m_lastMouseButtonState = 0;
 }
 
-Vector2 MouseInput::GetMousePosition()
+const Vector2& MouseInput::GetMousePosition() const
 {
 	return m_mousePosition;
 }
 
-Vector2 MouseInput::GetDeltaMousePosition()
+const Vector2& MouseInput::GetDeltaMousePosition() const
 {
 	return m_deltaMousePosition;
 }
 
-bool MouseInput::GetMouseButton(int buttonIndex)
+bool MouseInput::GetMouseButton(int buttonIndex) const
 {
 	if (buttonIndex < c_numberOfButtons)
 	{
@@ -46,7 +46,7 @@ bool MouseInput::GetMouseButton(int buttonIndex)
 	}
 }
 
-bool MouseInput::GetMouseButtonDownThisFrame(int buttonIndex)
+bool MouseInput::GetMouseButtonDownThisFrame(int buttonIndex) const
 {
 	if (buttonIndex < c_numberOfButtons)
 	{
@@ -61,7 +61,7 @@ bool MouseInput::GetMouseButtonDownThisFrame(int buttonIndex)
 	}
 }
 
-bool MouseInput::GetMouseButtonUpThisFrame(int buttonIndex)
+bool MouseInput::GetMouseButtonUpThisFrame(int buttonIndex) const
 {
 	if (buttonIndex < c_numberOfButtons)
 	{
