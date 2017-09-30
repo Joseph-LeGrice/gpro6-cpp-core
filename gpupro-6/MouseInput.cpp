@@ -18,7 +18,7 @@ const MouseButtonTranslate c_validStates[c_numberOfButtons] = {
 
 MouseInput::MouseInput()
 {
-	m_mousePosition = Vector2::Zero();
+	m_mousePosition = m_deltaMousePosition = Vector2::Zero();
 	m_thisMouseButtonState = m_lastMouseButtonState = 0;
 }
 
@@ -37,7 +37,7 @@ bool MouseInput::GetMouseButton(int buttonIndex) const
 	if (buttonIndex < c_numberOfButtons)
 	{
 		UINT8 flag = 1 << buttonIndex;
-		return (m_thisMouseButtonState & flag) == buttonIndex;
+		return (m_thisMouseButtonState & flag) == flag;
 	}
 	else
 	{
@@ -87,14 +87,14 @@ void MouseInput::HandleInput(MSG m)
 		{
 			if (m.message == c_validStates[i].buttonUpCode)
 			{
-				m_thisMouseButtonState |= flag;
+				m_thisMouseButtonState &= ~flag;
 			}
 		}
 		else
 		{
 			if (m.message == c_validStates[i].buttonDownCode)
 			{
-				m_thisMouseButtonState &= ~flag;
+				m_thisMouseButtonState |= flag;
 			}
 		}
 	}
