@@ -3,7 +3,7 @@
 #include <chrono>
 
 typedef std::chrono::steady_clock::time_point TimePoint;
-typedef std::chrono::duration<float, std::chrono::milliseconds::period> Milliseconds;
+typedef std::chrono::duration<float, std::chrono::seconds::period> Seconds;
 
 class TimeSystem : public ISystem
 {
@@ -18,8 +18,8 @@ public:
 
 private:
 	TimePoint m_time;
-	Milliseconds m_deltaTime;
-	Milliseconds m_fixedTimestep;
-	Milliseconds m_latency;
+	Seconds m_deltaTime;
+	Seconds m_fixedTimestep;
+	Seconds m_latency;
 };
 
