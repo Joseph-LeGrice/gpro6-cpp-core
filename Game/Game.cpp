@@ -29,75 +29,55 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-	bool allOK = true;
-	int returnCode = -1;
-
 	try
 	{
-		allOK &= GameSystem::InitializeAllSystems();
+		GameSystem::InitializeAllSystems();
 
-		if (allOK)
-		{
-			Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
-			allOK &= t != nullptr;
-			if (allOK)
-			{
-				Shader* s = new Shader();
-				allOK &= s->Initialize(L"SimpleTexturedQuad.shader");
-				if (allOK)
-				{
-					TextureSampler* ts = new TextureSampler();
-					allOK &= ts->Initialize();
-					if (allOK)
-					{
-						s->AddShaderResource((ShaderResource*)t);
-						s->AddTextureSampler(ts);
+		Shader* s = new Shader();
+		//s->Initialize(L"SimpleTexturedQuad.shader");
 
-						Material* m = Material::Create();
-						allOK &= m != nullptr;
-						if (allOK)
-						{
-							SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
-							
-							// Quad Mesh
-							Mesh mesh = MeshHelper::CreateQuad();
-							size_t meshIndex = sg.m_meshes.InsertComponent(mesh);
+		Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
+		s->AddShaderResource((ShaderResource*)t);
+		
+		TextureSampler* ts = new TextureSampler();
+		ts->Initialize();
+		s->AddTextureSampler(ts);
 
-							Transform meshTransform = Transform::New();
-							meshTransform.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-							meshTransform.m_position = Vector3::New(0.0f, 0.0f, 5.0f);
-							meshTransform.m_scale = Vector3::New(5.0f, 5.0f, 5.0f);
+		Material* m = Material::Create();
+		
+		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
+		
+		// Quad Mesh
+		Mesh mesh = MeshHelper::CreateQuad();
+		size_t meshIndex = sg.m_meshes.InsertComponent(mesh);
 
-							size_t meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
+		Transform meshTransform = Transform::New();
+		meshTransform.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+		meshTransform.m_position = Vector3::New(0.0f, 0.0f, 5.0f);
+		meshTransform.m_scale = Vector3::New(5.0f, 5.0f, 5.0f);
 
-							m->SetShader(s);
-							m->RegisterMeshInfo(meshIndex, meshTransformIndex);
+		size_t meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
-							MouseRotateSystem::Instance()->SetTransformIndexToRotate(meshTransformIndex);
+		m->SetShader(s);
+		m->RegisterMeshInfo(meshIndex, meshTransformIndex);
 
-							// Camera
-							Transform cameraTransform = Transform::New();
-							cameraTransform.m_position = Vector3::New(0.0f, 0.0f, -10.0f);
-							size_t cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
+		MouseRotateSystem::Instance()->SetTransformIndexToRotate(meshTransformIndex);
 
-							Camera camera = Camera::New();
-							camera.m_transformIndex = cameraTransformIndex;
-							size_t cameraIndex = sg.m_cameras.InsertComponent(camera);
-						}
-					}
-				}
-			}
-		}
+		// Camera
+		Transform cameraTransform = Transform::New();
+		cameraTransform.m_position = Vector3::New(0.0f, 0.0f, -10.0f);
+		size_t cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
 
-		if (allOK)
-		{
-			returnCode = GameSystem::Run();
-		}
+		Camera camera = Camera::New();
+		camera.m_transformIndex = cameraTransformIndex;
+		size_t cameraIndex = sg.m_cameras.InsertComponent(camera);
 	}
 	catch(...)
 	{
 
 	}
+
+	int returnCode = GameSystem::Run();
 
 	ImagingFactory::DestroyFactory();
 	GameSystem::ShutdownWindows();

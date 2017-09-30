@@ -48,26 +48,33 @@ void GameSystem::Quit()
 
 int GameSystem::GameLoop()
 {
-	TimeSystem* time = TimeSystem::Instance();
-	
-	m_running = true;
-	while (m_running)
+	try
 	{
-		while (time->ShouldAdvanceFixedStep())
+		TimeSystem* time = TimeSystem::Instance();
+
+		m_running = true;
+		while (m_running)
 		{
+			while (time->ShouldAdvanceFixedStep())
+			{
+				for (auto it = m_subsystems.begin(); it != m_subsystems.end(); ++it)
+				{
+					it->second->FixedTick();
+				}
+			}
+
 			for (auto it = m_subsystems.begin(); it != m_subsystems.end(); ++it)
 			{
-				it->second->FixedTick();
+				auto sys = it->second;
+				sys->VariableTick();
 			}
-		}
 
-		for (auto it = m_subsystems.begin(); it != m_subsystems.end(); ++it)
-		{
-			auto sys = it->second;
-			sys->VariableTick();
+			time->AdvanceFrame();
 		}
+	}
+	catch (...)
+	{
 
-		time->AdvanceFrame();
 	}
 
 	return 0;
