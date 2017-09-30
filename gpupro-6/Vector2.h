@@ -7,21 +7,21 @@ struct Vector2
 	FLOAT X;
 	FLOAT Y;
 
-	Vector2 operator+(const Vector2& other)
+	Vector2 operator+(const Vector2& other) const
 	{
 		Vector2 result;
 		result.X = X + other.X; result.Y = Y + other.Y;
 		return result;
 	}
 
-	Vector2 operator-(const Vector2& other)
+	Vector2 operator-(const Vector2& other) const
 	{
 		Vector2 result;
 		result.X = X - other.X; result.Y = Y - other.Y;
 		return result;
 	}
 
-	Vector2 operator*(const float other)
+	Vector2 operator*(const float other) const
 	{
 		Vector2 result;
 		result.X = X * other; result.Y = Y * other;
@@ -29,7 +29,7 @@ struct Vector2
 	}
 
 
-	Vector2 operator/(const float other)
+	Vector2 operator/(const float other) const
 	{
 		Vector2 result;
 		result.X = X / other; result.Y = Y / other;

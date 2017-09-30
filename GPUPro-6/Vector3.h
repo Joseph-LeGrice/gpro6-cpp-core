@@ -8,21 +8,21 @@ struct Vector3
 	FLOAT Y;
 	FLOAT Z;
 
-	Vector3 operator+(const Vector3& other)
+	Vector3 operator+(const Vector3& other) const
 	{
 		Vector3 result;
 		result.X = X + other.X; result.Y = Y + other.Y; result.Z = Z + other.Z;
 		return result;
 	}
 
-	Vector3 operator-(const Vector3& other)
+	Vector3 operator-(const Vector3& other) const
 	{
 		Vector3 result;
 		result.X = X - other.X; result.Y = Y - other.Y; result.Z = Z - other.Z;
 		return result;
 	}
 
-	Vector3 operator*(const float other)
+	Vector3 operator*(const float other) const
 	{
 		Vector3 result;
 		result.X = X * other; result.Y = Y * other; result.Z = Z * other;
@@ -30,7 +30,7 @@ struct Vector3
 	}
 
 
-	Vector3 operator/(const float other)
+	Vector3 operator/(const float other) const
 	{
 		Vector3 result;
 		result.X = X / other; result.Y = Y / other; result.Z = Z / other;
