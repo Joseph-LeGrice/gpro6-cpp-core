@@ -151,7 +151,6 @@ void Material::Render(ConstantBuffer* constBuf)
 		for (auto transformIt = it->second.begin(); transformIt != it->second.end(); ++transformIt)
 		{
 			Transform& t = allTransforms[*transformIt];
-			t.m_position = Vector3::New(0,0,0);
 			constBuf->SetWorldMatrix(Transform::GetTransformationMatrix(t));
 			constBuf->UpdateBuffers();
 
