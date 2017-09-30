@@ -49,53 +49,62 @@ bool Shader::Initialize(std::wstring filename)
 	return (vertexShaderCompiled && hullShaderCompiled && domainShaderCompiled && geometryShaderCompiled && pixelShaderCompiled);
 }
 
-void Shader::SetCurrent()
+bool Shader::SetCurrentIfValid()
 {
-	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
-	deviceContext->IASetInputLayout(m_inputLayout);
-	deviceContext->VSSetShader(m_vertexShader, NULL, 0);
-
-	if (m_hullShader != nullptr && m_domainShader != nullptr)
+	if (m_vertexShader == nullptr || m_inputLayout == nullptr || m_pixelShader == nullptr)
 	{
-		deviceContext->HSSetShader(m_hullShader, NULL, 0);
-		deviceContext->DSSetShader(m_domainShader, NULL, 0);
+		return false;
 	}
-
-	if (m_geometryShader != nullptr)
+	else
 	{
-		deviceContext->GSSetShader(m_geometryShader, 0, 0);
-	}
+		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+		deviceContext->IASetInputLayout(m_inputLayout);
+		deviceContext->VSSetShader(m_vertexShader, NULL, 0);
 
-	deviceContext->PSSetShader(m_pixelShader, NULL, 0);
-
-	if (m_shaderResources->size() > 0)
-	{
-		std::vector<ID3D11ShaderResourceView*> allResources;
-		for each (ShaderResource* sr in *m_shaderResources)
+		if (m_hullShader != nullptr && m_domainShader != nullptr)
 		{
-			ID3D11ShaderResourceView* resource = sr->GetResourceView();
-			allResources.push_back(resource);
+			deviceContext->HSSetShader(m_hullShader, NULL, 0);
+			deviceContext->DSSetShader(m_domainShader, NULL, 0);
 		}
-		deviceContext->VSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
-		//deviceContext->HSSetShaderResources(0, allResources.size(), &allResources[0]);
-		//deviceContext->DSSetShaderResources(0, allResources.size(), &allResources[0]);
-		//deviceContext->GSSetShaderResources(0, allResources.size(), &allResources[0]);
-		deviceContext->PSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
-	}
 
-	if (m_textureSamplers->size() > 0)
-	{
-		std::vector<ID3D11SamplerState*> allSamplers;
-		for each (TextureSampler* ts in *m_textureSamplers)
+		if (m_geometryShader != nullptr)
 		{
-			ID3D11SamplerState* sampler = ts->GetSampler();
-			allSamplers.push_back(sampler);
+			deviceContext->GSSetShader(m_geometryShader, 0, 0);
 		}
-		deviceContext->VSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
-		//deviceContext->HSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
-		//deviceContext->DSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
-		//deviceContext->GSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
-		deviceContext->PSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
+
+		deviceContext->PSSetShader(m_pixelShader, NULL, 0);
+
+		if (m_shaderResources->size() > 0)
+		{
+			std::vector<ID3D11ShaderResourceView*> allResources;
+			for each (ShaderResource* sr in *m_shaderResources)
+			{
+				ID3D11ShaderResourceView* resource = sr->GetResourceView();
+				allResources.push_back(resource);
+			}
+			deviceContext->VSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
+			//deviceContext->HSSetShaderResources(0, allResources.size(), &allResources[0]);
+			//deviceContext->DSSetShaderResources(0, allResources.size(), &allResources[0]);
+			//deviceContext->GSSetShaderResources(0, allResources.size(), &allResources[0]);
+			deviceContext->PSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
+		}
+
+		if (m_textureSamplers->size() > 0)
+		{
+			std::vector<ID3D11SamplerState*> allSamplers;
+			for each (TextureSampler* ts in *m_textureSamplers)
+			{
+				ID3D11SamplerState* sampler = ts->GetSampler();
+				allSamplers.push_back(sampler);
+			}
+			deviceContext->VSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
+			//deviceContext->HSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+			//deviceContext->DSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+			//deviceContext->GSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+			deviceContext->PSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
+		}
+
+		return true;
 	}
 }
 

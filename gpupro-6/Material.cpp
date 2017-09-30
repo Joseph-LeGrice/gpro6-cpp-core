@@ -101,63 +101,64 @@ bool Material::InitializeBuffers()
 
 void Material::Render(ConstantBuffer* constBuf)
 {
-	m_shader->SetCurrent();
-
-	UINT offset = 0;
-	UINT stride = sizeof(VertexData);
-
-	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
-	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
-	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
-
-	SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
-	Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
-
-	PODArray<VertexData> allVerts = PODArray<VertexData>::New();
-	PODArray<UINT16> allIndices = PODArray<UINT16>::New();
-
-	for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
+	if (m_shader->SetCurrentIfValid())
 	{
-		Mesh& m = allMeshes[it->first];
-		PODArray<VertexData>::Append(allVerts, m.m_vertexData);
-		PODArray<UINT16>::Append(allIndices, m.m_indices);
-	}
+		UINT offset = 0;
+		UINT stride = sizeof(VertexData);
 
-	D3D11_MAPPED_SUBRESOURCE vertexData;
-	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
-	if (SUCCEEDED(vertexBufferAcquireResult))
-	{
-		memcpy(vertexData.pData, &allVerts[0], sizeof(VertexData) * PODArray<VertexData>::Size(allVerts));
-		deviceContext->Unmap(m_vertexBuffer, 0);
-	}
+		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+		deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
-	D3D11_MAPPED_SUBRESOURCE indexBufferData;
-	HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);
-	if (SUCCEEDED(indexBufferAcquireResult))
-	{
-		memcpy(indexBufferData.pData, &allIndices[0], sizeof(UINT16) * PODArray<UINT16>::Size(allIndices));
-		deviceContext->Unmap(m_indexBuffer, 0);
-	}
+		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
+		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
 
-	PODArray<VertexData>::Free(allVerts);
-	PODArray<UINT16>::Free(allIndices);
+		PODArray<VertexData> allVerts = PODArray<VertexData>::New();
+		PODArray<UINT16> allIndices = PODArray<UINT16>::New();
 
-	Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
-	
-	UINT16 currentIndex = 0;
-	for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
-	{
-		Mesh& m = allMeshes[it->first];
-		for (auto transformIt = it->second.begin(); transformIt != it->second.end(); ++transformIt)
+		for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 		{
-			Transform& t = allTransforms[*transformIt];
-			constBuf->SetWorldMatrix(Transform::GetTransformationMatrix(t));
-			constBuf->UpdateBuffers();
+			Mesh& m = allMeshes[it->first];
+			PODArray<VertexData>::Append(allVerts, m.m_vertexData);
+			PODArray<UINT16>::Append(allIndices, m.m_indices);
+		}
 
-			UINT16 numberOfVerts = (UINT16)PODArray<UINT16>::Size(m.m_indices);
-			deviceContext->IASetPrimitiveTopology(m.m_topology);
-			deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
-			currentIndex += numberOfVerts;
+		D3D11_MAPPED_SUBRESOURCE vertexData;
+		HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
+		if (SUCCEEDED(vertexBufferAcquireResult))
+		{
+			memcpy(vertexData.pData, &allVerts[0], sizeof(VertexData) * PODArray<VertexData>::Size(allVerts));
+			deviceContext->Unmap(m_vertexBuffer, 0);
+		}
+
+		D3D11_MAPPED_SUBRESOURCE indexBufferData;
+		HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);
+		if (SUCCEEDED(indexBufferAcquireResult))
+		{
+			memcpy(indexBufferData.pData, &allIndices[0], sizeof(UINT16) * PODArray<UINT16>::Size(allIndices));
+			deviceContext->Unmap(m_indexBuffer, 0);
+		}
+
+		PODArray<VertexData>::Free(allVerts);
+		PODArray<UINT16>::Free(allIndices);
+
+		Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
+
+		UINT16 currentIndex = 0;
+		for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
+		{
+			Mesh& m = allMeshes[it->first];
+			for (auto transformIt = it->second.begin(); transformIt != it->second.end(); ++transformIt)
+			{
+				Transform& t = allTransforms[*transformIt];
+				constBuf->SetWorldMatrix(Transform::GetTransformationMatrix(t));
+				constBuf->UpdateBuffers();
+
+				UINT16 numberOfVerts = (UINT16)PODArray<UINT16>::Size(m.m_indices);
+				deviceContext->IASetPrimitiveTopology(m.m_topology);
+				deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+				currentIndex += numberOfVerts;
+			}
 		}
 	}
 }

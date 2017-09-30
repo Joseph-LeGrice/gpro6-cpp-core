@@ -14,7 +14,7 @@ public:
 	~Shader();
 
 	bool Initialize(std::wstring filename);
-	void SetCurrent();
+	bool SetCurrentIfValid();
 
 	void AddShaderResource(ShaderResource* r);
 	void RemoveShaderResource(ShaderResource* r);
