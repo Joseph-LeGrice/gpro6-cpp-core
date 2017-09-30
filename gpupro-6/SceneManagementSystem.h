@@ -1,7 +1,6 @@
 #pragma once
 #include "ISystem.h"
-
-class SceneGraph;
+#include "SceneGraph.h"
 
 class SceneManagementSystem : public ISystem
 {

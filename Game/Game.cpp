@@ -19,6 +19,7 @@
 #include "Quaternion.h"
 #include "MeshHelper.h"
 #include "MathHelper.h"
+#include "MouseRotateSystem.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -34,6 +35,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	try
 	{
 		allOK &= GameSystem::InitializeAllSystems();
+
 		if (allOK)
 		{
 			Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
@@ -70,6 +72,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 							m->SetShader(s);
 							m->RegisterMeshInfo(meshIndex, meshTransformIndex);
+
+							MouseRotateSystem::Instance()->SetTransformIndexToRotate(meshTransformIndex);
 
 							// Camera
 							Transform cameraTransform = Transform::New();
