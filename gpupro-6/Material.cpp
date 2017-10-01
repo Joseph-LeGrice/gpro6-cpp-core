@@ -115,8 +115,6 @@ void Material::RemoveTextureSampler(TextureSampler* ts)
 
 bool Material::Initialize()
 {
-	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
-
 	size_t INDEX_BUFFER_SIZE = (size_t)pow(1024, 2);
 	size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
 

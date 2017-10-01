@@ -35,8 +35,6 @@ struct Camera
 
 	static Matrix4x4 Camera::OrthoProject(float size, float depth, float aspectRatio)
 	{
-		float halfSize = 0.5f * size;
-
 		Matrix4x4 result;
 		Matrix4x4::Identity(result);
 

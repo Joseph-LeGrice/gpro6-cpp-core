@@ -15,9 +15,8 @@ struct PODArray
 		poda.m_arraySize = 0;
 		poda.m_arrayPointer = nullptr;
 		
-		T newT;
-		ZeroMemory(&newT, sizeof(T));
-		PODArray<T>::Reallocate(poda, initialCapacity, newT);
+		PODArray<T>::Reallocate(poda, initialCapacity);
+		ZeroMemory(&poda.m_arrayPointer[0], initialCapacity * sizeof(T));
 
 		return poda;
 	}
@@ -58,7 +57,7 @@ struct PODArray
 			{
 				newCap = 2 * newCap;
 			}
-			Reallocate(poda, newCap, newObject);
+			Reallocate(poda, newCap);
 		}
 
 		for (size_t indexToClear = poda.m_arraySize; indexToClear > newSize; indexToClear--)
@@ -110,7 +109,7 @@ private:
 	size_t m_capacity;
 	size_t m_arraySize;
 
-	static void Reallocate(PODArray& poda, size_t newCapacity, T& newObject)
+	static void Reallocate(PODArray& poda, size_t newCapacity)
 	{
 		T* newArrayPointer = nullptr;
 		if (newCapacity > 0)

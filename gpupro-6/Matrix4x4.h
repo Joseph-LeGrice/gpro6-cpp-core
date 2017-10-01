@@ -107,12 +107,12 @@ struct Matrix4x4
 		return result;
 	}
 
-	static float Determinant(Matrix4x4& m)
+	static float Determinant(const Matrix4x4& m)
 	{
 		return m.M11 * m.M22 * m.M33 * m.M44 - m.M14 * m.M23 * m.M32 * m.M41;
 	}
 
-	static Matrix4x4 MatrixOfMinors(Matrix4x4& m)
+	static Matrix4x4 MatrixOfMinors(const Matrix4x4& m)
 	{
 		Matrix4x4 result;
 
@@ -217,7 +217,7 @@ struct Matrix4x4
 		return result;
 	}
 
-	static Matrix4x4 Inverse(Matrix4x4& m)
+	static Matrix4x4 Inverse(const Matrix4x4& m)
 	{
 		float determinant = Matrix4x4::Determinant(m);
 		if (determinant > 0.0f)
