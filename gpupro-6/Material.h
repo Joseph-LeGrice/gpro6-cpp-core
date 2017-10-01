@@ -22,6 +22,7 @@ public:
 	static Material* Create();
 
 	void Render(ConstantBuffer*);
+	void UpdateIfDirty();
 	
 	void SetShader(Shader* shader);
 	
@@ -35,6 +36,7 @@ private:
 	Material();
 	Material(const Material&) = delete;
 
+	bool m_isDirty;
 	Shader* m_shader;
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;

@@ -11,7 +11,7 @@ public:
 	static IndexBuffer* Create(size_t bufferSize);
 
 	bool SetCurrentIfValid();
-	void SetData(PODArray<UINT16>& data);
+	bool TrySetData(PODArray<UINT16>& data);
 
 private:
 	IndexBuffer();

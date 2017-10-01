@@ -141,6 +141,7 @@ void GraphicsSystem::VariableTick()
 
 		for each (Material* m in *allMats)
 		{
+			m->UpdateIfDirty();
 			m->Render(m_constantBuffer);
 		}
 

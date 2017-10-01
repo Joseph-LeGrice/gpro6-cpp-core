@@ -16,6 +16,7 @@
 Material::Material()
 {
 	m_shader = nullptr;
+	m_isDirty = false;
 	m_myIndexBuffer = nullptr;
 	m_myVertexBuffer = nullptr;
 }
@@ -62,6 +63,7 @@ void Material::RegisterMeshInfo(size_t meshIndex, size_t transformIndex)
 		m_renderMap[meshIndex] = std::vector<size_t>();
 	}
 	m_renderMap[meshIndex].push_back(transformIndex);
+	m_isDirty = true;
 }
 
 void Material::SetShader(Shader* s)
@@ -83,9 +85,9 @@ bool Material::InitializeBuffers()
 }
 
 
-void Material::Render(ConstantBuffer* constBuf)
+void Material::UpdateIfDirty()
 {
-	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
+	if (m_isDirty)
 	{
 		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
 		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
@@ -99,14 +101,27 @@ void Material::Render(ConstantBuffer* constBuf)
 			PODArray<VertexData>::Append(allVerts, m.m_vertexData);
 			PODArray<UINT16>::Append(allIndices, m.m_indices);
 		}
-		m_myVertexBuffer->SetData(allVerts);
-		m_myIndexBuffer->SetData(allIndices);
+
+		if (m_myVertexBuffer->TrySetData(allVerts) &&
+			m_myIndexBuffer->TrySetData(allIndices))
+		{
+			m_isDirty = false;
+		}
 
 		PODArray<VertexData>::Free(allVerts);
 		PODArray<UINT16>::Free(allIndices);
+	}
+}
 
+void Material::Render(ConstantBuffer* constBuf)
+{
+	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
+	{
 		m_myVertexBuffer->SetCurrentIfValid();
 		m_myIndexBuffer->SetCurrentIfValid();
+		
+		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
+		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
 		
 		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 		Transform* const allTransforms = sg->m_transforms.GetArrayPointer();

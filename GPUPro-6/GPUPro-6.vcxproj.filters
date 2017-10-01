@@ -69,7 +69,9 @@
     <ClCompile Include="VertexBuffer.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -183,7 +185,9 @@
     <ClInclude Include="VertexBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

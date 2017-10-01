@@ -47,7 +47,7 @@ bool IndexBuffer::SetCurrentIfValid()
 	return true;
 }
 
-void IndexBuffer::SetData(PODArray<UINT16>& data)
+bool IndexBuffer::TrySetData(PODArray<UINT16>& data)
 {
 	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 	
@@ -57,5 +57,7 @@ void IndexBuffer::SetData(PODArray<UINT16>& data)
 	{
 		memcpy(indexBufferData.pData, &data[0], sizeof(UINT16) * PODArray<UINT16>::Size(data));
 		deviceContext->Unmap(m_indexBuffer, 0);
+		return true;
 	}
+	return false;
 }

@@ -51,7 +51,7 @@ VertexBuffer* VertexBuffer::Create(size_t bufferSize)
 }
 
 
-void VertexBuffer::SetData(PODArray<VertexData>& data)
+bool VertexBuffer::TrySetData(PODArray<VertexData>& data)
 {
 	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 
@@ -61,5 +61,7 @@ void VertexBuffer::SetData(PODArray<VertexData>& data)
 	{
 		memcpy(vertexData.pData, &data[0], sizeof(VertexData) * PODArray<VertexData>::Size(data));
 		deviceContext->Unmap(m_vertexBuffer, 0);
+		return true;
 	}
+	return false;
 }
