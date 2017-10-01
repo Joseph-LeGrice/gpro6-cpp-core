@@ -81,32 +81,39 @@ struct Quaternion
 		return sqrt(pow(q.W, 2) + pow(q.V.X, 2) + pow(q.V.Y, 2) + pow(q.V.Z, 2));
 	}
 
-	Quaternion operator+(Quaternion other)
+	Quaternion operator+(const Quaternion& other) const
 	{
 		Quaternion result;
 		result.W = W + other.W; result.V = V + other.V;
 		return result;
 	}
 
-	Quaternion operator-(Quaternion other)
+	Quaternion operator-(const Quaternion& other) const
 	{
 		Quaternion result;
 		result.W = W - other.W; result.V = V - other.V;
 		return result;
 	}
 
-	Quaternion operator*(float scalar)
+	Quaternion operator*(float scalar) const
 	{
 		Quaternion result;
 		result.W = W * scalar; result.V = V * scalar;
 		return result;
 	}
 
-	Quaternion operator*(Quaternion other)
+	Quaternion operator*(const Quaternion& other) const
 	{
 		Quaternion result;
 		result.W = W * other.W - Vector3::Dot(V, other.V);
 		result.V = other.V * W + V * other.W + Vector3::Cross(V, other.V);
 		return result;
+	}
+
+	void operator *=(const Quaternion& other)
+	{
+		W = W * other.W - Vector3::Dot(V, other.V);
+		V = other.V * W + V * other.W + Vector3::Cross(V, other.V);
+		Normalize(*this);
 	}
 };

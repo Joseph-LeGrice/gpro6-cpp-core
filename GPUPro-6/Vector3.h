@@ -57,6 +57,11 @@ struct Vector3
 		return{ 1.0f, 1.0f, 1.0f };
 	}
 	
+	static Vector3 Up()
+	{
+		return{ 0.0f, 1.0f, 0.0f };
+	}
+	
 	static FLOAT Magnitude(Vector3& v)
 	{
 		return sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z);

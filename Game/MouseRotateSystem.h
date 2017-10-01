@@ -12,9 +12,11 @@ public:
 	virtual void VariableTick() override;
 
 private:
-	const float m_speed = 5.0f;
+	const float c_speed = 5.0f;
+	const float c_angularVelocity = 2.5f;
 	bool m_hasIndex;
 	size_t m_index;
 	float m_velocity;
+	bool m_toggleRotate;
 };
 
