@@ -111,7 +111,10 @@ bool Shader::SetCurrentIfValid()
 
 void Shader::AddShaderResource(ShaderResource* r)
 {
-	m_shaderResources->push_back(r);
+	if (r != nullptr)
+	{
+		m_shaderResources->push_back(r);
+	}
 }
 
 void Shader::RemoveShaderResource(ShaderResource* r)
