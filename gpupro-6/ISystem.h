@@ -12,6 +12,7 @@ public:
 	virtual void VariableTick();
 };
 
+//TODO: Maybe replace REGISTER_SUBSYSTEM with a templated version of ISystem
 #define REGISTER_SUBSYSTEM(x) \
 public: \
 static x* Instance() \

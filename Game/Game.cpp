@@ -34,7 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		GameSystem::InitializeAllSystems();
 
 		Shader* s = new Shader();
-		//s->Initialize(L"SimpleTexturedQuad.shader");
+		s->Initialize(L"SimpleTexturedQuad.shader");
 
 		Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
 		s->AddShaderResource((ShaderResource*)t);

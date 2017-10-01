@@ -34,6 +34,11 @@ bool TextureSampler::Initialize()
 	return SUCCEEDED(createSamplerResult);
 }
 
+bool TextureSampler::IsValid()
+{
+	return m_sampler != nullptr;
+}
+
 ID3D11SamplerState* TextureSampler::GetSampler()
 {
 	return m_sampler;

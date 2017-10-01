@@ -9,6 +9,7 @@ public:
 	~TextureSampler();
 
 	bool Initialize();
+	bool IsValid();
 	ID3D11SamplerState* GetSampler();
 private:
 	ID3D11SamplerState* m_sampler;

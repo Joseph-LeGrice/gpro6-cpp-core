@@ -9,6 +9,7 @@
 #include "ShaderResource.h"
 #include <algorithm>
 #include <vector>
+#include "Logging.h"
 
 Shader::Shader()
 {
@@ -115,6 +116,10 @@ void Shader::AddShaderResource(ShaderResource* r)
 	{
 		m_shaderResources->push_back(r);
 	}
+	else
+	{
+		LogError("ShaderResource is not valid!");
+	}
 }
 
 void Shader::RemoveShaderResource(ShaderResource* r)
@@ -125,7 +130,14 @@ void Shader::RemoveShaderResource(ShaderResource* r)
 
 void Shader::AddTextureSampler(TextureSampler* ts)
 {
-	m_textureSamplers->push_back(ts);
+	if (ts->IsValid())
+	{
+		m_textureSamplers->push_back(ts);
+	}
+	else
+	{
+		LogError("TextureSampler is not valid!");
+	}
 }
 
 void Shader::RemoveTextureSampler(TextureSampler* ts)
