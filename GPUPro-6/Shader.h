@@ -37,7 +37,7 @@ private:
 	ID3D11HullShader* m_hullShader;
 	ID3D11DomainShader* m_domainShader;
 
-	std::vector<ShaderResource*>* m_shaderResources;
-	std::vector<TextureSampler*>* m_textureSamplers;
+	std::vector<ShaderResource*> m_shaderResources;
+	std::vector<TextureSampler*> m_textureSamplers;
 };
 
