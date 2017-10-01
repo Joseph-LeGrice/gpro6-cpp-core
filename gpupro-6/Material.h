@@ -10,6 +10,7 @@ class Shader;
 class ShaderResource;
 class ConstantBuffer;
 class VertexBuffer;
+class IndexBuffer;
 
 typedef std::unordered_map<size_t, std::vector<size_t>> MeshTransformMap;
 
@@ -33,9 +34,9 @@ private:
 
 	Material();
 	Material(const Material&) = delete;
-	ID3D11Buffer* m_indexBuffer;
 
 	Shader* m_shader;
 	VertexBuffer* m_myVertexBuffer;
+	IndexBuffer* m_myIndexBuffer;
 	MeshTransformMap m_renderMap;
 };

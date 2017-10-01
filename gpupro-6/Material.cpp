@@ -11,18 +11,19 @@
 #include "Entity.h"
 #include "Transform.h"
 #include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 Material::Material()
 {
 	m_shader = nullptr;
-	m_indexBuffer = nullptr;
+	m_myIndexBuffer = nullptr;
 	m_myVertexBuffer = nullptr;
 }
 
 Material::~Material()
 {
 	SAFE_DELETE(m_myVertexBuffer);
-	SAFE_RELEASE(m_indexBuffer);
+	SAFE_DELETE(m_myIndexBuffer);
 }
 
 Material* Material::Create()
@@ -75,19 +76,10 @@ bool Material::InitializeBuffers()
 	size_t INDEX_BUFFER_SIZE = 1024;
 	size_t VERTEX_BUFFER_SIZE = 1024;
 
-	D3D11_BUFFER_DESC indexBufferDesc;
-	ZeroMemory(&indexBufferDesc, sizeof(D3D11_BUFFER_DESC));
-	indexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	indexBufferDesc.ByteWidth = sizeof(UINT16) * INDEX_BUFFER_SIZE;
-	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	indexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	indexBufferDesc.MiscFlags = 0;
-
-	HRESULT indexBufferCreationResult = device->CreateBuffer(&indexBufferDesc, NULL, &m_indexBuffer);
-	
+	m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
 	m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
 
-	return SUCCEEDED(indexBufferCreationResult) && m_myVertexBuffer != nullptr;
+	return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
 }
 
 
@@ -95,15 +87,6 @@ void Material::Render(ConstantBuffer* constBuf)
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
-		m_myVertexBuffer->SetCurrentIfValid();
-
-		UINT offset = 0;
-		UINT stride = sizeof(VertexData);
-
-		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
-		deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
-
-
 		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
 		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
 
@@ -117,19 +100,15 @@ void Material::Render(ConstantBuffer* constBuf)
 			PODArray<UINT16>::Append(allIndices, m.m_indices);
 		}
 		m_myVertexBuffer->SetData(allVerts);
-
-
-		D3D11_MAPPED_SUBRESOURCE indexBufferData;
-		HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);
-		if (SUCCEEDED(indexBufferAcquireResult))
-		{
-			memcpy(indexBufferData.pData, &allIndices[0], sizeof(UINT16) * PODArray<UINT16>::Size(allIndices));
-			deviceContext->Unmap(m_indexBuffer, 0);
-		}
+		m_myIndexBuffer->SetData(allIndices);
 
 		PODArray<VertexData>::Free(allVerts);
 		PODArray<UINT16>::Free(allIndices);
 
+		m_myVertexBuffer->SetCurrentIfValid();
+		m_myIndexBuffer->SetCurrentIfValid();
+		
+		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 		Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
 
 		UINT16 currentIndex = 0;
