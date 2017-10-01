@@ -1,10 +1,10 @@
 #pragma once
 
+#include "ISystem.h"
 #include <type_traits>
 #include <typeindex>
 #include <unordered_map>
 
-class ISystem;
 class GraphicsSystem;
 class MaterialManagementSystem;
 class SceneManagementSystem;
@@ -42,6 +42,7 @@ private:
 template <class T>
 static T* GameSystem::GetSystem()
 {
+	static_assert(std::is_base_of<ISystem, T>::value, "Must be Sub-Class of ISystem");
 	std::type_index typeId = typeid(T);
 	if (!s_instance->m_subsystems.count(typeId))
 	{
@@ -50,3 +51,14 @@ static T* GameSystem::GetSystem()
 	return (T*)s_instance->m_subsystems[typeId];
 }
 
+//TODO: Maybe replace REGISTER_SUBSYSTEM with a templated version of ISystem
+#define REGISTER_SUBSYSTEM(x) \
+public: \
+static x* Instance() \
+{ \
+	static_assert(std::is_base_of<ISystem, x>::value, "Must be Sub-Class of ISystem"); \
+	return GameSystem::GetSystem<x>(); \
+} \
+x(const x&) = delete; \
+x(); \
+virtual ~x();

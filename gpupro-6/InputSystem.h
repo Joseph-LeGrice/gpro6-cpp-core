@@ -1,5 +1,5 @@
 #pragma once
-#include "ISystem.h"
+#include "GameSystem.h"
 #include "MouseInput.h"
 #include "KeyboardInput.h"
 

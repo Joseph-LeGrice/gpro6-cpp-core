@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ISystem.h"
+#include "GameSystem.h"
 
 
 ISystem::ISystem()

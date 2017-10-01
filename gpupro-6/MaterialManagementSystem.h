@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "Material.h"
-#include "ISystem.h"
+#include "GameSystem.h"
 
 class MaterialManagementSystem : public ISystem
 {

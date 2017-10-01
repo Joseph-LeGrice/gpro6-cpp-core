@@ -1,5 +1,5 @@
 #pragma once
-#include "ISystem.h"
+#include "GameSystem.h"
 #include <chrono>
 
 typedef std::chrono::steady_clock::time_point TimePoint;
