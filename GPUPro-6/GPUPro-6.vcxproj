@@ -194,6 +194,7 @@
     <ClCompile Include="SceneGraph.cpp" />
     <ClCompile Include="SceneManagementSystem.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderManagementSystem.cpp" />
     <ClCompile Include="ShaderResource.cpp" />
     <ClCompile Include="Texture2D_ShaderResource.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -212,6 +213,7 @@
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="PODArray.h" />
+    <ClInclude Include="ShaderManagementSystem.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="ImagingFactory.h" />
     <ClInclude Include="InputSystem.h" />

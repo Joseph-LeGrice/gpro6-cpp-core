@@ -9,11 +9,10 @@ class TextureSampler;
 
 class Shader
 {
-public:
-	Shader();
-	~Shader();
+	friend class ShaderManagementSystem;
 
-	bool Initialize(std::wstring filename);
+public:
+	static Shader* CreateFromFile(std::wstring filename);
 	bool SetCurrentIfValid();
 
 	void AddShaderResource(ShaderResource* r);
@@ -39,5 +38,8 @@ private:
 
 	std::vector<ShaderResource*> m_shaderResources;
 	std::vector<TextureSampler*> m_textureSamplers;
+
+	Shader();
+	~Shader();
 };
 

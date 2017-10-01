@@ -66,6 +66,7 @@
     <ClCompile Include="KeyboardInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderManagementSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="VertexData.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderManagementSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <vector>
 #include "Logging.h"
+#include "ShaderManagementSystem.h"
 
 Shader::Shader()
 {
@@ -38,16 +39,28 @@ Shader::~Shader()
 }
 
 
-bool Shader::Initialize(std::wstring filename)
+Shader* Shader::CreateFromFile(std::wstring filename)
 {
-	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
-	bool vertexShaderCompiled = InitVertexShader(filename, "VShader", device);
-	bool hullShaderCompiled = true; // = m_shader->InitHullShader(filename, "HShader", device);
-	bool domainShaderCompiled = true; //= m_shader->InitDomainShader(filename, "DShader", device);
-	bool geometryShaderCompiled = true; // = m_shader->InitGeometryShader(filename, "GShaderTessellation", device);
-	bool pixelShaderCompiled = InitPixelShader(filename, "PShader", device);
+	Shader* newShaderInstance = new Shader();
 
-	return (vertexShaderCompiled && hullShaderCompiled && domainShaderCompiled && geometryShaderCompiled && pixelShaderCompiled);
+	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
+	bool vertexShaderCompiled = newShaderInstance->InitVertexShader(filename, "VShader", device);
+	bool hullShaderCompiled = true; // = newShaderInstance->InitHullShader(filename, "HShader", device);
+	bool domainShaderCompiled = true; //= newShaderInstance->InitDomainShader(filename, "DShader", device);
+	bool geometryShaderCompiled = true; // = newShaderInstance->InitGeometryShader(filename, "GShaderTessellation", device);
+	bool pixelShaderCompiled = newShaderInstance->InitPixelShader(filename, "PShader", device);
+
+	if (vertexShaderCompiled && hullShaderCompiled &&
+		domainShaderCompiled && geometryShaderCompiled && 
+		pixelShaderCompiled)
+	{
+		ShaderManagementSystem::Instance()->RegisterShader(newShaderInstance);
+		return newShaderInstance;
+	}
+	else
+	{
+		SAFE_DELETE(newShaderInstance);
+	}
 }
 
 bool Shader::SetCurrentIfValid()

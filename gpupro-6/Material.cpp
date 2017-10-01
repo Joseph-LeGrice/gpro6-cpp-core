@@ -22,7 +22,6 @@ Material::~Material()
 {
 	SAFE_RELEASE(m_vertexBuffer);
 	SAFE_RELEASE(m_indexBuffer);
-	SAFE_DELETE(m_shader);
 }
 
 Material* Material::Create()
@@ -101,7 +100,7 @@ bool Material::InitializeBuffers()
 
 void Material::Render(ConstantBuffer* constBuf)
 {
-	if (m_shader->SetCurrentIfValid())
+	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
 		UINT offset = 0;
 		UINT stride = sizeof(VertexData);
