@@ -66,6 +66,7 @@
     <ClCompile Include="ShaderManagementSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Mesh.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

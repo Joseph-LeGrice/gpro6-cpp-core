@@ -10,17 +10,18 @@
 #include "SceneGraph.h"
 #include "Entity.h"
 #include "Transform.h"
+#include "VertexBuffer.h"
 
 Material::Material()
 {
 	m_shader = nullptr;
 	m_indexBuffer = nullptr;
-	m_vertexBuffer = nullptr;
+	m_myVertexBuffer = nullptr;
 }
 
 Material::~Material()
 {
-	SAFE_RELEASE(m_vertexBuffer);
+	SAFE_DELETE(m_myVertexBuffer);
 	SAFE_RELEASE(m_indexBuffer);
 }
 
@@ -71,8 +72,8 @@ bool Material::InitializeBuffers()
 {
 	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 	
-	int INDEX_BUFFER_SIZE = 1024;
-	int VERTEX_BUFER_SIZE = 1024;
+	size_t INDEX_BUFFER_SIZE = 1024;
+	size_t VERTEX_BUFFER_SIZE = 1024;
 
 	D3D11_BUFFER_DESC indexBufferDesc;
 	ZeroMemory(&indexBufferDesc, sizeof(D3D11_BUFFER_DESC));
@@ -84,17 +85,9 @@ bool Material::InitializeBuffers()
 
 	HRESULT indexBufferCreationResult = device->CreateBuffer(&indexBufferDesc, NULL, &m_indexBuffer);
 	
-	D3D11_BUFFER_DESC vertexBufferDesc;
-	ZeroMemory(&vertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
-	vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	vertexBufferDesc.ByteWidth = sizeof(VertexData) * VERTEX_BUFER_SIZE;
-	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	vertexBufferDesc.MiscFlags = 0;
+	m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
 
-	HRESULT vertexBufferCreation = device->CreateBuffer(&vertexBufferDesc, NULL, &m_vertexBuffer);
-
-	return SUCCEEDED(indexBufferCreationResult) && SUCCEEDED(vertexBufferCreation);
+	return SUCCEEDED(indexBufferCreationResult) && m_myVertexBuffer != nullptr;
 }
 
 
@@ -102,12 +95,14 @@ void Material::Render(ConstantBuffer* constBuf)
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
+		m_myVertexBuffer->SetCurrentIfValid();
+
 		UINT offset = 0;
 		UINT stride = sizeof(VertexData);
 
 		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 		deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
-		deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
+
 
 		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
 		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
@@ -121,14 +116,8 @@ void Material::Render(ConstantBuffer* constBuf)
 			PODArray<VertexData>::Append(allVerts, m.m_vertexData);
 			PODArray<UINT16>::Append(allIndices, m.m_indices);
 		}
+		m_myVertexBuffer->SetData(allVerts);
 
-		D3D11_MAPPED_SUBRESOURCE vertexData;
-		HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
-		if (SUCCEEDED(vertexBufferAcquireResult))
-		{
-			memcpy(vertexData.pData, &allVerts[0], sizeof(VertexData) * PODArray<VertexData>::Size(allVerts));
-			deviceContext->Unmap(m_vertexBuffer, 0);
-		}
 
 		D3D11_MAPPED_SUBRESOURCE indexBufferData;
 		HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);

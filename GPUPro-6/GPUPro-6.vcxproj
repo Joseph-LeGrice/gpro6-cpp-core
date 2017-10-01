@@ -204,6 +204,7 @@
     </ClCompile>
     <ClCompile Include="TextureSampler.cpp" />
     <ClCompile Include="TimeSystem.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -243,6 +244,7 @@
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector4.h" />
+    <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexData.h" />
   </ItemGroup>
   <ItemGroup>
