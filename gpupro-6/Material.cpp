@@ -116,8 +116,8 @@ bool Material::Initialize()
 {
 	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 
-	size_t INDEX_BUFFER_SIZE = 1024;
-	size_t VERTEX_BUFFER_SIZE = 1024;
+	size_t INDEX_BUFFER_SIZE = pow(1024, 2);
+	size_t VERTEX_BUFFER_SIZE = pow(1024, 2);
 
 	m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
 	m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);

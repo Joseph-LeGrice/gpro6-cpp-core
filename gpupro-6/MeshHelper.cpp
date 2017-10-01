@@ -61,7 +61,7 @@ Mesh MeshHelper::CreateSphereICO()
 
 Mesh MeshHelper::CreateSphereUV()
 {
-	Mesh result;
+	Mesh result = Mesh::New();
 	result.m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
@@ -70,8 +70,8 @@ Mesh MeshHelper::CreateSphereUV()
 	std::vector<UINT16> indices = std::vector<UINT16>();
 
 	float radius = 1.0f;
-	size_t latitude = 8;
-	size_t longitude = 9;
+	size_t latitude = 16;
+	size_t longitude = 16;
 
 	for (size_t latSlice = 0; latSlice < latitude; ++latSlice)
 	{
@@ -109,9 +109,9 @@ Mesh MeshHelper::CreateSphereUV()
 			indices.push_back(v2);
 			indices.push_back(v3);
 
+			indices.push_back(v3);
 			indices.push_back(v2);
 			indices.push_back(v4);
-			indices.push_back(v3);
 		}
 	}
 
