@@ -68,6 +68,7 @@ void Material::RegisterMeshInfo(size_t meshIndex, size_t transformIndex)
 }
 
 
+
 void Material::DeregisterMeshInfo(size_t meshIndex, size_t transformIndex)
 {
 	size_t lastIndex = m_renderMap[meshIndex].size() - 1;
@@ -96,7 +97,7 @@ void Material::RemoveShaderResource(ShaderResource* r)
 
 void Material::AddTextureSampler(TextureSampler* ts)
 {
-	if (ts->IsValid())
+	if (ts != nullptr && ts->IsValid())
 	{
 		m_textureSamplers.push_back(ts);
 	}
@@ -116,8 +117,8 @@ bool Material::Initialize()
 {
 	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 
-	size_t INDEX_BUFFER_SIZE = pow(1024, 2);
-	size_t VERTEX_BUFFER_SIZE = pow(1024, 2);
+	size_t INDEX_BUFFER_SIZE = (size_t)pow(1024, 2);
+	size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
 
 	m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
 	m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);

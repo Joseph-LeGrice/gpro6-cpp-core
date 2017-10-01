@@ -45,8 +45,8 @@ private:
 
 	bool m_isDirty;
 	Shader* m_shader;
-	std::vector<ShaderResource*> m_shaderResources;
-	std::vector<TextureSampler*> m_textureSamplers;
+	std::vector<ShaderResource*> m_shaderResources; //TODO: Contiguous array of all ShaderResources. Reference via index
+	std::vector<TextureSampler*> m_textureSamplers; //TODO: Contiguous array of all TextureSamplers. Reference via index
 
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;
