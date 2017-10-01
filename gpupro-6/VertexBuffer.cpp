@@ -33,7 +33,7 @@ VertexBuffer* VertexBuffer::Create(size_t bufferSize)
 	D3D11_BUFFER_DESC vertexBufferDesc;
 	ZeroMemory(&vertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
 	vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	vertexBufferDesc.ByteWidth = sizeof(VertexData) * bufferSize;
+	vertexBufferDesc.ByteWidth = (UINT)(sizeof(VertexData) * bufferSize);
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	vertexBufferDesc.MiscFlags = 0;

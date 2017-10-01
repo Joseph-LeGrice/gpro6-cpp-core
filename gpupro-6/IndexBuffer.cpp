@@ -22,7 +22,7 @@ IndexBuffer* IndexBuffer::Create(size_t bufferSize)
 	D3D11_BUFFER_DESC indexBufferDesc;
 	ZeroMemory(&indexBufferDesc, sizeof(D3D11_BUFFER_DESC));
 	indexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	indexBufferDesc.ByteWidth = sizeof(UINT16) * bufferSize;
+	indexBufferDesc.ByteWidth = (UINT)(sizeof(UINT16) * bufferSize);
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	indexBufferDesc.MiscFlags = 0;
