@@ -53,7 +53,12 @@ struct PODArray
 	{
 		if (newSize >= poda.m_capacity)
 		{
-			Reallocate(poda, 2 * poda.m_capacity, newObject);
+			size_t newCap = 2 * poda.m_capacity;
+			while (newCap <= newSize)
+			{
+				newCap = 2 * newCap;
+			}
+			Reallocate(poda, newCap, newObject);
 		}
 
 		for (size_t indexToClear = poda.m_arraySize; indexToClear > newSize; indexToClear--)
