@@ -191,7 +191,6 @@
     <ClCompile Include="MeshHelper.cpp" />
     <ClCompile Include="MouseInput.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
-    <ClCompile Include="SceneGraph.cpp" />
     <ClCompile Include="SceneManagementSystem.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManagementSystem.cpp" />

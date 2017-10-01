@@ -30,9 +30,6 @@
     <ClCompile Include="Material.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGraph.cpp">
-      <Filter>DataStructures</Filter>
-    </ClCompile>
     <ClCompile Include="PerlinNoise.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -66,7 +63,9 @@
     <ClCompile Include="KeyboardInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderManagementSystem.cpp" />
+    <ClCompile Include="ShaderManagementSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -100,9 +99,6 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="SceneGraph.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
@@ -174,7 +170,12 @@
     <ClInclude Include="VertexData.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderManagementSystem.h" />
+    <ClInclude Include="ShaderManagementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

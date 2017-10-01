@@ -72,12 +72,8 @@ struct ComponentArray
 	}
 };
 
-class SceneGraph
+struct SceneGraph
 {
-public:
-	SceneGraph();
-	~SceneGraph();
-
 	ComponentArray<Mesh> m_meshes;
 	ComponentArray<Camera> m_cameras;
 	ComponentArray<Transform> m_transforms;
