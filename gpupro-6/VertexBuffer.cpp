@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "VertexBuffer.h"
+#include "VertexData.h"
+#include "GraphicsSystem.h"
 
 VertexBuffer::VertexBuffer()
 {

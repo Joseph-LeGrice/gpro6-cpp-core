@@ -2,7 +2,8 @@
 
 #include "D3D11.h"
 #include "PODArray.h"
-#include "VertexData.h"
+
+struct VertexData;
 
 class VertexBuffer
 {
