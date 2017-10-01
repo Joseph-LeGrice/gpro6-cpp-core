@@ -11,6 +11,8 @@ class ShaderResource;
 class ConstantBuffer;
 class VertexBuffer;
 class IndexBuffer;
+class ShaderResource;
+class TextureSampler;
 
 typedef std::unordered_map<size_t, std::vector<size_t>> MeshTransformMap;
 
@@ -28,16 +30,24 @@ public:
 	
 	void DeregisterMeshInfo(size_t meshIndex, size_t transformIndex);
 	void RegisterMeshInfo(size_t meshIndex, size_t transformIndex);
+	
+	void AddShaderResource(ShaderResource* r);
+	void RemoveShaderResource(ShaderResource* r);
+
+	void AddTextureSampler(TextureSampler* ts);
+	void RemoveTextureSampler(TextureSampler* ts);
 
 private:
 	bool Initialize();
-	bool InitializeBuffers();
 
 	Material();
 	Material(const Material&) = delete;
 
 	bool m_isDirty;
 	Shader* m_shader;
+	std::vector<ShaderResource*> m_shaderResources;
+	std::vector<TextureSampler*> m_textureSamplers;
+
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;
 	MeshTransformMap m_renderMap;

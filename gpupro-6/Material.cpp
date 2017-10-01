@@ -12,6 +12,9 @@
 #include "Transform.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "Logging.h"
+#include "TextureSampler.h"
+#include "ShaderResource.h"
 
 Material::Material()
 {
@@ -19,12 +22,17 @@ Material::Material()
 	m_isDirty = false;
 	m_myIndexBuffer = nullptr;
 	m_myVertexBuffer = nullptr;
+	m_shaderResources = std::vector<ShaderResource*>();
+	m_textureSamplers = std::vector<TextureSampler*>();
 }
 
 Material::~Material()
 {
 	SAFE_DELETE(m_myVertexBuffer);
 	SAFE_DELETE(m_myIndexBuffer);
+
+	SAFE_DELETE_VECTOR_STACK(m_textureSamplers);
+	SAFE_DELETE_VECTOR_STACK(m_shaderResources);
 }
 
 Material* Material::Create()
@@ -42,17 +50,10 @@ Material* Material::Create()
 	}
 }
 
-bool Material::Initialize()
-{
-	return InitializeBuffers();
-}
 
-
-void Material::DeregisterMeshInfo(size_t meshIndex, size_t transformIndex)
+void Material::SetShader(Shader* s)
 {
-	size_t lastIndex = m_renderMap[meshIndex].size() - 1;
-	m_renderMap[meshIndex][transformIndex] = m_renderMap[meshIndex][lastIndex];
-	m_renderMap[meshIndex].resize(lastIndex);
+	m_shader = s;
 }
 
 
@@ -66,15 +67,55 @@ void Material::RegisterMeshInfo(size_t meshIndex, size_t transformIndex)
 	m_isDirty = true;
 }
 
-void Material::SetShader(Shader* s)
+
+void Material::DeregisterMeshInfo(size_t meshIndex, size_t transformIndex)
 {
-	m_shader = s;
+	size_t lastIndex = m_renderMap[meshIndex].size() - 1;
+	m_renderMap[meshIndex][transformIndex] = m_renderMap[meshIndex][lastIndex];
+	m_renderMap[meshIndex].resize(lastIndex);
 }
 
-bool Material::InitializeBuffers()
+
+void Material::AddShaderResource(ShaderResource* r)
+{
+	if (r != nullptr)
+	{
+		m_shaderResources.push_back(r);
+	}
+	else
+	{
+		LogError("ShaderResource is not valid!");
+	}
+}
+
+void Material::RemoveShaderResource(ShaderResource* r)
+{
+	m_shaderResources.erase(std::remove(m_shaderResources.begin(), m_shaderResources.end(), r), m_shaderResources.end());
+}
+
+
+void Material::AddTextureSampler(TextureSampler* ts)
+{
+	if (ts->IsValid())
+	{
+		m_textureSamplers.push_back(ts);
+	}
+	else
+	{
+		LogError("TextureSampler is not valid!");
+	}
+}
+
+void Material::RemoveTextureSampler(TextureSampler* ts)
+{
+	m_textureSamplers.erase(std::remove(m_textureSamplers.begin(), m_textureSamplers.end(), ts), m_textureSamplers.end());
+}
+
+
+bool Material::Initialize()
 {
 	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
-	
+
 	size_t INDEX_BUFFER_SIZE = 1024;
 	size_t VERTEX_BUFFER_SIZE = 1024;
 
@@ -120,10 +161,41 @@ void Material::Render(ConstantBuffer* constBuf)
 		m_myVertexBuffer->SetCurrentIfValid();
 		m_myIndexBuffer->SetCurrentIfValid();
 		
+		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+		
+		if (m_shaderResources.size() > 0)
+		{
+			std::vector<ID3D11ShaderResourceView*> allResources;
+			for each (ShaderResource* sr in m_shaderResources)
+			{
+				ID3D11ShaderResourceView* resource = sr->GetResourceView();
+				allResources.push_back(resource);
+			}
+			deviceContext->VSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
+			//deviceContext->HSSetShaderResources(0, allResources.size(), &allResources[0]);
+			//deviceContext->DSSetShaderResources(0, allResources.size(), &allResources[0]);
+			//deviceContext->GSSetShaderResources(0, allResources.size(), &allResources[0]);
+			deviceContext->PSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
+		}
+
+		if (m_textureSamplers.size() > 0)
+		{
+			std::vector<ID3D11SamplerState*> allSamplers;
+			for each (TextureSampler* ts in m_textureSamplers)
+			{
+				ID3D11SamplerState* sampler = ts->GetSampler();
+				allSamplers.push_back(sampler);
+			}
+			deviceContext->VSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
+			//deviceContext->HSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+			//deviceContext->DSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+			//deviceContext->GSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
+			deviceContext->PSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
+		}
+
+		
 		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
 		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
-		
-		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 		Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
 
 		UINT16 currentIndex = 0;

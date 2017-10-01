@@ -5,11 +5,6 @@
 
 #include "VertexData.h"
 #include "GraphicsSystem.h"
-#include "TextureSampler.h"
-#include "ShaderResource.h"
-#include <algorithm>
-#include <vector>
-#include "Logging.h"
 #include "ShaderManagementSystem.h"
 
 Shader::Shader()
@@ -20,8 +15,6 @@ Shader::Shader()
 	m_geometryShader = nullptr;
 	m_hullShader = nullptr;
 	m_domainShader = nullptr;
-	m_shaderResources = std::vector<ShaderResource*>();
-	m_textureSamplers = std::vector<TextureSampler*>();
 }
 
 
@@ -33,9 +26,6 @@ Shader::~Shader()
 	SAFE_RELEASE(m_domainShader);
 	SAFE_RELEASE(m_geometryShader);
 	SAFE_RELEASE(m_pixelShader);
-	
-	SAFE_DELETE_VECTOR_STACK(m_textureSamplers);
-	SAFE_DELETE_VECTOR_STACK(m_shaderResources);
 }
 
 
@@ -88,74 +78,8 @@ bool Shader::SetCurrentIfValid()
 
 		deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 
-		if (m_shaderResources.size() > 0)
-		{
-			std::vector<ID3D11ShaderResourceView*> allResources;
-			for each (ShaderResource* sr in m_shaderResources)
-			{
-				ID3D11ShaderResourceView* resource = sr->GetResourceView();
-				allResources.push_back(resource);
-			}
-			deviceContext->VSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
-			//deviceContext->HSSetShaderResources(0, allResources.size(), &allResources[0]);
-			//deviceContext->DSSetShaderResources(0, allResources.size(), &allResources[0]);
-			//deviceContext->GSSetShaderResources(0, allResources.size(), &allResources[0]);
-			deviceContext->PSSetShaderResources(0, (UINT)allResources.size(), &allResources[0]);
-		}
-
-		if (m_textureSamplers.size() > 0)
-		{
-			std::vector<ID3D11SamplerState*> allSamplers;
-			for each (TextureSampler* ts in m_textureSamplers)
-			{
-				ID3D11SamplerState* sampler = ts->GetSampler();
-				allSamplers.push_back(sampler);
-			}
-			deviceContext->VSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
-			//deviceContext->HSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
-			//deviceContext->DSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
-			//deviceContext->GSSetSamplers(0, allSamplers.size(), &allSamplers[0]);
-			deviceContext->PSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
-		}
-
 		return true;
 	}
-}
-
-
-void Shader::AddShaderResource(ShaderResource* r)
-{
-	if (r != nullptr)
-	{
-		m_shaderResources.push_back(r);
-	}
-	else
-	{
-		LogError("ShaderResource is not valid!");
-	}
-}
-
-void Shader::RemoveShaderResource(ShaderResource* r)
-{
-	m_shaderResources.erase(std::remove(m_shaderResources.begin(), m_shaderResources.end(), r), m_shaderResources.end());
-}
-
-
-void Shader::AddTextureSampler(TextureSampler* ts)
-{
-	if (ts->IsValid())
-	{
-		m_textureSamplers.push_back(ts);
-	}
-	else
-	{
-		LogError("TextureSampler is not valid!");
-	}
-}
-
-void Shader::RemoveTextureSampler(TextureSampler* ts)
-{
-	m_textureSamplers.erase(std::remove(m_textureSamplers.begin(), m_textureSamplers.end(), ts), m_textureSamplers.end());
 }
 
 bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Device* device)

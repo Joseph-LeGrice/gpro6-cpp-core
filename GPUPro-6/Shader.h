@@ -4,9 +4,6 @@
 #include <string>
 #include <vector>
 
-class ShaderResource;
-class TextureSampler;
-
 class Shader
 {
 	friend class ShaderManagementSystem;
@@ -14,13 +11,6 @@ class Shader
 public:
 	static Shader* CreateFromFile(std::wstring filename);
 	bool SetCurrentIfValid();
-
-	void AddShaderResource(ShaderResource* r);
-	void RemoveShaderResource(ShaderResource* r);
-
-	void AddTextureSampler(TextureSampler* ts);
-	void RemoveTextureSampler(TextureSampler* ts);
-
 
 private:
 	bool InitVertexShader(std::wstring filename, std::string name, ID3D11Device* device);
@@ -35,9 +25,6 @@ private:
 	ID3D11GeometryShader* m_geometryShader;
 	ID3D11HullShader* m_hullShader;
 	ID3D11DomainShader* m_domainShader;
-
-	std::vector<ShaderResource*> m_shaderResources;
-	std::vector<TextureSampler*> m_textureSamplers;
 
 	Shader();
 	~Shader();

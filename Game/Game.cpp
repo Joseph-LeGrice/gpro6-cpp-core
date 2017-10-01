@@ -33,16 +33,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		GameSystem::InitializeAllSystems();
 
+		Material* m = Material::Create();
+
 		Shader* s = Shader::CreateFromFile(L"SimpleTexturedQuad.shader");
+		m->SetShader(s);
+
 		Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
-		s->AddShaderResource((ShaderResource*)t);
+		m->AddShaderResource((ShaderResource*)t);
 		
 		TextureSampler* ts = new TextureSampler();
 		ts->Initialize();
-		s->AddTextureSampler(ts);
+		m->AddTextureSampler(ts);
 
-		Material* m = Material::Create();
-		
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
 		
 		// Quad Mesh
@@ -56,7 +58,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		size_t meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
-		m->SetShader(s);
 		m->RegisterMeshInfo(meshIndex, meshTransformIndex);
 
 		MouseRotateSystem::Instance()->SetTransformIndexToRotate(meshTransformIndex);
