@@ -135,10 +135,10 @@ Mesh MeshHelper::CreateCube()
 
 	// Front Face
 	verts.push_back({ -1.0f,  1.0f, -1.0f });
-	verts.push_back({  1.0f,  1.0f, -1.0f });
+	verts.push_back({ 1.0f,  1.0f, -1.0f });
 	verts.push_back({ -1.0f, -1.0f, -1.0f });
-	verts.push_back({  1.0f, -1.0f, -1.0f });
-	
+	verts.push_back({ 1.0f, -1.0f, -1.0f });
+
 	norms.push_back({ 0.0f, 0.0f, -1.0f });
 	norms.push_back({ 0.0f, 0.0f, -1.0f });
 	norms.push_back({ 0.0f, 0.0f, -1.0f });
@@ -176,11 +176,10 @@ Mesh MeshHelper::CreateCube()
 	indices.push_back(7);
 	
 	// Top Face
-	verts.push_back({ -1.0f, 1.0f, -1.0f });
-	norms.push_back({  0.0f,  0.0f,  0.0f }); 
-	verts.push_back({  1.0f, 1.0f, -1.0f });
 	verts.push_back({ -1.0f, 1.0f,  1.0f });
 	verts.push_back({  1.0f, 1.0f,  1.0f });
+	verts.push_back({ -1.0f, 1.0f, -1.0f });
+	verts.push_back({  1.0f, 1.0f, -1.0f });
 
 	norms.push_back({ 0.0f, 1.0f,  0.0f });
 	norms.push_back({ 0.0f, 1.0f,  0.0f });
@@ -196,17 +195,17 @@ Mesh MeshHelper::CreateCube()
 	indices.push_back(10);
 	indices.push_back(9);
 	indices.push_back(11);
-	
-	// Bottom Face
-	verts.push_back({  1.0f, -1.0f, -1.0f });
-	verts.push_back({ -1.0f, -1.0f, -1.0f });
-	verts.push_back({  1.0f, -1.0f,  1.0f });
-	verts.push_back({ -1.0f, -1.0f,  1.0f });
 
-	norms.push_back({ 0.0f, -1.0f,  0.0f });
-	norms.push_back({ 0.0f, -1.0f,  0.0f });
-	norms.push_back({ 0.0f, -1.0f,  0.0f });
-	norms.push_back({ 0.0f, -1.0f,  0.0f });
+	// Left Face
+	verts.push_back({  1.0f, -1.0f,  1.0f });
+	verts.push_back({  1.0f, -1.0f, -1.0f });
+	verts.push_back({  1.0f,  1.0f,  1.0f });
+	verts.push_back({  1.0f,  1.0f, -1.0f });
+
+	norms.push_back({ -1.0f,  0.0f,  0.0f });
+	norms.push_back({ -1.0f,  0.0f,  0.0f });
+	norms.push_back({ -1.0f,  0.0f,  0.0f });
+	norms.push_back({ -1.0f,  0.0f,  0.0f });
 
 	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
 	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
@@ -218,16 +217,16 @@ Mesh MeshHelper::CreateCube()
 	indices.push_back(13);
 	indices.push_back(15);
 	
-	// Back Face
-	verts.push_back({ -1.0f,  1.0f, 1.0f });
-	verts.push_back({  1.0f,  1.0f, 1.0f });
-	verts.push_back({ -1.0f, -1.0f, 1.0f });
-	verts.push_back({  1.0f, -1.0f, 1.0f });
+	// Bottom Face
+	verts.push_back({  1.0f, -1.0f,  1.0f });
+	verts.push_back({ -1.0f, -1.0f,  1.0f });
+	verts.push_back({  1.0f, -1.0f, -1.0f });
+	verts.push_back({ -1.0f, -1.0f, -1.0f });
 
-	norms.push_back({ 0.0f, 0.0f,  1.0f });
-	norms.push_back({ 0.0f, 0.0f,  1.0f });
-	norms.push_back({ 0.0f, 0.0f,  1.0f });
-	norms.push_back({ 0.0f, 0.0f,  1.0f });
+	norms.push_back({ 0.0f, -1.0f,  0.0f });
+	norms.push_back({ 0.0f, -1.0f,  0.0f });
+	norms.push_back({ 0.0f, -1.0f,  0.0f });
+	norms.push_back({ 0.0f, -1.0f,  0.0f });
 
 	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
 	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
@@ -238,6 +237,27 @@ Mesh MeshHelper::CreateCube()
 	indices.push_back(18);
 	indices.push_back(17);
 	indices.push_back(19);
+
+	// Back Face
+	verts.push_back({ -1.0f, -1.0f, 1.0f });
+	verts.push_back({  1.0f, -1.0f, 1.0f });
+	verts.push_back({ -1.0f,  1.0f, 1.0f });
+	verts.push_back({  1.0f,  1.0f, 1.0f });
+
+	norms.push_back({ 0.0f, 0.0f,  1.0f });
+	norms.push_back({ 0.0f, 0.0f,  1.0f });
+	norms.push_back({ 0.0f, 0.0f,  1.0f });
+	norms.push_back({ 0.0f, 0.0f,  1.0f });
+
+	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
+	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+
+	indices.push_back(20);
+	indices.push_back(21);
+	indices.push_back(22);
+	indices.push_back(22);
+	indices.push_back(21);
+	indices.push_back(23);
 
 	result.SetVertices(result, verts);
 	result.SetNormals(result, norms);
