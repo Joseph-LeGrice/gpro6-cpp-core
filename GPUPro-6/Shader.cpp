@@ -50,6 +50,7 @@ Shader* Shader::CreateFromFile(std::wstring filename)
 	else
 	{
 		SAFE_DELETE(newShaderInstance);
+		return nullptr;
 	}
 }
 
