@@ -8,7 +8,7 @@
 struct Mesh;
 class Shader;
 class ShaderResource;
-class ConstantBuffer;
+class PerObjectConstantBuffer;
 class VertexBuffer;
 class IndexBuffer;
 class ShaderResource;
@@ -23,7 +23,7 @@ public:
 
 	static Material* Create();
 
-	void Render(ConstantBuffer*);
+	void Render(PerObjectConstantBuffer*);
 	void UpdateIfDirty();
 	
 	void SetShader(Shader* shader);

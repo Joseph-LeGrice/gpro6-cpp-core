@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "Material.h"
 #include "Mesh.h"
-#include "ConstantBuffer.h"
+#include "ConstantBuffers/PerObjectConstantBuffer.h"
 #include "MaterialManagementSystem.h"
 #include "GraphicsSystem.h"
 #include "Shader.h"
@@ -153,7 +153,7 @@ void Material::UpdateIfDirty()
 	}
 }
 
-void Material::Render(ConstantBuffer* constBuf)
+void Material::Render(PerObjectConstantBuffer* constBuf)
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{

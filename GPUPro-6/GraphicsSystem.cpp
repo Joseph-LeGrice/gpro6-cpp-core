@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GraphicsSystem.h"
 #include "Material.h"
-#include "ConstantBuffer.h"
+#include "ConstantBuffers/PerObjectConstantBuffer.h"
 #include "Camera.h"
 #include "SceneManagementSystem.h"
 #include "MaterialManagementSystem.h"
@@ -98,7 +98,7 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 
 			m_deviceContext->RSSetViewports(1, &viewportDesc);
 
-			m_constantBuffer = new ConstantBuffer();
+			m_constantBuffer = new PerObjectConstantBuffer();
 			bool createdConstantBuffer = m_constantBuffer->Initialize(m_device);
 
 			return createdConstantBuffer;

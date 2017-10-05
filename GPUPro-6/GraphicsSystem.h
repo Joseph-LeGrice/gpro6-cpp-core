@@ -12,7 +12,7 @@
 #pragma comment (lib, "d3dx10.lib")
 
 class Material;
-class ConstantBuffer;
+class PerObjectConstantBuffer;
 struct Camera;
 struct SceneGraph;
 
@@ -37,7 +37,7 @@ private:
 	IDXGISwapChain* m_swapchain;
 	ID3D11RenderTargetView * m_rtBackBuffer;
 
-	ConstantBuffer* m_constantBuffer;
+	PerObjectConstantBuffer* m_constantBuffer;
 
 	float m_viewportWidth, m_viewportHeight;
 };

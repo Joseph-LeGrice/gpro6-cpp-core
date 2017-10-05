@@ -24,9 +24,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -72,6 +69,12 @@
     <ClCompile Include="IndexBuffer.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>Graphics\ConstantBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffers\PerObjectConstantBuffer.cpp">
+      <Filter>Graphics\ConstantBuffers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -93,9 +96,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
@@ -188,6 +188,12 @@
     <ClInclude Include="IndexBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Graphics\ConstantBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffers\PerObjectConstantBuffer.h">
+      <Filter>Graphics\ConstantBuffers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -211,5 +217,19 @@
     <Filter Include="Input">
       <UniqueIdentifier>{fa0ba861-dc61-44bf-9034-7bd6f3ae7eaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{dfa88832-0aec-4779-bfde-6d8a9e35ef6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\ConstantBuffers">
+      <UniqueIdentifier>{8369d17f-422b-4a72-8478-4cf8631d5f6c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\CommonInclude.hlsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ForwardRendering.hlsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

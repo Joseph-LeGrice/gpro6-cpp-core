@@ -1,35 +1,14 @@
 #pragma once
 #include "D3DX11.h"
-#include "D3DX10.h"
-#include "Matrix4x4.h"
-
-
-struct VS_CONSTANT_BUFFER
-{
-	Matrix4x4 MVP;
-	Matrix4x4 WorldMatrix;
-	Matrix4x4 ViewProjectionMatrix;
-};
 
 class ConstantBuffer
 {
 public:
 	ConstantBuffer();
-	~ConstantBuffer();
+	virtual ~ConstantBuffer();
 
-	bool Initialize(ID3D11Device* device);
-	void SetBuffers();
-	void UpdateBuffers();
-	void SetProjectionMatrix(const Matrix4x4& vp);
-	void SetViewMatrix(const Matrix4x4& vp);
-	void SetWorldMatrix(const Matrix4x4& w);
-
-private:
-	Matrix4x4 m_vMatrix;
-	Matrix4x4 m_pMatrix;
-	Matrix4x4 m_wMatrix;
-	ID3D11Buffer* m_buffer;
-
-	VS_CONSTANT_BUFFER GetBufferData();
+	virtual bool Initialize(ID3D11Device* device) = 0;
+	virtual void SetBuffers() = 0;
+	virtual void UpdateBuffers() = 0;
 };
 
