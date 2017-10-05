@@ -29,29 +29,11 @@ Shader::~Shader()
 }
 
 
-Shader* Shader::CreateFromFile(std::wstring filename)
+Shader* Shader::CreateNew()
 {
 	Shader* newShaderInstance = new Shader();
-
-	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
-	bool vertexShaderCompiled = newShaderInstance->InitVertexShader(filename, "VShader", device);
-	bool hullShaderCompiled = true; // = newShaderInstance->InitHullShader(filename, "HShader", device);
-	bool domainShaderCompiled = true; //= newShaderInstance->InitDomainShader(filename, "DShader", device);
-	bool geometryShaderCompiled = true; // = newShaderInstance->InitGeometryShader(filename, "GShaderTessellation", device);
-	bool pixelShaderCompiled = newShaderInstance->InitPixelShader(filename, "PShader", device);
-
-	if (vertexShaderCompiled && hullShaderCompiled &&
-		domainShaderCompiled && geometryShaderCompiled && 
-		pixelShaderCompiled)
-	{
-		ShaderManagementSystem::Instance()->RegisterShader(newShaderInstance);
-		return newShaderInstance;
-	}
-	else
-	{
-		SAFE_DELETE(newShaderInstance);
-		return nullptr;
-	}
+	ShaderManagementSystem::Instance()->RegisterShader(newShaderInstance);
+	return newShaderInstance;
 }
 
 bool Shader::SetCurrentIfValid()
@@ -83,7 +65,7 @@ bool Shader::SetCurrentIfValid()
 	}
 }
 
-bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Device* device)
+bool Shader::InitVertexShader(std::wstring filename, std::string name)
 {
 	ID3D10Blob* vertexShaderBlob = nullptr;
 	ID3D10Blob* vertexShaderErrorBlob = nullptr;
@@ -96,6 +78,7 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Dev
 
 	if (SUCCEEDED(vertexShaderCompileResult))
 	{
+		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 		HRESULT createdVertexShader  = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_vertexShader);
 		if (SUCCEEDED(createdVertexShader))
 		{
@@ -111,7 +94,7 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name, ID3D11Dev
 }
 
 
-bool Shader::InitHullShader(std::wstring filename, std::string name, ID3D11Device* device)
+bool Shader::InitHullShader(std::wstring filename, std::string name)
 {
 	ID3D10Blob* hullShaderBlob = nullptr;
 	ID3D10Blob* hullShaderErrorBlob = nullptr;
@@ -124,6 +107,7 @@ bool Shader::InitHullShader(std::wstring filename, std::string name, ID3D11Devic
 
 	if (SUCCEEDED(hullShaderCompileResult))
 	{
+		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 		HRESULT createdHullShader = device->CreateHullShader(hullShaderBlob->GetBufferPointer(), hullShaderBlob->GetBufferSize(), NULL, &m_hullShader);
 		SAFE_RELEASE(hullShaderBlob);
 
@@ -136,7 +120,7 @@ bool Shader::InitHullShader(std::wstring filename, std::string name, ID3D11Devic
 }
 
 
-bool Shader::InitDomainShader(std::wstring filename, std::string name, ID3D11Device* device)
+bool Shader::InitDomainShader(std::wstring filename, std::string name)
 {
 	ID3D10Blob* domainShaderBlob = nullptr;
 	ID3D10Blob* domainShaderErrorBlob = nullptr;
@@ -149,6 +133,7 @@ bool Shader::InitDomainShader(std::wstring filename, std::string name, ID3D11Dev
 
 	if (SUCCEEDED(domainShaderCompileResult))
 	{
+		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 		HRESULT createdDomainShader = device->CreateDomainShader(domainShaderBlob->GetBufferPointer(), domainShaderBlob->GetBufferSize(), 0, &m_domainShader);
 		SAFE_RELEASE(domainShaderBlob);
 
@@ -161,7 +146,7 @@ bool Shader::InitDomainShader(std::wstring filename, std::string name, ID3D11Dev
 }
 
 
-bool Shader::InitGeometryShader(std::wstring filename, std::string name, ID3D11Device* device)
+bool Shader::InitGeometryShader(std::wstring filename, std::string name)
 {
 	ID3D10Blob* geomShaderBlob = nullptr;
 	ID3D10Blob* geomShaderErrorBlob = nullptr;
@@ -174,6 +159,7 @@ bool Shader::InitGeometryShader(std::wstring filename, std::string name, ID3D11D
 
 	if (SUCCEEDED(geomShaderCompileResult))
 	{
+		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 		HRESULT createdGeometryShader = device->CreateGeometryShader(geomShaderBlob->GetBufferPointer(), geomShaderBlob->GetBufferSize(), NULL, &m_geometryShader);
 		SAFE_RELEASE(geomShaderBlob);
 
@@ -186,7 +172,7 @@ bool Shader::InitGeometryShader(std::wstring filename, std::string name, ID3D11D
 }
 
 	
-bool Shader::InitPixelShader(std::wstring filename, std::string name, ID3D11Device* device)
+bool Shader::InitPixelShader(std::wstring filename, std::string name)
 {
 	ID3D10Blob* pixelShaderBlob = nullptr;
 	ID3D10Blob* pixelShaderErrorBlob = nullptr;
@@ -199,6 +185,7 @@ bool Shader::InitPixelShader(std::wstring filename, std::string name, ID3D11Devi
 
 	if (SUCCEEDED(pixelShaderCompileResult))
 	{
+		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
 		HRESULT createdPixelShader = device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), NULL, &m_pixelShader);
 		SAFE_RELEASE(pixelShaderBlob);
 

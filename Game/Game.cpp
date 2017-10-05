@@ -35,7 +35,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		Material* m = Material::Create();
 
-		Shader* s = Shader::CreateFromFile(L"SimpleTexturedQuad.shader");
+		Shader* s = Shader::CreateNew();
+		s->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader");
+		s->InitPixelShader(L"SimpleTexturedQuad.shader", "PShader");
 		m->SetShader(s);
 
 		Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
