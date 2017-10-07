@@ -69,11 +69,8 @@
     <ClCompile Include="IndexBuffer.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>Graphics\ConstantBuffers</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstantBuffers\PerObjectConstantBuffer.cpp">
-      <Filter>Graphics\ConstantBuffers</Filter>
+    <ClCompile Include="Systems\ConstantBufferManagementSystem.cpp">
+      <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,10 +186,13 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ConstantBuffers\PerObjectBuffer.h">
       <Filter>Graphics\ConstantBuffers</Filter>
     </ClInclude>
-    <ClInclude Include="ConstantBuffers\PerObjectConstantBuffer.h">
-      <Filter>Graphics\ConstantBuffers</Filter>
+    <ClInclude Include="Systems\ConstantBufferManagementSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

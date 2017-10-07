@@ -4,15 +4,16 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "Graphics/ConstantBuffers/PerObjectBuffer.h"
 
 struct Mesh;
 class Shader;
 class ShaderResource;
-class PerObjectConstantBuffer;
 class VertexBuffer;
 class IndexBuffer;
 class ShaderResource;
 class TextureSampler;
+struct Matrix4x4;
 
 typedef std::unordered_map<size_t, std::vector<size_t>> MeshTransformMap;
 
@@ -23,7 +24,7 @@ public:
 
 	static Material* Create();
 
-	void Render(PerObjectConstantBuffer*);
+	void Render(Matrix4x4&,Matrix4x4&);
 	void UpdateIfDirty();
 	
 	void SetShader(Shader* shader);

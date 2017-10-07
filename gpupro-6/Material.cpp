@@ -2,7 +2,6 @@
 #include <algorithm>
 #include "Material.h"
 #include "Mesh.h"
-#include "ConstantBuffers/PerObjectConstantBuffer.h"
 #include "MaterialManagementSystem.h"
 #include "GraphicsSystem.h"
 #include "Shader.h"
@@ -15,6 +14,7 @@
 #include "Logging.h"
 #include "TextureSampler.h"
 #include "ShaderResource.h"
+#include "Systems/ConstantBufferManagementSystem.h"
 
 Material::Material()
 {
@@ -153,7 +153,7 @@ void Material::UpdateIfDirty()
 	}
 }
 
-void Material::Render(PerObjectConstantBuffer* constBuf)
+void Material::Render(Matrix4x4& proj, Matrix4x4& view)
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
@@ -192,11 +192,12 @@ void Material::Render(PerObjectConstantBuffer* constBuf)
 			deviceContext->PSSetSamplers(0, (UINT)allSamplers.size(), &allSamplers[0]);
 		}
 
-		
+		PER_OBJECT_BUFFER pob;
 		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
 		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
 		Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
 
+		PerObjectBuffer& pub = ConstantBufferManagementSystem::Instance()->GetPerObjectBuffer();
 		UINT16 currentIndex = 0;
 		for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 		{
@@ -204,8 +205,11 @@ void Material::Render(PerObjectConstantBuffer* constBuf)
 			for (auto transformIt = it->second.begin(); transformIt != it->second.end(); ++transformIt)
 			{
 				Transform& t = allTransforms[*transformIt];
-				constBuf->SetWorldMatrix(Transform::GetTransformationMatrix(t));
-				constBuf->UpdateBuffers();
+				Matrix4x4 model = Transform::GetTransformationMatrix(t);
+
+				pob.ModelViewProjection = proj * view * model;
+				pob.ModelView = view * model;
+				pub.UpdateBuffer(pob);
 
 				UINT16 numberOfVerts = (UINT16)PODArray<UINT16>::Size(m.m_indices);
 				deviceContext->IASetPrimitiveTopology(m.m_topology);

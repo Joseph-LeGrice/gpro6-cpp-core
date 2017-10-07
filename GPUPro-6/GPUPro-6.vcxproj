@@ -183,8 +183,6 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConstantBuffer.cpp" />
-    <ClCompile Include="ConstantBuffers\PerObjectConstantBuffer.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GraphicsSystem.cpp" />
     <ClCompile Include="ImagingFactory.cpp" />
@@ -201,6 +199,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManagementSystem.cpp" />
     <ClCompile Include="ShaderResource.cpp" />
+    <ClCompile Include="Systems\ConstantBufferManagementSystem.cpp" />
     <ClCompile Include="Texture2D_ShaderResource.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -215,13 +214,14 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ConstantBuffer.h" />
-    <ClInclude Include="ConstantBuffers\PerObjectConstantBuffer.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GraphicsSystem.h" />
+    <ClInclude Include="Graphics\ConstantBuffers\PerObjectBuffer.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="PODArray.h" />
     <ClInclude Include="ShaderManagementSystem.h" />
+    <ClInclude Include="Systems\ConstantBufferManagementSystem.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="ImagingFactory.h" />
     <ClInclude Include="InputSystem.h" />

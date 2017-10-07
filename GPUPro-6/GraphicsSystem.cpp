@@ -1,17 +1,17 @@
 #include "stdafx.h"
 #include "GraphicsSystem.h"
 #include "Material.h"
-#include "ConstantBuffers/PerObjectConstantBuffer.h"
+#include "ConstantBuffer.h"
 #include "Camera.h"
 #include "SceneManagementSystem.h"
 #include "MaterialManagementSystem.h"
 #include "SceneGraph.h"
+#include "Systems\ConstantBufferManagementSystem.h"
 
 #define DEBUG
 
 GraphicsSystem::GraphicsSystem()
 {
-	m_constantBuffer = nullptr;
 	m_rtBackBuffer = nullptr;
 	m_swapchain = nullptr;
 	m_device = nullptr;
@@ -22,7 +22,6 @@ GraphicsSystem::~GraphicsSystem()
 {
 	m_swapchain->SetFullscreenState(FALSE, NULL);
 
-	SAFE_DELETE(m_constantBuffer);
 	SAFE_RELEASE(m_rtBackBuffer);
 	SAFE_RELEASE(m_swapchain);
 	SAFE_RELEASE(m_device);
@@ -98,10 +97,7 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 
 			m_deviceContext->RSSetViewports(1, &viewportDesc);
 
-			m_constantBuffer = new PerObjectConstantBuffer();
-			bool createdConstantBuffer = m_constantBuffer->Initialize(m_device);
-
-			return createdConstantBuffer;
+			return true;
 		}
 	}
 	
@@ -128,21 +124,22 @@ void GraphicsSystem::VariableTick()
 	size_t allCamerasSize = cca.GetArraySize();
 
 	const std::vector<Material*>* allMats = MaterialManagementSystem::Instance()->GetAllMaterials();
+	ConstantBufferManagementSystem::Instance()->SetBuffers();
 
 	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
 	{
 		Camera& cam = allCameras[cameraIndex];
-		m_constantBuffer->SetBuffers();
+
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
 		Transform& t = allTransforms[cam.m_transformIndex];
-		m_constantBuffer->SetViewMatrix(Transform::GetViewMatrix(t));
-		m_constantBuffer->SetProjectionMatrix(cam.m_projectionMatrix);
+		Matrix4x4 view = Transform::GetViewMatrix(t);
+		Matrix4x4 proj = cam.m_projectionMatrix;
 
 		for each (Material* m in *allMats)
 		{
 			m->UpdateIfDirty();
-			m->Render(m_constantBuffer);
+			m->Render(proj, view);
 		}
 
 		m_swapchain->Present(0, 0);
