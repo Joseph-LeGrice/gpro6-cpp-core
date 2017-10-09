@@ -5,9 +5,11 @@
 
 #include "Graphics/ConstantBuffers/ConstantBufferDefines.h"
 
+
 class ConstantBufferManagementSystem : public ISystem
 {
 	REGISTER_SUBSYSTEM(ConstantBufferManagementSystem);
+
 public:
 	PerObjectBuffer& GetPerObjectBuffer()
 	{
@@ -15,4 +17,15 @@ public:
 	}
 private:
 	PerObjectBuffer m_perObjectBuffer;
+
+
+public:
+	MaterialBuffer& GetMaterialBuffer()
+	{
+		return m_materialBuffer;
+	}
+private:
+	MaterialBuffer m_materialBuffer;
 };
+
+
