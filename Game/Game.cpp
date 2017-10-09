@@ -33,19 +33,24 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		GameSystem::InitializeAllSystems();
 
-		Material* m = Material::Create();
+		Material* simpleQuadMat = Material::Create();
 
-		Shader* s = Shader::CreateNew();
-		s->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader");
-		s->InitPixelShader(L"SimpleTexturedQuad.shader", "PShader");
-		m->SetShader(s);
+		Shader* simpleTexturedQuadShader = Shader::CreateNew();
+		simpleTexturedQuadShader->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader");
+		simpleTexturedQuadShader->InitPixelShader(L"SimpleTexturedQuad.shader", "PShader");
+
+		Shader* materialShader = Shader::CreateNew();
+		materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
+		//materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
+
+		simpleQuadMat->SetShader(simpleTexturedQuadShader);
 
 		Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
-		m->AddShaderResource((ShaderResource*)t);
+		simpleQuadMat->AddShaderResource((ShaderResource*)t);
 		
 		TextureSampler* ts = new TextureSampler();
 		ts->Initialize();
-		m->AddTextureSampler(ts);
+		simpleQuadMat->AddTextureSampler(ts);
 
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
 		
@@ -62,7 +67,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		size_t meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
-		m->RegisterMeshInfo(meshIndex, meshTransformIndex);
+		simpleQuadMat->RegisterMeshInfo(meshIndex, meshTransformIndex);
 
 		MouseRotateSystem::Instance()->SetTransformIndexToRotate(meshTransformIndex);
 

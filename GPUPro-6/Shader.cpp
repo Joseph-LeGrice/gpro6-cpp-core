@@ -82,7 +82,7 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name)
 		HRESULT createdVertexShader  = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, &m_vertexShader);
 		if (SUCCEEDED(createdVertexShader))
 		{
-			HRESULT attachedInputLayout = device->CreateInputLayout(g_inputLayoutScheme, 3, vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &m_inputLayout);
+			HRESULT attachedInputLayout = device->CreateInputLayout(g_inputLayoutScheme, 5, vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &m_inputLayout);
 
 			SAFE_RELEASE(vertexShaderBlob);
 

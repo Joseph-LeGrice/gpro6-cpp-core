@@ -1,6 +1,8 @@
 struct VS_INPUT
 {
 	float3 vPosition : POSITION;
+	float3 tangent : TANGENT;
+	float3 binormal : BINORMAL;
 	float3 normal : NORMAL;
 	float2 uv : TEXCOORD;
 };
@@ -14,8 +16,7 @@ struct VS_OUTPUT
 cbuffer PS_CONSTANT_BUFFER
 {
 	float4x4 g_mvp;
-	float4x4 g_world;
-	float4x4 g_viewProjection;
+	float4x4 g_modelView;
 };
 
 
