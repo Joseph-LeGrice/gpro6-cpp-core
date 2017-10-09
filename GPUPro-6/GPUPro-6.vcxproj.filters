@@ -185,14 +185,14 @@
     <ClInclude Include="IndexBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\ConstantBuffers\PerObjectBuffer.h">
-      <Filter>Graphics\ConstantBuffers</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\ConstantBufferManagementSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ConstantBuffers\ConstantBufferDefines.h">
+      <Filter>Graphics\ConstantBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Graphics\ConstantBuffers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

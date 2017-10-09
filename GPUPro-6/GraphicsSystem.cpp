@@ -124,7 +124,7 @@ void GraphicsSystem::VariableTick()
 	size_t allCamerasSize = cca.GetArraySize();
 
 	const std::vector<Material*>* allMats = MaterialManagementSystem::Instance()->GetAllMaterials();
-	ConstantBufferManagementSystem::Instance()->SetBuffers();
+	ConstantBufferManagementSystem::Instance()->GetPerObjectBuffer().BindBuffer();
 
 	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
 	{

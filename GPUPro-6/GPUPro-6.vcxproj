@@ -217,7 +217,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GraphicsSystem.h" />
-    <ClInclude Include="Graphics\ConstantBuffers\PerObjectBuffer.h" />
+    <ClInclude Include="Graphics\ConstantBuffers\ConstantBufferDefines.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="PODArray.h" />
     <ClInclude Include="ShaderManagementSystem.h" />

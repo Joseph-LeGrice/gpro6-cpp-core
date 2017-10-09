@@ -3,7 +3,6 @@
 
 ConstantBufferManagementSystem::ConstantBufferManagementSystem()
 {
-	m_perObjectBuffer.Initialize();
 }
 
 ConstantBufferManagementSystem::~ConstantBufferManagementSystem()

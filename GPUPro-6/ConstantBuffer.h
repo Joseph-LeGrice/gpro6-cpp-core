@@ -2,14 +2,63 @@
 #include "D3DX11.h"
 #include "D3DX10.h"
 #include "GraphicsSystem.h"
+#include "Logging.h"
 
-template<class T>
+enum BindFlags
+{
+	BIND_VERTEX = 1 << 0,
+	BIND_HULL = 1 << 1,
+	BIND_DOMAIN = 1 << 2,
+	BIND_GEOM = 1 << 3,
+	BIND_PIXEL = 1 << 4,
+	BIND_ALL = BIND_VERTEX | BIND_HULL | BIND_DOMAIN | BIND_GEOM | BIND_PIXEL
+};
+
+template<class T, size_t m_bufferSlot, size_t m_maxBuffers, BindFlags m_bindFlags>
 class ConstantBuffer
 {
 	friend class ConstantBufferManagementSystem;
 
 public:
-	bool Initialize()
+	void UpdateBuffer(T& data)
+	{
+		D3D11_MAPPED_SUBRESOURCE mappedData;
+		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+		HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
+		if (SUCCEEDED(bufferMapResult))
+		{
+			memcpy(mappedData.pData, &data, sizeof(T));
+			deviceContext->Unmap(m_buffer, 0);
+		}
+	}
+
+	void BindBuffer()
+	{
+		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+		if ((m_bindFlags & BIND_VERTEX) == BIND_VERTEX)
+		{
+			deviceContext->VSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+		}
+		if ((m_bindFlags & BIND_HULL) == BIND_HULL)
+		{
+			deviceContext->HSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+		}
+		if ((m_bindFlags & BIND_DOMAIN) == BIND_VERTEX)
+		{
+			deviceContext->DSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+		}
+		if ((m_bindFlags & BIND_GEOM) == BIND_VERTEX)
+		{
+			deviceContext->GSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+		}
+		if ((m_bindFlags & BIND_PIXEL) == BIND_VERTEX)
+		{
+			deviceContext->PSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+		}
+	}
+
+private:
+	ConstantBuffer()
 	{
 		T initialData;
 		ZeroMemory(&initialData, sizeof(T));
@@ -26,31 +75,10 @@ public:
 		data.pSysMem = &initialData;
 
 		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
-		return SUCCEEDED(device->CreateBuffer(&desc, &data, &m_buffer));
-	}
-
-	void UpdateBuffer(T& data)
-	{
-		D3D11_MAPPED_SUBRESOURCE mappedData;
-
-		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
-		HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
-		if (SUCCEEDED(bufferMapResult))
+		if (!SUCCEEDED(device->CreateBuffer(&desc, &data, &m_buffer)))
 		{
-			memcpy(mappedData.pData, &data, sizeof(T));
-			deviceContext->Unmap(m_buffer, 0);
+			LogError("[ConstantBuffer] Could not Create Buffer!");
 		}
-	}
-
-	ID3D11Buffer* const GetBuffer()
-	{
-		return m_buffer;
-	}
-
-private:
-	ConstantBuffer()
-	{
-		m_buffer = nullptr;
 	}
 
 	~ConstantBuffer()
