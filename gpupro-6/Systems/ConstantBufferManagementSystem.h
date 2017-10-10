@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ConstantBuffer.h"
-#include "GameSystem.h"
+#include "Graphics\ConstantBuffers\ConstantBuffer.h"
+#include "Systems\GameSystem.h"
 
 #include "Graphics/ConstantBuffers/ConstantBufferDefines.h"
 

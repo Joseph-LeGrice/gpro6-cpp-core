@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ConstantBuffer.h"
-#include "Matrix4x4.h"
-#include "Vector2.h"
-#include "Vector4.h"
+#include "Graphics\ConstantBuffers\ConstantBuffer.h"
+#include "DataStructures\Matrix4x4.h"
+#include "DataStructures\Vector2.h"
+#include "DataStructures\Vector4.h"
 
 #define NUM_BUFFERS 2
 

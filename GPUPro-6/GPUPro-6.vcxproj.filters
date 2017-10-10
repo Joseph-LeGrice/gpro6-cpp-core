@@ -9,190 +9,190 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="GraphicsSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialManagementSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManagementSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="Graphics\Shader.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Material.cpp">
+    <ClCompile Include="Graphics\Material.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="PerlinNoise.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture2D_ShaderResource.cpp">
+    <ClCompile Include="Graphics\Texture2D_ShaderResource.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderResource.cpp">
+    <ClCompile Include="Graphics\ShaderResource.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="TextureSampler.cpp">
+    <ClCompile Include="Graphics\TextureSampler.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ImagingFactory.cpp">
-      <Filter>Utilities</Filter>
+    <ClCompile Include="Graphics\VertexBuffer.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="MeshHelper.cpp">
-      <Filter>Utilities</Filter>
+    <ClCompile Include="Graphics\IndexBuffer.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="TimeSystem.cpp">
+    <ClCompile Include="Systems\GraphicsSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="ISystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseInput.cpp">
+    <ClCompile Include="Input\MouseInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardInput.cpp">
+    <ClCompile Include="Input\KeyboardInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderManagementSystem.cpp">
+    <ClCompile Include="Systems\MaterialManagementSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="VertexBuffer.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Systems\SceneManagementSystem.cpp">
+      <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="IndexBuffer.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Systems\GameSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\TimeSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\InputSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\ISystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\ShaderManagementSystem.cpp">
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\ConstantBufferManagementSystem.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\PerlinNoise.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\ImagingFactory.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\MeshHelper.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="GraphicsSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialManagementSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManagementSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="Components\Mesh.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="UtilityMacros.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGraph.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="PerlinNoise.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="Components\Camera.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Texture2D_ShaderResource.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderResource.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureSampler.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="ImagingFactory.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix4x4.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix3x3.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshHelper.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="MathHelper.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Quaternion.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector4.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="ISystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseInput.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardInput.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="Components\Entity.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="PODArray.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexData.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManagementSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
+    <ClInclude Include="Components\Transform.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
+    <ClInclude Include="DataStructures\SceneGraph.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\PODArray.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\VertexData.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Vector2.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Quaternion.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Vector4.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Matrix4x4.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Matrix3x3.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Vector3.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="IndexBuffer.h">
+    <ClInclude Include="Graphics\Material.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\ConstantBufferManagementSystem.h">
-      <Filter>Systems</Filter>
+    <ClInclude Include="Graphics\ShaderResource.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\TextureSampler.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Texture2D_ShaderResource.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\VertexBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\IndexBuffer.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\ConstantBuffers\ConstantBufferDefines.h">
       <Filter>Graphics\ConstantBuffers</Filter>
     </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
+    <ClInclude Include="Graphics\ConstantBuffers\ConstantBuffer.h">
       <Filter>Graphics\ConstantBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\GraphicsSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\ShaderManagementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\ConstantBufferManagementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\TimeSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\InputSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\ISystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\MaterialManagementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\SceneManagementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\GameSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\MouseInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\KeyboardInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\UtilityMacros.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\PerlinNoise.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\ImagingFactory.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\MeshHelper.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\MathHelper.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Logging.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

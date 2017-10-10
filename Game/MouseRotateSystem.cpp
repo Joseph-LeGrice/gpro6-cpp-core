@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "MouseRotateSystem.h"
-#include "InputSystem.h"
-#include "TimeSystem.h"
-#include "SceneManagementSystem.h"
-#include "Quaternion.h"
+#include "Systems\InputSystem.h"
+#include "Systems\TimeSystem.h"
+#include "Systems\SceneManagementSystem.h"
+#include "DataStructures\Quaternion.h"
 
 MouseRotateSystem::MouseRotateSystem() : m_velocity(0.0f),
 	m_index(-1), m_hasIndex(false), m_toggleRotate(false)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameSystem.h"
+#include "Systems\GameSystem.h"
 
 class MouseRotateSystem : public ISystem
 {
