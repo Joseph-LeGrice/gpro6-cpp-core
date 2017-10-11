@@ -19,4 +19,3 @@ private:
 	float m_velocity;
 	bool m_toggleRotate;
 };
-

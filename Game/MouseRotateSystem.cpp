@@ -28,10 +28,12 @@ void MouseRotateSystem::VariableTick()
 		ComponentArray<Transform>& tca = SceneManagementSystem::Instance()->GetSceneGraph()->m_transforms;
 		Transform* const allTransforms = tca.GetArrayPointer();
 		const MouseInput& mi = InputSystem::Instance()->GetMouse();
+		const KeyboardInput& ki = InputSystem::Instance()->GetKeyboard();
 
 		if (!m_toggleRotate)
 		{
-			if (mi.GetMouseButton(0))
+			//if (mi.GetMouseButton(0))
+			if (ki.GetKey(kInputKey_C))
 			{
 				Transform& t = allTransforms[m_index];
 				Vector2 deltaMove = mi.GetDeltaMousePosition() * c_speed * TimeSystem::Instance()->DeltaTimeStep();
