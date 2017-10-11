@@ -19,7 +19,7 @@ void InputSystem::VariableTick()
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
 
-	if (PeekMessage(&msg, m_hwnd, 0, 0, PM_REMOVE))
+	while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
