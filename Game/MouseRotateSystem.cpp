@@ -32,8 +32,7 @@ void MouseRotateSystem::VariableTick()
 
 		if (!m_toggleRotate)
 		{
-			//if (mi.GetMouseButton(0))
-			if (ki.GetKey(kInputKey_C))
+			if (mi.GetMouseButton(0))
 			{
 				Transform& t = allTransforms[m_index];
 				Vector2 deltaMove = mi.GetDeltaMousePosition() * c_speed * TimeSystem::Instance()->DeltaTimeStep();
@@ -49,7 +48,7 @@ void MouseRotateSystem::VariableTick()
 			t.m_rotation *= Quaternion::FromAxisAngle(Vector3::Up(), angularDelta);
 		}
 
-		if (mi.GetMouseButtonDownThisFrame(1))
+		if (ki.GetKeyDownThisFrame(kInputKey_C))
 		{
 			m_toggleRotate = !m_toggleRotate;
 		}

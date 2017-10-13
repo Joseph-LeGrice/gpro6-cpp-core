@@ -76,9 +76,12 @@ bool MouseInput::GetMouseButtonUpThisFrame(int buttonIndex) const
 	}
 }
 
-void MouseInput::HandleInput(MSG m)
+void MouseInput::HandleInput(MSG m, bool didAdvanceFrame)
 {
-	m_lastMouseButtonState = m_thisMouseButtonState;
+	if (didAdvanceFrame)
+	{
+		m_lastMouseButtonState = m_thisMouseButtonState;
+	}
 	
 	for (size_t i = 0; i < c_numberOfButtons; ++i)
 	{

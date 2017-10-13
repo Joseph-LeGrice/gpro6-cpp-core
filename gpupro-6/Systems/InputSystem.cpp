@@ -19,6 +19,7 @@ void InputSystem::VariableTick()
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
 
+	bool isNewFrame = true;
 	while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&msg);
@@ -29,8 +30,10 @@ void InputSystem::VariableTick()
 			GameSystem::Quit();
 		}
 
-		m_mouseInput.HandleInput(msg);
-		m_keyboardInput.HandleInput(msg);
+		m_mouseInput.HandleInput(msg, isNewFrame);
+		m_keyboardInput.HandleInput(msg, isNewFrame);
+
+		isNewFrame = false;
 	}
 }
 

@@ -14,7 +14,7 @@ public:
 	bool GetMouseButtonDownThisFrame(int buttonIndex) const;
 	bool GetMouseButtonUpThisFrame(int buttonIndex) const;
 
-	void HandleInput(MSG m);
+	void HandleInput(MSG m, bool didAdvanceFrame);
 
 private:
 	Vector2 m_mousePosition, m_deltaMousePosition;

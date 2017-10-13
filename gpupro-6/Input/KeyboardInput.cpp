@@ -1,14 +1,19 @@
 #include "stdafx.h"
 #include "Input\KeyboardInput.h"
+#include "..\Utilities\Logging.h"
 
 
 KeyboardInput::KeyboardInput()
 {
 }
 
-void KeyboardInput::HandleInput(MSG msg)
+void KeyboardInput::HandleInput(MSG msg, bool didAdvanceFrame)
 {
-	m_keyPressesLastFrame = m_keyPressesThisFrame;
+	if (didAdvanceFrame)
+	{
+		m_keyPressesLastFrame = m_keyPressesThisFrame;
+	}
+
 	if (msg.message == WM_KEYDOWN)
 	{
 		if (IsKeyboardKeypress(msg.wParam))
@@ -35,13 +40,13 @@ bool KeyboardInput::GetKey(InputKey key) const
 bool KeyboardInput::GetKeyDownThisFrame(InputKey key) const
 {
 	return m_keyPressesThisFrame.count(key) && m_keyPressesThisFrame.at(key) && 
-		!(m_keyPressesLastFrame.count(key) || m_keyPressesLastFrame.at(key));
+		(!m_keyPressesLastFrame.count(key) || !m_keyPressesLastFrame.at(key));
 }
 
 bool KeyboardInput::GetKeyUpThisFrame(InputKey key) const
 {
 	return m_keyPressesThisFrame.count(key) && !m_keyPressesThisFrame.at(key) && 
-		m_keyPressesLastFrame.count(key) && !m_keyPressesLastFrame.at(key);
+		m_keyPressesLastFrame.count(key) && m_keyPressesLastFrame.at(key);
 }
 
 bool KeyboardInput::IsKeyboardKeypress(WPARAM param) const
