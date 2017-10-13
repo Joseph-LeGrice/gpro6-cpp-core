@@ -21,8 +21,8 @@ struct Quaternion
 	static Quaternion FromAxisAngle(Vector3 axis, float angle)
 	{
 		Quaternion q;
-		q.V = axis * sinf(angle / 2.0f);
 		q.W = cosf(angle / 2.0f);
+		q.V = axis * sinf(angle / 2.0f);
 		Quaternion::Normalize(q);
 		return q;
 	}
@@ -110,10 +110,11 @@ struct Quaternion
 		return result;
 	}
 
-	void operator *=(const Quaternion& other)
+	void operator *=(const Quaternion& second)
 	{
-		W = W * other.W - Vector3::Dot(V, other.V);
-		V = other.V * W + V * other.W + Vector3::Cross(V, other.V);
-		Normalize(*this);
+		FLOAT newW = W * second.W - Vector3::Dot(V, second.V);
+		Vector3 newV = second.V * W + V * second.W + Vector3::Cross(V, second.V);
+		
+		W = newW; V = newV;
 	}
 };
