@@ -15,9 +15,9 @@ struct Transform
 	static Transform New()
 	{
 		Transform t;
-		t.m_scale = Vector3::One();
-		t.m_position = Vector3::Zero();
-		t.m_rotation = Quaternion::Identity();
+		t.m_scale = VectorOne();
+		t.m_position = VectorZero();
+		t.m_rotation = QuaternionIdentity();
 		return t;
 	}
 
@@ -25,13 +25,13 @@ struct Transform
 
 	static Matrix4x4 GetTransformationMatrix(const Transform& t)
 	{
-		return Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)) *
-			Vector4::GetScaleMatrix(Vector4::FromVector3(t.m_scale)) *
-			Quaternion::GetMatrix(t.m_rotation);
+		return GetTranslationMatrix(Vector4FromVector3(t.m_position)) *
+			GetScaleMatrix(Vector4FromVector3(t.m_scale)) *
+			QuaternionGetMatrix(t.m_rotation);
 	}
 
 	static Matrix4x4 GetViewMatrix(const Transform& t)
 	{
-		return Matrix4x4::Inverse(Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)));
+		return MatrixInverse(GetTranslationMatrix(Vector4FromVector3(t.m_position)));
 	}
 };

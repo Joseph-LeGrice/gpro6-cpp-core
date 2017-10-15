@@ -72,6 +72,24 @@
     <ClCompile Include="Utilities\MeshHelper.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="DataStructures\Matrix4x4.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Vector3.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Matrix3x3.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Vector4.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Vector2.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Quaternion.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />

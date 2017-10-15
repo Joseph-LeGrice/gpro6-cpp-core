@@ -10,6 +10,7 @@
 #include "Components\Camera.h"
 #include "Components\Mesh.h"
 #include "Components\Transform.h"
+#include "Components\Entity.h"
 
 template<typename T>
 struct has_cleanup
@@ -77,4 +78,5 @@ struct SceneGraph
 	ComponentArray<Mesh> m_meshes;
 	ComponentArray<Camera> m_cameras;
 	ComponentArray<Transform> m_transforms;
+	//ComponentArray<Entity> m_entities;
 };

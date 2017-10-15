@@ -36,7 +36,7 @@ struct Camera
 	static Matrix4x4 Camera::OrthoProject(float size, float depth, float aspectRatio)
 	{
 		Matrix4x4 result;
-		Matrix4x4::Identity(result);
+		MatrixIdentity(result);
 
 		result.M11 = 2 / size;
 		result.M22 = aspectRatio * 2 / size;
@@ -52,7 +52,7 @@ struct Camera
 	static Matrix4x4 Camera::PerspProject(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
 	{
 		Matrix4x4 result;
-		Matrix4x4::Identity(result);
+		MatrixIdentity(result);
 
 		float t = tan(fieldOfViewRadians / 2) * screenNear;
 		float b = -t;

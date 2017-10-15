@@ -10,11 +10,12 @@ typedef std::unordered_map<std::type_index, IndexList> IndexMap;
 
 struct Entity
 {
-public:
+	static void Entity::Free(Entity& e) { }
+
 	template<class T>
-	void Entity::RegisterComponent(Entity& e, size_t index)
+	static void Entity::RegisterComponent(Entity& e, size_t index)
 	{
-		m_componentIndexMap[typeid(T)].push_back(index);
+		e.m_componentIndexMap[typeid(T)].push_back(index);
 	}
 
 	template<typename T>

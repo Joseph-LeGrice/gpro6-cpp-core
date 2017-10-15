@@ -7,92 +7,22 @@ struct Vector3
 	FLOAT X;
 	FLOAT Y;
 	FLOAT Z;
-
-	Vector3 operator+(const Vector3& other) const
-	{
-		Vector3 result;
-		result.X = X + other.X; result.Y = Y + other.Y; result.Z = Z + other.Z;
-		return result;
-	}
-
-	Vector3 operator-() const
-	{
-		Vector3 result;
-		result.X = -X; result.Y = -Y; result.Z = -Z;
-		return result;
-	}
-
-	Vector3 operator-(const Vector3& other) const
-	{
-		Vector3 result;
-		result.X = X - other.X; result.Y = Y - other.Y; result.Z = Z - other.Z;
-		return result;
-	}
-
-	Vector3 operator*(const float other) const
-	{
-		Vector3 result;
-		result.X = X * other; result.Y = Y * other; result.Z = Z * other;
-		return result;
-	}
-
-
-	Vector3 operator/(const float other) const
-	{
-		Vector3 result;
-		result.X = X / other; result.Y = Y / other; result.Z = Z / other;
-		return result;
-	}
-
-	void operator+=(const Vector3 other) { X += other.X; Y += other.Y; Z += other.Z; }
-	void operator-=(const Vector3 other) { X -= other.X; Y -= other.Y; Z -= other.Z; }
-	void operator*=(const float other) { X *= other; Y *= other; Z *= other; }
-	void operator/=(const float other) { X /= other; Y /= other; Z /= other; }
-
-	static Vector3 New(FLOAT x, FLOAT y, FLOAT z)
-	{
-		return { x, y, z };
-	}
-
-	static Vector3 Zero()
-	{
-		return{ 0.0f, 0.0f, 0.0f };
-	}
-
-	static Vector3 One()
-	{
-		return{ 1.0f, 1.0f, 1.0f };
-	}
-	
-	static Vector3 Up()
-	{
-		return{ 0.0f, 1.0f, 0.0f };
-	}
-	
-	static FLOAT Magnitude(Vector3& v)
-	{
-		return sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
-	}
-
-	static void Normalize(Vector3& v)
-	{
-		FLOAT mag = Magnitude(v);
-		v.X /= mag;
-		v.Y /= mag;
-		v.Z /= mag;
-	}
-
-	static FLOAT Dot(Vector3 a, Vector3 b)
-	{
-		return a.X * b.X + a.Y * b.Y * a.Z * b.Z;
-	}
-
-	static Vector3 Cross(Vector3 a, Vector3 b)
-	{
-		Vector3 result;
-		result.X = a.Y * b.Z - a.Z * b.Y;
-		result.Y = a.Z * b.X - a.X * b.Z;
-		result.Z = a.X * b.Y - a.Y * b.X;
-		return result;
-	}
 };
+
+Vector3 operator+(const Vector3& first, const Vector3& second);
+Vector3 operator-(const Vector3& first);
+Vector3 operator-(const Vector3& first, const Vector3& second);
+Vector3 operator*(const Vector3& first, const float factor);
+Vector3 operator/(const Vector3& first, const float factor);
+void operator+=(Vector3& lhs, const Vector3& rhs);
+void operator-=(Vector3& lhs, const Vector3& rhs);
+void operator*=(Vector3& lhs, const float rhs);
+void operator/=(Vector3& lhs, const float rhs);
+Vector3 VectorNew(FLOAT x, FLOAT y, FLOAT z);
+Vector3 VectorZero();
+Vector3 VectorOne();
+Vector3 VectorUp();
+FLOAT VectorMagnitude(Vector3& v);
+void VectorNormalize(Vector3& v);
+FLOAT VectorDot(Vector3 a, Vector3 b);
+Vector3 VectorCross(Vector3 a, Vector3 b);

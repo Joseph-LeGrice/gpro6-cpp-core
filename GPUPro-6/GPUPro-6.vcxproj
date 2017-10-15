@@ -183,6 +183,12 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DataStructures\Matrix3x3.cpp" />
+    <ClCompile Include="DataStructures\Matrix4x4.cpp" />
+    <ClCompile Include="DataStructures\Quaternion.cpp" />
+    <ClCompile Include="DataStructures\Vector2.cpp" />
+    <ClCompile Include="DataStructures\Vector3.cpp" />
+    <ClCompile Include="DataStructures\Vector4.cpp" />
     <ClCompile Include="Graphics\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Material.cpp" />
     <ClCompile Include="Graphics\Shader.cpp" />

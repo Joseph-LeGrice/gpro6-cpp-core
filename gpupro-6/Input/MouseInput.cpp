@@ -18,7 +18,7 @@ const MouseButtonTranslate c_validStates[c_numberOfButtons] = {
 
 MouseInput::MouseInput()
 {
-	m_mousePosition = m_deltaMousePosition = Vector2::Zero();
+	m_mousePosition = m_deltaMousePosition = { 0.0f, 0.0f };
 	m_thisMouseButtonState = m_lastMouseButtonState = 0;
 }
 
