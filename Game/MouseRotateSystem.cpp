@@ -42,10 +42,10 @@ void MouseRotateSystem::VariableTick()
 		}
 		else
 		{
-			Transform& t = allTransforms[m_index];
-
 			float angularDelta = c_angularVelocity * TimeSystem::Instance()->DeltaTimeStep();
+			Transform& t = allTransforms[m_index];
 			t.m_rotation *= Quaternion::FromAxisAngle(Vector3::Up(), angularDelta);
+			Quaternion::Normalize(t.m_rotation);
 		}
 
 		if (ki.GetKeyDownThisFrame(kInputKey_C))

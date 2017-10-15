@@ -16,6 +16,24 @@ struct Quaternion
 		return q;
 	}
 
+	static Quaternion Conjugate(const Quaternion& q)
+	{
+		Quaternion result;
+		result.W = q.W;
+		result.V = -result.V;
+		return result;
+	}
+
+	static Quaternion Inverse(const Quaternion& q) 
+	{
+		Quaternion con = Quaternion::Conjugate(q);
+		float mag = Quaternion::Magnitude(q);
+		
+		Quaternion result;
+		result.W = con.W / mag; result.V = con.V / mag;
+		return result;
+	}
+
 	// TODO: Quaternion.LookAt
 
 	static Quaternion FromAxisAngle(Vector3 axis, float angle)
@@ -31,9 +49,9 @@ struct Quaternion
 	{
 		//Orthonormal basis
 
-		float x  = q.V.X * 2.0F;
-		float y  = q.V.Y * 2.0F;
-		float z  = q.V.Z * 2.0F;
+		float x = q.V.X * 2.0F;
+		float y = q.V.Y * 2.0F;
+		float z = q.V.Z * 2.0F;
 		float xx = q.V.X * x;
 		float yy = q.V.Y * y;
 		float zz = q.V.Z * z;
@@ -47,25 +65,10 @@ struct Quaternion
 		Matrix4x4 result;
 		Matrix4x4::Identity(result);
 
-		result.M11 = 1.0f - (yy + zz);
-		result.M12 = xy + wz;
-		result.M13 = xz - wy;
-		result.M14 = 0.0F;
-
-		result.M21 = xy - wz;
-		result.M22 = 1.0f - (xx + zz);
-		result.M23 = yz + wx;
-		result.M24 = 0.0F;
-
-		result.M31 = xz + wy;
-		result.M32 = yz - wx;
-		result.M33 = 1.0f - (xx + yy);
-		result.M34 = 0.0F;
-		
-		result.M41 = 0.0f;
-		result.M42 = 0.0f;
-		result.M43 = 0.0f;
-		result.M44 = 1.0f;
+		result.M11 = 1.0f - (yy + zz); result.M21 = xy - wz;          result.M31 = xz + wy;          result.M41 = 0.0f;
+		result.M12 = xy + wz;          result.M22 = 1.0f - (xx + zz); result.M32 = yz - wx;          result.M42 = 0.0f;
+		result.M13 = xz - wy;          result.M23 = yz + wx;          result.M33 = 1.0f - (xx + yy); result.M43 = 0.0f;
+		result.M14 = 0.0f;             result.M24 = 0.0f;             result.M34 = 0.0f;             result.M44 = 1.0f;
 		return result;
 	}
 
@@ -105,16 +108,20 @@ struct Quaternion
 	Quaternion operator*(const Quaternion& other) const
 	{
 		Quaternion result;
-		result.W = W * other.W - Vector3::Dot(V, other.V);
-		result.V = other.V * W + V * other.W + Vector3::Cross(V, other.V);
+		result.V.X = W * other.V.X + V.X * other.W + V.Y * other.V.Z - V.Z * other.V.Y;
+		result.V.Y = W * other.V.Y + V.Y * other.W + V.Z * other.V.X - V.X * other.V.Z;
+		result.V.Z = W * other.V.Z + V.Z * other.W + V.X * other.V.Y - V.Y * other.V.X;
+		result.W = W * other.W - V.X * other.V.X - V.Y * other.V.Y - V.Z * other.V.Z;
 		return result;
 	}
 
-	void operator *=(const Quaternion& second)
+	void operator *=(const Quaternion& other)
 	{
-		FLOAT newW = W * second.W - Vector3::Dot(V, second.V);
-		Vector3 newV = second.V * W + V * second.W + Vector3::Cross(V, second.V);
-		
+		Vector3 newV;
+		newV.X = W * other.V.X + V.X * other.W + V.Y * other.V.Z - V.Z * other.V.Y;
+		newV.Y = W * other.V.Y + V.Y * other.W + V.Z * other.V.X - V.X * other.V.Z;
+		newV.Z = W * other.V.Z + V.Z * other.W + V.X * other.V.Y - V.Y * other.V.X;
+		FLOAT newW = W * other.W - V.X * other.V.X - V.Y * other.V.Y - V.Z * other.V.Z;		
 		W = newW; V = newV;
 	}
 };

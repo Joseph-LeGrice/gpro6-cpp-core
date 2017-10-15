@@ -15,6 +15,13 @@ struct Vector3
 		return result;
 	}
 
+	Vector3 operator-() const
+	{
+		Vector3 result;
+		result.X = -X; result.Y = -Y; result.Z = -Z;
+		return result;
+	}
+
 	Vector3 operator-(const Vector3& other) const
 	{
 		Vector3 result;
