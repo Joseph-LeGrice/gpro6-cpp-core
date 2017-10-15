@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "DataStructures/Vector2.h"
 
+#include <math.h>
+
 Vector2 operator+(const Vector2& lhs, const Vector2& rhs)
 {
 	Vector2 result;

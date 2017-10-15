@@ -1,6 +1,4 @@
 #pragma once
-#include "D3D11.h"
-#include <math.h>
 
 struct Vector3
 {

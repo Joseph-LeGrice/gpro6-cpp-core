@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Vector3.h"
 
+#include <math.h>
 
 Vector3 operator+(const Vector3& first, const Vector3& second)
 {
