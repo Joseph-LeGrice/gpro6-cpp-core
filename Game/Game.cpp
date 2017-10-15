@@ -62,8 +62,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		Transform meshTransform = Transform::New();
 		meshTransform.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-		meshTransform.m_position = VectorNew(0.0f, 0.0f, 20.0f);
-		meshTransform.m_scale = VectorNew(5.0f, 5.0f, 5.0f);
+		meshTransform.m_position = { 0.0f, 0.0f, 20.0f };
+		meshTransform.m_scale = { 5.0f, 5.0f, 5.0f };
 
 		size_t meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
@@ -73,7 +73,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// Camera
 		Transform cameraTransform = Transform::New();
-		cameraTransform.m_position = VectorNew(0.0f, 0.0f, -10.0f);
+		cameraTransform.m_position = { 0.0f, 0.0f, -10.0f };
 		size_t cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
 
 		Camera camera = Camera::New();

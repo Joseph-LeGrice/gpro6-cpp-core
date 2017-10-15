@@ -44,7 +44,7 @@ void MouseRotateSystem::VariableTick()
 		{
 			float angularDelta = c_angularVelocity * TimeSystem::Instance()->DeltaTimeStep();
 			Transform& t = allTransforms[m_index];
-			t.m_rotation *= QuaternionFromAxisAngle(VectorUp(), angularDelta);
+			t.m_rotation *= QuaternionFromAxisAngle({ 0.0f, 1.0f, 0.0f }, angularDelta);
 			QuaternionNormalize(t.m_rotation);
 		}
 

@@ -43,26 +43,6 @@ void operator-=(Vector3& lhs, const Vector3& rhs) { lhs.X -= rhs.X; lhs.Y -= rhs
 void operator*=(Vector3& lhs, const float rhs) { lhs.X *= rhs; lhs.Y *= rhs; lhs.Z *= rhs; }
 void operator/=(Vector3& lhs, const float rhs) { lhs.X /= rhs; lhs.Y /= rhs; lhs.Z /= rhs; }
 
-Vector3 VectorNew(FLOAT x, FLOAT y, FLOAT z)
-{
-	return{ x, y, z };
-}
-
-Vector3 VectorZero()
-{
-	return{ 0.0f, 0.0f, 0.0f };
-}
-
-Vector3 VectorOne()
-{
-	return{ 1.0f, 1.0f, 1.0f };
-}
-
-Vector3 VectorUp()
-{
-	return{ 0.0f, 1.0f, 0.0f };
-}
-
 FLOAT VectorMagnitude(Vector3& v)
 {
 	return sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z);

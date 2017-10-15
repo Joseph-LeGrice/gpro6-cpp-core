@@ -15,8 +15,8 @@ struct Transform
 	static Transform New()
 	{
 		Transform t;
-		t.m_scale = VectorOne();
-		t.m_position = VectorZero();
+		t.m_scale = { 1.0f, 1.0f, 1.0f };
+		t.m_position = { 0.0f, 0.0f, 0.0f };
 		t.m_rotation = QuaternionIdentity();
 		return t;
 	}
