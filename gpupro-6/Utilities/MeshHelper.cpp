@@ -1,8 +1,10 @@
 #include "stdafx.h"
-#include "MeshHelper.h"
+
+#include "Components/Mesh.h"
+#include "Utilities/MeshHelper.h"
+#include "Utilities/MathHelper.h"
 
 #include <math.h>
-#include "MathHelper.h"
 
 Mesh MeshHelper::CreateQuad()
 {

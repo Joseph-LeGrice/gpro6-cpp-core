@@ -1,17 +1,11 @@
 #pragma once
 
-#include "Components\Mesh.h"
+struct Mesh;
 
-class MeshHelper
+namespace MeshHelper
 {
-public:
-	MeshHelper() = delete;
-	MeshHelper(const MeshHelper&) = delete;
-	~MeshHelper() = delete;
-
-	static Mesh CreateQuad();
-	static Mesh CreateSphereICO();
-	static Mesh CreateSphereUV();
-	static Mesh CreateCube();
+	Mesh CreateQuad();
+	Mesh CreateSphereICO();
+	Mesh CreateSphereUV();
+	Mesh CreateCube();
 };
-
