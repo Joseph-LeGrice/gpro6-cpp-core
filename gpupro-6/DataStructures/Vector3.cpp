@@ -3,34 +3,40 @@
 
 #include <math.h>
 
-Vector3 operator+(const Vector3& first, const Vector3& second)
+Vector3 operator+(const Vector3& lhs, const Vector3& rhs)
 {
 	Vector3 result;
-	result.X = first.X + second.X; result.Y = first.Y + second.Y; result.Z = first.Z + second.Z;
+	result.X = lhs.X + rhs.X; result.Y = lhs.Y + rhs.Y; result.Z = lhs.Z + rhs.Z;
 	return result;
 }
 
-Vector3 operator-(const Vector3& first)
+Vector3 operator-(const Vector3& rhs)
 {
 	Vector3 result;
-	result.X = -first.X; result.Y = -first.Y; result.Z = -first.Z;
+	result.X = -rhs.X; result.Y = -rhs.Y; result.Z = -rhs.Z;
 	return result;
 }
 
-Vector3 operator-(const Vector3& first, const Vector3& second)
+Vector3 operator-(const Vector3& lhs, const Vector3& rhs)
 {
 	Vector3 result;
-	result.X = first.X - second.X; result.Y = first.Y - second.Y; result.Z = first.Z - second.Z;
+	result.X = lhs.X - rhs.X; result.Y = lhs.Y - rhs.Y; result.Z = lhs.Z - rhs.Z;
 	return result;
 }
 
-Vector3 operator*(const Vector3& first, const float factor)
+Vector3 operator*(const Vector3& lhs, const float rhs)
 {
 	Vector3 result;
-	result.X = first.X * factor; result.Y = first.Y * factor; result.Z = first.Z * factor;
+	result.X = lhs.X * rhs; result.Y = lhs.Y * rhs; result.Z = lhs.Z * rhs;
 	return result;
 }
 
+Vector3 operator*(const float lhs, Vector3& rhs)
+{
+	Vector3 result;
+	result.X = rhs.X * lhs; result.Y = rhs.Y * lhs; result.Z = rhs.Z * lhs;
+	return result;
+}
 
 Vector3 operator/(const Vector3& first, const float factor)
 {

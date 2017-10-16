@@ -61,7 +61,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		Transform meshTransform = TransformNew();
 		meshTransform.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		meshTransform.m_position = { 0.0f, 0.0f, 20.0f };
-		meshTransform.m_scale = { 5.0f, 5.0f, 5.0f };
+		meshTransform.m_scale = { 1.0f, 1.0f, 1.0f };
+		meshTransform.m_scale = 10.0f * meshTransform.m_scale;
 
 		size_t meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 

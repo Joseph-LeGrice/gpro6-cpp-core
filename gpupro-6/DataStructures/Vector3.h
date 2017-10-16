@@ -8,9 +8,10 @@ struct Vector3
 };
 
 Vector3 operator+(const Vector3& first, const Vector3& second);
-Vector3 operator-(const Vector3& first);
-Vector3 operator-(const Vector3& first, const Vector3& second);
+Vector3 operator-(const Vector3& rhs);
+Vector3 operator-(const Vector3& rhs, const Vector3& second);
 Vector3 operator*(const Vector3& first, const float factor);
+Vector3 operator*(const float rhs, Vector3& lhs);
 Vector3 operator/(const Vector3& first, const float factor);
 void operator+=(Vector3& lhs, const Vector3& rhs);
 void operator-=(Vector3& lhs, const Vector3& rhs);

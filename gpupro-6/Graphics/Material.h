@@ -25,11 +25,10 @@ public:
 
 	void Render(Matrix4x4&,Matrix4x4&);
 	void UpdateIfDirty();
-	
-	void SetShader(Shader* shader, size_t numberOfResources, size_t numberOfSamplers);
-	
 	void DeregisterMeshInfo(size_t meshIndex, size_t transformIndex);
 	void RegisterMeshInfo(size_t meshIndex, size_t transformIndex);
+	
+	void SetShader(Shader* shader, size_t numberOfResources, size_t numberOfSamplers);
 	
 	void AddShaderResource(size_t shaderResourceIndex, size_t shaderResourceSlotIndex);
 	void RemoveShaderResource(size_t shaderResourceSlotIndex);
