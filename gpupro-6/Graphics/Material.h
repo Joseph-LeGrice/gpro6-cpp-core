@@ -31,11 +31,11 @@ public:
 	void DeregisterMeshInfo(size_t meshIndex, size_t transformIndex);
 	void RegisterMeshInfo(size_t meshIndex, size_t transformIndex);
 	
-	void AddShaderResource(ShaderResource* r);
-	void RemoveShaderResource(ShaderResource* r);
+	void AddShaderResource(size_t shaderResourceIndex, size_t shaderResourceSlotIndex);
+	void RemoveShaderResource(size_t shaderResourceSlotIndex);
 
-	void AddTextureSampler(TextureSampler* ts);
-	void RemoveTextureSampler(TextureSampler* ts);
+	void AddTextureSampler(size_t textureSamplerIndex, size_t textureSamplerSlotIndex);
+	void RemoveTextureSampler(size_t textureSamplerSlotIndex);
 
 private:
 	bool Initialize();
@@ -45,8 +45,9 @@ private:
 
 	bool m_isDirty;
 	Shader* m_shader;
-	std::vector<ShaderResource*> m_shaderResources; //TODO: Contiguous array of all ShaderResources. Reference via index
-	std::vector<TextureSampler*> m_textureSamplers; //TODO: Contiguous array of all TextureSamplers. Reference via index
+	
+	size_t m_shaderResourceIndexes[4];
+	size_t m_textureSamplerIndexes[4];
 
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;

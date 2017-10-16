@@ -45,12 +45,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		simpleQuadMat->SetShader(simpleTexturedQuadShader);
 
-		Texture2D_ShaderResource* t = Texture2D_ShaderResource::CreateFromFile(L"C:\\TestImage.png");
-		simpleQuadMat->AddShaderResource((ShaderResource*)t);
+		size_t textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
+		simpleQuadMat->AddShaderResource(textureResourceIndex, 0);
 		
-		TextureSampler* ts = new TextureSampler();
-		ts->Initialize();
-		simpleQuadMat->AddTextureSampler(ts);
+		size_t index = CreateTextureSampler();
+		simpleQuadMat->AddTextureSampler(index, 0);
 
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
 		

@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "TextureSampler.h"
-#include "Systems\GraphicsSystem.h"
-
+#include "Graphics/TextureSampler.h"
+#include "Systems/GraphicsSystem.h"
+#include "Systems/MaterialManagementSystem.h"
 
 TextureSampler::TextureSampler()
 {
@@ -12,6 +12,16 @@ TextureSampler::TextureSampler()
 TextureSampler::~TextureSampler()
 {
 	SAFE_RELEASE(m_sampler);
+}
+
+void TextureSampler::BindTextureSampler(size_t samplerIndex, size_t numberOfSamplers)
+{
+	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+	deviceContext->VSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
+	deviceContext->HSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
+	deviceContext->DSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
+	deviceContext->GSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
+	deviceContext->PSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
 }
 
 bool TextureSampler::Initialize()
@@ -39,7 +49,16 @@ bool TextureSampler::IsValid()
 	return m_sampler != nullptr;
 }
 
-ID3D11SamplerState* TextureSampler::GetSampler()
+size_t CreateTextureSampler()
 {
-	return m_sampler;
+	TextureSampler* ts = new TextureSampler();
+	if (ts->Initialize())
+	{
+		return MaterialManagementSystem::Instance()->RegisterTextureSampler(*ts);
+	}
+	else
+	{
+		SAFE_DELETE(ts);
+		return -1;
+	}
 }

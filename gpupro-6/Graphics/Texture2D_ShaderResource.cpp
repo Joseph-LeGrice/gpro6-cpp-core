@@ -1,8 +1,10 @@
 #include "stdafx.h"
-#include "Utilities\PerlinNoise.h"
-#include "Graphics\Texture2D_ShaderResource.h"
-#include "Systems\GraphicsSystem.h"
-#include "Utilities\ImagingFactory.h"
+
+#include "Graphics/Texture2D_ShaderResource.h"
+#include "Systems/GraphicsSystem.h"
+#include "Systems/MaterialManagementSystem.h"
+#include "Utilities/PerlinNoise.h"
+#include "Utilities/ImagingFactory.h"
 
 Texture2D_ShaderResource::Texture2D_ShaderResource()
 {
@@ -17,7 +19,7 @@ Texture2D_ShaderResource::~Texture2D_ShaderResource()
 	SAFE_RELEASE(m_resourceView);
 }
 
-Texture2D_ShaderResource* Texture2D_ShaderResource::CreateFromFile(std::wstring filepath)
+size_t CreateTextureResourceFromFile(std::wstring filepath)
 {
 	BYTE* pbBuffer = nullptr;
 	UINT bpp, width, height;
@@ -62,11 +64,12 @@ Texture2D_ShaderResource* Texture2D_ShaderResource::CreateFromFile(std::wstring 
 		}
 		delete[] pbBuffer;
 
-		return newTexture2D;
+		size_t index = MaterialManagementSystem::Instance()->RegisterShaderResource((ShaderResource&)(*newTexture2D));
+		return index;
 	}
 	else
 	{
-		return nullptr;
+		return -1;
 	}
 }
 

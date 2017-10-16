@@ -4,14 +4,17 @@
 
 class TextureSampler
 {
+	friend size_t CreateTextureSampler();
 public:
-	TextureSampler();
 	~TextureSampler();
 
+	void BindTextureSampler(size_t samplerIndex, size_t numberOfSamplers);
 	bool Initialize();
 	bool IsValid();
-	ID3D11SamplerState* GetSampler();
+
 private:
 	ID3D11SamplerState* m_sampler;
+	TextureSampler();
 };
 
+size_t CreateTextureSampler();

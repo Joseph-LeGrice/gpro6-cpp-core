@@ -61,5 +61,3 @@ class ConstantBufferManagementSystem : public ISystem
 	REGISTER_BUFFER(PerObjectBuffer);
 	REGISTER_BUFFER(MaterialBuffer);
 };
-
-

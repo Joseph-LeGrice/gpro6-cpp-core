@@ -10,9 +10,17 @@ class MaterialManagementSystem : public ISystem
 
 public:
 	const std::vector<Material*>* GetAllMaterials();
-	const void RegisterInstancedMaterial(Material&);
+	const size_t RegisterInstancedMaterial(Material&);
+
+	const std::vector<ShaderResource*>* GetAllShaderResources();
+	const size_t RegisterShaderResource(ShaderResource&);
+	
+	const std::vector<TextureSampler*>* GetAllTextureSamplers();
+	const size_t RegisterTextureSampler(TextureSampler&);
 
 private:
 	std::vector<Material*> m_instancedMaterials;
+	std::vector<ShaderResource*> m_shaderResources;
+	std::vector<TextureSampler*> m_textureSamplers;
 };
 
