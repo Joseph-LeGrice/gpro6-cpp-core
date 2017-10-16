@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "Systems\GraphicsSystem.h"
-#include "Graphics\Material.h"
-#include "Graphics\ConstantBuffers\ConstantBuffer.h"
-#include "Components\Camera.h"
+#include "Systems/GraphicsSystem.h"
+#include "Graphics/Material.h"
+#include "Components/Camera.h"
 #include "SceneManagementSystem.h"
 #include "MaterialManagementSystem.h"
-#include "DataStructures\SceneGraph.h"
-#include "Systems\ConstantBufferManagementSystem.h"
+#include "DataStructures/SceneGraph.h"
+#include "Graphics/ConstantBuffer.h"
+#include "Systems/ConstantBufferManagementSystem.h"
 
 #define DEBUG
 

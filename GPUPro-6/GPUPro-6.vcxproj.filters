@@ -161,12 +161,6 @@
     <ClInclude Include="Graphics\IndexBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ConstantBuffers\ConstantBufferDefines.h">
-      <Filter>Graphics\ConstantBuffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\ConstantBuffers\ConstantBuffer.h">
-      <Filter>Graphics\ConstantBuffers</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\GraphicsSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
@@ -218,6 +212,9 @@
     <ClInclude Include="Utilities\Logging.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\ConstantBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -243,9 +240,6 @@
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{dfa88832-0aec-4779-bfde-6d8a9e35ef6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\ConstantBuffers">
-      <UniqueIdentifier>{8369d17f-422b-4a72-8478-4cf8631d5f6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

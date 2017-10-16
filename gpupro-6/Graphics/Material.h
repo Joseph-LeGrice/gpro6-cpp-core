@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "Graphics/ConstantBuffers/ConstantBufferDefines.h"
 
 struct Mesh;
 class Shader;

@@ -233,8 +233,7 @@
     <ClInclude Include="DataStructures\Vector3.h" />
     <ClInclude Include="DataStructures\Vector4.h" />
     <ClInclude Include="DataStructures\VertexData.h" />
-    <ClInclude Include="Graphics\ConstantBuffers\ConstantBuffer.h" />
-    <ClInclude Include="Graphics\ConstantBuffers\ConstantBufferDefines.h" />
+    <ClInclude Include="Graphics\ConstantBuffer.h" />
     <ClInclude Include="Graphics\IndexBuffer.h" />
     <ClInclude Include="Graphics\Material.h" />
     <ClInclude Include="Graphics\Shader.h" />
