@@ -1,8 +1,13 @@
 #pragma once
 
 #include <vector>
-#include "Graphics\Material.h"
-#include "Systems\GameSystem.h"
+#include "Graphics/Material.h"
+#include "Graphics/ShaderResource.h"
+#include "Graphics/TextureSampler.h"
+#include "DataStructures/Mesh.h"
+
+#include "Systems/GameSystem.h"
+
 
 class MaterialManagementSystem : public ISystem
 {
@@ -10,17 +15,22 @@ class MaterialManagementSystem : public ISystem
 
 public:
 	const std::vector<Material*>* GetAllMaterials();
-	const size_t RegisterInstancedMaterial(Material&);
+	const size_t RegisterInstancedMaterial(Material& m);
 
 	const std::vector<ShaderResource*>* GetAllShaderResources();
-	const size_t RegisterShaderResource(ShaderResource&);
+	const size_t RegisterShaderResource(ShaderResource& sr);
 	
 	const std::vector<TextureSampler*>* GetAllTextureSamplers();
-	const size_t RegisterTextureSampler(TextureSampler&);
+	const size_t RegisterTextureSampler(TextureSampler& ts);
+
+	const std::vector<Mesh*>* GetAllMeshes();
+	const size_t RegisterMesh(Mesh& m);
+	Mesh& GetMesh(size_t meshIndex);
 
 private:
 	std::vector<Material*> m_instancedMaterials;
 	std::vector<ShaderResource*> m_shaderResources;
 	std::vector<TextureSampler*> m_textureSamplers;
+	std::vector<Mesh*> m_meshes;
 };
 

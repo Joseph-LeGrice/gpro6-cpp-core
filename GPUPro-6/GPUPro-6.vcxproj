@@ -187,6 +187,7 @@
     <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="DataStructures\Matrix3x3.cpp" />
     <ClCompile Include="DataStructures\Matrix4x4.cpp" />
+    <ClCompile Include="DataStructures\Mesh.cpp" />
     <ClCompile Include="DataStructures\Quaternion.cpp" />
     <ClCompile Include="DataStructures\Vector2.cpp" />
     <ClCompile Include="DataStructures\Vector3.cpp" />
@@ -222,8 +223,8 @@
   <ItemGroup>
     <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Entity.h" />
-    <ClInclude Include="Components\Mesh.h" />
     <ClInclude Include="Components\Transform.h" />
+    <ClInclude Include="DataStructures\Mesh.h" />
     <ClInclude Include="DataStructures\SceneGraph.h" />
     <ClInclude Include="DataStructures\PODArray.h" />
     <ClInclude Include="DataStructures\Matrix3x3.h" />

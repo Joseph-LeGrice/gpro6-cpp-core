@@ -6,7 +6,7 @@
 
 #include "Components/Transform.h"
 #include "Components/Entity.h"
-#include "Components/Mesh.h"
+#include "DataStructures/Mesh.h"
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"
 #include "DataStructures/Quaternion.h"
@@ -54,10 +54,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
 		
 		// Quad Mesh
-		//Mesh mesh = MeshHelper::CreateQuad();
-		Mesh mesh = MeshHelper::CreateSphereUV();
-		//Mesh mesh = MeshHelper::CreateCube();
-		size_t meshIndex = sg.m_meshes.InsertComponent(mesh);
+		//size_t meshIndex = MeshHelper::CreateQuad();
+		size_t meshIndex = MeshHelper::CreateSphereUV();
+		//size_t meshIndex = MeshHelper::CreateCube();
 
 		Transform meshTransform = TransformNew();
 		meshTransform.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);

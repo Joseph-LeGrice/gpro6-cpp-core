@@ -1,21 +1,24 @@
 #include "stdafx.h"
+
 #include <vector>
 #include <algorithm>
-#include "Components\Mesh.h"
-#include "Components\Entity.h"
-#include "Components\Transform.h"
-#include "DataStructures\SceneGraph.h"
-#include "Graphics\Material.h"
-#include "Graphics\Shader.h"
-#include "Graphics\VertexBuffer.h"
-#include "Graphics\IndexBuffer.h"
-#include "Graphics\TextureSampler.h"
-#include "Graphics\ShaderResource.h"
-#include "Systems\MaterialManagementSystem.h"
-#include "Systems\GraphicsSystem.h"
-#include "Systems\SceneManagementSystem.h"
-#include "Systems\ConstantBufferManagementSystem.h"
-#include "Utilities\Logging.h"
+
+#include "Components/Entity.h"
+#include "Components/Transform.h"
+#include "DataStructures/Mesh.h"
+#include "DataStructures/SceneGraph.h"
+#include "Graphics/Material.h"
+#include "Graphics/Shader.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/IndexBuffer.h"
+#include "Graphics/TextureSampler.h"
+#include "Graphics/ShaderResource.h"
+#include "Systems/MaterialManagementSystem.h"
+#include "Systems/GraphicsSystem.h"
+#include "Systems/SceneManagementSystem.h"
+#include "Systems/ConstantBufferManagementSystem.h"
+#include "Systems/MaterialManagementSystem.h"
+#include "Utilities/Logging.h"
 
 Material::Material()
 {
@@ -123,16 +126,20 @@ void Material::UpdateIfDirty()
 	if (m_isDirty)
 	{
 		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
-		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
+		const std::vector<Mesh*>& allMeshes = *MaterialManagementSystem::Instance()->GetAllMeshes();
 
-		PODArray<VertexData> allVerts = PODArray<VertexData>::New();
-		PODArray<UINT16> allIndices = PODArray<UINT16>::New();
+		std::vector<VertexData> allVerts;
+		std::vector<UINT16> allIndices;
 
 		for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 		{
-			Mesh& m = allMeshes[it->first];
-			PODArray<VertexData>::Append(allVerts, m.m_vertexData);
-			PODArray<UINT16>::Append(allIndices, m.m_indices);
+			Mesh& m = *allMeshes[it->first];
+
+			const std::vector<VertexData>& vertexData = m.GetVertexData();
+			allVerts.insert(allVerts.end(), vertexData.begin(), vertexData.end());
+			
+			const std::vector<UINT16>& indexData = m.GetIndices();
+			allIndices.insert(allIndices.end(), indexData.begin(), indexData.end());
 		}
 
 		if (m_myVertexBuffer->TrySetData(allVerts) &&
@@ -140,9 +147,6 @@ void Material::UpdateIfDirty()
 		{
 			m_isDirty = false;
 		}
-
-		PODArray<VertexData>::Free(allVerts);
-		PODArray<UINT16>::Free(allIndices);
 	}
 }
 
@@ -171,14 +175,14 @@ void Material::Render(Matrix4x4& proj, Matrix4x4& view)
 
 		PER_OBJECT_BUFFER pob;
 		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
-		Mesh* allMeshes = sg->m_meshes.GetArrayPointer();
+		const std::vector<Mesh*>& allMeshes = *MaterialManagementSystem::Instance()->GetAllMeshes();
 		Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
 
 		PerObjectBuffer& pub = ConstantBufferManagementSystem::Instance()->GetPerObjectBuffer();
 		UINT16 currentIndex = 0;
 		for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
 		{
-			Mesh& m = allMeshes[it->first];
+			Mesh& m = *allMeshes[it->first];
 			for (auto transformIt = it->second.begin(); transformIt != it->second.end(); ++transformIt)
 			{
 				Transform& t = allTransforms[*transformIt];
@@ -188,7 +192,7 @@ void Material::Render(Matrix4x4& proj, Matrix4x4& view)
 				pob.ModelView = view * model;
 				pub.UpdateBuffer(pob);
 
-				UINT16 numberOfVerts = (UINT16)PODArray<UINT16>::Size(m.m_indices);
+				UINT16 numberOfVerts = (UINT16)m.GetIndices().size();
 				deviceContext->IASetPrimitiveTopology(m.m_topology);
 				deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
 				currentIndex += numberOfVerts;

@@ -96,14 +96,12 @@
     <ClCompile Include="Components\Camera.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="DataStructures\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Components\Mesh.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Components\Camera.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -215,6 +213,7 @@
     <ClInclude Include="Graphics\ConstantBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="DataStructures\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

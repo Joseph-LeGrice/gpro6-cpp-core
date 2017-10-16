@@ -11,7 +11,7 @@ public:
 	static IndexBuffer* Create(size_t bufferSize);
 
 	bool SetCurrentIfValid();
-	bool TrySetData(PODArray<UINT16>& data);
+	bool TrySetData(const std::vector<UINT16>& data);
 
 private:
 	IndexBuffer();

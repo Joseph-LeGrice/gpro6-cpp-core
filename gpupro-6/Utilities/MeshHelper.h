@@ -4,8 +4,8 @@ struct Mesh;
 
 namespace MeshHelper
 {
-	Mesh CreateQuad();
-	Mesh CreateSphereICO();
-	Mesh CreateSphereUV();
-	Mesh CreateCube();
+	size_t CreateQuad();
+	size_t CreateSphereICO();
+	size_t CreateSphereUV();
+	size_t CreateCube();
 };

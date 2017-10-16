@@ -7,8 +7,8 @@
 #include <type_traits>
 #include <sstream>
 
+#include "DataStructures\PODArray.h"
 #include "Components\Camera.h"
-#include "Components\Mesh.h"
 #include "Components\Transform.h"
 #include "Components\Entity.h"
 
@@ -75,7 +75,6 @@ struct ComponentArray
 
 struct SceneGraph
 {
-	ComponentArray<Mesh> m_meshes;
 	ComponentArray<Camera> m_cameras;
 	ComponentArray<Transform> m_transforms;
 	//ComponentArray<Entity> m_entities;

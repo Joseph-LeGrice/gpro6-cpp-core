@@ -1,14 +1,17 @@
 #include "stdafx.h"
 
-#include "Components/Mesh.h"
+#include "Systems/MaterialManagementSystem.h"
+#include "DataStructures/Mesh.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
 
 #include <math.h>
 
-Mesh MeshHelper::CreateQuad()
+size_t MeshHelper::CreateQuad()
 {
-	Mesh result = Mesh::New();
+	size_t meshIndex = CreateMesh();
+	Mesh& result = MaterialManagementSystem::Instance()->GetMesh(meshIndex);
+	
 	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
@@ -16,21 +19,21 @@ Mesh MeshHelper::CreateQuad()
 	verts.push_back({ -1.0f,  1.0f, 0.0f });
 	verts.push_back({  1.0f,  1.0f, 0.0f });
 	verts.push_back({  1.0f, -1.0f, 0.0f });
-	result.SetVertices(result, verts);
+	result.SetVertices(verts);
 		
 	std::vector<Vector3> normals = std::vector<Vector3>();
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
-	result.SetNormals(result, normals);
+	result.SetNormals(normals);
 
 	std::vector<Vector2> uvs = std::vector<Vector2>();
 	uvs.push_back({ 0.0f, 1.0f });
 	uvs.push_back({ 0.0f, 0.0f });
 	uvs.push_back({ 1.0f, 0.0f });
 	uvs.push_back({ 1.0f, 1.0f });
-	result.SetUVs(result, uvs);
+	result.SetUVs(uvs);
 
 	std::vector<UINT16> indices = std::vector<UINT16>();
 	indices.push_back(1);
@@ -38,14 +41,15 @@ Mesh MeshHelper::CreateQuad()
 	indices.push_back(0);
 	indices.push_back(2);
 	indices.push_back(3);
-	result.SetIndices(result, indices);
+	result.SetIndices(indices);
 
-	return result;
+	return meshIndex;
 }
 
-Mesh MeshHelper::CreateSphereICO()
+size_t MeshHelper::CreateSphereICO()
 {
-	Mesh result = Mesh::New();
+	size_t meshIndex = CreateMesh();
+	Mesh& result = MaterialManagementSystem::Instance()->GetMesh(meshIndex);
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();
@@ -53,17 +57,19 @@ Mesh MeshHelper::CreateSphereICO()
 	std::vector<UINT16> indices = std::vector<UINT16>();
 
 
-	result.SetVertices(result, verts);
-	result.SetNormals(result, norms);
-	result.SetUVs(result, uvs);
-	result.SetIndices(result, indices);
+	result.SetVertices(verts);
+	result.SetNormals(norms);
+	result.SetUVs(uvs);
+	result.SetIndices(indices);
 
-	return result;
+	return meshIndex;
 }
 
-Mesh MeshHelper::CreateSphereUV()
+size_t MeshHelper::CreateSphereUV()
 {
-	Mesh result = Mesh::New();
+	size_t meshIndex = CreateMesh();
+	Mesh& result = MaterialManagementSystem::Instance()->GetMesh(meshIndex);
+
 	result.m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
@@ -117,17 +123,19 @@ Mesh MeshHelper::CreateSphereUV()
 		}
 	}
 
-	result.SetVertices(result, verts);
-	result.SetNormals(result, norms);
-	result.SetUVs(result, uvs);
-	result.SetIndices(result, indices);
+	result.SetVertices(verts);
+	result.SetNormals(norms);
+	result.SetUVs(uvs);
+	result.SetIndices(indices);
 
-	return result;
+	return meshIndex;
 }
 
-Mesh MeshHelper::CreateCube()
+size_t MeshHelper::CreateCube()
 {
-	Mesh result = Mesh::New();
+	size_t meshIndex = CreateMesh();
+	Mesh& result = MaterialManagementSystem::Instance()->GetMesh(meshIndex);
+
 	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
@@ -261,9 +269,10 @@ Mesh MeshHelper::CreateCube()
 	indices.push_back(21);
 	indices.push_back(23);
 
-	result.SetVertices(result, verts);
-	result.SetNormals(result, norms);
-	result.SetUVs(result, uvs);
-	result.SetIndices(result, indices);
-	return result;
+	result.SetVertices(verts);
+	result.SetNormals(norms);
+	result.SetUVs(uvs);
+	result.SetIndices(indices);
+
+	return meshIndex;
 }

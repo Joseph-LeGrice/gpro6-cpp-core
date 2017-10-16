@@ -51,7 +51,7 @@ VertexBuffer* VertexBuffer::Create(size_t bufferSize)
 }
 
 
-bool VertexBuffer::TrySetData(PODArray<VertexData>& data)
+bool VertexBuffer::TrySetData(const std::vector<VertexData>& data)
 {
 	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 
@@ -59,7 +59,7 @@ bool VertexBuffer::TrySetData(PODArray<VertexData>& data)
 	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);
 	if (SUCCEEDED(vertexBufferAcquireResult))
 	{
-		memcpy(vertexData.pData, &data[0], sizeof(VertexData) * PODArray<VertexData>::Size(data));
+		memcpy(vertexData.pData, &data[0], sizeof(VertexData) * data.size());
 		deviceContext->Unmap(m_vertexBuffer, 0);
 		return true;
 	}

@@ -47,7 +47,7 @@ bool IndexBuffer::SetCurrentIfValid()
 	return true;
 }
 
-bool IndexBuffer::TrySetData(PODArray<UINT16>& data)
+bool IndexBuffer::TrySetData(const std::vector<UINT16>& data)
 {
 	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 	
@@ -55,7 +55,7 @@ bool IndexBuffer::TrySetData(PODArray<UINT16>& data)
 	HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);
 	if (SUCCEEDED(indexBufferAcquireResult))
 	{
-		memcpy(indexBufferData.pData, &data[0], sizeof(UINT16) * PODArray<UINT16>::Size(data));
+		memcpy(indexBufferData.pData, &data[0], sizeof(UINT16) * data.size());
 		deviceContext->Unmap(m_indexBuffer, 0);
 		return true;
 	}

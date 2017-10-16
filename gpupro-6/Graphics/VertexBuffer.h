@@ -12,7 +12,7 @@ public:
 	~VertexBuffer();
 
 	bool SetCurrentIfValid(); 
-	bool TrySetData(PODArray<VertexData>& data);
+	bool TrySetData(const std::vector<VertexData>& data);
 
 private:
 	VertexBuffer();
