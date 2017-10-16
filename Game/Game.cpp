@@ -4,22 +4,22 @@
 #include "stdafx.h"
 #include "Game.h"
 
-#include "Components\Transform.h"
-#include "Components\Entity.h"
-#include "Components\Mesh.h"
-#include "Components\Camera.h"
-#include "DataStructures\SceneGraph.h"
-#include "DataStructures\Quaternion.h"
-#include "Graphics\Shader.h"
-#include "Graphics\Material.h"
-#include "Graphics\Texture2D_ShaderResource.h"
-#include "Graphics\TextureSampler.h"
-#include "Systems\GameSystem.h"
-#include "Systems\SceneManagementSystem.h"
+#include "Components/Transform.h"
+#include "Components/Entity.h"
+#include "Components/Mesh.h"
+#include "Components/Camera.h"
+#include "DataStructures/SceneGraph.h"
+#include "DataStructures/Quaternion.h"
+#include "Graphics/Shader.h"
+#include "Graphics/Material.h"
+#include "Graphics/Texture2D_ShaderResource.h"
+#include "Graphics/TextureSampler.h"
+#include "Systems/GameSystem.h"
+#include "Systems/SceneManagementSystem.h"
 #include "MouseRotateSystem.h"
-#include "Utilities\ImagingFactory.h"
-#include "Utilities\MeshHelper.h"
-#include "Utilities\MathHelper.h"
+#include "Utilities/ImagingFactory.h"
+#include "Utilities/MeshHelper.h"
+#include "Utilities/MathHelper.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -43,7 +43,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		//materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-		simpleQuadMat->SetShader(simpleTexturedQuadShader);
+		simpleQuadMat->SetShader(simpleTexturedQuadShader, 1, 1);
 
 		size_t textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
 		simpleQuadMat->AddShaderResource(textureResourceIndex, 0);

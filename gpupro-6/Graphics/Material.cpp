@@ -47,9 +47,21 @@ Material* Material::Create()
 }
 
 
-void Material::SetShader(Shader* s)
+void Material::SetShader(Shader* s, size_t numberOfResources, size_t numberOfSamplers)
 {
 	m_shader = s;
+	
+	m_shaderResourceIndexes.resize(numberOfResources);
+	for (int i = 0; i < numberOfResources; ++i)
+	{
+		m_shaderResourceIndexes[i] = -1;
+	}
+	
+	m_textureSamplerIndexes.resize(numberOfSamplers);
+	for (int i = 0; i < numberOfSamplers; ++i)
+	{
+		m_textureSamplerIndexes[i] = -1;
+	}
 }
 
 
@@ -62,7 +74,6 @@ void Material::RegisterMeshInfo(size_t meshIndex, size_t transformIndex)
 	m_renderMap[meshIndex].push_back(transformIndex);
 	m_isDirty = true;
 }
-
 
 
 void Material::DeregisterMeshInfo(size_t meshIndex, size_t transformIndex)
@@ -145,14 +156,18 @@ void Material::Render(Matrix4x4& proj, Matrix4x4& view)
 		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 		
 		std::vector<ShaderResource*> allResources = *MaterialManagementSystem::Instance()->GetAllShaderResources();
-		size_t shaderResourceSlot = 0;
-		size_t shaderResourceIndex = m_shaderResourceIndexes[shaderResourceSlot];
-		allResources[shaderResourceIndex]->BindResource(shaderResourceSlot, 1);
+		for (size_t shaderResourceSlot = 0; shaderResourceSlot < m_shaderResourceIndexes.size(); ++shaderResourceSlot)
+		{
+			size_t shaderResourceIndex = m_shaderResourceIndexes[shaderResourceSlot];
+			allResources[shaderResourceIndex]->BindResource(shaderResourceSlot, m_shaderResourceIndexes.size());
+		}
 
 		std::vector<TextureSampler*> allTexturesSamplers = *MaterialManagementSystem::Instance()->GetAllTextureSamplers();
-		size_t textureSamplerSlot = 0;
-		size_t textureSamplerIndex = m_shaderResourceIndexes[textureSamplerSlot];
-		allTexturesSamplers[textureSamplerIndex]->BindTextureSampler(textureSamplerSlot, 1);
+		for (size_t textureSamplerSlot = 0; textureSamplerSlot < m_textureSamplerIndexes.size(); ++textureSamplerSlot)
+		{
+			size_t textureSamplerIndex = m_textureSamplerIndexes[textureSamplerSlot];
+			allTexturesSamplers[textureSamplerIndex]->BindTextureSampler(textureSamplerSlot, m_textureSamplerIndexes.size());
+		}
 
 		PER_OBJECT_BUFFER pob;
 		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();

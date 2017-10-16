@@ -26,7 +26,7 @@ public:
 	void Render(Matrix4x4&,Matrix4x4&);
 	void UpdateIfDirty();
 	
-	void SetShader(Shader* shader);
+	void SetShader(Shader* shader, size_t numberOfResources, size_t numberOfSamplers);
 	
 	void DeregisterMeshInfo(size_t meshIndex, size_t transformIndex);
 	void RegisterMeshInfo(size_t meshIndex, size_t transformIndex);
@@ -45,10 +45,12 @@ private:
 
 	bool m_isDirty;
 	Shader* m_shader;
+	size_t m_numberOfResources;
+	size_t m_numberOfSamplers;
 	
-	size_t m_shaderResourceIndexes[4];
-	size_t m_textureSamplerIndexes[4];
-
+	std::vector<size_t> m_shaderResourceIndexes;
+	std::vector<size_t> m_textureSamplerIndexes;
+	
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;
 	MeshTransformMap m_renderMap;
