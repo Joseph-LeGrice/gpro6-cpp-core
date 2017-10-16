@@ -60,7 +60,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//Mesh mesh = MeshHelper::CreateCube();
 		size_t meshIndex = sg.m_meshes.InsertComponent(mesh);
 
-		Transform meshTransform = Transform::New();
+		Transform meshTransform = TransformNew();
 		meshTransform.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		meshTransform.m_position = { 0.0f, 0.0f, 20.0f };
 		meshTransform.m_scale = { 5.0f, 5.0f, 5.0f };
@@ -72,11 +72,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		MouseRotateSystem::Instance()->SetTransformIndexToRotate(meshTransformIndex);
 
 		// Camera
-		Transform cameraTransform = Transform::New();
+		Transform cameraTransform = TransformNew();
 		cameraTransform.m_position = { 0.0f, 0.0f, -10.0f };
 		size_t cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
 
-		Camera camera = Camera::New();
+		Camera camera = CameraTestNew();
 		camera.m_transformIndex = cameraTransformIndex;
 		size_t cameraIndex = sg.m_cameras.InsertComponent(camera);
 	}

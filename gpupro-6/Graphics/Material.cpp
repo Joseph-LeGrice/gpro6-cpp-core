@@ -205,7 +205,7 @@ void Material::Render(Matrix4x4& proj, Matrix4x4& view)
 			for (auto transformIt = it->second.begin(); transformIt != it->second.end(); ++transformIt)
 			{
 				Transform& t = allTransforms[*transformIt];
-				Matrix4x4 model = Transform::GetTransformationMatrix(t);
+				Matrix4x4 model = TransformGetMatrix(t);
 
 				pob.ModelViewProjection = proj * view * model;
 				pob.ModelView = view * model;

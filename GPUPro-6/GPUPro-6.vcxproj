@@ -183,6 +183,8 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Camera.cpp" />
+    <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="DataStructures\Matrix3x3.cpp" />
     <ClCompile Include="DataStructures\Matrix4x4.cpp" />
     <ClCompile Include="DataStructures\Quaternion.cpp" />

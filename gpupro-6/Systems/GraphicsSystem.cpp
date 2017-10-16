@@ -133,7 +133,7 @@ void GraphicsSystem::VariableTick()
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
 		Transform& t = allTransforms[cam.m_transformIndex];
-		Matrix4x4 view = Transform::GetViewMatrix(t);
+		Matrix4x4 view = TransformGetCameraViewMatrix(t);
 		Matrix4x4 proj = cam.m_projectionMatrix;
 
 		for each (Material* m in *allMats)

@@ -90,6 +90,12 @@
     <ClCompile Include="DataStructures\Quaternion.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Transform.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Camera.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
