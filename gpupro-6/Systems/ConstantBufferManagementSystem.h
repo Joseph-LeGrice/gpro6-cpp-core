@@ -66,6 +66,13 @@ struct LIGHT_BUFFER
 	Vector2 Padding;
 };
 
+enum LightType
+{
+	kLightType_Point = 0,
+	kLightType_Spotlight = 1,
+	kLightType_Directional = 2
+};
+
 #define NUM_BUFFERS 2
 typedef ConstantBuffer<PER_OBJECT_BUFFER, 0, NUM_BUFFERS, BIND_ALL> PerObjectBuffer;
 typedef ConstantBuffer<MATERIAL_BUFFER, 1, NUM_BUFFERS, BIND_ALL> MaterialBuffer;
