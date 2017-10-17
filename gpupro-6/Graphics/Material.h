@@ -5,14 +5,7 @@
 #include <vector>
 #include <unordered_map>
 
-struct Mesh;
 class Shader;
-class ShaderResource;
-class VertexBuffer;
-class IndexBuffer;
-class ShaderResource;
-class TextureSampler;
-struct Matrix4x4;
 
 typedef std::unordered_map<size_t, std::vector<size_t>> MeshTransformMap;
 
@@ -21,12 +14,9 @@ class Material
 public:
 	~Material();
 
-	static Material* Create();
+	static size_t Create();
 
-	void Render(Matrix4x4&,Matrix4x4&);
-	void UpdateIfDirty();
-	void DeregisterMeshInfo(size_t meshIndex, size_t transformIndex);
-	void RegisterMeshInfo(size_t meshIndex, size_t transformIndex);
+	void Bind();
 	
 	void SetShader(Shader* shader, size_t numberOfResources, size_t numberOfSamplers);
 	
@@ -37,20 +27,10 @@ public:
 	void RemoveTextureSampler(size_t textureSamplerSlotIndex);
 
 private:
-	bool Initialize();
-
 	Material();
 	Material(const Material&) = delete;
 
-	bool m_isDirty;
 	Shader* m_shader;
-	size_t m_numberOfResources;
-	size_t m_numberOfSamplers;
-	
 	std::vector<size_t> m_shaderResourceIndexes;
 	std::vector<size_t> m_textureSamplerIndexes;
-	
-	VertexBuffer* m_myVertexBuffer;
-	IndexBuffer* m_myIndexBuffer;
-	MeshTransformMap m_renderMap;
 };

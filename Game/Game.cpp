@@ -16,6 +16,7 @@
 #include "Graphics/TextureSampler.h"
 #include "Systems/GameSystem.h"
 #include "Systems/SceneManagementSystem.h"
+#include "Systems/MaterialManagementSystem.h"
 #include "MouseRotateSystem.h"
 #include "Utilities/ImagingFactory.h"
 #include "Utilities/MeshHelper.h"
@@ -33,7 +34,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		GameSystem::InitializeAllSystems();
 
-		Material* simpleQuadMat = Material::Create();
+		size_t materialIndex = Material::Create();
+		Material& simpleQuadMat = MaterialManagementSystem::Instance()->GetMaterial(materialIndex);
 
 		Shader* simpleTexturedQuadShader = Shader::CreateNew();
 		simpleTexturedQuadShader->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader");
@@ -43,16 +45,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		//materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-		simpleQuadMat->SetShader(simpleTexturedQuadShader, 1, 1);
+		simpleQuadMat.SetShader(simpleTexturedQuadShader, 1, 1);
 
 		size_t textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
-		simpleQuadMat->AddShaderResource(textureResourceIndex, 0);
-		
+		simpleQuadMat.AddShaderResource(textureResourceIndex, 0);
+
 		size_t index = CreateTextureSampler();
-		simpleQuadMat->AddTextureSampler(index, 0);
+		simpleQuadMat.AddTextureSampler(index, 0);
 
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
-		
+
 		// Quad Mesh
 		//size_t meshIndex = MeshHelper::CreateQuad();
 		size_t meshIndex = MeshHelper::CreateSphereUV();
@@ -66,7 +68,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		size_t meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
-		simpleQuadMat->RegisterMeshInfo(meshIndex, meshTransformIndex);
+		MeshRenderHook mrh = { meshTransformIndex, meshIndex, materialIndex };
+		GraphicsSystem::Instance()->RegisterMeshRenderHook(mrh);
 
 		MouseRotateSystem::Instance()->SetTransformIndexToRotate(meshTransformIndex);
 

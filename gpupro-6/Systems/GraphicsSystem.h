@@ -12,8 +12,17 @@
 #pragma comment (lib, "d3dx10.lib")
 
 class Material;
+class VertexBuffer;
+class IndexBuffer;
 struct Camera;
 struct SceneGraph;
+
+struct MeshRenderHook
+{
+	size_t m_transformIndex;
+	size_t m_meshIndex;
+	size_t m_materialIndex;
+};
 
 class GraphicsSystem : public ISystem
 {
@@ -29,6 +38,8 @@ public:
 	float GetViewportWidth();
 	float GetViewportHeight();
 
+	void RegisterMeshRenderHook(MeshRenderHook& mrh);
+
 private:
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_deviceContext;
@@ -36,5 +47,12 @@ private:
 	IDXGISwapChain* m_swapchain;
 	ID3D11RenderTargetView * m_rtBackBuffer;
 
+	bool m_isDirty;
+	VertexBuffer* m_myVertexBuffer;
+	IndexBuffer* m_myIndexBuffer;
+	std::vector<MeshRenderHook> m_renderMap;
+
 	float m_viewportWidth, m_viewportHeight;
+	
+	void UpdateIfDirty();
 };

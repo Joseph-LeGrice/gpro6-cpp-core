@@ -16,6 +16,7 @@ class MaterialManagementSystem : public ISystem
 public:
 	const std::vector<Material*>* GetAllMaterials();
 	const size_t RegisterInstancedMaterial(Material& m);
+	Material& GetMaterial(size_t index);
 
 	const std::vector<ShaderResource*>* GetAllShaderResources();
 	const size_t RegisterShaderResource(ShaderResource& sr);

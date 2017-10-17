@@ -28,6 +28,11 @@ const size_t MaterialManagementSystem::RegisterInstancedMaterial(Material& m)
 	return index;
 }
 
+Material& MaterialManagementSystem::GetMaterial(size_t index)
+{
+	return *m_instancedMaterials[index];
+}
+
 const std::vector<ShaderResource*>* MaterialManagementSystem::GetAllShaderResources()
 {
 	return &m_shaderResources;

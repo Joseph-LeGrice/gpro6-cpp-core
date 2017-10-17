@@ -7,6 +7,9 @@
 #include "DataStructures/SceneGraph.h"
 #include "Graphics/ConstantBuffer.h"
 #include "Systems/ConstantBufferManagementSystem.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/IndexBuffer.h"
+
 
 #define DEBUG
 
@@ -26,6 +29,8 @@ GraphicsSystem::~GraphicsSystem()
 	SAFE_RELEASE(m_swapchain);
 	SAFE_RELEASE(m_device);
 	SAFE_RELEASE(m_deviceContext);
+	SAFE_DELETE(m_myVertexBuffer);
+	SAFE_DELETE(m_myIndexBuffer);
 }
 
 
@@ -97,7 +102,14 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 
 			m_deviceContext->RSSetViewports(1, &viewportDesc);
 
-			return true;
+			// Initialize Buffers
+			size_t INDEX_BUFFER_SIZE = (size_t)pow(1024, 2);
+			size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
+
+			m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
+			m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
+
+			return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
 		}
 	}
 	
@@ -114,18 +126,65 @@ float GraphicsSystem::GetViewportHeight()
 	return m_viewportHeight;
 }
 
+void GraphicsSystem::RegisterMeshRenderHook(MeshRenderHook& mrh)
+{
+	m_renderMap.push_back(mrh);
+	m_isDirty = true;
+}
+
+void GraphicsSystem::UpdateIfDirty()
+{
+	if (m_isDirty)
+	{
+		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
+		const std::vector<Mesh*>& allMeshes = *MaterialManagementSystem::Instance()->GetAllMeshes();
+
+		std::vector<VertexData> allVerts;
+		std::vector<UINT16> allIndices;
+
+		for (auto it = m_renderMap.begin(); it != m_renderMap.end(); ++it)
+		{
+			Mesh& m = *allMeshes[it->m_meshIndex];
+
+			const std::vector<VertexData>& vertexData = m.GetVertexData();
+			allVerts.insert(allVerts.end(), vertexData.begin(), vertexData.end());
+
+			const std::vector<UINT16>& indexData = m.GetIndices();
+			allIndices.insert(allIndices.end(), indexData.begin(), indexData.end());
+		}
+
+		if (m_myVertexBuffer->TrySetData(allVerts) &&
+			m_myIndexBuffer->TrySetData(allIndices))
+		{
+			m_isDirty = false;
+		}
+	}
+}
+
 void GraphicsSystem::VariableTick()
 {
-	ComponentArray<Transform>& tca = SceneManagementSystem::Instance()->GetSceneGraph()->m_transforms;
-	Transform* allTransforms = tca.GetArrayPointer();
-
+	UpdateIfDirty(); 
+	
+	m_myVertexBuffer->SetCurrentIfValid();
+	m_myIndexBuffer->SetCurrentIfValid();
+	
 	ComponentArray<Camera>& cca = SceneManagementSystem::Instance()->GetSceneGraph()->m_cameras;
 	Camera* allCameras = cca.GetArrayPointer();
 	size_t allCamerasSize = cca.GetArraySize();
 
-	const std::vector<Material*>* allMats = MaterialManagementSystem::Instance()->GetAllMaterials();
-	ConstantBufferManagementSystem::Instance()->GetPerObjectBuffer().BindBuffer();
+	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+	PER_OBJECT_BUFFER pob;
 
+	SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
+
+	Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
+	const std::vector<Mesh*>& allMeshes = *MaterialManagementSystem::Instance()->GetAllMeshes();
+	const std::vector<Material*>& allMats = *MaterialManagementSystem::Instance()->GetAllMaterials();
+
+	PerObjectBuffer& pub = ConstantBufferManagementSystem::Instance()->GetPerObjectBuffer();
+	pub.BindBuffer();
+
+	UINT16 currentIndex = 0;
 	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
 	{
 		Camera& cam = allCameras[cameraIndex];
@@ -136,12 +195,27 @@ void GraphicsSystem::VariableTick()
 		Matrix4x4 view = TransformGetCameraViewMatrix(t);
 		Matrix4x4 proj = cam.m_projectionMatrix;
 
-		for each (Material* m in *allMats)
+		for (size_t meshRenderIndex = 0; meshRenderIndex < m_renderMap.size(); ++meshRenderIndex)
 		{
-			m->UpdateIfDirty();
-			m->Render(proj, view);
-		}
+			MeshRenderHook mrh = m_renderMap[meshRenderIndex];
+			
+			Material& mat = *allMats[mrh.m_materialIndex];
+			mat.Bind();
 
+			Transform& t = allTransforms[mrh.m_transformIndex];
+			Matrix4x4 model = TransformGetMatrix(t);
+
+			pob.ModelViewProjection = proj * view * model;
+			pob.ModelView = view * model;
+			pub.UpdateBuffer(pob);
+
+			Mesh& mesh = *allMeshes[mrh.m_meshIndex];
+			UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
+			deviceContext->IASetPrimitiveTopology(mesh.m_topology);
+			deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+
+			currentIndex += numberOfVerts;
+		}
 		m_swapchain->Present(0, 0);
 	}
 }
