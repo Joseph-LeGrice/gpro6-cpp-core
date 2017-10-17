@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "Graphics/Material.h"
-#include "Graphics/ShaderResource.h"
+#include "Graphics/ResourceTypes/ShaderResource.h"
 #include "Graphics/TextureSampler.h"
 #include "DataStructures/Mesh.h"
 

@@ -62,7 +62,6 @@ struct Light
 #define SPOT_LIGHT 1
 #define DIRECTIONAL_LIGHT 2
 
-
 cbuffer PerObjectBuffer : register(b0)
 {
 	float4x4 ModelViewProjection;

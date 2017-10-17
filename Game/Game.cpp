@@ -12,7 +12,7 @@
 #include "DataStructures/Quaternion.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Material.h"
-#include "Graphics/Texture2D_ShaderResource.h"
+#include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
 #include "Graphics/TextureSampler.h"
 #include "Systems/GameSystem.h"
 #include "Systems/SceneManagementSystem.h"

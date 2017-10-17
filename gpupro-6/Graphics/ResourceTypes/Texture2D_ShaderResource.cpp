@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "Graphics/Texture2D_ShaderResource.h"
+#include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
 #include "Systems/GraphicsSystem.h"
 #include "Systems/MaterialManagementSystem.h"
 #include "Utilities/PerlinNoise.h"

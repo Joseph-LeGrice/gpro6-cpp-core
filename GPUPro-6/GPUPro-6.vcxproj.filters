@@ -15,19 +15,7 @@
     <ClCompile Include="Graphics\Material.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Texture2D_ShaderResource.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\ShaderResource.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\TextureSampler.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\VertexBuffer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\IndexBuffer.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Systems\GraphicsSystem.cpp">
@@ -97,6 +85,19 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="DataStructures\Mesh.cpp" />
+    <ClCompile Include="Graphics\ResourceTypes\StructuredBuffer_ShaderResource.cpp" />
+    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
+      <Filter>Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
+      <Filter>Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\ShaderResource.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\Texture2D_ShaderResource.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -144,19 +145,7 @@
     <ClInclude Include="Graphics\Material.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ShaderResource.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\TextureSampler.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Texture2D_ShaderResource.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\VertexBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\IndexBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Systems\GraphicsSystem.h">
@@ -210,10 +199,23 @@
     <ClInclude Include="Utilities\Logging.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ConstantBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="DataStructures\Mesh.h" />
+    <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer_ShaderResource.h" />
+    <ClInclude Include="Graphics\Buffers\ConstantBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\ShaderResource.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\Texture2D_ShaderResource.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -239,6 +241,12 @@
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{dfa88832-0aec-4779-bfde-6d8a9e35ef6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Buffers">
+      <UniqueIdentifier>{ff41a36b-2160-44c8-a10d-3072861fee0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\ResourceTypes">
+      <UniqueIdentifier>{538c66c2-f9b2-458e-8f20-59fccfb88305}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

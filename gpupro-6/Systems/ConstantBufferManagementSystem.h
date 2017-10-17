@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Graphics/ConstantBuffer.h"
+#include "Graphics/Buffers/ConstantBuffer.h"
 #include "Systems/GameSystem.h"
 
 #include "DataStructures/Vector2.h"
@@ -47,6 +47,22 @@ struct MATERIAL_BUFFER
 
 	FLOAT SpecularScale;
 	FLOAT AlphaThreshold;
+	Vector2 Padding;
+};
+
+struct LIGHT_BUFFER
+{
+	Vector4 PositionWS;
+	Vector4 DirectionWS;
+	Vector4 PositionVS;
+	Vector4 DirectionVS;
+	Vector4 Color;
+	FLOAT SpotlightAngle;
+	FLOAT Range;
+	FLOAT Intensity;
+	BOOL Enabled;
+	BOOL Selected;
+	UINT16 Type;
 	Vector2 Padding;
 };
 
