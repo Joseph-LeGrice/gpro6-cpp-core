@@ -96,8 +96,8 @@ DXGI_FORMAT ImagingFactory::GetNativeFormat(const GUID& bitmapPixelFormat)
 UINT ImagingFactory::GetBitsPerPixel(WICPixelFormatGUID bitmapPixelFormat)
 {
 	UINT bpp = 0;
-	IWICComponentInfo* cinfo;
-	IWICPixelFormatInfo* pfinfo;
+	IWICComponentInfo* cinfo = nullptr;
+	IWICPixelFormatInfo* pfinfo = nullptr;
 
 	HRESULT hr = m_factory->CreateComponentInfo(bitmapPixelFormat, &cinfo);
 	if (SUCCEEDED(hr))

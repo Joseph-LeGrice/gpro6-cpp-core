@@ -13,14 +13,19 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Material.h"
 #include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
+#include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 #include "Graphics/TextureSampler.h"
 #include "Systems/GameSystem.h"
 #include "Systems/SceneManagementSystem.h"
 #include "Systems/MaterialManagementSystem.h"
+#include "Systems/ConstantBufferManagementSystem.h"
 #include "MouseRotateSystem.h"
 #include "Utilities/ImagingFactory.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
+
+#define NUM_LIGHTS 1
+typedef StructuredBuffer_ShaderResource<LIGHT_BUFFER, NUM_LIGHTS> StructuredBufferLights;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -34,8 +39,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		GameSystem::InitializeAllSystems();
 
-		size_t materialIndex = Material::Create();
-		Material& simpleQuadMat = MaterialManagementSystem::Instance()->GetMaterial(materialIndex);
+		MaterialManagementSystem& mms = *MaterialManagementSystem::Instance();
+
+		int materialIndex = Material::Create();
+		Material& simpleQuadMat = *mms.GetMaterial(materialIndex);
 
 		Shader* simpleTexturedQuadShader = Shader::CreateNew();
 		simpleTexturedQuadShader->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader");
@@ -45,20 +52,47 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		//materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-		simpleQuadMat.SetShader(simpleTexturedQuadShader, 1, 1);
+		simpleQuadMat.SetShader(simpleTexturedQuadShader, 2, 1);
 
-		size_t textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
+		int textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
 		simpleQuadMat.AddShaderResource(textureResourceIndex, 0);
 
-		size_t index = CreateTextureSampler();
-		simpleQuadMat.AddTextureSampler(index, 0);
+		int textureSamplerIndex = CreateTextureSampler();
+		simpleQuadMat.AddTextureSampler(textureSamplerIndex, 0);
 
+		int lightBufferIndex = StructuredBufferLights::CreateNew();
+		simpleQuadMat.AddShaderResource(lightBufferIndex, 1);
+
+		LIGHT_BUFFER lights[NUM_LIGHTS];
+		ZeroMemory(&lights, NUM_LIGHTS * sizeof(LIGHT_BUFFER));
+
+		for (size_t i = 0; i < NUM_LIGHTS; ++i)
+		{
+			lights[i].PositionWS = { 0.0f, 0.0f, 0.0f, 0.0f };
+			lights[i].DirectionWS = { 0.0f, 0.0f, 0.0f, 0.0f };
+			lights[i].PositionVS = { 0.0f, 0.0f, 0.0f, 0.0f };
+			lights[i].DirectionVS = { 0.0f, 0.0f, 0.0f, 0.0f };
+			lights[i].Color = { 0.0f, 0.0f, 0.0f, 0.0f };
+			lights[i].SpotlightAngle = 0.0f;
+			lights[i].Range = 0.0f;
+			lights[i].Intensity = 1.0f;
+			lights[i].Enabled = TRUE;
+			lights[i].Selected = TRUE;
+			lights[i].Type = kLightType_Point;
+		}
+
+		StructuredBufferLights* lightBuf = reinterpret_cast<StructuredBufferLights*>(mms.GetShaderResource(lightBufferIndex));
+		if (lightBuf != nullptr)
+		{
+			lightBuf->UpdateBuffer(*lights);
+		}
+		
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
 
 		// Quad Mesh
-		//size_t meshIndex = MeshHelper::CreateQuad();
-		size_t meshIndex = MeshHelper::CreateSphereUV();
-		//size_t meshIndex = MeshHelper::CreateCube();
+		//int meshIndex = MeshHelper::CreateQuad();
+		int meshIndex = MeshHelper::CreateSphereUV();
+		//int meshIndex = MeshHelper::CreateCube();
 
 		Transform meshTransform = TransformNew();
 		meshTransform.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
@@ -66,7 +100,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		meshTransform.m_scale = { 1.0f, 1.0f, 1.0f };
 		meshTransform.m_scale = 10.0f * meshTransform.m_scale;
 
-		size_t meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
+		int meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
 		MeshRenderHook mrh = { meshTransformIndex, meshIndex, materialIndex };
 		GraphicsSystem::Instance()->RegisterMeshRenderHook(mrh);
@@ -76,11 +110,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Camera
 		Transform cameraTransform = TransformNew();
 		cameraTransform.m_position = { 0.0f, 0.0f, -10.0f };
-		size_t cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
+		int cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
 
 		Camera camera = CameraTestNew();
 		camera.m_transformIndex = cameraTransformIndex;
-		size_t cameraIndex = sg.m_cameras.InsertComponent(camera);
+		int cameraIndex = sg.m_cameras.InsertComponent(camera);
 	}
 	catch(...)
 	{

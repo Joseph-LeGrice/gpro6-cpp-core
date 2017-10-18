@@ -85,7 +85,6 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="DataStructures\Mesh.cpp" />
-    <ClCompile Include="Graphics\ResourceTypes\StructuredBuffer_ShaderResource.cpp" />
     <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
       <Filter>Graphics\Buffers</Filter>
     </ClCompile>
@@ -200,7 +199,6 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="DataStructures\Mesh.h" />
-    <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer_ShaderResource.h" />
     <ClInclude Include="Graphics\Buffers\ConstantBuffer.h">
       <Filter>Graphics\Buffers</Filter>
     </ClInclude>
@@ -214,6 +212,9 @@
       <Filter>Graphics\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\ResourceTypes\Texture2D_ShaderResource.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer_ShaderResource.h">
       <Filter>Graphics\ResourceTypes</Filter>
     </ClInclude>
   </ItemGroup>

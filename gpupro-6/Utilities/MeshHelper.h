@@ -1,11 +1,11 @@
 #pragma once
 
-struct Mesh;
+class Mesh;
 
 namespace MeshHelper
 {
-	size_t CreateQuad();
-	size_t CreateSphereICO();
-	size_t CreateSphereUV();
-	size_t CreateCube();
+	int CreateQuad();
+	int CreateSphereICO();
+	int CreateSphereUV();
+	int CreateCube();
 };

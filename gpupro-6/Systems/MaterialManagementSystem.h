@@ -15,18 +15,18 @@ class MaterialManagementSystem : public ISystem
 
 public:
 	const std::vector<Material*>* GetAllMaterials();
-	const size_t RegisterInstancedMaterial(Material& m);
-	Material& GetMaterial(size_t index);
+	const int RegisterInstancedMaterial(Material& m);
+	Material* GetMaterial(int index);
 
-	const std::vector<ShaderResource*>* GetAllShaderResources();
-	const size_t RegisterShaderResource(ShaderResource& sr);
-	
-	const std::vector<TextureSampler*>* GetAllTextureSamplers();
-	const size_t RegisterTextureSampler(TextureSampler& ts);
+	const int RegisterShaderResource(ShaderResource& sr);
+	ShaderResource* GetShaderResource(int index);
+
+	const int RegisterTextureSampler(TextureSampler& ts);
+	TextureSampler* GetTextureSampler(int index);
 
 	const std::vector<Mesh*>* GetAllMeshes();
-	const size_t RegisterMesh(Mesh& m);
-	Mesh& GetMesh(size_t meshIndex);
+	const int RegisterMesh(Mesh& m);
+	Mesh* GetMesh(int meshIndex);
 
 private:
 	std::vector<Material*> m_instancedMaterials;

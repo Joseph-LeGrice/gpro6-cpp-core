@@ -14,16 +14,16 @@ class Material
 public:
 	~Material();
 
-	static size_t Create();
+	static int Create();
 
-	void Bind();
+	bool BindIfValid();
 	
 	void SetShader(Shader* shader, size_t numberOfResources, size_t numberOfSamplers);
 	
-	void AddShaderResource(size_t shaderResourceIndex, size_t shaderResourceSlotIndex);
+	void AddShaderResource(int shaderResourceIndex, size_t shaderResourceSlotIndex);
 	void RemoveShaderResource(size_t shaderResourceSlotIndex);
 
-	void AddTextureSampler(size_t textureSamplerIndex, size_t textureSamplerSlotIndex);
+	void AddTextureSampler(int textureSamplerIndex, size_t textureSamplerSlotIndex);
 	void RemoveTextureSampler(size_t textureSamplerSlotIndex);
 
 private:
@@ -31,6 +31,8 @@ private:
 	Material(const Material&) = delete;
 
 	Shader* m_shader;
-	std::vector<size_t> m_shaderResourceIndexes;
-	std::vector<size_t> m_textureSamplerIndexes;
+	size_t m_numberOfResources;
+	size_t m_numberOfTextureSamplers;
+	std::vector<int> m_shaderResourceIndexes;
+	std::vector<int> m_textureSamplerIndexes;
 };

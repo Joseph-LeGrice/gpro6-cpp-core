@@ -1,4 +1,7 @@
 #pragma once
+#pragma warning(push)
+#pragma warning(disable: 4127)
+
 #include "D3DX11.h"
 #include "D3DX10.h"
 #include "Systems\GraphicsSystem.h"
@@ -14,7 +17,7 @@ enum BindFlags
 	BIND_ALL    = BIND_VERTEX | BIND_HULL | BIND_DOMAIN | BIND_GEOM | BIND_PIXEL
 };
 
-template<class T, size_t m_bufferSlot, size_t m_maxBuffers, BindFlags m_bindFlags>
+template<class T, UINT m_bufferSlot, UINT m_maxBuffers, BindFlags m_bindFlags>
 class ConstantBuffer
 {
 	friend class ConstantBufferManagementSystem;
@@ -91,3 +94,5 @@ private:
 
 	ID3D11Buffer* m_buffer;
 };
+
+#pragma warning(pop)

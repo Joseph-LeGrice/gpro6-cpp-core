@@ -52,7 +52,7 @@ void operator/=(Vector3& lhs, const float rhs) { lhs.X /= rhs; lhs.Y /= rhs; lhs
 
 FLOAT VectorMagnitude(Vector3& v)
 {
-	return sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
+	return sqrtf(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
 }
 
 void VectorNormalize(Vector3& v)

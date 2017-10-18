@@ -19,9 +19,9 @@ struct SceneGraph;
 
 struct MeshRenderHook
 {
-	size_t m_transformIndex;
-	size_t m_meshIndex;
-	size_t m_materialIndex;
+	int m_transformIndex;
+	int m_meshIndex;
+	int m_materialIndex;
 };
 
 class GraphicsSystem : public ISystem

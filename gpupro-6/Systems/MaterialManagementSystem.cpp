@@ -21,40 +21,61 @@ const std::vector<Material*>* MaterialManagementSystem::GetAllMaterials()
 	return &m_instancedMaterials;
 }
 
-const size_t MaterialManagementSystem::RegisterInstancedMaterial(Material& m)
+const int MaterialManagementSystem::RegisterInstancedMaterial(Material& m)
 {
-	size_t index = m_instancedMaterials.size();
+	int index = static_cast<int>(m_instancedMaterials.size());
 	m_instancedMaterials.push_back(&m);
 	return index;
 }
 
-Material& MaterialManagementSystem::GetMaterial(size_t index)
+Material* MaterialManagementSystem::GetMaterial(int index)
 {
-	return *m_instancedMaterials[index];
+	if (index >= 0 && index < m_instancedMaterials.size())
+	{
+		return m_instancedMaterials[index];
+	}
+	else
+	{
+		return nullptr;
+	}
 }
 
-const std::vector<ShaderResource*>* MaterialManagementSystem::GetAllShaderResources()
+const int MaterialManagementSystem::RegisterShaderResource(ShaderResource& sr)
 {
-	return &m_shaderResources;
-}
-
-const size_t MaterialManagementSystem::RegisterShaderResource(ShaderResource& sr)
-{
-	size_t index = m_shaderResources.size();
+	int index = static_cast<int>(m_shaderResources.size());
 	m_shaderResources.push_back(&sr);
 	return index;
 }
 
-const std::vector<TextureSampler*>* MaterialManagementSystem::GetAllTextureSamplers()
+ShaderResource* MaterialManagementSystem::GetShaderResource(int index)
 {
-	return &m_textureSamplers;
+	if (index >= 0 && index < m_shaderResources.size())
+	{
+		return m_shaderResources[index];
+	}
+	else
+	{
+		return nullptr;
+	}
 }
 
-const size_t MaterialManagementSystem::RegisterTextureSampler(TextureSampler& ts)
+const int MaterialManagementSystem::RegisterTextureSampler(TextureSampler& ts)
 {
-	size_t index = m_textureSamplers.size();
+	int index = static_cast<int>(m_textureSamplers.size());
 	m_textureSamplers.push_back(&ts);
 	return index;
+}
+
+TextureSampler* MaterialManagementSystem::GetTextureSampler(int index)
+{
+	if (index >= 0 && index < m_textureSamplers.size())
+	{
+		return m_textureSamplers[index];
+	}
+	else
+	{
+		return nullptr;
+	}
 }
 
 const std::vector<Mesh*>* MaterialManagementSystem::GetAllMeshes()
@@ -62,15 +83,22 @@ const std::vector<Mesh*>* MaterialManagementSystem::GetAllMeshes()
 	return &m_meshes;
 }
 
-const size_t MaterialManagementSystem::RegisterMesh(Mesh& m)
+const int MaterialManagementSystem::RegisterMesh(Mesh& m)
 {
-	size_t index = m_meshes.size();
+	int index = static_cast<int>(m_meshes.size());
 	m_meshes.push_back(&m);
 	return index;
 
 }
 
-Mesh& MaterialManagementSystem::GetMesh(size_t meshIndex)
+Mesh* MaterialManagementSystem::GetMesh(int meshIndex)
 {
-	return *m_meshes[meshIndex];
+	if (meshIndex >= 0 && meshIndex < m_meshes.size())
+	{
+		return m_meshes[meshIndex];
+	}
+	else
+	{
+		return nullptr;
+	}
 }

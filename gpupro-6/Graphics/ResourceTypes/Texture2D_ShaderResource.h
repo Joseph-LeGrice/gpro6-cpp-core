@@ -6,7 +6,7 @@
 
 class Texture2D_ShaderResource : ShaderResource
 {
-	friend size_t CreateTextureResourceFromFile(std::wstring filepath);
+	friend int CreateTextureResourceFromFile(std::wstring filepath);
 public:
 	virtual ~Texture2D_ShaderResource() override;
 protected:
@@ -19,4 +19,4 @@ private:
 	ID3D11ShaderResourceView* m_resourceView;
 };
 
-size_t CreateTextureResourceFromFile(std::wstring filepath);
+int CreateTextureResourceFromFile(std::wstring filepath);

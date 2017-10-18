@@ -29,7 +29,7 @@ Material::~Material()
 {
 }
 
-size_t Material::Create()
+int Material::Create()
 {
 	Material* newMaterial = new Material();
 	return MaterialManagementSystem::Instance()->RegisterInstancedMaterial(*newMaterial);
@@ -39,12 +39,14 @@ void Material::SetShader(Shader* s, size_t numberOfResources, size_t numberOfSam
 {
 	m_shader = s;
 	
+	m_numberOfResources = numberOfResources;
 	m_shaderResourceIndexes.resize(numberOfResources);
 	for (int i = 0; i < numberOfResources; ++i)
 	{
 		m_shaderResourceIndexes[i] = -1;
 	}
 	
+	m_numberOfTextureSamplers = numberOfSamplers;
 	m_textureSamplerIndexes.resize(numberOfSamplers);
 	for (int i = 0; i < numberOfSamplers; ++i)
 	{
@@ -52,42 +54,78 @@ void Material::SetShader(Shader* s, size_t numberOfResources, size_t numberOfSam
 	}
 }
 
-void Material::AddShaderResource(size_t shaderResourceIndex, size_t shaderResourceSlotIndex)
+void Material::AddShaderResource(int shaderResourceIndex, size_t shaderResourceSlotIndex)
 {
-	m_shaderResourceIndexes[shaderResourceSlotIndex] = shaderResourceIndex;
+	if (shaderResourceSlotIndex < m_numberOfResources)
+	{
+		m_shaderResourceIndexes[shaderResourceSlotIndex] = shaderResourceIndex;
+	}
 }
 
 void Material::RemoveShaderResource(size_t shaderResourceSlotIndex)
 {
-	m_shaderResourceIndexes[shaderResourceSlotIndex] = -1;
+	if (shaderResourceSlotIndex < m_numberOfResources)
+	{
+		m_shaderResourceIndexes[shaderResourceSlotIndex] = -1;
+	}
 }
 
-void Material::AddTextureSampler(size_t textureSamplerIndex, size_t textureSamplerSlotIndex)
+void Material::AddTextureSampler(int textureSamplerIndex, size_t textureSamplerSlotIndex)
 {
-	m_textureSamplerIndexes[textureSamplerSlotIndex] = textureSamplerIndex;
+	if (textureSamplerSlotIndex < m_numberOfTextureSamplers)
+	{
+		m_textureSamplerIndexes[textureSamplerSlotIndex] = textureSamplerIndex;
+	}
 }
 
 void Material::RemoveTextureSampler(size_t textureSamplerSlotIndex)
 {
-	m_textureSamplerIndexes[textureSamplerSlotIndex] = -1;
+	if (textureSamplerSlotIndex < m_numberOfTextureSamplers)
+	{
+		m_textureSamplerIndexes[textureSamplerSlotIndex] = -1;
+	}
 }
 
-void Material::Bind()
+bool Material::BindIfValid()
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
-		std::vector<ShaderResource*> allResources = *MaterialManagementSystem::Instance()->GetAllShaderResources();
+		MaterialManagementSystem& mms = *MaterialManagementSystem::Instance();
+
 		for (size_t shaderResourceSlot = 0; shaderResourceSlot < m_shaderResourceIndexes.size(); ++shaderResourceSlot)
 		{
-			size_t shaderResourceIndex = m_shaderResourceIndexes[shaderResourceSlot];
-			allResources[shaderResourceIndex]->BindResource(shaderResourceSlot, m_shaderResourceIndexes.size());
+			int shaderResourceIndex = m_shaderResourceIndexes[shaderResourceSlot];
+			ShaderResource* sr = mms.GetShaderResource(shaderResourceIndex);
+			if (sr != nullptr)
+			{
+				sr->BindResource(static_cast<UINT>(shaderResourceSlot), 
+					static_cast<UINT>(m_shaderResourceIndexes.size()));
+			}
+			else
+			{
+				return false;
+			}
 		}
 
-		std::vector<TextureSampler*> allTexturesSamplers = *MaterialManagementSystem::Instance()->GetAllTextureSamplers();
 		for (size_t textureSamplerSlot = 0; textureSamplerSlot < m_textureSamplerIndexes.size(); ++textureSamplerSlot)
 		{
-			size_t textureSamplerIndex = m_textureSamplerIndexes[textureSamplerSlot];
-			allTexturesSamplers[textureSamplerIndex]->BindTextureSampler(textureSamplerSlot, m_textureSamplerIndexes.size());
+			int textureSamplerIndex = m_textureSamplerIndexes[textureSamplerSlot];
+			TextureSampler* ts = mms.GetTextureSampler(textureSamplerIndex);
+			if (ts != nullptr)
+			{
+				ts->BindTextureSampler(static_cast<UINT>(textureSamplerSlot), 
+					static_cast<UINT>(m_textureSamplerIndexes.size()));
+			}
+			else
+			{
+				return false;
+			}
 		}
+
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }

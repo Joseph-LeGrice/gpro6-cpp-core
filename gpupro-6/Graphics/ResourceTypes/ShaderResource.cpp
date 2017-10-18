@@ -11,7 +11,7 @@ ShaderResource::~ShaderResource()
 {
 }
 
-void ShaderResource::BindResource(size_t resourceIndex, size_t numberOfResources)
+void ShaderResource::BindResource(UINT resourceIndex, UINT numberOfResources)
 {
 	ID3D11ShaderResourceView* resource = GetResourceView();
 	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();

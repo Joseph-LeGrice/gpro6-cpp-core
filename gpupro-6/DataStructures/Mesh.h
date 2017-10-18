@@ -6,7 +6,7 @@
 
 class Mesh
 {
-	friend size_t CreateMesh();
+	friend int CreateMesh();
 
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
@@ -27,4 +27,4 @@ private:
 	Mesh(const Mesh&) = delete;
 };
 
-size_t CreateMesh();
+int CreateMesh();

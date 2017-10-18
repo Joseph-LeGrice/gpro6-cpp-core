@@ -7,7 +7,7 @@ class ShaderResource
 public:
 	virtual ~ShaderResource();
 
-	void BindResource(size_t resourceIndex, size_t numberOfResources);
+	void BindResource(UINT resourceIndex, UINT numberOfResources);
 
 protected:
 	ShaderResource();

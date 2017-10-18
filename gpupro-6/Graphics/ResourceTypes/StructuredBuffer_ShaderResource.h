@@ -1,11 +1,11 @@
 #pragma once
 #include "ShaderResource.h"
 
-template<class T, size_t m_numberOfElements>
+template<class T, UINT m_numberOfElements>
 class StructuredBuffer_ShaderResource : ShaderResource
 {
 public:
-	static size_t CreateNew()
+	static int CreateNew()
 	{
 		ID3D11Buffer* buffer;
 
@@ -18,12 +18,8 @@ public:
 		bDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 		bDesc.StructureByteStride = sizeof(T);
 
-		D3D11_SUBRESOURCE_DATA data;
-		ZeroMemory(&data, sizeof(D3D11_SUBRESOURCE_DATA));
-		data.pSysMem = NULL;
-		
 		ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
-		HRESULT createBufferResult = device->CreateBuffer(&bDesc, &data, &buffer);
+		HRESULT createBufferResult = device->CreateBuffer(&bDesc, NULL, &buffer);
 		if (!SUCCEEDED(createBufferResult))
 		{
 			return -1;
@@ -53,7 +49,7 @@ public:
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
 		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
-		HRESULT mapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DYNAMIC, &mappedData);
+		HRESULT mapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(mapResult))
 		{
 			memcpy(mappedData.pData, &newData, sizeof(T));

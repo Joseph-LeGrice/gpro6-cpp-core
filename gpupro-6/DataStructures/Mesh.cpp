@@ -60,7 +60,7 @@ const std::vector<UINT16>& Mesh::GetIndices()
 
 }
 
-size_t CreateMesh()
+int CreateMesh()
 {
 	Mesh* newMesh = new Mesh();
 	return MaterialManagementSystem::Instance()->RegisterMesh(*newMesh);

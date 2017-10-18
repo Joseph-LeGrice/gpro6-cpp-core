@@ -136,7 +136,6 @@ void GraphicsSystem::UpdateIfDirty()
 {
 	if (m_isDirty)
 	{
-		SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
 		const std::vector<Mesh*>& allMeshes = *MaterialManagementSystem::Instance()->GetAllMeshes();
 
 		std::vector<VertexData> allVerts;
@@ -191,28 +190,31 @@ void GraphicsSystem::VariableTick()
 
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
-		Transform& t = allTransforms[cam.m_transformIndex];
-		Matrix4x4 view = TransformGetCameraViewMatrix(t);
+		Transform& cameraTransform = allTransforms[cam.m_transformIndex];
+		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform);
 		Matrix4x4 proj = cam.m_projectionMatrix;
 
 		for (size_t meshRenderIndex = 0; meshRenderIndex < m_renderMap.size(); ++meshRenderIndex)
 		{
 			MeshRenderHook mrh = m_renderMap[meshRenderIndex];
 			
-			Material& mat = *allMats[mrh.m_materialIndex];
-			mat.Bind();
-
-			Transform& t = allTransforms[mrh.m_transformIndex];
-			Matrix4x4 model = TransformGetMatrix(t);
-
-			pob.ModelViewProjection = proj * view * model;
-			pob.ModelView = view * model;
-			pub.UpdateBuffer(pob);
-
 			Mesh& mesh = *allMeshes[mrh.m_meshIndex];
 			UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
-			deviceContext->IASetPrimitiveTopology(mesh.m_topology);
-			deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+			
+			Material& mat = *allMats[mrh.m_materialIndex];
+			if (mat.BindIfValid())
+			{
+				Transform& modelTransform = allTransforms[mrh.m_transformIndex];
+				Matrix4x4 model = TransformGetMatrix(modelTransform);
+
+				pob.ModelViewProjection = proj * view * model;
+				pob.ModelView = view * model;
+				pub.UpdateBuffer(pob);
+
+				deviceContext->IASetPrimitiveTopology(mesh.m_topology);
+				deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+
+			}
 
 			currentIndex += numberOfVerts;
 		}

@@ -10,8 +10,6 @@ typedef std::unordered_map<std::type_index, IndexList> IndexMap;
 
 struct Entity
 {
-	static void Entity::Free(Entity& e) { }
-
 	template<class T>
 	static void Entity::RegisterComponent(Entity& e, size_t index)
 	{

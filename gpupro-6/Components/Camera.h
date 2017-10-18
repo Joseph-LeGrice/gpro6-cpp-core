@@ -6,8 +6,6 @@ struct Camera
 {
 	size_t m_transformIndex;
 	Matrix4x4 m_projectionMatrix;
-
-	static void Free(Camera& c) { }
 };
 
 Camera CameraTestNew();

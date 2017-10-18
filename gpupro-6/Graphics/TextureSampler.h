@@ -4,11 +4,11 @@
 
 class TextureSampler
 {
-	friend size_t CreateTextureSampler();
+	friend int CreateTextureSampler();
 public:
 	~TextureSampler();
 
-	void BindTextureSampler(size_t samplerIndex, size_t numberOfSamplers);
+	void BindTextureSampler(UINT samplerIndex, UINT numberOfSamplers);
 	bool Initialize();
 	bool IsValid();
 
@@ -17,4 +17,4 @@ private:
 	TextureSampler();
 };
 
-size_t CreateTextureSampler();
+int CreateTextureSampler();

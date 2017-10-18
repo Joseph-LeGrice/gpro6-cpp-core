@@ -19,7 +19,7 @@ Texture2D_ShaderResource::~Texture2D_ShaderResource()
 	SAFE_RELEASE(m_resourceView);
 }
 
-size_t CreateTextureResourceFromFile(std::wstring filepath)
+int CreateTextureResourceFromFile(std::wstring filepath)
 {
 	BYTE* pbBuffer = nullptr;
 	UINT bpp, width, height;
@@ -64,7 +64,7 @@ size_t CreateTextureResourceFromFile(std::wstring filepath)
 		}
 		delete[] pbBuffer;
 
-		size_t index = MaterialManagementSystem::Instance()->RegisterShaderResource((ShaderResource&)(*newTexture2D));
+		int index = MaterialManagementSystem::Instance()->RegisterShaderResource((ShaderResource&)(*newTexture2D));
 		return index;
 	}
 	else
