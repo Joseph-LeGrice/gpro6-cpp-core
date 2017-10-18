@@ -52,7 +52,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		//materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-		simpleQuadMat.SetShader(simpleTexturedQuadShader, 2, 1);
+		simpleQuadMat.SetShader(simpleTexturedQuadShader, 2, 9);
 
 		int textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
 		simpleQuadMat.AddShaderResource(textureResourceIndex, 0);
@@ -61,7 +61,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		simpleQuadMat.AddTextureSampler(textureSamplerIndex, 0);
 
 		int lightBufferIndex = StructuredBufferLights::CreateNew();
-		simpleQuadMat.AddShaderResource(lightBufferIndex, 1);
+		simpleQuadMat.AddShaderResource(lightBufferIndex, 8);
 
 		LIGHT_BUFFER lights[NUM_LIGHTS];
 		ZeroMemory(&lights, NUM_LIGHTS * sizeof(LIGHT_BUFFER));

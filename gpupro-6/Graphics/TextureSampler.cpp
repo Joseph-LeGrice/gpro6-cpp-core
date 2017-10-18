@@ -14,14 +14,14 @@ TextureSampler::~TextureSampler()
 	SAFE_RELEASE(m_sampler);
 }
 
-void TextureSampler::BindTextureSampler(UINT samplerIndex, UINT numberOfSamplers)
+void TextureSampler::BindTextureSampler(UINT samplerIndex)
 {
 	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
-	deviceContext->VSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
-	deviceContext->HSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
-	deviceContext->DSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
-	deviceContext->GSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
-	deviceContext->PSSetSamplers(samplerIndex, numberOfSamplers, &m_sampler);
+	deviceContext->VSSetSamplers(samplerIndex, 1, &m_sampler);
+	deviceContext->HSSetSamplers(samplerIndex, 1, &m_sampler);
+	deviceContext->DSSetSamplers(samplerIndex, 1, &m_sampler);
+	deviceContext->GSSetSamplers(samplerIndex, 1, &m_sampler);
+	deviceContext->PSSetSamplers(samplerIndex, 1, &m_sampler);
 }
 
 bool TextureSampler::Initialize()

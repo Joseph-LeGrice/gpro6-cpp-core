@@ -86,7 +86,7 @@ void Material::RemoveTextureSampler(size_t textureSamplerSlotIndex)
 	}
 }
 
-bool Material::BindIfValid()
+void Material::Bind()
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
@@ -98,12 +98,7 @@ bool Material::BindIfValid()
 			ShaderResource* sr = mms.GetShaderResource(shaderResourceIndex);
 			if (sr != nullptr)
 			{
-				sr->BindResource(static_cast<UINT>(shaderResourceSlot), 
-					static_cast<UINT>(m_shaderResourceIndexes.size()));
-			}
-			else
-			{
-				return false;
+				sr->BindResource(static_cast<UINT>(shaderResourceSlot));
 			}
 		}
 
@@ -113,19 +108,8 @@ bool Material::BindIfValid()
 			TextureSampler* ts = mms.GetTextureSampler(textureSamplerIndex);
 			if (ts != nullptr)
 			{
-				ts->BindTextureSampler(static_cast<UINT>(textureSamplerSlot), 
-					static_cast<UINT>(m_textureSamplerIndexes.size()));
-			}
-			else
-			{
-				return false;
+				ts->BindTextureSampler(static_cast<UINT>(textureSamplerSlot));
 			}
 		}
-
-		return true;
-	}
-	else
-	{
-		return false;
 	}
 }

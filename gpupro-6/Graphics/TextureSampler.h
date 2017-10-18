@@ -8,7 +8,7 @@ class TextureSampler
 public:
 	~TextureSampler();
 
-	void BindTextureSampler(UINT samplerIndex, UINT numberOfSamplers);
+	void BindTextureSampler(UINT samplerIndex);
 	bool Initialize();
 	bool IsValid();
 
