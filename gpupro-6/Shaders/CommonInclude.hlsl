@@ -53,13 +53,13 @@ cbuffer Material : register(b1)
 	Material Mat;
 };
 
-Texture2D AmbientTexture		: register(t0);
-Texture2D EmissiveTexture		: register(t1);
-Texture2D DiffuseTexture		: register(t2);
-Texture2D SpecularTexture		: register(t3);
-Texture2D SpecularPowerTexture	: register(t4);
-Texture2D NormalTexture			: register(t5);
-Texture2D BumpTexture			: register(t6);
-Texture2D OpacityTexture		: register(t7);
+Texture2D DiffuseTexture		: register(t1);
+Texture2D SpecularTexture		: register(t2);
+Texture2D SpecularPowerTexture	: register(t3);
+Texture2D AmbientTexture		: register(t4);
+Texture2D EmissiveTexture		: register(t5);
+Texture2D NormalTexture			: register(t6);
+Texture2D BumpTexture			: register(t7);
+Texture2D OpacityTexture		: register(t8);
 
 SamplerState LinearRepeatSampler;

@@ -24,7 +24,7 @@
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
 
-#define NUM_LIGHTS 1
+#define NUM_LIGHTS 5
 typedef StructuredBuffer_ShaderResource<LIGHT_BUFFER, NUM_LIGHTS> StructuredBufferLights;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -44,37 +44,76 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		int materialIndex = Material::Create();
 		Material& simpleQuadMat = *mms.GetMaterial(materialIndex);
 
+        /*
 		Shader* simpleTexturedQuadShader = Shader::CreateNew();
 		simpleTexturedQuadShader->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader");
 		simpleTexturedQuadShader->InitPixelShader(L"SimpleTexturedQuad.shader", "PShader");
-
+        
+        simpleQuadMat.SetShader(simpleTexturedQuadShader, 9, 1);
+        */
+        
 		Shader* materialShader = Shader::CreateNew();
 		materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-		simpleQuadMat.SetShader(simpleTexturedQuadShader, 2, 9);
+        simpleQuadMat.SetShader(materialShader, 9, 1);
+        
+        int lightBufferIndex = StructuredBufferLights::CreateNew();
+        simpleQuadMat.AddShaderResource(lightBufferIndex, 0);
 
-		int textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
-		simpleQuadMat.AddShaderResource(textureResourceIndex, 0);
+        int textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
+        simpleQuadMat.AddShaderResource(textureResourceIndex, 1);
 
 		int textureSamplerIndex = CreateTextureSampler();
 		simpleQuadMat.AddTextureSampler(textureSamplerIndex, 0);
 
-		int lightBufferIndex = StructuredBufferLights::CreateNew();
-		simpleQuadMat.AddShaderResource(lightBufferIndex, 8);
+        //------------------------------------------------------------------------------------
+        // MATERIAL BUFFER STUFF
+        MATERIAL_BUFFER mat;
+        ZeroMemory(&mat, sizeof(MATERIAL_BUFFER));
+        //mat.GlobalAmbient;
+        //mat.AmbientColor;
+        //mat.EmissiveColor;
+        mat.DiffuseColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+        mat.SpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+        //mat.Reflectance;
 
+        //mat.Opacity;
+        mat.SpecularPower = 10.0f;
+        //mat.IndexOfRefraction;
+
+        mat.HasDiffuseTexture = TRUE;
+        //mat.HasAmbientTexture;
+        //mat.HasEmissiveTexture;
+        //mat.HasSpecularTexture;
+        //mat.HasSpecularPowerTexture;
+        //mat.HasNormalTexture;
+        //mat.HasBumpTexture;
+        //mat.HasOpacityTexture;
+        
+        //mat.BumpIntensity;
+        //mat.SpecularScale;
+        //mat.AlphaThreshold;
+        MATERIAL_BUFFER_CONTAINER buf = { mat };
+        MaterialBuffer& mf = ConstantBufferManagementSystem::Instance()->GetMaterialBuffer();
+        mf.UpdateBuffer(buf);
+        mf.BindBuffer();
+        //------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------
+        // LIGHT BUFFER STUFF
 		LIGHT_BUFFER lights[NUM_LIGHTS];
 		ZeroMemory(&lights, NUM_LIGHTS * sizeof(LIGHT_BUFFER));
 
 		for (size_t i = 0; i < NUM_LIGHTS; ++i)
 		{
-			lights[i].PositionWS = { 0.0f, 0.0f, 0.0f, 0.0f };
+			lights[i].PositionWS = { 0.0f, 0.0f, 50.0f, 0.0f };
 			lights[i].DirectionWS = { 0.0f, 0.0f, 0.0f, 0.0f };
 			lights[i].PositionVS = { 0.0f, 0.0f, 0.0f, 0.0f };
 			lights[i].DirectionVS = { 0.0f, 0.0f, 0.0f, 0.0f };
-			lights[i].Color = { 0.0f, 0.0f, 0.0f, 0.0f };
+			lights[i].Color = { 1.0f, 1.0f, 1.0f, 1.0f };
 			lights[i].SpotlightAngle = 0.0f;
-			lights[i].Range = 0.0f;
+			lights[i].Range = 10000.0f;
 			lights[i].Intensity = 1.0f;
 			lights[i].Enabled = TRUE;
 			lights[i].Selected = TRUE;
@@ -86,6 +125,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			lightBuf->UpdateBuffer(*lights);
 		}
+        //------------------------------------------------------------------------------------ 
 		
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
 
@@ -96,7 +136,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		Transform meshTransform = TransformNew();
 		meshTransform.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-		meshTransform.m_position = { 0.0f, 0.0f, 20.0f };
+		meshTransform.m_position = { 0.0f, 0.0f, 50.0f };
 		meshTransform.m_scale = { 1.0f, 1.0f, 1.0f };
 		meshTransform.m_scale = 10.0f * meshTransform.m_scale;
 

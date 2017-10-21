@@ -73,8 +73,7 @@ float4 PShader(VertexShaderOutput IN) : SV_TARGET
 
     float4 P = float4(IN.positionVS, 1);
     LightingResult lr = DoLighting(mat, eyePos, P, N);
-    lr.Diffuse = 1.0f;
-
+    
     diffuse *= float4(lr.Diffuse.rgb, 1.0f);
     
     float4 specular = 0;
@@ -88,7 +87,6 @@ float4 PShader(VertexShaderOutput IN) : SV_TARGET
         specular *= lr.Specular;
     }
 
-    return float4(diffuse.rgb, 1.0f);
-    //return float4((ambient + emissive + diffuse + specular).rgb,
-        //alpha * mat.Opacity);
+    return float4((ambient + emissive + diffuse + specular).rgb,
+        alpha * mat.Opacity);
 }

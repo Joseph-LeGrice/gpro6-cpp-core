@@ -20,7 +20,7 @@ struct Light
     float2 Padding;
 };
 
-StructuredBuffer<Light> Lights : register(t8);
+StructuredBuffer<Light> Lights : register(t0);
 
 struct LightingResult
 {
