@@ -86,7 +86,7 @@ void Material::RemoveTextureSampler(size_t textureSamplerSlotIndex)
 	}
 }
 
-void Material::Bind()
+bool Material::BindIfValid()
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
@@ -111,5 +111,8 @@ void Material::Bind()
 				ts->BindTextureSampler(static_cast<UINT>(textureSamplerSlot));
 			}
 		}
+
+        return true;
 	}
+    return false;
 }

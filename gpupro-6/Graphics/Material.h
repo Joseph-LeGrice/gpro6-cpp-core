@@ -16,7 +16,7 @@ public:
 
 	static int Create();
 
-	void Bind();
+	bool BindIfValid();
 	
 	void SetShader(Shader* shader, size_t numberOfResources, size_t numberOfSamplers);
 	

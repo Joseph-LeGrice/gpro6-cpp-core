@@ -198,20 +198,22 @@ void GraphicsSystem::VariableTick()
 		{
 			MeshRenderHook mrh = m_renderMap[meshRenderIndex];
 			
-			Material& mat = *allMats[mrh.m_materialIndex];
-			mat.Bind();
-			
-			Transform& modelTransform = allTransforms[mrh.m_transformIndex];
-			Matrix4x4 model = TransformGetMatrix(modelTransform);
-
-			pob.ModelViewProjection = proj * view * model;
-			pob.ModelView = view * model;
-			pub.UpdateBuffer(pob);
-
 			Mesh& mesh = *allMeshes[mrh.m_meshIndex];
 			UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
-			deviceContext->IASetPrimitiveTopology(mesh.m_topology);
-			deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+
+            Material& mat = *allMats[mrh.m_materialIndex];
+            if (mat.BindIfValid())
+            {
+			    Transform& modelTransform = allTransforms[mrh.m_transformIndex];
+			    Matrix4x4 model = TransformGetMatrix(modelTransform);
+
+			    pob.ModelViewProjection = proj * view * model;
+			    pob.ModelView = view * model;
+			    pub.UpdateBuffer(pob);
+
+			    deviceContext->IASetPrimitiveTopology(mesh.m_topology);
+			    deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+            }
 
 			currentIndex += numberOfVerts;
 		}
