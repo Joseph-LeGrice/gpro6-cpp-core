@@ -99,6 +99,9 @@
     <ClCompile Include="DataStructures\Mesh.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\LightingSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="DataStructures\Mesh.h">
       <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\LightingSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

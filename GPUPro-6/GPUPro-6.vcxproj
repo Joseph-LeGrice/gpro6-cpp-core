@@ -205,6 +205,7 @@
     <ClCompile Include="Systems\GraphicsSystem.cpp" />
     <ClCompile Include="Systems\InputSystem.cpp" />
     <ClCompile Include="Systems\ISystem.cpp" />
+    <ClCompile Include="Systems\LightingSystem.cpp" />
     <ClCompile Include="Systems\MaterialManagementSystem.cpp" />
     <ClCompile Include="Systems\SceneManagementSystem.cpp" />
     <ClCompile Include="Systems\ShaderManagementSystem.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Systems\GameSystem.h" />
     <ClInclude Include="Systems\GraphicsSystem.h" />
+    <ClInclude Include="Systems\LightingSystem.h" />
     <ClInclude Include="Systems\ShaderManagementSystem.h" />
     <ClInclude Include="Systems\ConstantBufferManagementSystem.h" />
     <ClInclude Include="Systems\InputSystem.h" />

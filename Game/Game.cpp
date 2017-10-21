@@ -15,17 +15,15 @@
 #include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 #include "Graphics/TextureSampler.h"
-#include "Systems/GameSystem.h"
-#include "Systems/SceneManagementSystem.h"
-#include "Systems/MaterialManagementSystem.h"
 #include "Systems/ConstantBufferManagementSystem.h"
+#include "Systems/GameSystem.h"
+#include "Systems/LightingSystem.h"
+#include "Systems/MaterialManagementSystem.h"
+#include "Systems/SceneManagementSystem.h"
 #include "MouseRotateSystem.h"
 #include "Utilities/ImagingFactory.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
-
-#define NUM_LIGHTS 5
-typedef StructuredBuffer_ShaderResource<LIGHT_BUFFER, NUM_LIGHTS> StructuredBufferLights;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -58,7 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         simpleQuadMat.SetShader(materialShader, 9, 1);
         
-        int lightBufferIndex = StructuredBufferLights::CreateNew();
+        int lightBufferIndex = LightingSystem::Instance()->GetBufferResourceIndex();
         simpleQuadMat.AddShaderResource(lightBufferIndex, 0);
 
         int textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
@@ -99,33 +97,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         mf.UpdateBuffer(buf);
         mf.BindBuffer();
         //------------------------------------------------------------------------------------
-
-        //------------------------------------------------------------------------------------
-        // LIGHT BUFFER STUFF
-		LIGHT_BUFFER lights[NUM_LIGHTS];
-		ZeroMemory(&lights, NUM_LIGHTS * sizeof(LIGHT_BUFFER));
-
-		for (size_t i = 0; i < NUM_LIGHTS; ++i)
-		{
-			lights[i].PositionWS = { 0.0f, 0.0f, 50.0f, 0.0f };
-			lights[i].DirectionWS = { 0.0f, 0.0f, 0.0f, 0.0f };
-			lights[i].PositionVS = { 0.0f, 0.0f, 0.0f, 0.0f };
-			lights[i].DirectionVS = { 0.0f, 0.0f, 0.0f, 0.0f };
-			lights[i].Color = { 1.0f, 1.0f, 1.0f, 1.0f };
-			lights[i].SpotlightAngle = 0.0f;
-			lights[i].Range = 10000.0f;
-			lights[i].Intensity = 1.0f;
-			lights[i].Enabled = TRUE;
-			lights[i].Selected = TRUE;
-			lights[i].Type = kLightType_Point;
-		}
-
-		StructuredBufferLights* lightBuf = reinterpret_cast<StructuredBufferLights*>(mms.GetShaderResource(lightBufferIndex));
-		if (lightBuf != nullptr)
-		{
-			lightBuf->UpdateBuffer(*lights);
-		}
-        //------------------------------------------------------------------------------------ 
 		
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
 

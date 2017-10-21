@@ -7,6 +7,11 @@ ISystem::ISystem()
 
 }
 
+bool ISystem::InitSystem()
+{
+    return true;
+}
+
 void ISystem::FixedTick()
 {
 

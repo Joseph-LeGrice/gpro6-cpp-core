@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "Systems\GameSystem.h"
-#include "Systems\GraphicsSystem.h"
+#include "Systems/GameSystem.h"
+#include "Systems/GraphicsSystem.h"
+#include "Systems/LightingSystem.h"
 #include "SceneManagementSystem.h"
 #include "MaterialManagementSystem.h"
 #include "TimeSystem.h"
@@ -31,7 +32,8 @@ bool GameSystem::InitializeAllSystems()
 	int screenWidth = 0;
 	int screenHeight = 0;
 	s_instance->InitializeWindows(screenWidth, screenHeight);
-	return GraphicsSystem::Instance()->InitializeGraphics(s_instance->s_hwnd, screenWidth, screenHeight);
+	
+    return GraphicsSystem::Instance()->InitializeGraphics(s_instance->s_hwnd, screenWidth, screenHeight) && LightingSystem::Instance()->InitSystem();
 }
 
 int GameSystem::Run()
