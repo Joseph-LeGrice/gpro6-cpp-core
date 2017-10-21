@@ -84,7 +84,6 @@
     <ClCompile Include="Components\Camera.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Mesh.cpp" />
     <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
       <Filter>Graphics\Buffers</Filter>
     </ClCompile>
@@ -96,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\ResourceTypes\Texture2D_ShaderResource.cpp">
       <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Mesh.cpp">
+      <Filter>DataStructures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +200,6 @@
     <ClInclude Include="Utilities\Logging.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Mesh.h" />
     <ClInclude Include="Graphics\Buffers\ConstantBuffer.h">
       <Filter>Graphics\Buffers</Filter>
     </ClInclude>
@@ -216,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer_ShaderResource.h">
       <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Mesh.h">
+      <Filter>DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

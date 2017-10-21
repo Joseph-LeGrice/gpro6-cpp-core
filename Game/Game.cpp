@@ -129,7 +129,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		
 		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
 
-		// Quad Mesh
+		// Mesh Set up
 		//int meshIndex = MeshHelper::CreateQuad();
 		int meshIndex = MeshHelper::CreateSphereUV();
 		//int meshIndex = MeshHelper::CreateCube();
