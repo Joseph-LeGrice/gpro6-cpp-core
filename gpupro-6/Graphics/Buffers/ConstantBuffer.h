@@ -17,7 +17,7 @@ enum BindFlags
 	BIND_ALL    = BIND_VERTEX | BIND_HULL | BIND_DOMAIN | BIND_GEOM | BIND_PIXEL
 };
 
-template<class T, UINT m_bufferSlot, UINT m_maxBuffers, BindFlags m_bindFlags>
+template<class T, UINT m_bufferSlot, BindFlags m_bindFlags>
 class ConstantBuffer
 {
 	friend class ConstantBufferManagementSystem;
@@ -43,23 +43,23 @@ public:
 		ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 		if ((m_bindFlags & BIND_VERTEX) == BIND_VERTEX)
 		{
-			deviceContext->VSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+			deviceContext->VSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
 		}
 		if ((m_bindFlags & BIND_HULL) == BIND_HULL)
 		{
-			deviceContext->HSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+			deviceContext->HSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
 		}
-		if ((m_bindFlags & BIND_DOMAIN) == BIND_VERTEX)
+		if ((m_bindFlags & BIND_DOMAIN) == BIND_DOMAIN)
 		{
-			deviceContext->DSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+			deviceContext->DSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
 		}
-		if ((m_bindFlags & BIND_GEOM) == BIND_VERTEX)
+		if ((m_bindFlags & BIND_GEOM) == BIND_GEOM)
 		{
-			deviceContext->GSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+			deviceContext->GSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
 		}
-		if ((m_bindFlags & BIND_PIXEL) == BIND_VERTEX)
+		if ((m_bindFlags & BIND_PIXEL) == BIND_PIXEL)
 		{
-			deviceContext->PSSetConstantBuffers(m_bufferSlot, m_maxBuffers, &m_buffer);
+			deviceContext->PSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
 		}
 	}
 
