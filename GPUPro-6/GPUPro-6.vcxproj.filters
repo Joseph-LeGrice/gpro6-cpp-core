@@ -257,5 +257,8 @@
     <None Include="Shaders\ForwardRendering.hlsl">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="Shaders\Lighting.hlsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

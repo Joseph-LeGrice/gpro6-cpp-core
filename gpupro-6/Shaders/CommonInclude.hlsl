@@ -42,26 +42,6 @@ struct Material
 	float2 Padding;
 };
 
-struct Light
-{
-	float4 PositionWS;
-	float4 DirectionWS;
-	float4 PositionVS;
-	float4 DirectionVS;
-	float4 Color;
-	float SpotlightAngle;
-	float Range;
-	float Intensity;
-	bool Enabled;
-	bool Selected;
-	uint Type;
-	float2 Padding;
-};
-
-#define POINT_LIGHT 0
-#define SPOT_LIGHT 1
-#define DIRECTIONAL_LIGHT 2
-
 cbuffer PerObjectBuffer : register(b0)
 {
 	float4x4 ModelViewProjection;
@@ -82,4 +62,4 @@ Texture2D NormalTexture			: register(t5);
 Texture2D BumpTexture			: register(t6);
 Texture2D OpacityTexture		: register(t7);
 
-StructuredBuffer<Light> Lights : register(t8);
+SamplerState LinearRepeatSampler;
