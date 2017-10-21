@@ -13,15 +13,15 @@ float4 DoNormalMapping(float3x3 TBN, Texture2D tex, sampler s, float2 uv)
 VertexShaderOutput VShader(AppData IN)
 {
 	VertexShaderOutput OUT;
-	OUT.position = mul(ModelViewProjection, float4(IN.position, 1.0f));
-	OUT.positionVS = mul(ModelView, float4(IN.position, 1.0f)).xyz;
+	OUT.position = mul(float4(IN.position, 1.0f), ModelViewProjection);
+	OUT.positionVS = mul(float4(IN.position, 1.0f), ModelView).xyz;
 	
 	OUT.texCoord = IN.texCoord;
 
 	float3x3 ModelView3x3 = (float3x3)ModelView;
-	OUT.tangentVS = mul(ModelView3x3, IN.tangent);
-	OUT.binormalVS = mul(ModelView3x3, IN.binormal);
-	OUT.normalVS = mul(ModelView3x3, IN.normal);
+	OUT.tangentVS = mul(IN.tangent, ModelView3x3);
+	OUT.binormalVS = mul(IN.binormal, ModelView3x3);
+	OUT.normalVS = mul(IN.normal, ModelView3x3);
 
 	return OUT;
 }
