@@ -35,15 +35,7 @@ float4 PShader(VertexShaderOutput IN) : SV_TARGET
 	float4 diffuse = mat.DiffuseColor;
 	if (mat.HasDiffuseTexture)
 	{
-		float4 diffuseTex = DiffuseTexture.Sample(LinearRepeatSampler, IN.texCoord);
-		if (any(diffuse.rgb))
-		{
-			diffuse *= diffuseTex;
-		}
-		else
-		{
-			diffuse = diffuseTex;
-		}
+        diffuse *= DiffuseTexture.Sample(LinearRepeatSampler, IN.texCoord);
 	}
 
 	float alpha = diffuse.a;
@@ -55,30 +47,14 @@ float4 PShader(VertexShaderOutput IN) : SV_TARGET
 	float4 ambient = mat.AmbientColor;
 	if (mat.HasAmbientTexture)
 	{
-		float4 ambientTex = AmbientTexture.Sample(LinearRepeatSampler, IN.texCoord);
-		if (any(ambient.rgb))
-		{
-			ambient *= ambientTex;
-		}
-		else
-		{
-			ambient = ambientTex;
-		}
+		ambient *= AmbientTexture.Sample(LinearRepeatSampler, IN.texCoord);
 	}
 	ambient *= mat.GlobalAmbient;
 
 	float4 emissive = mat.EmissiveColor;
 	if (mat.HasEmissiveTexture)
 	{
-		float4 emissiveTex = EmissiveTexture.Sample(LinearRepeatSampler, IN.texCoord);
-		if (any(emissive))
-		{
-			emissive *= emissiveTex;
-		}
-		else
-		{
-			emissive = emissiveTex;
-		}
+        emissive *= EmissiveTexture.Sample(LinearRepeatSampler, IN.texCoord);
 	}
 
 	if (mat.HasSpecularPowerTexture)
@@ -97,6 +73,8 @@ float4 PShader(VertexShaderOutput IN) : SV_TARGET
 
     float4 P = float4(IN.positionVS, 1);
     LightingResult lr = DoLighting(mat, eyePos, P, N);
+    lr.Diffuse = 1.0f;
+
     diffuse *= float4(lr.Diffuse.rgb, 1.0f);
     
     float4 specular = 0;
@@ -105,19 +83,12 @@ float4 PShader(VertexShaderOutput IN) : SV_TARGET
         specular = mat.SpecularColor;
         if (mat.HasSpecularTexture)
         {
-            float4 specularTex = SpecularTexture.Sample(LinearRepeatSampler, IN.texCoord);
-            if (any(specular.rgb))
-            {
-                specular *= specularTex;
-            }
-            else
-            {
-                specular = specularTex;
-            }
+            specular *= SpecularTexture.Sample(LinearRepeatSampler, IN.texCoord);
         }
         specular *= lr.Specular;
     }
 
-    return float4((ambient + emissive + diffuse + specular).rgb,
-        alpha * mat.Opacity);
+    return float4(diffuse.rgb, 1.0f);
+    //return float4((ambient + emissive + diffuse + specular).rgb,
+        //alpha * mat.Opacity);
 }
