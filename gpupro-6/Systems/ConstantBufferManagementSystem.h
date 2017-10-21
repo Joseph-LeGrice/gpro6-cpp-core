@@ -50,6 +50,11 @@ struct MATERIAL_BUFFER
 	Vector2 Padding;
 };
 
+struct MATERIAL_BUFFER_CONTAINER
+{
+    MATERIAL_BUFFER buf;
+};
+
 struct LIGHT_BUFFER
 {
 	Vector4 PositionWS;
@@ -73,9 +78,9 @@ enum LightType
 	kLightType_Directional = 2
 };
 
-#define NUM_BUFFERS 2
-typedef ConstantBuffer<PER_OBJECT_BUFFER, 0, NUM_BUFFERS, BIND_ALL> PerObjectBuffer;
-typedef ConstantBuffer<MATERIAL_BUFFER, 1, NUM_BUFFERS, BIND_ALL> MaterialBuffer;
+//#define NUM_BUFFERS 2
+typedef ConstantBuffer<PER_OBJECT_BUFFER, 0, BIND_ALL> PerObjectBuffer;
+typedef ConstantBuffer<MATERIAL_BUFFER_CONTAINER, 1, BIND_ALL> MaterialBuffer;
 
 class ConstantBufferManagementSystem : public ISystem
 {
