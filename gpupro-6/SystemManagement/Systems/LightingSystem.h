@@ -1,5 +1,5 @@
 #pragma once
-#include "GameSystem.h"
+#include "SystemManagement/GameSystem.h"
 
 class LightingSystem : public ISystem
 {

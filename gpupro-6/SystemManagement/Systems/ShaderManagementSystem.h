@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Systems\GameSystem.h"
-#include "Graphics\Shader.h"
+#include "SystemManagement/GameSystem.h"
+#include "Graphics/Shader.h"
 
 class ShaderManagementSystem : public ISystem
 {

@@ -1,7 +1,7 @@
 #pragma once
-#include "Systems\GameSystem.h"
-#include "Input\MouseInput.h"
-#include "Input\KeyboardInput.h"
+#include "SystemManagement/GameSystem.h"
+#include "Input/MouseInput.h"
+#include "Input/KeyboardInput.h"
 
 class InputSystem : public ISystem
 {

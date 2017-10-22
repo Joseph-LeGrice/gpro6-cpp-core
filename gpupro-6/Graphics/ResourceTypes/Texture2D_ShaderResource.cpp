@@ -1,8 +1,8 @@
 #include "stdafx.h"
 
 #include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
-#include "Systems/GraphicsSystem.h"
-#include "Systems/MaterialManagementSystem.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "Utilities/PerlinNoise.h"
 #include "Utilities/ImagingFactory.h"
 

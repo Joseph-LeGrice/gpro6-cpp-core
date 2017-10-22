@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Graphics/TextureSampler.h"
-#include "Systems/GraphicsSystem.h"
-#include "Systems/MaterialManagementSystem.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
 
 TextureSampler::TextureSampler()
 {

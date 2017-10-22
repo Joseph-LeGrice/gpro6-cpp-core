@@ -4,8 +4,8 @@
 
 #include "D3DX11.h"
 #include "D3DX10.h"
-#include "Systems\GraphicsSystem.h"
-#include "Utilities\Logging.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "Utilities/Logging.h"
 
 enum BindFlags
 {

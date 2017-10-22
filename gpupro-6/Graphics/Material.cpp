@@ -13,11 +13,11 @@
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/TextureSampler.h"
 #include "Graphics/ResourceTypes/ShaderResource.h"
-#include "Systems/MaterialManagementSystem.h"
-#include "Systems/GraphicsSystem.h"
-#include "Systems/SceneManagementSystem.h"
-#include "Systems/ConstantBufferManagementSystem.h"
-#include "Systems/MaterialManagementSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/Systems/SceneManagementSystem.h"
+#include "SystemManagement/Systems/ConstantBufferManagementSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "Utilities/Logging.h"
 
 Material::Material()

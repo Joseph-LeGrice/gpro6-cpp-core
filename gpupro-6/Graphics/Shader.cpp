@@ -4,8 +4,8 @@
 #include "D3DX11.h"
 
 #include "DataStructures\VertexData.h"
-#include "Systems\GraphicsSystem.h"
-#include "Systems\ShaderManagementSystem.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/Systems/ShaderManagementSystem.h"
 
 Shader::Shader()
 {

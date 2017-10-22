@@ -5,7 +5,7 @@
 #include "D3DX10.h"
 
 #include <vector>
-#include "Systems\GameSystem.h"
+#include "SystemManagement/GameSystem.h"
 
 #pragma comment (lib, "d3d11.lib")
 #pragma comment (lib, "d3dx11.lib")

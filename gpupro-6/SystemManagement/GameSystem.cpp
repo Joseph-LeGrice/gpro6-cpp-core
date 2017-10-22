@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "Systems/GameSystem.h"
-#include "Systems/GraphicsSystem.h"
-#include "Systems/LightingSystem.h"
-#include "SceneManagementSystem.h"
-#include "MaterialManagementSystem.h"
-#include "TimeSystem.h"
+#include "SystemManagement/GameSystem.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/Systems/LightingSystem.h"
+#include "SystemManagement/Systems/SceneManagementSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
+#include "SystemManagement/Systems/TimeSystem.h"
+#include "SystemManagement/Systems/InputSystem.h"
 #include "DataStructures\SceneGraph.h"
-#include "InputSystem.h"
 
 GameSystem* GameSystem::s_instance = new GameSystem();
 

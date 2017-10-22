@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DataStructures/Mesh.h"
-#include "Systems/MaterialManagementSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
 
 
 Mesh::Mesh()

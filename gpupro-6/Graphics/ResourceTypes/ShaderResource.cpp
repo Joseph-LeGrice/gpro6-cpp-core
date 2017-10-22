@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ShaderResource.h"
-#include "Systems/GraphicsSystem.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
 
 ShaderResource::ShaderResource()
 {

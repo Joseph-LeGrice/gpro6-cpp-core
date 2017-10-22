@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Systems\GraphicsSystem.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
 #include "Vector3.h"
 #include "DataStructures\Vector2.h"
 

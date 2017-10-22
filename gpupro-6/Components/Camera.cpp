@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "Components/Camera.h"
-#include "Systems/GraphicsSystem.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
 
 Camera CameraTestNew()
 {

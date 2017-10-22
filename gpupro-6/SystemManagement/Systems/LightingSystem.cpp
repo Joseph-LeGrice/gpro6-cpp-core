@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "Systems/LightingSystem.h"
+#include "SystemManagement/Systems/LightingSystem.h"
 
-#include "Systems/ConstantBufferManagementSystem.h"
-#include "Systems/MaterialManagementSystem.h"
+#include "SystemManagement/Systems/ConstantBufferManagementSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 
 #define NUM_LIGHTS 5

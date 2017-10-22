@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "Systems/MaterialManagementSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "DataStructures/Mesh.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"

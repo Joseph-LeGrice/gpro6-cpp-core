@@ -26,9 +26,9 @@ private:
 	static GameSystem* s_instance;
 	
 	bool m_running;
-	static HINSTANCE s_hInstance;
 	static HWND s_hwnd;
 	static LPCWSTR s_applicationName;
+	static HINSTANCE s_hInstance;
 
 	GameSystem();
 	GameSystem(const GameSystem&);

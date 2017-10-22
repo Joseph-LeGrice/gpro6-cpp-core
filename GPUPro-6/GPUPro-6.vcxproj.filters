@@ -18,38 +18,11 @@
     <ClCompile Include="Graphics\TextureSampler.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\GraphicsSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Input\MouseInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="Input\KeyboardInput.cpp">
       <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\MaterialManagementSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\SceneManagementSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\GameSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\TimeSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\InputSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\ISystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\ShaderManagementSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\ConstantBufferManagementSystem.cpp">
-      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Utilities\PerlinNoise.cpp">
       <Filter>Utilities</Filter>
@@ -99,8 +72,38 @@
     <ClCompile Include="DataStructures\Mesh.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\LightingSystem.cpp">
-      <Filter>Systems</Filter>
+    <ClCompile Include="SystemManagement\GameSystem.cpp">
+      <Filter>SystemManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\SystemManagement.cpp">
+      <Filter>SystemManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\ISystem.cpp">
+      <Filter>SystemManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Systems\ConstantBufferManagementSystem.cpp">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Systems\GraphicsSystem.cpp">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Systems\InputSystem.cpp">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Systems\LightingSystem.cpp">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Systems\MaterialManagementSystem.cpp">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Systems\SceneManagementSystem.cpp">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Systems\ShaderManagementSystem.cpp">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp">
+      <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,33 +155,6 @@
     <ClInclude Include="Graphics\TextureSampler.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\GraphicsSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\ShaderManagementSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\ConstantBufferManagementSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\TimeSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\InputSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\ISystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\MaterialManagementSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\SceneManagementSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\GameSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Input\MouseInput.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -224,17 +200,45 @@
     <ClInclude Include="DataStructures\Mesh.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\LightingSystem.h">
-      <Filter>Systems</Filter>
+    <ClInclude Include="SystemManagement\GameSystem.h">
+      <Filter>SystemManagement</Filter>
     </ClInclude>
+    <ClInclude Include="SystemManagement\SystemManagement.h">
+      <Filter>SystemManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\ISystem.h">
+      <Filter>SystemManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\Systems\ConstantBufferManagementSystem.h">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\Systems\GraphicsSystem.h">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\Systems\InputSystem.h">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\Systems\LightingSystem.h">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\Systems\MaterialManagementSystem.h">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\Systems\SceneManagementSystem.h">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\Systems\TimeSystem.h">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\Systems\ShaderManagementSystem.h">
+      <Filter>SystemManagement\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\SystemConfiguration.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Systems">
-      <UniqueIdentifier>{5c0db4db-7336-4d84-ab2a-1fcd77c90e7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics">
       <UniqueIdentifier>{3f7ee8db-9aaf-489e-a12e-b89af640a04c}</UniqueIdentifier>
     </Filter>
@@ -258,6 +262,12 @@
     </Filter>
     <Filter Include="Graphics\ResourceTypes">
       <UniqueIdentifier>{538c66c2-f9b2-458e-8f20-59fccfb88305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemManagement">
+      <UniqueIdentifier>{5c0db4db-7336-4d84-ab2a-1fcd77c90e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemManagement\Systems">
+      <UniqueIdentifier>{55f249f4-08bd-47f1-804c-32df7e3e60e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@
 #include "Graphics/TextureSampler.h"
 #include "DataStructures/Mesh.h"
 
-#include "Systems/GameSystem.h"
+#include "SystemManagement/GameSystem.h"
 
 
 class MaterialManagementSystem : public ISystem
