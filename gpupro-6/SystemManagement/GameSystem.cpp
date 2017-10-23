@@ -111,8 +111,8 @@ void GameSystem::InitializeWindows(int& screenWidth, int& screenHeight)
 
 	posX = (GetSystemMetrics(SM_CXSCREEN) - screenWidth) / 2;
 	posY = (GetSystemMetrics(SM_CYSCREEN) - screenHeight) / 2;
-
-	s_hwnd = CreateWindowEx(
+    	
+    s_hwnd = CreateWindowEx(
 		NULL,
 		s_applicationName,
 		s_applicationName,

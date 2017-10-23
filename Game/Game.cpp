@@ -16,6 +16,7 @@
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 #include "Graphics/TextureSampler.h"
 #include "SystemManagement/GameSystem.h"
+#include "SystemManagement/SystemManagement.h"
 #include "SystemManagement/Systems/ConstantBufferManagementSystem.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/Systems/MaterialManagementSystem.h"
@@ -35,7 +36,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	try
 	{
-		GameSystem::InitializeAllSystems();
+        SystemManagement::Initialize();
 
 		MaterialManagementSystem& mms = *MaterialManagementSystem::Instance();
 
@@ -132,9 +133,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	}
 
-	int returnCode = GameSystem::Run();
+    int returnCode = SystemManagement::RunGameLoop();
 
-	ImagingFactory::DestroyFactory();
+    SystemManagement::Deinitialize();
+    ImagingFactory::DestroyFactory();
 	GameSystem::ShutdownWindows();
 
 	return returnCode;
