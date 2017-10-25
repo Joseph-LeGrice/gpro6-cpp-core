@@ -33,7 +33,7 @@ bool GameSystem::InitializeAllSystems()
 	int screenHeight = 0;
 	s_instance->InitializeWindows(screenWidth, screenHeight);
 	
-    return GraphicsSystem::Instance()->InitializeGraphics(s_instance->s_hwnd, screenWidth, screenHeight) && LightingSystem::Instance()->InitSystem();
+    return GraphicsSystem::Instance()->InitializeGraphics(s_instance->s_hwnd, screenWidth, screenHeight) && LightingSystem::Instance()->Initialize();
 }
 
 int GameSystem::Run()

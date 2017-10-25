@@ -81,9 +81,6 @@
     <ClCompile Include="SystemManagement\ISystem.cpp">
       <Filter>SystemManagement</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Systems\ConstantBufferManagementSystem.cpp">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="SystemManagement\Systems\GraphicsSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
@@ -104,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp">
+      <Filter>Graphics\Buffers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +209,6 @@
     <ClInclude Include="SystemManagement\ISystem.h">
       <Filter>SystemManagement</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\Systems\ConstantBufferManagementSystem.h">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="SystemManagement\Systems\GraphicsSystem.h">
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
@@ -234,6 +231,9 @@
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
     <ClInclude Include="SystemManagement\SystemConfiguration.hpp" />
+    <ClInclude Include="Graphics\Buffers\ConstantBufferInterface.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

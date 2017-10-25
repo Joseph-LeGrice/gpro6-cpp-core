@@ -74,8 +74,8 @@ size_t Size(SystemConfiguration<S, L...>& systemConfig)
 //------------------------------------------------------------------------------------
 //template<int i, class S, class... L>
 //template<int i, template<class, class...> class sc>
-template<int i, SystemConfiguration<class, class...> sc, class S, class... L>
-struct SystemConfigurationIndexer;
+//template<int i, SystemConfiguration<class, class...> sc, class S, class... L>
+//struct SystemConfigurationIndexer;
 
 //template<int i, class S, class... L>
 //struct SystemConfigurationIndexer<i, SystemConfiguration<S, L...>>

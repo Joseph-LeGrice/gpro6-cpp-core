@@ -4,16 +4,17 @@
 #include "D3DX11.h"
 #include "D3DX10.h"
 
-#include <vector>
-#include "SystemManagement/GameSystem.h"
-
 #pragma comment (lib, "d3d11.lib")
 #pragma comment (lib, "d3dx11.lib")
 #pragma comment (lib, "d3dx10.lib")
 
+#include <vector>
+#include "SystemManagement/GameSystem.h"
+
 class Material;
 class VertexBuffer;
 class IndexBuffer;
+class ConstantBufferInterface;
 struct Camera;
 struct SceneGraph;
 
@@ -31,6 +32,7 @@ class GraphicsSystem : public ISystem
 public:
 	ID3D11Device* GetGraphicsDevice();
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
+    ConstantBufferInterface& GetConstantBufferInterface();
 
 	virtual void VariableTick() override;
 
@@ -50,7 +52,8 @@ private:
 	bool m_isDirty;
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;
-	std::vector<MeshRenderHook> m_renderMap;
+    ConstantBufferInterface* m_constantBuffers;
+    std::vector<MeshRenderHook> m_renderMap;
 
 	float m_viewportWidth, m_viewportHeight;
 	

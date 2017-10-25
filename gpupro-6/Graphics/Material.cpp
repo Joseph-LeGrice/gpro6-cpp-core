@@ -16,7 +16,6 @@
 #include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
 #include "SystemManagement/Systems/SceneManagementSystem.h"
-#include "SystemManagement/Systems/ConstantBufferManagementSystem.h"
 #include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "Utilities/Logging.h"
 

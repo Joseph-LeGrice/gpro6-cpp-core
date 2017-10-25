@@ -7,7 +7,7 @@ ISystem::ISystem()
 
 }
 
-bool ISystem::InitSystem()
+bool ISystem::Initialize()
 {
     return true;
 }
@@ -18,6 +18,11 @@ void ISystem::FixedTick()
 }
 
 void ISystem::VariableTick()
+{
+
+}
+
+void ISystem::Deinitalize()
 {
 
 }

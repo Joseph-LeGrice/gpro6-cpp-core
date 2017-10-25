@@ -12,12 +12,12 @@
 #include "DataStructures/Quaternion.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Material.h"
+#include "Graphics/Buffers/ConstantBufferInterface.h"
 #include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 #include "Graphics/TextureSampler.h"
 #include "SystemManagement/GameSystem.h"
 #include "SystemManagement/SystemManagement.h"
-#include "SystemManagement/Systems/ConstantBufferManagementSystem.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "SystemManagement/Systems/SceneManagementSystem.h"
@@ -94,7 +94,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //mat.SpecularScale;
         //mat.AlphaThreshold;
         MATERIAL_BUFFER_CONTAINER buf = { mat };
-        MaterialBuffer& mf = ConstantBufferManagementSystem::Instance()->GetMaterialBuffer();
+        MaterialBuffer& mf = SystemManagement::GetGraphicsSystem()->GetConstantBufferInterface().GetMaterialBuffer();
         mf.UpdateBuffer(buf);
         mf.BindBuffer();
         //------------------------------------------------------------------------------------

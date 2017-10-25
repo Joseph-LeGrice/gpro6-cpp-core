@@ -7,7 +7,8 @@ public:
 	virtual ~ISystem();
 	ISystem(const ISystem&) = delete;
 
-    virtual bool InitSystem();
+    virtual bool Initialize();
     virtual void FixedTick();
 	virtual void VariableTick();
+    virtual void Deinitalize();
 };

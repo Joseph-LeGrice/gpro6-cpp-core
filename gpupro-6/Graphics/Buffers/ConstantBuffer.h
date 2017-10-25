@@ -20,7 +20,7 @@ enum BindFlags
 template<class T, UINT m_bufferSlot, BindFlags m_bindFlags>
 class ConstantBuffer
 {
-	friend class ConstantBufferManagementSystem;
+	friend class ConstantBufferInterface;
 	
 	static_assert(sizeof(T) % 16 == 0, "Constant Buffer size must be divisible by 16");
 	static_assert(sizeof(T) <= D3D11_REQ_CONSTANT_BUFFER_ELEMENT_COUNT, "Constant Buffer size must be less than or equal to D3D11_REQ_CONSTANT_BUFFER_ELEMENT_COUNT");

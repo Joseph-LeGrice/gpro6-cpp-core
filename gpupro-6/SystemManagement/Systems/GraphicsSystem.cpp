@@ -5,10 +5,10 @@
 #include "SystemManagement/Systems/SceneManagementSystem.h"
 #include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
-#include "SystemManagement/Systems/ConstantBufferManagementSystem.h"
 #include "Graphics/Buffers/ConstantBuffer.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/IndexBuffer.h"
+#include "Graphics/Buffers/ConstantBufferInterface.h"
 
 
 #define DEBUG
@@ -19,6 +19,7 @@ GraphicsSystem::GraphicsSystem()
 	m_swapchain = nullptr;
 	m_device = nullptr;
 	m_deviceContext = nullptr;
+    m_constantBuffers = nullptr;
 }
 
 GraphicsSystem::~GraphicsSystem()
@@ -31,6 +32,7 @@ GraphicsSystem::~GraphicsSystem()
 	SAFE_RELEASE(m_deviceContext);
 	SAFE_DELETE(m_myVertexBuffer);
 	SAFE_DELETE(m_myIndexBuffer);
+    SAFE_DELETE(m_constantBuffers);
 }
 
 
@@ -42,6 +44,11 @@ ID3D11Device* GraphicsSystem::GetGraphicsDevice()
 ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
 {
 	return m_deviceContext;
+}
+
+ConstantBufferInterface& GraphicsSystem::GetConstantBufferInterface()
+{
+    return *m_constantBuffers;
 }
 
 bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight)
@@ -108,7 +115,7 @@ bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHe
 
 			m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
 			m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
-
+            m_constantBuffers = new ConstantBufferInterface();
 			return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
 		}
 	}
@@ -180,7 +187,7 @@ void GraphicsSystem::VariableTick()
 	const std::vector<Mesh*>& allMeshes = *MaterialManagementSystem::Instance()->GetAllMeshes();
 	const std::vector<Material*>& allMats = *MaterialManagementSystem::Instance()->GetAllMaterials();
 
-	PerObjectBuffer& pub = ConstantBufferManagementSystem::Instance()->GetPerObjectBuffer();
+	PerObjectBuffer& pub = m_constantBuffers->GetPerObjectBuffer();
 	pub.BindBuffer();
 
 	UINT16 currentIndex = 0;

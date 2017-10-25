@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 
-#include "SystemManagement/Systems/ConstantBufferManagementSystem.h"
 #include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 
@@ -18,7 +17,7 @@ LightingSystem::~LightingSystem()
 
 }
 
-bool LightingSystem::InitSystem()
+bool LightingSystem::Initialize()
 {
     m_lightBufferIndex = StructuredBufferLights::CreateNew();
     return m_lightBufferIndex >= 0;
