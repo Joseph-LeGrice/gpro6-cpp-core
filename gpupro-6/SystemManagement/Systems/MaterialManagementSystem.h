@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Graphics/Shader.h"
 #include "Graphics/Material.h"
 #include "Graphics/ResourceTypes/ShaderResource.h"
 #include "Graphics/TextureSampler.h"
@@ -28,10 +29,13 @@ public:
 	const int RegisterMesh(Mesh& m);
 	Mesh* GetMesh(int meshIndex);
 
+    void RegisterShader(Shader* s);
+
 private:
 	std::vector<Material*> m_instancedMaterials;
 	std::vector<ShaderResource*> m_shaderResources;
 	std::vector<TextureSampler*> m_textureSamplers;
 	std::vector<Mesh*> m_meshes;
+    std::vector<Shader*> m_shaders;
 };
 

@@ -14,8 +14,10 @@ MaterialManagementSystem::~MaterialManagementSystem()
 	SAFE_DELETE_VECTOR_STACK(m_textureSamplers);
 	SAFE_DELETE_VECTOR_STACK(m_shaderResources);
 	SAFE_DELETE_VECTOR_STACK(m_meshes);
+    SAFE_DELETE_VECTOR_STACK(m_shaders);
 }
 
+// Materials
 const std::vector<Material*>* MaterialManagementSystem::GetAllMaterials()
 {
 	return &m_instancedMaterials;
@@ -40,6 +42,7 @@ Material* MaterialManagementSystem::GetMaterial(int index)
 	}
 }
 
+// Shader Resources
 const int MaterialManagementSystem::RegisterShaderResource(ShaderResource& sr)
 {
 	int index = static_cast<int>(m_shaderResources.size());
@@ -59,6 +62,7 @@ ShaderResource* MaterialManagementSystem::GetShaderResource(int index)
 	}
 }
 
+// Texture Samplers
 const int MaterialManagementSystem::RegisterTextureSampler(TextureSampler& ts)
 {
 	int index = static_cast<int>(m_textureSamplers.size());
@@ -78,6 +82,7 @@ TextureSampler* MaterialManagementSystem::GetTextureSampler(int index)
 	}
 }
 
+// Meshes
 const std::vector<Mesh*>* MaterialManagementSystem::GetAllMeshes()
 {
 	return &m_meshes;
@@ -101,4 +106,10 @@ Mesh* MaterialManagementSystem::GetMesh(int meshIndex)
 	{
 		return nullptr;
 	}
+}
+
+// Shaders
+void MaterialManagementSystem::RegisterShader(Shader* s)
+{
+    m_shaders.push_back(s);
 }

@@ -5,7 +5,7 @@
 
 #include "DataStructures\VertexData.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
-#include "SystemManagement/Systems/ShaderManagementSystem.h"
+#include "SystemManagement/Systems/MaterialManagementSystem.h"
 
 Shader::Shader()
 {
@@ -32,7 +32,7 @@ Shader::~Shader()
 Shader* Shader::CreateNew()
 {
 	Shader* newShaderInstance = new Shader();
-	ShaderManagementSystem::Instance()->RegisterShader(newShaderInstance);
+    MaterialManagementSystem::Instance()->RegisterShader(newShaderInstance);
 	return newShaderInstance;
 }
 

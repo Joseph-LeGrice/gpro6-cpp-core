@@ -208,7 +208,6 @@
     <ClCompile Include="SystemManagement\Systems\LightingSystem.cpp" />
     <ClCompile Include="SystemManagement\Systems\MaterialManagementSystem.cpp" />
     <ClCompile Include="SystemManagement\Systems\SceneManagementSystem.cpp" />
-    <ClCompile Include="SystemManagement\Systems\ShaderManagementSystem.cpp" />
     <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp" />
     <ClCompile Include="SystemManagement\SystemManagement.cpp" />
     <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp" />
@@ -249,7 +248,6 @@
     <ClInclude Include="SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="SystemManagement\Systems\GraphicsSystem.h" />
     <ClInclude Include="SystemManagement\Systems\LightingSystem.h" />
-    <ClInclude Include="SystemManagement\Systems\ShaderManagementSystem.h" />
     <ClInclude Include="Graphics\Buffers\ConstantBufferInterface.h" />
     <ClInclude Include="SystemManagement\Systems\InputSystem.h" />
     <ClInclude Include="SystemManagement\ISystem.h" />

@@ -96,9 +96,6 @@
     <ClCompile Include="SystemManagement\Systems\SceneManagementSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Systems\ShaderManagementSystem.cpp">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
@@ -225,9 +222,6 @@
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
     <ClInclude Include="SystemManagement\Systems\TimeSystem.h">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemManagement\Systems\ShaderManagementSystem.h">
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
     <ClInclude Include="SystemManagement\SystemConfiguration.hpp" />

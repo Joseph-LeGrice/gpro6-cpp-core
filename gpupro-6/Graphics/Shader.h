@@ -18,6 +18,8 @@ public:
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
 
+    ~Shader();
+
 private:
 	ID3D11InputLayout* m_inputLayout;
 	ID3D11VertexShader* m_vertexShader;
@@ -27,6 +29,5 @@ private:
 	ID3D11DomainShader* m_domainShader;
 
 	Shader();
-	~Shader();
 };
 
