@@ -10,7 +10,6 @@
 
 #include <vector>
 #include "SystemManagement/GameSystem.h"
-#include "DataStructures/SceneGraph.h"
 
 class Material;
 class VertexBuffer;
@@ -57,7 +56,7 @@ private:
     ConstantBufferInterface* m_constantBuffers;
     std::vector<MeshRenderHook> m_renderMap;
 
-    SceneGraph m_sceneGraph; //TODO: Remove SceneGraph from GraphicsSystem
+    SceneGraph* m_sceneGraph; //TODO: Remove SceneGraph from GraphicsSystem
 
 	float m_viewportWidth, m_viewportHeight;
 	

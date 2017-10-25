@@ -3,6 +3,7 @@
 #include "SystemManagement/SystemManagement.h"
 #include "DataStructures/Quaternion.h"
 #include "DataStructures/ComponentArray.h"
+#include "DataStructures/SceneGraph.h"
 #include "Components/Transform.h"
 
 MouseRotateSystem::MouseRotateSystem() : m_velocity(0.0f),

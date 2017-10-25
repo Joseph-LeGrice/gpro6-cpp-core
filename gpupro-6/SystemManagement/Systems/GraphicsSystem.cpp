@@ -19,6 +19,7 @@ GraphicsSystem::GraphicsSystem()
 	m_device = nullptr;
 	m_deviceContext = nullptr;
     m_constantBuffers = nullptr;
+    m_sceneGraph = new SceneGraph();
 }
 
 GraphicsSystem::~GraphicsSystem()
@@ -32,6 +33,7 @@ GraphicsSystem::~GraphicsSystem()
 	SAFE_DELETE(m_myVertexBuffer);
 	SAFE_DELETE(m_myIndexBuffer);
     SAFE_DELETE(m_constantBuffers);
+    SAFE_DELETE(m_sceneGraph);
 }
 
 
@@ -52,7 +54,7 @@ ConstantBufferInterface& GraphicsSystem::GetConstantBufferInterface()
 
 SceneGraph& GraphicsSystem::GetSceneGraph()
 {
-    return m_sceneGraph;
+    return *m_sceneGraph;
 }
 
 bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight)
@@ -178,14 +180,14 @@ void GraphicsSystem::VariableTick()
 	m_myVertexBuffer->SetCurrentIfValid();
 	m_myIndexBuffer->SetCurrentIfValid();
 	
-	ComponentArray<Camera>& cca = m_sceneGraph.m_cameras;
+	ComponentArray<Camera>& cca = m_sceneGraph->m_cameras;
 	Camera* allCameras = cca.GetArrayPointer();
 	size_t allCamerasSize = cca.GetArraySize();
 
 	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
 	PER_OBJECT_BUFFER pob;
 
-    ComponentArray<Transform>& tca = m_sceneGraph.m_transforms;
+    ComponentArray<Transform>& tca = m_sceneGraph->m_transforms;
     Transform* const allTransforms = tca.GetArrayPointer();
 	const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
 	const std::vector<Material*>& allMats = *AssetManager::Instance()->GetAllMaterials();
