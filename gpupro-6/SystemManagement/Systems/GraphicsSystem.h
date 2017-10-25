@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "SystemManagement/GameSystem.h"
+#include "DataStructures/SceneGraph.h"
 
 class Material;
 class VertexBuffer;
@@ -33,6 +34,7 @@ public:
 	ID3D11Device* GetGraphicsDevice();
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
     ConstantBufferInterface& GetConstantBufferInterface();
+    SceneGraph& GetSceneGraph();
 
 	virtual void VariableTick() override;
 
@@ -54,6 +56,8 @@ private:
 	IndexBuffer* m_myIndexBuffer;
     ConstantBufferInterface* m_constantBuffers;
     std::vector<MeshRenderHook> m_renderMap;
+
+    SceneGraph m_sceneGraph; //TODO: Remove SceneGraph from GraphicsSystem
 
 	float m_viewportWidth, m_viewportHeight;
 	

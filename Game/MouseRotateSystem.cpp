@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "MouseRotateSystem.h"
-#include "SystemManagement/Systems/InputSystem.h"
-#include "SystemManagement/Systems/TimeSystem.h"
-#include "SystemManagement/Systems/SceneManagementSystem.h"
+#include "SystemManagement/SystemManagement.h"
 #include "DataStructures/Quaternion.h"
+#include "DataStructures/ComponentArray.h"
+#include "Components/Transform.h"
 
 MouseRotateSystem::MouseRotateSystem() : m_velocity(0.0f),
 	m_index(-1), m_hasIndex(false), m_toggleRotate(false)
@@ -25,7 +25,7 @@ void MouseRotateSystem::VariableTick()
 {
 	if (m_hasIndex)
 	{
-		ComponentArray<Transform>& tca = SceneManagementSystem::Instance()->GetSceneGraph()->m_transforms;
+		ComponentArray<Transform>& tca = SystemManagement::GetGraphicsSystem()->GetSceneGraph().m_transforms;
 		Transform* const allTransforms = tca.GetArrayPointer();
 		const MouseInput& mi = InputSystem::Instance()->GetMouse();
 		const KeyboardInput& ki = InputSystem::Instance()->GetKeyboard();

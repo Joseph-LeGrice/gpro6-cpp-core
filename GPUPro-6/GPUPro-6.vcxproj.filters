@@ -90,9 +90,6 @@
     <ClCompile Include="SystemManagement\Systems\LightingSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Systems\SceneManagementSystem.cpp">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
@@ -215,9 +212,6 @@
     <ClInclude Include="SystemManagement\Systems\LightingSystem.h">
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\Systems\SceneManagementSystem.h">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="SystemManagement\Systems\TimeSystem.h">
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
@@ -228,6 +222,7 @@
     <ClInclude Include="AssetManagement\AssetManager.h">
       <Filter>AssetManagement</Filter>
     </ClInclude>
+    <ClInclude Include="DataStructures\ComponentArray.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

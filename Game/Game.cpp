@@ -20,7 +20,6 @@
 #include "SystemManagement/GameSystem.h"
 #include "SystemManagement/SystemManagement.h"
 #include "SystemManagement/Systems/LightingSystem.h"
-#include "SystemManagement/Systems/SceneManagementSystem.h"
 #include "MouseRotateSystem.h"
 #include "Utilities/ImagingFactory.h"
 #include "Utilities/MeshHelper.h"
@@ -40,6 +39,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         AssetManager::Create();
         AssetManager& mms = *AssetManager::Instance();
+
+        GraphicsSystem& graphicsSystem = *SystemManagement::GetGraphicsSystem();
 
 		int materialIndex = Material::Create();
 		Material& simpleQuadMat = *mms.GetMaterial(materialIndex);
@@ -95,12 +96,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //mat.SpecularScale;
         //mat.AlphaThreshold;
         MATERIAL_BUFFER_CONTAINER buf = { mat };
-        MaterialBuffer& mf = SystemManagement::GetGraphicsSystem()->GetConstantBufferInterface().GetMaterialBuffer();
+        MaterialBuffer& mf = graphicsSystem.GetConstantBufferInterface().GetMaterialBuffer();
         mf.UpdateBuffer(buf);
         mf.BindBuffer();
         //------------------------------------------------------------------------------------
 		
-		SceneGraph& sg = *SceneManagementSystem::Instance()->GetSceneGraph();
+        SceneGraph sg = graphicsSystem.GetSceneGraph();
 
 		// Mesh Set up
 		//int meshIndex = MeshHelper::CreateQuad();

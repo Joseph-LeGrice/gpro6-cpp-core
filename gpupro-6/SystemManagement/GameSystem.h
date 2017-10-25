@@ -7,7 +7,6 @@
 
 class GraphicsSystem;
 class AssetManager;
-class SceneManagementSystem;
 
 class GameSystem
 {

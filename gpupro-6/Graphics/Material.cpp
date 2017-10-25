@@ -15,7 +15,6 @@
 #include "Graphics/TextureSampler.h"
 #include "Graphics/ResourceTypes/ShaderResource.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
-#include "SystemManagement/Systems/SceneManagementSystem.h"
 #include "Utilities/Logging.h"
 
 Material::Material()
