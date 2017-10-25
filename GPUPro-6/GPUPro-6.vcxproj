@@ -206,7 +206,7 @@
     <ClCompile Include="SystemManagement\Systems\InputSystem.cpp" />
     <ClCompile Include="SystemManagement\ISystem.cpp" />
     <ClCompile Include="SystemManagement\Systems\LightingSystem.cpp" />
-    <ClCompile Include="SystemManagement\Systems\MaterialManagementSystem.cpp" />
+    <ClCompile Include="AssetManagement\AssetManager.cpp" />
     <ClCompile Include="SystemManagement\Systems\SceneManagementSystem.cpp" />
     <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp" />
     <ClCompile Include="SystemManagement\SystemManagement.cpp" />
@@ -251,7 +251,7 @@
     <ClInclude Include="Graphics\Buffers\ConstantBufferInterface.h" />
     <ClInclude Include="SystemManagement\Systems\InputSystem.h" />
     <ClInclude Include="SystemManagement\ISystem.h" />
-    <ClInclude Include="SystemManagement\Systems\MaterialManagementSystem.h" />
+    <ClInclude Include="AssetManagement\AssetManager.h" />
     <ClInclude Include="SystemManagement\Systems\SceneManagementSystem.h" />
     <ClInclude Include="SystemManagement\SystemManagement.h" />
     <ClInclude Include="SystemManagement\Systems\TimeSystem.h" />

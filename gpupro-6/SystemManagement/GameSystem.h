@@ -6,7 +6,7 @@
 #include <unordered_map>
 
 class GraphicsSystem;
-class MaterialManagementSystem;
+class AssetManager;
 class SceneManagementSystem;
 
 class GameSystem

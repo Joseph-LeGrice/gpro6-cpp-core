@@ -90,9 +90,6 @@
     <ClCompile Include="SystemManagement\Systems\LightingSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Systems\MaterialManagementSystem.cpp">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="SystemManagement\Systems\SceneManagementSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
@@ -101,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp">
       <Filter>Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManagement\AssetManager.cpp">
+      <Filter>AssetManagement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +215,6 @@
     <ClInclude Include="SystemManagement\Systems\LightingSystem.h">
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\Systems\MaterialManagementSystem.h">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="SystemManagement\Systems\SceneManagementSystem.h">
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
@@ -227,6 +224,9 @@
     <ClInclude Include="SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="Graphics\Buffers\ConstantBufferInterface.h">
       <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManagement\AssetManager.h">
+      <Filter>AssetManagement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +262,9 @@
     </Filter>
     <Filter Include="SystemManagement\Systems">
       <UniqueIdentifier>{55f249f4-08bd-47f1-804c-32df7e3e60e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AssetManagement">
+      <UniqueIdentifier>{0f100b31-8b51-4360-b4ff-bbce9c137a98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

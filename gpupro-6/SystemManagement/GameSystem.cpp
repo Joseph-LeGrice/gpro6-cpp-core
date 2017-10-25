@@ -3,7 +3,6 @@
 #include "SystemManagement/Systems/GraphicsSystem.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/Systems/SceneManagementSystem.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "SystemManagement/Systems/TimeSystem.h"
 #include "SystemManagement/Systems/InputSystem.h"
 #include "DataStructures\SceneGraph.h"

@@ -1,14 +1,15 @@
 #include "stdafx.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
+#include "AssetManagement/AssetManager.h"
 
+AssetManager* AssetManager::s_instance = nullptr;
 
-MaterialManagementSystem::MaterialManagementSystem()
+AssetManager::AssetManager()
 {
 	m_instancedMaterials = std::vector<Material*>();
 }
 
 
-MaterialManagementSystem::~MaterialManagementSystem()
+AssetManager::~AssetManager()
 {
 	SAFE_DELETE_VECTOR_STACK(m_instancedMaterials);
 	SAFE_DELETE_VECTOR_STACK(m_textureSamplers);
@@ -18,19 +19,19 @@ MaterialManagementSystem::~MaterialManagementSystem()
 }
 
 // Materials
-const std::vector<Material*>* MaterialManagementSystem::GetAllMaterials()
+const std::vector<Material*>* AssetManager::GetAllMaterials()
 {
 	return &m_instancedMaterials;
 }
 
-const int MaterialManagementSystem::RegisterInstancedMaterial(Material& m)
+const int AssetManager::RegisterInstancedMaterial(Material& m)
 {
 	int index = static_cast<int>(m_instancedMaterials.size());
 	m_instancedMaterials.push_back(&m);
 	return index;
 }
 
-Material* MaterialManagementSystem::GetMaterial(int index)
+Material* AssetManager::GetMaterial(int index)
 {
 	if (index >= 0 && index < m_instancedMaterials.size())
 	{
@@ -43,14 +44,14 @@ Material* MaterialManagementSystem::GetMaterial(int index)
 }
 
 // Shader Resources
-const int MaterialManagementSystem::RegisterShaderResource(ShaderResource& sr)
+const int AssetManager::RegisterShaderResource(ShaderResource& sr)
 {
 	int index = static_cast<int>(m_shaderResources.size());
 	m_shaderResources.push_back(&sr);
 	return index;
 }
 
-ShaderResource* MaterialManagementSystem::GetShaderResource(int index)
+ShaderResource* AssetManager::GetShaderResource(int index)
 {
 	if (index >= 0 && index < m_shaderResources.size())
 	{
@@ -63,14 +64,14 @@ ShaderResource* MaterialManagementSystem::GetShaderResource(int index)
 }
 
 // Texture Samplers
-const int MaterialManagementSystem::RegisterTextureSampler(TextureSampler& ts)
+const int AssetManager::RegisterTextureSampler(TextureSampler& ts)
 {
 	int index = static_cast<int>(m_textureSamplers.size());
 	m_textureSamplers.push_back(&ts);
 	return index;
 }
 
-TextureSampler* MaterialManagementSystem::GetTextureSampler(int index)
+TextureSampler* AssetManager::GetTextureSampler(int index)
 {
 	if (index >= 0 && index < m_textureSamplers.size())
 	{
@@ -83,12 +84,12 @@ TextureSampler* MaterialManagementSystem::GetTextureSampler(int index)
 }
 
 // Meshes
-const std::vector<Mesh*>* MaterialManagementSystem::GetAllMeshes()
+const std::vector<Mesh*>* AssetManager::GetAllMeshes()
 {
 	return &m_meshes;
 }
 
-const int MaterialManagementSystem::RegisterMesh(Mesh& m)
+const int AssetManager::RegisterMesh(Mesh& m)
 {
 	int index = static_cast<int>(m_meshes.size());
 	m_meshes.push_back(&m);
@@ -96,7 +97,7 @@ const int MaterialManagementSystem::RegisterMesh(Mesh& m)
 
 }
 
-Mesh* MaterialManagementSystem::GetMesh(int meshIndex)
+Mesh* AssetManager::GetMesh(int meshIndex)
 {
 	if (meshIndex >= 0 && meshIndex < m_meshes.size())
 	{
@@ -109,7 +110,7 @@ Mesh* MaterialManagementSystem::GetMesh(int meshIndex)
 }
 
 // Shaders
-void MaterialManagementSystem::RegisterShader(Shader* s)
+void AssetManager::RegisterShader(Shader* s)
 {
     m_shaders.push_back(s);
 }

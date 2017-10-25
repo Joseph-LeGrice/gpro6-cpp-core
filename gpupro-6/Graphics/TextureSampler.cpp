@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Graphics/TextureSampler.h"
+#include "AssetManagement/AssetManager.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
 
 TextureSampler::TextureSampler()
 {
@@ -54,7 +54,7 @@ int CreateTextureSampler()
 	TextureSampler* ts = new TextureSampler();
 	if (ts->Initialize())
 	{
-		return MaterialManagementSystem::Instance()->RegisterTextureSampler(*ts);
+		return AssetManager::Instance()->RegisterTextureSampler(*ts);
 	}
 	else
 	{

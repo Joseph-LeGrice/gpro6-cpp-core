@@ -10,9 +10,30 @@
 #include "SystemManagement/GameSystem.h"
 
 
-class MaterialManagementSystem : public ISystem
+class AssetManager
 {
-	REGISTER_SUBSYSTEM(MaterialManagementSystem)
+public:
+    static void Create()
+    {
+        s_instance = new AssetManager();
+    }
+
+    static AssetManager* Instance()
+    {
+        return s_instance;
+    }
+
+    static void Destroy()
+    {
+        SAFE_DELETE(s_instance);
+    }
+
+private:
+    static AssetManager* s_instance;
+
+    AssetManager(const AssetManager&) = delete;
+    AssetManager();
+    ~AssetManager();
 
 public:
 	const std::vector<Material*>* GetAllMaterials();

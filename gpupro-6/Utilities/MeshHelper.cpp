@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
+#include "AssetManagement/AssetManager.h"
 #include "DataStructures/Mesh.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
@@ -10,7 +10,7 @@
 int MeshHelper::CreateQuad()
 {
 	int meshIndex = CreateMesh();
-	Mesh& result = *MaterialManagementSystem::Instance()->GetMesh(meshIndex);
+	Mesh& result = *AssetManager::Instance()->GetMesh(meshIndex);
 	
 	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
@@ -49,7 +49,7 @@ int MeshHelper::CreateQuad()
 int MeshHelper::CreateSphereICO()
 {
 	int meshIndex = CreateMesh();
-	Mesh& result = *MaterialManagementSystem::Instance()->GetMesh(meshIndex);
+	Mesh& result = *AssetManager::Instance()->GetMesh(meshIndex);
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();
@@ -68,7 +68,7 @@ int MeshHelper::CreateSphereICO()
 int MeshHelper::CreateSphereUV()
 {
 	int meshIndex = CreateMesh();
-	Mesh& result = *MaterialManagementSystem::Instance()->GetMesh(meshIndex);
+	Mesh& result = *AssetManager::Instance()->GetMesh(meshIndex);
 
 	result.m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
@@ -134,7 +134,7 @@ int MeshHelper::CreateSphereUV()
 int MeshHelper::CreateCube()
 {
 	int meshIndex = CreateMesh();
-	Mesh& result = *MaterialManagementSystem::Instance()->GetMesh(meshIndex);
+	Mesh& result = *AssetManager::Instance()->GetMesh(meshIndex);
 
 	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 

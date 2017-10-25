@@ -2,7 +2,7 @@
 
 #include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
+#include "AssetManagement/AssetManager.h"
 #include "Utilities/PerlinNoise.h"
 #include "Utilities/ImagingFactory.h"
 
@@ -64,7 +64,7 @@ int CreateTextureResourceFromFile(std::wstring filepath)
 		}
 		delete[] pbBuffer;
 
-		int index = MaterialManagementSystem::Instance()->RegisterShaderResource((ShaderResource&)(*newTexture2D));
+		int index = AssetManager::Instance()->RegisterShaderResource((ShaderResource&)(*newTexture2D));
 		return index;
 	}
 	else

@@ -42,7 +42,7 @@ public:
 		StructuredBuffer_ShaderResource* newInstance = new StructuredBuffer_ShaderResource();
 		newInstance->m_buffer = buffer;
 		newInstance->m_resourceView = resourceView;
-		return MaterialManagementSystem::Instance()->RegisterShaderResource((ShaderResource&)*newInstance);
+		return AssetManager::Instance()->RegisterShaderResource((ShaderResource&)*newInstance);
 	}
 
 	void UpdateBuffer(T& newData)

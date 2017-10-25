@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
+#include "AssetManagement/AssetManager.h"
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 
 #define NUM_LIGHTS 5
@@ -43,7 +43,7 @@ void LightingSystem::VariableTick()
         lights[i].Type = kLightType_Point;
     }
 
-    MaterialManagementSystem& mms = *MaterialManagementSystem::Instance();
+    AssetManager& mms = *AssetManager::Instance();
     StructuredBufferLights* lightBuf = reinterpret_cast<StructuredBufferLights*>(mms.GetShaderResource(m_lightBufferIndex));
     if (lightBuf != nullptr)
     {

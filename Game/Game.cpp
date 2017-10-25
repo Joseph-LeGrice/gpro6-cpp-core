@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Game.h"
 
+#include "AssetManagement/AssetManager.h"
 #include "Components/Transform.h"
 #include "Components/Entity.h"
 #include "DataStructures/Mesh.h"
@@ -19,7 +20,6 @@
 #include "SystemManagement/GameSystem.h"
 #include "SystemManagement/SystemManagement.h"
 #include "SystemManagement/Systems/LightingSystem.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "SystemManagement/Systems/SceneManagementSystem.h"
 #include "MouseRotateSystem.h"
 #include "Utilities/ImagingFactory.h"
@@ -38,7 +38,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
         SystemManagement::Initialize();
 
-		MaterialManagementSystem& mms = *MaterialManagementSystem::Instance();
+        AssetManager::Create();
+        AssetManager& mms = *AssetManager::Instance();
 
 		int materialIndex = Material::Create();
 		Material& simpleQuadMat = *mms.GetMaterial(materialIndex);

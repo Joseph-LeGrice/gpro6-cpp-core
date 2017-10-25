@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DataStructures/Mesh.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
+#include "AssetManagement/AssetManager.h"
 
 
 Mesh::Mesh()
@@ -63,5 +63,5 @@ const std::vector<UINT16>& Mesh::GetIndices()
 int CreateMesh()
 {
 	Mesh* newMesh = new Mesh();
-	return MaterialManagementSystem::Instance()->RegisterMesh(*newMesh);
+	return AssetManager::Instance()->RegisterMesh(*newMesh);
 }

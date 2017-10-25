@@ -1,9 +1,9 @@
 #include "stdafx.h"
+#include "AssetManagement/AssetManager.h"
 #include "Graphics/Material.h"
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"
 #include "SystemManagement/Systems/SceneManagementSystem.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
 #include "Graphics/Buffers/ConstantBuffer.h"
 #include "Graphics/Buffers/VertexBuffer.h"
@@ -143,7 +143,7 @@ void GraphicsSystem::UpdateIfDirty()
 {
 	if (m_isDirty)
 	{
-		const std::vector<Mesh*>& allMeshes = *MaterialManagementSystem::Instance()->GetAllMeshes();
+		const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
 
 		std::vector<VertexData> allVerts;
 		std::vector<UINT16> allIndices;
@@ -184,8 +184,8 @@ void GraphicsSystem::VariableTick()
 	SceneGraph* sg = SceneManagementSystem::Instance()->GetSceneGraph();
 
 	Transform* const allTransforms = sg->m_transforms.GetArrayPointer();
-	const std::vector<Mesh*>& allMeshes = *MaterialManagementSystem::Instance()->GetAllMeshes();
-	const std::vector<Material*>& allMats = *MaterialManagementSystem::Instance()->GetAllMaterials();
+	const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
+	const std::vector<Material*>& allMats = *AssetManager::Instance()->GetAllMaterials();
 
 	PerObjectBuffer& pub = m_constantBuffers->GetPerObjectBuffer();
 	pub.BindBuffer();

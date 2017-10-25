@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 
+#include "AssetManagement/AssetManager.h"
 #include "Components/Entity.h"
 #include "Components/Transform.h"
 #include "DataStructures/Mesh.h"
@@ -13,10 +14,8 @@
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/TextureSampler.h"
 #include "Graphics/ResourceTypes/ShaderResource.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
 #include "SystemManagement/Systems/SceneManagementSystem.h"
-#include "SystemManagement/Systems/MaterialManagementSystem.h"
 #include "Utilities/Logging.h"
 
 Material::Material()
@@ -31,7 +30,7 @@ Material::~Material()
 int Material::Create()
 {
 	Material* newMaterial = new Material();
-	return MaterialManagementSystem::Instance()->RegisterInstancedMaterial(*newMaterial);
+	return AssetManager::Instance()->RegisterInstancedMaterial(*newMaterial);
 }
 
 void Material::SetShader(Shader* s, size_t numberOfResources, size_t numberOfSamplers)
@@ -89,7 +88,7 @@ bool Material::BindIfValid()
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
-		MaterialManagementSystem& mms = *MaterialManagementSystem::Instance();
+		AssetManager& mms = *AssetManager::Instance();
 
 		for (size_t shaderResourceSlot = 0; shaderResourceSlot < m_shaderResourceIndexes.size(); ++shaderResourceSlot)
 		{
