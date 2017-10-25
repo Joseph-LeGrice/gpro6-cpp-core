@@ -37,9 +37,10 @@ public:
     GraphicsSystem(const GraphicsSystem&) = delete;
     virtual ~GraphicsSystem();
 
-	virtual void VariableTick() override;
+    virtual bool Initialize() override;
+    virtual void VariableTick() override;
 
-	bool InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight);
+	void SetInfo(HWND hwnd, int screenWidth, int screenHeight);
 	float GetViewportWidth();
 	float GetViewportHeight();
 
@@ -60,6 +61,7 @@ private:
 
     SceneGraph* m_sceneGraph; //TODO: Remove SceneGraph from GraphicsSystem
 
+    HWND m_hwnd;
 	float m_viewportWidth, m_viewportHeight;
 	
 	void UpdateIfDirty();

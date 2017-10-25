@@ -37,6 +37,75 @@ GraphicsSystem::~GraphicsSystem()
 }
 
 
+bool GraphicsSystem::Initialize()
+{
+    // Initialize Direct3D
+    DXGI_SWAP_CHAIN_DESC scd;
+    ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
+
+    scd.BufferCount = 1;
+    scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+    scd.BufferDesc.Width = m_viewportWidth;
+    scd.BufferDesc.Height = m_viewportHeight;
+    scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+    scd.OutputWindow = m_hwnd;
+    scd.SampleDesc.Count = 4;
+    scd.Windowed = TRUE;
+    scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+
+    UINT creationFlags = D3D11_CREATE_DEVICE_DEBUG;
+
+    HRESULT createDeviceResult = D3D11CreateDeviceAndSwapChain(NULL,
+        D3D_DRIVER_TYPE_HARDWARE,
+        NULL,
+        creationFlags,
+        NULL,
+        NULL,
+        D3D11_SDK_VERSION,
+        &scd,
+        &m_swapchain,
+        &m_device,
+        NULL,
+        &m_deviceContext);
+
+    if (SUCCEEDED(createDeviceResult))
+    {
+        // Initialize Render Targets
+        ID3D11Texture2D* pBackBuffer;
+        m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
+        HRESULT createdRenderTarget = m_device->CreateRenderTargetView(pBackBuffer, NULL, &m_rtBackBuffer);
+
+        if (SUCCEEDED(createdRenderTarget))
+        {
+            pBackBuffer->Release();
+            m_deviceContext->OMSetRenderTargets(1, &m_rtBackBuffer, NULL);
+
+            // Initialize Viewport
+            D3D11_VIEWPORT viewportDesc;
+            ZeroMemory(&viewportDesc, sizeof(D3D11_VIEWPORT));
+            viewportDesc.TopLeftX = 0;
+            viewportDesc.TopLeftY = 0;
+            viewportDesc.Width = m_viewportWidth;
+            viewportDesc.Height = m_viewportHeight;
+            viewportDesc.MinDepth = 0.0f;
+            viewportDesc.MaxDepth = 1.0f;
+
+            m_deviceContext->RSSetViewports(1, &viewportDesc);
+
+            // Initialize Buffers
+            size_t INDEX_BUFFER_SIZE = (size_t)pow(1024, 2);
+            size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
+
+            m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
+            m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
+            m_constantBuffers = new ConstantBufferInterface();
+            return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
+        }
+    }
+
+    return false;
+}
+
 ID3D11Device* GraphicsSystem::GetGraphicsDevice()
 {
 	return m_device;
@@ -57,76 +126,11 @@ SceneGraph& GraphicsSystem::GetSceneGraph()
     return *m_sceneGraph;
 }
 
-bool GraphicsSystem::InitializeGraphics(HWND hwnd, int screenWidth, int screenHeight)
+void GraphicsSystem::SetInfo(HWND hwnd, int screenWidth, int screenHeight)
 {	
-	// Initialize Direct3D
-	DXGI_SWAP_CHAIN_DESC scd;
-	ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
-
-	scd.BufferCount = 1;
-	scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	scd.BufferDesc.Width = screenWidth;
-	scd.BufferDesc.Height = screenHeight;
-	scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	scd.OutputWindow = hwnd;
-	scd.SampleDesc.Count = 4;
-	scd.Windowed = TRUE;
-	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-
-	UINT creationFlags = D3D11_CREATE_DEVICE_DEBUG;
-
-	HRESULT createDeviceResult = D3D11CreateDeviceAndSwapChain(NULL,
-		D3D_DRIVER_TYPE_HARDWARE,
-		NULL,
-		creationFlags,
-		NULL,
-		NULL,
-		D3D11_SDK_VERSION,
-		&scd,
-		&m_swapchain,
-		&m_device,
-		NULL,
-		&m_deviceContext);
-
-	if (SUCCEEDED(createDeviceResult))
-	{
-		m_viewportWidth = (FLOAT)screenWidth;
-		m_viewportHeight = (FLOAT)screenHeight;
-
-		// Initialize Render Targets
-		ID3D11Texture2D* pBackBuffer;
-		m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-		HRESULT createdRenderTarget = m_device->CreateRenderTargetView(pBackBuffer, NULL, &m_rtBackBuffer);
-
-		if (SUCCEEDED(createdRenderTarget))
-		{
-			pBackBuffer->Release();
-			m_deviceContext->OMSetRenderTargets(1, &m_rtBackBuffer, NULL);
-
-			// Initialize Viewport
-			D3D11_VIEWPORT viewportDesc;
-			ZeroMemory(&viewportDesc, sizeof(D3D11_VIEWPORT));
-			viewportDesc.TopLeftX = 0;
-			viewportDesc.TopLeftY = 0;
-			viewportDesc.Width = m_viewportWidth;
-			viewportDesc.Height = m_viewportHeight;
-			viewportDesc.MinDepth = 0.0f;
-			viewportDesc.MaxDepth = 1.0f;
-
-			m_deviceContext->RSSetViewports(1, &viewportDesc);
-
-			// Initialize Buffers
-			size_t INDEX_BUFFER_SIZE = (size_t)pow(1024, 2);
-			size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
-
-			m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
-			m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
-            m_constantBuffers = new ConstantBufferInterface();
-			return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
-		}
-	}
-	
-	return false;
+    m_hwnd = hwnd;
+    m_viewportWidth = (FLOAT)screenWidth;
+    m_viewportHeight = (FLOAT)screenHeight;
 }
 
 float GraphicsSystem::GetViewportWidth()

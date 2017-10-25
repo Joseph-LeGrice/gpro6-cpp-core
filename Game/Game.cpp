@@ -34,10 +34,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	try
 	{
-        SystemManagement::Initialize();
-
         AssetManager::Create();
         AssetManager& mms = *AssetManager::Instance();
+
+        SystemManagement::Initialize();
 
         GraphicsSystem& graphicsSystem = *SystemManagement::GetGraphicsSystem();
 
@@ -100,7 +100,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         mf.BindBuffer();
         //------------------------------------------------------------------------------------
 		
-        SceneGraph sg = graphicsSystem.GetSceneGraph();
+        SceneGraph& sg = graphicsSystem.GetSceneGraph();
 
 		// Mesh Set up
 		//int meshIndex = MeshHelper::CreateQuad();

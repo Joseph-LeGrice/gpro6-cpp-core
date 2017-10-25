@@ -23,6 +23,8 @@ void SystemManagement::DoInitialize()
     int screenHeight = 0;
     InitializeWindows(screenWidth, screenHeight);
 
+    m_graphicsSystem.SetInfo(s_hwnd, screenWidth, screenHeight);
+
     m_timeSystem.Initialize();
     m_inputSystem.Initialize();
     m_graphicsSystem.Initialize();

@@ -6,6 +6,10 @@ AssetManager* AssetManager::s_instance = nullptr;
 AssetManager::AssetManager()
 {
 	m_instancedMaterials = std::vector<Material*>();
+    m_shaderResources = std::vector<ShaderResource*>();
+    m_textureSamplers = std::vector<TextureSampler*>();
+    m_meshes = std::vector<Mesh*>();
+    m_shaders = std::vector<Shader*>();
 }
 
 
