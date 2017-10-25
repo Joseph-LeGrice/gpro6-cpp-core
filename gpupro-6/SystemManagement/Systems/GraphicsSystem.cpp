@@ -3,7 +3,7 @@
 #include "Graphics/Material.h"
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"
-#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/SystemManagement.h"
 #include "Graphics/Buffers/ConstantBuffer.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/IndexBuffer.h"
@@ -184,7 +184,7 @@ void GraphicsSystem::VariableTick()
 	Camera* allCameras = cca.GetArrayPointer();
 	size_t allCamerasSize = cca.GetArraySize();
 
-	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = SystemManagement::GetGraphicsSystem()->GetGraphicsDeviceContext();
 	PER_OBJECT_BUFFER pob;
 
     ComponentArray<Transform>& tca = m_sceneGraph->m_transforms;

@@ -1,5 +1,5 @@
 #pragma once
-#include "SystemManagement/GameSystem.h"
+#include "SystemManagement/ISystem.h"
 #include <chrono>
 
 typedef std::chrono::steady_clock::time_point TimePoint;
@@ -7,9 +7,10 @@ typedef std::chrono::duration<float, std::chrono::seconds::period> Seconds;
 
 class TimeSystem : public ISystem
 {
-	REGISTER_SUBSYSTEM(TimeSystem);
-
 public:
+    TimeSystem();
+    virtual ~TimeSystem();
+
 	float FixedTimeStep();
 	float DeltaTimeStep();
 

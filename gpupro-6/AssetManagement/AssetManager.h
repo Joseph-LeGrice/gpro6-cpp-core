@@ -7,9 +7,6 @@
 #include "Graphics/TextureSampler.h"
 #include "DataStructures/Mesh.h"
 
-#include "SystemManagement/GameSystem.h"
-
-
 class AssetManager
 {
 public:

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ShaderResource.h"
-#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/SystemManagement.h"
 
 ShaderResource::ShaderResource()
 {
@@ -14,7 +14,7 @@ ShaderResource::~ShaderResource()
 void ShaderResource::BindResource(UINT resourceIndex)
 {
 	ID3D11ShaderResourceView* resource = GetResourceView();
-	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = SystemManagement::GetGraphicsSystem()->GetGraphicsDeviceContext();
 	deviceContext->VSSetShaderResources(resourceIndex, 1, &resource);
 	deviceContext->HSSetShaderResources(resourceIndex, 1, &resource);
 	deviceContext->DSSetShaderResources(resourceIndex, 1, &resource);

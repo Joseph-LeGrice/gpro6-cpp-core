@@ -1,13 +1,15 @@
 #pragma once
-#include "SystemManagement/GameSystem.h"
+#include "SystemManagement/ISystem.h"
 #include "Input/MouseInput.h"
 #include "Input/KeyboardInput.h"
 
 class InputSystem : public ISystem
 {
-	REGISTER_SUBSYSTEM(InputSystem);
-
 public:
+    InputSystem();
+    InputSystem(const InputSystem&) = delete;
+    virtual ~InputSystem();
+
 	void SetHWND(HWND hwnd);
 	virtual void VariableTick() override;
 

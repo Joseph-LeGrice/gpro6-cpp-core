@@ -72,9 +72,6 @@
     <ClCompile Include="DataStructures\Mesh.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\GameSystem.cpp">
-      <Filter>SystemManagement</Filter>
-    </ClCompile>
     <ClCompile Include="SystemManagement\SystemManagement.cpp">
       <Filter>SystemManagement</Filter>
     </ClCompile>
@@ -193,9 +190,6 @@
     </ClInclude>
     <ClInclude Include="DataStructures\Mesh.h">
       <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemManagement\GameSystem.h">
-      <Filter>SystemManagement</Filter>
     </ClInclude>
     <ClInclude Include="SystemManagement\SystemManagement.h">
       <Filter>SystemManagement</Filter>

@@ -66,6 +66,8 @@ public:
         s_instance->m_running = false;
     }
 
+    static void ShutdownWindows();
+
 private:
     static SystemManagement* s_instance;
    
@@ -94,7 +96,6 @@ private:
     static HWND s_hwnd;
     static LPCWSTR s_applicationName;
     static HINSTANCE s_hInstance;
-    void InitializeWindows(int& screenWidth, int& screenHeight);
-    void ShutdownWindows();
+    static void InitializeWindows(int& screenWidth, int& screenHeight);
 };
 

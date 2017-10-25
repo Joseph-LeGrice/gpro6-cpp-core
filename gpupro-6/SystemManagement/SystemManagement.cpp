@@ -111,7 +111,7 @@ void SystemManagement::InitializeWindows(int& screenWidth, int& screenHeight)
         NULL,
         s_hInstance,
         NULL);
-    InputSystem::Instance()->SetHWND(s_hwnd);
+    SystemManagement::GetInputSystem()->SetHWND(s_hwnd);
 
     ShowWindow(s_hwnd, SW_SHOW);
     SetForegroundWindow(s_hwnd);

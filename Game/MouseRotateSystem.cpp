@@ -28,22 +28,22 @@ void MouseRotateSystem::VariableTick()
 	{
 		ComponentArray<Transform>& tca = SystemManagement::GetGraphicsSystem()->GetSceneGraph().m_transforms;
 		Transform* const allTransforms = tca.GetArrayPointer();
-		const MouseInput& mi = InputSystem::Instance()->GetMouse();
-		const KeyboardInput& ki = InputSystem::Instance()->GetKeyboard();
+		const MouseInput& mi = SystemManagement::GetInputSystem()->GetMouse();
+		const KeyboardInput& ki = SystemManagement::GetInputSystem()->GetKeyboard();
 
 		if (!m_toggleRotate)
 		{
 			if (mi.GetMouseButton(0))
 			{
 				Transform& t = allTransforms[m_index];
-				Vector2 deltaMove = mi.GetDeltaMousePosition() * c_speed * TimeSystem::Instance()->DeltaTimeStep();
+				Vector2 deltaMove = mi.GetDeltaMousePosition() * c_speed * SystemManagement::GetTimeSystem()->DeltaTimeStep();
 				t.m_position.X += deltaMove.X;
 				t.m_position.Y -= deltaMove.Y;
 			}
 		}
 		else
 		{
-			float angularDelta = c_angularVelocity * TimeSystem::Instance()->DeltaTimeStep();
+			float angularDelta = c_angularVelocity * SystemManagement::GetTimeSystem()->DeltaTimeStep();
 			Transform& t = allTransforms[m_index];
 			t.m_rotation *= QuaternionFromAxisAngle({ 0.0f, 1.0f, 0.0f }, angularDelta);
 			QuaternionNormalize(t.m_rotation);

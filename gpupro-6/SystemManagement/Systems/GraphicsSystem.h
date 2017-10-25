@@ -9,7 +9,7 @@
 #pragma comment (lib, "d3dx10.lib")
 
 #include <vector>
-#include "SystemManagement/GameSystem.h"
+#include "SystemManagement/ISystem.h"
 
 class Material;
 class VertexBuffer;
@@ -27,13 +27,15 @@ struct MeshRenderHook
 
 class GraphicsSystem : public ISystem
 {
-	REGISTER_SUBSYSTEM(GraphicsSystem)
-
 public:
 	ID3D11Device* GetGraphicsDevice();
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
     ConstantBufferInterface& GetConstantBufferInterface();
     SceneGraph& GetSceneGraph();
+
+    GraphicsSystem();
+    GraphicsSystem(const GraphicsSystem&) = delete;
+    virtual ~GraphicsSystem();
 
 	virtual void VariableTick() override;
 

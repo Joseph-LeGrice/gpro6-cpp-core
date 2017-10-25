@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "DataStructures/VertexData.h"
-#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/SystemManagement.h"
 
 VertexBuffer::VertexBuffer()
 {
@@ -18,7 +18,7 @@ bool VertexBuffer::SetCurrentIfValid()
 	UINT offset = 0;
 	UINT stride = sizeof(VertexData);
 	
-	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = SystemManagement::GetGraphicsSystem()->GetGraphicsDeviceContext();
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
 	return true;
@@ -28,7 +28,7 @@ VertexBuffer* VertexBuffer::Create(size_t bufferSize)
 {
 	VertexBuffer* vb = new VertexBuffer();
 
-	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
+	ID3D11Device* device = SystemManagement::GetGraphicsSystem()->GetGraphicsDevice();
 
 	D3D11_BUFFER_DESC vertexBufferDesc;
 	ZeroMemory(&vertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
@@ -53,7 +53,7 @@ VertexBuffer* VertexBuffer::Create(size_t bufferSize)
 
 bool VertexBuffer::TrySetData(const std::vector<VertexData>& data)
 {
-	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = SystemManagement::GetGraphicsSystem()->GetGraphicsDeviceContext();
 
 	D3D11_MAPPED_SUBRESOURCE vertexData;
 	HRESULT vertexBufferAcquireResult = deviceContext->Map(m_vertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &vertexData);

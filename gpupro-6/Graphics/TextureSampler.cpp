@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Graphics/TextureSampler.h"
 #include "AssetManagement/AssetManager.h"
-#include "SystemManagement/Systems/GraphicsSystem.h"
+#include "SystemManagement/SystemManagement.h"
 
 TextureSampler::TextureSampler()
 {
@@ -16,7 +16,7 @@ TextureSampler::~TextureSampler()
 
 void TextureSampler::BindTextureSampler(UINT samplerIndex)
 {
-	ID3D11DeviceContext* deviceContext = GraphicsSystem::Instance()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = SystemManagement::GetGraphicsSystem()->GetGraphicsDeviceContext();
 	deviceContext->VSSetSamplers(samplerIndex, 1, &m_sampler);
 	deviceContext->HSSetSamplers(samplerIndex, 1, &m_sampler);
 	deviceContext->DSSetSamplers(samplerIndex, 1, &m_sampler);
@@ -39,7 +39,7 @@ bool TextureSampler::Initialize()
 	desc.MinLOD = 0;
 	desc.MaxLOD = 0;
 
-	ID3D11Device* device = GraphicsSystem::Instance()->GetGraphicsDevice();
+	ID3D11Device* device = SystemManagement::GetGraphicsSystem()->GetGraphicsDevice();
 	HRESULT createSamplerResult = device->CreateSamplerState(&desc, &m_sampler);
 	return SUCCEEDED(createSamplerResult);
 }

@@ -1,11 +1,12 @@
 #pragma once
 
-#include "SystemManagement/GameSystem.h"
+#include "SystemManagement/ISystem.h"
 
 class MouseRotateSystem : public ISystem
 {
-	REGISTER_SUBSYSTEM(MouseRotateSystem);
 public:
+    MouseRotateSystem();
+    virtual ~MouseRotateSystem();
 
 	void SetTransformIndexToRotate(size_t index);
 

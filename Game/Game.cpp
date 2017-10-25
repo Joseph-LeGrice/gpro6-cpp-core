@@ -17,7 +17,6 @@
 #include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 #include "Graphics/TextureSampler.h"
-#include "SystemManagement/GameSystem.h"
 #include "SystemManagement/SystemManagement.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "MouseRotateSystem.h"
@@ -59,7 +58,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         simpleQuadMat.SetShader(materialShader, 9, 1);
         
-        int lightBufferIndex = LightingSystem::Instance()->GetBufferResourceIndex();
+        int lightBufferIndex = SystemManagement::GetLightingSystem()->GetBufferResourceIndex();
         simpleQuadMat.AddShaderResource(lightBufferIndex, 0);
 
         int textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
@@ -117,9 +116,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		int meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
 		MeshRenderHook mrh = { meshTransformIndex, meshIndex, materialIndex };
-		GraphicsSystem::Instance()->RegisterMeshRenderHook(mrh);
+		SystemManagement::GetGraphicsSystem()->RegisterMeshRenderHook(mrh);
 
-		MouseRotateSystem::Instance()->SetTransformIndexToRotate(meshTransformIndex);
+        //SystemManagement::GetMouseRotateSystem()->SetTransformIndexToRotate(meshTransformIndex);
 
 		// Camera
 		Transform cameraTransform = TransformNew();
@@ -139,7 +138,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     SystemManagement::Deinitialize();
     ImagingFactory::DestroyFactory();
-	GameSystem::ShutdownWindows();
+    SystemManagement::ShutdownWindows();
 
 	return returnCode;
 }

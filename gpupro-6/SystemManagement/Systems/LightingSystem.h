@@ -1,5 +1,5 @@
 #pragma once
-#include "SystemManagement/GameSystem.h"
+#include "SystemManagement/ISystem.h"
 #include "DataStructures/Vector4.h"
 #include "DataStructures/Vector2.h"
 
@@ -28,9 +28,10 @@ enum LightType
 
 class LightingSystem : public ISystem
 {
-    REGISTER_SUBSYSTEM(LightingSystem);
-
 public:
+    LightingSystem();
+    virtual ~LightingSystem();
+
     virtual bool Initialize() override;
     virtual void VariableTick() override;
 
