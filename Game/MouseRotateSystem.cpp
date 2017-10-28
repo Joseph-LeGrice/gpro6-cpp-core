@@ -26,24 +26,24 @@ void MouseRotateSystem::VariableTick()
 {
 	if (m_hasIndex)
 	{
-		ComponentArray<Transform>& tca = SystemManagement::GetGraphicsSystem()->GetSceneGraph().m_transforms;
+		ComponentArray<Transform>& tca = SystemManagement::GetSystem<GraphicsSystem>()->GetSceneGraph().m_transforms;
 		Transform* const allTransforms = tca.GetArrayPointer();
-		const MouseInput& mi = SystemManagement::GetInputSystem()->GetMouse();
-		const KeyboardInput& ki = SystemManagement::GetInputSystem()->GetKeyboard();
+		const MouseInput& mi = SystemManagement::GetSystem<InputSystem>()->GetMouse();
+		const KeyboardInput& ki = SystemManagement::GetSystem<InputSystem>()->GetKeyboard();
 
 		if (!m_toggleRotate)
 		{
 			if (mi.GetMouseButton(0))
 			{
 				Transform& t = allTransforms[m_index];
-				Vector2 deltaMove = mi.GetDeltaMousePosition() * c_speed * SystemManagement::GetTimeSystem()->DeltaTimeStep();
+				Vector2 deltaMove = mi.GetDeltaMousePosition() * c_speed * SystemManagement::GetSystem<TimeSystem>()->DeltaTimeStep();
 				t.m_position.X += deltaMove.X;
 				t.m_position.Y -= deltaMove.Y;
 			}
 		}
 		else
 		{
-			float angularDelta = c_angularVelocity * SystemManagement::GetTimeSystem()->DeltaTimeStep();
+			float angularDelta = c_angularVelocity * SystemManagement::GetSystem<TimeSystem>()->DeltaTimeStep();
 			Transform& t = allTransforms[m_index];
 			t.m_rotation *= QuaternionFromAxisAngle({ 0.0f, 1.0f, 0.0f }, angularDelta);
 			QuaternionNormalize(t.m_rotation);

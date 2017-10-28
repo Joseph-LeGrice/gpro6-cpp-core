@@ -16,7 +16,7 @@ TextureSampler::~TextureSampler()
 
 void TextureSampler::BindTextureSampler(UINT samplerIndex)
 {
-	ID3D11DeviceContext* deviceContext = SystemManagement::GetGraphicsSystem()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = SystemManagement::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 	deviceContext->VSSetSamplers(samplerIndex, 1, &m_sampler);
 	deviceContext->HSSetSamplers(samplerIndex, 1, &m_sampler);
 	deviceContext->DSSetSamplers(samplerIndex, 1, &m_sampler);
@@ -39,7 +39,7 @@ bool TextureSampler::Initialize()
 	desc.MinLOD = 0;
 	desc.MaxLOD = 0;
 
-	ID3D11Device* device = SystemManagement::GetGraphicsSystem()->GetGraphicsDevice();
+	ID3D11Device* device = SystemManagement::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 	HRESULT createSamplerResult = device->CreateSamplerState(&desc, &m_sampler);
 	return SUCCEEDED(createSamplerResult);
 }

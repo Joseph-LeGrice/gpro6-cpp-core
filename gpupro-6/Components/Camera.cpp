@@ -5,8 +5,8 @@
 
 Camera CameraTestNew()
 {
-	float viewportWidth = SystemManagement::GetGraphicsSystem()->GetViewportWidth();
-	float viewportHeight = SystemManagement::GetGraphicsSystem()->GetViewportHeight();
+	float viewportWidth = SystemManagement::GetSystem<GraphicsSystem>()->GetViewportWidth();
+	float viewportHeight = SystemManagement::GetSystem<GraphicsSystem>()->GetViewportHeight();
 	float aspectRatio = viewportWidth / viewportHeight;
 
 	bool isOrtho = false;

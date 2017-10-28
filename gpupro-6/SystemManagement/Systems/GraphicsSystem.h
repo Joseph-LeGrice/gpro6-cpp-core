@@ -40,7 +40,6 @@ public:
     virtual bool Initialize() override;
     virtual void VariableTick() override;
 
-	void SetInfo(HWND hwnd, int screenWidth, int screenHeight);
 	float GetViewportWidth();
 	float GetViewportHeight();
 
@@ -61,7 +60,6 @@ private:
 
     SceneGraph* m_sceneGraph; //TODO: Remove SceneGraph from GraphicsSystem
 
-    HWND m_hwnd;
 	float m_viewportWidth, m_viewportHeight;
 	
 	void UpdateIfDirty();

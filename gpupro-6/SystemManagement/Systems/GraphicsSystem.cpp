@@ -4,6 +4,7 @@
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"
 #include "SystemManagement/SystemManagement.h"
+#include "SystemManagement/WindowManager.h"
 #include "Graphics/Buffers/ConstantBuffer.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/IndexBuffer.h"
@@ -39,16 +40,19 @@ GraphicsSystem::~GraphicsSystem()
 
 bool GraphicsSystem::Initialize()
 {
+    m_viewportWidth = static_cast<float>(WindowManager::GetWindowWidth());
+    m_viewportHeight = static_cast<float>(WindowManager::GetWindowHeight());
+
     // Initialize Direct3D
     DXGI_SWAP_CHAIN_DESC scd;
     ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
 
     scd.BufferCount = 1;
     scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    scd.BufferDesc.Width = m_viewportWidth;
-    scd.BufferDesc.Height = m_viewportHeight;
+    scd.BufferDesc.Width = static_cast<UINT>(m_viewportWidth);
+    scd.BufferDesc.Height = static_cast<UINT>(m_viewportHeight);
     scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    scd.OutputWindow = m_hwnd;
+    scd.OutputWindow = WindowManager::GetHWND();
     scd.SampleDesc.Count = 4;
     scd.Windowed = TRUE;
     scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
@@ -126,13 +130,6 @@ SceneGraph& GraphicsSystem::GetSceneGraph()
     return *m_sceneGraph;
 }
 
-void GraphicsSystem::SetInfo(HWND hwnd, int screenWidth, int screenHeight)
-{	
-    m_hwnd = hwnd;
-    m_viewportWidth = (FLOAT)screenWidth;
-    m_viewportHeight = (FLOAT)screenHeight;
-}
-
 float GraphicsSystem::GetViewportWidth()
 {
 	return m_viewportWidth;
@@ -188,7 +185,7 @@ void GraphicsSystem::VariableTick()
 	Camera* allCameras = cca.GetArrayPointer();
 	size_t allCamerasSize = cca.GetArraySize();
 
-	ID3D11DeviceContext* deviceContext = SystemManagement::GetGraphicsSystem()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = SystemManagement::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 	PER_OBJECT_BUFFER pob;
 
     ComponentArray<Transform>& tca = m_sceneGraph->m_transforms;

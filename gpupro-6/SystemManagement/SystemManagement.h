@@ -7,14 +7,14 @@
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/Systems/TimeSystem.h"
 
+#include <map>
+#include <type_traits>
+#include <typeindex>
+
 //typedef SystemConfiguration<
 //    GraphicsSystem,
-//    MaterialManagementSystem,
-//    SceneManagementSystem,
 //    LightingSystem,
-//    ShaderManagementSystem,
 //    TimeSystem,
-//    ConstantBufferManagementSystem,
 //    InputSystem
 //> MainConfig;
 
@@ -25,9 +25,10 @@
 class SystemManagement
 {
 public:
+    template<class... Ts>
     static void Initialize()
     {
-        s_instance->DoInitialize();
+        s_instance->DoInitialize<Ts...>();
     }
 
     static int RunGameLoop()
@@ -41,24 +42,17 @@ public:
         delete s_instance;
     }
 
-    static TimeSystem* GetTimeSystem()
+    template<class T>
+    static T* GetSystem()
     {
-        return &s_instance->m_timeSystem;
-    }
-
-    static InputSystem* GetInputSystem()
-    {
-        return &s_instance->m_inputSystem;
-    }
-
-    static GraphicsSystem* GetGraphicsSystem()
-    {
-        return &s_instance->m_graphicsSystem;
-    }
-
-    static LightingSystem* GetLightingSystem()
-    {
-        return &s_instance->m_lightingSystem;
+        if (s_instance->m_map.count(typeid(T)))
+        {
+            return static_cast<T*>(s_instance->m_map[typeid(T)]);
+        }
+        else
+        {
+            return nullptr;
+        }
     }
 
     static void Quit()
@@ -66,21 +60,10 @@ public:
         s_instance->m_running = false;
     }
 
-    static void ShutdownWindows();
-
 private:
     static SystemManagement* s_instance;
-   
-    // TODO: THESE ARE NOT SYSTEMS!
-    //MaterialManagementSystem,
-    //SceneManagementSystem 
-    //ShaderManagementSystem,
-    //ConstantBufferManagementSystem,
 
-    TimeSystem m_timeSystem;
-    InputSystem m_inputSystem;
-    GraphicsSystem m_graphicsSystem;
-    LightingSystem m_lightingSystem;
+    std::map<std::type_index, ISystem*> m_map;
 
     bool m_running;
 
@@ -88,14 +71,33 @@ private:
     ~SystemManagement();
     SystemManagement(const SystemManagement&) = delete;
 
-    void DoInitialize();
+    template<class T>
+    void DoInitialize()
+    {
+        static_assert(std::is_base_of<ISystem, T>::value, "Not a system.");
+        if (!m_map.count(typeid(T)))
+        {
+            T* newInstance = new T();
+            m_map[typeid(T)] = newInstance;
+            newInstance->Initialize();
+        }
+    }
+
+    template<class T, class U, class... Ts>
+    void DoInitialize()
+    {
+        static_assert(std::is_base_of<ISystem, T>::value, "Not a system.");
+        if (!m_map.count(typeid(T)))
+        {
+            T* newInstance = new T();
+            m_map[typeid(T)] = newInstance;
+            newInstance->Initialize();
+        }
+
+        DoInitialize<U, Ts...>();
+    }
+
     int DoRunGameLoop();
     void DoDeinitialize();
-
-    //TODO: Move this functionality 
-    static HWND s_hwnd;
-    static LPCWSTR s_applicationName;
-    static HINSTANCE s_hInstance;
-    static void InitializeWindows(int& screenWidth, int& screenHeight);
 };
 
