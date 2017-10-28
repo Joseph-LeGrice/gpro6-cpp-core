@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "SystemManagement/SystemManagement.h"
+#include "SystemManagement/SystemManager.h"
 
-SystemManagement* SystemManagement::s_instance = new SystemManagement();
+SystemManager* SystemManager::s_instance = new SystemManager();
 
-SystemManagement::~SystemManagement()
+SystemManager::~SystemManager()
 {
 
 }
 
-SystemManagement::SystemManagement()
+SystemManager::SystemManager()
 {
 }
 
-int SystemManagement::DoRunGameLoop()
+int SystemManager::DoRunGameLoop()
 {
     try
     {
@@ -45,7 +45,7 @@ int SystemManagement::DoRunGameLoop()
     return 0;
 }
 
-void SystemManagement::DoDeinitialize()
+void SystemManager::DoDeinitialize()
 {
     for (auto it = m_map.begin(); it != m_map.end(); ++it)
     {

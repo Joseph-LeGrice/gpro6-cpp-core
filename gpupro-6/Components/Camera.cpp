@@ -1,12 +1,12 @@
 #include "stdafx.h"
 
 #include "Components/Camera.h"
-#include "SystemManagement/SystemManagement.h"
+#include "SystemManagement/SystemManager.h"
 
 Camera CameraTestNew()
 {
-	float viewportWidth = SystemManagement::GetSystem<GraphicsSystem>()->GetViewportWidth();
-	float viewportHeight = SystemManagement::GetSystem<GraphicsSystem>()->GetViewportHeight();
+	float viewportWidth = SystemManager::GetSystem<GraphicsSystem>()->GetViewportWidth();
+	float viewportHeight = SystemManager::GetSystem<GraphicsSystem>()->GetViewportHeight();
 	float aspectRatio = viewportWidth / viewportHeight;
 
 	bool isOrtho = false;

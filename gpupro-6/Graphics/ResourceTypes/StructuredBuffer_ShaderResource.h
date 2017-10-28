@@ -1,6 +1,6 @@
 #pragma once
 #include "ShaderResource.h"
-#include "SystemManagement/SystemManagement.h"
+#include "SystemManagement/SystemManager.h"
 
 template<class T, UINT m_numberOfElements>
 class StructuredBuffer_ShaderResource : ShaderResource
@@ -19,7 +19,7 @@ public:
 		bDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 		bDesc.StructureByteStride = sizeof(T);
 
-		ID3D11Device* device = SystemManagement::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		HRESULT createBufferResult = device->CreateBuffer(&bDesc, NULL, &buffer);
 		if (!SUCCEEDED(createBufferResult))
 		{
@@ -49,7 +49,7 @@ public:
 	void UpdateBuffer(T& newData)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = SystemManagement::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 		HRESULT mapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(mapResult))
 		{

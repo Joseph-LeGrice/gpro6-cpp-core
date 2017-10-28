@@ -17,7 +17,7 @@
 #include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 #include "Graphics/TextureSampler.h"
-#include "SystemManagement/SystemManagement.h"
+#include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/WindowManager.h"
 #include "MouseRotateSystem.h"
@@ -40,7 +40,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         AssetManager::Create();
         AssetManager& mms = *AssetManager::Instance();
         
-        SystemManagement::Initialize<
+        SystemManager::Initialize<
             GraphicsSystem,
             LightingSystem,
             TimeSystem,
@@ -48,7 +48,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             MouseRotateSystem
         >();
         
-        GraphicsSystem& graphicsSystem = *SystemManagement::GetSystem<GraphicsSystem>();
+        GraphicsSystem& graphicsSystem = *SystemManager::GetSystem<GraphicsSystem>();
 
 		int materialIndex = Material::Create();
 		Material& simpleQuadMat = *mms.GetMaterial(materialIndex);
@@ -67,7 +67,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         simpleQuadMat.SetShader(materialShader, 9, 1);
         
-        int lightBufferIndex = SystemManagement::GetSystem<LightingSystem>()->GetBufferResourceIndex();
+        int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
         simpleQuadMat.AddShaderResource(lightBufferIndex, 0);
 
         int textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
@@ -125,9 +125,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		int meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
 		MeshRenderHook mrh = { meshTransformIndex, meshIndex, materialIndex };
-		SystemManagement::GetSystem<GraphicsSystem>()->RegisterMeshRenderHook(mrh);
+		SystemManager::GetSystem<GraphicsSystem>()->RegisterMeshRenderHook(mrh);
 
-        SystemManagement::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransformIndex);
+        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransformIndex);
 
 		// Camera
 		Transform cameraTransform = TransformNew();
@@ -143,9 +143,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	}
 
-    int returnCode = SystemManagement::RunGameLoop();
+    int returnCode = SystemManager::RunGameLoop();
 
-    SystemManagement::Deinitialize();
+    SystemManager::Deinitialize();
     ImagingFactory::DestroyFactory();
     WindowManager::ShutdownWindow();
     AssetManager::Destroy();

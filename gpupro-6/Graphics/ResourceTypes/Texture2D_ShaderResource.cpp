@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
-#include "SystemManagement/SystemManagement.h"
+#include "SystemManagement/SystemManager.h"
 #include "AssetManagement/AssetManager.h"
 #include "Utilities/PerlinNoise.h"
 #include "Utilities/ImagingFactory.h"
@@ -46,7 +46,7 @@ int CreateTextureResourceFromFile(std::wstring filepath)
 		data.SysMemSlicePitch = width * height * bpp;
 
 		Texture2D_ShaderResource* newTexture2D = new Texture2D_ShaderResource();
-		ID3D11Device* device = SystemManagement::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		bool createdEverything = false;
 		HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &newTexture2D->m_pTexture);
 		if (SUCCEEDED(createTextureResult))

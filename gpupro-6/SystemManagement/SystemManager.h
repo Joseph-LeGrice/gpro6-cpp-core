@@ -22,7 +22,7 @@
 //TODO: Make SystemManagement more easily extensible with code generation,
 //      or some other way of registering systems as modules that can be retrieved
 //      Bear in mind need for concurrency in the future.
-class SystemManagement
+class SystemManager
 {
 public:
     template<class... Ts>
@@ -61,15 +61,15 @@ public:
     }
 
 private:
-    static SystemManagement* s_instance;
+    static SystemManager* s_instance;
 
     std::map<std::type_index, ISystem*> m_map;
 
     bool m_running;
 
-    SystemManagement();
-    ~SystemManagement();
-    SystemManagement(const SystemManagement&) = delete;
+    SystemManager();
+    ~SystemManager();
+    SystemManager(const SystemManager&) = delete;
 
     template<class T>
     void DoInitialize()

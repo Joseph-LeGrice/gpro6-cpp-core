@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "InputSystem.h"
-#include "SystemManagement/SystemManagement.h"
+#include "SystemManagement/SystemManager.h"
 
 InputSystem::InputSystem()
 {
@@ -28,7 +28,7 @@ void InputSystem::VariableTick()
 
 		if (msg.message == WM_QUIT)
 		{
-			SystemManagement::Quit();
+			SystemManager::Quit();
 		}
 
 		m_mouseInput.HandleInput(msg, isNewFrame);

@@ -215,7 +215,7 @@
     <ClCompile Include="SystemManagement\Systems\LightingSystem.cpp" />
     <ClCompile Include="AssetManagement\AssetManager.cpp" />
     <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp" />
-    <ClCompile Include="SystemManagement\SystemManagement.cpp" />
+    <ClCompile Include="SystemManagement\SystemManager.cpp" />
     <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp" />
     <ClCompile Include="Utilities\ImagingFactory.cpp" />
     <ClCompile Include="Utilities\MeshHelper.cpp" />
@@ -259,7 +259,7 @@
     <ClInclude Include="SystemManagement\Systems\InputSystem.h" />
     <ClInclude Include="SystemManagement\ISystem.h" />
     <ClInclude Include="AssetManagement\AssetManager.h" />
-    <ClInclude Include="SystemManagement\SystemManagement.h" />
+    <ClInclude Include="SystemManagement\SystemManager.h" />
     <ClInclude Include="SystemManagement\Systems\TimeSystem.h" />
     <ClInclude Include="Input\KeyboardInput.h" />
     <ClInclude Include="Input\MouseInput.h" />
