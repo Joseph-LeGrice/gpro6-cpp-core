@@ -18,6 +18,8 @@
 #include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
 #include "Graphics/TextureSampler.h"
 #include "SystemManagement/SystemManager.h"
+#include "SystemManagement/Systems/TimeSystem.h"
+#include "SystemManagement/Systems/InputSystem.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/WindowManager.h"
 #include "MouseRotateSystem.h"
@@ -33,10 +35,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    WindowManager::InitializeWindow();
-	
     try
 	{
+        WindowManager::InitializeWindow();
+        
         AssetManager::Create();
         AssetManager& mms = *AssetManager::Instance();
         

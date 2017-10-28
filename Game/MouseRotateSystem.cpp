@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "MouseRotateSystem.h"
 #include "SystemManagement/SystemManager.h"
+#include "SystemManagement/Systems/InputSystem.h"
+#include "SystemManagement/Systems/TimeSystem.h"
 #include "DataStructures/Quaternion.h"
 #include "DataStructures/ComponentArray.h"
 #include "DataStructures/SceneGraph.h"

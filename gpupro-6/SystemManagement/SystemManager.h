@@ -1,27 +1,11 @@
 #pragma once
 
-#include "SystemManagement/SystemConfiguration.hpp"
-
-#include "SystemManagement/Systems/GraphicsSystem.h"
-#include "SystemManagement/Systems/InputSystem.h"
-#include "SystemManagement/Systems/LightingSystem.h"
-#include "SystemManagement/Systems/TimeSystem.h"
+#include "SystemManagement/ISystem.h"
 
 #include <map>
 #include <type_traits>
 #include <typeindex>
 
-//typedef SystemConfiguration<
-//    GraphicsSystem,
-//    LightingSystem,
-//    TimeSystem,
-//    InputSystem
-//> MainConfig;
-
-
-//TODO: Make SystemManagement more easily extensible with code generation,
-//      or some other way of registering systems as modules that can be retrieved
-//      Bear in mind need for concurrency in the future.
 class SystemManager
 {
 public:

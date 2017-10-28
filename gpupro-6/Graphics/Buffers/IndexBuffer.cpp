@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "IndexBuffer.h"
 #include "SystemManagement/SystemManager.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
 
 
 IndexBuffer::IndexBuffer()

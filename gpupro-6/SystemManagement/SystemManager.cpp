@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SystemManagement/SystemManager.h"
+#include "SystemManagement/Systems/TimeSystem.h"
 
 SystemManager* SystemManager::s_instance = new SystemManager();
 

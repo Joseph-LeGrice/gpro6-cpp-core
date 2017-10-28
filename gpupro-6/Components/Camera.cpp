@@ -2,6 +2,7 @@
 
 #include "Components/Camera.h"
 #include "SystemManagement/SystemManager.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
 
 Camera CameraTestNew()
 {
