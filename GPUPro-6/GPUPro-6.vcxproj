@@ -191,6 +191,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DataStructures\Color.cpp" />
     <ClCompile Include="Components\Camera.cpp" />
     <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="DataStructures\Matrix3x3.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Input\KeyboardInput.cpp" />
     <ClCompile Include="Input\MouseInput.cpp" />
+    <ClCompile Include="Components\Light.cpp" />
     <ClCompile Include="SystemManagement\Systems\GraphicsSystem.cpp" />
     <ClCompile Include="SystemManagement\Systems\InputSystem.cpp" />
     <ClCompile Include="SystemManagement\ISystem.cpp" />
@@ -229,6 +231,7 @@
     <ClCompile Include="SystemManagement\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataStructures\Color.h" />
     <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Entity.h" />
     <ClInclude Include="Components\Transform.h" />
@@ -252,6 +255,7 @@
     <ClInclude Include="Graphics\ResourceTypes\Texture2D_ShaderResource.h" />
     <ClInclude Include="Graphics\TextureSampler.h" />
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Components\Light.h" />
     <ClInclude Include="SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="SystemManagement\Systems\GraphicsSystem.h" />
     <ClInclude Include="SystemManagement\Systems\LightingSystem.h" />

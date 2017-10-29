@@ -2,6 +2,7 @@
 #include "SystemManagement/ISystem.h"
 #include "DataStructures/Vector4.h"
 #include "DataStructures/Vector2.h"
+#include "Components/Light.h"
 
 struct LIGHT_BUFFER
 {
@@ -19,12 +20,6 @@ struct LIGHT_BUFFER
     Vector2 Padding;
 };
 
-enum LightType
-{
-    kLightType_Point = 0,
-    kLightType_Spotlight = 1,
-    kLightType_Directional = 2
-};
 
 class LightingSystem : public ISystem
 {

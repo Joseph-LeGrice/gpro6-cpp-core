@@ -99,6 +99,12 @@
     <ClCompile Include="SystemManagement\SystemManager.cpp">
       <Filter>SystemManagement</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Light.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Color.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -209,19 +215,29 @@
     <ClInclude Include="SystemManagement\Systems\TimeSystem.h">
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="Graphics\Buffers\ConstantBufferInterface.h">
       <Filter>Graphics\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="AssetManagement\AssetManager.h">
       <Filter>AssetManagement</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\ComponentArray.h" />
     <ClInclude Include="SystemManagement\WindowManager.h">
       <Filter>SystemManagement</Filter>
     </ClInclude>
     <ClInclude Include="SystemManagement\SystemManager.h">
       <Filter>SystemManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Light.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Color.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManagement\SystemConfiguration.hpp">
+      <Filter>SystemManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\ComponentArray.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
