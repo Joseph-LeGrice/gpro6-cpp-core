@@ -11,16 +11,16 @@ typedef std::unordered_map<std::type_index, IndexList> IndexMap;
 struct Entity
 {
 	template<class T>
-	static void Entity::RegisterComponent(Entity& e, size_t index)
+	void RegisterComponent(size_t index)
 	{
-		e.m_componentIndexMap[typeid(T)].push_back(index);
+		m_componentIndexMap[typeid(T)].push_back(index);
 	}
 
 	template<typename T>
-	static IndexList Entity::GetIndicesForComponent(Entity& e)
+	IndexList GetIndicesForComponent()
 	{
 		std::type_index ti = typeid(T);
-		if (e.m_componentIndexMap.count(ti))
+		if (m_componentIndexMap.count(ti))
 		{
 			return m_componentIndexMap[ti];
 		}
