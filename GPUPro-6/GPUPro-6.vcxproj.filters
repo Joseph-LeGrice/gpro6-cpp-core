@@ -122,9 +122,6 @@
     <ClInclude Include="DataStructures\SceneGraph.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\PODArray.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
     <ClInclude Include="DataStructures\VertexData.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
@@ -236,8 +233,11 @@
     <ClInclude Include="SystemManagement\SystemConfiguration.hpp">
       <Filter>SystemManagement</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\ComponentArray.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="DataStructures\ComponentArray.hpp">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\PODArray.hpp">
+      <Filter>DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
