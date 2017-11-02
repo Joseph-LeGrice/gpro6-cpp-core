@@ -1,7 +1,7 @@
 #pragma once
 
 #include "D3D11.h"
-#include "DataStructures\PODArray.h"
+#include <vector>
 
 class IndexBuffer
 {

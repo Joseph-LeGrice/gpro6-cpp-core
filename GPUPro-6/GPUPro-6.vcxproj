@@ -235,10 +235,10 @@
     <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Entity.h" />
     <ClInclude Include="Components\Transform.h" />
-    <ClInclude Include="DataStructures\ComponentArray.h" />
+    <ClInclude Include="DataStructures\ComponentArray.hpp" />
     <ClInclude Include="DataStructures\Mesh.h" />
     <ClInclude Include="DataStructures\SceneGraph.h" />
-    <ClInclude Include="DataStructures\PODArray.h" />
+    <ClInclude Include="DataStructures\PODArray.hpp" />
     <ClInclude Include="DataStructures\Matrix3x3.h" />
     <ClInclude Include="DataStructures\Matrix4x4.h" />
     <ClInclude Include="DataStructures\Quaternion.h" />

@@ -4,7 +4,7 @@
 #include "Components/Transform.h"
 #include "Components/Entity.h"
 
-#include "DataStructures/ComponentArray.h"
+#include "DataStructures/ComponentArray.hpp"
 #include <vector>
 
 struct SceneGraph

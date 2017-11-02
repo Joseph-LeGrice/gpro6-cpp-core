@@ -4,7 +4,7 @@
 #include "SystemManagement/Systems/InputSystem.h"
 #include "SystemManagement/Systems/TimeSystem.h"
 #include "DataStructures/Quaternion.h"
-#include "DataStructures/ComponentArray.h"
+#include "DataStructures/ComponentArray.hpp"
 #include "DataStructures/SceneGraph.h"
 #include "Components/Transform.h"
 
