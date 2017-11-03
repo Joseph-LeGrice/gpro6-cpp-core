@@ -191,6 +191,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Entity.cpp" />
     <ClCompile Include="DataStructures\Color.cpp" />
     <ClCompile Include="Components\Camera.cpp" />
     <ClCompile Include="Components\Transform.cpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="DataStructures\Matrix4x4.cpp" />
     <ClCompile Include="DataStructures\Mesh.cpp" />
     <ClCompile Include="DataStructures\Quaternion.cpp" />
+    <ClCompile Include="DataStructures\Util\ComponentReferenceNode.cpp" />
     <ClCompile Include="DataStructures\Vector2.cpp" />
     <ClCompile Include="DataStructures\Vector3.cpp" />
     <ClCompile Include="DataStructures\Vector4.cpp" />
@@ -242,6 +244,7 @@
     <ClInclude Include="DataStructures\Matrix3x3.h" />
     <ClInclude Include="DataStructures\Matrix4x4.h" />
     <ClInclude Include="DataStructures\Quaternion.h" />
+    <ClInclude Include="DataStructures\Util\ComponentReferenceNode.h" />
     <ClInclude Include="DataStructures\Vector2.h" />
     <ClInclude Include="DataStructures\Vector3.h" />
     <ClInclude Include="DataStructures\Vector4.h" />

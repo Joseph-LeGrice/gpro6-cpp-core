@@ -8,7 +8,7 @@ struct Matrix4x4;
 struct Transform
 {
 	// TODO: Child / Parent functionality
-
+    int m_entityIndex;
 	Vector3 m_position;
 	Vector3 m_scale;
 	Quaternion m_rotation;

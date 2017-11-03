@@ -105,6 +105,12 @@
     <ClCompile Include="DataStructures\Color.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="DataStructures\Util\ComponentReferenceNode.cpp">
+      <Filter>DataStructures\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Entity.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -239,6 +245,9 @@
     <ClInclude Include="DataStructures\PODArray.hpp">
       <Filter>DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="DataStructures\Util\ComponentReferenceNode.h">
+      <Filter>DataStructures\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -276,6 +285,9 @@
     </Filter>
     <Filter Include="AssetManagement">
       <UniqueIdentifier>{0f100b31-8b51-4360-b4ff-bbce9c137a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Util">
+      <UniqueIdentifier>{28b573a7-11e8-46bb-acac-3d1deb605f8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
