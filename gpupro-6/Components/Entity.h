@@ -13,7 +13,7 @@ struct Entity
 	template<class T>
 	void AddComponent(size_t componentIndex)
 	{
-        if (m_currentNodeIndex < c_numberOfComponentTypesAllowed - 1)
+        if (m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
         {
             Insert(typeid(T), componentIndex, m_rootNode);
         }
@@ -35,7 +35,8 @@ struct Entity
 private:
     ComponentReferenceNode m_rootNode;
     ComponentReferenceNode m_nodePool[c_numberOfComponentTypesAllowed];
-    unsigned int m_currentNodeIndex = 0;
+    bool m_activeNodeIndexPool[c_numberOfComponentTypesAllowed];
+    unsigned int m_currentNumberOfNodesActive = 0;
     
     ComponentReferenceNode* GetNextNode();
     void ReturnNode(ComponentReferenceNode* node);

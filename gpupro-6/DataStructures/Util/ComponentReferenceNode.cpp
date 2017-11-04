@@ -67,6 +67,7 @@ bool RemoveIndex(ComponentReferenceNode& node, size_t index)
         node.m_componentIndices[indexOfIndex] = node.m_componentIndices[node.m_currentSize - 1];
         node.m_currentSize = node.m_currentSize - 1;
     }
+    return indexOfIndex > -1;
 }
 
 void DetermineHeight(ComponentReferenceNode& node)

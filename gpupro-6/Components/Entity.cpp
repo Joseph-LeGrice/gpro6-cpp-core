@@ -4,21 +4,34 @@
 
 ComponentReferenceNode* Entity::GetNextNode()
 {
-    if (m_currentNodeIndex < c_numberOfComponentTypesAllowed - 1)
+    if (m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
     {
-        int index = m_currentNodeIndex;
-        m_currentNodeIndex++;
-        return &m_nodePool[index];
+        for (size_t i = 0; i < c_numberOfComponentTypesAllowed; i++)
+        {
+            if (!m_activeNodeIndexPool[i])
+            {
+                m_activeNodeIndexPool[i] = true;
+                m_currentNumberOfNodesActive++;
+                return &m_nodePool[i];
+            }
+        }
     }
-    else
-    {
-        return nullptr;
-    }
+    return nullptr;
 }
 
 void Entity::ReturnNode(ComponentReferenceNode* node)
 {
+    int nodeIndex = -1;
+    for (size_t i = 0; i < c_numberOfComponentTypesAllowed; i++)
+    {
+        if (&m_nodePool[i] == node)
+        {
+            nodeIndex = static_cast<int>(i);
+        }
+    }
 
+    m_currentNumberOfNodesActive--;
+    m_activeNodeIndexPool[nodeIndex] = false;
 }
 
 ComponentReferenceNode* Entity::Insert(std::type_index ti, size_t i, ComponentReferenceNode* currentNode)
@@ -49,7 +62,6 @@ ComponentReferenceNode* Entity::Insert(std::type_index ti, size_t i, ComponentRe
         }
 
         return Rebalance(currentNode);
-
     }
 }
 

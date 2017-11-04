@@ -25,6 +25,6 @@ bool RemoveIndex(ComponentReferenceNode& node, size_t index);
 void DetermineHeight(ComponentReferenceNode& node);
 ComponentReferenceNode* RotateLeft(ComponentReferenceNode& node);
 ComponentReferenceNode* RotateRight(ComponentReferenceNode& node);
-ComponentReferenceNode* FindCorrectChild(ComponentReferenceNode* node);
+ComponentReferenceNode* DeleteNode(ComponentReferenceNode* node);
 ComponentReferenceNode* FindMax(ComponentReferenceNode* node); 
 ComponentReferenceNode* FindMin(ComponentReferenceNode* node);
