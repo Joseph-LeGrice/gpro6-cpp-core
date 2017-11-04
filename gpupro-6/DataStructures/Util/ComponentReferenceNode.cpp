@@ -1,6 +1,19 @@
 #include "stdafx.h"
 #include "ComponentReferenceNode.h"
 
+std::vector<size_t> GetIndices(ComponentReferenceNode* node)
+{
+    std::vector<size_t> result;
+    if (node != nullptr)
+    {
+        for (size_t i = 0; i < node->m_currentSize; i++)
+        {
+            result.push_back(node->m_componentIndices[i]);
+        }
+    }
+    return result;
+}
+
 int GetBalance(ComponentReferenceNode& node)
 {
     return RightHeight(node) - LeftHeight(node);
@@ -35,6 +48,25 @@ bool AddIndex(ComponentReferenceNode& node, size_t index)
         }
     }
     return false;
+}
+
+bool RemoveIndex(ComponentReferenceNode& node, size_t index)
+{
+    int indexOfIndex = -1;
+    for (int i = 0; i < node.m_currentSize; i++)
+    {
+        if (node.m_componentIndices[i] == index)
+        {
+            indexOfIndex = i;
+            break;
+        }
+    }
+
+    if (indexOfIndex > -1)
+    {
+        node.m_componentIndices[indexOfIndex] = node.m_componentIndices[node.m_currentSize - 1];
+        node.m_currentSize = node.m_currentSize - 1;
+    }
 }
 
 void DetermineHeight(ComponentReferenceNode& node)
@@ -79,4 +111,53 @@ ComponentReferenceNode* RotateRight(ComponentReferenceNode& node)
         return leftNode;
     }
     return nullptr;
+}
+
+ComponentReferenceNode* DeleteNode(ComponentReferenceNode* node)
+{
+    if (node->m_leftChild != nullptr && node->m_rightChild != nullptr)
+    {
+        ComponentReferenceNode* replacementNode = FindMin(node->m_rightChild);
+        replacementNode->m_leftChild = node->m_leftChild;
+        return replacementNode;
+    }
+    else
+    {
+        if (node->m_leftChild != nullptr)
+        {
+            return node->m_leftChild;
+        }
+        else if (node->m_rightChild != nullptr)
+        {
+            return node->m_rightChild;
+        }
+        else
+        {
+            return nullptr;
+        }
+    }
+}
+
+ComponentReferenceNode* FindMax(ComponentReferenceNode* node)
+{
+    if (node->m_rightChild != nullptr)
+    {
+        return FindMax(node->m_rightChild);
+    }
+    else
+    {
+        return node;
+    }
+}
+
+ComponentReferenceNode* FindMin(ComponentReferenceNode* node)
+{
+    if (node->m_leftChild != nullptr)
+    {
+        return FindMin(node->m_leftChild);
+    }
+    else
+    {
+        return node;
+    }
 }

@@ -1,5 +1,6 @@
 
 #include <typeindex>
+#include <vector>
 
 static const unsigned int c_maxComponentsOfSameType = 10;
 
@@ -15,10 +16,15 @@ struct ComponentReferenceNode
     int m_currentSize = 0;
 };
 
+std::vector<size_t> GetIndices(ComponentReferenceNode* node);
 int GetBalance(ComponentReferenceNode& node);
 int RightHeight(ComponentReferenceNode& node);
 int LeftHeight(ComponentReferenceNode& node);
 bool AddIndex(ComponentReferenceNode& node, size_t index);
+bool RemoveIndex(ComponentReferenceNode& node, size_t index);
 void DetermineHeight(ComponentReferenceNode& node);
 ComponentReferenceNode* RotateLeft(ComponentReferenceNode& node);
 ComponentReferenceNode* RotateRight(ComponentReferenceNode& node);
+ComponentReferenceNode* FindCorrectChild(ComponentReferenceNode* node);
+ComponentReferenceNode* FindMax(ComponentReferenceNode* node); 
+ComponentReferenceNode* FindMin(ComponentReferenceNode* node);
