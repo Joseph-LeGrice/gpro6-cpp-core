@@ -2,6 +2,8 @@
 
 #include "Components/Camera.h"
 #include "Components/Transform.h"
+#include "Components/MeshRenderer.h"
+#include "Components/Light.h"
 #include "Components/Entity.h"
 
 #include "DataStructures/ComponentArray.hpp"
@@ -10,9 +12,13 @@
 struct SceneGraph
 {
 	ComponentArray<Camera> m_cameras;
-	ComponentArray<Transform> m_transforms;
+
+    ComponentArray<TransformComponent> m_transforms;
+    //ComponentArray<CameraComponent> m_cameras;
+    //ComponentArray<LightComponent> m_transforms;
+    //ComponentArray<MeshRendererComponent> m_meshRenderers;
+    //ComponentArray<EntityComponent> m_entities;
 	
-    //ComponentArray<Entity> m_entities;
     std::vector<Entity> m_entities;
 
     SceneGraph() = default;

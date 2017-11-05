@@ -188,8 +188,8 @@ void GraphicsSystem::VariableTick()
 	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 	PER_OBJECT_BUFFER pob;
 
-    ComponentArray<Transform>& tca = m_sceneGraph->m_transforms;
-    Transform* const allTransforms = tca.GetArrayPointer();
+    ComponentArray<TransformComponent>& tca = m_sceneGraph->m_transforms;
+    TransformComponent* const allTransforms = tca.GetArrayPointer();
 	const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
 	const std::vector<Material*>& allMats = *AssetManager::Instance()->GetAllMaterials();
 
@@ -203,8 +203,8 @@ void GraphicsSystem::VariableTick()
 
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
-		Transform& cameraTransform = allTransforms[cam.m_transformIndex];
-		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform);
+        TransformComponent& cameraTransform = allTransforms[cam.m_transformIndex];
+		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform.m_data);
 		Matrix4x4 proj = cam.m_projectionMatrix;
 
 		for (size_t meshRenderIndex = 0; meshRenderIndex < m_renderMap.size(); ++meshRenderIndex)
@@ -217,8 +217,8 @@ void GraphicsSystem::VariableTick()
             Material& mat = *allMats[mrh.m_materialIndex];
             if (mat.BindIfValid())
             {
-			    Transform& modelTransform = allTransforms[mrh.m_transformIndex];
-			    Matrix4x4 model = TransformGetMatrix(modelTransform);
+			    TransformComponent& modelTransform = allTransforms[mrh.m_transformIndex];
+			    Matrix4x4 model = TransformGetMatrix(modelTransform.m_data);
 
 			    pob.ModelViewProjection = proj * view * model;
 			    pob.ModelView = view * model;
