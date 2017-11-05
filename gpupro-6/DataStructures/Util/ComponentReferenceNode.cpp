@@ -1,6 +1,19 @@
 #include "stdafx.h"
 #include "ComponentReferenceNode.h"
 
+void InitComponentReferenceNode(ComponentReferenceNode& node)
+{
+    node.m_componentType = NULL;
+    node.m_height = -1;
+    node.m_leftChild = nullptr;
+    node.m_rightChild = nullptr;
+    node.m_currentSize = 0;
+    for (size_t i = 0; i < c_maxComponentsOfSameType; i++)
+    {
+        node.m_componentIndices[i] = -1;
+    }
+}
+
 std::vector<size_t> GetIndices(ComponentReferenceNode* node)
 {
     std::vector<size_t> result;

@@ -248,6 +248,12 @@
     <ClInclude Include="DataStructures\Util\ComponentReferenceNode.h">
       <Filter>DataStructures\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Components\ComponentType.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\MeshRenderer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

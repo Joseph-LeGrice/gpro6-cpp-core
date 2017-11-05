@@ -8,6 +8,7 @@
 #include "Components/Transform.h"
 #include "Components/Entity.h"
 #include "DataStructures/Mesh.h"
+#include "Components/ComponentType.hpp"
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"
 #include "DataStructures/Quaternion.h"
@@ -117,14 +118,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//int meshIndex = MeshHelper::CreateQuad();
 		int meshIndex = MeshHelper::CreateSphereUV();
 		//int meshIndex = MeshHelper::CreateCube();
+        
+        TransformComponent meshTransform = CreateComponent<TransformComponent>();
+        meshTransform.m_data.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+		meshTransform.m_data.m_position = { 0.0f, 0.0f, 50.0f };
+		meshTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
+		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
 
-		Transform meshTransform = TransformNew();
-		meshTransform.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-		meshTransform.m_position = { 0.0f, 0.0f, 50.0f };
-		meshTransform.m_scale = { 1.0f, 1.0f, 1.0f };
-		meshTransform.m_scale = 10.0f * meshTransform.m_scale;
+        int meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
 
-		int meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
+        UINT16 type = GetComponentType<TransformComponent>();
 
 		MeshRenderHook mrh = { meshTransformIndex, meshIndex, materialIndex };
 		SystemManager::GetSystem<GraphicsSystem>()->RegisterMeshRenderHook(mrh);
@@ -132,9 +135,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransformIndex);
 
 		// Camera
-		Transform cameraTransform = TransformNew();
-		cameraTransform.m_position = { 0.0f, 0.0f, -10.0f };
-		int cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
+        TransformComponent cameraTransform = CreateComponent<TransformComponent>();
+		cameraTransform.m_data.m_position = { 0.0f, 0.0f, -10.0f };
+
+        int cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
 
 		Camera camera = CameraTestNew();
 		camera.m_transformIndex = cameraTransformIndex;

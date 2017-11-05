@@ -233,6 +233,8 @@
     <ClCompile Include="SystemManagement\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\ComponentType.hpp" />
+    <ClInclude Include="Components\MeshRenderer.h" />
     <ClInclude Include="DataStructures\Color.h" />
     <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Entity.h" />

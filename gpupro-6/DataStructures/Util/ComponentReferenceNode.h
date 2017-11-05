@@ -1,12 +1,14 @@
+#pragma once
 
-#include <typeindex>
 #include <vector>
+#include "Components/ComponentType.hpp"
+
 
 static const unsigned int c_maxComponentsOfSameType = 10;
 
 struct ComponentReferenceNode
 {
-    std::type_index m_componentType;
+    ComponentType m_componentType = NULL;
 
     int m_height = -1;
     ComponentReferenceNode* m_leftChild = nullptr;
@@ -16,6 +18,7 @@ struct ComponentReferenceNode
     int m_currentSize = 0;
 };
 
+void InitComponentReferenceNode(ComponentReferenceNode& node);
 std::vector<size_t> GetIndices(ComponentReferenceNode* node);
 int GetBalance(ComponentReferenceNode& node);
 int RightHeight(ComponentReferenceNode& node);

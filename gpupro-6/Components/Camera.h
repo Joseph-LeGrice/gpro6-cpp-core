@@ -1,6 +1,7 @@
 #pragma once
 
-#include "DataStructures\Matrix4x4.h"
+#include "Components/ComponentType.hpp"
+#include "DataStructures/Matrix4x4.h"
 
 struct Camera
 {

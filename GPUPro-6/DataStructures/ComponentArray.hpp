@@ -3,15 +3,6 @@
 #include <type_traits>
 #include "DataStructures/PODArray.hpp"
 
-// Culled by SFINAE if reserve does not exist or is not accessible
-//template <typename T>
-//constexpr auto has_entity_index(T& t) -> decltype(t.m_entityIndex, bool()) {
-//    return true;
-//}
-
-// Used as fallback when SFINAE culls the template method
-//constexpr bool has_entity_index(...) { return false; }
-
 template<typename T>
 struct ComponentArray
 {
