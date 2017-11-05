@@ -140,8 +140,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         int cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
 
-		Camera camera = CameraTestNew();
-		camera.m_transformIndex = cameraTransformIndex;
+        CameraComponent camera = CreateComponent<CameraComponent>();
+		camera.m_data.m_transformIndex = cameraTransformIndex;
 		int cameraIndex = sg.m_cameras.InsertComponent(camera);
 	}
 	catch(...)

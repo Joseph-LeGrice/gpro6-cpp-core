@@ -181,8 +181,8 @@ void GraphicsSystem::VariableTick()
 	m_myVertexBuffer->SetCurrentIfValid();
 	m_myIndexBuffer->SetCurrentIfValid();
 	
-	ComponentArray<Camera>& cca = m_sceneGraph->m_cameras;
-	Camera* allCameras = cca.GetArrayPointer();
+	ComponentArray<CameraComponent>& cca = m_sceneGraph->m_cameras;
+    CameraComponent* allCameras = cca.GetArrayPointer();
 	size_t allCamerasSize = cca.GetArraySize();
 
 	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
@@ -199,13 +199,13 @@ void GraphicsSystem::VariableTick()
 	UINT16 currentIndex = 0;
 	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
 	{
-		Camera& cam = allCameras[cameraIndex];
+        CameraComponent& cam = allCameras[cameraIndex];
 
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
-        TransformComponent& cameraTransform = allTransforms[cam.m_transformIndex];
+        TransformComponent& cameraTransform = allTransforms[cam.m_data.m_transformIndex];
 		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform.m_data);
-		Matrix4x4 proj = cam.m_projectionMatrix;
+		Matrix4x4 proj = cam.m_data.m_projectionMatrix;
 
 		for (size_t meshRenderIndex = 0; meshRenderIndex < m_renderMap.size(); ++meshRenderIndex)
 		{

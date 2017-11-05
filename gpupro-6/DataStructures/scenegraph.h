@@ -11,10 +11,9 @@
 
 struct SceneGraph
 {
-	ComponentArray<Camera> m_cameras;
-
     ComponentArray<TransformComponent> m_transforms;
-    //ComponentArray<CameraComponent> m_cameras;
+    ComponentArray<CameraComponent> m_cameras;
+
     //ComponentArray<LightComponent> m_transforms;
     //ComponentArray<MeshRendererComponent> m_meshRenderers;
     //ComponentArray<EntityComponent> m_entities;

@@ -4,28 +4,7 @@
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
 
-Camera CameraTestNew()
-{
-	float viewportWidth = SystemManager::GetSystem<GraphicsSystem>()->GetViewportWidth();
-	float viewportHeight = SystemManager::GetSystem<GraphicsSystem>()->GetViewportHeight();
-	float aspectRatio = viewportWidth / viewportHeight;
-
-	bool isOrtho = false;
-	if (isOrtho)
-	{
-		return CameraNewOrthographic(0.1f, 50.0f, aspectRatio);
-	}
-	else
-	{
-		float screenNear = 0.1f;
-		float screenDepth = 100.0f;
-		float fieldOfView = (float)D3DX_PI / 2.0f;
-
-		return CameraNewPerspective(fieldOfView, aspectRatio, screenNear, screenDepth);
-	}
-}
-
-Camera CameraNewOrthographic(float size, float depth, float aspectRatio)
+Camera CameraSetOrthographic(float size, float depth, float aspectRatio)
 {
 	Matrix4x4 result;
 	MatrixIdentity(result);
@@ -43,7 +22,7 @@ Camera CameraNewOrthographic(float size, float depth, float aspectRatio)
 	return c;
 }
 
-Camera CameraNewPerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
+Camera CameraSetPerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
 {
 	Matrix4x4 result;
 	MatrixIdentity(result);
