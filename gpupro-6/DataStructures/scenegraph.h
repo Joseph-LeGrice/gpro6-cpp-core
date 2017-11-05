@@ -16,7 +16,6 @@ struct SceneGraph
     ComponentArray<LightComponent> m_lights;
     ComponentArray<MeshRendererComponent> m_meshRenderers;
     ComponentArray<Entity> m_entities;
-    //std::vector<Entity> m_entities;
 
     SceneGraph() = default;
     ~SceneGraph() = default;
