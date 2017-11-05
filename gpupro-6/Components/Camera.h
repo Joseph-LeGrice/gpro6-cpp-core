@@ -30,4 +30,4 @@ struct InitCamera
     }
 };
 
-typedef ComponentRegistrationInfo<Camera, 1, InitCamera> CameraComponent;
+typedef ComponentRegistrationInfo<Camera, 2, InitCamera> CameraComponent;

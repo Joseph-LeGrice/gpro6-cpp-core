@@ -13,8 +13,8 @@ struct SceneGraph
 {
     ComponentArray<TransformComponent> m_transforms;
     ComponentArray<CameraComponent> m_cameras;
+    ComponentArray<LightComponent> m_lights;
 
-    //ComponentArray<LightComponent> m_transforms;
     //ComponentArray<MeshRendererComponent> m_meshRenderers;
     //ComponentArray<EntityComponent> m_entities;
 	

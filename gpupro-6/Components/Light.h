@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DataStructures/Color.h"
+#include "Components/ComponentType.hpp"
 
 enum LightType
 {
@@ -11,7 +12,6 @@ enum LightType
 
 struct Light
 {
-    int m_entityIndex;
     Color m_color;
     FLOAT m_range;
     FLOAT m_intensity;
@@ -19,8 +19,14 @@ struct Light
     LightType m_type;
 };
 
-struct LightTransformMap
+struct InitLight
 {
-    int m_transformIndex;
-    int m_lightIndex;
+    Light operator()()
+    {
+        Light newLight;
+        ZeroMemory(&newLight, sizeof(newLight));
+        return newLight;
+    }
 };
+
+typedef ComponentRegistrationInfo<Light, 3, InitLight> LightComponent;
