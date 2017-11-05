@@ -1,63 +1,45 @@
 #include "stdafx.h"
 #include "Entity.h"
 
-
-Entity::Entity()
+ComponentReferenceNode* GetNextNode(Entity& e)
 {
-    for (size_t i = 0; i < c_numberOfComponentTypesAllowed; i++)
-    {
-        m_activeNodeIndexPool[i] = false;
-        InitComponentReferenceNode(m_nodePool[i]);
-    }
-
-    m_currentNumberOfNodesActive = 0;
-    m_rootNode = GetNextNode();
-}
-
-Entity::~Entity()
-{
-
-}
-
-ComponentReferenceNode* Entity::GetNextNode()
-{
-    if (m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
+    if (e.m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
     {
         for (size_t i = 0; i < c_numberOfComponentTypesAllowed; i++)
         {
-            if (!m_activeNodeIndexPool[i])
+            if (!e.m_activeNodeIndexPool[i])
             {
-                m_activeNodeIndexPool[i] = true;
-                m_currentNumberOfNodesActive++;
+                e.m_activeNodeIndexPool[i] = true;
+                e.m_currentNumberOfNodesActive++;
 
-                InitComponentReferenceNode(m_nodePool[i]);
-                return &m_nodePool[i];
+                InitComponentReferenceNode(e.m_nodePool[i]);
+                return &e.m_nodePool[i];
             }
         }
     }
     return nullptr;
 }
 
-void Entity::ReturnNode(ComponentReferenceNode* node)
+void ReturnNode(Entity& e, ComponentReferenceNode* node)
 {
     int nodeIndex = -1;
     for (size_t i = 0; i < c_numberOfComponentTypesAllowed; i++)
     {
-        if (&m_nodePool[i] == node)
+        if (&e.m_nodePool[i] == node)
         {
             nodeIndex = static_cast<int>(i);
         }
     }
 
-    m_currentNumberOfNodesActive--;
-    m_activeNodeIndexPool[nodeIndex] = false;
+    e.m_currentNumberOfNodesActive--;
+    e.m_activeNodeIndexPool[nodeIndex] = false;
 }
 
-ComponentReferenceNode* Entity::Insert(ComponentType ct, size_t i, ComponentReferenceNode* currentNode)
+ComponentReferenceNode* Insert(Entity& e, ComponentType ct, size_t i, ComponentReferenceNode* currentNode)
 {
     if (currentNode == nullptr)
     {
-        ComponentReferenceNode* nextNode = GetNextNode();
+        ComponentReferenceNode* nextNode = GetNextNode(e);
         nextNode->m_height = 1;
         nextNode->m_componentType = ct;
         AddIndex(*nextNode, i);
@@ -73,18 +55,18 @@ ComponentReferenceNode* Entity::Insert(ComponentType ct, size_t i, ComponentRefe
         }
         else if (ct < currentNode->m_componentType)
         {
-            currentNode->m_leftChild = Insert(ct, i, currentNode->m_leftChild);
+            currentNode->m_leftChild = Insert(e, ct, i, currentNode->m_leftChild);
         }
         else if (ct > currentNode->m_componentType)
         {
-            currentNode->m_rightChild = Insert(ct, i, currentNode->m_rightChild);
+            currentNode->m_rightChild = Insert(e, ct, i, currentNode->m_rightChild);
         }
 
         return Rebalance(currentNode);
     }
 }
 
-ComponentReferenceNode* Entity::Find(ComponentType ct, ComponentReferenceNode* currentNode)
+ComponentReferenceNode* Find(ComponentType ct, ComponentReferenceNode* currentNode)
 {
     if (currentNode == nullptr)
     {
@@ -104,7 +86,7 @@ ComponentReferenceNode* Entity::Find(ComponentType ct, ComponentReferenceNode* c
     }
 }
 
-ComponentReferenceNode* Entity::Delete(ComponentType ct, size_t i, ComponentReferenceNode* currentNode)
+ComponentReferenceNode* Delete(Entity& e, ComponentType ct, size_t i, ComponentReferenceNode* currentNode)
 {
     if (currentNode == nullptr)
     {
@@ -120,7 +102,7 @@ ComponentReferenceNode* Entity::Delete(ComponentType ct, size_t i, ComponentRefe
         else
         {
             ComponentReferenceNode* newChild = DeleteNode(currentNode);
-            ReturnNode(currentNode);
+            ReturnNode(e, currentNode);
             return newChild;
         }
     }
@@ -128,7 +110,7 @@ ComponentReferenceNode* Entity::Delete(ComponentType ct, size_t i, ComponentRefe
     ComponentReferenceNode* newChild = nullptr;
     if (ct < currentNode->m_componentType)
     {
-        newChild = Delete(ct, i, currentNode->m_leftChild);
+        newChild = Delete(e, ct, i, currentNode->m_leftChild);
         if (newChild != nullptr)
         {
             currentNode->m_leftChild = newChild;
@@ -136,7 +118,7 @@ ComponentReferenceNode* Entity::Delete(ComponentType ct, size_t i, ComponentRefe
     }
     else if (ct > currentNode->m_componentType)
     {
-        newChild = Delete(ct, i, currentNode->m_rightChild); 
+        newChild = Delete(e, ct, i, currentNode->m_rightChild); 
         if (newChild != nullptr)
         {
             currentNode->m_rightChild = newChild;
@@ -153,7 +135,7 @@ ComponentReferenceNode* Entity::Delete(ComponentType ct, size_t i, ComponentRefe
     }
 }
 
-ComponentReferenceNode* Entity::Rebalance(ComponentReferenceNode* currentNode)
+ComponentReferenceNode* Rebalance(ComponentReferenceNode* currentNode)
 {
     ComponentReferenceNode& nodeRef = *currentNode;
     DetermineHeight(nodeRef);

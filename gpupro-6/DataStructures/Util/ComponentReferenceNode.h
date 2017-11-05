@@ -8,14 +8,14 @@ static const unsigned int c_maxComponentsOfSameType = 10;
 
 struct ComponentReferenceNode
 {
-    ComponentType m_componentType = NULL;
+    ComponentType m_componentType;
 
-    int m_height = -1;
-    ComponentReferenceNode* m_leftChild = nullptr;
-    ComponentReferenceNode* m_rightChild = nullptr;
+    int m_height;
+    ComponentReferenceNode* m_leftChild;
+    ComponentReferenceNode* m_rightChild;
 
     int m_componentIndices[c_maxComponentsOfSameType];
-    int m_currentSize = 0;
+    int m_currentSize;
 };
 
 void InitComponentReferenceNode(ComponentReferenceNode& node);
