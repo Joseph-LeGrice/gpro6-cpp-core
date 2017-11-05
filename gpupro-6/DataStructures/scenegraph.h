@@ -15,7 +15,7 @@ struct SceneGraph
     ComponentArray<CameraComponent> m_cameras;
     ComponentArray<LightComponent> m_lights;
     ComponentArray<MeshRendererComponent> m_meshRenderers;
-    ComponentArray<Entity> m_entities;
+    ComponentArray<EntityComponent> m_entities;
 
     SceneGraph() = default;
     ~SceneGraph() = default;

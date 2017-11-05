@@ -135,14 +135,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransformIndex);
 
 		// Camera
-        TransformComponent cameraTransform = CreateComponent<TransformComponent>();
-		cameraTransform.m_data.m_position = { 0.0f, 0.0f, -10.0f };
+        EntityComponent cameraEntity = CreateComponent<EntityComponent>();
+        int cameraEntityIndex = sg.m_entities.InsertComponent(cameraEntity);
 
+        TransformComponent cameraTransform = CreateComponent<TransformComponent>();
+        cameraTransform.m_entityIndex = cameraEntityIndex;
+		cameraTransform.m_data.m_position = { 0.0f, 0.0f, -10.0f };
         int cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
+        LinkComponent<TransformComponent>(cameraEntity.m_data, cameraTransformIndex);
 
         CameraComponent camera = CreateComponent<CameraComponent>();
-		camera.m_data.m_transformIndex = cameraTransformIndex;
-		int cameraIndex = sg.m_cameras.InsertComponent(camera);
+        camera.m_entityIndex = cameraEntityIndex;
+        int cameraIndex = sg.m_cameras.InsertComponent(camera);
+        LinkComponent<CameraComponent>(cameraEntity.m_data, cameraIndex);
+
 	}
 	catch(...)
 	{

@@ -16,9 +16,9 @@ struct Entity
 };
 
 template<class T>
-void AddComponent(Entity& e, size_t componentIndex)
+void LinkComponent(Entity& e, size_t componentIndex)
 {
-    if (m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
+    if (e.m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
     {
         Insert(e, GetComponentType<T>(), componentIndex, e.m_rootNode);
     }
@@ -29,6 +29,21 @@ void RemoveComponentIndex(Entity& e, size_t componentIndex)
 {
     Delete(e, GetComponentType<T>(), componentIndex, e.m_rootNode);
 }
+
+template<typename T>
+int GetComponentIndex(Entity& e)
+{
+    ComponentReferenceNode* nodeFound = Find(GetComponentType<T>(), e.m_rootNode);
+    if (nodeFound->m_currentSize > 0)
+    {
+        return nodeFound->m_componentIndices[0];
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 
 template<typename T>
 std::vector<int> GetComponentIndices(Entity& e)
@@ -58,6 +73,7 @@ struct InitEntity
 
         e.m_currentNumberOfNodesActive = 0;
         e.m_rootNode = GetNextNode(e);
+        return e;
     }
 };
 

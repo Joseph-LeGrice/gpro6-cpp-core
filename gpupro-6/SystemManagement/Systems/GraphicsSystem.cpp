@@ -181,6 +181,9 @@ void GraphicsSystem::VariableTick()
 	m_myVertexBuffer->SetCurrentIfValid();
 	m_myIndexBuffer->SetCurrentIfValid();
 	
+    ComponentArray<EntityComponent>& eca = m_sceneGraph->m_entities;
+    EntityComponent* allEntities = eca.GetArrayPointer();
+    
 	ComponentArray<CameraComponent>& cca = m_sceneGraph->m_cameras;
     CameraComponent* allCameras = cca.GetArrayPointer();
 	size_t allCamerasSize = cca.GetArraySize();
@@ -203,7 +206,10 @@ void GraphicsSystem::VariableTick()
 
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
-        TransformComponent& cameraTransform = allTransforms[cam.m_data.m_transformIndex];
+        EntityComponent cameraEntity = allEntities[cam.m_entityIndex];
+        int transformIndex = GetComponentIndex<TransformComponent>(cameraEntity.m_data);
+
+        TransformComponent& cameraTransform = allTransforms[transformIndex];
 		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform.m_data);
 		Matrix4x4 proj = cam.m_data.m_projectionMatrix;
 
