@@ -20,7 +20,11 @@ void LinkComponent(Entity& e, size_t componentIndex)
 {
     if (e.m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
     {
-        Insert(e, GetComponentType<T>(), componentIndex, e.m_rootNode);
+        ComponentReferenceNode* nodeInserted = Insert(e, GetComponentType<T>(), componentIndex, e.m_rootNode);
+        if (nodeInserted != nullptr && e.m_rootNode == nullptr)
+        {
+            e.m_rootNode = nodeInserted;
+        }
     }
 }
 
@@ -34,7 +38,7 @@ template<typename T>
 int GetComponentIndex(Entity& e)
 {
     ComponentReferenceNode* nodeFound = Find(GetComponentType<T>(), e.m_rootNode);
-    if (nodeFound->m_currentSize > 0)
+    if (nodeFound != nullptr && nodeFound->m_currentSize > 0)
     {
         return nodeFound->m_componentIndices[0];
     }
@@ -72,7 +76,7 @@ struct InitEntity
         }
 
         e.m_currentNumberOfNodesActive = 0;
-        e.m_rootNode = GetNextNode(e);
+        e.m_rootNode = nullptr;
         return e;
     }
 };

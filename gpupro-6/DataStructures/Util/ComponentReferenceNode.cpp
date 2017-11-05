@@ -4,7 +4,7 @@
 void InitComponentReferenceNode(ComponentReferenceNode& node)
 {
     node.m_componentType = NULL;
-    node.m_height = -1;
+    node.m_height = 0;
     node.m_leftChild = nullptr;
     node.m_rightChild = nullptr;
     node.m_currentSize = 0;

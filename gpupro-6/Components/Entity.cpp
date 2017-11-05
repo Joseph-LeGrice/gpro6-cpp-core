@@ -40,7 +40,7 @@ ComponentReferenceNode* Insert(Entity& e, ComponentType ct, size_t i, ComponentR
     if (currentNode == nullptr)
     {
         ComponentReferenceNode* nextNode = GetNextNode(e);
-        nextNode->m_height = 1;
+        nextNode->m_height = 0;
         nextNode->m_componentType = ct;
         AddIndex(*nextNode, i);
 
