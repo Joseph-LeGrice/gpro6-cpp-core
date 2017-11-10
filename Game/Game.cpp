@@ -112,42 +112,35 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         mf.BindBuffer();
         //------------------------------------------------------------------------------------
 		
-        SceneGraph& sg = graphicsSystem.GetSceneGraph();
-
 		// Mesh Set up
 		//int meshIndex = MeshHelper::CreateQuad();
 		int meshIndex = MeshHelper::CreateSphereUV();
 		//int meshIndex = MeshHelper::CreateCube();
         
-        TransformComponent meshTransform = CreateComponent<TransformComponent>();
+        TransformComponent& meshTransform = GetSceneGraph().CreateComponent<TransformComponent>();
         meshTransform.m_data.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		meshTransform.m_data.m_position = { 0.0f, 0.0f, 50.0f };
 		meshTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
 		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
 
-        int meshTransformIndex = sg.m_transforms.InsertComponent(meshTransform);
-
         UINT16 type = GetComponentType<TransformComponent>();
 
-		MeshRenderHook mrh = { meshTransformIndex, meshIndex, materialIndex };
+		MeshRenderHook mrh = { meshTransform.m_componentIndex, meshIndex, materialIndex };
 		SystemManager::GetSystem<GraphicsSystem>()->RegisterMeshRenderHook(mrh);
 
-        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransformIndex);
+        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransform.m_componentIndex);
 
 		// Camera
-        EntityComponent cameraEntity = CreateComponent<EntityComponent>();
-        int cameraEntityIndex = sg.m_entities.InsertComponent(cameraEntity);
+        EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
 
-        TransformComponent cameraTransform = CreateComponent<TransformComponent>();
-        cameraTransform.m_entityIndex = cameraEntityIndex;
-		cameraTransform.m_data.m_position = { 0.0f, 0.0f, -10.0f };
-        int cameraTransformIndex = sg.m_transforms.InsertComponent(cameraTransform);
-        LinkComponent<TransformComponent>(cameraEntity.m_data, cameraTransformIndex);
+        TransformComponent& cameraTransform = GetSceneGraph().CreateComponent<TransformComponent>();
+        cameraTransform.m_entityIndex = cameraTransform.m_componentIndex;
+        cameraTransform.m_data.m_position = { 0.0f, 0.0f, -10.0f };
+        LinkComponent<TransformComponent>(cameraEntity.m_data, cameraTransform.m_componentIndex);
 
-        CameraComponent camera = CreateComponent<CameraComponent>();
-        camera.m_entityIndex = cameraEntityIndex;
-        int cameraIndex = sg.m_cameras.InsertComponent(camera);
-        LinkComponent<CameraComponent>(cameraEntity.m_data, cameraIndex);
+        CameraComponent& camera = GetSceneGraph().CreateComponent<CameraComponent>();
+        camera.m_entityIndex = cameraEntity.m_componentIndex;
+        LinkComponent<CameraComponent>(cameraEntity.m_data, camera.m_componentIndex);
 
 	}
 	catch(...)

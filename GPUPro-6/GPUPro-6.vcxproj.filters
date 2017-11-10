@@ -111,6 +111,9 @@
     <ClCompile Include="Components\Entity.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="DataStructures\SceneGraph.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />

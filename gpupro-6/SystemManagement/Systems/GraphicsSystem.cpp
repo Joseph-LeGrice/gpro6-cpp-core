@@ -20,7 +20,6 @@ GraphicsSystem::GraphicsSystem()
 	m_device = nullptr;
 	m_deviceContext = nullptr;
     m_constantBuffers = nullptr;
-    m_sceneGraph = new SceneGraph();
 }
 
 GraphicsSystem::~GraphicsSystem()
@@ -34,7 +33,6 @@ GraphicsSystem::~GraphicsSystem()
 	SAFE_DELETE(m_myVertexBuffer);
 	SAFE_DELETE(m_myIndexBuffer);
     SAFE_DELETE(m_constantBuffers);
-    SAFE_DELETE(m_sceneGraph);
 }
 
 
@@ -125,11 +123,6 @@ ConstantBufferInterface& GraphicsSystem::GetConstantBufferInterface()
     return *m_constantBuffers;
 }
 
-SceneGraph& GraphicsSystem::GetSceneGraph()
-{
-    return *m_sceneGraph;
-}
-
 float GraphicsSystem::GetViewportWidth()
 {
 	return m_viewportWidth;
@@ -181,19 +174,13 @@ void GraphicsSystem::VariableTick()
 	m_myVertexBuffer->SetCurrentIfValid();
 	m_myIndexBuffer->SetCurrentIfValid();
 	
-    ComponentArray<EntityComponent>& eca = m_sceneGraph->m_entities;
-    EntityComponent* allEntities = eca.GetArrayPointer();
-    
-	ComponentArray<CameraComponent>& cca = m_sceneGraph->m_cameras;
+	ComponentArray<CameraComponent>& cca = GetSceneGraph().GetComponentArray<CameraComponent>();
     CameraComponent* allCameras = cca.GetArrayPointer();
 	size_t allCamerasSize = cca.GetArraySize();
 
 	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-	PER_OBJECT_BUFFER pob;
 
-    ComponentArray<TransformComponent>& tca = m_sceneGraph->m_transforms;
-    TransformComponent* const allTransforms = tca.GetArrayPointer();
-	const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
+    const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
 	const std::vector<Material*>& allMats = *AssetManager::Instance()->GetAllMaterials();
 
 	PerObjectBuffer& pub = m_constantBuffers->GetPerObjectBuffer();
@@ -206,10 +193,10 @@ void GraphicsSystem::VariableTick()
 
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
-        EntityComponent cameraEntity = allEntities[cam.m_entityIndex];
+        EntityComponent& cameraEntity = *GetSceneGraph().GetComponent<EntityComponent>(cam.m_entityIndex);
         int transformIndex = GetComponentIndex<TransformComponent>(cameraEntity.m_data);
+        TransformComponent& cameraTransform = *GetSceneGraph().GetComponent<TransformComponent>(transformIndex);
 
-        TransformComponent& cameraTransform = allTransforms[transformIndex];
 		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform.m_data);
 		Matrix4x4 proj = cam.m_data.m_projectionMatrix;
 
@@ -223,10 +210,11 @@ void GraphicsSystem::VariableTick()
             Material& mat = *allMats[mrh.m_materialIndex];
             if (mat.BindIfValid())
             {
-			    TransformComponent& modelTransform = allTransforms[mrh.m_transformIndex];
+			    TransformComponent& modelTransform = *GetSceneGraph().GetComponent<TransformComponent>(mrh.m_transformIndex);
 			    Matrix4x4 model = TransformGetMatrix(modelTransform.m_data);
 
-			    pob.ModelViewProjection = proj * view * model;
+                PER_OBJECT_BUFFER pob;
+                pob.ModelViewProjection = proj * view * model;
 			    pob.ModelView = view * model;
 			    pub.UpdateBuffer(pob);
 

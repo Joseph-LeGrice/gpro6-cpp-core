@@ -199,6 +199,7 @@
     <ClCompile Include="DataStructures\Matrix4x4.cpp" />
     <ClCompile Include="DataStructures\Mesh.cpp" />
     <ClCompile Include="DataStructures\Quaternion.cpp" />
+    <ClCompile Include="DataStructures\SceneGraph.cpp" />
     <ClCompile Include="DataStructures\Util\ComponentReferenceNode.cpp" />
     <ClCompile Include="DataStructures\Vector2.cpp" />
     <ClCompile Include="DataStructures\Vector3.cpp" />

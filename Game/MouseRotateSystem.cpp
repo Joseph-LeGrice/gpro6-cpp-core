@@ -3,8 +3,9 @@
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/InputSystem.h"
 #include "SystemManagement/Systems/TimeSystem.h"
-#include "DataStructures/Quaternion.h"
 #include "DataStructures/ComponentArray.hpp"
+#include "DataStructures/SceneGraph.h"
+#include "DataStructures/Quaternion.h"
 #include "DataStructures/SceneGraph.h"
 #include "Components/Transform.h"
 
@@ -28,7 +29,7 @@ void MouseRotateSystem::VariableTick()
 {
 	if (m_hasIndex)
 	{
-		ComponentArray<TransformComponent>& tca = SystemManager::GetSystem<GraphicsSystem>()->GetSceneGraph().m_transforms;
+		ComponentArray<TransformComponent>& tca = GetSceneGraph().GetComponentArray<TransformComponent>();
         TransformComponent* const allTransforms = tca.GetArrayPointer();
 		const MouseInput& mi = SystemManager::GetSystem<InputSystem>()->GetMouse();
 		const KeyboardInput& ki = SystemManager::GetSystem<InputSystem>()->GetKeyboard();

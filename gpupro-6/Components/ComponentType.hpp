@@ -8,6 +8,7 @@ struct ComponentRegistrationInfo
 {
     static const UINT16 sc_componentId = id;
     InitFunctor s_initFunctor;
+    int m_componentIndex;
     int m_entityIndex;
     T m_data;
 };
@@ -15,6 +16,7 @@ struct ComponentRegistrationInfo
 template<class T, UINT16 id, class InitFunctor>
 void InitializeComponentRegistrationInfo(ComponentRegistrationInfo<T, id, InitFunctor>& cri)
 {
+    cri.m_componentIndex = -1;
     cri.m_entityIndex = -1;
 }
 
@@ -29,14 +31,4 @@ UINT16 GetComponentType()
 {
     static_assert(is_registered<T>::value, "T is not registered component type");
     return T::sc_componentId;
-}
-
-template<class T>
-T CreateComponent()
-{
-    static_assert(is_registered<T>::value, "T is not registered component type");
-    T newComponent;
-    newComponent.m_entityIndex = -1;
-    newComponent.m_data = newComponent.s_initFunctor();
-    return newComponent;
 }
