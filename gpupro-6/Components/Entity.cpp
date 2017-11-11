@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Entity.h"
 
-ComponentReferenceNode* GetNextNode(Entity& e)
+ComponentReferenceNode* EntityInternal::GetNextNode(Entity& e)
 {
     if (e.m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
     {
@@ -20,7 +20,7 @@ ComponentReferenceNode* GetNextNode(Entity& e)
     return nullptr;
 }
 
-void ReturnNode(Entity& e, ComponentReferenceNode* node)
+void EntityInternal::ReturnNode(Entity& e, ComponentReferenceNode* node)
 {
     int nodeIndex = -1;
     for (size_t i = 0; i < c_numberOfComponentTypesAllowed; i++)
@@ -35,7 +35,7 @@ void ReturnNode(Entity& e, ComponentReferenceNode* node)
     e.m_activeNodeIndexPool[nodeIndex] = false;
 }
 
-ComponentReferenceNode* Insert(Entity& e, ComponentType ct, size_t i, ComponentReferenceNode* currentNode)
+ComponentReferenceNode* EntityInternal::Insert(Entity& e, ComponentType ct, size_t i, ComponentReferenceNode* currentNode)
 {
     if (currentNode == nullptr)
     {
@@ -66,7 +66,7 @@ ComponentReferenceNode* Insert(Entity& e, ComponentType ct, size_t i, ComponentR
     }
 }
 
-ComponentReferenceNode* Find(ComponentType ct, ComponentReferenceNode* currentNode)
+ComponentReferenceNode* EntityInternal::Find(ComponentType ct, ComponentReferenceNode* currentNode)
 {
     if (currentNode == nullptr)
     {
@@ -86,7 +86,7 @@ ComponentReferenceNode* Find(ComponentType ct, ComponentReferenceNode* currentNo
     }
 }
 
-ComponentReferenceNode* Delete(Entity& e, ComponentType ct, size_t i, ComponentReferenceNode* currentNode)
+ComponentReferenceNode* EntityInternal::Delete(Entity& e, ComponentType ct, size_t i, ComponentReferenceNode* currentNode)
 {
     if (currentNode == nullptr)
     {
@@ -135,7 +135,7 @@ ComponentReferenceNode* Delete(Entity& e, ComponentType ct, size_t i, ComponentR
     }
 }
 
-ComponentReferenceNode* Rebalance(ComponentReferenceNode* currentNode)
+ComponentReferenceNode* EntityInternal::Rebalance(ComponentReferenceNode* currentNode)
 {
     ComponentReferenceNode& nodeRef = *currentNode;
     DetermineHeight(nodeRef);

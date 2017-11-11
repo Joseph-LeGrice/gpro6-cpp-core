@@ -8,6 +8,7 @@
 #include "Components/Transform.h"
 #include "Components/Entity.h"
 #include "DataStructures/Mesh.h"
+#include "Components/Util/EntityUtil.hpp"
 #include "Components/ComponentType.hpp"
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"
@@ -105,27 +106,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Ball Object
 		EntityComponent& meshEntity = GetSceneGraph().CreateComponent<EntityComponent>();
 
-        TransformComponent& meshTransform = GetSceneGraph().CreateComponent<TransformComponent>();
+        TransformComponent& meshTransform = EntityUtil::AddComponent<TransformComponent>(meshEntity);
         meshTransform.m_data.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		meshTransform.m_data.m_position = { 0.0f, 0.0f, 50.0f };
 		meshTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
 		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
-        LinkComponent<TransformComponent>(meshEntity, meshTransform);
 
-        MeshRendererComponent& meshRenderer = GetSceneGraph().CreateComponent<MeshRendererComponent>();
+        MeshRendererComponent& meshRenderer = EntityUtil::AddComponent<MeshRendererComponent>(meshEntity);
         meshRenderer.m_data.m_meshIndex = MeshHelper::CreateSphereUV();
         meshRenderer.m_data.m_materialIndex = materialIndex;
-		LinkComponent<MeshRendererComponent>(meshEntity, meshRenderer);
 
         // Camera
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
 
-        TransformComponent& cameraTransform = GetSceneGraph().CreateComponent<TransformComponent>();
+        TransformComponent& cameraTransform = EntityUtil::AddComponent<TransformComponent>(cameraEntity);
         cameraTransform.m_data.m_position = { 0.0f, 0.0f, -10.0f };
-        LinkComponent<TransformComponent>(cameraEntity, cameraTransform);
 
-        CameraComponent& cameraComponent = GetSceneGraph().CreateComponent<CameraComponent>();
-        LinkComponent<CameraComponent>(cameraEntity, cameraComponent);
+        CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
 
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem

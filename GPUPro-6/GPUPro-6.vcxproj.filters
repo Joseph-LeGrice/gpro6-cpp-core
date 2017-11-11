@@ -257,6 +257,9 @@
     <ClInclude Include="Components\MeshRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Components\Util\EntityUtil.hpp">
+      <Filter>Components\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -297,6 +300,9 @@
     </Filter>
     <Filter Include="DataStructures\Util">
       <UniqueIdentifier>{28b573a7-11e8-46bb-acac-3d1deb605f8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Util">
+      <UniqueIdentifier>{9eb398d9-b6cd-4122-a12b-6349f130c961}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AssetManagement/AssetManager.h"
 #include "Graphics/Material.h"
+#include "Components/Util/EntityUtil.hpp"
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"
 #include "SystemManagement/SystemManager.h"
@@ -175,10 +176,6 @@ void GraphicsSystem::VariableTick()
 	m_myVertexBuffer->SetCurrentIfValid();
 	m_myIndexBuffer->SetCurrentIfValid();
 	
-	ComponentArray<CameraComponent>& cca = GetSceneGraph().GetComponentArray<CameraComponent>();
-    CameraComponent* allCameras = cca.GetArrayPointer();
-	size_t allCamerasSize = cca.GetArraySize();
-
 	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 
     const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
@@ -188,15 +185,15 @@ void GraphicsSystem::VariableTick()
 	pub.BindBuffer();
 
 	UINT16 currentIndex = 0;
+    size_t allCamerasSize = GetSceneGraph().GetComponentArray<CameraComponent>().GetArraySize();
 	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
 	{
-        CameraComponent& cam = allCameras[cameraIndex];
+        CameraComponent& cam = *GetSceneGraph().GetComponent<CameraComponent>(cameraIndex);
 
 		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
         EntityComponent& cameraEntity = *GetSceneGraph().GetComponent<EntityComponent>(cam.m_entityIndex);
-        int cameraTransformIndex = GetComponentIndex<TransformComponent>(cameraEntity);
-        TransformComponent& cameraTransform = *GetSceneGraph().GetComponent<TransformComponent>(cameraTransformIndex);
+        TransformComponent& cameraTransform = *EntityUtil::GetComponent<TransformComponent>(cameraEntity);
 
 		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform.m_data);
 		Matrix4x4 proj = cam.m_data.m_projectionMatrix;
@@ -205,19 +202,18 @@ void GraphicsSystem::VariableTick()
 		for (size_t i = 0; i < meshRenderers.GetArraySize(); ++i)
 		{
             MeshRendererComponent mrc = meshRenderers.m_components[i];
-            EntityComponent* ec = GetSceneGraph().GetComponent<EntityComponent>(mrc.m_entityIndex);
+            EntityComponent& meshEntity = *GetSceneGraph().GetComponent<EntityComponent>(mrc.m_entityIndex);
 
             int meshIndex = mrc.m_data.m_meshIndex;
             int materialIndex = mrc.m_data.m_materialIndex;
-            int meshTransformIndex = GetComponentIndex<TransformComponent>(*ec);
-			
+            
 			Mesh& mesh = *allMeshes[meshIndex];
 			UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
 
             Material& mat = *allMats[materialIndex];
             if (mat.BindIfValid())
             {
-			    TransformComponent& modelTransform = *GetSceneGraph().GetComponent<TransformComponent>(meshTransformIndex);
+			    TransformComponent& modelTransform = *EntityUtil::GetComponent<TransformComponent>(meshEntity);
 			    Matrix4x4 model = TransformGetMatrix(modelTransform.m_data);
 
                 PER_OBJECT_BUFFER pob;
