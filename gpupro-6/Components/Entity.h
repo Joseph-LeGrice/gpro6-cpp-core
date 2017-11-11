@@ -15,47 +15,6 @@ struct Entity
     unsigned int m_currentNumberOfNodesActive;
 };
 
-template<class T>
-void LinkComponent(Entity& e, size_t componentIndex)
-{
-    if (e.m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
-    {
-        ComponentReferenceNode* nodeInserted = Insert(e, GetComponentType<T>(), componentIndex, e.m_rootNode);
-        if (nodeInserted != nullptr && e.m_rootNode == nullptr)
-        {
-            e.m_rootNode = nodeInserted;
-        }
-    }
-}
-
-template<class T>
-void RemoveComponentIndex(Entity& e, size_t componentIndex)
-{
-    Delete(e, GetComponentType<T>(), componentIndex, e.m_rootNode);
-}
-
-template<typename T>
-int GetComponentIndex(Entity& e)
-{
-    ComponentReferenceNode* nodeFound = Find(GetComponentType<T>(), e.m_rootNode);
-    if (nodeFound != nullptr && nodeFound->m_currentSize > 0)
-    {
-        return nodeFound->m_componentIndices[0];
-    }
-    else
-    {
-        return -1;
-    }
-}
-
-
-template<typename T>
-std::vector<int> GetComponentIndices(Entity& e)
-{
-    ComponentReferenceNode* nodeFound = Find(GetComponentType<T>(), e.m_rootNode);
-    return GetIndices(nodeFound);
-}
-
 ComponentReferenceNode* GetNextNode(Entity& e);
 void ReturnNode(Entity& e, ComponentReferenceNode* node);
 
@@ -82,3 +41,46 @@ struct InitEntity
 };
 
 typedef ComponentRegistrationInfo<Entity, 5, InitEntity> EntityComponent;
+
+template<class T>
+void LinkComponent(EntityComponent& ec, T& component)
+{
+    if (ec.m_data.m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
+    {
+        ComponentReferenceNode* nodeInserted = Insert(ec.m_data, GetComponentType<T>(), component.m_componentIndex, ec.m_data.m_rootNode);
+        component.m_entityIndex = ec.m_componentIndex;
+
+        if (nodeInserted != nullptr && ec.m_data.m_rootNode == nullptr)
+        {
+            ec.m_data.m_rootNode = nodeInserted;
+        }
+    }
+}
+
+template<class T>
+void UnlinkComponent(EntityComponent& ec, T& component)
+{
+    Delete(ec.m_data, GetComponentType<T>(), component.m_componentIndex, ec.m_data.m_rootNode);
+    component.m_entityIndex = -1;
+}
+
+template<typename T>
+int GetComponentIndex(EntityComponent& ec)
+{
+    ComponentReferenceNode* nodeFound = Find(GetComponentType<T>(), ec.m_data.m_rootNode);
+    if (nodeFound != nullptr && nodeFound->m_currentSize > 0)
+    {
+        return nodeFound->m_componentIndices[0];
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+template<typename T>
+std::vector<int> GetComponentIndices(EntityComponent& ec)
+{
+    ComponentReferenceNode* nodeFound = Find(GetComponentType<T>(), ec.m_data.m_rootNode);
+    return GetIndices(nodeFound);
+}

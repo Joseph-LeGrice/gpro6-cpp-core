@@ -17,19 +17,13 @@ class IndexBuffer;
 class ConstantBufferInterface;
 struct Camera;
 
-struct MeshRenderHook
-{
-	int m_transformIndex;
-	int m_meshIndex;
-	int m_materialIndex;
-};
-
 class GraphicsSystem : public ISystem
 {
 public:
 	ID3D11Device* GetGraphicsDevice();
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
     ConstantBufferInterface& GetConstantBufferInterface();
+    void SetDirty();
 
     GraphicsSystem();
     GraphicsSystem(const GraphicsSystem&) = delete;
@@ -40,8 +34,6 @@ public:
 
 	float GetViewportWidth();
 	float GetViewportHeight();
-
-	void RegisterMeshRenderHook(MeshRenderHook& mrh);
 
 private:
 	ID3D11Device* m_device;
@@ -54,7 +46,6 @@ private:
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;
     ConstantBufferInterface* m_constantBuffers;
-    std::vector<MeshRenderHook> m_renderMap;
 
 	float m_viewportWidth, m_viewportHeight;
 	

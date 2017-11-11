@@ -51,19 +51,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             MouseRotateSystem
         >();
         
-        GraphicsSystem& graphicsSystem = *SystemManager::GetSystem<GraphicsSystem>();
-
 		int materialIndex = Material::Create();
 		Material& simpleQuadMat = *mms.GetMaterial(materialIndex);
 
-        /*
-		Shader* simpleTexturedQuadShader = Shader::CreateNew();
-		simpleTexturedQuadShader->InitVertexShader(L"SimpleTexturedQuad.shader", "VShader");
-		simpleTexturedQuadShader->InitPixelShader(L"SimpleTexturedQuad.shader", "PShader");
-        
-        simpleQuadMat.SetShader(simpleTexturedQuadShader, 9, 1);
-        */
-        
 		Shader* materialShader = Shader::CreateNew();
 		materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
@@ -107,41 +97,40 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //mat.SpecularScale;
         //mat.AlphaThreshold;
         MATERIAL_BUFFER_CONTAINER buf = { mat };
-        MaterialBuffer& mf = graphicsSystem.GetConstantBufferInterface().GetMaterialBuffer();
+        MaterialBuffer& mf = SystemManager::GetSystem<GraphicsSystem>()->GetConstantBufferInterface().GetMaterialBuffer();
         mf.UpdateBuffer(buf);
         mf.BindBuffer();
         //------------------------------------------------------------------------------------
 		
-		// Mesh Set up
-		//int meshIndex = MeshHelper::CreateQuad();
-		int meshIndex = MeshHelper::CreateSphereUV();
-		//int meshIndex = MeshHelper::CreateCube();
-        
+		// Ball Object
+		EntityComponent& meshEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+
         TransformComponent& meshTransform = GetSceneGraph().CreateComponent<TransformComponent>();
         meshTransform.m_data.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		meshTransform.m_data.m_position = { 0.0f, 0.0f, 50.0f };
 		meshTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
 		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
+        LinkComponent<TransformComponent>(meshEntity, meshTransform);
 
-        UINT16 type = GetComponentType<TransformComponent>();
+        MeshRendererComponent& meshRenderer = GetSceneGraph().CreateComponent<MeshRendererComponent>();
+        meshRenderer.m_data.m_meshIndex = MeshHelper::CreateSphereUV();
+        meshRenderer.m_data.m_materialIndex = materialIndex;
+		LinkComponent<MeshRendererComponent>(meshEntity, meshRenderer);
 
-		MeshRenderHook mrh = { meshTransform.m_componentIndex, meshIndex, materialIndex };
-		SystemManager::GetSystem<GraphicsSystem>()->RegisterMeshRenderHook(mrh);
-
-        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransform.m_componentIndex);
-
-		// Camera
+        // Camera
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
 
         TransformComponent& cameraTransform = GetSceneGraph().CreateComponent<TransformComponent>();
-        cameraTransform.m_entityIndex = cameraTransform.m_componentIndex;
         cameraTransform.m_data.m_position = { 0.0f, 0.0f, -10.0f };
-        LinkComponent<TransformComponent>(cameraEntity.m_data, cameraTransform.m_componentIndex);
+        LinkComponent<TransformComponent>(cameraEntity, cameraTransform);
 
-        CameraComponent& camera = GetSceneGraph().CreateComponent<CameraComponent>();
-        camera.m_entityIndex = cameraEntity.m_componentIndex;
-        LinkComponent<CameraComponent>(cameraEntity.m_data, camera.m_componentIndex);
+        CameraComponent& cameraComponent = GetSceneGraph().CreateComponent<CameraComponent>();
+        LinkComponent<CameraComponent>(cameraEntity, cameraComponent);
 
+        // Tell a couple of systems to do things
+        // TODO: Remove SetDirty() from GraphicsSystem
+        SystemManager::GetSystem<GraphicsSystem>()->SetDirty();
+        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransform.m_componentIndex);
 	}
 	catch(...)
 	{
