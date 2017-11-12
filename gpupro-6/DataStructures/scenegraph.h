@@ -14,7 +14,8 @@ template<typename... Types>
 struct SceneGraphImpl
 {
     static_assert(is_registered_typelist<Types...>::value, "Type list contains a non ComponentRegistrationInfo instantiation.");
-
+    static_assert(does_not_collide<Types...>::value, "A component in the type list has a type id collision");
+    
     std::tuple<ComponentArray<Types>...> m_componentArrays;
  
     template<class T>

@@ -47,6 +47,23 @@ struct is_registered_typelist<ComponentRegistrationInfo<X, Y, InitFunctor>, T...
     static constexpr bool value = is_registered_typelist<T...>::value;
 };
 
+// does_not_collide: checks if given list of ComponentRegistrationInfo contain unique Component ID's
+template<class X, class... T>
+struct does_not_collide
+{
+    static_assert(is_registered<X>::value, "T is not registered component type");
+    static constexpr UINT16 id = X::sc_componentId;
+    static constexpr bool value = id != does_not_collide<T...>::id && does_not_collide<T...>::value;
+};
+
+template<class X>
+struct does_not_collide<X>
+{
+    static_assert(is_registered<X>::value, "T is not registered component type");
+    static constexpr UINT16 id = X::sc_componentId;
+    static constexpr bool value = true;
+};
+
 
 template<class T>
 UINT16 GetComponentType()
