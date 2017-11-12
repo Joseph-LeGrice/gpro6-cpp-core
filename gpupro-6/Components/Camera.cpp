@@ -4,7 +4,7 @@
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
 
-Camera CameraSetOrthographic(float size, float depth, float aspectRatio)
+Camera Camera::CreateOrthographic(float size, float depth, float aspectRatio)
 {
 	Matrix4x4 result;
 	MatrixIdentity(result);
@@ -22,7 +22,7 @@ Camera CameraSetOrthographic(float size, float depth, float aspectRatio)
 	return c;
 }
 
-Camera CameraSetPerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
+Camera Camera::CreatePerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
 {
 	Matrix4x4 result;
 	MatrixIdentity(result);

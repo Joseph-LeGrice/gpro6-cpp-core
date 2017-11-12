@@ -9,15 +9,18 @@ struct MeshRenderer
     int m_materialIndex;
 };
 
-struct InitMeshRenderer
+namespace MeshRendererInternal
 {
-    MeshRenderer operator()()
+    struct InitMeshRenderer
     {
-        MeshRenderer mr;
-        mr.m_meshIndex = -1;
-        mr.m_materialIndex = -1;
-        return mr;
-    }
-};
+        MeshRenderer operator()()
+        {
+            MeshRenderer mr;
+            mr.m_meshIndex = -1;
+            mr.m_materialIndex = -1;
+            return mr;
+        }
+    };
+}
 
-typedef ComponentRegistrationInfo<MeshRenderer, 4, InitMeshRenderer> MeshRendererComponent;
+typedef ComponentRegistrationInfo<MeshRenderer, 4, MeshRendererInternal::InitMeshRenderer> MeshRendererComponent;

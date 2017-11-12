@@ -197,7 +197,7 @@ void GraphicsSystem::VariableTick()
         EntityComponent& cameraEntity = *GetSceneGraph().GetComponent<EntityComponent>(cam.m_entityIndex);
         TransformComponent& cameraTransform = *EntityUtil::GetComponent<TransformComponent>(cameraEntity);
 
-		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform.m_data);
+		Matrix4x4 view = Transform::GetCameraViewMatrix(cameraTransform.m_data);
 		Matrix4x4 proj = cam.m_data.m_projectionMatrix;
 
         MeshRendererComponent* meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
@@ -218,7 +218,7 @@ void GraphicsSystem::VariableTick()
             if (mat.BindIfValid())
             {
 			    TransformComponent& modelTransform = *EntityUtil::GetComponent<TransformComponent>(meshEntity);
-			    Matrix4x4 model = TransformGetMatrix(modelTransform.m_data);
+			    Matrix4x4 model = Transform::GetMatrix(modelTransform.m_data);
 
                 PER_OBJECT_BUFFER pob;
                 pob.ModelViewProjection = proj * view * model;

@@ -12,21 +12,24 @@ struct Transform
     Vector3 m_position;
 	Vector3 m_scale;
 	Quaternion m_rotation;
+
+    static Matrix4x4 GetMatrix(const Transform& t);
+    static Matrix4x4 GetCameraViewMatrix(const Transform& t);
 };
 
-const struct InitTransform
+namespace TransformInternal
 {
-    Transform operator()()
+    struct InitTransform
     {
-        Transform t;
-        t.m_scale = { 1.0f, 1.0f, 1.0f };
-        t.m_position = { 0.0f, 0.0f, 0.0f };
-        t.m_rotation = QuaternionIdentity();
-        return t;
-    }
-};
+        Transform operator()()
+        {
+            Transform t;
+            t.m_scale = { 1.0f, 1.0f, 1.0f };
+            t.m_position = { 0.0f, 0.0f, 0.0f };
+            t.m_rotation = QuaternionIdentity();
+            return t;
+        }
+    };
+}
 
-Matrix4x4 TransformGetMatrix(const Transform& t);
-Matrix4x4 TransformGetCameraViewMatrix(const Transform& t);
-
-typedef ComponentRegistrationInfo<Transform, 1, InitTransform> TransformComponent;
+typedef ComponentRegistrationInfo<Transform, 1, TransformInternal::InitTransform> TransformComponent;

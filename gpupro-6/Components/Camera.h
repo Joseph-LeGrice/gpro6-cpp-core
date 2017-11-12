@@ -7,26 +7,29 @@
 
 struct Camera
 {
-	Matrix4x4 m_projectionMatrix;
+    Matrix4x4 m_projectionMatrix;
+
+    static Camera CreateOrthographic(float size, float depth, float aspectRatio);
+    static Camera CreatePerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar);
 };
 
-Camera CameraSetOrthographic(float size, float depth, float aspectRatio);
-Camera CameraSetPerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar);
-
-struct InitCamera
+namespace CameraInternal
 {
-    Camera operator()()
+    struct InitCamera
     {
-        float viewportWidth = SystemManager::GetSystem<GraphicsSystem>()->GetViewportWidth();
-        float viewportHeight = SystemManager::GetSystem<GraphicsSystem>()->GetViewportHeight();
-        float aspectRatio = viewportWidth / viewportHeight;
+        Camera operator()()
+        {
+            float viewportWidth = SystemManager::GetSystem<GraphicsSystem>()->GetViewportWidth();
+            float viewportHeight = SystemManager::GetSystem<GraphicsSystem>()->GetViewportHeight();
+            float aspectRatio = viewportWidth / viewportHeight;
 
-        float screenNear = 0.1f;
-        float screenDepth = 100.0f;
-        float fieldOfView = (float)D3DX_PI / 2.0f;
+            float screenNear = 0.1f;
+            float screenDepth = 100.0f;
+            float fieldOfView = (float)D3DX_PI / 2.0f;
 
-        return CameraSetPerspective(fieldOfView, aspectRatio, screenNear, screenDepth);
-    }
-};
+            return Camera::CreatePerspective(fieldOfView, aspectRatio, screenNear, screenDepth);
+        }
+    };
+}
 
-typedef ComponentRegistrationInfo<Camera, 2, InitCamera> CameraComponent;
+typedef ComponentRegistrationInfo<Camera, 2, CameraInternal::InitCamera> CameraComponent;
