@@ -13,6 +13,8 @@
 template<typename... Types>
 struct SceneGraphImpl
 {
+    static_assert(is_registered_typelist<Types...>::value, "Type list contains a non ComponentRegistrationInfo instantiation.");
+
     std::tuple<ComponentArray<Types>...> m_componentArrays;
  
     template<class T>
@@ -75,9 +77,9 @@ struct SceneGraphImpl
 typedef SceneGraphImpl<
     TransformComponent,
     CameraComponent,
-    LightComponent,
     MeshRendererComponent,
-    EntityComponent
+    EntityComponent,
+    LightComponent
 > SceneGraph;
 
 

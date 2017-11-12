@@ -54,12 +54,12 @@ struct MATERIAL_BUFFER_CONTAINER
     MATERIAL_BUFFER buf;
 };
 
-//#define NUM_BUFFERS 2
 typedef ConstantBuffer<PER_OBJECT_BUFFER, 0, BIND_ALL> PerObjectBuffer;
 typedef ConstantBuffer<MATERIAL_BUFFER_CONTAINER, 1, BIND_ALL> MaterialBuffer;
 
 class ConstantBufferInterface
 {
+    //TODO: Replace REGISTER_BUFFER macro with a std::tuple
 	REGISTER_BUFFER(PerObjectBuffer);
 	REGISTER_BUFFER(MaterialBuffer);
 

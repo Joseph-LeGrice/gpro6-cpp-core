@@ -124,6 +124,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
 
+        //TODO: Light Object
+        EntityComponent& lightEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        //LightComponent& lightComoonent = EntityUtil::AddComponent<LightComponent>();
+
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
         SystemManager::GetSystem<GraphicsSystem>()->SetDirty();

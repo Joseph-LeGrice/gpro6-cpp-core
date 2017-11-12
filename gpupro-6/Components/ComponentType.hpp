@@ -1,5 +1,6 @@
 #pragma once
 
+#include <type_traits>
 
 typedef UINT16 ComponentType;
 
@@ -20,11 +21,32 @@ void InitializeComponentRegistrationInfo(ComponentRegistrationInfo<T, id, InitFu
     cri.m_entityIndex = -1;
 }
 
-template<typename>
-struct is_registered : std::false_type {};
+// is_registered: checks if a given type is ComponentRegistrationInfo
+template<class... X>
+struct is_registered;
+
+template<class X>
+struct is_registered<X> : std::false_type {};
 
 template<class X, UINT16 Y, class InitFunctor>
 struct is_registered<ComponentRegistrationInfo<X, Y, InitFunctor>> : std::true_type {};
+
+// is_registered_typelist: checks if a given list of types s ComponentRegistrationInfo
+template<typename... X>
+struct is_registered_typelist;
+
+template<class X, class... T>
+struct is_registered_typelist<X, T...> : std::false_type {};
+
+template<class X, UINT16 Y, class InitFunctor>
+struct is_registered_typelist<ComponentRegistrationInfo<X, Y, InitFunctor>> : std::true_type {};
+
+template<class X, UINT16 Y, class InitFunctor, class... T>
+struct is_registered_typelist<ComponentRegistrationInfo<X, Y, InitFunctor>, T...>
+{
+    static constexpr bool value = is_registered_typelist<T...>::value;
+};
+
 
 template<class T>
 UINT16 GetComponentType()
