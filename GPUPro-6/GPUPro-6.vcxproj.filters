@@ -245,9 +245,6 @@
     <ClInclude Include="DataStructures\ComponentArray.hpp">
       <Filter>DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\PODArray.hpp">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
     <ClInclude Include="DataStructures\Util\ComponentReferenceNode.h">
       <Filter>DataStructures\Util</Filter>
     </ClInclude>

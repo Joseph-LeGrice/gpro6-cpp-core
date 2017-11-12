@@ -30,12 +30,22 @@ struct SceneGraphImpl
         ComponentArray<T>& ca = std::get<ComponentArray<T>>(m_componentArrays);
         if (index >= 0 && index < ca.GetArraySize())
         {
-            return &ca.m_components[index];
+            T* arrayPointer = ca.GetArrayPointer();
+            return &arrayPointer[index];
         }
         else
         {
             return nullptr;
         }
+    }
+
+    template<class T>
+    void DeleteComponent(int index)
+    {
+        static_assert(is_registered<T>::value, "T is not registered component type");
+
+        ComponentArray<T>& ca = std::get<ComponentArray<T>>(m_componentArrays);
+        ca.RemoveComponent(index);
     }
 
     template<class T>
@@ -49,8 +59,10 @@ struct SceneGraphImpl
         newComponent.m_entityIndex = -1;
         newComponent.m_data = newComponent.s_initFunctor();
         
+        T* arrayPointer = ca.GetArrayPointer();
+
         int i = ca.InsertComponent(newComponent);
-        T& result = ca.m_components[i];
+        T& result = arrayPointer[i];
         result.m_componentIndex = i;
         return result;
     }

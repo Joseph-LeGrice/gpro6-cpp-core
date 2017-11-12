@@ -1,7 +1,7 @@
 #pragma once
 
 #include "D3D11.h"
-#include "DataStructures\PODArray.hpp"
+#include <vector>
 
 struct VertexData;
 

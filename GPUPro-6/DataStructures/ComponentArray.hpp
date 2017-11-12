@@ -1,50 +1,51 @@
 #pragma once
 
 #include <type_traits>
-#include "DataStructures/PODArray.hpp"
+
+const size_t c_maximumComponents = 250;
 
 template<typename T>
 struct ComponentArray
 {
     static_assert(std::is_pod<T>::value, "Component must be a POD type!");
-    //static_assert(has_entity_index<T>(), "T does not contain m_entityIndex");
     
-    PODArray<T> m_components;
-
-    ComponentArray()
-    {
-        m_components = PODArray<T>::New();
-    }
-
-    ~ComponentArray()
-    {
-        PODArray<T>::Free(m_components);
-    }
-
     int InsertComponent(T& newComp)
     {
-        int newIndex = (int)PODArray<T>::Size(m_components);
-        PODArray<T>::Push_Back(m_components, newComp);
-        return newIndex;
+        if (m_currentSize < c_maximumComponents)
+        {
+            int newIndex = static_cast<int>(m_currentSize);
+            memcpy(&m_components[newIndex], &newComp, sizeof(T));
+            m_currentSize++;
+            return newIndex;
+        }
+        else
+        {
+            return -1;
+        }
     }
 
     void RemoveComponent(int index)
     {
-        if (index >= 0 && index < m_components.size())
+        if (index < m_currentSize)
         {
-            size_t lastIndex = m_components.size() - 1;
+            size_t lastIndex = m_currentSize - 1;
             m_components[index] = m_components[lastIndex];
-            PODArray<T>::Resize(m_components, lastIndex);
+            m_components[index].m_componentIndex = index;
+            m_currentSize--;
         }
     }
 
     T* const GetArrayPointer()
     {
-        return PODArray<T>::GetArrayPointer(m_components);
+        return m_components;
     }
 
     size_t GetArraySize()
     {
-        return PODArray<T>::Size(m_components);
+        return m_currentSize;
     }
+
+private:
+    T m_components[c_maximumComponents];
+    size_t m_currentSize = 0;
 };

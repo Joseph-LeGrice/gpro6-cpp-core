@@ -13,6 +13,14 @@ namespace EntityUtil
     }
 
     template<class T>
+    void RemoveComponent(EntityComponent& e)
+    {
+        T* component = GetComponent<T>(e);
+        UnlinkComponent(e, component);
+        GetSceneGraph().DeleteComponent(component->m_componentIndex);
+    }
+
+    template<class T>
     T* GetComponent(EntityComponent& e)
     {
         int componentIndex = GetComponentIndex<T>(e);
