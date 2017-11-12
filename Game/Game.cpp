@@ -105,28 +105,26 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		
 		// Ball Object
 		EntityComponent& meshEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-
         TransformComponent& meshTransform = EntityUtil::AddComponent<TransformComponent>(meshEntity);
         meshTransform.m_data.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-		meshTransform.m_data.m_position = { 0.0f, 0.0f, 50.0f };
 		meshTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
 		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
-
         MeshRendererComponent& meshRenderer = EntityUtil::AddComponent<MeshRendererComponent>(meshEntity);
         meshRenderer.m_data.m_meshIndex = MeshHelper::CreateSphereUV();
         meshRenderer.m_data.m_materialIndex = materialIndex;
 
         // Camera
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-
         TransformComponent& cameraTransform = EntityUtil::AddComponent<TransformComponent>(cameraEntity);
-        cameraTransform.m_data.m_position = { 0.0f, 0.0f, -10.0f };
-
+        cameraTransform.m_data.m_position = { 0.0f, 0.0f, -100.0f };
         CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
 
         //TODO: Light Object
         EntityComponent& lightEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-        //LightComponent& lightComoonent = EntityUtil::AddComponent<LightComponent>();
+        TransformComponent& lightTransform = EntityUtil::AddComponent<TransformComponent>(lightEntity);
+        lightTransform.m_data.m_position = { 50.0f, 0.0f, 0.0f };
+        LightComponent& lightComponent = EntityUtil::AddComponent<LightComponent>(lightEntity);
+        lightComponent.m_data.m_range = 250.0f;
 
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem

@@ -17,12 +17,19 @@ struct SceneGraphImpl
     static_assert(does_not_collide<Types...>::value, "A component in the type list has a type id collision");
     
     std::tuple<ComponentArray<Types>...> m_componentArrays;
- 
+
     template<class T>
-    ComponentArray<T>& GetComponentArray()
+    T* const GetComponentArrayPointer()
     {
         static_assert(is_registered<T>::value, "T is not registered component type");
-        return std::get<ComponentArray<T>>(m_componentArrays);
+        return std::get<ComponentArray<T>>(m_componentArrays).GetArrayPointer();
+    }
+
+    template<class T>
+    size_t GetNumberOfComponents()
+    {
+        static_assert(is_registered<T>::value, "T is not registered component type");
+        return std::get<ComponentArray<T>>(m_componentArrays).GetArraySize();
     }
 
     template<class T>

@@ -29,9 +29,9 @@ void MouseRotateSystem::VariableTick()
 {
 	if (m_hasIndex)
 	{
-		ComponentArray<TransformComponent>& tca = GetSceneGraph().GetComponentArray<TransformComponent>();
-        TransformComponent* const allTransforms = tca.GetArrayPointer();
-		const MouseInput& mi = SystemManager::GetSystem<InputSystem>()->GetMouse();
+        TransformComponent* const allTransforms = GetSceneGraph().GetComponentArrayPointer<TransformComponent>();
+        
+        const MouseInput& mi = SystemManager::GetSystem<InputSystem>()->GetMouse();
 		const KeyboardInput& ki = SystemManager::GetSystem<InputSystem>()->GetKeyboard();
 
 		if (!m_toggleRotate)

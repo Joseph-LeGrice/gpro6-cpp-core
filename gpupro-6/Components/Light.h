@@ -25,6 +25,11 @@ struct InitLight
     {
         Light newLight;
         ZeroMemory(&newLight, sizeof(newLight));
+        newLight.m_type = kLightType_Point;
+        newLight.m_range = 100.0f;
+        newLight.m_color = Color::White();
+        newLight.m_intensity = 1.0f;
+
         return newLight;
     }
 };

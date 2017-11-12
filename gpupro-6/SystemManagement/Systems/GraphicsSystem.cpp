@@ -148,10 +148,10 @@ void GraphicsSystem::UpdateIfDirty()
 		std::vector<VertexData> allVerts;
 		std::vector<UINT16> allIndices;
 
-        ComponentArray<MeshRendererComponent>& meshRendererComponentArray = GetSceneGraph().GetComponentArray<MeshRendererComponent>();
-        MeshRendererComponent* const meshRenderers = meshRendererComponentArray.GetArrayPointer();
+        MeshRendererComponent* const meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
+        size_t numberOfMeshRenderers = GetSceneGraph().GetNumberOfComponents<MeshRendererComponent>();
 
-        for (size_t i=0; i<meshRendererComponentArray.GetArraySize(); i++)
+        for (size_t i=0; i< numberOfMeshRenderers; i++)
 		{
             int meshIndex = meshRenderers[i].m_data.m_meshIndex;
 			Mesh& m = *allMeshes[meshIndex];
@@ -187,7 +187,7 @@ void GraphicsSystem::VariableTick()
 	pub.BindBuffer();
 
 	UINT16 currentIndex = 0;
-    size_t allCamerasSize = GetSceneGraph().GetComponentArray<CameraComponent>().GetArraySize();
+    size_t allCamerasSize = GetSceneGraph().GetNumberOfComponents<CameraComponent>();
 	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
 	{
         CameraComponent& cam = *GetSceneGraph().GetComponent<CameraComponent>(static_cast<int>(cameraIndex));
@@ -200,10 +200,10 @@ void GraphicsSystem::VariableTick()
 		Matrix4x4 view = TransformGetCameraViewMatrix(cameraTransform.m_data);
 		Matrix4x4 proj = cam.m_data.m_projectionMatrix;
 
-        ComponentArray<MeshRendererComponent>& meshRendererComponentArray = GetSceneGraph().GetComponentArray<MeshRendererComponent>();
-        MeshRendererComponent* meshRenderers = meshRendererComponentArray.GetArrayPointer();
+        MeshRendererComponent* meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
+        size_t numberOfMeshRenderers = GetSceneGraph().GetNumberOfComponents<MeshRendererComponent>();
 
-		for (size_t i = 0; i < meshRendererComponentArray.GetArraySize(); ++i)
+		for (size_t i = 0; i < numberOfMeshRenderers; ++i)
 		{
             MeshRendererComponent mrc = meshRenderers[i];
             EntityComponent& meshEntity = *GetSceneGraph().GetComponent<EntityComponent>(mrc.m_entityIndex);

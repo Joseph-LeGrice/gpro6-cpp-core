@@ -2,6 +2,7 @@
 #include "SystemManagement/ISystem.h"
 #include "DataStructures/Vector4.h"
 #include "DataStructures/Vector2.h"
+#include "DataStructures/Color.h"
 #include "Components/Light.h"
 
 struct LIGHT_BUFFER
@@ -10,7 +11,7 @@ struct LIGHT_BUFFER
     Vector4 DirectionWS;
     Vector4 PositionVS;
     Vector4 DirectionVS;
-    Vector4 Color;
+    Color Color;
     FLOAT SpotlightAngle;
     FLOAT Range;
     FLOAT Intensity;
