@@ -106,7 +106,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Ball Object
 		EntityComponent& meshEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& meshTransform = EntityUtil::AddComponent<TransformComponent>(meshEntity);
-        meshTransform.m_data.m_rotation = QuaternionFromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+        meshTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		meshTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
 		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
         MeshRendererComponent& meshRenderer = EntityUtil::AddComponent<MeshRendererComponent>(meshEntity);

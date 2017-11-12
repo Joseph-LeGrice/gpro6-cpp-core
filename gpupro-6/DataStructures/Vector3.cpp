@@ -50,25 +50,25 @@ void operator-=(Vector3& lhs, const Vector3& rhs) { lhs.X -= rhs.X; lhs.Y -= rhs
 void operator*=(Vector3& lhs, const float rhs) { lhs.X *= rhs; lhs.Y *= rhs; lhs.Z *= rhs; }
 void operator/=(Vector3& lhs, const float rhs) { lhs.X /= rhs; lhs.Y /= rhs; lhs.Z /= rhs; }
 
-FLOAT VectorMagnitude(Vector3& v)
+FLOAT Vector3::Magnitude(Vector3& v)
 {
 	return sqrtf(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
 }
 
-void VectorNormalize(Vector3& v)
+void Vector3::Normalize(Vector3& v)
 {
-	FLOAT mag = VectorMagnitude(v);
+	FLOAT mag = Vector3::Magnitude(v);
 	v.X /= mag;
 	v.Y /= mag;
 	v.Z /= mag;
 }
 
-FLOAT VectorDot(Vector3 a, Vector3 b)
+FLOAT Vector3::Dot(Vector3 a, Vector3 b)
 {
 	return a.X * b.X + a.Y * b.Y * a.Z * b.Z;
 }
 
-Vector3 VectorCross(Vector3 a, Vector3 b)
+Vector3 Vector3::Cross(Vector3 a, Vector3 b)
 {
 	Vector3 result;
 	result.X = a.Y * b.Z - a.Z * b.Y;

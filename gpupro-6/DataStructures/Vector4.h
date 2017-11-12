@@ -9,8 +9,8 @@ struct Vector4
 	FLOAT Y;
 	FLOAT Z;
 	FLOAT W;
-};
 
-Vector4 Vector4FromVector3(const Vector3& v3);
-Matrix4x4 GetTranslationMatrix(const Vector4& v);
-Matrix4x4 GetScaleMatrix(const Vector4& v);
+    static Vector4 FromVector3(const Vector3& v3);
+    static Matrix4x4 GetTranslationMatrix(const Vector4& v);
+    static Matrix4x4 GetScaleMatrix(const Vector4& v);
+};

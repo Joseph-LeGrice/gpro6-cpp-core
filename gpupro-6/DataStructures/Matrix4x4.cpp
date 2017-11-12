@@ -60,7 +60,7 @@ Matrix4x4 operator*(const Matrix4x4& lhs, const Matrix4x4& rhs)
 	return result;
 }
 
-void MatrixIdentity(Matrix4x4& m)
+void Matrix4x4::Identity(Matrix4x4& m)
 {
 	m.M11 = 1; m.M21 = 0; m.M31 = 0; m.M41 = 0;
 	m.M12 = 0; m.M22 = 1; m.M32 = 0; m.M42 = 0;
@@ -68,7 +68,7 @@ void MatrixIdentity(Matrix4x4& m)
 	m.M14 = 0; m.M24 = 0; m.M34 = 0; m.M44 = 1;
 }
 
-Matrix4x4 MatrixTranspose(const Matrix4x4& m)
+Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& m)
 {
 	Matrix4x4 result;
 	result.M11 = m.M11; result.M21 = m.M12; result.M31 = m.M13; result.M41 = m.M14;
@@ -78,12 +78,12 @@ Matrix4x4 MatrixTranspose(const Matrix4x4& m)
 	return result;
 }
 
-float MatrixDeterminant(const Matrix4x4& m)
+float Matrix4x4::Determinant(const Matrix4x4& m)
 {
 	return m.M11 * m.M22 * m.M33 * m.M44 - m.M14 * m.M23 * m.M32 * m.M41;
 }
 
-Matrix4x4 MatrixOfMinors(const Matrix4x4& m)
+Matrix4x4 Matrix4x4::MatrixOfMinors(const Matrix4x4& m)
 {
 	Matrix4x4 result;
 
@@ -93,114 +93,114 @@ Matrix4x4 MatrixOfMinors(const Matrix4x4& m)
 	determinant.M11 = m.M22; determinant.M21 = m.M32; determinant.M31 = m.M42;
 	determinant.M12 = m.M23; determinant.M22 = m.M33; determinant.M32 = m.M43;
 	determinant.M13 = m.M24; determinant.M23 = m.M34; determinant.M33 = m.M44;
-	result.M11 = MatrixDeterminant(determinant);
+	result.M11 = Matrix3x3::Determinant(determinant);
 
 	// M21
 	determinant.M11 = m.M12; determinant.M21 = m.M32; determinant.M31 = m.M42;
 	determinant.M12 = m.M13; determinant.M22 = m.M33; determinant.M32 = m.M43;
 	determinant.M13 = m.M14; determinant.M23 = m.M34; determinant.M33 = m.M44;
-	result.M21 = MatrixDeterminant(determinant);
+	result.M21 = Matrix3x3::Determinant(determinant);
 
 	// M31
 	determinant.M11 = m.M12; determinant.M21 = m.M22; determinant.M31 = m.M42;
 	determinant.M12 = m.M13; determinant.M22 = m.M23; determinant.M32 = m.M43;
 	determinant.M13 = m.M14; determinant.M23 = m.M24; determinant.M33 = m.M44;
-	result.M31 = MatrixDeterminant(determinant);
+	result.M31 = Matrix3x3::Determinant(determinant);
 
 	// M41
 	determinant.M11 = m.M12; determinant.M21 = m.M22; determinant.M31 = m.M32;
 	determinant.M12 = m.M13; determinant.M22 = m.M23; determinant.M32 = m.M33;
 	determinant.M13 = m.M14; determinant.M23 = m.M24; determinant.M33 = m.M34;
-	result.M41 = MatrixDeterminant(determinant);
+	result.M41 = Matrix3x3::Determinant(determinant);
 
 	// M12
 	determinant.M11 = m.M21; determinant.M21 = m.M31; determinant.M31 = m.M41;
 	determinant.M12 = m.M23; determinant.M22 = m.M33; determinant.M32 = m.M43;
 	determinant.M13 = m.M24; determinant.M23 = m.M34; determinant.M33 = m.M44;
-	result.M12 = MatrixDeterminant(determinant);
+	result.M12 = Matrix3x3::Determinant(determinant);
 
 	// M22
 	determinant.M11 = m.M11; determinant.M21 = m.M31; determinant.M31 = m.M41;
 	determinant.M12 = m.M13; determinant.M22 = m.M33; determinant.M32 = m.M43;
 	determinant.M13 = m.M14; determinant.M23 = m.M34; determinant.M33 = m.M44;
-	result.M22 = MatrixDeterminant(determinant);
+	result.M22 = Matrix3x3::Determinant(determinant);
 
 	// M32
 	determinant.M11 = m.M11; determinant.M21 = m.M21; determinant.M31 = m.M41;
 	determinant.M12 = m.M13; determinant.M22 = m.M23; determinant.M32 = m.M43;
 	determinant.M13 = m.M14; determinant.M23 = m.M24; determinant.M33 = m.M44;
-	result.M32 = MatrixDeterminant(determinant);
+	result.M32 = Matrix3x3::Determinant(determinant);
 
 	// M42
 	determinant.M11 = m.M11; determinant.M21 = m.M21; determinant.M31 = m.M31;
 	determinant.M12 = m.M13; determinant.M22 = m.M23; determinant.M32 = m.M33;
 	determinant.M13 = m.M14; determinant.M23 = m.M24; determinant.M33 = m.M34;
-	result.M42 = MatrixDeterminant(determinant);
+	result.M42 = Matrix3x3::Determinant(determinant);
 
 	// M13
 	determinant.M11 = m.M21; determinant.M21 = m.M31; determinant.M31 = m.M41;
 	determinant.M12 = m.M22; determinant.M22 = m.M32; determinant.M32 = m.M42;
 	determinant.M13 = m.M24; determinant.M23 = m.M34; determinant.M33 = m.M44;
-	result.M13 = MatrixDeterminant(determinant);
+	result.M13 = Matrix3x3::Determinant(determinant);
 
 	// M23
 	determinant.M11 = m.M11; determinant.M21 = m.M31; determinant.M31 = m.M41;
 	determinant.M12 = m.M12; determinant.M22 = m.M32; determinant.M32 = m.M42;
 	determinant.M13 = m.M14; determinant.M23 = m.M34; determinant.M33 = m.M44;
-	result.M23 = MatrixDeterminant(determinant);
+	result.M23 = Matrix3x3::Determinant(determinant);
 
 	// M33
 	determinant.M11 = m.M11; determinant.M21 = m.M21; determinant.M31 = m.M41;
 	determinant.M12 = m.M12; determinant.M22 = m.M22; determinant.M32 = m.M42;
 	determinant.M13 = m.M14; determinant.M23 = m.M24; determinant.M33 = m.M44;
-	result.M33 = MatrixDeterminant(determinant);
+	result.M33 = Matrix3x3::Determinant(determinant);
 
 	// M43
 	determinant.M11 = m.M11; determinant.M21 = m.M21; determinant.M31 = m.M31;
 	determinant.M12 = m.M12; determinant.M22 = m.M22; determinant.M32 = m.M32;
 	determinant.M13 = m.M14; determinant.M23 = m.M24; determinant.M33 = m.M34;
-	result.M43 = MatrixDeterminant(determinant);
+	result.M43 = Matrix3x3::Determinant(determinant);
 
 	// M14
 	determinant.M11 = m.M21; determinant.M21 = m.M31; determinant.M31 = m.M41;
 	determinant.M12 = m.M22; determinant.M22 = m.M32; determinant.M32 = m.M42;
 	determinant.M13 = m.M23; determinant.M23 = m.M33; determinant.M33 = m.M43;
-	result.M14 = MatrixDeterminant(determinant);
+	result.M14 = Matrix3x3::Determinant(determinant);
 
 	// M24
 	determinant.M11 = m.M11; determinant.M21 = m.M31; determinant.M31 = m.M41;
 	determinant.M12 = m.M12; determinant.M22 = m.M32; determinant.M32 = m.M42;
 	determinant.M13 = m.M13; determinant.M23 = m.M33; determinant.M33 = m.M43;
-	result.M24 = MatrixDeterminant(determinant);
+	result.M24 = Matrix3x3::Determinant(determinant);
 
 	// M34
 	determinant.M11 = m.M11; determinant.M21 = m.M21; determinant.M31 = m.M41;
 	determinant.M12 = m.M12; determinant.M22 = m.M22; determinant.M32 = m.M42;
 	determinant.M13 = m.M13; determinant.M23 = m.M23; determinant.M33 = m.M43;
-	result.M34 = MatrixDeterminant(determinant);
+	result.M34 = Matrix3x3::Determinant(determinant);
 
 	// M44
 	determinant.M11 = m.M11; determinant.M21 = m.M21; determinant.M31 = m.M31;
 	determinant.M12 = m.M12; determinant.M22 = m.M22; determinant.M32 = m.M32;
 	determinant.M13 = m.M13; determinant.M23 = m.M23; determinant.M33 = m.M33;
-	result.M44 = MatrixDeterminant(determinant);
+	result.M44 = Matrix3x3::Determinant(determinant);
 
 	return result;
 }
 
-Matrix4x4 MatrixInverse(const Matrix4x4& m)
+Matrix4x4 Matrix4x4::Inverse(const Matrix4x4& m)
 {
-	float determinant = MatrixDeterminant(m);
+	float determinant = Matrix4x4::Determinant(m);
 	if (determinant > 0.0f)
 	{
-		Matrix4x4 minors = MatrixOfMinors(m);
+		Matrix4x4 minors = Matrix4x4::MatrixOfMinors(m);
 
 		minors.M14 *= -1; minors.M24 *= 1; minors.M34 *= -1; minors.M44 *= 1;
 		minors.M11 *= 1; minors.M21 *= -1; minors.M31 *= 1; minors.M41 *= -1;
 		minors.M12 *= -1; minors.M22 *= 1; minors.M32 *= -1; minors.M42 *= 1;
 		minors.M13 *= 1; minors.M23 *= -1; minors.M33 *= 1; minors.M43 *= -1;
 
-		Matrix4x4 adjugate = MatrixTranspose(minors);
+		Matrix4x4 adjugate = Matrix4x4::Transpose(minors);
 		Matrix4x4 inverse = adjugate * (1.0f / determinant);
 
 		return inverse;

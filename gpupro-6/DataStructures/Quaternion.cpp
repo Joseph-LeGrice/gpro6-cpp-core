@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DataStructures/Quaternion.h"
 
-Quaternion QuaternionIdentity()
+Quaternion Quaternion::Identity()
 {
 	Quaternion q;
 	q.W = 1.0f;
@@ -9,7 +9,7 @@ Quaternion QuaternionIdentity()
 	return q;
 }
 
-Quaternion QuaternionConjugate(const Quaternion& q)
+Quaternion Quaternion::Conjugate(const Quaternion& q)
 {
 	Quaternion result;
 	result.W = q.W;
@@ -17,10 +17,10 @@ Quaternion QuaternionConjugate(const Quaternion& q)
 	return result;
 }
 
-Quaternion QuaternionInverse(const Quaternion& q)
+Quaternion Quaternion::Inverse(const Quaternion& q)
 {
-	Quaternion con = QuaternionConjugate(q);
-	float mag = QuaternionMagnitude(q);
+	Quaternion con = Quaternion::Conjugate(q);
+	float mag = Quaternion::Magnitude(q);
 
 	Quaternion result;
 	result.W = con.W / mag; result.V = con.V / mag;
@@ -29,16 +29,16 @@ Quaternion QuaternionInverse(const Quaternion& q)
 
 // TODO: Quaternion.LookAt
 
-Quaternion QuaternionFromAxisAngle(Vector3 axis, float angle)
+Quaternion Quaternion::FromAxisAngle(Vector3 axis, float angle)
 {
 	Quaternion q;
 	q.W = cosf(angle / 2.0f);
 	q.V = axis * sinf(angle / 2.0f);
-	QuaternionNormalize(q);
+	Quaternion::Normalize(q);
 	return q;
 }
 
-Matrix4x4 QuaternionGetMatrix(const Quaternion& q)
+Matrix4x4 Quaternion::GetMatrix(const Quaternion& q)
 {
 	//Orthonormal basis
 
@@ -56,7 +56,7 @@ Matrix4x4 QuaternionGetMatrix(const Quaternion& q)
 	float wz = q.W * z;
 
 	Matrix4x4 result;
-	MatrixIdentity(result);
+	Matrix4x4::Identity(result);
 
 	result.M11 = 1.0f - (yy + zz); result.M21 = xy - wz;          result.M31 = xz + wy;          result.M41 = 0.0f;
 	result.M12 = xy + wz;          result.M22 = 1.0f - (xx + zz); result.M32 = yz - wx;          result.M42 = 0.0f;
@@ -65,14 +65,14 @@ Matrix4x4 QuaternionGetMatrix(const Quaternion& q)
 	return result;
 }
 
-void QuaternionNormalize(Quaternion& q)
+void Quaternion::Normalize(Quaternion& q)
 {
-	FLOAT mag = QuaternionMagnitude(q);
+	FLOAT mag = Quaternion::Magnitude(q);
 	q.W /= mag;
 	q.V /= mag;
 }
 
-FLOAT QuaternionMagnitude(const Quaternion& q)
+FLOAT Quaternion::Magnitude(const Quaternion& q)
 {
 	return sqrt(pow(q.W, 2) + pow(q.V.X, 2) + pow(q.V.Y, 2) + pow(q.V.Z, 2));
 }

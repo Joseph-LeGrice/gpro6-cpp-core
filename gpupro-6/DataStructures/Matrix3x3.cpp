@@ -47,14 +47,14 @@ Matrix3x3 operator*(const Matrix3x3& lhs, const Matrix3x3& rhs)
 	return result;
 }
 
-void MatrixIdentity(Matrix3x3& m)
+void Matrix3x3::Identity(Matrix3x3& m)
 {
 	m.M11 = 1; m.M21 = 0; m.M31 = 0;
 	m.M12 = 0; m.M22 = 1; m.M32 = 0;
 	m.M13 = 0; m.M23 = 0; m.M33 = 1;
 }
 
-Matrix3x3 MatrixTranspose(const Matrix3x3& m)
+Matrix3x3 Matrix3x3::Transpose(const Matrix3x3& m)
 {
 	Matrix3x3 result;
 	result.M11 = m.M11; result.M21 = m.M12; result.M31 = m.M13;
@@ -63,7 +63,7 @@ Matrix3x3 MatrixTranspose(const Matrix3x3& m)
 	return result;
 }
 
-float MatrixDeterminant(const Matrix3x3& m)
+float Matrix3x3::Determinant(const Matrix3x3& m)
 {
 	return m.M11 * m.M22 * m.M33 - m.M13 * m.M22 * m.M31;
 }

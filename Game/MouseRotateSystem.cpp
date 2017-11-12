@@ -48,8 +48,8 @@ void MouseRotateSystem::VariableTick()
 		{
 			float angularDelta = c_angularVelocity * SystemManager::GetSystem<TimeSystem>()->DeltaTimeStep();
 			TransformComponent& t = allTransforms[m_index];
-			t.m_data.m_rotation *= QuaternionFromAxisAngle({ 0.0f, 1.0f, 0.0f }, angularDelta);
-			QuaternionNormalize(t.m_data.m_rotation);
+			t.m_data.m_rotation *= Quaternion::FromAxisAngle({ 0.0f, 1.0f, 0.0f }, angularDelta);
+			Quaternion::Normalize(t.m_data.m_rotation);
 		}
 
 		if (ki.GetKeyDownThisFrame(kInputKey_C))

@@ -13,12 +13,13 @@ struct Matrix3x3
 	float M21; float M22; float M23;
 	float M31; float M32; float M33;
 #endif
+
+    static void Identity(Matrix3x3& m);
+    static Matrix3x3 Transpose(const Matrix3x3& m);
+    static float Determinant(const Matrix3x3& m);
 };
 
 Matrix3x3 operator+(const Matrix3x3& lhs, const Matrix3x3& rhs);
 Matrix3x3 operator-(const Matrix3x3& lhs, const Matrix3x3& rhs);
 Matrix3x3 operator*(const Matrix3x3& lhs, const Matrix3x3& rhs);
 Matrix3x3 operator*(const Matrix3x3& lhs, const float rhs);
-void MatrixIdentity(Matrix3x3& m);
-Matrix3x3 MatrixTranspose(const Matrix3x3& m);
-float MatrixDeterminant(const Matrix3x3& m);

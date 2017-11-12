@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DataStructures/Vector4.h"
 
-Vector4 Vector4FromVector3(const Vector3& v3)
+Vector4 Vector4::FromVector3(const Vector3& v3)
 {
 	Vector4 v4;
 	v4.X = v3.X;
@@ -11,10 +11,10 @@ Vector4 Vector4FromVector3(const Vector3& v3)
 	return v4;
 }
 
-Matrix4x4 GetTranslationMatrix(const Vector4& v)
+Matrix4x4 Vector4::GetTranslationMatrix(const Vector4& v)
 {
 	Matrix4x4 translation;
-	MatrixIdentity(translation);
+    Matrix4x4::Identity(translation);
 	translation.M41 = v.X;
 	translation.M42 = v.Y;
 	translation.M43 = v.Z;
@@ -22,10 +22,10 @@ Matrix4x4 GetTranslationMatrix(const Vector4& v)
 	return translation;
 }
 
-Matrix4x4 GetScaleMatrix(const Vector4& v)
+Matrix4x4 Vector4::GetScaleMatrix(const Vector4& v)
 {
 	Matrix4x4 scale;
-	MatrixIdentity(scale);
+	Matrix4x4::Identity(scale);
 	scale.M11 = v.X;
 	scale.M22 = v.Y;
 	scale.M33 = v.Z;

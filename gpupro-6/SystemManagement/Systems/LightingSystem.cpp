@@ -39,7 +39,7 @@ void LightingSystem::VariableTick()
         EntityComponent* lightEntity = GetSceneGraph().GetComponent<EntityComponent>(light.m_entityIndex);
         TransformComponent* lightTransform = EntityUtil::GetComponent<TransformComponent>(*lightEntity);
 
-        lights[i].PositionWS = Vector4FromVector3(lightTransform->m_data.m_position);
+        lights[i].PositionWS = Vector4::FromVector3(lightTransform->m_data.m_position);
         lights[i].DirectionWS = { 0.0f, 0.0f, 0.0f, 0.0f };
 
         lights[i].PositionVS = { 0.0f, 0.0f, 0.0f, 0.0f };

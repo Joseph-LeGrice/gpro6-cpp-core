@@ -26,7 +26,7 @@ namespace TransformInternal
             Transform t;
             t.m_scale = { 1.0f, 1.0f, 1.0f };
             t.m_position = { 0.0f, 0.0f, 0.0f };
-            t.m_rotation = QuaternionIdentity();
+            t.m_rotation = Quaternion::Identity();
             return t;
         }
     };

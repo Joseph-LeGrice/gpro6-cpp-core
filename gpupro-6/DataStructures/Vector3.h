@@ -5,6 +5,11 @@ struct Vector3
 	FLOAT X;
 	FLOAT Y;
 	FLOAT Z;
+
+    FLOAT Magnitude(Vector3& v);
+    void Normalize(Vector3& v);
+    FLOAT Dot(Vector3 a, Vector3 b);
+    Vector3 Cross(Vector3 a, Vector3 b);
 };
 
 Vector3 operator+(const Vector3& first, const Vector3& second);
@@ -17,8 +22,3 @@ void operator+=(Vector3& lhs, const Vector3& rhs);
 void operator-=(Vector3& lhs, const Vector3& rhs);
 void operator*=(Vector3& lhs, const float rhs);
 void operator/=(Vector3& lhs, const float rhs);
-
-FLOAT VectorMagnitude(Vector3& v);
-void VectorNormalize(Vector3& v);
-FLOAT VectorDot(Vector3 a, Vector3 b);
-Vector3 VectorCross(Vector3 a, Vector3 b);
