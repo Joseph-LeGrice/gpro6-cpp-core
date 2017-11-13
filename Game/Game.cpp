@@ -16,8 +16,8 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Material.h"
 #include "Graphics/Buffers/ConstantBufferInterface.h"
-#include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
-#include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
+#include "Graphics/ResourceTypes/Texture2D.h"
+#include "Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Graphics/TextureSampler.h"
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/TimeSystem.h"
@@ -40,10 +40,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     try
 	{
         WindowManager::InitializeWindow();
-        
-        AssetManager::Create();
-        AssetManager& mms = *AssetManager::Instance();
-        
+                
         SystemManager::Initialize<
             GraphicsSystem,
             LightingSystem,
@@ -52,23 +49,25 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             MouseRotateSystem
         >();
         
-		int materialIndex = Material::Create();
-		Material& simpleQuadMat = *mms.GetMaterial(materialIndex);
+        int materialIndex = GetAssetManager().AllocateNew<Material>();
+        Material& simpleQuadMat = *GetAssetManager().GetAsset<Material>(materialIndex);
 
-		Shader* materialShader = Shader::CreateNew();
-		materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
+        int shaderIndex = GetAssetManager().AllocateNew<Shader>();
+        Shader* materialShader = GetAssetManager().GetAsset<Shader>(shaderIndex);
+
+        materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-        simpleQuadMat.SetShader(materialShader, 9, 1);
-        
+        simpleQuadMat.SetShader(materialShader);  //9, 1);
+
         int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
-        simpleQuadMat.AddShaderResource(lightBufferIndex, 0);
+        simpleQuadMat.AddStructuredBufferResource({ lightBufferIndex, 0});
 
-        int textureResourceIndex = CreateTextureResourceFromFile(L"C:\\TestImage.png");
-        simpleQuadMat.AddShaderResource(textureResourceIndex, 1);
+        int textureResourceIndex = Texture2D::CreateTextureResourceFromFile(L"C:\\TestImage.png");
+        simpleQuadMat.AddTexture2DResource({ textureResourceIndex, 1 });
 
-		int textureSamplerIndex = CreateTextureSampler();
-		simpleQuadMat.AddTextureSampler(textureSamplerIndex, 0);
+		int textureSamplerIndex = GetAssetManager().AllocateNew<TextureSampler>();
+        simpleQuadMat.AddTextureSampler({ textureSamplerIndex, 0 });
 
         //------------------------------------------------------------------------------------
         // MATERIAL BUFFER STUFF
@@ -98,7 +97,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //mat.SpecularScale;
         //mat.AlphaThreshold;
         MATERIAL_BUFFER_CONTAINER buf = { mat };
-        MaterialBuffer& mf = SystemManager::GetSystem<GraphicsSystem>()->GetConstantBufferInterface().GetMaterialBuffer();
+        MaterialBuffer& mf = GetConstantBufferInterface().GetBuffer<MaterialBuffer>();
         mf.UpdateBuffer(buf);
         mf.BindBuffer();
         //------------------------------------------------------------------------------------
@@ -119,7 +118,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         cameraTransform.m_data.m_position = { 0.0f, 0.0f, -100.0f };
         CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
 
-        //TODO: Light Object
+        // Light
         EntityComponent& lightEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& lightTransform = EntityUtil::AddComponent<TransformComponent>(lightEntity);
         lightTransform.m_data.m_position = { 50.0f, 0.0f, 0.0f };
@@ -141,7 +140,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     SystemManager::Deinitialize();
     ImagingFactory::DestroyFactory();
     WindowManager::ShutdownWindow();
-    AssetManager::Destroy();
+    //TODO: Destroy everything in the assetmanager here
 
 	return returnCode;
 }

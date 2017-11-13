@@ -48,17 +48,3 @@ bool TextureSampler::IsValid()
 {
 	return m_sampler != nullptr;
 }
-
-int CreateTextureSampler()
-{
-	TextureSampler* ts = new TextureSampler();
-	if (ts->Initialize())
-	{
-		return AssetManager::Instance()->RegisterTextureSampler(*ts);
-	}
-	else
-	{
-		SAFE_DELETE(ts);
-		return -1;
-	}
-}

@@ -13,7 +13,6 @@
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/TextureSampler.h"
-#include "Graphics/ResourceTypes/ShaderResource.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
 #include "Utilities/Logging.h"
 
@@ -26,86 +25,58 @@ Material::~Material()
 {
 }
 
-int Material::Create()
-{
-	Material* newMaterial = new Material();
-	return AssetManager::Instance()->RegisterInstancedMaterial(*newMaterial);
-}
-
-void Material::SetShader(Shader* s, size_t numberOfResources, size_t numberOfSamplers)
+void Material::SetShader(Shader* s)
 {
 	m_shader = s;
-	
-	m_numberOfResources = numberOfResources;
-	m_shaderResourceIndexes.resize(numberOfResources);
-	for (int i = 0; i < numberOfResources; ++i)
-	{
-		m_shaderResourceIndexes[i] = -1;
-	}
-	
-	m_numberOfTextureSamplers = numberOfSamplers;
-	m_textureSamplerIndexes.resize(numberOfSamplers);
-	for (int i = 0; i < numberOfSamplers; ++i)
-	{
-		m_textureSamplerIndexes[i] = -1;
-	}
 }
 
-void Material::AddShaderResource(int shaderResourceIndex, size_t shaderResourceSlotIndex)
+void Material::AddTexture2DResource(ResourceDetails rd)
 {
-	if (shaderResourceSlotIndex < m_numberOfResources)
-	{
-		m_shaderResourceIndexes[shaderResourceSlotIndex] = shaderResourceIndex;
-	}
+    m_texture2dIndexes.push_back(rd);
 }
 
-void Material::RemoveShaderResource(size_t shaderResourceSlotIndex)
+void Material::AddStructuredBufferResource(ResourceDetails rd)
 {
-	if (shaderResourceSlotIndex < m_numberOfResources)
-	{
-		m_shaderResourceIndexes[shaderResourceSlotIndex] = -1;
-	}
+    m_structuredBufferIndexes.push_back(rd);
 }
 
-void Material::AddTextureSampler(int textureSamplerIndex, size_t textureSamplerSlotIndex)
+void Material::AddTextureSampler(ResourceDetails rd)
 {
-	if (textureSamplerSlotIndex < m_numberOfTextureSamplers)
-	{
-		m_textureSamplerIndexes[textureSamplerSlotIndex] = textureSamplerIndex;
-	}
-}
-
-void Material::RemoveTextureSampler(size_t textureSamplerSlotIndex)
-{
-	if (textureSamplerSlotIndex < m_numberOfTextureSamplers)
-	{
-		m_textureSamplerIndexes[textureSamplerSlotIndex] = -1;
-	}
+	m_textureSamplerIndexes.push_back(rd);
 }
 
 bool Material::BindIfValid()
 {
 	if (m_shader != nullptr && m_shader->SetCurrentIfValid())
 	{
-		AssetManager& mms = *AssetManager::Instance();
 
-		for (size_t shaderResourceSlot = 0; shaderResourceSlot < m_shaderResourceIndexes.size(); ++shaderResourceSlot)
-		{
-			int shaderResourceIndex = m_shaderResourceIndexes[shaderResourceSlot];
-			ShaderResource* sr = mms.GetShaderResource(shaderResourceIndex);
-			if (sr != nullptr)
-			{
-				sr->BindResource(static_cast<UINT>(shaderResourceSlot));
-			}
-		}
+        for (size_t i = 0; i < m_texture2dIndexes.size(); ++i)
+        {
+            ResourceDetails rd = m_texture2dIndexes[i];
+            Texture2D* tex = GetAssetManager().GetAsset<Texture2D>(rd.m_resourceIndex);
+            if (tex != nullptr)
+            {
+                tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
+            }
+        }
 
-		for (size_t textureSamplerSlot = 0; textureSamplerSlot < m_textureSamplerIndexes.size(); ++textureSamplerSlot)
+        for (size_t i = 0; i < m_structuredBufferIndexes.size(); ++i)
+        {
+            ResourceDetails rd = m_structuredBufferIndexes[i];
+            StructuredBuffer* sb = GetAssetManager().GetAsset<StructuredBuffer>(rd.m_resourceIndex);
+            if (sb != nullptr)
+            {
+                sb->BindResource(static_cast<UINT>(rd.m_slotIndex));
+            }
+        }
+
+		for (size_t i = 0; i < m_textureSamplerIndexes.size(); ++i)
 		{
-			int textureSamplerIndex = m_textureSamplerIndexes[textureSamplerSlot];
-			TextureSampler* ts = mms.GetTextureSampler(textureSamplerIndex);
+			ResourceDetails rd = m_textureSamplerIndexes[i];
+			TextureSampler* ts = GetAssetManager().GetAsset<TextureSampler>(rd.m_resourceIndex);
 			if (ts != nullptr)
 			{
-				ts->BindTextureSampler(static_cast<UINT>(textureSamplerSlot));
+				ts->BindTextureSampler(static_cast<UINT>(rd.m_slotIndex));
 			}
 		}
 

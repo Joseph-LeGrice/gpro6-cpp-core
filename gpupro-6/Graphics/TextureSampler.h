@@ -4,8 +4,8 @@
 
 class TextureSampler
 {
-	friend int CreateTextureSampler();
 public:
+	TextureSampler();
 	~TextureSampler();
 
 	void BindTextureSampler(UINT samplerIndex);
@@ -14,7 +14,4 @@ public:
 
 private:
 	ID3D11SamplerState* m_sampler;
-	TextureSampler();
 };
-
-int CreateTextureSampler();

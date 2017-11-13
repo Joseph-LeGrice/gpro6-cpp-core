@@ -57,11 +57,4 @@ const std::vector<VertexData>& Mesh::GetVertexData()
 const std::vector<UINT16>& Mesh::GetIndices()
 {
 	return m_indices;
-
-}
-
-int CreateMesh()
-{
-	Mesh* newMesh = new Mesh();
-	return AssetManager::Instance()->RegisterMesh(*newMesh);
 }

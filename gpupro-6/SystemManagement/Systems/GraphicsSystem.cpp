@@ -20,7 +20,6 @@ GraphicsSystem::GraphicsSystem()
 	m_swapchain = nullptr;
 	m_device = nullptr;
 	m_deviceContext = nullptr;
-    m_constantBuffers = nullptr;
 }
 
 GraphicsSystem::~GraphicsSystem()
@@ -33,7 +32,6 @@ GraphicsSystem::~GraphicsSystem()
 	SAFE_RELEASE(m_deviceContext);
 	SAFE_DELETE(m_myVertexBuffer);
 	SAFE_DELETE(m_myIndexBuffer);
-    SAFE_DELETE(m_constantBuffers);
 }
 
 
@@ -101,7 +99,6 @@ bool GraphicsSystem::Initialize()
 
             m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
             m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
-            m_constantBuffers = new ConstantBufferInterface();
             return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
         }
     }
@@ -117,11 +114,6 @@ ID3D11Device* GraphicsSystem::GetGraphicsDevice()
 ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
 {
 	return m_deviceContext;
-}
-
-ConstantBufferInterface& GraphicsSystem::GetConstantBufferInterface()
-{
-    return *m_constantBuffers;
 }
 
 float GraphicsSystem::GetViewportWidth()
@@ -143,8 +135,6 @@ void GraphicsSystem::UpdateIfDirty()
 {
 	if (m_isDirty)
 	{
-		const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
-
 		std::vector<VertexData> allVerts;
 		std::vector<UINT16> allIndices;
 
@@ -154,7 +144,7 @@ void GraphicsSystem::UpdateIfDirty()
         for (size_t i=0; i< numberOfMeshRenderers; i++)
 		{
             int meshIndex = meshRenderers[i].m_data.m_meshIndex;
-			Mesh& m = *allMeshes[meshIndex];
+			Mesh& m = *GetAssetManager().GetAsset<Mesh>(meshIndex);
 
 			const std::vector<VertexData>& vertexData = m.GetVertexData();
 			allVerts.insert(allVerts.end(), vertexData.begin(), vertexData.end());
@@ -180,10 +170,7 @@ void GraphicsSystem::VariableTick()
 	
 	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 
-    const std::vector<Mesh*>& allMeshes = *AssetManager::Instance()->GetAllMeshes();
-	const std::vector<Material*>& allMats = *AssetManager::Instance()->GetAllMaterials();
-
-	PerObjectBuffer& pub = m_constantBuffers->GetPerObjectBuffer();
+	PerObjectBuffer& pub = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
 	pub.BindBuffer();
 
 	UINT16 currentIndex = 0;
@@ -211,10 +198,10 @@ void GraphicsSystem::VariableTick()
             int meshIndex = mrc.m_data.m_meshIndex;
             int materialIndex = mrc.m_data.m_materialIndex;
             
-			Mesh& mesh = *allMeshes[meshIndex];
-			UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
+            Mesh& mesh = *GetAssetManager().GetAsset<Mesh>(meshIndex);
+            UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
 
-            Material& mat = *allMats[materialIndex];
+            Material& mat = *GetAssetManager().GetAsset<Material>(materialIndex);
             if (mat.BindIfValid())
             {
 			    TransformComponent& modelTransform = *EntityUtil::GetComponent<TransformComponent>(meshEntity);

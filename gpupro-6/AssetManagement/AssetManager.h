@@ -1,59 +1,59 @@
 #pragma once
 
 #include <vector>
+#include <tuple>
 #include "Graphics/Shader.h"
 #include "Graphics/Material.h"
-#include "Graphics/ResourceTypes/ShaderResource.h"
+#include "Graphics/ResourceTypes/Texture2D.h"
+#include "Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Graphics/TextureSampler.h"
 #include "DataStructures/Mesh.h"
 
-class AssetManager
+template<class... Types>
+class AssetManagerImpl
 {
 public:
-    static void Create()
+
+    //TODO: Should not be storing lists of pointers. At the very least it should be lists of the actual type (although this doesn't allow for templated types).
+    //TODO: Ideally should be storing some structure which allows for grouping the memory together such that assets 'relevant' to each other exists near to each other.
+
+    std::tuple<std::vector<Types*>...> m_assetLists;
+
+    template<class T>
+    int AllocateNew()
     {
-        s_instance = new AssetManager();
+        std::vector<T*>& assetList = std::get<std::vector<T*>>(m_assetLists);
+        int index = static_cast<int>(assetList.size());
+        assetList.resize(index + 1);
+        assetList[index] = new T();
+        return index;
     }
 
-    static AssetManager* Instance()
+    template<class T>
+    T* GetAsset(int index)
     {
-        return s_instance;
+        std::vector<T*>& assetList = std::get<std::vector<T*>>(m_assetLists);
+        return assetList[index];
     }
 
-    static void Destroy()
+    template<class T>
+    void Deallocate(int index)
     {
-        SAFE_DELETE(s_instance);
+        std::vector<T*>& assetList = std::get<std::vector<T*>>(m_assetLists);
+        int lastIndex = static_cast<int>(assetList.size()) - 1;
+        delete assetList[index];
+        assetList[index] = assetList[lastIndex];
+        assetList.resize(lastIndex);
     }
-
-private:
-    static AssetManager* s_instance;
-
-    AssetManager(const AssetManager&) = delete;
-    AssetManager();
-    ~AssetManager();
-
-public:
-	const std::vector<Material*>* GetAllMaterials();
-	const int RegisterInstancedMaterial(Material& m);
-	Material* GetMaterial(int index);
-
-	const int RegisterShaderResource(ShaderResource& sr);
-	ShaderResource* GetShaderResource(int index);
-
-	const int RegisterTextureSampler(TextureSampler& ts);
-	TextureSampler* GetTextureSampler(int index);
-
-	const std::vector<Mesh*>* GetAllMeshes();
-	const int RegisterMesh(Mesh& m);
-	Mesh* GetMesh(int meshIndex);
-
-    void RegisterShader(Shader* s);
-
-private:
-	std::vector<Material*> m_instancedMaterials;
-	std::vector<ShaderResource*> m_shaderResources;
-	std::vector<TextureSampler*> m_textureSamplers;
-	std::vector<Mesh*> m_meshes;
-    std::vector<Shader*> m_shaders;
 };
 
+typedef AssetManagerImpl<
+    Shader,
+    Mesh,
+    TextureSampler,
+    Texture2D,
+    StructuredBuffer,
+    Material
+> AssetManager;
+
+AssetManager& GetAssetManager();

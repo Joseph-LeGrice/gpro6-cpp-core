@@ -1,0 +1,26 @@
+#include "stdafx.h"
+
+#include "Graphics/ResourceTypes/StructuredBuffer.h"
+#include "SystemManagement/Systems/GraphicsSystem.h"
+
+StructuredBuffer::StructuredBuffer()
+{
+    m_buffer = nullptr;
+    m_resourceView = nullptr;
+}
+
+StructuredBuffer::~StructuredBuffer()
+{
+    SAFE_RELEASE(m_buffer);
+    SAFE_RELEASE(m_resourceView);
+}
+
+void StructuredBuffer::BindResource(UINT resourceIndex)
+{
+    ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    deviceContext->VSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->HSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->DSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->GSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
+}

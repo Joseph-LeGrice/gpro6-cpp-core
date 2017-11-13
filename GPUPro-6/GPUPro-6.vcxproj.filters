@@ -63,12 +63,6 @@
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
       <Filter>Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\ShaderResource.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\Texture2D_ShaderResource.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="DataStructures\Mesh.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
@@ -113,6 +107,12 @@
     </ClCompile>
     <ClCompile Include="DataStructures\SceneGraph.cpp">
       <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\StructuredBuffer.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\Texture2D.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,15 +194,6 @@
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
       <Filter>Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\ShaderResource.h">
-      <Filter>Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\Texture2D_ShaderResource.h">
-      <Filter>Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer_ShaderResource.h">
-      <Filter>Graphics\ResourceTypes</Filter>
-    </ClInclude>
     <ClInclude Include="DataStructures\Mesh.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
@@ -256,6 +247,12 @@
     </ClInclude>
     <ClInclude Include="Components\Util\EntityUtil.hpp">
       <Filter>Components\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\Texture2D.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer.h">
+      <Filter>Graphics\ResourceTypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

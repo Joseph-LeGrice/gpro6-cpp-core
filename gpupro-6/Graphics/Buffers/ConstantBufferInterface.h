@@ -1,18 +1,10 @@
 #pragma once
 
+#include <tuple>
 #include "Graphics/Buffers/ConstantBuffer.h"
 
 #include "DataStructures/Vector2.h"
 #include "DataStructures/Vector4.h"
-
-#define REGISTER_BUFFER(bufferType) \
-public: \
-	bufferType& Get##bufferType##() \
-	{ \
-		return m_##bufferType##Buffer; \
-	} \
-private: \
-	bufferType m_##bufferType##Buffer; \
 
 struct PER_OBJECT_BUFFER
 {
@@ -54,17 +46,30 @@ struct MATERIAL_BUFFER_CONTAINER
     MATERIAL_BUFFER buf;
 };
 
+template<typename... Types>
+class ConstantBufferInterfaceImpl
+{
+public:
+    template<class T>
+    T& GetBuffer()
+    {
+        return std::get<T>(m_constantBuffers);
+    }
+
+    ConstantBufferInterfaceImpl() = default;
+    ~ConstantBufferInterfaceImpl() = default;
+    ConstantBufferInterfaceImpl(ConstantBufferInterfaceImpl&) = delete;
+
+private:
+    std::tuple<Types...> m_constantBuffers;
+};
+
 typedef ConstantBuffer<PER_OBJECT_BUFFER, 0, BIND_ALL> PerObjectBuffer;
 typedef ConstantBuffer<MATERIAL_BUFFER_CONTAINER, 1, BIND_ALL> MaterialBuffer;
 
-class ConstantBufferInterface
-{
-    //TODO: Replace REGISTER_BUFFER macro with a std::tuple
-	REGISTER_BUFFER(PerObjectBuffer);
-	REGISTER_BUFFER(MaterialBuffer);
+typedef ConstantBufferInterfaceImpl<
+    PerObjectBuffer,
+    MaterialBuffer
+> ConstantBufferInterface;
 
-public:
-    ConstantBufferInterface() = default;
-    ~ConstantBufferInterface() = default;
-    ConstantBufferInterface(ConstantBufferInterface&) = delete;
-};
+ConstantBufferInterface& GetConstantBufferInterface();

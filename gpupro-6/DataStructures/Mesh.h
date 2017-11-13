@@ -6,10 +6,11 @@
 
 class Mesh
 {
-	friend int CreateMesh();
-
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
+
+	Mesh();
+	Mesh(const Mesh&) = delete;
 
 	void SetVertices(std::vector<Vector3>& verts);
 	void SetNormals(std::vector<Vector3>& normals);
@@ -22,9 +23,4 @@ public:
 private:
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
-
-	Mesh();
-	Mesh(const Mesh&) = delete;
 };
-
-int CreateMesh();

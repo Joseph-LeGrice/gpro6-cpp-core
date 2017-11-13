@@ -1,27 +1,36 @@
 #include "stdafx.h"
 
-#include "Graphics/ResourceTypes/Texture2D_ShaderResource.h"
+#include "Graphics/ResourceTypes/Texture2D.h"
 #include "SystemManagement/SystemManager.h"
 #include "AssetManagement/AssetManager.h"
 #include "Utilities/PerlinNoise.h"
 #include "Utilities/ImagingFactory.h"
 
-Texture2D_ShaderResource::Texture2D_ShaderResource()
+Texture2D::Texture2D()
 {
 	m_pTexture = nullptr;
 	m_resourceView = nullptr;
 }
 
-
-Texture2D_ShaderResource::~Texture2D_ShaderResource()
+Texture2D::~Texture2D()
 {
 	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_resourceView);
 }
 
-int CreateTextureResourceFromFile(std::wstring filepath)
+void Texture2D::BindResource(UINT resourceIndex)
 {
-	BYTE* pbBuffer = nullptr;
+    ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    deviceContext->VSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->HSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->DSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->GSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
+}
+
+int Texture2D::CreateTextureResourceFromFile(std::wstring filepath)
+{
+    BYTE* pbBuffer = nullptr;
 	UINT bpp, width, height;
 	DXGI_FORMAT pixelFormat;
 	HRESULT hr = ImagingFactory::GetPixelDataFromFile(filepath, &pbBuffer, pixelFormat, bpp, width, height);
@@ -45,8 +54,10 @@ int CreateTextureResourceFromFile(std::wstring filepath)
 		data.SysMemPitch = width * bpp;
 		data.SysMemSlicePitch = width * height * bpp;
 
-		Texture2D_ShaderResource* newTexture2D = new Texture2D_ShaderResource();
-		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+        int index = GetAssetManager().AllocateNew<Texture2D>();
+        Texture2D* newTexture2D = GetAssetManager().GetAsset<Texture2D>(index);
+        
+        ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		bool createdEverything = false;
 		HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &newTexture2D->m_pTexture);
 		if (SUCCEEDED(createTextureResult))
@@ -60,22 +71,16 @@ int CreateTextureResourceFromFile(std::wstring filepath)
 
 		if (!createdEverything)
 		{
-			SAFE_DELETE(newTexture2D)
+            GetAssetManager().Deallocate<Texture2D>(index);
 		}
 		delete[] pbBuffer;
 
-		int index = AssetManager::Instance()->RegisterShaderResource((ShaderResource&)(*newTexture2D));
 		return index;
 	}
 	else
 	{
 		return -1;
 	}
-}
-
-ID3D11ShaderResourceView* Texture2D_ShaderResource::GetResourceView()
-{
-	return m_resourceView;
 }
 
 /*

@@ -4,10 +4,9 @@
 #include "Components/Util/EntityUtil.hpp"
 #include "DataStructures/SceneGraph.h"
 #include "AssetManagement/AssetManager.h"
-#include "Graphics/ResourceTypes/StructuredBuffer_ShaderResource.h"
+#include "Graphics/ResourceTypes/StructuredBuffer.h"
 
 #define MAX_LIGHTS 5
-typedef StructuredBuffer_ShaderResource<LIGHT_BUFFER, MAX_LIGHTS> StructuredBufferLights;
 
 LightingSystem::LightingSystem()
 {
@@ -21,7 +20,10 @@ LightingSystem::~LightingSystem()
 
 bool LightingSystem::Initialize()
 {
-    m_lightBufferIndex = StructuredBufferLights::CreateNew();
+    m_lightBufferIndex = GetAssetManager().AllocateNew<StructuredBuffer>();
+    StructuredBuffer* buf = GetAssetManager().GetAsset<StructuredBuffer>(m_lightBufferIndex);
+    buf->Initialize<LIGHT_BUFFER, MAX_LIGHTS>();
+
     return m_lightBufferIndex >= 0;
 }
 
@@ -55,8 +57,7 @@ void LightingSystem::VariableTick()
         lights[i].Selected = TRUE;
     }
 
-    AssetManager& mms = *AssetManager::Instance();
-    StructuredBufferLights* lightBuf = reinterpret_cast<StructuredBufferLights*>(mms.GetShaderResource(m_lightBufferIndex));
+    StructuredBuffer* lightBuf = GetAssetManager().GetAsset<StructuredBuffer>(m_lightBufferIndex);
     if (lightBuf != nullptr)
     {
         lightBuf->UpdateBuffer(*lights);

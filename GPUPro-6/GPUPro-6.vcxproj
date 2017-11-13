@@ -206,9 +206,9 @@
     <ClCompile Include="DataStructures\Vector4.cpp" />
     <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Material.cpp" />
+    <ClCompile Include="Graphics\ResourceTypes\StructuredBuffer.cpp" />
     <ClCompile Include="Graphics\Shader.cpp" />
-    <ClCompile Include="Graphics\ResourceTypes\ShaderResource.cpp" />
-    <ClCompile Include="Graphics\ResourceTypes\Texture2D_ShaderResource.cpp" />
+    <ClCompile Include="Graphics\ResourceTypes\Texture2D.cpp" />
     <ClCompile Include="Graphics\TextureSampler.cpp" />
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Input\KeyboardInput.cpp" />
@@ -256,9 +256,8 @@
     <ClInclude Include="Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Graphics\Material.h" />
     <ClInclude Include="Graphics\Shader.h" />
-    <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer_ShaderResource.h" />
-    <ClInclude Include="Graphics\ResourceTypes\ShaderResource.h" />
-    <ClInclude Include="Graphics\ResourceTypes\Texture2D_ShaderResource.h" />
+    <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer.h" />
+    <ClInclude Include="Graphics\ResourceTypes\Texture2D.h" />
     <ClInclude Include="Graphics\TextureSampler.h" />
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Components\Light.h" />

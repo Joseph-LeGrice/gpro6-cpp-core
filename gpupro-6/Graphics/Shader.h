@@ -6,10 +6,7 @@
 
 class Shader
 {
-	friend class ShaderManagementSystem;
-
 public:
-	static Shader* CreateNew();
 	bool SetCurrentIfValid();
 
 	bool InitVertexShader(std::wstring filename, std::string name);
@@ -18,6 +15,7 @@ public:
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
 
+	Shader();
     ~Shader();
 
 private:
@@ -27,7 +25,5 @@ private:
 	ID3D11GeometryShader* m_geometryShader;
 	ID3D11HullShader* m_hullShader;
 	ID3D11DomainShader* m_domainShader;
-
-	Shader();
 };
 

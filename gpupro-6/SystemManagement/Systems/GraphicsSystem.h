@@ -14,7 +14,6 @@
 class Material;
 class VertexBuffer;
 class IndexBuffer;
-class ConstantBufferInterface;
 struct Camera;
 
 class GraphicsSystem : public ISystem
@@ -22,7 +21,6 @@ class GraphicsSystem : public ISystem
 public:
 	ID3D11Device* GetGraphicsDevice();
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
-    ConstantBufferInterface& GetConstantBufferInterface();
     void SetDirty();
 
     GraphicsSystem();
@@ -45,7 +43,6 @@ private:
 	bool m_isDirty;
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;
-    ConstantBufferInterface* m_constantBuffers;
 
 	float m_viewportWidth, m_viewportHeight;
 	

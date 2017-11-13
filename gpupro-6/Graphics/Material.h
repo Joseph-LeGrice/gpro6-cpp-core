@@ -12,27 +12,27 @@ typedef std::unordered_map<size_t, std::vector<size_t>> MeshTransformMap;
 class Material
 {
 public:
+    struct ResourceDetails
+    {
+        int m_resourceIndex;
+        size_t m_slotIndex;
+    };
+
 	~Material();
-
-	static int Create();
-
-	bool BindIfValid();
-	
-	void SetShader(Shader* shader, size_t numberOfResources, size_t numberOfSamplers);
-	
-	void AddShaderResource(int shaderResourceIndex, size_t shaderResourceSlotIndex);
-	void RemoveShaderResource(size_t shaderResourceSlotIndex);
-
-	void AddTextureSampler(int textureSamplerIndex, size_t textureSamplerSlotIndex);
-	void RemoveTextureSampler(size_t textureSamplerSlotIndex);
-
-private:
 	Material();
 	Material(const Material&) = delete;
 
+    bool BindIfValid();
+	
+    void SetShader(Shader* shader);
+	
+    void AddTexture2DResource(ResourceDetails rd);
+    void AddStructuredBufferResource(ResourceDetails rd);
+	void AddTextureSampler(ResourceDetails rd);
+	
+private:
 	Shader* m_shader;
-	size_t m_numberOfResources;
-	size_t m_numberOfTextureSamplers;
-	std::vector<int> m_shaderResourceIndexes;
-	std::vector<int> m_textureSamplerIndexes;
+    std::vector<ResourceDetails> m_texture2dIndexes;
+    std::vector<ResourceDetails> m_structuredBufferIndexes;
+	std::vector<ResourceDetails> m_textureSamplerIndexes;
 };

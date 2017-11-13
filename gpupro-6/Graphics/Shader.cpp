@@ -29,13 +29,6 @@ Shader::~Shader()
 }
 
 
-Shader* Shader::CreateNew()
-{
-	Shader* newShaderInstance = new Shader();
-    AssetManager::Instance()->RegisterShader(newShaderInstance);
-	return newShaderInstance;
-}
-
 bool Shader::SetCurrentIfValid()
 {
 	if (m_vertexShader == nullptr || m_inputLayout == nullptr || m_pixelShader == nullptr)
