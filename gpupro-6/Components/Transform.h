@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Components/ComponentType.hpp"
+#include "Components/Util/ComponentType.hpp"
 #include "DataStructures\Vector3.h"
 #include "DataStructures\Quaternion.h"
 

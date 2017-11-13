@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "AssetManagement/AssetManager.h"
-#include "DataStructures/Mesh.h"
+#include "Graphics/ResourceTypes/Mesh.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
 

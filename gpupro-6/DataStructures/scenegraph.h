@@ -6,7 +6,7 @@
 #include "Components/Light.h"
 #include "Components/Entity.h"
 
-#include "DataStructures/ComponentArray.hpp"
+#include "Components/Util/ComponentArray.hpp"
 #include <vector>
 #include <tuple>
 

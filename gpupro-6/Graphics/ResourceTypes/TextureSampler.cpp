@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Graphics/TextureSampler.h"
+#include "Graphics/ResourceTypes/TextureSampler.h"
 #include "AssetManagement/AssetManager.h"
 #include "SystemManagement/SystemManager.h"
 

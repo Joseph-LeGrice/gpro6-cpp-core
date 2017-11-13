@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "DataStructures/Mesh.h"
+#include "Graphics/ResourceTypes/Mesh.h"
 #include "AssetManagement/AssetManager.h"
 
 

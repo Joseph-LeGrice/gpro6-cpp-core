@@ -9,15 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Graphics\Shader.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Material.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\TextureSampler.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Input\MouseInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
@@ -57,15 +48,6 @@
     <ClCompile Include="Components\Camera.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
-      <Filter>Graphics\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
-      <Filter>Graphics\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="DataStructures\Mesh.cpp">
-      <Filter>DataStructures</Filter>
-    </ClCompile>
     <ClCompile Include="SystemManagement\ISystem.cpp">
       <Filter>SystemManagement</Filter>
     </ClCompile>
@@ -81,9 +63,6 @@
     <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp">
-      <Filter>Graphics\Buffers</Filter>
-    </ClCompile>
     <ClCompile Include="AssetManagement\AssetManager.cpp">
       <Filter>AssetManagement</Filter>
     </ClCompile>
@@ -93,14 +72,8 @@
     <ClCompile Include="SystemManagement\SystemManager.cpp">
       <Filter>SystemManagement</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Light.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="DataStructures\Color.cpp">
       <Filter>DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="DataStructures\Util\ComponentReferenceNode.cpp">
-      <Filter>DataStructures\Util</Filter>
     </ClCompile>
     <ClCompile Include="Components\Entity.cpp">
       <Filter>Components</Filter>
@@ -108,11 +81,35 @@
     <ClCompile Include="DataStructures\SceneGraph.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp">
+      <Filter>Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
+      <Filter>Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
+      <Filter>Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\Material.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\Mesh.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\Shader.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
     <ClCompile Include="Graphics\ResourceTypes\StructuredBuffer.cpp">
       <Filter>Graphics\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\ResourceTypes\Texture2D.cpp">
       <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\TextureSampler.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Util\ComponentReferenceNode.cpp">
+      <Filter>Components\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +126,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="DataStructures\SceneGraph.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="DataStructures\VertexData.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="DataStructures\Vector2.h">
@@ -151,15 +145,6 @@
     </ClInclude>
     <ClInclude Include="DataStructures\Vector3.h">
       <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Shader.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\TextureSampler.h">
-      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Input\MouseInput.h">
       <Filter>Input</Filter>
@@ -185,18 +170,6 @@
     <ClInclude Include="Utilities\Logging.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\ConstantBuffer.h">
-      <Filter>Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
-      <Filter>Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
-      <Filter>Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="DataStructures\Mesh.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
     <ClInclude Include="SystemManagement\ISystem.h">
       <Filter>SystemManagement</Filter>
     </ClInclude>
@@ -211,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="SystemManagement\Systems\TimeSystem.h">
       <Filter>SystemManagement\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Buffers\ConstantBufferInterface.h">
-      <Filter>Graphics\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="AssetManagement\AssetManager.h">
       <Filter>AssetManagement</Filter>
@@ -233,26 +203,53 @@
     <ClInclude Include="SystemManagement\SystemConfiguration.hpp">
       <Filter>SystemManagement</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\ComponentArray.hpp">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="DataStructures\Util\ComponentReferenceNode.h">
-      <Filter>DataStructures\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ComponentType.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Components\MeshRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\Util\EntityUtil.hpp">
       <Filter>Components\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\Texture2D.h">
+    <ClInclude Include="Components\Util\ComponentType.hpp">
+      <Filter>Components\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\ConstantBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\ConstantBufferInterface.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\TextureSampler.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\Material.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\Mesh.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\Shader.h">
       <Filter>Graphics\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer.h">
       <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ResourceTypes\Texture2D.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Util\ComponentReferenceNode.h">
+      <Filter>Components\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Util\ComponentArray.hpp">
+      <Filter>Components\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\VertexData.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -277,12 +274,6 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{dfa88832-0aec-4779-bfde-6d8a9e35ef6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Buffers">
-      <UniqueIdentifier>{ff41a36b-2160-44c8-a10d-3072861fee0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\ResourceTypes">
-      <UniqueIdentifier>{538c66c2-f9b2-458e-8f20-59fccfb88305}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemManagement">
       <UniqueIdentifier>{5c0db4db-7336-4d84-ab2a-1fcd77c90e7e}</UniqueIdentifier>
     </Filter>
@@ -292,11 +283,14 @@
     <Filter Include="AssetManagement">
       <UniqueIdentifier>{0f100b31-8b51-4360-b4ff-bbce9c137a98}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DataStructures\Util">
-      <UniqueIdentifier>{28b573a7-11e8-46bb-acac-3d1deb605f8b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\Util">
       <UniqueIdentifier>{9eb398d9-b6cd-4122-a12b-6349f130c961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Buffers">
+      <UniqueIdentifier>{42745e47-bee4-479e-ad5b-0520e1afc869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\ResourceTypes">
+      <UniqueIdentifier>{c922c5fa-36ad-47b1-9ab2-e1181970ae27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

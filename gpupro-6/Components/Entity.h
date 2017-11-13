@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Components/ComponentType.hpp"
-#include "DataStructures/Util/ComponentReferenceNode.h"
+#include "Components/Util/ComponentType.hpp"
+#include "Components/Util/ComponentReferenceNode.h"
 
 #include <vector>
 

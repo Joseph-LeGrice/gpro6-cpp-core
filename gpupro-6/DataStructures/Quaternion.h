@@ -1,7 +1,7 @@
 #pragma once
 
 #include <math.h>
-#include "DataStructures/VertexData.h"
+#include "Graphics/VertexData.h"
 #include "DataStructures/Matrix4x4.h"
 
 struct Quaternion

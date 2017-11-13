@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Components/ComponentType.hpp"
+#include "Components/Util/ComponentType.hpp"
 #include "DataStructures/Matrix4x4.h"
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"

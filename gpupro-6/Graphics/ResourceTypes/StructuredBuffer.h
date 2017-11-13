@@ -8,8 +8,7 @@ class StructuredBuffer
 public:
     StructuredBuffer();
     ~StructuredBuffer();
-    StructuredBuffer(const StructuredBuffer&) = delete;
-    
+
     void BindResource(UINT resourceIndex);
 
     template<class T, UINT m_numberOfElements>

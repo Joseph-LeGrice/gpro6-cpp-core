@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Components/ComponentType.hpp"
+#include "Components/Util/ComponentType.hpp"
 
 
 static const unsigned int c_maxComponentsOfSameType = 10;

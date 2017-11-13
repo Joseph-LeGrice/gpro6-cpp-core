@@ -3,7 +3,7 @@
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/InputSystem.h"
 #include "SystemManagement/Systems/TimeSystem.h"
-#include "DataStructures/ComponentArray.hpp"
+#include "Components/Util/ComponentArray.hpp"
 #include "DataStructures/SceneGraph.h"
 #include "DataStructures/Quaternion.h"
 #include "DataStructures/SceneGraph.h"

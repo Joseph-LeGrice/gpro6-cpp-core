@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Graphics/Buffers/VertexBuffer.h"
-#include "DataStructures/VertexData.h"
+#include "Graphics/VertexData.h"
 #include "SystemManagement/SystemManager.h"
 
 VertexBuffer::VertexBuffer()

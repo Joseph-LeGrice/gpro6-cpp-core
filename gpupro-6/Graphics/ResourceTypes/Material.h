@@ -20,7 +20,6 @@ public:
 
 	~Material();
 	Material();
-	Material(const Material&) = delete;
 
     bool BindIfValid();
 	

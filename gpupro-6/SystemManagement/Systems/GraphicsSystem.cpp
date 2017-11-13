@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "AssetManagement/AssetManager.h"
-#include "Graphics/Material.h"
+#include "Graphics/ResourceTypes/Material.h"
 #include "Components/Util/EntityUtil.hpp"
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"

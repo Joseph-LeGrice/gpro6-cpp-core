@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DataStructures/Color.h"
-#include "Components/ComponentType.hpp"
+#include "Components/Util/ComponentType.hpp"
 
 enum LightType
 {

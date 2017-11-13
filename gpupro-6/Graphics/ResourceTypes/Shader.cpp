@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "Graphics\Shader.h"
+#include "Graphics/ResourceTypes/Shader.h"
 
 #include "D3DX11.h"
 
-#include "DataStructures\VertexData.h"
+#include "Graphics/VertexData.h"
 #include "SystemManagement/SystemManager.h"
 #include "AssetManagement/AssetManager.h"
 
