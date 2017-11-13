@@ -1,9 +1,14 @@
 #include "stdafx.h"
 #include "AssetManagement/AssetManager.h"
 
+AssetManager* s_instance = new AssetManager();
 
 AssetManager& GetAssetManager()
 {
-    static AssetManager* s_instance = new AssetManager();
     return *s_instance;
+}
+
+void DestroyAssetManager()
+{
+    delete s_instance;
 }

@@ -36,7 +36,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-
+    
     try
 	{
         WindowManager::InitializeWindow();
@@ -48,6 +48,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             InputSystem,
             MouseRotateSystem
         >();
+
+        InitConstantBufferInterface();
         
         int materialIndex = GetAssetManager().AllocateNew<Material>();
         Material& simpleQuadMat = *GetAssetManager().GetAsset<Material>(materialIndex);
@@ -67,6 +69,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         simpleQuadMat.AddTexture2DResource({ textureResourceIndex, 1 });
 
 		int textureSamplerIndex = GetAssetManager().AllocateNew<TextureSampler>();
+        TextureSampler* ts = GetAssetManager().GetAsset<TextureSampler>(textureSamplerIndex);
+        ts->Initialize();
         simpleQuadMat.AddTextureSampler({ textureSamplerIndex, 0 });
 
         //------------------------------------------------------------------------------------
@@ -140,7 +144,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     SystemManager::Deinitialize();
     ImagingFactory::DestroyFactory();
     WindowManager::ShutdownWindow();
-    //TODO: Destroy everything in the assetmanager here
+    
+    DestroyConstantBufferInterface();
+    DestroyAssetManager();
 
 	return returnCode;
 }

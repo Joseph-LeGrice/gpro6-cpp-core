@@ -72,4 +72,8 @@ typedef ConstantBufferInterfaceImpl<
     MaterialBuffer
 > ConstantBufferInterface;
 
+extern ConstantBufferInterface* s_buffer;
+
+void InitConstantBufferInterface();
 ConstantBufferInterface& GetConstantBufferInterface();
+void DestroyConstantBufferInterface();

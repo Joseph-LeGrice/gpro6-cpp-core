@@ -14,7 +14,6 @@ class AssetManagerImpl
 {
 public:
 
-    //TODO: Should not be storing lists of pointers. At the very least it should be lists of the actual type (although this doesn't allow for templated types).
     //TODO: Ideally should be storing some structure which allows for grouping the memory together such that assets 'relevant' to each other exists near to each other.
 
     std::tuple<std::vector<Types>...> m_assetLists;
@@ -56,4 +55,7 @@ typedef AssetManagerImpl<
     Material
 > AssetManager;
 
+extern AssetManager* s_instance;
+
 AssetManager& GetAssetManager();
+void DestroyAssetManager();
