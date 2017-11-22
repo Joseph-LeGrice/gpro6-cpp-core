@@ -11,8 +11,22 @@
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Buffers/ConstantBufferInterface.h"
 
+#include "FreeImage.h"
+#include <iostream>
+
 
 #define DEBUG
+
+void FreeImageOutput(FREE_IMAGE_FORMAT fif, const char* message)
+{
+    std::cout << "***" << std::endl;
+    if (fif != FIF_UNKNOWN)
+    {
+        std::cout << "Format: " << FreeImage_GetFormatFromFIF(fif) << std::endl;
+    }
+    std::cout << message << std::endl;
+    std::cout << "***" << std::endl;
+}
 
 GraphicsSystem::GraphicsSystem()
 {
@@ -20,6 +34,8 @@ GraphicsSystem::GraphicsSystem()
 	m_swapchain = nullptr;
 	m_device = nullptr;
 	m_deviceContext = nullptr;
+
+    FreeImage_SetOutputMessage(FreeImageOutput);
 }
 
 GraphicsSystem::~GraphicsSystem()

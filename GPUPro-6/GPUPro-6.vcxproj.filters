@@ -18,9 +18,6 @@
     <ClCompile Include="Utilities\PerlinNoise.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\ImagingFactory.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Utilities\MeshHelper.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -158,9 +155,6 @@
     <ClInclude Include="Utilities\PerlinNoise.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\ImagingFactory.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\MeshHelper.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -251,6 +245,7 @@
     <ClInclude Include="Graphics\VertexData.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Util\FreeImageUtil.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

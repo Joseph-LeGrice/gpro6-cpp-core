@@ -4,7 +4,7 @@
 #include "SystemManagement/SystemManager.h"
 #include "AssetManagement/AssetManager.h"
 #include "Utilities/PerlinNoise.h"
-#include "Utilities/ImagingFactory.h"
+#include "FreeImage.h"
 
 Texture2D::Texture2D()
 {
@@ -28,59 +28,63 @@ void Texture2D::BindResource(UINT resourceIndex)
     deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
 }
 
-int Texture2D::CreateTextureResourceFromFile(std::wstring filepath)
+int Texture2D::CreateTextureResourceFromFile(const wchar_t* filepath)
 {
-    BYTE* pbBuffer = nullptr;
-	UINT bpp, width, height;
-	DXGI_FORMAT pixelFormat;
-	HRESULT hr = ImagingFactory::GetPixelDataFromFile(filepath, &pbBuffer, pixelFormat, bpp, width, height);
+    FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeU(filepath);
+    if (fif != FIF_UNKNOWN)
+    {
+        FIBITMAP* bmp = FreeImage_LoadU(fif, filepath);
+        FIBITMAP* bitmap = FreeImage_ConvertTo32Bits(bmp);
+        FreeImage_Unload(bmp);
 
-	if (SUCCEEDED(hr))
-	{
-		D3D11_TEXTURE2D_DESC desc;
-		ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
-		desc.Width = width;
-		desc.Height = height;
-		desc.MipLevels = 1;
-		desc.ArraySize = 1;
-		desc.Format = pixelFormat;
-		desc.SampleDesc.Count = 1;
-		desc.Usage = D3D11_USAGE_DEFAULT;
-		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+        UINT pitch = FreeImage_GetPitch(bitmap);
+        UINT width = FreeImage_GetWidth(bitmap);
+        UINT height = FreeImage_GetHeight(bitmap);
 
-		D3D11_SUBRESOURCE_DATA data;
-		ZeroMemory(&data, sizeof(D3D11_SUBRESOURCE_DATA));
-		data.pSysMem = pbBuffer;
-		data.SysMemPitch = width * bpp;
-		data.SysMemSlicePitch = width * height * bpp;
+        DXGI_FORMAT pixelFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
+        BYTE* pbBuffer = FreeImage_GetBits(bitmap);
+       
+        D3D11_TEXTURE2D_DESC desc;
+        ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
+        desc.Width = width;
+        desc.Height = height;
+        desc.MipLevels = 1;
+        desc.ArraySize = 1;
+        desc.Format = pixelFormat;
+        desc.SampleDesc.Count = 1;
+        desc.Usage = D3D11_USAGE_DEFAULT;
+        desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+
+        D3D11_SUBRESOURCE_DATA data;
+        ZeroMemory(&data, sizeof(D3D11_SUBRESOURCE_DATA));
+        data.pSysMem = pbBuffer;
+        data.SysMemPitch = pitch;
+        data.SysMemSlicePitch = pitch * height;
 
         int index = GetAssetManager().AllocateNew<Texture2D>();
         Texture2D* newTexture2D = GetAssetManager().GetAsset<Texture2D>(index);
-        
+
         ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
-		bool createdEverything = false;
-		HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &newTexture2D->m_pTexture);
-		if (SUCCEEDED(createTextureResult))
-		{
-			HRESULT createResourceViewResult = device->CreateShaderResourceView(newTexture2D->m_pTexture, NULL, &newTexture2D->m_resourceView);
-			if (SUCCEEDED(createResourceViewResult))
-			{
-				createdEverything = true;
-			}
-		}
+        bool createdEverything = false;
+        HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &newTexture2D->m_pTexture);
+        if (SUCCEEDED(createTextureResult))
+        {
+            HRESULT createResourceViewResult = device->CreateShaderResourceView(newTexture2D->m_pTexture, NULL, &newTexture2D->m_resourceView);
+            if (SUCCEEDED(createResourceViewResult))
+            {
+                createdEverything = true;
+            }
+        }
 
-		if (!createdEverything)
-		{
+        if (!createdEverything)
+        {
             GetAssetManager().Deallocate<Texture2D>(index);
-		}
-		delete[] pbBuffer;
+        }
+        FreeImage_Unload(bitmap);
 
-		return index;
-	}
-	else
-	{
-		return -1;
-	}
+        return index;
+    }
+	return -1;
 }
 
 /*

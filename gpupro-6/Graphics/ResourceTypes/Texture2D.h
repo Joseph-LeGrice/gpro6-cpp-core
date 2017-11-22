@@ -11,7 +11,7 @@ public:
 
     void BindResource(UINT resourceIndex);
 
-    static int CreateTextureResourceFromFile(std::wstring filepath);
+    static int CreateTextureResourceFromFile(const wchar_t* filepath);
 
 private:
 	ID3D11Texture2D* m_pTexture;

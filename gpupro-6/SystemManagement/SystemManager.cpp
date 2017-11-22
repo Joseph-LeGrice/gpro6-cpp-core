@@ -1,9 +1,23 @@
 #include "stdafx.h"
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/TimeSystem.h"
+//#include "FreeImage.h"
+#include <iostream>
 
 SystemManager* SystemManager::s_instance = new SystemManager();
+/*
+void PrintFreeImageError(FREE_IMAGE_FORMAT fif, const char* message)
+{
+    std::cout << "***" << std::endl;
+    if (fif != FIF_UNKNOWN)
+    {
+        std::cout << FreeImage_GetFormatFromFIF(fif) << " Format" << std::endl;
+    }
+    std::cout << message << std::endl;
+    std::cout << "***" << std::endl;
 
+}
+*/
 SystemManager::~SystemManager()
 {
 
@@ -11,6 +25,7 @@ SystemManager::~SystemManager()
 
 SystemManager::SystemManager()
 {
+    //FreeImage_SetOutputMessage(PrintFreeImageError);
 }
 
 int SystemManager::DoRunGameLoop()

@@ -25,7 +25,6 @@
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/WindowManager.h"
 #include "MouseRotateSystem.h"
-#include "Utilities/ImagingFactory.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
 
@@ -142,7 +141,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     int returnCode = SystemManager::RunGameLoop();
 
     SystemManager::Deinitialize();
-    ImagingFactory::DestroyFactory();
     WindowManager::ShutdownWindow();
     
     DestroyConstantBufferInterface();
