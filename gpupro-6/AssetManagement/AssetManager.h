@@ -31,7 +31,14 @@ public:
     T* GetAsset(int index)
     {
         std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
-        return &assetList[index];
+        if (index > -1 && index < assetList.size())
+        {
+            return &assetList[index];
+        }
+        else
+        {
+            return nullptr;
+        }
     }
 
     template<class T>
