@@ -24,6 +24,8 @@ void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
     FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeU(filepath);
     if (fif != FIF_UNKNOWN)
     {
+        ReleaseResources();
+
         FIBITMAP* bmp = FreeImage_LoadU(fif, filepath);
         m_bitmap = FreeImage_ConvertTo32Bits(bmp);
         FreeImage_Unload(bmp);
@@ -38,8 +40,6 @@ void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
 
 void Texture2D::CreateResources()
 {
-    ReleaseResources();
-
     UINT pitch = FreeImage_GetPitch(m_bitmap);
     UINT width = FreeImage_GetWidth(m_bitmap);
     UINT height = FreeImage_GetHeight(m_bitmap);
