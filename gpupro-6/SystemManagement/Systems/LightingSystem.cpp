@@ -20,11 +20,15 @@ LightingSystem::~LightingSystem()
 
 bool LightingSystem::Initialize()
 {
-    m_lightBufferIndex = GetAssetManager().AllocateNew<StructuredBuffer>();
-    StructuredBuffer* buf = GetAssetManager().GetAsset<StructuredBuffer>(m_lightBufferIndex);
-    buf->Initialize<LIGHT_BUFFER, MAX_LIGHTS>();
+    StructuredBuffer* buf = GetAssetManager().Instantiate<StructuredBuffer>();
+    if (buf != nullptr)
+    {
+        buf->Initialize<LIGHT_BUFFER, MAX_LIGHTS>();
+        m_lightBufferIndex = buf->GetResourceID();
 
-    return m_lightBufferIndex >= 0;
+        return true;
+    }
+    return false;
 }
 
 void LightingSystem::VariableTick()

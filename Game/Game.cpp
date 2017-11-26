@@ -50,26 +50,26 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         InitConstantBufferInterface();
         
-        int materialIndex = GetAssetManager().AllocateNew<Material>();
-        Material& simpleQuadMat = *GetAssetManager().GetAsset<Material>(materialIndex);
-
-        int shaderIndex = GetAssetManager().AllocateNew<Shader>();
-        Shader* materialShader = GetAssetManager().GetAsset<Shader>(shaderIndex);
+        Material& simpleQuadMat = *GetAssetManager().Instantiate<Material>();
+        Shader* materialShader = GetAssetManager().Instantiate<Shader>();
 
         materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-        simpleQuadMat.SetShader(materialShader);  //9, 1);
+        simpleQuadMat.SetShader(materialShader);
 
         int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
         simpleQuadMat.AddStructuredBufferResource({ lightBufferIndex, 0});
 
-        int textureResourceIndex = Texture2D::CreateTextureResourceFromFile(L"C:\\TestImage.png");
-        simpleQuadMat.AddTexture2DResource({ textureResourceIndex, 1 });
+        Texture2D* testImageTexture = GetAssetManager().Instantiate<Texture2D>();
+        testImageTexture->InitializeWithBitmap(L"C:\\TestImage.png");
+        int textureResourceId = static_cast<int>(testImageTexture->GetResourceID());
+        simpleQuadMat.AddTexture2DResource({ textureResourceId, 1 });
 
-		int textureSamplerIndex = GetAssetManager().AllocateNew<TextureSampler>();
-        TextureSampler* ts = GetAssetManager().GetAsset<TextureSampler>(textureSamplerIndex);
+        TextureSampler* ts = GetAssetManager().Instantiate<TextureSampler>();
         ts->Initialize();
+
+        int textureSamplerIndex = static_cast<int>(ts->GetResourceID());
         simpleQuadMat.AddTextureSampler({ textureSamplerIndex, 0 });
 
         //------------------------------------------------------------------------------------
@@ -112,8 +112,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		meshTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
 		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
         MeshRendererComponent& meshRenderer = EntityUtil::AddComponent<MeshRendererComponent>(meshEntity);
-        meshRenderer.m_data.m_meshIndex = MeshHelper::CreateSphereUV();
-        meshRenderer.m_data.m_materialIndex = materialIndex;
+        meshRenderer.m_data.m_meshIndex = MeshHelper::CreateSphereUV()->GetResourceID();
+        meshRenderer.m_data.m_materialIndex = simpleQuadMat.GetResourceID();
 
         // Camera
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();

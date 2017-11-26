@@ -3,8 +3,9 @@
 #include "D3D11.h"
 #include <string>
 #include <vector>
+#include "AssetManagement/IResource.h"
 
-class Shader
+class Shader : public IResource
 {
 public:
 	bool SetCurrentIfValid();
@@ -15,7 +16,7 @@ public:
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
 
-	Shader();
+	Shader(UINT resourceId);
     ~Shader();
 
 private:

@@ -1,12 +1,13 @@
 #pragma once
 
 #include "D3D11.h"
+#include "AssetManagement/IResource.h"
 #include "SystemManagement/SystemManager.h"
 
-class StructuredBuffer
+class StructuredBuffer : public IResource
 {
 public:
-    StructuredBuffer();
+    StructuredBuffer(UINT resourceId);
     ~StructuredBuffer();
 
     void BindResource(UINT resourceIndex);

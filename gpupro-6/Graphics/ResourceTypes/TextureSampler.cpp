@@ -3,7 +3,7 @@
 #include "AssetManagement/AssetManager.h"
 #include "SystemManagement/SystemManager.h"
 
-TextureSampler::TextureSampler()
+TextureSampler::TextureSampler(UINT resourceId) : IResource(resourceId)
 {
 	m_sampler = nullptr;
 }

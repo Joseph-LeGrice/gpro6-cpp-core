@@ -4,12 +4,13 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "AssetManagement/IResource.h"
 
 class Shader;
 
 typedef std::unordered_map<size_t, std::vector<size_t>> MeshTransformMap;
 
-class Material
+class Material : public IResource
 {
 public:
     struct ResourceDetails
@@ -18,8 +19,8 @@ public:
         size_t m_slotIndex;
     };
 
+	Material(UINT resouceId);
 	~Material();
-	Material();
 
     bool BindIfValid();
 	

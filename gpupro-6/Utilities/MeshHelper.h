@@ -4,8 +4,8 @@ class Mesh;
 
 namespace MeshHelper
 {
-	int CreateQuad();
-	int CreateSphereICO();
-	int CreateSphereUV();
-	int CreateCube();
+	Mesh* CreateQuad();
+	Mesh* CreateSphereICO();
+	Mesh* CreateSphereUV();
+	Mesh* CreateCube();
 };

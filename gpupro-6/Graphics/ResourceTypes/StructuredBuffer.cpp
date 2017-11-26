@@ -3,7 +3,7 @@
 #include "Graphics/ResourceTypes/StructuredBuffer.h"
 #include "SystemManagement/Systems/GraphicsSystem.h"
 
-StructuredBuffer::StructuredBuffer()
+StructuredBuffer::StructuredBuffer(UINT resourceId) : IResource(resourceId)
 {
     m_buffer = nullptr;
     m_resourceView = nullptr;

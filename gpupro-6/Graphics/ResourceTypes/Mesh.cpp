@@ -3,7 +3,7 @@
 #include "AssetManagement/AssetManager.h"
 
 
-Mesh::Mesh()
+Mesh::Mesh(UINT resourceId) : IResource(resourceId)
 {
 	m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 	m_indices = std::vector<UINT16>();

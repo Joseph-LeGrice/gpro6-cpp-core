@@ -19,12 +19,12 @@ public:
     std::tuple<std::vector<Types>...> m_assetLists;
 
     template<class T>
-    int AllocateNew()
+    T* Instantiate()
     {
         std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
         int index = static_cast<int>(assetList.size());
-        assetList.resize(index + 1);
-        return index;
+        assetList.resize(index + 1, T(index));
+        return &assetList[index];
     }
 
     template<class T>

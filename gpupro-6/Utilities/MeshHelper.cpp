@@ -7,33 +7,31 @@
 
 #include <math.h>
 
-int MeshHelper::CreateQuad()
+Mesh* MeshHelper::CreateQuad()
 {
-    int meshIndex = GetAssetManager().AllocateNew<Mesh>();
-	Mesh& result = *GetAssetManager().GetAsset<Mesh>(meshIndex);
-	
-	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+    Mesh* result = GetAssetManager().Instantiate<Mesh>();
+	result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	verts.push_back({ -1.0f, -1.0f, 0.0f });
 	verts.push_back({ -1.0f,  1.0f, 0.0f });
 	verts.push_back({  1.0f,  1.0f, 0.0f });
 	verts.push_back({  1.0f, -1.0f, 0.0f });
-	result.SetVertices(verts);
+	result->SetVertices(verts);
 		
 	std::vector<Vector3> normals = std::vector<Vector3>();
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
 	normals.push_back({ 0.0f, 0.0f, 1.0f });
-	result.SetNormals(normals);
+	result->SetNormals(normals);
 
 	std::vector<Vector2> uvs = std::vector<Vector2>();
 	uvs.push_back({ 0.0f, 1.0f });
 	uvs.push_back({ 0.0f, 0.0f });
 	uvs.push_back({ 1.0f, 0.0f });
 	uvs.push_back({ 1.0f, 1.0f });
-	result.SetUVs(uvs);
+	result->SetUVs(uvs);
 
 	std::vector<UINT16> indices = std::vector<UINT16>();
 	indices.push_back(1);
@@ -41,37 +39,29 @@ int MeshHelper::CreateQuad()
 	indices.push_back(0);
 	indices.push_back(2);
 	indices.push_back(3);
-	result.SetIndices(indices);
+	result->SetIndices(indices);
 
-	return meshIndex;
+	return result;
 }
 
-int MeshHelper::CreateSphereICO()
+Mesh* MeshHelper::CreateSphereICO()
 {
-    int meshIndex = GetAssetManager().AllocateNew<Mesh>();
-    Mesh& result = *GetAssetManager().GetAsset<Mesh>(meshIndex);
-
-	std::vector<Vector3> verts = std::vector<Vector3>();
+    std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();
 	std::vector<Vector2> uvs = std::vector<Vector2>();
 	std::vector<UINT16> indices = std::vector<UINT16>();
 
+    Mesh* result = GetAssetManager().Instantiate<Mesh>();
+    result->SetVertices(verts);
+    result->SetNormals(norms);
+    result->SetUVs(uvs);
+    result->SetIndices(indices);
 
-	result.SetVertices(verts);
-	result.SetNormals(norms);
-	result.SetUVs(uvs);
-	result.SetIndices(indices);
-
-	return meshIndex;
+	return result;
 }
 
-int MeshHelper::CreateSphereUV()
+Mesh* MeshHelper::CreateSphereUV()
 {
-    int meshIndex = GetAssetManager().AllocateNew<Mesh>();
-    Mesh& result = *GetAssetManager().GetAsset<Mesh>(meshIndex);
-
-	result.m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();
 	std::vector<Vector2> uvs = std::vector<Vector2>();
@@ -123,21 +113,18 @@ int MeshHelper::CreateSphereUV()
 		}
 	}
 
-	result.SetVertices(verts);
-	result.SetNormals(norms);
-	result.SetUVs(uvs);
-	result.SetIndices(indices);
+    Mesh* result = GetAssetManager().Instantiate<Mesh>();
+    result->m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+    result->SetVertices(verts);
+    result->SetNormals(norms);
+    result->SetUVs(uvs);
+    result->SetIndices(indices);
 
-	return meshIndex;
+	return result;
 }
 
-int MeshHelper::CreateCube()
+Mesh* MeshHelper::CreateCube()
 {
-    int meshIndex = GetAssetManager().AllocateNew<Mesh>();
-    Mesh& result = *GetAssetManager().GetAsset<Mesh>(meshIndex);
-
-	result.m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	std::vector<Vector3> norms = std::vector<Vector3>();
 	std::vector<Vector2> uvs = std::vector<Vector2>();
@@ -269,10 +256,12 @@ int MeshHelper::CreateCube()
 	indices.push_back(21);
 	indices.push_back(23);
 
-	result.SetVertices(verts);
-	result.SetNormals(norms);
-	result.SetUVs(uvs);
-	result.SetIndices(indices);
+    Mesh* result = GetAssetManager().Instantiate<Mesh>();
+    result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+    result->SetVertices(verts);
+    result->SetNormals(norms);
+    result->SetUVs(uvs);
+    result->SetIndices(indices);
 
-	return meshIndex;
+	return result;
 }

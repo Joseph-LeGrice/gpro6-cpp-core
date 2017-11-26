@@ -1,15 +1,16 @@
 #pragma once
 
+#include "AssetManagement/IResource.h"
 #include "DataStructures/Matrix4x4.h"
 #include "Graphics/VertexData.h"
 #include <vector>
 
-class Mesh
+class Mesh : public IResource
 {
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
 
-	Mesh();
+	Mesh(UINT resourceId);
 
 	void SetVertices(std::vector<Vector3>& verts);
 	void SetNormals(std::vector<Vector3>& normals);

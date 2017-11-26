@@ -7,7 +7,7 @@
 #include "SystemManagement/SystemManager.h"
 #include "AssetManagement/AssetManager.h"
 
-Shader::Shader()
+Shader::Shader(UINT resourceId) : IResource(resourceId)
 {
 	m_inputLayout = nullptr;
 	m_vertexShader = nullptr;

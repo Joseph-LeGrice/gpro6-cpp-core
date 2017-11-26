@@ -16,7 +16,7 @@
 #include "SystemManagement/Systems/GraphicsSystem.h"
 #include "Utilities/Logging.h"
 
-Material::Material()
+Material::Material(UINT resourceId) : IResource(resourceId)
 {
 	m_shader = nullptr;
 }
