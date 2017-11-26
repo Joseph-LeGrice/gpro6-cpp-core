@@ -16,9 +16,7 @@ Texture2D::Texture2D(UINT resourceId) : IResource(resourceId)
 
 Texture2D::~Texture2D()
 {
-    FreeImage_Unload(m_bitmap);
-	SAFE_RELEASE(m_pTexture);
-	SAFE_RELEASE(m_resourceView);
+    ReleaseResources();
 }
 
 void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
@@ -40,7 +38,8 @@ void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
 
 void Texture2D::CreateResources()
 {
-    
+    ReleaseResources();
+
     UINT pitch = FreeImage_GetPitch(m_bitmap);
     UINT width = FreeImage_GetWidth(m_bitmap);
     UINT height = FreeImage_GetHeight(m_bitmap);
@@ -91,92 +90,12 @@ void Texture2D::BindResource(UINT resourceIndex)
     deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
 }
 
-/*
-
-TODO: Reimplement this with COLOR_DATA being a bit more standardised somewhere else
-	  Actually when we come back to this we could adopt more of a 'procedural texture' approach where we can update the texture at arbitrary points throughout runtime.
-
-struct COLOR_DATA
+void Texture2D::ReleaseResources()
 {
-	FLOAT R;
-	FLOAT G;
-	FLOAT B;
-	FLOAT A;
-}; 
-
-Texture2D_ShaderResource Texture2D_ShaderResource::CreateFromData(COLOR_DATA[] data)
-{
-	ID3D11Device* device = SystemManagement::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
-	const int texture_size = 64;
-
-	D3D11_TEXTURE2D_DESC desc;
-	ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
-
-	desc.Width = texture_size;
-	desc.Height = texture_size;
-	desc.MipLevels = desc.ArraySize = 1;
-	desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	desc.SampleDesc.Count = 1;
-	desc.Usage = D3D11_USAGE_DEFAULT;
-	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-
-	COLOR_DATA* color_data = new COLOR_DATA[texture_size * texture_size];
-
-	//FIXME: Memory Leak here if something goes wrong?
-	//for (int x = 0; x < texture_size; x++)
-	//{
-	//	for (int y = 0; y < texture_size; y++)
-	//	{
-	//		color_data[y * texture_size + x].R = x / 32.0f;
-	//		color_data[y * texture_size + x].G = y / 32.0f;
-	//		color_data[y * texture_size + x].B = 0.0f;
-	//		color_data[y * texture_size + x].A = 1.0f;
-	//	}
-	//}
-
-	for (int x = 0; x < texture_size; x++)
-	{
-		for (int y = 0; y < texture_size; y++)
-		{
-			double noiseVal = PerlinNoise::noise(
-				(double)(x * 3.6 + 4 * texture_size * 2.75),
-				(double)(y * 2.5 + 2 * texture_size * 232.75),
-				(double)(x * y * texture_size * 23.45));
-			noiseVal = noiseVal * 0.23 + noiseVal;
-			//double noiseVal = PerlinNoise::octaveNoise(x, y, x*y, 4, 2.6);
-			//double noiseVal = PerlinNoise::noise(x, y, x*y);
-
-			color_data[y * texture_size + x].R = (FLOAT)noiseVal;
-			color_data[y * texture_size + x].G = (FLOAT)noiseVal;
-			color_data[y * texture_size + x].B = (FLOAT)noiseVal;
-			color_data[y * texture_size + x].A = 1.0f;
-		}
-	}
-
-	D3D11_SUBRESOURCE_DATA data;
-	ZeroMemory(&data, sizeof(D3D11_SUBRESOURCE_DATA));
-	data.pSysMem = color_data;
-	data.SysMemPitch = sizeof(COLOR_DATA) * texture_size;
-	data.SysMemSlicePitch = sizeof(COLOR_DATA) * texture_size * texture_size;
-
-	bool createdEverything = false;
-	HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &m_pTexture);
-	if (SUCCEEDED(createTextureResult))
-	{
-		HRESULT createResourceViewResult = device->CreateShaderResourceView(m_pTexture, NULL, &m_resourceView);
-		if (SUCCEEDED(createResourceViewResult))
-		{
-			createdEverything = true;
-		}
-	}
-
-	if (!createdEverything)
-	{
-		SAFE_RELEASE(m_pTexture);
-		SAFE_RELEASE(m_resourceView);
-		delete[] color_data;
-	}
-
-	return createdEverything;
+    if (m_bitmap != nullptr)
+    {
+        FreeImage_Unload(m_bitmap);
+    }
+    SAFE_RELEASE(m_pTexture);
+    SAFE_RELEASE(m_resourceView);
 }
-*/

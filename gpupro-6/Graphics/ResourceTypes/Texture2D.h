@@ -21,4 +21,5 @@ private:
 	ID3D11ShaderResourceView* m_resourceView;
     
     void CreateResources();
+    void ReleaseResources();
 };
