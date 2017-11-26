@@ -1,4 +1,5 @@
 #include "CommonInclude.hlsl"
+#include "Material.hlsl"
 #include "Lighting.hlsl"
 
 float4 DoNormalMapping(float3x3 TBN, Texture2D tex, sampler s, float2 uv)

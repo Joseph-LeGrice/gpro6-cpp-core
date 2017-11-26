@@ -51,37 +51,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         InitConstantBufferInterface();
         
-        Material& simpleQuadMat = *GetAssetManager().Instantiate<Material>();
         Shader* materialShader = GetAssetManager().Instantiate<Shader>();
-
         materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-        simpleQuadMat.SetShader(materialShader);
-
-        int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
-        simpleQuadMat.AddStructuredBufferResource({ lightBufferIndex, 0});
-
-        Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
-        testCubemap->InitializeWithBitmaps({
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Top.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Bottom.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp"
-        });
-
         Texture2D* testImageTexture = GetAssetManager().Instantiate<Texture2D>();
         testImageTexture->InitializeWithBitmap(L"C:\\GPro_Test\\TestImage.png");
+
+        TextureSampler* textureSampler = GetAssetManager().Instantiate<TextureSampler>();
+        textureSampler->Initialize();
+
+        Material& simpleTestMaterial = *GetAssetManager().Instantiate<Material>();
+        simpleTestMaterial.SetShader(materialShader);
+
+        int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
+        simpleTestMaterial.AddStructuredBufferResource({ lightBufferIndex, 0});
+
         int textureResourceId = static_cast<int>(testImageTexture->GetResourceID());
-        simpleQuadMat.AddTexture2DResource({ textureResourceId, 1 });
-
-        TextureSampler* ts = GetAssetManager().Instantiate<TextureSampler>();
-        ts->Initialize();
-
-        int textureSamplerIndex = static_cast<int>(ts->GetResourceID());
-        simpleQuadMat.AddTextureSampler({ textureSamplerIndex, 0 });
+        simpleTestMaterial.AddTexture2DResource({ textureResourceId, 1 });
+        
+        int textureSamplerIndex = static_cast<int>(textureSampler->GetResourceID());
+        simpleTestMaterial.AddTextureSampler({ textureSamplerIndex, 0 });
 
         //------------------------------------------------------------------------------------
         // MATERIAL BUFFER STUFF
@@ -124,7 +114,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
         MeshRendererComponent& meshRenderer = EntityUtil::AddComponent<MeshRendererComponent>(meshEntity);
         meshRenderer.m_data.m_meshIndex = MeshHelper::CreateSphereUV()->GetResourceID();
-        meshRenderer.m_data.m_materialIndex = simpleQuadMat.GetResourceID();
+        meshRenderer.m_data.m_materialIndex = simpleTestMaterial.GetResourceID();
+
+        //Skybox
+        Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
+        testCubemap->InitializeWithBitmaps({
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Top.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Bottom.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp"
+        });
+
 
         // Camera
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
