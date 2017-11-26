@@ -17,6 +17,7 @@
 #include "Graphics/ResourceTypes/Material.h"
 #include "Graphics/Buffers/ConstantBufferInterface.h"
 #include "Graphics/ResourceTypes/Texture2D.h"
+#include "Graphics/ResourceTypes/Texture2DArray.h"
 #include "Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Graphics/ResourceTypes/TextureSampler.h"
 #include "SystemManagement/SystemManager.h"
@@ -61,8 +62,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
         simpleQuadMat.AddStructuredBufferResource({ lightBufferIndex, 0});
 
+        Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
+        testCubemap->InitializeWithBitmaps({
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Top.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Bottom.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp"
+        });
+
         Texture2D* testImageTexture = GetAssetManager().Instantiate<Texture2D>();
-        testImageTexture->InitializeWithBitmap(L"C:\\TestImage.png");
+        testImageTexture->InitializeWithBitmap(L"C:\\GPro_Test\\TestImage.png");
         int textureResourceId = static_cast<int>(testImageTexture->GetResourceID());
         simpleQuadMat.AddTexture2DResource({ textureResourceId, 1 });
 

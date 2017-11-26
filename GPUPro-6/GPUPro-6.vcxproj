@@ -249,6 +249,7 @@
     <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp" />
     <ClCompile Include="SystemManagement\SystemManager.cpp" />
     <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp" />
+    <ClCompile Include="Graphics\ResourceTypes\Texture2DArray.cpp" />
     <ClCompile Include="Utilities\MeshHelper.cpp" />
     <ClCompile Include="Utilities\PerlinNoise.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -260,6 +261,7 @@
     <ClCompile Include="SystemManagement\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetManagement\IResource.h" />
     <ClInclude Include="Components\Util\ComponentType.hpp" />
     <ClInclude Include="Components\Util\EntityUtil.hpp" />
     <ClInclude Include="Components\MeshRenderer.h" />
@@ -277,7 +279,6 @@
     <ClInclude Include="DataStructures\Vector2.h" />
     <ClInclude Include="DataStructures\Vector3.h" />
     <ClInclude Include="DataStructures\Vector4.h" />
-    <ClInclude Include="Graphics\Util\FreeImageUtil.hpp" />
     <ClInclude Include="Graphics\VertexData.h" />
     <ClInclude Include="Graphics\Buffers\ConstantBuffer.h" />
     <ClInclude Include="Graphics\Buffers\IndexBuffer.h" />
@@ -299,6 +300,7 @@
     <ClInclude Include="SystemManagement\Systems\TimeSystem.h" />
     <ClInclude Include="Input\KeyboardInput.h" />
     <ClInclude Include="Input\MouseInput.h" />
+    <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h" />
     <ClInclude Include="Utilities\Logging.h" />
     <ClInclude Include="Utilities\MathHelper.h" />
     <ClInclude Include="Utilities\MeshHelper.h" />

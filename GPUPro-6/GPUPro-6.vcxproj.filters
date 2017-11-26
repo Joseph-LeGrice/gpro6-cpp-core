@@ -108,6 +108,9 @@
     <ClCompile Include="Components\Util\ComponentReferenceNode.cpp">
       <Filter>Components\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\ResourceTypes\Texture2DArray.cpp">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -245,7 +248,10 @@
     <ClInclude Include="Graphics\VertexData.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Util\FreeImageUtil.hpp" />
+    <ClInclude Include="AssetManagement\IResource.h" />
+    <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h">
+      <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

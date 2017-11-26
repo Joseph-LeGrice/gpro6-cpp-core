@@ -5,6 +5,7 @@
 #include "Graphics/ResourceTypes/Shader.h"
 #include "Graphics/ResourceTypes/Material.h"
 #include "Graphics/ResourceTypes/Texture2D.h"
+#include "Graphics/ResourceTypes/Texture2DArray.h"
 #include "Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Graphics/ResourceTypes/TextureSampler.h"
 #include "Graphics/ResourceTypes/Mesh.h"
@@ -58,6 +59,7 @@ typedef AssetManagerImpl<
     Mesh,
     TextureSampler,
     Texture2D,
+    Texture2DArray,
     StructuredBuffer,
     Material
 > AssetManager;

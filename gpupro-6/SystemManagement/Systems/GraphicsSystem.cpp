@@ -14,7 +14,6 @@
 #include "FreeImage.h"
 #include <iostream>
 
-
 #define DEBUG
 
 void FreeImageOutput(FREE_IMAGE_FORMAT fif, const char* message)
