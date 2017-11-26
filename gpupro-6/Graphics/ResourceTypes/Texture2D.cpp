@@ -21,11 +21,11 @@ Texture2D::~Texture2D()
 
 void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
 {
+    ReleaseResources();
+
     FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeU(filepath);
     if (fif != FIF_UNKNOWN)
     {
-        ReleaseResources();
-
         FIBITMAP* bmp = FreeImage_LoadU(fif, filepath);
         m_bitmap = FreeImage_ConvertTo32Bits(bmp);
         FreeImage_Unload(bmp);
