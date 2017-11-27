@@ -305,4 +305,8 @@
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shaders\EnvironmentMap.hlsl" />
+    <FxCompile Include="Shaders\Material.hlsl" />
+  </ItemGroup>
 </Project>

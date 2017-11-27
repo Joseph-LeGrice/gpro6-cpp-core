@@ -61,17 +61,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         TextureSampler* textureSampler = GetAssetManager().Instantiate<TextureSampler>();
         textureSampler->Initialize();
 
-        Material& simpleTestMaterial = *GetAssetManager().Instantiate<Material>();
-        simpleTestMaterial.SetShader(materialShader);
+        Material* simpleTestMaterial = GetAssetManager().Instantiate<Material>();
+        simpleTestMaterial->SetShaderIndex(materialShader->GetResourceID());
 
         int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
-        simpleTestMaterial.AddStructuredBufferResource({ lightBufferIndex, 0});
+        simpleTestMaterial->AddStructuredBufferResource({ lightBufferIndex, 0});
 
-        int textureResourceId = static_cast<int>(testImageTexture->GetResourceID());
-        simpleTestMaterial.AddTexture2DResource({ textureResourceId, 1 });
+        int uvTextureResourceId = static_cast<int>(testImageTexture->GetResourceID());
+        simpleTestMaterial->AddTexture2DResource({ uvTextureResourceId, 1 });
         
         int textureSamplerIndex = static_cast<int>(textureSampler->GetResourceID());
-        simpleTestMaterial.AddTextureSampler({ textureSamplerIndex, 0 });
+        simpleTestMaterial->AddTextureSampler({ textureSamplerIndex, 0 });
 
         //------------------------------------------------------------------------------------
         // MATERIAL BUFFER STUFF
@@ -107,14 +107,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //------------------------------------------------------------------------------------
 		
 		// Ball Object
-		EntityComponent& meshEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-        TransformComponent& meshTransform = EntityUtil::AddComponent<TransformComponent>(meshEntity);
-        meshTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-		meshTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
-		meshTransform.m_data.m_scale = 10.0f * meshTransform.m_data.m_scale;
-        MeshRendererComponent& meshRenderer = EntityUtil::AddComponent<MeshRendererComponent>(meshEntity);
-        meshRenderer.m_data.m_meshIndex = MeshHelper::CreateSphereUV()->GetResourceID();
-        meshRenderer.m_data.m_materialIndex = simpleTestMaterial.GetResourceID();
+        Mesh* sphereMesh = MeshHelper::CreateSphereUV();
+
+		EntityComponent& sphereEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        TransformComponent& sphereTransform = EntityUtil::AddComponent<TransformComponent>(sphereEntity);
+        sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+		sphereTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
+		sphereTransform.m_data.m_scale = 10.0f * sphereTransform.m_data.m_scale;
+        MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
+        sphereRenderer.m_data.m_meshIndex = sphereMesh->GetResourceID();
+        sphereRenderer.m_data.m_materialIndex = simpleTestMaterial->GetResourceID();
 
         //Skybox
         Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
@@ -144,7 +146,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
         SystemManager::GetSystem<GraphicsSystem>()->SetDirty();
-        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(meshTransform.m_componentIndex);
+        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransform.m_componentIndex);
 	}
 	catch(...)
 	{

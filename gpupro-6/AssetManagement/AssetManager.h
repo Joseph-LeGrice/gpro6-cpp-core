@@ -48,6 +48,8 @@ public:
         std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
         int lastIndex = static_cast<int>(assetList.size()) - 1;
         T& deletedAsset = assetList[index];
+        deletedAsset.Release(); //TODO: Call release on everything when AssetManager is deleted
+        
         assetList[index] = assetList[lastIndex];
         assetList[lastIndex] = deletedAsset;
         assetList.resize(lastIndex);

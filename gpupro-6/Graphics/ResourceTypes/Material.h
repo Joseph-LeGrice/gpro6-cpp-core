@@ -15,7 +15,7 @@ class Material : public IResource
 public:
     struct ResourceDetails
     {
-        int m_resourceIndex;
+        int m_resourceIndex; //TODO: Shoukd never be able to bind an invalid or non existant resource here.
         size_t m_slotIndex;
     };
 
@@ -24,15 +24,20 @@ public:
 
     bool BindIfValid();
 	
-    void SetShader(Shader* shader);
+    void SetShaderIndex(UINT16 shaderIndex);
 	
     void AddTexture2DResource(ResourceDetails rd);
+    void AddTexture2DArrayResource(ResourceDetails rd);
     void AddStructuredBufferResource(ResourceDetails rd);
 	void AddTextureSampler(ResourceDetails rd);
-	
+
+    virtual void Release() override;
+
+
 private:
-	Shader* m_shader;
+    int m_shaderIndex;
     std::vector<ResourceDetails> m_texture2dIndexes;
+    std::vector<ResourceDetails> m_texture2dArrayIndexes;
     std::vector<ResourceDetails> m_structuredBufferIndexes;
 	std::vector<ResourceDetails> m_textureSamplerIndexes;
 };

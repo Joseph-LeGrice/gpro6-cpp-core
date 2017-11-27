@@ -14,13 +14,12 @@ Texture2DArray::Texture2DArray(UINT resourceId) : IResource(resourceId)
 
 Texture2DArray::~Texture2DArray()
 {
-    ReleaseResources();
 }
 
 
 void Texture2DArray::InitializeWithBitmaps(std::vector<std::wstring> filepaths)
 {
-    ReleaseResources();
+    Release();
 
     for (size_t filepathIndex = 0; filepathIndex < filepaths.size(); filepathIndex++)
     {
@@ -35,7 +34,7 @@ void Texture2DArray::InitializeWithBitmaps(std::vector<std::wstring> filepaths)
         else
         {
             LogError("Could not load bitmap FREE_IMAGE_FORMAT == FIF_UNKNOWN");
-            ReleaseResources();
+            Release();
             break;
         }
     }
@@ -63,7 +62,7 @@ void Texture2DArray::InitializeWithBitmaps(std::vector<std::wstring> filepaths)
         else
         {
             LogError("Dimensions of bitmaps in the array are not consistent");
-            ReleaseResources();
+            Release();
         }
     }
 }
@@ -125,7 +124,7 @@ void Texture2DArray::BindResource(UINT resourceIndex)
     deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
 }
 
-void Texture2DArray::ReleaseResources()
+void Texture2DArray::Release()
 {
     for (size_t i = 0; i < m_bitmaps.size(); i++)
     {

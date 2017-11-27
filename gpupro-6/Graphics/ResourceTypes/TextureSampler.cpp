@@ -11,7 +11,6 @@ TextureSampler::TextureSampler(UINT resourceId) : IResource(resourceId)
 
 TextureSampler::~TextureSampler()
 {
-	SAFE_RELEASE(m_sampler);
 }
 
 void TextureSampler::BindTextureSampler(UINT samplerIndex)
@@ -47,4 +46,9 @@ bool TextureSampler::Initialize()
 bool TextureSampler::IsValid()
 {
 	return m_sampler != nullptr;
+}
+
+void TextureSampler::Release()
+{
+    SAFE_RELEASE(m_sampler);
 }

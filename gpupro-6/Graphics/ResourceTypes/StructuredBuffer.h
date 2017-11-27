@@ -59,6 +59,8 @@ public:
 		}
 	}
 
+    virtual void Release() override;
+
 private:
 	ID3D11Buffer* m_buffer;
 	ID3D11ShaderResourceView* m_resourceView;

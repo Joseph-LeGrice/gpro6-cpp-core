@@ -16,12 +16,11 @@ Texture2D::Texture2D(UINT resourceId) : IResource(resourceId)
 
 Texture2D::~Texture2D()
 {
-    ReleaseResources();
 }
 
 void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
 {
-    ReleaseResources();
+    Release();
 
     FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeU(filepath);
     if (fif != FIF_UNKNOWN)
@@ -90,7 +89,7 @@ void Texture2D::BindResource(UINT resourceIndex)
     deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
 }
 
-void Texture2D::ReleaseResources()
+void Texture2D::Release()
 {
     if (m_bitmap != nullptr)
     {

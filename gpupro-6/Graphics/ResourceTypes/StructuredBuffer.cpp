@@ -11,8 +11,6 @@ StructuredBuffer::StructuredBuffer(UINT resourceId) : IResource(resourceId)
 
 StructuredBuffer::~StructuredBuffer()
 {
-    SAFE_RELEASE(m_buffer);
-    SAFE_RELEASE(m_resourceView);
 }
 
 void StructuredBuffer::BindResource(UINT resourceIndex)
@@ -23,4 +21,10 @@ void StructuredBuffer::BindResource(UINT resourceIndex)
     deviceContext->DSSetShaderResources(resourceIndex, 1, &m_resourceView);
     deviceContext->GSSetShaderResources(resourceIndex, 1, &m_resourceView);
     deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
+}
+
+void StructuredBuffer::Release()
+{
+    SAFE_RELEASE(m_buffer);
+    SAFE_RELEASE(m_resourceView);
 }

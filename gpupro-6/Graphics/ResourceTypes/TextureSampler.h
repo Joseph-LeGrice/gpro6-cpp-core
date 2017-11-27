@@ -13,6 +13,8 @@ public:
 	bool Initialize();
 	bool IsValid();
 
+    virtual void Release() override;
+
 private:
 	ID3D11SamplerState* m_sampler;
 };

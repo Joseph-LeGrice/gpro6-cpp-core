@@ -19,7 +19,10 @@ public:
 
 	const std::vector<VertexData>& GetVertexData();
 	const std::vector<UINT16>& GetIndices();
-	
+
+    virtual void Release() override;
+
+
 private:
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;

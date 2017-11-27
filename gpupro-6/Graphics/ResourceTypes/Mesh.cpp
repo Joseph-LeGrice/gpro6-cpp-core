@@ -58,3 +58,7 @@ const std::vector<UINT16>& Mesh::GetIndices()
 {
 	return m_indices;
 }
+
+void Mesh::Release()
+{
+}

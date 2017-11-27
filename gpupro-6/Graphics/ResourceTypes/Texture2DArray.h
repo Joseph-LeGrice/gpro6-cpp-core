@@ -15,12 +15,13 @@ public:
     void InitializeWithBitmaps(std::vector<std::wstring> filepaths);
     void BindResource(UINT resourceIndex);
 
+    virtual void Release() override;
+
 private:
     std::vector<FIBITMAP*> m_bitmaps;
     ID3D11Texture2D* m_pTextureArray;
     ID3D11ShaderResourceView* m_resourceView;
 
     void CreateResources(UINT pitch, UINT width, UINT height);
-    void ReleaseResources();
 };
 
