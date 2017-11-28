@@ -20,3 +20,4 @@
 
 // TODO: reference additional headers your program requires here
 #include "Utilities\UtilityMacros.h"
+#include "Utilities\PointerRelease.hpp"

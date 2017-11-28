@@ -31,15 +31,15 @@ public:
 	float GetViewportHeight();
 
 private:
-	ID3D11Device* m_device;
-	ID3D11DeviceContext* m_deviceContext;
+    ManualRelease<ID3D11Device> m_device;
+    ManualRelease<ID3D11DeviceContext> m_deviceContext;
+    ManualRelease<IDXGISwapChain> m_swapchain;
+    ManualRelease<ID3D11RenderTargetView> m_rtBackBuffer;
 
 #if defined(_DEBUG)
-    ID3D11Debug* m_debugInterface;
+    ManualRelease<ID3D11Debug> m_debugInterface;
 #endif
 
-	IDXGISwapChain* m_swapchain;
-	ID3D11RenderTargetView * m_rtBackBuffer;
 
 	bool m_isDirty;
 	VertexBuffer* m_myVertexBuffer;

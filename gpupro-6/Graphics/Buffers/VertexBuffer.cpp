@@ -5,12 +5,10 @@
 
 VertexBuffer::VertexBuffer()
 {
-	m_vertexBuffer = nullptr;
 }
 
 VertexBuffer::~VertexBuffer()
 {
-	SAFE_RELEASE(m_vertexBuffer);
 }
 
 bool VertexBuffer::SetCurrentIfValid()
@@ -19,7 +17,7 @@ bool VertexBuffer::SetCurrentIfValid()
 	UINT stride = sizeof(VertexData);
 	
 	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
+	deviceContext->IASetVertexBuffers(0, 1, m_vertexBuffer, &stride, &offset);
 
 	return true;
 }
@@ -38,7 +36,7 @@ VertexBuffer* VertexBuffer::Create(size_t bufferSize)
 	vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	vertexBufferDesc.MiscFlags = 0;
 
-	HRESULT vertexBufferCreation = device->CreateBuffer(&vertexBufferDesc, NULL, &vb->m_vertexBuffer);
+	HRESULT vertexBufferCreation = device->CreateBuffer(&vertexBufferDesc, NULL, vb->m_vertexBuffer);
 	if (SUCCEEDED(vertexBufferCreation))
 	{
 		return vb;

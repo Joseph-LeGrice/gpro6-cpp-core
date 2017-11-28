@@ -251,11 +251,11 @@
     <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h">
       <Filter>Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\AutoRelease.hpp">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="AssetManagement\IResource.h">
       <Filter>AssetManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\PointerRelease.hpp">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

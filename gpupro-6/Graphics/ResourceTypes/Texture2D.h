@@ -19,8 +19,8 @@ public:
 
 private:
     FIBITMAP* m_bitmap;
-	ID3D11Texture2D* m_pTexture;
-	ID3D11ShaderResourceView* m_resourceView;
+	ManualRelease<ID3D11Texture2D> m_pTexture;
+	ManualRelease<ID3D11ShaderResourceView> m_resourceView;
     
     void CreateResources();
 };

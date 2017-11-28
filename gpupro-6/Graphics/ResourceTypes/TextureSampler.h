@@ -16,5 +16,5 @@ public:
     virtual void Release() override;
 
 private:
-	ID3D11SamplerState* m_sampler;
+	ManualRelease<ID3D11SamplerState> m_sampler;
 };

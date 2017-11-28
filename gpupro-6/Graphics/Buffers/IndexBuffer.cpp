@@ -6,13 +6,11 @@
 
 IndexBuffer::IndexBuffer()
 {
-	m_indexBuffer = nullptr;
 }
 
 
 IndexBuffer::~IndexBuffer()
 {
-	SAFE_RELEASE(m_indexBuffer);
 }
 
 IndexBuffer* IndexBuffer::Create(size_t bufferSize)
@@ -28,10 +26,10 @@ IndexBuffer* IndexBuffer::Create(size_t bufferSize)
 	indexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	indexBufferDesc.MiscFlags = 0;
 
-	HRESULT indexBufferCreationResult = device->CreateBuffer(&indexBufferDesc, NULL, &ib->m_indexBuffer);
+	HRESULT indexBufferCreationResult = device->CreateBuffer(&indexBufferDesc, NULL, ib->m_indexBuffer);
 	if (SUCCEEDED(indexBufferCreationResult))
 	{
-		return ib;
+        return ib;
 	}
 	else
 	{

@@ -27,11 +27,6 @@ void FreeImageOutput(FREE_IMAGE_FORMAT fif, const char* message)
 
 GraphicsSystem::GraphicsSystem()
 {
-	m_rtBackBuffer = nullptr;
-	m_swapchain = nullptr;
-	m_device = nullptr;
-	m_deviceContext = nullptr;
-
     FreeImage_SetOutputMessage(FreeImageOutput);
 }
 
@@ -72,10 +67,10 @@ bool GraphicsSystem::Initialize()
         NULL,
         D3D11_SDK_VERSION,
         &scd,
-        &m_swapchain,
-        &m_device,
+        m_swapchain,
+        m_device,
         NULL,
-        &m_deviceContext);
+        m_deviceContext);
 
     if (SUCCEEDED(createDeviceResult))
     {
@@ -91,12 +86,12 @@ bool GraphicsSystem::Initialize()
         // Initialize Render Targets
         ID3D11Texture2D* pBackBuffer;
         m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-        HRESULT createdRenderTarget = m_device->CreateRenderTargetView(pBackBuffer, NULL, &m_rtBackBuffer);
+        HRESULT createdRenderTarget = m_device->CreateRenderTargetView(pBackBuffer, NULL, m_rtBackBuffer);
 
         if (SUCCEEDED(createdRenderTarget))
         {
             pBackBuffer->Release();
-            m_deviceContext->OMSetRenderTargets(1, &m_rtBackBuffer, NULL);
+            m_deviceContext->OMSetRenderTargets(1, m_rtBackBuffer, NULL);
 
             // Initialize Viewport
             D3D11_VIEWPORT viewportDesc;
@@ -127,16 +122,17 @@ void GraphicsSystem::Deinitalize()
 {
     m_swapchain->SetFullscreenState(FALSE, NULL);
 
-    SAFE_RELEASE(m_rtBackBuffer);
-    SAFE_RELEASE(m_swapchain);
-    SAFE_RELEASE(m_device);
-    SAFE_RELEASE(m_deviceContext);
+    m_rtBackBuffer.ReleasePointer();
+    m_swapchain.ReleasePointer();
+    m_device.ReleasePointer();
+    m_deviceContext.ReleasePointer();
+
     SAFE_DELETE(m_myVertexBuffer);
     SAFE_DELETE(m_myIndexBuffer);
 
 #if defined(_DEBUG)
     m_debugInterface->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
-    SAFE_RELEASE(m_debugInterface);
+    m_debugInterface.ReleasePointer();
 #endif
 }
 

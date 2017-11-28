@@ -301,7 +301,7 @@
     <ClInclude Include="Input\KeyboardInput.h" />
     <ClInclude Include="Input\MouseInput.h" />
     <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h" />
-    <ClInclude Include="Utilities\AutoRelease.hpp" />
+    <ClInclude Include="Utilities\PointerRelease.hpp" />
     <ClInclude Include="Utilities\Logging.h" />
     <ClInclude Include="Utilities\MathHelper.h" />
     <ClInclude Include="Utilities\MeshHelper.h" />

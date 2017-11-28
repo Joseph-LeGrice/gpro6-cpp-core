@@ -21,21 +21,11 @@ public:
     virtual void Release() override;
 
 private:
-	ID3D11InputLayout* m_inputLayout;
-	
-    ID3D11VertexShader* m_vertexShader;
-    ID3D10Blob* m_vertexShaderBlob;
-
-	ID3D11PixelShader* m_pixelShader;
-    ID3D10Blob* m_pixelShaderBlob;
-
-	ID3D11GeometryShader* m_geometryShader;
-    ID3D10Blob* m_geomShaderBlob;
-
-	ID3D11HullShader* m_hullShader;
-    ID3D10Blob* m_hullShaderBlob;
-
-	ID3D11DomainShader* m_domainShader;
-    ID3D10Blob* m_domainShaderBlob;
+    ManualRelease<ID3D11InputLayout> m_inputLayout;
+    ManualRelease<ID3D11VertexShader> m_vertexShader;
+    ManualRelease<ID3D11PixelShader> m_pixelShader;
+    ManualRelease<ID3D11GeometryShader> m_geometryShader;
+    ManualRelease<ID3D11HullShader> m_hullShader;
+    ManualRelease<ID3D11DomainShader> m_domainShader;
 };
 

@@ -42,23 +42,23 @@ public:
 		ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 		if ((m_bindFlags & BIND_VERTEX) == BIND_VERTEX)
 		{
-			deviceContext->VSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
+			deviceContext->VSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
 		}
 		if ((m_bindFlags & BIND_HULL) == BIND_HULL)
 		{
-			deviceContext->HSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
+			deviceContext->HSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
 		}
 		if ((m_bindFlags & BIND_DOMAIN) == BIND_DOMAIN)
 		{
-			deviceContext->DSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
+			deviceContext->DSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
 		}
 		if ((m_bindFlags & BIND_GEOM) == BIND_GEOM)
 		{
-			deviceContext->GSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
+			deviceContext->GSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
 		}
 		if ((m_bindFlags & BIND_PIXEL) == BIND_PIXEL)
 		{
-			deviceContext->PSSetConstantBuffers(m_bufferSlot, 1, &m_buffer);
+			deviceContext->PSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
 		}
 	}
 
@@ -79,7 +79,7 @@ public:
 		data.pSysMem = &initialData;
 
 		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
-		if (!SUCCEEDED(device->CreateBuffer(&desc, &data, &m_buffer)))
+		if (!SUCCEEDED(device->CreateBuffer(&desc, &data, m_buffer)))
 		{
 			LogError("[ConstantBuffer] Could not Create Buffer!");
 		}
@@ -87,11 +87,10 @@ public:
 
 	~ConstantBuffer()
 	{
-		SAFE_RELEASE(m_buffer);
 	}
 
 private:
-	ID3D11Buffer* m_buffer;
+	AutoRelease<ID3D11Buffer> m_buffer;
 };
 
 #pragma warning(pop)

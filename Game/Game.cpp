@@ -119,6 +119,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         sphereRenderer.m_data.m_materialIndex = simpleTestMaterial->GetResourceID();
 
         //Skybox
+        Shader* skyboxShader = GetAssetManager().Instantiate<Shader>();
+        skyboxShader->InitVertexShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "VEnvShader");
+        skyboxShader->InitPixelShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "PEnvShader");
+
         Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
         testCubemap->InitializeWithBitmaps({
             L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
@@ -128,7 +132,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
             L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp"
         });
+        
+        Material* skyboxMat = GetAssetManager().Instantiate<Material>();
+        skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
+        int cubemapTextureId = static_cast<int>(testCubemap->GetResourceID());
+        skyboxMat->AddTexture2DArrayResource({ cubemapTextureId, 0 });
 
+        //skyboxMat->SetShaderIndex(materialShader->GetResourceID());
+        //skyboxMat->AddTexture2DResource({ lightBufferIndex, 0 });
+        //skyboxMat->AddTexture2DResource({ uvTextureResourceId, 1 });
+
+        EntityComponent& skyboxEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        TransformComponent& skyboxTransform = EntityUtil::AddComponent<TransformComponent>(skyboxEntity);
+        MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(skyboxEntity);
+        skyboxRenderer.m_data.m_meshIndex = sphereMesh->GetResourceID();
+        skyboxRenderer.m_data.m_materialIndex = skyboxMat->GetResourceID();
 
         // Camera
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
@@ -154,12 +172,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
     int returnCode = SystemManager::RunGameLoop();
-
-    SystemManager::Deinitialize();
-    WindowManager::ShutdownWindow();
     
     DestroyConstantBufferInterface();
     DestroyAssetManager();
+
+    SystemManager::Deinitialize();
+    WindowManager::ShutdownWindow();
 
 	return returnCode;
 }

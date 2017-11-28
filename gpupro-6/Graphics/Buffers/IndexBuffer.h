@@ -16,6 +16,6 @@ public:
 private:
 	IndexBuffer();
 
-	ID3D11Buffer* m_indexBuffer;
+    AutoRelease<ID3D11Buffer> m_indexBuffer;
 };
 

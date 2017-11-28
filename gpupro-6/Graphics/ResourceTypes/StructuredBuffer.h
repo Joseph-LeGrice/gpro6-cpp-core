@@ -7,10 +7,7 @@
 class StructuredBuffer : public IResource
 {
 public:
-    StructuredBuffer(UINT resourceId);
-    ~StructuredBuffer();
-
-    void BindResource(UINT resourceIndex);
+    StructuredBuffer(UINT id) : IResource(id) {}
 
     template<class T, UINT m_numberOfElements>
 	bool Initialize()
@@ -25,7 +22,7 @@ public:
 		bDesc.StructureByteStride = sizeof(T);
 
 		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
-		HRESULT createBufferResult = device->CreateBuffer(&bDesc, NULL, &m_buffer);
+		HRESULT createBufferResult = device->CreateBuffer(&bDesc, NULL, m_buffer);
 		if (!SUCCEEDED(createBufferResult))
 		{
 			return false;
@@ -36,10 +33,10 @@ public:
 		rvDesc.Format = DXGI_FORMAT_UNKNOWN;
 		rvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
 		rvDesc.Buffer.ElementWidth = m_numberOfElements;
-		HRESULT createResourceViewResult = device->CreateShaderResourceView(m_buffer, &rvDesc, &m_resourceView);
+		HRESULT createResourceViewResult = device->CreateShaderResourceView(m_buffer, &rvDesc, m_resourceView);
         if (!SUCCEEDED(createResourceViewResult))
         {
-            SAFE_RELEASE(m_buffer);
+            m_buffer.ReleasePointer();
             return false;
         }
 
@@ -59,9 +56,10 @@ public:
 		}
 	}
 
+    void BindResource(UINT resourceIndex);
     virtual void Release() override;
 
 private:
-	ID3D11Buffer* m_buffer;
-	ID3D11ShaderResourceView* m_resourceView;
+	ManualRelease<ID3D11Buffer> m_buffer;
+    ManualRelease<ID3D11ShaderResourceView> m_resourceView;
 };

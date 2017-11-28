@@ -64,10 +64,10 @@ void Texture2D::CreateResources()
     data.SysMemSlicePitch = pitch * height;
 
     ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
-    HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, &m_pTexture);
+    HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, m_pTexture);
     if (SUCCEEDED(createTextureResult))
     {
-        HRESULT createResourceViewResult = device->CreateShaderResourceView(m_pTexture, NULL, &m_resourceView);
+        HRESULT createResourceViewResult = device->CreateShaderResourceView(m_pTexture, NULL, m_resourceView);
         if (!SUCCEEDED(createResourceViewResult))
         {
             LogError("Could not create resource view");
@@ -82,11 +82,11 @@ void Texture2D::CreateResources()
 void Texture2D::BindResource(UINT resourceIndex)
 {
     ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-    deviceContext->VSSetShaderResources(resourceIndex, 1, &m_resourceView);
-    deviceContext->HSSetShaderResources(resourceIndex, 1, &m_resourceView);
-    deviceContext->DSSetShaderResources(resourceIndex, 1, &m_resourceView);
-    deviceContext->GSSetShaderResources(resourceIndex, 1, &m_resourceView);
-    deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->VSSetShaderResources(resourceIndex, 1, m_resourceView);
+    deviceContext->HSSetShaderResources(resourceIndex, 1, m_resourceView);
+    deviceContext->DSSetShaderResources(resourceIndex, 1, m_resourceView);
+    deviceContext->GSSetShaderResources(resourceIndex, 1, m_resourceView);
+    deviceContext->PSSetShaderResources(resourceIndex, 1, m_resourceView);
 }
 
 void Texture2D::Release()
@@ -95,6 +95,6 @@ void Texture2D::Release()
     {
         FreeImage_Unload(m_bitmap);
     }
-    SAFE_RELEASE(m_pTexture);
-    SAFE_RELEASE(m_resourceView);
+    m_pTexture.ReleasePointer();
+    m_resourceView.ReleasePointer();
 }

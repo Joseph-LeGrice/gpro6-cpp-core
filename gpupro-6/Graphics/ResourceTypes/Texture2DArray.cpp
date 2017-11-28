@@ -99,10 +99,10 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
     }
 
     ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
-    HRESULT createTextureResult = device->CreateTexture2D(&desc, data.data(), &m_pTextureArray);
+    HRESULT createTextureResult = device->CreateTexture2D(&desc, data.data(), m_pTextureArray);
     if (SUCCEEDED(createTextureResult))
     {
-        HRESULT createResourceViewResult = device->CreateShaderResourceView(m_pTextureArray, NULL, &m_resourceView);
+        HRESULT createResourceViewResult = device->CreateShaderResourceView(m_pTextureArray, NULL, m_resourceView);
         if (!SUCCEEDED(createResourceViewResult))
         {
             LogError("Could not create resource view");
@@ -117,11 +117,11 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
 void Texture2DArray::BindResource(UINT resourceIndex)
 {
     ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-    deviceContext->VSSetShaderResources(resourceIndex, 1, &m_resourceView);
-    deviceContext->HSSetShaderResources(resourceIndex, 1, &m_resourceView);
-    deviceContext->DSSetShaderResources(resourceIndex, 1, &m_resourceView);
-    deviceContext->GSSetShaderResources(resourceIndex, 1, &m_resourceView);
-    deviceContext->PSSetShaderResources(resourceIndex, 1, &m_resourceView);
+    deviceContext->VSSetShaderResources(resourceIndex, 1, m_resourceView);
+    deviceContext->HSSetShaderResources(resourceIndex, 1, m_resourceView);
+    deviceContext->DSSetShaderResources(resourceIndex, 1, m_resourceView);
+    deviceContext->GSSetShaderResources(resourceIndex, 1, m_resourceView);
+    deviceContext->PSSetShaderResources(resourceIndex, 1, m_resourceView);
 }
 
 void Texture2DArray::Release()
@@ -131,6 +131,6 @@ void Texture2DArray::Release()
         FreeImage_Unload(m_bitmaps[i]);
     }
     m_bitmaps.clear();
-    SAFE_RELEASE(m_pTextureArray);
-    SAFE_RELEASE(m_resourceView);
+    m_pTextureArray.ReleasePointer();
+    m_resourceView.ReleasePointer();
 }

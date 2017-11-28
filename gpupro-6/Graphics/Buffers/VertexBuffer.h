@@ -17,6 +17,6 @@ public:
 private:
 	VertexBuffer();
 
-	ID3D11Buffer* m_vertexBuffer;
+	AutoRelease<ID3D11Buffer> m_vertexBuffer;
 };
 

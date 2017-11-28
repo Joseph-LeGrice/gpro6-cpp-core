@@ -19,8 +19,8 @@ public:
 
 private:
     std::vector<FIBITMAP*> m_bitmaps;
-    ID3D11Texture2D* m_pTextureArray;
-    ID3D11ShaderResourceView* m_resourceView;
+    ManualRelease<ID3D11Texture2D> m_pTextureArray;
+    ManualRelease<ID3D11ShaderResourceView> m_resourceView;
 
     void CreateResources(UINT pitch, UINT width, UINT height);
 };
