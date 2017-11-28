@@ -248,9 +248,14 @@
     <ClInclude Include="Graphics\VertexData.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="AssetManagement\IResource.h" />
     <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h">
       <Filter>Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\AutoRelease.hpp">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManagement\IResource.h">
+      <Filter>AssetManagement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -304,9 +309,7 @@
     <None Include="Shaders\Lighting.hlsl">
       <Filter>Shaders</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Shaders\EnvironmentMap.hlsl" />
-    <FxCompile Include="Shaders\Material.hlsl" />
+    <None Include="Shaders\EnvironmentMap.hlsl" />
+    <None Include="Shaders\Material.hlsl" />
   </ItemGroup>
 </Project>

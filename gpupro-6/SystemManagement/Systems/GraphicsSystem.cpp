@@ -14,8 +14,6 @@
 #include "FreeImage.h"
 #include <iostream>
 
-#define DEBUG
-
 void FreeImageOutput(FREE_IMAGE_FORMAT fif, const char* message)
 {
     std::cout << "***" << std::endl;
@@ -39,14 +37,6 @@ GraphicsSystem::GraphicsSystem()
 
 GraphicsSystem::~GraphicsSystem()
 {
-	m_swapchain->SetFullscreenState(FALSE, NULL);
-
-	SAFE_RELEASE(m_rtBackBuffer);
-	SAFE_RELEASE(m_swapchain);
-	SAFE_RELEASE(m_device);
-	SAFE_RELEASE(m_deviceContext);
-	SAFE_DELETE(m_myVertexBuffer);
-	SAFE_DELETE(m_myIndexBuffer);
 }
 
 
@@ -69,7 +59,10 @@ bool GraphicsSystem::Initialize()
     scd.Windowed = TRUE;
     scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
-    UINT creationFlags = D3D11_CREATE_DEVICE_DEBUG;
+    UINT creationFlags = 0;
+#if defined(_DEBUG)
+    creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
 
     HRESULT createDeviceResult = D3D11CreateDeviceAndSwapChain(NULL,
         D3D_DRIVER_TYPE_HARDWARE,
@@ -86,6 +79,15 @@ bool GraphicsSystem::Initialize()
 
     if (SUCCEEDED(createDeviceResult))
     {
+#if defined(_DEBUG)
+        void* debugInterface;
+        HRESULT hr = m_device->QueryInterface(__uuidof(ID3D11Debug), &debugInterface);
+        if (SUCCEEDED(hr))
+        {
+            m_debugInterface = static_cast<ID3D11Debug*>(debugInterface);
+        }
+#endif
+
         // Initialize Render Targets
         ID3D11Texture2D* pBackBuffer;
         m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
@@ -119,6 +121,23 @@ bool GraphicsSystem::Initialize()
     }
 
     return false;
+}
+
+void GraphicsSystem::Deinitalize()
+{
+    m_swapchain->SetFullscreenState(FALSE, NULL);
+
+    SAFE_RELEASE(m_rtBackBuffer);
+    SAFE_RELEASE(m_swapchain);
+    SAFE_RELEASE(m_device);
+    SAFE_RELEASE(m_deviceContext);
+    SAFE_DELETE(m_myVertexBuffer);
+    SAFE_DELETE(m_myIndexBuffer);
+
+#if defined(_DEBUG)
+    m_debugInterface->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+    SAFE_RELEASE(m_debugInterface);
+#endif
 }
 
 ID3D11Device* GraphicsSystem::GetGraphicsDevice()

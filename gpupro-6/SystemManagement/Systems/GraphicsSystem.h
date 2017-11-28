@@ -24,6 +24,7 @@ public:
     virtual ~GraphicsSystem();
 
     virtual bool Initialize() override;
+    virtual void Deinitalize() override;
     virtual void VariableTick() override;
 
 	float GetViewportWidth();
@@ -32,6 +33,10 @@ public:
 private:
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_deviceContext;
+
+#if defined(_DEBUG)
+    ID3D11Debug* m_debugInterface;
+#endif
 
 	IDXGISwapChain* m_swapchain;
 	ID3D11RenderTargetView * m_rtBackBuffer;

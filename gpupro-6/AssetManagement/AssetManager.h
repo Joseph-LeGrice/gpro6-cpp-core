@@ -13,12 +13,12 @@
 template<class... Types>
 class AssetManagerImpl
 {
-public:
-
     //TODO: Ideally should be storing some structure which allows for grouping the memory together such that assets 'relevant' to each other exists near to each other.
 
+private:
     std::tuple<std::vector<Types>...> m_assetLists;
 
+public:
     template<class T>
     T* Instantiate()
     {
@@ -43,12 +43,23 @@ public:
     }
 
     template<class T>
+    void DeallocateAll()
+    {
+        std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
+        for (size_t i = 0; i < assetList.size(); i++)
+        {
+            assetList[i].Release();
+        }
+        assetList.clear();
+    }
+
+    template<class T>
     void Deallocate(int index)
     {
         std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
         int lastIndex = static_cast<int>(assetList.size()) - 1;
         T& deletedAsset = assetList[index];
-        deletedAsset.Release(); //TODO: Call release on everything when AssetManager is deleted
+        deletedAsset.Release();
         
         assetList[index] = assetList[lastIndex];
         assetList[lastIndex] = deletedAsset;
