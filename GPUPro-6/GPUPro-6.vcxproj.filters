@@ -111,6 +111,7 @@
     <ClCompile Include="Graphics\ResourceTypes\Texture2DArray.cpp">
       <Filter>Graphics\ResourceTypes</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\RasterizerState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -257,6 +258,7 @@
     <ClInclude Include="Utilities\PointerRelease.hpp">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\RasterizerState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

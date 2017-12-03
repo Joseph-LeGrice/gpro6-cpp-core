@@ -63,6 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         Material* simpleTestMaterial = GetAssetManager().Instantiate<Material>();
         simpleTestMaterial->SetShaderIndex(materialShader->GetResourceID());
+        UINT simpleTestMaterialID = simpleTestMaterial->GetResourceID();
 
         int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
         simpleTestMaterial->AddStructuredBufferResource({ lightBufferIndex, 0});
@@ -106,48 +107,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         mf.BindBuffer();
         //------------------------------------------------------------------------------------
 		
-		// Ball Object
-        Mesh* sphereMesh = MeshHelper::CreateSphereUV();
-
-		EntityComponent& sphereEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-        TransformComponent& sphereTransform = EntityUtil::AddComponent<TransformComponent>(sphereEntity);
-        sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-		sphereTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
-		sphereTransform.m_data.m_scale = 10.0f * sphereTransform.m_data.m_scale;
-        MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
-        sphereRenderer.m_data.m_meshIndex = sphereMesh->GetResourceID();
-        sphereRenderer.m_data.m_materialIndex = simpleTestMaterial->GetResourceID();
-
-        //Skybox
-        Shader* skyboxShader = GetAssetManager().Instantiate<Shader>();
-        skyboxShader->InitVertexShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "VEnvShader");
-        skyboxShader->InitPixelShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "PEnvShader");
-
-        Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
-        testCubemap->InitializeWithBitmaps({
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Top.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Bottom.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp"
-        });
-        
-        Material* skyboxMat = GetAssetManager().Instantiate<Material>();
-        skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
-        int cubemapTextureId = static_cast<int>(testCubemap->GetResourceID());
-        skyboxMat->AddTexture2DArrayResource({ cubemapTextureId, 0 });
-
-        //skyboxMat->SetShaderIndex(materialShader->GetResourceID());
-        //skyboxMat->AddTexture2DResource({ lightBufferIndex, 0 });
-        //skyboxMat->AddTexture2DResource({ uvTextureResourceId, 1 });
-
-        EntityComponent& skyboxEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-        TransformComponent& skyboxTransform = EntityUtil::AddComponent<TransformComponent>(skyboxEntity);
-        MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(skyboxEntity);
-        skyboxRenderer.m_data.m_meshIndex = sphereMesh->GetResourceID();
-        skyboxRenderer.m_data.m_materialIndex = skyboxMat->GetResourceID();
-
         // Camera
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& cameraTransform = EntityUtil::AddComponent<TransformComponent>(cameraEntity);
@@ -161,10 +120,58 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         LightComponent& lightComponent = EntityUtil::AddComponent<LightComponent>(lightEntity);
         lightComponent.m_data.m_range = 250.0f;
 
+		// Ball Object
+        Mesh* sphereMesh = MeshHelper::CreateSphereUV();
+        UINT sphereMeshID = sphereMesh->GetResourceID();
+
+		EntityComponent& sphereEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        TransformComponent& sphereTransform = EntityUtil::AddComponent<TransformComponent>(sphereEntity);
+        int sphereTransformIndex = sphereTransform.m_componentIndex;
+        sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+		sphereTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
+		sphereTransform.m_data.m_scale = 50.0f * sphereTransform.m_data.m_scale;
+        MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
+        sphereRenderer.m_data.m_meshIndex = sphereMesh->GetResourceID();
+        sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
+
+        //Skybox
+        Shader* skyboxShader = GetAssetManager().Instantiate<Shader>();
+        skyboxShader->InitVertexShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "VShader");
+        skyboxShader->InitPixelShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "PShader");
+
+        Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
+        testCubemap->InitializeWithBitmaps({
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Top.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Bottom.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp"
+        });
+        
+        Material* skyboxMat = GetAssetManager().Instantiate<Material>();
+        UINT skyboxMatID = skyboxMat->GetResourceID();
+        skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
+        int cubemapTextureId = static_cast<int>(testCubemap->GetResourceID());
+        skyboxMat->AddTexture2DArrayResource({ cubemapTextureId, 0 });
+
+        //skyboxMat->SetShaderIndex(materialShader->GetResourceID());
+        //skyboxMat->AddTextureSampler({ textureSamplerIndex, 0 });
+        //skyboxMat->AddStructuredBufferResource({ lightBufferIndex, 0 });
+        //skyboxMat->AddTexture2DResource({ uvTextureResourceId, 1 });
+
+        EntityComponent& skyboxEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        TransformComponent& skyboxTransform = EntityUtil::AddComponent<TransformComponent>(skyboxEntity);
+        skyboxTransform.m_data.m_position = { 0.0f, 0.0f, -100.0f };
+        MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(skyboxEntity);
+        skyboxRenderer.m_enabled = true;
+        skyboxRenderer.m_data.m_meshIndex = sphereMeshID;
+        skyboxRenderer.m_data.m_materialIndex = skyboxMatID;
+
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
         SystemManager::GetSystem<GraphicsSystem>()->SetDirty();
-        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransform.m_componentIndex);
+        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
 	}
 	catch(...)
 	{
