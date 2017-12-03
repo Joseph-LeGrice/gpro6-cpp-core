@@ -10,14 +10,17 @@
 class Material;
 class VertexBuffer;
 class IndexBuffer;
+class DepthStencilBuffer;
 class RasterizerState;
 struct Camera;
 
 class GraphicsSystem : public ISystem
 {
 public:
-	ID3D11Device* GetGraphicsDevice();
+    IDXGISwapChain* GetSwapChain();
+    ID3D11Device* GetGraphicsDevice();
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
+    DepthStencilBuffer* GetDepthStencilBuffer();
     RasterizerState* GetRasterizerState();
     void SetDirty();
 
@@ -36,7 +39,6 @@ private:
     ManualRelease<ID3D11Device> m_device;
     ManualRelease<ID3D11DeviceContext> m_deviceContext;
     ManualRelease<IDXGISwapChain> m_swapchain;
-    ManualRelease<ID3D11RenderTargetView> m_rtBackBuffer;
 
 #if defined(_DEBUG)
     ManualRelease<ID3D11Debug> m_debugInterface;
@@ -45,6 +47,7 @@ private:
 	bool m_isDirty;
     RasterizerState* m_rasterizerState;
 	VertexBuffer* m_myVertexBuffer;
+    DepthStencilBuffer* m_depthStencilBuffer;
 	IndexBuffer* m_myIndexBuffer;
 
 	float m_viewportWidth, m_viewportHeight;

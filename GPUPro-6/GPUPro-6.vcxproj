@@ -225,6 +225,7 @@
     <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="DataStructures\Matrix3x3.cpp" />
     <ClCompile Include="DataStructures\Matrix4x4.cpp" />
+    <ClCompile Include="Graphics\Buffers\DepthStencilBuffer.cpp" />
     <ClCompile Include="Graphics\RasterizerState.cpp" />
     <ClCompile Include="Graphics\ResourceTypes\Mesh.cpp" />
     <ClCompile Include="DataStructures\Quaternion.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="Components\Entity.h" />
     <ClInclude Include="Components\Transform.h" />
     <ClInclude Include="Components\Util\ComponentArray.hpp" />
+    <ClInclude Include="Graphics\Buffers\DepthStencilBuffer.h" />
     <ClInclude Include="Graphics\RasterizerState.h" />
     <ClInclude Include="Graphics\ResourceTypes\Mesh.h" />
     <ClInclude Include="DataStructures\SceneGraph.h" />

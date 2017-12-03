@@ -112,6 +112,7 @@
       <Filter>Graphics\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\RasterizerState.cpp" />
+    <ClCompile Include="Graphics\Buffers\DepthStencilBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -259,6 +260,7 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\RasterizerState.h" />
+    <ClInclude Include="Graphics\Buffers\DepthStencilBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

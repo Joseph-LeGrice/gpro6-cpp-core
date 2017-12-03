@@ -6,16 +6,16 @@ public:
     static void ShutdownWindow();
     
     static HWND& GetHWND();
-    static int GetWindowWidth();
-    static int GetWindowHeight();
+    static UINT GetWindowWidth();
+    static UINT GetWindowHeight();
 
 private:
     WindowManager() = delete;
     WindowManager(const WindowManager&) = delete;
     ~WindowManager() = delete;
 
-    static int s_windowWidth;
-    static int s_windowHeight;
+    static UINT s_windowWidth;
+    static UINT s_windowHeight;
 
     static HWND s_hwnd;
     static LPCWSTR s_applicationName;

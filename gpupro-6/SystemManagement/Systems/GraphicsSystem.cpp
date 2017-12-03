@@ -1,19 +1,20 @@
 #include "stdafx.h"
 #include "AssetManagement/AssetManager.h"
-#include "Graphics/ResourceTypes/Material.h"
 #include "Components/Util/EntityUtil.hpp"
 #include "Components/Camera.h"
 #include "DataStructures/SceneGraph.h"
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/WindowManager.h"
+#include "Graphics/RasterizerState.h"
+#include "Graphics/ResourceTypes/Material.h"
 #include "Graphics/Buffers/ConstantBuffer.h"
-#include "Graphics/Buffers/VertexBuffer.h"
-#include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Buffers/ConstantBufferInterface.h"
+#include "Graphics/Buffers/DepthStencilBuffer.h"
+#include "Graphics/Buffers/IndexBuffer.h"
+#include "Graphics/Buffers/VertexBuffer.h"
 
 #include "FreeImage.h"
 #include <iostream>
-#include "../../Graphics/RasterizerState.h"
 
 void FreeImageOutput(FREE_IMAGE_FORMAT fif, const char* message)
 {
@@ -47,13 +48,15 @@ bool GraphicsSystem::Initialize()
 
     scd.BufferCount = 1;
     scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    scd.BufferDesc.Width = static_cast<UINT>(m_viewportWidth);
-    scd.BufferDesc.Height = static_cast<UINT>(m_viewportHeight);
+    scd.BufferDesc.Width = WindowManager::GetWindowWidth();
+    scd.BufferDesc.Height = WindowManager::GetWindowHeight();
     scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
     scd.OutputWindow = WindowManager::GetHWND();
-    scd.SampleDesc.Count = 4;
+    scd.SampleDesc.Count = 1;
+    scd.SampleDesc.Quality = 0;
+    scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
     scd.Windowed = TRUE;
-    scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+    //scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
     UINT creationFlags = 0;
 #if defined(_DEBUG)
@@ -84,40 +87,31 @@ bool GraphicsSystem::Initialize()
         }
 #endif
 
-        // Initialize Render Targets
-        ID3D11Texture2D* pBackBuffer;
-        m_swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-        HRESULT createdRenderTarget = m_device->CreateRenderTargetView(pBackBuffer, NULL, m_rtBackBuffer);
+        // Initialize Viewport
+        D3D11_VIEWPORT viewportDesc;
+        ZeroMemory(&viewportDesc, sizeof(D3D11_VIEWPORT));
+        viewportDesc.TopLeftX = 0;
+        viewportDesc.TopLeftY = 0;
+        viewportDesc.Width = m_viewportWidth;
+        viewportDesc.Height = m_viewportHeight;
+        viewportDesc.MinDepth = 0.0f;
+        viewportDesc.MaxDepth = 1.0f;
 
-        if (SUCCEEDED(createdRenderTarget))
-        {
-            pBackBuffer->Release();
-            m_deviceContext->OMSetRenderTargets(1, m_rtBackBuffer, NULL);
+        m_deviceContext->RSSetViewports(1, &viewportDesc);
 
-            // Initialize Viewport
-            D3D11_VIEWPORT viewportDesc;
-            ZeroMemory(&viewportDesc, sizeof(D3D11_VIEWPORT));
-            viewportDesc.TopLeftX = 0;
-            viewportDesc.TopLeftY = 0;
-            viewportDesc.Width = m_viewportWidth;
-            viewportDesc.Height = m_viewportHeight;
-            viewportDesc.MinDepth = 0.0f;
-            viewportDesc.MaxDepth = 1.0f;
+        // Initialize Buffers
+        size_t INDEX_BUFFER_SIZE = (size_t)pow(1024, 2);
+        size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
 
-            m_deviceContext->RSSetViewports(1, &viewportDesc);
-
-            // Initialize Buffers
-            size_t INDEX_BUFFER_SIZE = (size_t)pow(1024, 2);
-            size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
-
-            m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
-            m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
+        m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
+        m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
             
-            m_rasterizerState = new RasterizerState();
-            m_rasterizerState->SetCullState(kCullStateNoCull);
+        m_rasterizerState = new RasterizerState();
+        m_rasterizerState->SetCullState(kCullStateNoCull);
 
-            return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
-        }
+        m_depthStencilBuffer = new DepthStencilBuffer(WindowManager::GetWindowWidth(), WindowManager::GetWindowHeight());
+
+        return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
     }
 
     return false;
@@ -127,7 +121,6 @@ void GraphicsSystem::Deinitalize()
 {
     m_swapchain->SetFullscreenState(FALSE, NULL);
 
-    m_rtBackBuffer.ReleasePointer();
     m_swapchain.ReleasePointer();
     m_device.ReleasePointer();
     m_deviceContext.ReleasePointer();
@@ -135,11 +128,17 @@ void GraphicsSystem::Deinitalize()
     SAFE_DELETE(m_myVertexBuffer);
     SAFE_DELETE(m_myIndexBuffer);
     SAFE_DELETE(m_rasterizerState);
+    SAFE_DELETE(m_depthStencilBuffer);
 
 #if defined(_DEBUG)
     m_debugInterface->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
     m_debugInterface.ReleasePointer();
 #endif
+}
+
+IDXGISwapChain* GraphicsSystem::GetSwapChain()
+{
+    return m_swapchain;
 }
 
 ID3D11Device* GraphicsSystem::GetGraphicsDevice()
@@ -150,6 +149,11 @@ ID3D11Device* GraphicsSystem::GetGraphicsDevice()
 ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
 {
 	return m_deviceContext;
+}
+
+DepthStencilBuffer* GraphicsSystem::GetDepthStencilBuffer()
+{
+    return m_depthStencilBuffer;
 }
 
 RasterizerState* GraphicsSystem::GetRasterizerState()
@@ -208,19 +212,18 @@ void GraphicsSystem::VariableTick()
 	
 	m_myVertexBuffer->SetCurrentIfValid();
 	m_myIndexBuffer->SetCurrentIfValid();
-	
-	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 
 	PerObjectBuffer& pub = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
 	pub.BindBuffer();
+
+    m_depthStencilBuffer->ClearBuffer();
+    m_depthStencilBuffer->SetState();
 
 	UINT16 currentIndex = 0;
     size_t allCamerasSize = GetSceneGraph().GetNumberOfComponents<CameraComponent>();
 	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
 	{
         CameraComponent& cam = *GetSceneGraph().GetComponent<CameraComponent>(static_cast<int>(cameraIndex));
-
-		m_deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
 
         EntityComponent& cameraEntity = *GetSceneGraph().GetComponent<EntityComponent>(cam.m_entityIndex);
         TransformComponent& cameraTransform = *EntityUtil::GetComponent<TransformComponent>(cameraEntity);
@@ -255,12 +258,12 @@ void GraphicsSystem::VariableTick()
                     pob.ModelView = view * model;
                     pub.UpdateBuffer(pob);
 
-                    deviceContext->IASetPrimitiveTopology(mesh.m_topology);
-                    deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+                    m_deviceContext->IASetPrimitiveTopology(mesh.m_topology);
+                    m_deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
                 }
             }
 			currentIndex += numberOfVerts;
 		}
-		m_swapchain->Present(0, 0);
 	}
+	m_swapchain->Present(0, 0);
 }

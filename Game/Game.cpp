@@ -129,7 +129,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         int sphereTransformIndex = sphereTransform.m_componentIndex;
         sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		sphereTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
-		sphereTransform.m_data.m_scale = 50.0f * sphereTransform.m_data.m_scale;
+        sphereTransform.m_data.m_scale *= 10.0f;
         MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
         sphereRenderer.m_data.m_meshIndex = sphereMesh->GetResourceID();
         sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
@@ -154,11 +154,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
         int cubemapTextureId = static_cast<int>(testCubemap->GetResourceID());
         skyboxMat->AddTexture2DArrayResource({ cubemapTextureId, 0 });
-
-        //skyboxMat->SetShaderIndex(materialShader->GetResourceID());
-        //skyboxMat->AddTextureSampler({ textureSamplerIndex, 0 });
-        //skyboxMat->AddStructuredBufferResource({ lightBufferIndex, 0 });
-        //skyboxMat->AddTexture2DResource({ uvTextureResourceId, 1 });
 
         EntityComponent& skyboxEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& skyboxTransform = EntityUtil::AddComponent<TransformComponent>(skyboxEntity);

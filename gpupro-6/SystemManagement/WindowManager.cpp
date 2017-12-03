@@ -2,8 +2,8 @@
 #include "WindowManager.h"
 #include "SystemManagement/Systems/InputSystem.h"
 
-int WindowManager::s_windowWidth = 0;
-int WindowManager::s_windowHeight = 0;
+UINT WindowManager::s_windowWidth = 0;
+UINT WindowManager::s_windowHeight = 0;
 HWND WindowManager::s_hwnd = nullptr;
 LPCWSTR WindowManager::s_applicationName = nullptr;
 HINSTANCE WindowManager::s_hInstance = nullptr;
@@ -71,12 +71,12 @@ HWND& WindowManager::GetHWND()
     return s_hwnd;
 }
 
-int WindowManager::GetWindowWidth()
+UINT WindowManager::GetWindowWidth()
 {
     return s_windowWidth;
 }
 
-int WindowManager::GetWindowHeight()
+UINT WindowManager::GetWindowHeight()
 {
     return s_windowHeight;
 }
