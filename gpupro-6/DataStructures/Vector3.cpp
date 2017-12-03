@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Vector3.h"
+#include "Quaternion.h"
 
 #include <math.h>
 
@@ -45,6 +46,11 @@ Vector3 operator/(const Vector3& first, const float factor)
 	return result;
 }
 
+void operator*=(Vector3& lhs, Quaternion rhs)
+{
+    //TODO: Implement
+}
+
 void operator+=(Vector3& lhs, const Vector3& rhs) { lhs.X += rhs.X; lhs.Y += rhs.Y; lhs.Z += rhs.Z; }
 void operator-=(Vector3& lhs, const Vector3& rhs) { lhs.X -= rhs.X; lhs.Y -= rhs.Y; lhs.Z -= rhs.Z; }
 void operator*=(Vector3& lhs, const float rhs) { lhs.X *= rhs; lhs.Y *= rhs; lhs.Z *= rhs; }
@@ -58,9 +64,12 @@ FLOAT Vector3::Magnitude(Vector3& v)
 void Vector3::Normalize(Vector3& v)
 {
 	FLOAT mag = Vector3::Magnitude(v);
-	v.X /= mag;
-	v.Y /= mag;
-	v.Z /= mag;
+    if (mag > 0)
+    {
+        v.X /= mag;
+        v.Y /= mag;
+        v.Z /= mag;
+    }
 }
 
 FLOAT Vector3::Dot(Vector3 a, Vector3 b)

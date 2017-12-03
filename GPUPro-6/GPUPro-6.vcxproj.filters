@@ -111,8 +111,15 @@
     <ClCompile Include="Graphics\ResourceTypes\Texture2DArray.cpp">
       <Filter>Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\RasterizerState.cpp" />
-    <ClCompile Include="Graphics\Buffers\DepthStencilBuffer.cpp" />
+    <ClCompile Include="Graphics\RasterizerState.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\DepthStencilBuffer.cpp">
+      <Filter>Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Locomotion\NoClipLocomotion.cpp">
+      <Filter>Locomotion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -259,8 +266,15 @@
     <ClInclude Include="Utilities\PointerRelease.hpp">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\RasterizerState.h" />
-    <ClInclude Include="Graphics\Buffers\DepthStencilBuffer.h" />
+    <ClInclude Include="Graphics\RasterizerState.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\DepthStencilBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Locomotion\NoClipLocomotion.h">
+      <Filter>Locomotion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -301,6 +315,9 @@
     </Filter>
     <Filter Include="Graphics\ResourceTypes">
       <UniqueIdentifier>{c922c5fa-36ad-47b1-9ab2-e1181970ae27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Locomotion">
+      <UniqueIdentifier>{44e41045-d00b-424d-9a11-975c85fefb6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

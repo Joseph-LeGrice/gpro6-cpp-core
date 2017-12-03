@@ -29,7 +29,7 @@ std::vector<size_t> GetIndices(ComponentReferenceNode* node)
 
 int GetBalance(ComponentReferenceNode& node)
 {
-    return RightHeight(node) - LeftHeight(node);
+    return LeftHeight(node) - RightHeight(node);
 }
 
 int RightHeight(ComponentReferenceNode& node)

@@ -243,6 +243,7 @@
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Input\KeyboardInput.cpp" />
     <ClCompile Include="Input\MouseInput.cpp" />
+    <ClCompile Include="Locomotion\NoClipLocomotion.cpp" />
     <ClCompile Include="SystemManagement\Systems\GraphicsSystem.cpp" />
     <ClCompile Include="SystemManagement\Systems\InputSystem.cpp" />
     <ClCompile Include="SystemManagement\ISystem.cpp" />
@@ -293,6 +294,7 @@
     <ClInclude Include="Graphics\ResourceTypes\TextureSampler.h" />
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Components\Light.h" />
+    <ClInclude Include="Locomotion\NoClipLocomotion.h" />
     <ClInclude Include="SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="SystemManagement\Systems\GraphicsSystem.h" />
     <ClInclude Include="SystemManagement\Systems\LightingSystem.h" />

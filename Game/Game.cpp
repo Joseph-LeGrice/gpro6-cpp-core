@@ -25,6 +25,7 @@
 #include "SystemManagement/Systems/InputSystem.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/WindowManager.h"
+#include "Locomotion/NoClipLocomotion.h"
 #include "MouseRotateSystem.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
@@ -46,7 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             LightingSystem,
             TimeSystem,
             InputSystem,
-            MouseRotateSystem
+            NoClipLocomotion
         >();
 
         InitConstantBufferInterface();
@@ -107,12 +108,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         mf.BindBuffer();
         //------------------------------------------------------------------------------------
 		
-        // Camera
-        EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-        TransformComponent& cameraTransform = EntityUtil::AddComponent<TransformComponent>(cameraEntity);
-        cameraTransform.m_data.m_position = { 0.0f, 0.0f, -100.0f };
-        CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
-
         // Light
         EntityComponent& lightEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& lightTransform = EntityUtil::AddComponent<TransformComponent>(lightEntity);
@@ -127,13 +122,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		EntityComponent& sphereEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& sphereTransform = EntityUtil::AddComponent<TransformComponent>(sphereEntity);
         int sphereTransformIndex = sphereTransform.m_componentIndex;
-        sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+        //sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		sphereTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
         sphereTransform.m_data.m_scale *= 10.0f;
         MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
         sphereRenderer.m_data.m_meshIndex = sphereMesh->GetResourceID();
         sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
 
+        // Camera
+        EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        int cameraEntityId = cameraEntity.m_componentIndex;
+        TransformComponent& cameraTransform = EntityUtil::AddComponent<TransformComponent>(cameraEntity);
+        cameraTransform.m_data.m_position = { 0.0f, 0.0f, -50.0f };
+        CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
+        
         //Skybox
         Shader* skyboxShader = GetAssetManager().Instantiate<Shader>();
         skyboxShader->InitVertexShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "VShader");
@@ -155,10 +157,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         int cubemapTextureId = static_cast<int>(testCubemap->GetResourceID());
         skyboxMat->AddTexture2DArrayResource({ cubemapTextureId, 0 });
 
-        EntityComponent& skyboxEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-        TransformComponent& skyboxTransform = EntityUtil::AddComponent<TransformComponent>(skyboxEntity);
-        skyboxTransform.m_data.m_position = { 0.0f, 0.0f, -100.0f };
-        MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(skyboxEntity);
+        MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(cameraEntity);
         skyboxRenderer.m_enabled = true;
         skyboxRenderer.m_data.m_meshIndex = sphereMeshID;
         skyboxRenderer.m_data.m_materialIndex = skyboxMatID;
@@ -166,7 +165,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
         SystemManager::GetSystem<GraphicsSystem>()->SetDirty();
-        SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
+        //SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
+        SystemManager::GetSystem<NoClipLocomotion>()->SetPlayer(cameraEntityId);
 	}
 	catch(...)
 	{
