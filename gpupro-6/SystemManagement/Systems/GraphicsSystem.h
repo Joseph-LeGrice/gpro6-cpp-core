@@ -10,6 +10,7 @@
 class Material;
 class VertexBuffer;
 class IndexBuffer;
+class RasterizerState;
 struct Camera;
 
 class GraphicsSystem : public ISystem
@@ -17,6 +18,7 @@ class GraphicsSystem : public ISystem
 public:
 	ID3D11Device* GetGraphicsDevice();
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
+    RasterizerState* GetRasterizerState();
     void SetDirty();
 
     GraphicsSystem();
@@ -40,8 +42,8 @@ private:
     ManualRelease<ID3D11Debug> m_debugInterface;
 #endif
 
-
 	bool m_isDirty;
+    RasterizerState* m_rasterizerState;
 	VertexBuffer* m_myVertexBuffer;
 	IndexBuffer* m_myIndexBuffer;
 

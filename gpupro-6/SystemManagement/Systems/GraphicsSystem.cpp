@@ -13,6 +13,7 @@
 
 #include "FreeImage.h"
 #include <iostream>
+#include "../../Graphics/RasterizerState.h"
 
 void FreeImageOutput(FREE_IMAGE_FORMAT fif, const char* message)
 {
@@ -111,6 +112,10 @@ bool GraphicsSystem::Initialize()
 
             m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
             m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
+            
+            m_rasterizerState = new RasterizerState();
+            m_rasterizerState->SetCullState(kCullStateNoCull);
+
             return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
         }
     }
@@ -129,6 +134,7 @@ void GraphicsSystem::Deinitalize()
 
     SAFE_DELETE(m_myVertexBuffer);
     SAFE_DELETE(m_myIndexBuffer);
+    SAFE_DELETE(m_rasterizerState);
 
 #if defined(_DEBUG)
     m_debugInterface->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
@@ -144,6 +150,11 @@ ID3D11Device* GraphicsSystem::GetGraphicsDevice()
 ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
 {
 	return m_deviceContext;
+}
+
+RasterizerState* GraphicsSystem::GetRasterizerState()
+{
+    return m_rasterizerState;
 }
 
 float GraphicsSystem::GetViewportWidth()
