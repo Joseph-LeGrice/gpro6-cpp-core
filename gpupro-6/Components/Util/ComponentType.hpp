@@ -11,6 +11,7 @@ struct ComponentRegistrationInfo
     InitFunctor s_initFunctor;
     int m_componentIndex;
     int m_entityIndex;
+    bool m_enabled;
     T m_data;
 };
 
@@ -19,6 +20,7 @@ void InitializeComponentRegistrationInfo(ComponentRegistrationInfo<T, id, InitFu
 {
     cri.m_componentIndex = -1;
     cri.m_entityIndex = -1;
+    cri.m_enabled = true;
 }
 
 // is_registered: checks if a given type is ComponentRegistrationInfo

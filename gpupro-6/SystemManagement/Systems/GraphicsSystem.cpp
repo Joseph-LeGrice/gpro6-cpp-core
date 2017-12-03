@@ -227,25 +227,27 @@ void GraphicsSystem::VariableTick()
 
             int meshIndex = mrc.m_data.m_meshIndex;
             int materialIndex = mrc.m_data.m_materialIndex;
-            
+
             Mesh& mesh = *GetAssetManager().GetAsset<Mesh>(meshIndex);
             UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
 
-            Material& mat = *GetAssetManager().GetAsset<Material>(materialIndex);
-            if (mat.BindIfValid())
+            if (mrc.m_enabled)
             {
-			    TransformComponent& modelTransform = *EntityUtil::GetComponent<TransformComponent>(meshEntity);
-			    Matrix4x4 model = Transform::GetMatrix(modelTransform.m_data);
+                Material& mat = *GetAssetManager().GetAsset<Material>(materialIndex);
+                if (mat.BindIfValid())
+                {
+                    TransformComponent& modelTransform = *EntityUtil::GetComponent<TransformComponent>(meshEntity);
+                    Matrix4x4 model = Transform::GetMatrix(modelTransform.m_data);
 
-                PER_OBJECT_BUFFER pob;
-                pob.ModelViewProjection = proj * view * model;
-			    pob.ModelView = view * model;
-			    pub.UpdateBuffer(pob);
+                    PER_OBJECT_BUFFER pob;
+                    pob.ModelViewProjection = proj * view * model;
+                    pob.ModelView = view * model;
+                    pub.UpdateBuffer(pob);
 
-			    deviceContext->IASetPrimitiveTopology(mesh.m_topology);
-			    deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+                    deviceContext->IASetPrimitiveTopology(mesh.m_topology);
+                    deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
+                }
             }
-
 			currentIndex += numberOfVerts;
 		}
 		m_swapchain->Present(0, 0);
