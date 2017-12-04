@@ -13,7 +13,7 @@ public:
 private:
     int m_playerEntityId = -1;
 
-    float m_moveSpeed = 5.0f;
-    float m_moveBoostSpeed = 7.5f;
+    float m_moveSpeed = 10.0f;
+    float m_moveBoostSpeed = 15.5f;
 };
 

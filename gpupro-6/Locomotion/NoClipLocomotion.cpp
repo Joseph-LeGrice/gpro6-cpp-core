@@ -68,24 +68,29 @@ void NoClipLocomotion::VariableTick()
         moveDelta.X = -1.0f;
     }
 
-    //if (keyboardInput.GetKey(kInputKey_Space))
-    //{
-    //    moveDelta.Y = 1.0f;
-    //}
-    //else if (keyboardInput.GetKey(kInputKey_LeftCtrl))
-    //{
-    //    moveDelta.Y = -1.0f;
-    //}
+    if (keyboardInput.GetKey(kInputKey_R)) //kInputKey_Space))
+    {
+        moveDelta.Y = 1.0f;
+    }
+    else if (keyboardInput.GetKey(kInputKey_F)) //kInputKey_LeftCtrl))
+    {
+        moveDelta.Y = -1.0f;
+    }
 
     Vector3::Normalize(moveDelta);
 
-    if (false) //(keyboardInput.GetKey(kInputKey_LeftShift))
+    if (keyboardInput.GetKey(kInputKey_X)) //kInputKey_LeftShift))
     {
         moveDelta *= m_moveBoostSpeed;
     }
     else
     {
         moveDelta *= m_moveSpeed;
+    }
+
+    if (keyboardInput.GetKey(kInputKey_Q)) //kInputKey_LeftShift))
+    {
+        playerTransform->m_data.m_position = { 0,0,0 };
     }
 
     TimeSystem* time = SystemManager::GetSystem<TimeSystem>();
