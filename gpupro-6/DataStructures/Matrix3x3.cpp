@@ -65,5 +65,7 @@ Matrix3x3 Matrix3x3::Transpose(const Matrix3x3& m)
 
 float Matrix3x3::Determinant(const Matrix3x3& m)
 {
-	return m.M11 * m.M22 * m.M33 - m.M13 * m.M22 * m.M31;
+    return m.M11 * (m.M22 * m.M33 - m.M32 * m.M23) -
+        m.M21 * (m.M12 * m.M33 - m.M32 * m.M13) +
+        m.M31 * (m.M12 * m.M23 - m.M22 * m.M13);
 }
