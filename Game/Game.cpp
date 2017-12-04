@@ -120,13 +120,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         UINT sphereMeshID = sphereMesh->GetResourceID();
 
 		EntityComponent& sphereEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        UINT sphereEntityId = sphereEntity.m_componentIndex;
         TransformComponent& sphereTransform = EntityUtil::AddComponent<TransformComponent>(sphereEntity);
         int sphereTransformIndex = sphereTransform.m_componentIndex;
         //sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
 		sphereTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
         sphereTransform.m_data.m_scale *= 10.0f;
         MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
-        sphereRenderer.m_data.m_meshIndex = sphereMesh->GetResourceID();
+        sphereRenderer.m_data.m_meshIndex = sphereMeshID;
         sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
 
         // Camera
@@ -143,12 +144,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
         testCubemap->InitializeWithBitmaps({
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Top.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Bottom.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp",
             L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp"
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Bottom.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Top.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
+            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp"
         });
         
         Material* skyboxMat = GetAssetManager().Instantiate<Material>();
