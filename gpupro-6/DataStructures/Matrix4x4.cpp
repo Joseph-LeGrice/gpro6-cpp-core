@@ -68,7 +68,7 @@ void Matrix4x4::Identity(Matrix4x4& m)
 	m.M14 = 0; m.M24 = 0; m.M34 = 0; m.M44 = 1;
 }
 
-Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& m)
+Matrix4x4 Matrix4x4::Transpose(Matrix4x4 m)
 {
 	Matrix4x4 result;
 	result.M11 = m.M11; result.M21 = m.M12; result.M31 = m.M13; result.M41 = m.M14;
@@ -78,12 +78,12 @@ Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& m)
 	return result;
 }
 
-float Matrix4x4::Determinant(const Matrix4x4& m)
+float Matrix4x4::Determinant(Matrix4x4 m)
 {
 	return m.M11 * m.M22 * m.M33 * m.M44 - m.M14 * m.M23 * m.M32 * m.M41;
 }
 
-Matrix4x4 Matrix4x4::MatrixOfMinors(const Matrix4x4& m)
+Matrix4x4 Matrix4x4::MatrixOfMinors(Matrix4x4 m)
 {
 	Matrix4x4 result;
 
@@ -188,7 +188,7 @@ Matrix4x4 Matrix4x4::MatrixOfMinors(const Matrix4x4& m)
 	return result;
 }
 
-Matrix4x4 Matrix4x4::Inverse(const Matrix4x4& m)
+Matrix4x4 Matrix4x4::Inverse(Matrix4x4 m)
 {
 	float determinant = Matrix4x4::Determinant(m);
 	if (determinant > 0.0f)

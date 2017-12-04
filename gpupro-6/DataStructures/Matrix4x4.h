@@ -19,10 +19,10 @@ struct Matrix4x4
 #endif
 
     static void Identity(Matrix4x4& m);
-    static Matrix4x4 Transpose(const Matrix4x4& m);
-    static float Determinant(const Matrix4x4& m);
-    static Matrix4x4 MatrixOfMinors(const Matrix4x4& m);
-    static Matrix4x4 Inverse(const Matrix4x4& m);
+    static Matrix4x4 Transpose(Matrix4x4 m);
+    static float Determinant(Matrix4x4 m);
+    static Matrix4x4 MatrixOfMinors(Matrix4x4 m);
+    static Matrix4x4 Inverse(Matrix4x4 m);
 };
 
 Matrix4x4 operator+(const Matrix4x4& lhs, const Matrix4x4 rhs);
