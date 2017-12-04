@@ -85,7 +85,7 @@ Mesh* MeshHelper::CreateSphereUV()
 			verts.push_back({ x, y, z });
 			norms.push_back({ x, y, z });
 
-			float u = 1.0f - (float)lonSlice / (longitude - 1.0f);
+			float u = (float)lonSlice / (longitude - 1.0f);
 			float v = 1.0f - (float)latSlice / (latitude - 1.0f);
 			uvs.push_back({ u, v });
 		}
