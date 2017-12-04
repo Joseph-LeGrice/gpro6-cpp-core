@@ -23,6 +23,8 @@ int SystemManager::DoRunGameLoop()
         m_running = true;
         while (m_running)
         {
+            timeSystem.AdvanceFrame();
+         
             while (timeSystem.ShouldAdvanceFixedStep())
             {
                 for (auto it = m_map.begin(); it != m_map.end(); ++it)
@@ -35,8 +37,6 @@ int SystemManager::DoRunGameLoop()
             {
                 it->second->VariableTick();
             }
-
-            timeSystem.AdvanceFrame();
         }
     }
     catch (...)
