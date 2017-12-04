@@ -12,7 +12,11 @@ SamplerState samTriLinear
 VertexShaderOutput VShader(AppData IN)
 {
     VertexShaderOutput OUT;
-    OUT.positionVS = IN.position;
+
+    float4 localPos = mul(float4(IN.position, 1.0f), ModelView);
+    OUT.positionVS = localPos.xyz * localPos.w;
+    OUT.positionVS.y = -IN.position.y;
+    
     OUT.position = mul(float4(IN.position, 1.0f), ModelViewProjection).xyww;
     
     return OUT;
