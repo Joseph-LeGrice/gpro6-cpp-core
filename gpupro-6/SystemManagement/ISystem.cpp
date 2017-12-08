@@ -16,7 +16,17 @@ void ISystem::FixedTick()
 
 }
 
+void ISystem::EarlyVariableTick()
+{
+
+}
+
 void ISystem::VariableTick()
+{
+
+}
+
+void ISystem::LateVariableTick()
 {
 
 }

@@ -35,7 +35,17 @@ int SystemManager::DoRunGameLoop()
 
             for (auto it = m_map.begin(); it != m_map.end(); ++it)
             {
+                it->second->EarlyVariableTick();
+            }
+
+            for (auto it = m_map.begin(); it != m_map.end(); ++it)
+            {
                 it->second->VariableTick();
+            }
+
+            for (auto it = m_map.begin(); it != m_map.end(); ++it)
+            {
+                it->second->LateVariableTick();
             }
         }
     }

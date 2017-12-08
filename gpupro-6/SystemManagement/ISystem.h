@@ -9,6 +9,8 @@ public:
 
     virtual bool Initialize();
     virtual void FixedTick();
-	virtual void VariableTick();
+    virtual void EarlyVariableTick();
+    virtual void VariableTick();
+    virtual void LateVariableTick();
     virtual void Deinitalize();
 };
