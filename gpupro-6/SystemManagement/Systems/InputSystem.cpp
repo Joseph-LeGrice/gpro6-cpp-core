@@ -17,10 +17,12 @@ void InputSystem::SetHWND(HWND hwnd)
 
 void InputSystem::VariableTick()
 {
-	MSG msg;
+    m_mouseInput.AdvanceFrame();
+    m_keyboardInput.AdvanceFrame();
+    
+    MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
 
-	bool isNewFrame = true;
 	while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&msg);
@@ -31,10 +33,8 @@ void InputSystem::VariableTick()
 			SystemManager::Quit();
 		}
 
-		m_mouseInput.HandleInput(msg, isNewFrame);
-		m_keyboardInput.HandleInput(msg, isNewFrame);
-
-		isNewFrame = false;
+		m_mouseInput.HandleInput(msg);
+		m_keyboardInput.HandleInput(msg);
 	}
 }
 

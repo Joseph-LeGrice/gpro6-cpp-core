@@ -7,13 +7,8 @@ KeyboardInput::KeyboardInput()
 {
 }
 
-void KeyboardInput::HandleInput(MSG msg, bool didAdvanceFrame)
+void KeyboardInput::HandleInput(MSG msg)
 {
-	if (didAdvanceFrame)
-	{
-		m_keyPressesLastFrame = m_keyPressesThisFrame;
-	}
-
 	if (msg.message == WM_KEYDOWN)
 	{
 		if (IsKeyboardKeypress(msg.wParam))
@@ -52,6 +47,11 @@ bool KeyboardInput::GetKeyUpThisFrame(InputKey key) const
 bool KeyboardInput::IsKeyboardKeypress(WPARAM param) const
 {
 	return param >= kInputKey_A && param <= kInputKey_Z;
+}
+
+void KeyboardInput::AdvanceFrame()
+{
+    m_keyPressesLastFrame = m_keyPressesThisFrame;
 }
 
 KeyboardInput::~KeyboardInput()

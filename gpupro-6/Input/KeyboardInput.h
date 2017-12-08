@@ -38,7 +38,9 @@ public:
 	KeyboardInput();
 	~KeyboardInput();
 	KeyboardInput(const KeyboardInput&) = delete;
-	void HandleInput(MSG msg, bool didAdvanceFrame);
+	void HandleInput(MSG msg);
+    void AdvanceFrame();
+
 	bool GetKey(InputKey key) const;
 	bool GetKeyDownThisFrame(InputKey key) const;
 	bool GetKeyUpThisFrame(InputKey key) const;

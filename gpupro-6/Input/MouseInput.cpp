@@ -37,7 +37,7 @@ bool MouseInput::GetMouseButton(int buttonIndex) const
 	if (buttonIndex < c_numberOfButtons)
 	{
 		UINT8 flag = 1 << buttonIndex;
-		return (m_thisMouseButtonState & flag) == flag;
+        return (m_thisMouseButtonState & flag) == flag || (m_lastMouseButtonState & flag) == flag;
 	}
 	else
 	{
@@ -76,13 +76,8 @@ bool MouseInput::GetMouseButtonUpThisFrame(int buttonIndex) const
 	}
 }
 
-void MouseInput::HandleInput(MSG m, bool didAdvanceFrame)
+void MouseInput::HandleInput(MSG m)
 {
-	if (didAdvanceFrame)
-	{
-		m_lastMouseButtonState = m_thisMouseButtonState;
-	}
-	
 	for (size_t i = 0; i < c_numberOfButtons; ++i)
 	{
 		UINT8 flag = 1 << i;
@@ -90,7 +85,7 @@ void MouseInput::HandleInput(MSG m, bool didAdvanceFrame)
 		{
 			if (m.message == c_validStates[i].buttonUpCode)
 			{
-				m_thisMouseButtonState &= ~flag;
+                m_thisMouseButtonState &= ~flag;
 			}
 		}
 		else
@@ -102,15 +97,22 @@ void MouseInput::HandleInput(MSG m, bool didAdvanceFrame)
 		}
 	}
 
-	if (m.message == WM_MOUSEMOVE)
+    if (m.message == WM_MOUSEMOVE)
 	{
-		Vector2 thisPosition = {
+        Vector2 thisPosition = {
 			(float)GET_X_LPARAM(m.lParam),
 			(float)GET_Y_LPARAM(m.lParam)
 		};
-		m_deltaMousePosition = thisPosition - m_mousePosition;
-		m_mousePosition = thisPosition;
-	}
+
+        m_deltaMousePosition = thisPosition - m_mousePosition;
+        m_mousePosition = thisPosition;
+    }
+}
+
+void MouseInput::AdvanceFrame()
+{
+    m_lastMouseButtonState = m_thisMouseButtonState;
+    m_deltaMousePosition = { 0, 0 };
 }
 
 MouseInput::~MouseInput()
