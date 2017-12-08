@@ -8,6 +8,7 @@
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/InputSystem.h"
 #include "SystemManagement/Systems/TimeSystem.h"
+#include "Utilities/MathHelper.h"
 
 NoClipLocomotion::NoClipLocomotion()
 {
@@ -41,13 +42,21 @@ void NoClipLocomotion::VariableTick()
     {
         return;
     }
+    
+    TimeSystem* time = SystemManager::GetSystem<TimeSystem>();
+    float deltaTime = time->DeltaTimeStep();
 
     InputSystem* inputSys = SystemManager::GetSystem<InputSystem>();
     const MouseInput& mouseInput = inputSys->GetMouse();
-    Quaternion rotationDelta = Quaternion::Identity();
-
-    playerTransform->m_data.m_rotation *= rotationDelta;
-
+    if (mouseInput.GetMouseButton(0))
+    {
+        Vector2 mouseDelta = mouseInput.GetDeltaMousePosition();
+        Quaternion rotationDelta = Quaternion::Identity();
+        rotationDelta *= Quaternion::FromAxisAngle({ 1, 0, 0 }, m_sensitivity * mouseDelta.Y * deltaTime);
+        rotationDelta *= Quaternion::FromAxisAngle({ 0, 1, 0 }, m_sensitivity * mouseDelta.X * deltaTime);
+        rotationDelta *= Quaternion::FromAxisAngle({ 0, 0, 1 }, 0.0f);
+        playerTransform->m_data.m_rotation *= rotationDelta;
+    }
     const KeyboardInput& keyboardInput = inputSys->GetKeyboard();
     Vector3 moveDelta = { 0, 0, 0 };
     if (keyboardInput.GetKey(kInputKey_W))
@@ -93,8 +102,7 @@ void NoClipLocomotion::VariableTick()
         playerTransform->m_data.m_position = { 0,0,0 };
     }
 
-    TimeSystem* time = SystemManager::GetSystem<TimeSystem>();
-    moveDelta *= time->DeltaTimeStep();
+    moveDelta *= deltaTime;
 
     moveDelta *= playerTransform->m_data.m_rotation;
     playerTransform->m_data.m_position += moveDelta;
