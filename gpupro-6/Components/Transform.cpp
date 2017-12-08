@@ -22,5 +22,7 @@ Matrix4x4 Transform::GetMatrix(const Transform& t)
 
 Matrix4x4 Transform::GetCameraViewMatrix(const Transform& t)
 {
-	return Matrix4x4::Inverse(Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)));
+    Matrix4x4 TR = Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)) *
+        Quaternion::GetMatrix(t.m_rotation);
+	return Matrix4x4::Inverse(TR);
 }
