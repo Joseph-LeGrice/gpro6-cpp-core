@@ -120,6 +120,9 @@
     <ClCompile Include="Locomotion\NoClipLocomotion.cpp">
       <Filter>Locomotion</Filter>
     </ClCompile>
+    <ClCompile Include="TransformSync\TransfromSyncSystem.cpp">
+      <Filter>TransformSync</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -275,6 +278,12 @@
     <ClInclude Include="Locomotion\NoClipLocomotion.h">
       <Filter>Locomotion</Filter>
     </ClInclude>
+    <ClInclude Include="TransformSync\TranslationSync.h">
+      <Filter>TransformSync</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformSync\TransfromSyncSystem.h">
+      <Filter>TransformSync</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -318,6 +327,9 @@
     </Filter>
     <Filter Include="Locomotion">
       <UniqueIdentifier>{44e41045-d00b-424d-9a11-975c85fefb6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TransformSync">
+      <UniqueIdentifier>{e908b041-f771-474e-ab46-440376152ad0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -103,7 +103,7 @@ void NoClipLocomotion::VariableTick()
     }
 
     moveDelta *= deltaTime;
-
     moveDelta *= playerTransform->m_data.m_rotation;
+    
     playerTransform->m_data.m_position += moveDelta;
 }

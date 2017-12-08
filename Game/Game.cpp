@@ -26,11 +26,13 @@
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/WindowManager.h"
 #include "Locomotion/NoClipLocomotion.h"
+#include "TransformSync/TranslationSync.h"
+#include "TransformSync/TransfromSyncSystem.h"
 #include "MouseRotateSystem.h"
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
+int APIENTRY main(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
@@ -47,7 +49,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             LightingSystem,
             TimeSystem,
             InputSystem,
-            NoClipLocomotion
+            NoClipLocomotion,
+            TransfromSyncSystem
         >();
 
         InitConstantBufferInterface();
@@ -134,6 +137,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         int cameraEntityId = cameraEntity.m_componentIndex;
         TransformComponent& cameraTransform = EntityUtil::AddComponent<TransformComponent>(cameraEntity);
+        UINT cameraTransformId = cameraTransform.m_componentIndex;
         cameraTransform.m_data.m_position = { 0.0f, 0.0f, -50.0f };
         CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
         
@@ -158,7 +162,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         int cubemapTextureId = static_cast<int>(testCubemap->GetResourceID());
         skyboxMat->AddTexture2DArrayResource({ cubemapTextureId, 0 });
 
-        MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(cameraEntity);
+        EntityComponent& skyboxEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        TransformComponent& skyboxTransform = EntityUtil::AddComponent<TransformComponent>(skyboxEntity);
+        skyboxTransform.m_data.m_position = { 0.0f, 0.0f, -50.0f };
+
+        TranslationSyncComponent& translationSync = EntityUtil::AddComponent<TranslationSyncComponent>(skyboxEntity);
+        translationSync.m_data.m_transformId = cameraTransformId;
+
+        MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(skyboxEntity);
         skyboxRenderer.m_enabled = true;
         skyboxRenderer.m_data.m_meshIndex = sphereMeshID;
         skyboxRenderer.m_data.m_materialIndex = skyboxMatID;

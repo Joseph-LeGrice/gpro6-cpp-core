@@ -253,6 +253,7 @@
     <ClCompile Include="SystemManagement\SystemManager.cpp" />
     <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp" />
     <ClCompile Include="Graphics\ResourceTypes\Texture2DArray.cpp" />
+    <ClCompile Include="TransformSync\TransfromSyncSystem.cpp" />
     <ClCompile Include="Utilities\MeshHelper.cpp" />
     <ClCompile Include="Utilities\PerlinNoise.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -307,6 +308,8 @@
     <ClInclude Include="Input\KeyboardInput.h" />
     <ClInclude Include="Input\MouseInput.h" />
     <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h" />
+    <ClInclude Include="TransformSync\TransfromSyncSystem.h" />
+    <ClInclude Include="TransformSync\TranslationSync.h" />
     <ClInclude Include="Utilities\PointerRelease.hpp" />
     <ClInclude Include="Utilities\Logging.h" />
     <ClInclude Include="Utilities\MathHelper.h" />

@@ -8,6 +8,7 @@
 struct Camera
 {
     Matrix4x4 m_projectionMatrix;
+    //TODO: Add reference field for skybox?
 
     static Camera CreateOrthographic(float size, float depth, float aspectRatio);
     static Camera CreatePerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar);

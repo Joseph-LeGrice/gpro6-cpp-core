@@ -5,6 +5,7 @@
 #include "Components/MeshRenderer.h"
 #include "Components/Light.h"
 #include "Components/Entity.h"
+#include "TransformSync/TranslationSync.h"
 
 #include "Components/Util/ComponentArray.hpp"
 #include <vector>
@@ -87,8 +88,8 @@ typedef SceneGraphImpl<
     CameraComponent,
     MeshRendererComponent,
     EntityComponent,
-    LightComponent
+    LightComponent,
+    TranslationSyncComponent
 > SceneGraph;
-
 
 SceneGraph& GetSceneGraph();
