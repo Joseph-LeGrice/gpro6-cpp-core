@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include <iostream>
-#include "TimeSystem.h"
+#include "Time.h"
 
 using namespace std::chrono;
 
-TimeSystem::TimeSystem()
+StaticPointer<Time> Time::s_instance;
+
+Time::Time()
 {
 	m_fixedTimestep = Seconds(16.0f);
 	m_deltaTime = Seconds(0.0f);
@@ -13,21 +15,21 @@ TimeSystem::TimeSystem()
 	m_time = clock::now();
 }
 
-TimeSystem::~TimeSystem()
+Time::~Time()
 {
 }
 
-float TimeSystem::FixedTimeStep()
+float Time::FixedTimeStep()
 {
-	return m_fixedTimestep.count();
+	return s_instance->m_fixedTimestep.count();
 }
 
-float TimeSystem::DeltaTimeStep()
+float Time::DeltaTimeStep()
 {
-	return m_deltaTime.count();
+	return s_instance->m_deltaTime.count();
 }
 
-bool TimeSystem::ShouldAdvanceFixedStep()
+bool Time::ShouldAdvanceFixedStep()
 {
 	if (m_latency >= m_fixedTimestep)
 	{
@@ -40,7 +42,7 @@ bool TimeSystem::ShouldAdvanceFixedStep()
 	}
 }
 
-void TimeSystem::AdvanceFrame()
+void Time::AdvanceFrame()
 {
 	using clock = std::chrono::high_resolution_clock;
 	TimePoint thisTime = clock::now();

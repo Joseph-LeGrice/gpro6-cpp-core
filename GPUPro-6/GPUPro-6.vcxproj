@@ -251,7 +251,7 @@
     <ClCompile Include="AssetManagement\AssetManager.cpp" />
     <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp" />
     <ClCompile Include="SystemManagement\SystemManager.cpp" />
-    <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp" />
+    <ClCompile Include="SystemManagement\Time.cpp" />
     <ClCompile Include="Graphics\ResourceTypes\Texture2DArray.cpp" />
     <ClCompile Include="TransformSync\TransfromSyncSystem.cpp" />
     <ClCompile Include="Utilities\MeshHelper.cpp" />
@@ -304,7 +304,7 @@
     <ClInclude Include="SystemManagement\ISystem.h" />
     <ClInclude Include="AssetManagement\AssetManager.h" />
     <ClInclude Include="SystemManagement\SystemManager.h" />
-    <ClInclude Include="SystemManagement\Systems\TimeSystem.h" />
+    <ClInclude Include="SystemManagement\Time.h" />
     <ClInclude Include="Input\KeyboardInput.h" />
     <ClInclude Include="Input\MouseInput.h" />
     <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h" />
@@ -320,6 +320,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="SystemManagement\WindowManager.h" />
+    <ClInclude Include="Utilities\StaticPointer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

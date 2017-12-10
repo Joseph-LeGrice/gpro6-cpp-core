@@ -21,7 +21,7 @@
 #include "Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Graphics/ResourceTypes/TextureSampler.h"
 #include "SystemManagement/SystemManager.h"
-#include "SystemManagement/Systems/TimeSystem.h"
+#include "SystemManagement/Time.h"
 #include "SystemManagement/Systems/InputSystem.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/WindowManager.h"
@@ -47,7 +47,6 @@ int APIENTRY main(_In_ HINSTANCE hInstance,
         SystemManager::Initialize<
             GraphicsSystem,
             LightingSystem,
-            TimeSystem,
             InputSystem,
             NoClipLocomotion,
             TransfromSyncSystem

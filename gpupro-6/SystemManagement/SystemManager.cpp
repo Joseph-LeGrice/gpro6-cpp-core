@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SystemManagement/SystemManager.h"
-#include "SystemManagement/Systems/TimeSystem.h"
+#include "SystemManagement/Time.h"
 #include <iostream>
 
 SystemManager* SystemManager::s_instance = new SystemManager();
@@ -18,14 +18,12 @@ int SystemManager::DoRunGameLoop()
 {
     try
     {
-        TimeSystem& timeSystem = *GetSystem<TimeSystem>();
-
         m_running = true;
         while (m_running)
         {
-            timeSystem.AdvanceFrame();
+            Time::s_instance->AdvanceFrame();
          
-            while (timeSystem.ShouldAdvanceFixedStep())
+            while (Time::s_instance->ShouldAdvanceFixedStep())
             {
                 for (auto it = m_map.begin(); it != m_map.end(); ++it)
                 {

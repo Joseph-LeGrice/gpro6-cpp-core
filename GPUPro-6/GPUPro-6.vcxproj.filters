@@ -57,9 +57,6 @@
     <ClCompile Include="SystemManagement\Systems\LightingSystem.cpp">
       <Filter>SystemManagement\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Systems\TimeSystem.cpp">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="AssetManagement\AssetManager.cpp">
       <Filter>AssetManagement</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="TransformSync\TransfromSyncSystem.cpp">
       <Filter>TransformSync</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManagement\Time.cpp">
+      <Filter>SystemManagement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,9 +186,6 @@
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
     <ClInclude Include="SystemManagement\Systems\LightingSystem.h">
-      <Filter>SystemManagement\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemManagement\Systems\TimeSystem.h">
       <Filter>SystemManagement\Systems</Filter>
     </ClInclude>
     <ClInclude Include="AssetManagement\AssetManager.h">
@@ -283,6 +280,10 @@
     </ClInclude>
     <ClInclude Include="Utilities\AutoPointer.hpp">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\StaticPointer.hpp" />
+    <ClInclude Include="SystemManagement\Time.h">
+      <Filter>SystemManagement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

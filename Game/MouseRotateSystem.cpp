@@ -2,7 +2,7 @@
 #include "MouseRotateSystem.h"
 #include "SystemManagement/SystemManager.h"
 #include "SystemManagement/Systems/InputSystem.h"
-#include "SystemManagement/Systems/TimeSystem.h"
+#include "SystemManagement/Time.h"
 #include "Components/Util/ComponentArray.hpp"
 #include "DataStructures/SceneGraph.h"
 #include "DataStructures/Quaternion.h"
@@ -39,14 +39,14 @@ void MouseRotateSystem::VariableTick()
 			if (mi.GetMouseButton(0))
 			{
                 TransformComponent& t = allTransforms[m_index];
-				Vector2 deltaMove = mi.GetDeltaMousePosition() * c_speed * SystemManager::GetSystem<TimeSystem>()->DeltaTimeStep();
+				Vector2 deltaMove = mi.GetDeltaMousePosition() * c_speed * Time::DeltaTimeStep();
 				t.m_data.m_position.X += deltaMove.X;
 				t.m_data.m_position.Y -= deltaMove.Y;
 			}
 		}
 		else
 		{
-			float angularDelta = c_angularVelocity * SystemManager::GetSystem<TimeSystem>()->DeltaTimeStep();
+			float angularDelta = c_angularVelocity * Time::DeltaTimeStep();
 			TransformComponent& t = allTransforms[m_index];
 			t.m_data.m_rotation *= Quaternion::FromAxisAngle({ 0.0f, 1.0f, 0.0f }, angularDelta);
 			Quaternion::Normalize(t.m_data.m_rotation);
