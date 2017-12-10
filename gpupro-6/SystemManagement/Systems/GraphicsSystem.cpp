@@ -213,8 +213,11 @@ void GraphicsSystem::VariableTick()
 	m_myVertexBuffer->SetCurrentIfValid();
 	m_myIndexBuffer->SetCurrentIfValid();
 
-	PerObjectBuffer& pub = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
-	pub.BindBuffer();
+    PerObjectBuffer& perObjectBuffer = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
+    perObjectBuffer.BindBuffer();
+
+    PerCameraBuffer& perCameraBuffer = GetConstantBufferInterface().GetBuffer<PerCameraBuffer>();
+    perCameraBuffer.BindBuffer();
 
     m_depthStencilBuffer->ClearBuffer();
     m_depthStencilBuffer->SetState();
@@ -234,6 +237,15 @@ void GraphicsSystem::VariableTick()
         MeshRendererComponent* meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
         size_t numberOfMeshRenderers = GetSceneGraph().GetNumberOfComponents<MeshRendererComponent>();
 
+        PER_CAMERA_BUFFER pcb;
+        pcb.EyePos.X = cameraTransform.m_data.m_position.X;
+        pcb.EyePos.Y = cameraTransform.m_data.m_position.Y;
+        pcb.EyePos.Z = cameraTransform.m_data.m_position.Z;
+        pcb.EyePos.W = 1;
+        pcb.View = view;
+        pcb.Projection = proj;
+        perCameraBuffer.UpdateBuffer(pcb);
+
 		for (size_t i = 0; i < numberOfMeshRenderers; ++i)
 		{
             MeshRendererComponent mrc = meshRenderers[i];
@@ -250,13 +262,20 @@ void GraphicsSystem::VariableTick()
                 Material& mat = *GetAssetManager().GetAsset<Material>(materialIndex);
                 if (mat.BindIfValid())
                 {
-                    TransformComponent& modelTransform = *EntityUtil::GetComponent<TransformComponent>(meshEntity);
-                    Matrix4x4 model = Transform::GetMatrix(modelTransform.m_data);
+                    TransformComponent* modelTransform = EntityUtil::GetComponent<TransformComponent>(meshEntity);
+                    
+                    Matrix4x4 model;
+                    Matrix4x4::Identity(model);
+                    if (modelTransform != nullptr)
+                    {
+                        model = Transform::GetMatrix(modelTransform->m_data);
+                    }
 
                     PER_OBJECT_BUFFER pob;
                     pob.ModelViewProjection = proj * view * model;
                     pob.ModelView = view * model;
-                    pub.UpdateBuffer(pob);
+
+                    perObjectBuffer.UpdateBuffer(pob);
 
                     m_deviceContext->IASetPrimitiveTopology(mesh.m_topology);
                     m_deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);

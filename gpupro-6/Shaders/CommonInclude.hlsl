@@ -17,8 +17,15 @@ struct VertexShaderOutput
 	float4 position : SV_POSITION;
 };
 
-cbuffer PerObjectBuffer : register(b0)
+cbuffer PerCameraBuffer : register(b0)
 {
-	float4x4 ModelViewProjection;
-	float4x4 ModelView;
+    float4 EyePos;
+    float4x4 _View;
+    float4x4 _Projection;
+};
+
+cbuffer PerObjectBuffer : register(b1)
+{
+    float4x4 ModelViewProjection;
+    float4x4 ModelView;
 };

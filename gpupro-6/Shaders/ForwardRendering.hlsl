@@ -30,7 +30,6 @@ VertexShaderOutput VShader(AppData IN)
 [earlydepthstencil]
 float4 PShader(VertexShaderOutput IN) : SV_TARGET
 {
-	float4 eyePos = { 0, 0, 0, 1 };
 	Material mat = Mat;
 
 	float4 diffuse = mat.DiffuseColor;
@@ -73,7 +72,7 @@ float4 PShader(VertexShaderOutput IN) : SV_TARGET
 	}
 
     float4 P = float4(IN.positionVS, 1);
-    LightingResult lr = DoLighting(mat, eyePos, P, N);
+    LightingResult lr = DoLighting(mat, EyePos, P, N);
     
     diffuse *= float4(lr.Diffuse.rgb, 1.0f);
     

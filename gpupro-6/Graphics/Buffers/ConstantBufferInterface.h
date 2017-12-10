@@ -6,6 +6,13 @@
 #include "DataStructures/Vector2.h"
 #include "DataStructures/Vector4.h"
 
+struct PER_CAMERA_BUFFER
+{
+    Vector4 EyePos;
+    Matrix4x4 View;
+    Matrix4x4 Projection;
+};
+
 struct PER_OBJECT_BUFFER
 {
 	Matrix4x4 ModelViewProjection;
@@ -64,10 +71,12 @@ private:
     std::tuple<Types...> m_constantBuffers;
 };
 
-typedef ConstantBuffer<PER_OBJECT_BUFFER, 0, BIND_ALL> PerObjectBuffer;
-typedef ConstantBuffer<MATERIAL_BUFFER_CONTAINER, 1, BIND_ALL> MaterialBuffer;
+typedef ConstantBuffer<PER_CAMERA_BUFFER, 0, BIND_ALL> PerCameraBuffer;
+typedef ConstantBuffer<PER_OBJECT_BUFFER, 1, BIND_ALL> PerObjectBuffer;
+typedef ConstantBuffer<MATERIAL_BUFFER_CONTAINER, 2, BIND_ALL> MaterialBuffer;
 
 typedef ConstantBufferInterfaceImpl<
+    PerCameraBuffer,
     PerObjectBuffer,
     MaterialBuffer
 > ConstantBufferInterface;

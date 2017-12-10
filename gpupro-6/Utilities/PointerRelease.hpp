@@ -50,7 +50,7 @@ public:
     {
         if (m_pointer != nullptr)
         {
-            LogError("ManualRelease pointer was not manually released!");
+            LogError("ManualRelease pointer was not manually released!\n");
         }
     }
 

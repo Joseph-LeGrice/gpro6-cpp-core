@@ -23,7 +23,7 @@ struct Material
     float2 Padding;
 };
 
-cbuffer Material : register(b1)
+cbuffer Material : register(b2)
 {
     Material Mat;
 };
