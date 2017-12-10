@@ -164,9 +164,6 @@
     <ClInclude Include="Input\KeyboardInput.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\UtilityMacros.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\PerlinNoise.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -283,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="TransformSync\TransfromSyncSystem.h">
       <Filter>TransformSync</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\AutoPointer.hpp">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

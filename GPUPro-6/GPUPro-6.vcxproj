@@ -310,12 +310,12 @@
     <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h" />
     <ClInclude Include="TransformSync\TransfromSyncSystem.h" />
     <ClInclude Include="TransformSync\TranslationSync.h" />
+    <ClInclude Include="Utilities\AutoPointer.hpp" />
     <ClInclude Include="Utilities\PointerRelease.hpp" />
     <ClInclude Include="Utilities\Logging.h" />
     <ClInclude Include="Utilities\MathHelper.h" />
     <ClInclude Include="Utilities\MeshHelper.h" />
     <ClInclude Include="Utilities\PerlinNoise.h" />
-    <ClInclude Include="Utilities\UtilityMacros.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

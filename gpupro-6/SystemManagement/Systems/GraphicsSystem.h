@@ -45,10 +45,10 @@ private:
 #endif
 
 	bool m_isDirty;
-    RasterizerState* m_rasterizerState;
-	VertexBuffer* m_myVertexBuffer;
-    DepthStencilBuffer* m_depthStencilBuffer;
-	IndexBuffer* m_myIndexBuffer;
+    AutoPointer<RasterizerState> m_rasterizerState;
+    AutoPointer<VertexBuffer> m_myVertexBuffer;
+    AutoPointer<DepthStencilBuffer> m_depthStencilBuffer;
+    AutoPointer<IndexBuffer> m_myIndexBuffer;
 
 	float m_viewportWidth, m_viewportHeight;
 	

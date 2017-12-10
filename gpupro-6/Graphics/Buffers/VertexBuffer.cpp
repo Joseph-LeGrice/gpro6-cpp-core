@@ -43,7 +43,7 @@ VertexBuffer* VertexBuffer::Create(size_t bufferSize)
 	}
 	else
 	{
-		SAFE_DELETE(vb);
+		delete vb;
 		return nullptr;
 	}
 }

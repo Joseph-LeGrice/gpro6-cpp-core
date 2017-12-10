@@ -33,7 +33,7 @@ IndexBuffer* IndexBuffer::Create(size_t bufferSize)
 	}
 	else
 	{
-		SAFE_DELETE(ib);
+		delete ib;
 		return nullptr;
 	}
 }

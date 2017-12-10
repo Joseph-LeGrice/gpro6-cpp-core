@@ -125,10 +125,10 @@ void GraphicsSystem::Deinitalize()
     m_device.ReleasePointer();
     m_deviceContext.ReleasePointer();
 
-    SAFE_DELETE(m_myVertexBuffer);
-    SAFE_DELETE(m_myIndexBuffer);
-    SAFE_DELETE(m_rasterizerState);
-    SAFE_DELETE(m_depthStencilBuffer);
+    m_myVertexBuffer.DeletePointer();
+    m_myIndexBuffer.DeletePointer();
+    m_rasterizerState.DeletePointer();
+    m_depthStencilBuffer.DeletePointer();
 
 #if defined(_DEBUG)
     m_debugInterface->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
