@@ -47,8 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             GraphicsSystem,
             LightingSystem,
             InputSystem,
-            NoClipLocomotion,
-            TransfromSyncSystem
+            NoClipLocomotion
         >();
 
         InitConstantBufferInterface();
@@ -161,12 +160,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         skyboxMat->AddTexture2DArrayResource({ cubemapTextureId, 0 });
 
         EntityComponent& skyboxEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-        TransformComponent& skyboxTransform = EntityUtil::AddComponent<TransformComponent>(skyboxEntity);
-        skyboxTransform.m_data.m_position = { 0.0f, 0.0f, -50.0f };
-
-        TranslationSyncComponent& translationSync = EntityUtil::AddComponent<TranslationSyncComponent>(skyboxEntity);
-        translationSync.m_data.m_transformId = cameraTransformId;
-
         MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(skyboxEntity);
         skyboxRenderer.m_enabled = true;
         skyboxRenderer.m_data.m_meshIndex = sphereMeshID;

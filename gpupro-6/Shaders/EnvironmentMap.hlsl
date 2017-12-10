@@ -15,8 +15,14 @@ VertexShaderOutput VShader(AppData IN)
 
     OUT.positionVS = IN.position;
     OUT.positionVS.y = -IN.position.y;
-
-    OUT.position = mul(float4(IN.position, 1.0f), ModelViewProjection).xyww;
+    
+    float4x4 M = {        1,        0,        0,        0, 
+                          0,        1,        0,        0,
+                          0,        0,        1,        0,
+                   EyePos.x, EyePos.y, EyePos.z, EyePos.w, };
+    
+    float4x4 MVP = mul(mul(M, _View), _Projection);
+    OUT.position = mul(float4(IN.position, 1.0f), MVP).xyww;
     
     return OUT;
 }
