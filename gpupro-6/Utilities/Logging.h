@@ -1,12 +1,14 @@
 #pragma once
 #include <iostream>
+#include <string>
+#include <sstream>
 
-inline void Log(const char* msg)
+inline void Log(std::string msg)
 {
-	std::cout << "LOG: " << msg << std::endl;
+    OutputDebugStringA(msg.c_str());
 }
 
-inline void LogError(const char* msg)
+inline void LogError(std::string msg)
 {
-	std::cout << "ERROR: " << msg << std::endl;
+    OutputDebugStringA(msg.c_str());
 }

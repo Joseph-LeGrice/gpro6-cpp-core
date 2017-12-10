@@ -21,7 +21,6 @@
 #include "Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Graphics/ResourceTypes/TextureSampler.h"
 #include "SystemManagement/SystemManager.h"
-#include "SystemManagement/Time.h"
 #include "SystemManagement/Systems/InputSystem.h"
 #include "SystemManagement/Systems/LightingSystem.h"
 #include "SystemManagement/WindowManager.h"
@@ -32,7 +31,7 @@
 #include "Utilities/MeshHelper.h"
 #include "Utilities/MathHelper.h"
 
-int APIENTRY main(_In_ HINSTANCE hInstance,
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
