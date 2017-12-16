@@ -46,9 +46,12 @@ Vector3 operator/(const Vector3& first, const float factor)
 	return result;
 }
 
-void operator*=(Vector3& lhs, Quaternion rhs)
+void operator*=(Vector3& lhs, const Quaternion& rhs)
 {
-    //TODO: Implement
+    Quaternion pureComponent = { 0, lhs.X, lhs.Y, lhs.Z };
+    Quaternion conjugate = Quaternion::Conjugate(rhs);
+    Quaternion pureResult = (rhs * pureComponent) * conjugate;
+    lhs = pureResult.V;
 }
 
 void operator+=(Vector3& lhs, const Vector3& rhs) { lhs.X += rhs.X; lhs.Y += rhs.Y; lhs.Z += rhs.Z; }

@@ -13,7 +13,7 @@ Quaternion Quaternion::Conjugate(const Quaternion& q)
 {
 	Quaternion result;
 	result.W = q.W;
-	result.V = -result.V;
+	result.V = -q.V;
 	return result;
 }
 

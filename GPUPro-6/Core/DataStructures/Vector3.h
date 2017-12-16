@@ -30,6 +30,6 @@ Vector3 operator/(const Vector3& first, const float factor);
 
 void operator+=(Vector3& lhs, const Vector3& rhs);
 void operator-=(Vector3& lhs, const Vector3& rhs);
-void operator*=(Vector3& lhs, Quaternion rhs);
+void operator*=(Vector3& lhs, const Quaternion& rhs);
 void operator*=(Vector3& lhs, const float rhs);
 void operator/=(Vector3& lhs, const float rhs);
