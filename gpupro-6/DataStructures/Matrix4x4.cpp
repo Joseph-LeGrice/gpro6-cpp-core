@@ -80,7 +80,34 @@ Matrix4x4 Matrix4x4::Transpose(Matrix4x4 m)
 
 float Matrix4x4::Determinant(Matrix4x4 m)
 {
-	return m.M11 * m.M22 * m.M33 * m.M44 - m.M14 * m.M23 * m.M32 * m.M41;
+    float result = 0.0f;
+    Matrix3x3 minorMatrix;
+
+    // M11
+    minorMatrix.M11 = m.M22; minorMatrix.M21 = m.M32; minorMatrix.M31 = m.M42;
+    minorMatrix.M12 = m.M23; minorMatrix.M22 = m.M33; minorMatrix.M32 = m.M43;
+    minorMatrix.M13 = m.M24; minorMatrix.M23 = m.M34; minorMatrix.M33 = m.M44;
+    result += m.M11 * Matrix3x3::Determinant(minorMatrix);
+
+    // M21
+    minorMatrix.M11 = m.M12; minorMatrix.M21 = m.M32; minorMatrix.M31 = m.M42;
+    minorMatrix.M12 = m.M13; minorMatrix.M22 = m.M33; minorMatrix.M32 = m.M43;
+    minorMatrix.M13 = m.M14; minorMatrix.M23 = m.M34; minorMatrix.M33 = m.M44;
+    result -= m.M21 * Matrix3x3::Determinant(minorMatrix);
+
+    // M31
+    minorMatrix.M11 = m.M12; minorMatrix.M21 = m.M22; minorMatrix.M31 = m.M42;
+    minorMatrix.M12 = m.M13; minorMatrix.M22 = m.M23; minorMatrix.M32 = m.M43;
+    minorMatrix.M13 = m.M14; minorMatrix.M23 = m.M24; minorMatrix.M33 = m.M44;
+    result += m.M31 * Matrix3x3::Determinant(minorMatrix);
+
+    // M41
+    minorMatrix.M11 = m.M12; minorMatrix.M21 = m.M22; minorMatrix.M31 = m.M32;
+    minorMatrix.M12 = m.M13; minorMatrix.M22 = m.M23; minorMatrix.M32 = m.M33;
+    minorMatrix.M13 = m.M14; minorMatrix.M23 = m.M24; minorMatrix.M33 = m.M34;
+    result -= m.M41 * Matrix3x3::Determinant(minorMatrix);
+
+    return result;
 }
 
 Matrix4x4 Matrix4x4::MatrixOfMinors(Matrix4x4 m)
