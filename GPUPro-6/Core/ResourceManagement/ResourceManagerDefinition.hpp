@@ -7,10 +7,6 @@ template<class... Types>
 class ResourceManagerDefinition
 {
     //TODO: Ideally should be storing some structure which allows for grouping the memory together such that assets 'relevant' to each other exists near to each other.
-
-private:
-    std::tuple<std::vector<Types>...> m_allResources;
-
 public:
     template<class T>
     T* Instantiate()
@@ -36,17 +32,6 @@ public:
     }
 
     template<class T>
-    void DeallocateAll()
-    {
-        std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
-        for (size_t i = 0; i < resources.size(); i++)
-        {
-            resources[i].Release();
-        }
-        resources.clear();
-    }
-
-    template<class T>
     void Deallocate(int index)
     {
         std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
@@ -58,4 +43,25 @@ public:
         resources[lastIndex] = deletedAsset;
         resources.resize(lastIndex);
     }
+
+    template<int I = 0>
+    inline typename std::enable_if<I == sizeof...(Types), void>::type
+        DeallocateAll()
+    {}
+
+    template<int I = 0>
+    inline typename std::enable_if < I < sizeof...(Types), void>::type
+        DeallocateAll()
+    {
+        auto resources = std::get<I>(m_allResources);
+        for (size_t i = 0; i < resources.size(); i++)
+        {
+            resources[i].Release();
+        }
+        resources.clear();
+        DeallocateAll<I + 1>();
+    }
+
+private:
+    std::tuple<std::vector<Types>...> m_allResources;
 };
