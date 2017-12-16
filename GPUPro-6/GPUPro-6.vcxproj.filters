@@ -9,328 +9,343 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Input\MouseInput.cpp">
-      <Filter>Input</Filter>
+    <ClCompile Include="Extra\Locomotion\NoClipLocomotion.cpp">
+      <Filter>Extra\Locomotion</Filter>
     </ClCompile>
-    <ClCompile Include="Input\KeyboardInput.cpp">
-      <Filter>Input</Filter>
+    <ClCompile Include="Extra\TransformSync\TransfromSyncSystem.cpp">
+      <Filter>Extra\TransformSync</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\PerlinNoise.cpp">
-      <Filter>Utilities</Filter>
+    <ClCompile Include="Core\DataStructures\Color.cpp">
+      <Filter>Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\MeshHelper.cpp">
-      <Filter>Utilities</Filter>
+    <ClCompile Include="Core\DataStructures\Matrix3x3.cpp">
+      <Filter>Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Matrix4x4.cpp">
-      <Filter>DataStructures</Filter>
+    <ClCompile Include="Core\DataStructures\Matrix4x4.cpp">
+      <Filter>Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Vector3.cpp">
-      <Filter>DataStructures</Filter>
+    <ClCompile Include="Core\DataStructures\Quaternion.cpp">
+      <Filter>Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Matrix3x3.cpp">
-      <Filter>DataStructures</Filter>
+    <ClCompile Include="Core\DataStructures\Vector2.cpp">
+      <Filter>Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Vector4.cpp">
-      <Filter>DataStructures</Filter>
+    <ClCompile Include="Core\DataStructures\Vector3.cpp">
+      <Filter>Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Vector2.cpp">
-      <Filter>DataStructures</Filter>
+    <ClCompile Include="Core\DataStructures\Vector4.cpp">
+      <Filter>Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Quaternion.cpp">
-      <Filter>DataStructures</Filter>
+    <ClCompile Include="Core\Graphics\Buffers\ConstantBufferInterface.cpp">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Transform.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Core\Graphics\Buffers\DepthStencilBuffer.cpp">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Camera.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Core\Graphics\Buffers\IndexBuffer.cpp">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\ISystem.cpp">
-      <Filter>SystemManagement</Filter>
+    <ClCompile Include="Core\Graphics\Buffers\VertexBuffer.cpp">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Systems\GraphicsSystem.cpp">
-      <Filter>SystemManagement\Systems</Filter>
+    <ClCompile Include="Core\Graphics\Components\Camera.cpp">
+      <Filter>Core\Graphics\Components</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Systems\InputSystem.cpp">
-      <Filter>SystemManagement\Systems</Filter>
+    <ClCompile Include="Core\Graphics\Components\Transform.cpp">
+      <Filter>Core\Graphics\Components</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Systems\LightingSystem.cpp">
-      <Filter>SystemManagement\Systems</Filter>
+    <ClCompile Include="Core\Graphics\ResourceTypes\Material.cpp">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="AssetManagement\AssetManager.cpp">
-      <Filter>AssetManagement</Filter>
+    <ClCompile Include="Core\Graphics\ResourceTypes\Mesh.cpp">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\WindowManager.cpp">
-      <Filter>SystemManagement</Filter>
+    <ClCompile Include="Core\Graphics\ResourceTypes\Shader.cpp">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\SystemManager.cpp">
-      <Filter>SystemManagement</Filter>
+    <ClCompile Include="Core\Graphics\ResourceTypes\StructuredBuffer.cpp">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Color.cpp">
-      <Filter>DataStructures</Filter>
+    <ClCompile Include="Core\Graphics\ResourceTypes\Texture2D.cpp">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Entity.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Core\Graphics\ResourceTypes\Texture2DArray.cpp">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\SceneGraph.cpp">
-      <Filter>DataStructures</Filter>
+    <ClCompile Include="Core\Graphics\ResourceTypes\TextureSampler.cpp">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\ConstantBufferInterface.cpp">
-      <Filter>Graphics\Buffers</Filter>
+    <ClCompile Include="Core\Graphics\GraphicsSystem.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
-      <Filter>Graphics\Buffers</Filter>
+    <ClCompile Include="Core\Graphics\LightingSystem.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
-      <Filter>Graphics\Buffers</Filter>
+    <ClCompile Include="Core\Graphics\RasterizerState.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\Material.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClCompile Include="Core\Input\InputSystem.cpp">
+      <Filter>Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\Mesh.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClCompile Include="Core\Input\KeyboardInput.cpp">
+      <Filter>Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\Shader.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClCompile Include="Core\Input\MouseInput.cpp">
+      <Filter>Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\StructuredBuffer.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClCompile Include="Core\ResourceManagement\AssetManager.cpp">
+      <Filter>Core\AssetManagement</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\Texture2D.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClCompile Include="Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp">
+      <Filter>Core\SceneGraph\Components\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\TextureSampler.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClCompile Include="Core\SceneGraph\Components\Entity.cpp">
+      <Filter>Core\SceneGraph\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Util\ComponentReferenceNode.cpp">
-      <Filter>Components\Util</Filter>
+    <ClCompile Include="Core\SceneGraph\SceneGraph.cpp">
+      <Filter>Core\SceneGraph</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\ResourceTypes\Texture2DArray.cpp">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClCompile Include="Core\SystemManagement\ISystem.cpp">
+      <Filter>Core\SystemManagement</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\RasterizerState.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Core\SystemManagement\SystemManager.cpp">
+      <Filter>Core\SystemManagement</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\DepthStencilBuffer.cpp">
-      <Filter>Graphics\Buffers</Filter>
+    <ClCompile Include="Core\Time\Time.cpp">
+      <Filter>Core\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Locomotion\NoClipLocomotion.cpp">
-      <Filter>Locomotion</Filter>
+    <ClCompile Include="Core\Utilities\MeshHelper.cpp">
+      <Filter>Core\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="TransformSync\TransfromSyncSystem.cpp">
-      <Filter>TransformSync</Filter>
+    <ClCompile Include="Core\Utilities\PerlinNoise.cpp">
+      <Filter>Core\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManagement\Time.cpp">
-      <Filter>SystemManagement</Filter>
+    <ClCompile Include="Core\WindowManagement\WindowManager.cpp">
+      <Filter>Core\WindowManagement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Components\Camera.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Extra\Locomotion\NoClipLocomotion.h">
+      <Filter>Extra\Locomotion</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Entity.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Extra\TransformSync\TransfromSyncSystem.h">
+      <Filter>Extra\TransformSync</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Transform.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Extra\TransformSync\TranslationSync.h">
+      <Filter>Extra\TransformSync</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\SceneGraph.h">
-      <Filter>DataStructures</Filter>
+    <ClInclude Include="Core\DataStructures\Color.h">
+      <Filter>Core\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Vector2.h">
-      <Filter>DataStructures</Filter>
+    <ClInclude Include="Core\DataStructures\Matrix3x3.h">
+      <Filter>Core\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Quaternion.h">
-      <Filter>DataStructures</Filter>
+    <ClInclude Include="Core\DataStructures\Matrix4x4.h">
+      <Filter>Core\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Vector4.h">
-      <Filter>DataStructures</Filter>
+    <ClInclude Include="Core\DataStructures\Quaternion.h">
+      <Filter>Core\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Matrix4x4.h">
-      <Filter>DataStructures</Filter>
+    <ClInclude Include="Core\DataStructures\Vector2.h">
+      <Filter>Core\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Matrix3x3.h">
-      <Filter>DataStructures</Filter>
+    <ClInclude Include="Core\DataStructures\Vector3.h">
+      <Filter>Core\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Vector3.h">
-      <Filter>DataStructures</Filter>
+    <ClInclude Include="Core\DataStructures\Vector4.h">
+      <Filter>Core\DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="Input\MouseInput.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="Core\Graphics\Buffers\ConstantBuffer.h">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Input\KeyboardInput.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="Core\Graphics\Buffers\ConstantBufferInterface.h">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\PerlinNoise.h">
-      <Filter>Utilities</Filter>
+    <ClInclude Include="Core\Graphics\Buffers\DepthStencilBuffer.h">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\MeshHelper.h">
-      <Filter>Utilities</Filter>
+    <ClInclude Include="Core\Graphics\Buffers\IndexBuffer.h">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\MathHelper.h">
-      <Filter>Utilities</Filter>
+    <ClInclude Include="Core\Graphics\Buffers\VertexBuffer.h">
+      <Filter>Core\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\Logging.h">
-      <Filter>Utilities</Filter>
+    <ClInclude Include="Core\Graphics\Components\Camera.h">
+      <Filter>Core\Graphics\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\ISystem.h">
-      <Filter>SystemManagement</Filter>
+    <ClInclude Include="Core\Graphics\Components\Light.h">
+      <Filter>Core\Graphics\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\Systems\GraphicsSystem.h">
-      <Filter>SystemManagement\Systems</Filter>
+    <ClInclude Include="Core\Graphics\Components\MeshRenderer.h">
+      <Filter>Core\Graphics\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\Systems\InputSystem.h">
-      <Filter>SystemManagement\Systems</Filter>
+    <ClInclude Include="Core\Graphics\Components\Transform.h">
+      <Filter>Core\Graphics\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\Systems\LightingSystem.h">
-      <Filter>SystemManagement\Systems</Filter>
+    <ClInclude Include="Core\Graphics\ResourceTypes\Material.h">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="AssetManagement\AssetManager.h">
-      <Filter>AssetManagement</Filter>
+    <ClInclude Include="Core\Graphics\ResourceTypes\Mesh.h">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\WindowManager.h">
-      <Filter>SystemManagement</Filter>
+    <ClInclude Include="Core\Graphics\ResourceTypes\Shader.h">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\SystemManager.h">
-      <Filter>SystemManagement</Filter>
+    <ClInclude Include="Core\Graphics\ResourceTypes\StructuredBuffer.h">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Light.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Core\Graphics\ResourceTypes\Texture2D.h">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Color.h">
-      <Filter>DataStructures</Filter>
+    <ClInclude Include="Core\Graphics\ResourceTypes\Texture2DArray.h">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManagement\SystemConfiguration.hpp">
-      <Filter>SystemManagement</Filter>
+    <ClInclude Include="Core\Graphics\ResourceTypes\TextureSampler.h">
+      <Filter>Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="Components\MeshRenderer.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Core\Graphics\GraphicsSystem.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Util\EntityUtil.hpp">
-      <Filter>Components\Util</Filter>
+    <ClInclude Include="Core\Graphics\LightingSystem.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Util\ComponentType.hpp">
-      <Filter>Components\Util</Filter>
+    <ClInclude Include="Core\Graphics\RasterizerState.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\ConstantBuffer.h">
-      <Filter>Graphics\Buffers</Filter>
+    <ClInclude Include="Core\Graphics\VertexData.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\ConstantBufferInterface.h">
-      <Filter>Graphics\Buffers</Filter>
+    <ClInclude Include="Core\Input\InputSystem.h">
+      <Filter>Core\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
-      <Filter>Graphics\Buffers</Filter>
+    <ClInclude Include="Core\Input\KeyboardInput.h">
+      <Filter>Core\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
-      <Filter>Graphics\Buffers</Filter>
+    <ClInclude Include="Core\Input\MouseInput.h">
+      <Filter>Core\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\TextureSampler.h">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClInclude Include="Core\ResourceManagement\AssetManager.h">
+      <Filter>Core\AssetManagement</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\Material.h">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClInclude Include="Core\ResourceManagement\IResource.h">
+      <Filter>Core\AssetManagement</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\Mesh.h">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClInclude Include="Core\SceneGraph\Components\Util\ComponentArray.hpp">
+      <Filter>Core\SceneGraph\Components\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\Shader.h">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClInclude Include="Core\SceneGraph\Components\Util\ComponentReferenceNode.h">
+      <Filter>Core\SceneGraph\Components\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\StructuredBuffer.h">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClInclude Include="Core\SceneGraph\Components\Util\ComponentType.hpp">
+      <Filter>Core\SceneGraph\Components\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\Texture2D.h">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClInclude Include="Core\SceneGraph\Components\Util\EntityUtil.hpp">
+      <Filter>Core\SceneGraph\Components\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Util\ComponentReferenceNode.h">
-      <Filter>Components\Util</Filter>
+    <ClInclude Include="Core\SceneGraph\Components\Entity.h">
+      <Filter>Core\SceneGraph\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Util\ComponentArray.hpp">
-      <Filter>Components\Util</Filter>
+    <ClInclude Include="Core\SceneGraph\SceneGraph.h">
+      <Filter>Core\SceneGraph</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\VertexData.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Core\SystemManagement\ISystem.h">
+      <Filter>Core\SystemManagement</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\ResourceTypes\Texture2DArray.h">
-      <Filter>Graphics\ResourceTypes</Filter>
+    <ClInclude Include="Core\SystemManagement\SystemConfiguration.hpp">
+      <Filter>Core\SystemManagement</Filter>
     </ClInclude>
-    <ClInclude Include="AssetManagement\IResource.h">
-      <Filter>AssetManagement</Filter>
+    <ClInclude Include="Core\SystemManagement\SystemManager.h">
+      <Filter>Core\SystemManagement</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\PointerRelease.hpp">
-      <Filter>Utilities</Filter>
+    <ClInclude Include="Core\Time\Time.h">
+      <Filter>Core\Time</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\RasterizerState.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Core\Utilities\AutoPointer.hpp">
+      <Filter>Core\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\DepthStencilBuffer.h">
-      <Filter>Graphics\Buffers</Filter>
+    <ClInclude Include="Core\Utilities\Logging.h">
+      <Filter>Core\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Locomotion\NoClipLocomotion.h">
-      <Filter>Locomotion</Filter>
+    <ClInclude Include="Core\Utilities\MathHelper.h">
+      <Filter>Core\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="TransformSync\TranslationSync.h">
-      <Filter>TransformSync</Filter>
+    <ClInclude Include="Core\Utilities\MeshHelper.h">
+      <Filter>Core\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="TransformSync\TransfromSyncSystem.h">
-      <Filter>TransformSync</Filter>
+    <ClInclude Include="Core\Utilities\PerlinNoise.h">
+      <Filter>Core\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\AutoPointer.hpp">
-      <Filter>Utilities</Filter>
+    <ClInclude Include="Core\Utilities\PointerRelease.hpp">
+      <Filter>Core\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\StaticPointer.hpp" />
-    <ClInclude Include="SystemManagement\Time.h">
-      <Filter>SystemManagement</Filter>
+    <ClInclude Include="Core\Utilities\StaticPointer.hpp" />
+    <ClInclude Include="Core\WindowManagement\WindowManager.h">
+      <Filter>Core\WindowManagement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Graphics">
+    <Filter Include="Core">
+      <UniqueIdentifier>{c7c954ad-4835-49f6-a426-d99a66233898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\AssetManagement">
+      <UniqueIdentifier>{0f100b31-8b51-4360-b4ff-bbce9c137a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Graphics">
       <UniqueIdentifier>{3f7ee8db-9aaf-489e-a12e-b89af640a04c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components">
+    <Filter Include="Core\Graphics\Buffers">
+      <UniqueIdentifier>{42745e47-bee4-479e-ad5b-0520e1afc869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Graphics\ResourceTypes">
+      <UniqueIdentifier>{c922c5fa-36ad-47b1-9ab2-e1181970ae27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Graphics\Components">
+      <UniqueIdentifier>{31bbdc26-26ad-4460-916f-8865d060a0ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Input">
+      <UniqueIdentifier>{fa0ba861-dc61-44bf-9034-7bd6f3ae7eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\WindowManagement">
+      <UniqueIdentifier>{c0b1e798-4d55-48a7-881e-233a5fffec7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Time">
+      <UniqueIdentifier>{37effcff-70ee-473b-9f27-a2d4ec383bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\SceneGraph">
+      <UniqueIdentifier>{5a63edd1-a19f-47c1-92d2-0bf278737e3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\SceneGraph\Components">
       <UniqueIdentifier>{6fc18b86-cec5-48c5-bcbd-1083704dbd4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utilities">
+    <Filter Include="Core\SceneGraph\Components\Util">
+      <UniqueIdentifier>{9eb398d9-b6cd-4122-a12b-6349f130c961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\SystemManagement">
+      <UniqueIdentifier>{5c0db4db-7336-4d84-ab2a-1fcd77c90e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Utilities">
       <UniqueIdentifier>{ec9336a8-8ae8-4a61-a0d8-b57c4b6ce841}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DataStructures">
+    <Filter Include="Core\DataStructures">
       <UniqueIdentifier>{8f41650d-a265-4153-bd49-c214cb41a35a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{fa0ba861-dc61-44bf-9034-7bd6f3ae7eaa}</UniqueIdentifier>
+    <Filter Include="Extra">
+      <UniqueIdentifier>{1b435af9-d7e2-401b-bea9-14715727cd67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extra\TransformSync">
+      <UniqueIdentifier>{e908b041-f771-474e-ab46-440376152ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extra\Locomotion">
+      <UniqueIdentifier>{44e41045-d00b-424d-9a11-975c85fefb6b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{dfa88832-0aec-4779-bfde-6d8a9e35ef6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemManagement">
-      <UniqueIdentifier>{5c0db4db-7336-4d84-ab2a-1fcd77c90e7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemManagement\Systems">
-      <UniqueIdentifier>{55f249f4-08bd-47f1-804c-32df7e3e60e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AssetManagement">
-      <UniqueIdentifier>{0f100b31-8b51-4360-b4ff-bbce9c137a98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Util">
-      <UniqueIdentifier>{9eb398d9-b6cd-4122-a12b-6349f130c961}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Buffers">
-      <UniqueIdentifier>{42745e47-bee4-479e-ad5b-0520e1afc869}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\ResourceTypes">
-      <UniqueIdentifier>{c922c5fa-36ad-47b1-9ab2-e1181970ae27}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Locomotion">
-      <UniqueIdentifier>{44e41045-d00b-424d-9a11-975c85fefb6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TransformSync">
-      <UniqueIdentifier>{e908b041-f771-474e-ab46-440376152ad0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,6 @@
 
 
 // TODO: reference additional headers your program requires here
-#include "Utilities\PointerRelease.hpp"
-#include "Utilities\StaticPointer.hpp"
-#include "Utilities\AutoPointer.hpp"
+#include "Core/Utilities\PointerRelease.hpp"
+#include "Core/Utilities\StaticPointer.hpp"
+#include "Core/Utilities\AutoPointer.hpp"

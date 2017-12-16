@@ -1,0 +1,83 @@
+#pragma once
+
+#include <vector>
+#include <tuple>
+#include "Core/Graphics/ResourceTypes/Shader.h"
+#include "Core/Graphics/ResourceTypes/Material.h"
+#include "Core/Graphics/ResourceTypes/Texture2D.h"
+#include "Core/Graphics/ResourceTypes/Texture2DArray.h"
+#include "Core/Graphics/ResourceTypes/StructuredBuffer.h"
+#include "Core/Graphics/ResourceTypes/TextureSampler.h"
+#include "Core/Graphics/ResourceTypes/Mesh.h"
+
+template<class... Types>
+class AssetManagerImpl
+{
+    //TODO: Ideally should be storing some structure which allows for grouping the memory together such that assets 'relevant' to each other exists near to each other.
+
+private:
+    std::tuple<std::vector<Types>...> m_assetLists;
+
+public:
+    template<class T>
+    T* Instantiate()
+    {
+        std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
+        int index = static_cast<int>(assetList.size());
+        assetList.resize(index + 1, T(index));
+        return &assetList[index];
+    }
+
+    template<class T>
+    T* GetAsset(int index)
+    {
+        std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
+        if (index > -1 && index < assetList.size())
+        {
+            return &assetList[index];
+        }
+        else
+        {
+            return nullptr;
+        }
+    }
+
+    template<class T>
+    void DeallocateAll()
+    {
+        std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
+        for (size_t i = 0; i < assetList.size(); i++)
+        {
+            assetList[i].Release();
+        }
+        assetList.clear();
+    }
+
+    template<class T>
+    void Deallocate(int index)
+    {
+        std::vector<T>& assetList = std::get<std::vector<T>>(m_assetLists);
+        int lastIndex = static_cast<int>(assetList.size()) - 1;
+        T& deletedAsset = assetList[index];
+        deletedAsset.Release();
+        
+        assetList[index] = assetList[lastIndex];
+        assetList[lastIndex] = deletedAsset;
+        assetList.resize(lastIndex);
+    }
+};
+
+typedef AssetManagerImpl<
+    Shader,
+    Mesh,
+    TextureSampler,
+    Texture2D,
+    Texture2DArray,
+    StructuredBuffer,
+    Material
+> AssetManager;
+
+extern AssetManager* s_instance;
+
+AssetManager& GetAssetManager();
+void DestroyAssetManager();
