@@ -248,9 +248,8 @@
     <ClCompile Include="Core\Input\InputSystem.cpp" />
     <ClCompile Include="Core\SystemManagement\ISystem.cpp" />
     <ClCompile Include="Core\Graphics\LightingSystem.cpp" />
-    <ClCompile Include="Core\ResourceManagement\AssetManager.cpp" />
+    <ClCompile Include="Core\ResourceManagement\ResourceManager.cpp" />
     <ClCompile Include="Core\Graphics\Buffers\ConstantBufferInterface.cpp" />
-    <ClCompile Include="Core\SystemManagement\SystemManager.cpp" />
     <ClCompile Include="Core\Time\Time.cpp" />
     <ClCompile Include="Core\Graphics\ResourceTypes\Texture2DArray.cpp" />
     <ClCompile Include="Extra\TransformSync\TransfromSyncSystem.cpp" />
@@ -266,6 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\ResourceManagement\IResource.h" />
+    <ClInclude Include="Core\ResourceManagement\ResourceManagerDefinition.hpp" />
     <ClInclude Include="Core\SceneGraph\Components\Util\ComponentType.hpp" />
     <ClInclude Include="Core\SceneGraph\Components\Util\EntityUtil.hpp" />
     <ClInclude Include="Core\Graphics\Components\MeshRenderer.h" />
@@ -303,7 +303,7 @@
     <ClInclude Include="Core\Graphics\Buffers\ConstantBufferInterface.h" />
     <ClInclude Include="Core\Input\InputSystem.h" />
     <ClInclude Include="Core\SystemManagement\ISystem.h" />
-    <ClInclude Include="Core\ResourceManagement\AssetManager.h" />
+    <ClInclude Include="Core\ResourceManagement\ResourceManager.h" />
     <ClInclude Include="Core\SystemManagement\SystemManager.h" />
     <ClInclude Include="Core\Time\Time.h" />
     <ClInclude Include="Core\Input\KeyboardInput.h" />

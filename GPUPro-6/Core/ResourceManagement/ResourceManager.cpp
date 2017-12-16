@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 
-AssetManager* s_instance = new AssetManager();
+ResourceManager* s_instance = new ResourceManager();
 
-AssetManager& GetAssetManager()
+ResourceManager& GetResourceManager()
 {
     return *s_instance;
 }
 
-void DestroyAssetManager()
+void DestroyResourceManager()
 {
     s_instance->DeallocateAll<Shader>();
     s_instance->DeallocateAll<Texture2D>();

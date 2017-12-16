@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 #include "Core/SceneGraph/Components/Entity.h"
 #include "Core/Graphics/Components/Transform.h"
 #include "Core/Graphics/ResourceTypes/Mesh.h"
@@ -58,13 +58,13 @@ bool Material::BindIfValid()
 {
     if (m_shaderIndex > -1)
     {
-        Shader* s = GetAssetManager().GetAsset<Shader>(m_shaderIndex);
+        Shader* s = GetResourceManager().GetAsset<Shader>(m_shaderIndex);
         if (s != nullptr && s->SetCurrentIfValid())
         {
             for (size_t i = 0; i < m_texture2dIndexes.size(); ++i)
             {
                 ResourceDetails rd = m_texture2dIndexes[i];
-                Texture2D* tex = GetAssetManager().GetAsset<Texture2D>(rd.m_resourceIndex);
+                Texture2D* tex = GetResourceManager().GetAsset<Texture2D>(rd.m_resourceIndex);
                 if (tex != nullptr)
                 {
                     tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
@@ -74,7 +74,7 @@ bool Material::BindIfValid()
             for (size_t i = 0; i < m_texture2dArrayIndexes.size(); ++i)
             {
                 ResourceDetails rd = m_texture2dArrayIndexes[i];
-                Texture2DArray* tex = GetAssetManager().GetAsset<Texture2DArray>(rd.m_resourceIndex);
+                Texture2DArray* tex = GetResourceManager().GetAsset<Texture2DArray>(rd.m_resourceIndex);
                 if (tex != nullptr)
                 {
                     tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
@@ -84,7 +84,7 @@ bool Material::BindIfValid()
             for (size_t i = 0; i < m_structuredBufferIndexes.size(); ++i)
             {
                 ResourceDetails rd = m_structuredBufferIndexes[i];
-                StructuredBuffer* sb = GetAssetManager().GetAsset<StructuredBuffer>(rd.m_resourceIndex);
+                StructuredBuffer* sb = GetResourceManager().GetAsset<StructuredBuffer>(rd.m_resourceIndex);
                 if (sb != nullptr)
                 {
                     sb->BindResource(static_cast<UINT>(rd.m_slotIndex));
@@ -94,7 +94,7 @@ bool Material::BindIfValid()
             for (size_t i = 0; i < m_textureSamplerIndexes.size(); ++i)
             {
                 ResourceDetails rd = m_textureSamplerIndexes[i];
-                TextureSampler* ts = GetAssetManager().GetAsset<TextureSampler>(rd.m_resourceIndex);
+                TextureSampler* ts = GetResourceManager().GetAsset<TextureSampler>(rd.m_resourceIndex);
                 if (ts != nullptr)
                 {
                     ts->BindTextureSampler(static_cast<UINT>(rd.m_slotIndex));

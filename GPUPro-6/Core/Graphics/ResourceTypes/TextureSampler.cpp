@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Core/Graphics/ResourceTypes/TextureSampler.h"
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 #include "Core/SystemManagement/SystemManager.h"
 
 TextureSampler::TextureSampler(UINT resourceId) : IResource(resourceId)

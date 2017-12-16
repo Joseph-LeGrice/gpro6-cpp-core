@@ -3,7 +3,7 @@
 
 #include "Core/SceneGraph/Components/Util/EntityUtil.hpp"
 #include "Core/SceneGraph/SceneGraph.h"
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 #include "Core/Graphics/ResourceTypes/StructuredBuffer.h"
 
 #define MAX_LIGHTS 5
@@ -20,7 +20,7 @@ LightingSystem::~LightingSystem()
 
 bool LightingSystem::Initialize()
 {
-    StructuredBuffer* buf = GetAssetManager().Instantiate<StructuredBuffer>();
+    StructuredBuffer* buf = GetResourceManager().Instantiate<StructuredBuffer>();
     if (buf != nullptr)
     {
         buf->Initialize<LIGHT_BUFFER, MAX_LIGHTS>();
@@ -61,7 +61,7 @@ void LightingSystem::VariableTick()
         lights[i].Selected = TRUE;
     }
 
-    StructuredBuffer* lightBuf = GetAssetManager().GetAsset<StructuredBuffer>(m_lightBufferIndex);
+    StructuredBuffer* lightBuf = GetResourceManager().GetAsset<StructuredBuffer>(m_lightBufferIndex);
     if (lightBuf != nullptr)
     {
         lightBuf->UpdateBuffer(*lights);

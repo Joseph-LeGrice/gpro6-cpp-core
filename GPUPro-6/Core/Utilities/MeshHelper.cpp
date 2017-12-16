@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 #include "Core/Graphics/ResourceTypes/Mesh.h"
 #include "Core/Utilities/MeshHelper.h"
 #include "Core/Utilities/MathHelper.h"
@@ -9,7 +9,7 @@
 
 Mesh* MeshHelper::CreateQuad()
 {
-    Mesh* result = GetAssetManager().Instantiate<Mesh>();
+    Mesh* result = GetResourceManager().Instantiate<Mesh>();
 	result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
@@ -51,7 +51,7 @@ Mesh* MeshHelper::CreateSphereICO()
 	std::vector<Vector2> uvs = std::vector<Vector2>();
 	std::vector<UINT16> indices = std::vector<UINT16>();
 
-    Mesh* result = GetAssetManager().Instantiate<Mesh>();
+    Mesh* result = GetResourceManager().Instantiate<Mesh>();
     result->SetVertices(verts);
     result->SetNormals(norms);
     result->SetUVs(uvs);
@@ -113,7 +113,7 @@ Mesh* MeshHelper::CreateSphereUV()
 		}
 	}
 
-    Mesh* result = GetAssetManager().Instantiate<Mesh>();
+    Mesh* result = GetResourceManager().Instantiate<Mesh>();
     result->m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
     result->SetVertices(verts);
     result->SetNormals(norms);
@@ -256,7 +256,7 @@ Mesh* MeshHelper::CreateCube()
 	indices.push_back(21);
 	indices.push_back(23);
 
-    Mesh* result = GetAssetManager().Instantiate<Mesh>();
+    Mesh* result = GetResourceManager().Instantiate<Mesh>();
     result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
     result->SetVertices(verts);
     result->SetNormals(norms);

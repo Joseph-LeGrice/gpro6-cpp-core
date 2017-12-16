@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Core/Graphics/ResourceTypes/Mesh.h"
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 
 
 Mesh::Mesh(UINT resourceId) : IResource(resourceId)

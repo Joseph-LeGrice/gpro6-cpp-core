@@ -3,7 +3,7 @@
 #include "Core/Utilities/Logging.h"
 #include "Core/Graphics/ResourceTypes/Texture2D.h"
 #include "Core/SystemManagement/SystemManager.h"
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 #include "Core/Utilities/PerlinNoise.h"
 #include "FreeImage.h"
 

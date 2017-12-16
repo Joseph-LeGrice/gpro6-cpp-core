@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "Game.h"
 
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 #include "Core/Graphics/Components/Camera.h"
 #include "Core/SceneGraph/Components/Entity.h"
 #include "Core/Graphics/Components/Transform.h"

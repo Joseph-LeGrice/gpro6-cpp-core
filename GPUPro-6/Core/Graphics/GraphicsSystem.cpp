@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 #include "Core/SceneGraph/Components/Util/EntityUtil.hpp"
 #include "Core/Graphics/Components/Camera.h"
 #include "Core/SceneGraph/SceneGraph.h"
@@ -189,7 +189,7 @@ void GraphicsSystem::UpdateIfDirty()
         for (size_t i=0; i< numberOfMeshRenderers; i++)
 		{
             int meshIndex = meshRenderers[i].m_data.m_meshIndex;
-			Mesh& m = *GetAssetManager().GetAsset<Mesh>(meshIndex);
+			Mesh& m = *GetResourceManager().GetAsset<Mesh>(meshIndex);
 
 			const std::vector<VertexData>& vertexData = m.GetVertexData();
 			allVerts.insert(allVerts.end(), vertexData.begin(), vertexData.end());
@@ -254,12 +254,12 @@ void GraphicsSystem::VariableTick()
             int meshIndex = mrc.m_data.m_meshIndex;
             int materialIndex = mrc.m_data.m_materialIndex;
 
-            Mesh& mesh = *GetAssetManager().GetAsset<Mesh>(meshIndex);
+            Mesh& mesh = *GetResourceManager().GetAsset<Mesh>(meshIndex);
             UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
 
             if (mrc.m_enabled)
             {
-                Material& mat = *GetAssetManager().GetAsset<Material>(materialIndex);
+                Material& mat = *GetResourceManager().GetAsset<Material>(materialIndex);
                 if (mat.BindIfValid())
                 {
                     TransformComponent* modelTransform = EntityUtil::GetComponent<TransformComponent>(meshEntity);

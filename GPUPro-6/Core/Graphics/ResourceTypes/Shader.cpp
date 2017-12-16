@@ -5,7 +5,7 @@
 
 #include "Core/Graphics/VertexData.h"
 #include "Core/SystemManagement/SystemManager.h"
-#include "Core/ResourceManagement/AssetManager.h"
+#include "Core/ResourceManagement/ResourceManager.h"
 
 Shader::Shader(UINT resourceId) : IResource(resourceId)
 {
