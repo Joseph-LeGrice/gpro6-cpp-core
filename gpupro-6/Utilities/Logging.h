@@ -5,10 +5,10 @@
 
 inline void Log(std::string msg)
 {
-    OutputDebugStringA(msg.c_str());
+    OutputDebugStringA(msg.append("\n").c_str());
 }
 
 inline void LogError(std::string msg)
 {
-    OutputDebugStringA(msg.c_str());
+    OutputDebugStringA(msg.append("\n").c_str());
 }
