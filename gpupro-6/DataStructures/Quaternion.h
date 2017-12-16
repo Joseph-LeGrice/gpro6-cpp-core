@@ -16,6 +16,13 @@ struct Quaternion
     static Matrix4x4 GetMatrix(const Quaternion& q);
     static void Normalize(Quaternion& q);
     static FLOAT Magnitude(const Quaternion& q);
+
+    operator std::string()
+    {
+        std::stringstream ss;
+        ss << "{ " << V.X << ", " << V.Y << ", " << V.Z << ", " << W << " }";
+        return ss.str();
+    }
 };
 
 Quaternion operator+(const Quaternion& lhs, const Quaternion& rhs);

@@ -23,6 +23,18 @@ struct Matrix4x4
     static float Determinant(Matrix4x4 m);
     static Matrix4x4 MatrixOfMinors(Matrix4x4 m);
     static Matrix4x4 Inverse(Matrix4x4 m);
+
+    operator std::string()
+    {
+        std::stringstream ss;
+        ss.precision(4);
+        ss << std::fixed
+           << "{ " << M11 << ", " << M21 << ", " << M31 << ", " << M41 << "\n"
+           << "  " << M12 << ", " << M22 << ", " << M32 << ", " << M42 << "\n"
+           << "  " << M13 << ", " << M23 << ", " << M33 << ", " << M43 << "\n"
+           << "  " << M14 << ", " << M24 << ", " << M34 << ", " << M44 << " }";
+        return ss.str();
+    }
 };
 
 Matrix4x4 operator+(const Matrix4x4& lhs, const Matrix4x4 rhs);

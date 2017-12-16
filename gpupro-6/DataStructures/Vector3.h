@@ -12,6 +12,13 @@ struct Vector3
     static void Normalize(Vector3& v);
     static FLOAT Dot(Vector3 a, Vector3 b);
     static Vector3 Cross(Vector3 a, Vector3 b);
+
+    std::string operator()()
+    {
+        std::stringstream ss;
+        ss << "{ " << X << ", " << Y << ", " << Z << " }";
+        return ss.str();
+    }
 };
 
 Vector3 operator+(const Vector3& first, const Vector3& second);
