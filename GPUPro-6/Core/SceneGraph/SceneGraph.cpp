@@ -1,9 +1,19 @@
 #include "stdafx.h"
 #include "SceneGraph.h"
 
+SceneGraph* g_sceneGraph;
+
+void InitSceneGraph()
+{
+    g_sceneGraph = new SceneGraph();
+}
 
 SceneGraph& GetSceneGraph()
 {
-    static SceneGraph* s_sceneGraph = new SceneGraph();
-    return *s_sceneGraph;
+    return *g_sceneGraph;
+}
+
+void DestroySceneGraph()
+{
+    delete g_sceneGraph;
 }

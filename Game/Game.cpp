@@ -51,7 +51,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         >();
 
         InitConstantBufferInterface();
-        
+        InitSceneGraph();
+
         Shader* materialShader = GetAssetManager().Instantiate<Shader>();
         materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
@@ -179,6 +180,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     int returnCode = SystemManager::RunGameLoop();
     
     DestroyConstantBufferInterface();
+    DestroySceneGraph();
     DestroyAssetManager();
 
     SystemManager::Deinitialize();

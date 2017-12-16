@@ -102,9 +102,6 @@
     <ClCompile Include="Core\SceneGraph\Components\Entity.cpp">
       <Filter>Core\SceneGraph\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Core\SceneGraph\SceneGraph.cpp">
-      <Filter>Core\SceneGraph</Filter>
-    </ClCompile>
     <ClCompile Include="Core\SystemManagement\ISystem.cpp">
       <Filter>Core\SystemManagement</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="Core\WindowManagement\WindowManager.cpp">
       <Filter>Core\WindowManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\SceneGraph\SceneGraph.cpp">
+      <Filter>Core\SceneGraph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,9 +248,6 @@
     <ClInclude Include="Core\SceneGraph\Components\Entity.h">
       <Filter>Core\SceneGraph\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Core\SceneGraph\SceneGraph.h">
-      <Filter>Core\SceneGraph</Filter>
-    </ClInclude>
     <ClInclude Include="Core\SystemManagement\ISystem.h">
       <Filter>Core\SystemManagement</Filter>
     </ClInclude>
@@ -284,6 +281,12 @@
     <ClInclude Include="Core\Utilities\StaticPointer.hpp" />
     <ClInclude Include="Core\WindowManagement\WindowManager.h">
       <Filter>Core\WindowManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\SceneGraph\SceneGraphDefinition.hpp">
+      <Filter>Core\SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\SceneGraph\SceneGraph.h">
+      <Filter>Core\SceneGraph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

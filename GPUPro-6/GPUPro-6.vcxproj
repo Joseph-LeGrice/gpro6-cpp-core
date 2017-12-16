@@ -229,7 +229,6 @@
     <ClCompile Include="Core\Graphics\RasterizerState.cpp" />
     <ClCompile Include="Core\Graphics\ResourceTypes\Mesh.cpp" />
     <ClCompile Include="Core\DataStructures\Quaternion.cpp" />
-    <ClCompile Include="Core\SceneGraph\SceneGraph.cpp" />
     <ClCompile Include="Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp" />
     <ClCompile Include="Core\DataStructures\Vector2.cpp" />
     <ClCompile Include="Core\DataStructures\Vector3.cpp" />
@@ -243,6 +242,7 @@
     <ClCompile Include="Core\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Core\Input\KeyboardInput.cpp" />
     <ClCompile Include="Core\Input\MouseInput.cpp" />
+    <ClCompile Include="Core\SceneGraph\SceneGraph.cpp" />
     <ClCompile Include="Extra\Locomotion\NoClipLocomotion.cpp" />
     <ClCompile Include="Core\Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="Core\Input\InputSystem.cpp" />
@@ -277,7 +277,7 @@
     <ClInclude Include="Core\Graphics\Buffers\DepthStencilBuffer.h" />
     <ClInclude Include="Core\Graphics\RasterizerState.h" />
     <ClInclude Include="Core\Graphics\ResourceTypes\Mesh.h" />
-    <ClInclude Include="Core\SceneGraph\SceneGraph.h" />
+    <ClInclude Include="Core\SceneGraph\SceneGraphDefinition.hpp" />
     <ClInclude Include="Core\DataStructures\Matrix3x3.h" />
     <ClInclude Include="Core\DataStructures\Matrix4x4.h" />
     <ClInclude Include="Core\DataStructures\Quaternion.h" />
@@ -295,6 +295,7 @@
     <ClInclude Include="Core\Graphics\ResourceTypes\TextureSampler.h" />
     <ClInclude Include="Core\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Core\Graphics\Components\Light.h" />
+    <ClInclude Include="Core\SceneGraph\SceneGraph.h" />
     <ClInclude Include="Extra\Locomotion\NoClipLocomotion.h" />
     <ClInclude Include="Core\SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="Core\Graphics\GraphicsSystem.h" />
