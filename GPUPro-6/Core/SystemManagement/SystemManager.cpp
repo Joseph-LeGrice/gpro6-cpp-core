@@ -1,65 +1,31 @@
 #include "stdafx.h"
-#include "Core/SystemManagement/SystemManager.h"
-#include "Core/Time/Time.h"
-#include <iostream>
+#include "SystemManager.h"
 
-SystemManager* SystemManager::s_instance = new SystemManager();
+SystemManager* g_systemManager;
 
-SystemManager::~SystemManager()
+void InitSystem(ISystem* s)
 {
-
+    s->Initialize();
 }
 
-SystemManager::SystemManager()
+void DeinitSystem(ISystem* s)
 {
+    s->Deinitalize();
 }
 
-int SystemManager::DoRunGameLoop()
+void InitSystemManager()
 {
-    try
-    {
-        m_running = true;
-        while (m_running)
-        {
-            Time::s_instance->AdvanceFrame();
-         
-            while (Time::s_instance->ShouldAdvanceFixedStep())
-            {
-                for (auto it = m_map.begin(); it != m_map.end(); ++it)
-                {
-                    it->second->FixedTick();
-                }
-            }
-
-            for (auto it = m_map.begin(); it != m_map.end(); ++it)
-            {
-                it->second->EarlyVariableTick();
-            }
-
-            for (auto it = m_map.begin(); it != m_map.end(); ++it)
-            {
-                it->second->VariableTick();
-            }
-
-            for (auto it = m_map.begin(); it != m_map.end(); ++it)
-            {
-                it->second->LateVariableTick();
-            }
-        }
-    }
-    catch (...)
-    {
-
-    }
-
-    return 0;
+    g_systemManager = new SystemManager();
+    g_systemManager->ForEachSystem(InitSystem);
 }
 
-void SystemManager::DoDeinitialize()
+SystemManager& GetSystemManager()
 {
-    for (auto it = m_map.begin(); it != m_map.end(); ++it)
-    {
-        it->second->Deinitalize();
-        delete it->second;
-    }
+    return *g_systemManager;
+}
+
+void DestroySystemManager()
+{
+    g_systemManager->ForEachSystem(DeinitSystem);
+    delete g_systemManager;
 }

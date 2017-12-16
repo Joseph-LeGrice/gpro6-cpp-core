@@ -21,7 +21,7 @@ public:
 		bDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 		bDesc.StructureByteStride = sizeof(T);
 
-		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		HRESULT createBufferResult = device->CreateBuffer(&bDesc, NULL, m_buffer);
 		if (!SUCCEEDED(createBufferResult))
 		{
@@ -47,7 +47,7 @@ public:
     void UpdateBuffer(T& newData)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 		HRESULT mapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(mapResult))
 		{

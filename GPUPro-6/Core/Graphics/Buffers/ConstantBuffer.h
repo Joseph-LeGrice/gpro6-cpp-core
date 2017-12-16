@@ -28,7 +28,7 @@ public:
 	void UpdateBuffer(T& data)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 		HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(bufferMapResult))
 		{
@@ -39,7 +39,7 @@ public:
 
 	void BindBuffer()
 	{
-		ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 		if ((m_bindFlags & BIND_VERTEX) == BIND_VERTEX)
 		{
 			deviceContext->VSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
@@ -78,7 +78,7 @@ public:
 		ZeroMemory(&data, sizeof(data));
 		data.pSysMem = &initialData;
 
-		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		if (!SUCCEEDED(device->CreateBuffer(&desc, &data, m_buffer)))
 		{
 			LogError("[ConstantBuffer] Could not Create Buffer!");

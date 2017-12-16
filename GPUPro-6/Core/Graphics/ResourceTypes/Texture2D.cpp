@@ -63,7 +63,7 @@ void Texture2D::CreateResources()
     data.SysMemPitch = pitch;
     data.SysMemSlicePitch = pitch * height;
 
-    ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+    ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
     HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, m_pTexture);
     if (SUCCEEDED(createTextureResult))
     {
@@ -81,7 +81,7 @@ void Texture2D::CreateResources()
 
 void Texture2D::BindResource(UINT resourceIndex)
 {
-    ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
     deviceContext->VSSetShaderResources(resourceIndex, 1, m_resourceView);
     deviceContext->HSSetShaderResources(resourceIndex, 1, m_resourceView);
     deviceContext->DSSetShaderResources(resourceIndex, 1, m_resourceView);

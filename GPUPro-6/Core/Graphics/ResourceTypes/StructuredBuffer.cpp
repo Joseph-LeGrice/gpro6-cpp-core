@@ -6,7 +6,7 @@
 
 void StructuredBuffer::BindResource(UINT resourceIndex)
 {
-    ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
     deviceContext->VSSetShaderResources(resourceIndex, 1, m_resourceView);
     deviceContext->HSSetShaderResources(resourceIndex, 1, m_resourceView);
     deviceContext->DSSetShaderResources(resourceIndex, 1, m_resourceView);

@@ -30,7 +30,7 @@ bool Shader::SetCurrentIfValid()
 	}
 	else
 	{
-		ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 		deviceContext->IASetInputLayout(m_inputLayout);
 		deviceContext->VSSetShader(m_vertexShader, NULL, 0);
 
@@ -64,7 +64,7 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name)
     bool result = false;
 	if (SUCCEEDED(vertexShaderCompileResult))
 	{
-		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		HRESULT createdVertexShader  = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, m_vertexShader);
 		if (SUCCEEDED(createdVertexShader))
 		{
@@ -89,7 +89,7 @@ bool Shader::InitHullShader(std::wstring filename, std::string name)
 
 	if (SUCCEEDED(hullShaderCompileResult))
 	{
-		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		HRESULT createdHullShader = device->CreateHullShader(hullShaderBlob->GetBufferPointer(), hullShaderBlob->GetBufferSize(), NULL, m_hullShader);
 		
 		return SUCCEEDED(createdHullShader);
@@ -113,7 +113,7 @@ bool Shader::InitDomainShader(std::wstring filename, std::string name)
 
 	if (SUCCEEDED(domainShaderCompileResult))
 	{
-		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		HRESULT createdDomainShader = device->CreateDomainShader(domainShaderBlob->GetBufferPointer(), domainShaderBlob->GetBufferSize(), 0, m_domainShader);
 
 		return SUCCEEDED(createdDomainShader);
@@ -137,7 +137,7 @@ bool Shader::InitGeometryShader(std::wstring filename, std::string name)
 
 	if (SUCCEEDED(geomShaderCompileResult))
 	{
-		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		HRESULT createdGeometryShader = device->CreateGeometryShader(geomShaderBlob->GetBufferPointer(), geomShaderBlob->GetBufferSize(), NULL, m_geometryShader);
 
 		return SUCCEEDED(createdGeometryShader);
@@ -161,7 +161,7 @@ bool Shader::InitPixelShader(std::wstring filename, std::string name)
 
 	if (SUCCEEDED(pixelShaderCompileResult))
 	{
-		ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 		HRESULT createdPixelShader = device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), NULL, m_pixelShader);
 
 		return SUCCEEDED(createdPixelShader);

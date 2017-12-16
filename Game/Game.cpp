@@ -21,15 +21,12 @@
 #include "Core/Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Core/Graphics/ResourceTypes/TextureSampler.h"
 #include "Core/SystemManagement/SystemManager.h"
-#include "Core/Input/InputSystem.h"
-#include "Core/Graphics/LightingSystem.h"
 #include "Core/WindowManagement/WindowManager.h"
 #include "Extra/Locomotion/NoClipLocomotion.h"
 #include "Extra/TransformSync/TranslationSync.h"
-#include "Extra/TransformSync/TransfromSyncSystem.h"
-#include "MouseRotateSystem.h"
 #include "Core/Utilities/MeshHelper.h"
 #include "Core/Utilities/MathHelper.h"
+#include "Core/GameLoop.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -42,32 +39,26 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     try
 	{
         WindowManager::InitializeWindow();
-                
-        SystemManager::Initialize<
-            GraphicsSystem,
-            LightingSystem,
-            InputSystem,
-            NoClipLocomotion
-        >();
-
-        InitConstantBufferInterface();
+        
+        InitSystemManager();
         InitSceneGraph();
+        InitConstantBufferInterface();
 
-        Shader* materialShader = GetAssetManager().Instantiate<Shader>();
+        Shader* materialShader = GetResourceManager().Instantiate<Shader>();
         materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
 		materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
 
-        Texture2D* testImageTexture = GetAssetManager().Instantiate<Texture2D>();
+        Texture2D* testImageTexture = GetResourceManager().Instantiate<Texture2D>();
         testImageTexture->InitializeWithBitmap(L"C:\\GPro_Test\\TestImage.png");
 
-        TextureSampler* textureSampler = GetAssetManager().Instantiate<TextureSampler>();
+        TextureSampler* textureSampler = GetResourceManager().Instantiate<TextureSampler>();
         textureSampler->Initialize();
 
-        Material* simpleTestMaterial = GetAssetManager().Instantiate<Material>();
+        Material* simpleTestMaterial = GetResourceManager().Instantiate<Material>();
         simpleTestMaterial->SetShaderIndex(materialShader->GetResourceID());
         UINT simpleTestMaterialID = simpleTestMaterial->GetResourceID();
 
-        int lightBufferIndex = SystemManager::GetSystem<LightingSystem>()->GetBufferResourceIndex();
+        int lightBufferIndex = GetSystemManager().GetSystem<LightingSystem>()->GetBufferResourceIndex();
         simpleTestMaterial->AddStructuredBufferResource({ lightBufferIndex, 0});
 
         int uvTextureResourceId = static_cast<int>(testImageTexture->GetResourceID());
@@ -140,11 +131,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
         
         //Skybox
-        Shader* skyboxShader = GetAssetManager().Instantiate<Shader>();
+        Shader* skyboxShader = GetResourceManager().Instantiate<Shader>();
         skyboxShader->InitVertexShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "VShader");
         skyboxShader->InitPixelShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "PShader");
 
-        Texture2DArray* testCubemap = GetAssetManager().Instantiate<Texture2DArray>();
+        Texture2DArray* testCubemap = GetResourceManager().Instantiate<Texture2DArray>();
         testCubemap->InitializeWithBitmaps({
             L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp",
             L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
@@ -154,7 +145,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp"
         });
         
-        Material* skyboxMat = GetAssetManager().Instantiate<Material>();
+        Material* skyboxMat = GetResourceManager().Instantiate<Material>();
         UINT skyboxMatID = skyboxMat->GetResourceID();
         skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
         int cubemapTextureId = static_cast<int>(testCubemap->GetResourceID());
@@ -168,22 +159,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
-        SystemManager::GetSystem<GraphicsSystem>()->SetDirty();
-        //SystemManager::GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
-        SystemManager::GetSystem<NoClipLocomotion>()->SetPlayer(cameraEntityId);
+        GetSystemManager().GetSystem<GraphicsSystem>()->SetDirty();
+        //GetSystemManager().GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
+        GetSystemManager().GetSystem<NoClipLocomotion>()->SetPlayer(cameraEntityId);
 	}
 	catch(...)
 	{
 
 	}
 
-    int returnCode = SystemManager::RunGameLoop();
+    int returnCode = GameLoop::Run();
     
     DestroyConstantBufferInterface();
     DestroySceneGraph();
-    DestroyAssetManager();
+    DestroyResourceManager();
+    DestroySystemManager();
 
-    SystemManager::Deinitialize();
     WindowManager::ShutdownWindow();
 
 	return returnCode;

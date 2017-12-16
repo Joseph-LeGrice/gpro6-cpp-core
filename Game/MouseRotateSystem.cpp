@@ -31,8 +31,8 @@ void MouseRotateSystem::VariableTick()
 	{
         TransformComponent* const allTransforms = GetSceneGraph().GetComponentArrayPointer<TransformComponent>();
         
-        const MouseInput& mi = SystemManager::GetSystem<InputSystem>()->GetMouse();
-		const KeyboardInput& ki = SystemManager::GetSystem<InputSystem>()->GetKeyboard();
+        const MouseInput& mi = GetSystemManager().GetSystem<InputSystem>()->GetMouse();
+		const KeyboardInput& ki = GetSystemManager().GetSystem<InputSystem>()->GetKeyboard();
 
 		if (!m_toggleRotate)
 		{

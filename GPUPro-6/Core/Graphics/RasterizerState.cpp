@@ -5,7 +5,7 @@
 
 RasterizerState::RasterizerState()
 {
-    ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+    ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 
     D3D11_RASTERIZER_DESC noCullState;
     noCullState.FillMode = D3D11_FILL_SOLID;
@@ -41,7 +41,7 @@ RasterizerState::~RasterizerState()
 
 void RasterizerState::SetCullState(CullState cs)
 {
-    ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
     if (cs == kCullStateNoCull || cs == kCullStateFrontCull)
     {
         deviceContext->RSSetState(m_noCullRasterState);

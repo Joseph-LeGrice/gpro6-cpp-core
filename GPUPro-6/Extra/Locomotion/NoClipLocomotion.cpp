@@ -43,7 +43,7 @@ void NoClipLocomotion::VariableTick()
         return;
     }
     
-    InputSystem* inputSys = SystemManager::GetSystem<InputSystem>();
+    InputSystem* inputSys = GetSystemManager().GetSystem<InputSystem>();
     const MouseInput& mouseInput = inputSys->GetMouse();
     if (mouseInput.GetMouseButton(0))
     {

@@ -7,7 +7,7 @@ typedef std::chrono::duration<float, std::chrono::seconds::period> Seconds;
 
 class Time
 {
-friend class SystemManager;
+    friend class GameLoop;
 
 public:
     Time();

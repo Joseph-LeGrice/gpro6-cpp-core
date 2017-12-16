@@ -20,8 +20,8 @@ namespace CameraInternal
     {
         Camera operator()()
         {
-            float viewportWidth = SystemManager::GetSystem<GraphicsSystem>()->GetViewportWidth();
-            float viewportHeight = SystemManager::GetSystem<GraphicsSystem>()->GetViewportHeight();
+            float viewportWidth = GetSystemManager().GetSystem<GraphicsSystem>()->GetViewportWidth();
+            float viewportHeight = GetSystemManager().GetSystem<GraphicsSystem>()->GetViewportHeight();
             float aspectRatio = viewportWidth / viewportHeight;
 
             float screenNear = 0.1f;

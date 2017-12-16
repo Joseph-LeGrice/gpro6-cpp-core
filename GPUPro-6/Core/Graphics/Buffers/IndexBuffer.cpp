@@ -16,7 +16,7 @@ IndexBuffer::~IndexBuffer()
 IndexBuffer* IndexBuffer::Create(size_t bufferSize)
 {
 	IndexBuffer* ib = new IndexBuffer();
-	ID3D11Device* device = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+	ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
 
 	D3D11_BUFFER_DESC indexBufferDesc;
 	ZeroMemory(&indexBufferDesc, sizeof(D3D11_BUFFER_DESC));
@@ -40,7 +40,7 @@ IndexBuffer* IndexBuffer::Create(size_t bufferSize)
 
 bool IndexBuffer::SetCurrentIfValid()
 {
-	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
 	return true;
@@ -48,7 +48,7 @@ bool IndexBuffer::SetCurrentIfValid()
 
 bool IndexBuffer::TrySetData(const std::vector<UINT16>& data)
 {
-	ID3D11DeviceContext* deviceContext = SystemManager::GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
 	
 	D3D11_MAPPED_SUBRESOURCE indexBufferData;
 	HRESULT indexBufferAcquireResult = deviceContext->Map(m_indexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &indexBufferData);

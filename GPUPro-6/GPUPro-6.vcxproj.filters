@@ -93,9 +93,6 @@
     <ClCompile Include="Core\Input\MouseInput.cpp">
       <Filter>Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Core\ResourceManagement\AssetManager.cpp">
-      <Filter>Core\AssetManagement</Filter>
-    </ClCompile>
     <ClCompile Include="Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp">
       <Filter>Core\SceneGraph\Components\Util</Filter>
     </ClCompile>
@@ -103,9 +100,6 @@
       <Filter>Core\SceneGraph\Components</Filter>
     </ClCompile>
     <ClCompile Include="Core\SystemManagement\ISystem.cpp">
-      <Filter>Core\SystemManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\SystemManagement\SystemManager.cpp">
       <Filter>Core\SystemManagement</Filter>
     </ClCompile>
     <ClCompile Include="Core\Time\Time.cpp">
@@ -123,6 +117,11 @@
     <ClCompile Include="Core\SceneGraph\SceneGraph.cpp">
       <Filter>Core\SceneGraph</Filter>
     </ClCompile>
+    <ClCompile Include="Core\GameLoop.cpp" />
+    <ClCompile Include="Core\ResourceManagement\ResourceManager.cpp">
+      <Filter>Core\AssetManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\SystemManagement\SystemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -227,9 +226,6 @@
     <ClInclude Include="Core\Input\MouseInput.h">
       <Filter>Core\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Core\ResourceManagement\AssetManager.h">
-      <Filter>Core\AssetManagement</Filter>
-    </ClInclude>
     <ClInclude Include="Core\ResourceManagement\IResource.h">
       <Filter>Core\AssetManagement</Filter>
     </ClInclude>
@@ -288,6 +284,12 @@
     <ClInclude Include="Core\SceneGraph\SceneGraph.h">
       <Filter>Core\SceneGraph</Filter>
     </ClInclude>
+    <ClInclude Include="Core\GameLoop.h" />
+    <ClInclude Include="Core\ResourceManagement\ResourceManagerDefinition.hpp" />
+    <ClInclude Include="Core\ResourceManagement\ResourceManager.h">
+      <Filter>Core\AssetManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\SystemManagement\SystemManagerDefinition.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

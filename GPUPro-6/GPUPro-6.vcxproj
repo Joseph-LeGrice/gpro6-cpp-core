@@ -219,6 +219,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\GameLoop.cpp" />
     <ClCompile Include="Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="Core\DataStructures\Color.cpp" />
     <ClCompile Include="Core\Graphics\Components\Camera.cpp" />
@@ -243,6 +244,7 @@
     <ClCompile Include="Core\Input\KeyboardInput.cpp" />
     <ClCompile Include="Core\Input\MouseInput.cpp" />
     <ClCompile Include="Core\SceneGraph\SceneGraph.cpp" />
+    <ClCompile Include="Core\SystemManagement\SystemManager.cpp" />
     <ClCompile Include="Extra\Locomotion\NoClipLocomotion.cpp" />
     <ClCompile Include="Core\Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="Core\Input\InputSystem.cpp" />
@@ -264,6 +266,7 @@
     <ClCompile Include="Core\WindowManagement\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\GameLoop.h" />
     <ClInclude Include="Core\ResourceManagement\IResource.h" />
     <ClInclude Include="Core\ResourceManagement\ResourceManagerDefinition.hpp" />
     <ClInclude Include="Core\SceneGraph\Components\Util\ComponentType.hpp" />
@@ -296,6 +299,7 @@
     <ClInclude Include="Core\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Core\Graphics\Components\Light.h" />
     <ClInclude Include="Core\SceneGraph\SceneGraph.h" />
+    <ClInclude Include="Core\SystemManagement\SystemManagerDefinition.hpp" />
     <ClInclude Include="Extra\Locomotion\NoClipLocomotion.h" />
     <ClInclude Include="Core\SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="Core\Graphics\GraphicsSystem.h" />
