@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Core/Utilities/MathHelper.h"
 #include "Core/DataStructures/Quaternion.h"
 
 Quaternion Quaternion::Identity()
@@ -36,6 +37,61 @@ Quaternion Quaternion::FromAxisAngle(Vector3 axis, float angle)
 	q.V = axis * sinf(angle / 2.0f);
 	Quaternion::Normalize(q);
 	return q;
+}
+
+Vector3 Quaternion::ToEuler(const Quaternion& q)
+{
+    Vector3 result;
+
+    float sinr = 2 * (q.W * q.V.X + q.V.Y * q.V.Z);
+    float cosr = 1 - 2 * (q.V.X * q.V.X + q.V.Y * q.V.Y);
+    result.X = atan2f(sinr, cosr);
+
+    float sinp = 2 * (q.W * q.V.Y - q.V.Z * q.V.X);
+    if (abs(sinp) >= 1)
+    {
+        result.Y = copysign(PI / 2, sinp);
+    }
+    else
+    {
+        result.Y = asinf(sinp);
+    }
+
+    float siny = 2 * (q.W * q.V.Z + q.V.X * q.V.Y);
+    float cosy = 1 - 2 * (q.V.Y * q.V.Y + q.V.Z * q.V.Z);
+    result.Z = atan2f(siny, cosy);
+
+    return result * RadToDeg;
+}
+
+Quaternion Quaternion::FromEuler(const Vector3& degrees)
+{
+    Vector3 radians = degrees * DegToRad;
+    std::stringstream ss;
+    ss << "radians: " << (std::string)radians;
+    Log(ss.str());
+
+    float cy = cosf(radians.Z * 0.5f);
+    float sy = sinf(radians.Z * 0.5f);
+    float cr = cosf(radians.X * 0.5f);
+    float sr = sinf(radians.X * 0.5f);
+    float cp = cosf(radians.Y * 0.5f);
+    float sp = sinf(radians.Y * 0.5f);
+
+    Quaternion q;
+    q.W   = cy * cr * cp + sy * sr * sp;
+    q.V.X = cy * sr * cp - sy * cr * sp;
+    q.V.Y = cy * cr * sp + sy * sr * cp;
+    q.V.Z = sy * cr * cp - cy * sr * sp;
+    return q;
+}
+
+Quaternion Quaternion::FromLookRotation(Vector3 forward, Vector3 up)
+{
+    Vector3 right = Vector3::Cross(forward, up);
+    Vector3 trueUp = Vector3::Cross(right, forward);
+    Quaternion q;
+    return q;
 }
 
 Matrix4x4 Quaternion::GetMatrix(const Quaternion& q)
