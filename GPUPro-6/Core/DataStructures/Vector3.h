@@ -13,7 +13,7 @@ struct Vector3
     static FLOAT Dot(Vector3 a, Vector3 b);
     static Vector3 Cross(Vector3 a, Vector3 b);
 
-    std::string operator()()
+    operator std::string()
     {
         std::stringstream ss;
         ss << "{ " << X << ", " << Y << ", " << Z << " }";
