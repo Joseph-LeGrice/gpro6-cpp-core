@@ -28,8 +28,6 @@ Quaternion Quaternion::Inverse(const Quaternion& q)
 	return result;
 }
 
-// TODO: Quaternion.LookAt
-
 Quaternion Quaternion::FromAxisAngle(Vector3 axis, float angle)
 {
 	Quaternion q;
@@ -43,22 +41,22 @@ Vector3 Quaternion::ToEuler(const Quaternion& q)
 {
     Vector3 result;
 
-    float sinr = 2 * (q.W * q.V.X + q.V.Y * q.V.Z);
-    float cosr = 1 - 2 * (q.V.X * q.V.X + q.V.Y * q.V.Y);
+    float sinr = 2.0f * (q.W * q.V.X + q.V.Y * q.V.Z);
+    float cosr = 1.0f - 2.0f * (q.V.X * q.V.X + q.V.Y * q.V.Y);
     result.X = atan2f(sinr, cosr);
 
-    float sinp = 2 * (q.W * q.V.Y - q.V.Z * q.V.X);
-    if (abs(sinp) >= 1)
+    float sinp = 2.0f * (q.W * q.V.Y - q.V.Z * q.V.X);
+    if (abs(sinp) >= 1.0f)
     {
-        result.Y = copysign(PI / 2, sinp);
+        result.Y = copysign(PI / 2.0f, sinp);
     }
     else
     {
         result.Y = asinf(sinp);
     }
 
-    float siny = 2 * (q.W * q.V.Z + q.V.X * q.V.Y);
-    float cosy = 1 - 2 * (q.V.Y * q.V.Y + q.V.Z * q.V.Z);
+    float siny = 2.0f * (q.W * q.V.Z + q.V.X * q.V.Y);
+    float cosy = 1.0f - 2.0f * (q.V.Y * q.V.Y + q.V.Z * q.V.Z);
     result.Z = atan2f(siny, cosy);
 
     return result * RadToDeg;
@@ -67,9 +65,6 @@ Vector3 Quaternion::ToEuler(const Quaternion& q)
 Quaternion Quaternion::FromEuler(const Vector3& degrees)
 {
     Vector3 radians = degrees * DegToRad;
-    std::stringstream ss;
-    ss << "radians: " << (std::string)radians;
-    Log(ss.str());
 
     float cy = cosf(radians.Z * 0.5f);
     float sy = sinf(radians.Z * 0.5f);
@@ -83,6 +78,9 @@ Quaternion Quaternion::FromEuler(const Vector3& degrees)
     q.V.X = cy * sr * cp - sy * cr * sp;
     q.V.Y = cy * cr * sp + sy * sr * cp;
     q.V.Z = sy * cr * cp - cy * sr * sp;
+
+    //Quaternion::Normalize(q);
+
     return q;
 }
 

@@ -47,30 +47,13 @@ void NoClipLocomotion::VariableTick()
     const MouseInput& mouseInput = inputSys->GetMouse();
     if (mouseInput.GetMouseButton(0))
     {
-        Vector2 mouseDelta = mouseInput.GetDeltaMousePosition();
-
         Vector3 eulerAngle = Quaternion::ToEuler(playerTransform->m_data.m_rotation);
-
-        std::stringstream ss;
-        ss << "before: " << (std::string)eulerAngle;
-
-        eulerAngle.X += 1 * Time::DeltaTimeStep();
-        //eulerAngle.X += m_sensitivity * mouseDelta.Y * Time::DeltaTimeStep();
-        //eulerAngle.Y += m_sensitivity * mouseDelta.X * Time::DeltaTimeStep();
-        //eulerAngle.Z = 0;
-        ss << ", after: " << (std::string)eulerAngle;
-
-        Log(ss.str());
-
-        Quaternion newRotation = Quaternion::FromEuler(eulerAngle);
-        playerTransform->m_data.m_rotation = newRotation;
-
-        //Quaternion rotationDelta = Quaternion::Identity();
-        //rotationDelta *= Quaternion::FromAxisAngle({ 1, 0, 0 }, m_sensitivity * mouseDelta.Y * Time::DeltaTimeStep());
-        //rotationDelta *= Quaternion::FromAxisAngle({ 0, 1, 0 }, m_sensitivity * mouseDelta.X * Time::DeltaTimeStep());
-        //rotationDelta *= Quaternion::FromAxisAngle({ 0, 0, 1 }, 0.0f);
-
-        //playerTransform->m_data.m_rotation *= rotationDelta;
+        Vector2 mouseDelta = mouseInput.GetDeltaMousePosition();
+        eulerAngle.X += m_sensitivity * mouseDelta.Y * Time::DeltaTimeStep();
+        eulerAngle.Y += m_sensitivity * mouseDelta.X * Time::DeltaTimeStep();
+        eulerAngle.Z = 0;
+        
+        playerTransform->m_data.m_rotation = Quaternion::FromEuler(eulerAngle);
     }
     const KeyboardInput& keyboardInput = inputSys->GetKeyboard();
     Vector3 moveDelta = { 0, 0, 0 };
