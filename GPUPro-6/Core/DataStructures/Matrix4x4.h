@@ -2,11 +2,13 @@
 
 #include "Matrix3x3.h"
 
-#define COLUMN_MAJOR 1
+#define ROW_MAJOR 1
+
+struct Vector4;
 
 struct Matrix4x4
 {
-#if COLUMN_MAJOR
+#if ROW_MAJOR
 	float M11; float M21; float M31; float M41;
 	float M12; float M22; float M32; float M42;
 	float M13; float M23; float M33; float M43;
@@ -19,6 +21,7 @@ struct Matrix4x4
 #endif
 
     static void Identity(Matrix4x4& m);
+    void SetRow(unsigned int rowIndex, Vector4 values);
     static Matrix4x4 Transpose(Matrix4x4 m);
     static float Determinant(Matrix4x4 m);
     static Matrix4x4 MatrixOfMinors(Matrix4x4 m);

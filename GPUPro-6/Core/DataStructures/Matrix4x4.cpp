@@ -1,5 +1,6 @@
 #include "stdafx.h"
 
+#include "Vector4.h"
 #include "Matrix3x3.h"
 #include "Matrix4x4.h"
 
@@ -66,6 +67,12 @@ void Matrix4x4::Identity(Matrix4x4& m)
 	m.M12 = 0; m.M22 = 1; m.M32 = 0; m.M42 = 0;
 	m.M13 = 0; m.M23 = 0; m.M33 = 1; m.M43 = 0;
 	m.M14 = 0; m.M24 = 0; m.M34 = 0; m.M44 = 1;
+}
+
+void Matrix4x4::SetRow(unsigned int rowIndex, Vector4 values)
+{
+    assertion_range(rowIndex, 0, 4);
+    
 }
 
 Matrix4x4 Matrix4x4::Transpose(Matrix4x4 m)

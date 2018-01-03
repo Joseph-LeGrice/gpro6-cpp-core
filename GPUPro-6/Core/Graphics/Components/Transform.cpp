@@ -13,6 +13,27 @@ Transform TransformNew()
 	return t;
 }
 
+Vector3 Transform::WorldUp()
+{
+    Vector3 result = Vector3::Up() * m_rotation;
+    Vector3::Normalize(result);
+    return result;
+}
+
+Vector3 Transform::WorldRight()
+{
+    Vector3 result = Vector3::Right() * m_rotation;
+    Vector3::Normalize(result);
+    return result;
+}
+
+Vector3 Transform::WorldForward()
+{
+    Vector3 result = Vector3::Forward() * m_rotation;
+    Vector3::Normalize(result);
+    return result;
+}
+
 Matrix4x4 Transform::GetMatrix(const Transform& t)
 {
 	return Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)) *

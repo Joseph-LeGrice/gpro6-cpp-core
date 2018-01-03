@@ -1,6 +1,6 @@
 #pragma once
 
-#define COLUMN_MAJOR 1
+#define ROW_MAJOR 1
 
 struct Matrix3x3
 {

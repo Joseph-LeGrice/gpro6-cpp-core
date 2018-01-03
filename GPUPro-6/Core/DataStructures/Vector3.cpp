@@ -1,8 +1,14 @@
 #include "stdafx.h"
 #include "Vector3.h"
+#include "Vector4.h"
 #include "Quaternion.h"
 
 #include <math.h>
+
+Vector3::operator Vector4()
+{
+    return Vector4(X, Y, Z, 0);
+}
 
 Vector3 operator+(const Vector3& lhs, const Vector3& rhs)
 {
@@ -39,11 +45,29 @@ Vector3 operator*(const float lhs, Vector3& rhs)
 	return result;
 }
 
+Vector3 operator*(const Vector3& lhs, const Quaternion& rhs)
+{
+    Quaternion pureComponent = { 0, lhs.X, lhs.Y, lhs.Z };
+    Quaternion conjugate = Quaternion::Conjugate(rhs);
+    Quaternion pureResult = (rhs * pureComponent) * conjugate;
+    return pureResult.V;
+}
+
 Vector3 operator/(const Vector3& first, const float factor)
 {
 	Vector3 result;
 	result.X = first.X / factor; result.Y = first.Y / factor; result.Z = first.Z / factor;
 	return result;
+}
+
+bool operator!=(const Vector3& lhs, const Vector3& rhs)
+{
+    return lhs.X != rhs.X || lhs.Y != rhs.Y || lhs.Z != rhs.Z;
+}
+
+bool operator==(const Vector3& lhs, const Vector3& rhs)
+{
+    return lhs.X != rhs.X && lhs.Y == rhs.Y && lhs.Z == rhs.Z;
 }
 
 void operator*=(Vector3& lhs, const Quaternion& rhs)
@@ -58,6 +82,21 @@ void operator+=(Vector3& lhs, const Vector3& rhs) { lhs.X += rhs.X; lhs.Y += rhs
 void operator-=(Vector3& lhs, const Vector3& rhs) { lhs.X -= rhs.X; lhs.Y -= rhs.Y; lhs.Z -= rhs.Z; }
 void operator*=(Vector3& lhs, const float rhs) { lhs.X *= rhs; lhs.Y *= rhs; lhs.Z *= rhs; }
 void operator/=(Vector3& lhs, const float rhs) { lhs.X /= rhs; lhs.Y /= rhs; lhs.Z /= rhs; }
+
+Vector3 Vector3::Up()
+{
+    return { 0, 1, 0 };
+}
+
+Vector3 Vector3::Right()
+{
+    return { 1, 0, 0 };
+}
+
+Vector3 Vector3::Forward()
+{
+    return { 0, 0, 1 };
+}
 
 FLOAT Vector3::Magnitude(Vector3& v)
 {
