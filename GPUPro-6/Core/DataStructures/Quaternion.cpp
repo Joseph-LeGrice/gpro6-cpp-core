@@ -79,16 +79,35 @@ Quaternion Quaternion::FromEuler(const Vector3& degrees)
     q.V.Y = cy * cr * sp + sy * sr * cp;
     q.V.Z = sy * cr * cp - cy * sr * sp;
 
-    //Quaternion::Normalize(q);
+    Quaternion::Normalize(q);
 
     return q;
 }
 
 Quaternion Quaternion::FromLookRotation(Vector3 forward, Vector3 up)
 {
-    Vector3 right = Vector3::Cross(forward, up);
-    Vector3 trueUp = Vector3::Cross(right, forward);
+    assertion_not_equal(forward, up);
+
+    Vector3 right = Vector3::Cross(up, forward);
+    Vector3 trueUp = Vector3::Cross(forward, right);
+
+    float m00 = right.X;
+    float m01 = trueUp.X;
+    float m02 = forward.X;
+    float m10 = right.Y;
+    float m11 = trueUp.Y;
+    float m12 = forward.Y;
+    float m20 = right.Z;
+    float m21 = trueUp.Z;
+    float m22 = forward.Z;
+
     Quaternion q;
+    q.W = sqrtf(1.0f + m00 + m11 + m22) * 0.5f;
+    float w4_recip = 1.0f / (4.0f * q.W);
+    q.V.X = (m21 - m12) * w4_recip;
+    q.V.Y = (m02 - m20) * w4_recip;
+    q.V.Z = (m10 - m01) * w4_recip;
+
     return q;
 }
 
