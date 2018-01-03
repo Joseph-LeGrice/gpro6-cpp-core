@@ -290,6 +290,7 @@
       <Filter>Core\AssetManagement</Filter>
     </ClInclude>
     <ClInclude Include="Core\SystemManagement\SystemManagerDefinition.hpp" />
+    <ClInclude Include="Core\Utilities\Assertions.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

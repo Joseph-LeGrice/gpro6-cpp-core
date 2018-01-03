@@ -300,6 +300,7 @@
     <ClInclude Include="Core\Graphics\Components\Light.h" />
     <ClInclude Include="Core\SceneGraph\SceneGraph.h" />
     <ClInclude Include="Core\SystemManagement\SystemManagerDefinition.hpp" />
+    <ClInclude Include="Core\Utilities\Assertions.h" />
     <ClInclude Include="Extra\Locomotion\NoClipLocomotion.h" />
     <ClInclude Include="Core\SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="Core\Graphics\GraphicsSystem.h" />
