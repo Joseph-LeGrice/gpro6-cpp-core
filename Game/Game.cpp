@@ -46,8 +46,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         InitConstantBufferInterface();
 
         Shader* materialShader = GetResourceManager().Instantiate<Shader>();
-        materialShader->InitVertexShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "VShader");
-		materialShader->InitPixelShader(L"../gpupro-6/Shaders/ForwardRendering.hlsl", "PShader");
+        materialShader->InitVertexShader(L"../gpupro-6/src/Shaders/ForwardRendering.hlsl", "VShader");
+		materialShader->InitPixelShader(L"../gpupro-6/src/Shaders/ForwardRendering.hlsl", "PShader");
 
         Texture2D* testImageTexture = GetResourceManager().Instantiate<Texture2D>();
         testImageTexture->InitializeWithBitmap(L"C:\\GPro_Test\\TestImage.png");
@@ -133,8 +133,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         
         //Skybox
         Shader* skyboxShader = GetResourceManager().Instantiate<Shader>();
-        skyboxShader->InitVertexShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "VShader");
-        skyboxShader->InitPixelShader(L"../gpupro-6/Shaders/EnvironmentMap.hlsl", "PShader");
+        skyboxShader->InitVertexShader(L"../gpupro-6/src/Shaders/EnvironmentMap.hlsl", "VShader");
+        skyboxShader->InitPixelShader(L"../gpupro-6/src/Shaders/EnvironmentMap.hlsl", "PShader");
 
         Texture2DArray* testCubemap = GetResourceManager().Instantiate<Texture2DArray>();
         testCubemap->InitializeWithBitmaps({

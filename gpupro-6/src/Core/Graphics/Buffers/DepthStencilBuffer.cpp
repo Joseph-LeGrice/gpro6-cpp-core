@@ -73,9 +73,9 @@ DepthStencilBuffer::~DepthStencilBuffer()
 void DepthStencilBuffer::ClearBuffer()
 {
     Color rtDefaultColor = { 1, 1, 1, 1 };
-
+    FLOAT* color = reinterpret_cast<FLOAT*>(&rtDefaultColor);
     ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-    deviceContext->ClearRenderTargetView(m_rtBackBuffer, reinterpret_cast<FLOAT*>(&rtDefaultColor));
+    deviceContext->ClearRenderTargetView(m_rtBackBuffer, color);
     deviceContext->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1, 1);
 }
 
