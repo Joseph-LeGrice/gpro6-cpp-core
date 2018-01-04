@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj",
 		{DDAA2792-10DB-4F52-9C1B-63EDE21B57F3} = {DDAA2792-10DB-4F52-9C1B-63EDE21B57F3}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyMath", "MyMath\MyMath.vcxproj", "{014DDF1E-A801-4CFF-9262-1DED774D5E8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,16 @@ Global
 		{86E15B2D-2387-49DB-8894-E2AD83F8458B}.Release|x64.Build.0 = Release|x64
 		{86E15B2D-2387-49DB-8894-E2AD83F8458B}.Release|x86.ActiveCfg = Release|Win32
 		{86E15B2D-2387-49DB-8894-E2AD83F8458B}.Release|x86.Build.0 = Release|Win32
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Debug|x64.ActiveCfg = Debug|x64
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Debug|x64.Build.0 = Debug|x64
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Debug|x86.ActiveCfg = Debug|Win32
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Debug|x86.Build.0 = Debug|Win32
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Release|Any CPU.ActiveCfg = Release|Win32
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Release|x64.ActiveCfg = Release|x64
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Release|x64.Build.0 = Release|x64
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Release|x86.ActiveCfg = Release|Win32
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

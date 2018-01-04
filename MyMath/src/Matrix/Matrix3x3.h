@@ -4,7 +4,7 @@
 
 struct Matrix3x3
 {
-#if COLUMN_MAJOR
+#if ROW_MAJOR
 	float M11; float M21; float M31;
 	float M12; float M22; float M32;
 	float M13; float M23; float M33;

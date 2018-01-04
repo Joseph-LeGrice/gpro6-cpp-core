@@ -1,8 +1,9 @@
-#include "stdafx.h"
-
-#include "Vector4.h"
-#include "Matrix3x3.h"
 #include "Matrix4x4.h"
+#include "Matrix3x3.h"
+
+#include "Vector/Vector4.h"
+
+#include <sstream>
 
 Matrix4x4 operator+(const Matrix4x4& lhs, const Matrix4x4 rhs)
 {
@@ -69,11 +70,9 @@ void Matrix4x4::Identity(Matrix4x4& m)
 	m.M14 = 0; m.M24 = 0; m.M34 = 0; m.M44 = 1;
 }
 
-void Matrix4x4::SetRow(unsigned int rowIndex, Vector4 values)
-{
-    assertion_range(rowIndex, 0, 4);
-    
-}
+//void Matrix4x4::SetRow(unsigned int rowIndex, const Vector4& values)
+//{
+//}
 
 Matrix4x4 Matrix4x4::Transpose(Matrix4x4 m)
 {
@@ -243,4 +242,16 @@ Matrix4x4 Matrix4x4::Inverse(Matrix4x4 m)
 	{
 		return m;
 	}
+}
+
+Matrix4x4::operator std::string()
+{
+    std::stringstream ss;
+    ss.precision(4);
+    ss << std::fixed
+        << "{ " << M11 << ", " << M21 << ", " << M31 << ", " << M41 << "\n"
+        << "  " << M12 << ", " << M22 << ", " << M32 << ", " << M42 << "\n"
+        << "  " << M13 << ", " << M23 << ", " << M33 << ", " << M43 << "\n"
+        << "  " << M14 << ", " << M24 << ", " << M34 << ", " << M44 << " }";
+    return ss.str();
 }

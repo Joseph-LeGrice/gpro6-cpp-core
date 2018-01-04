@@ -1,12 +1,20 @@
-#include "stdafx.h"
-#include "Core/Utilities/MathHelper.h"
-#include "Core/DataStructures/Quaternion.h"
+#include "Quaternion.h"
+#include "MathDefines.h"
+
+#include "Assertions.h"
+#include "Matrix/Matrix4x4.h"
+#include "Vector/Vector3.h"
+
+#include <math.h>
+#include <sstream>
 
 Quaternion Quaternion::Identity()
 {
 	Quaternion q;
 	q.W = 1.0f;
-	q.V = { 0.0, 0.0, 0.0 };
+    q.X = 0.0f;
+    q.Y = 0.0f;
+    q.Z = 0.0f;
 	return q;
 }
 
@@ -14,7 +22,9 @@ Quaternion Quaternion::Conjugate(const Quaternion& q)
 {
 	Quaternion result;
 	result.W = q.W;
-	result.V = -q.V;
+    result.X = -q.X;
+    result.Y = -q.Y;
+    result.Z = -q.Z;
 	return result;
 }
 
@@ -24,7 +34,10 @@ Quaternion Quaternion::Inverse(const Quaternion& q)
 	float mag = Quaternion::Magnitude(q);
 
 	Quaternion result;
-	result.W = con.W / mag; result.V = con.V / mag;
+	result.W = con.W / mag; 
+    result.X = con.X / mag;
+    result.Y = con.Y / mag;
+    result.Z = con.Z / mag;
 	return result;
 }
 
@@ -32,7 +45,12 @@ Quaternion Quaternion::FromAxisAngle(Vector3 axis, float angle)
 {
 	Quaternion q;
 	q.W = cosf(angle / 2.0f);
-	q.V = axis * sinf(angle / 2.0f);
+
+	Vector3 vectorComponent = axis * sinf(angle / 2.0f);
+    q.X = vectorComponent.X;
+    q.Y = vectorComponent.Y;
+    q.Z = vectorComponent.Z;
+
 	Quaternion::Normalize(q);
 	return q;
 }
@@ -41,11 +59,11 @@ Vector3 Quaternion::ToEuler(const Quaternion& q)
 {
     Vector3 result;
 
-    float sinr = 2.0f * (q.W * q.V.X + q.V.Y * q.V.Z);
-    float cosr = 1.0f - 2.0f * (q.V.X * q.V.X + q.V.Y * q.V.Y);
+    float sinr = 2.0f * (q.W * q.X + q.Y * q.Z);
+    float cosr = 1.0f - 2.0f * (q.X * q.X + q.Y * q.Y);
     result.X = atan2f(sinr, cosr);
 
-    float sinp = 2.0f * (q.W * q.V.Y - q.V.Z * q.V.X);
+    float sinp = 2.0f * (q.W * q.Y - q.Z * q.X);
     if (abs(sinp) >= 1.0f)
     {
         result.Y = copysign(PI / 2.0f, sinp);
@@ -55,8 +73,8 @@ Vector3 Quaternion::ToEuler(const Quaternion& q)
         result.Y = asinf(sinp);
     }
 
-    float siny = 2.0f * (q.W * q.V.Z + q.V.X * q.V.Y);
-    float cosy = 1.0f - 2.0f * (q.V.Y * q.V.Y + q.V.Z * q.V.Z);
+    float siny = 2.0f * (q.W * q.Z + q.X * q.Y);
+    float cosy = 1.0f - 2.0f * (q.Y * q.Y + q.Z * q.Z);
     result.Z = atan2f(siny, cosy);
 
     return result * RadToDeg;
@@ -75,9 +93,9 @@ Quaternion Quaternion::FromEuler(const Vector3& degrees)
 
     Quaternion q;
     q.W   = cy * cr * cp + sy * sr * sp;
-    q.V.X = cy * sr * cp - sy * cr * sp;
-    q.V.Y = cy * cr * sp + sy * sr * cp;
-    q.V.Z = sy * cr * cp - cy * sr * sp;
+    q.X = cy * sr * cp - sy * cr * sp;
+    q.Y = cy * cr * sp + sy * sr * cp;
+    q.Z = sy * cr * cp - cy * sr * sp;
 
     Quaternion::Normalize(q);
 
@@ -104,26 +122,31 @@ Quaternion Quaternion::FromLookRotation(Vector3 forward, Vector3 up)
     Quaternion q;
     q.W = sqrtf(1.0f + m00 + m11 + m22) * 0.5f;
     float w4_recip = 1.0f / (4.0f * q.W);
-    q.V.X = (m21 - m12) * w4_recip;
-    q.V.Y = (m02 - m20) * w4_recip;
-    q.V.Z = (m10 - m01) * w4_recip;
+    q.X = (m21 - m12) * w4_recip;
+    q.Y = (m02 - m20) * w4_recip;
+    q.Z = (m10 - m01) * w4_recip;
 
     return q;
+}
+
+Quaternion Quaternion::FromLookRotation(Vector3 forward)
+{
+    return FromLookRotation(forward, { 0, 1, 0 });
 }
 
 Matrix4x4 Quaternion::GetMatrix(const Quaternion& q)
 {
 	//Orthonormal basis
 
-	float x = q.V.X * 2.0F;
-	float y = q.V.Y * 2.0F;
-	float z = q.V.Z * 2.0F;
-	float xx = q.V.X * x;
-	float yy = q.V.Y * y;
-	float zz = q.V.Z * z;
-	float xy = q.V.X * y;
-	float xz = q.V.X * z;
-	float yz = q.V.Y * z;
+	float x = q.X * 2.0F;
+	float y = q.Y * 2.0F;
+	float z = q.Z * 2.0F;
+	float xx = q.X * x;
+	float yy = q.Y * y;
+	float zz = q.Z * z;
+	float xy = q.X * y;
+	float xz = q.X * z;
+	float yz = q.Y * z;
 	float wx = q.W * x;
 	float wy = q.W * y;
 	float wz = q.W * z;
@@ -140,53 +163,75 @@ Matrix4x4 Quaternion::GetMatrix(const Quaternion& q)
 
 void Quaternion::Normalize(Quaternion& q)
 {
-	FLOAT mag = Quaternion::Magnitude(q);
+	float mag = Quaternion::Magnitude(q);
 	q.W /= mag;
-	q.V /= mag;
+    q.X /= mag;
+    q.Y /= mag;
+    q.Z /= mag;
 }
 
-FLOAT Quaternion::Magnitude(const Quaternion& q)
+float Quaternion::Magnitude(const Quaternion& q)
 {
-	return sqrt(pow(q.W, 2) + pow(q.V.X, 2) + pow(q.V.Y, 2) + pow(q.V.Z, 2));
+	return sqrt(pow(q.W, 2) + pow(q.X, 2) + pow(q.Y, 2) + pow(q.Z, 2));
+}
+
+Quaternion::operator std::string()
+{
+    std::stringstream ss;
+    ss << "{ " << W << ", " << X << ", " << Y << ", " << Z << " }";
+    return ss.str();
 }
 
 Quaternion operator+(const Quaternion& lhs, const Quaternion& rhs)
 {
 	Quaternion result;
-	result.W = lhs.W + rhs.W; result.V = lhs.V + rhs.V;
+	result.W = lhs.W + rhs.W; 
+    result.X = lhs.X + rhs.X;
+    result.Y = lhs.Y + rhs.Y;
+    result.Z = lhs.Z + rhs.Z;
 	return result;
 }
 
 Quaternion operator-(const Quaternion& lhs, const Quaternion& rhs)
 {
 	Quaternion result;
-	result.W = lhs.W - rhs.W; result.V = lhs.V - rhs.V;
+	result.W = lhs.W - rhs.W; 
+    result.X = lhs.X - rhs.X;
+    result.Y = lhs.Y - rhs.Y;
+    result.Z = lhs.Z - rhs.Z;
 	return result;
 }
 
 Quaternion operator*(const Quaternion& lhs, float rhs)
 {
 	Quaternion result;
-	result.W = lhs.W * rhs; result.V = lhs.V * rhs;
+	result.W = lhs.W * rhs;
+    result.X = lhs.X * rhs;
+    result.Y = lhs.Y * rhs;
+    result.Z = lhs.Z * rhs;
 	return result;
 }
 
 Quaternion operator*(const Quaternion& lhs, const Quaternion& rhs)
 {
 	Quaternion result;
-	result.V.X = lhs.W * rhs.V.X + lhs.V.X * rhs.W + lhs.V.Y * rhs.V.Z - lhs.V.Z * rhs.V.Y;
-	result.V.Y = lhs.W * rhs.V.Y + lhs.V.Y * rhs.W + lhs.V.Z * rhs.V.X - lhs.V.X * rhs.V.Z;
-	result.V.Z = lhs.W * rhs.V.Z + lhs.V.Z * rhs.W + lhs.V.X * rhs.V.Y - lhs.V.Y * rhs.V.X;
-	result.W = lhs.W * rhs.W - lhs.V.X * rhs.V.X - lhs.V.Y * rhs.V.Y - lhs.V.Z * rhs.V.Z;
+	result.X = lhs.W * rhs.X + lhs.X * rhs.W + lhs.Y * rhs.Z - lhs.Z * rhs.Y;
+	result.Y = lhs.W * rhs.Y + lhs.Y * rhs.W + lhs.Z * rhs.X - lhs.X * rhs.Z;
+	result.Z = lhs.W * rhs.Z + lhs.Z * rhs.W + lhs.X * rhs.Y - lhs.Y * rhs.X;
+	result.W = lhs.W * rhs.W - lhs.X * rhs.X - lhs.Y * rhs.Y - lhs.Z * rhs.Z;
 	return result;
 }
 
 void operator *=(Quaternion& lhs, const Quaternion& rhs)
 {
 	Vector3 newV;
-	newV.X = lhs.W * rhs.V.X + lhs.V.X * rhs.W + lhs.V.Y * rhs.V.Z - lhs.V.Z * rhs.V.Y;
-	newV.Y = lhs.W * rhs.V.Y + lhs.V.Y * rhs.W + lhs.V.Z * rhs.V.X - lhs.V.X * rhs.V.Z;
-	newV.Z = lhs.W * rhs.V.Z + lhs.V.Z * rhs.W + lhs.V.X * rhs.V.Y - lhs.V.Y * rhs.V.X;
-	FLOAT newW = lhs.W * rhs.W - lhs.V.X * rhs.V.X - lhs.V.Y * rhs.V.Y - lhs.V.Z * rhs.V.Z;
-	lhs.W = newW; lhs.V = newV;
+	newV.X = lhs.W * rhs.X + lhs.X * rhs.W + lhs.Y * rhs.Z - lhs.Z * rhs.Y;
+	newV.Y = lhs.W * rhs.Y + lhs.Y * rhs.W + lhs.Z * rhs.X - lhs.X * rhs.Z;
+	newV.Z = lhs.W * rhs.Z + lhs.Z * rhs.W + lhs.X * rhs.Y - lhs.Y * rhs.X;
+	float newW = lhs.W * rhs.W - lhs.X * rhs.X - lhs.Y * rhs.Y - lhs.Z * rhs.Z;
+	
+    lhs.W = newW;
+    lhs.X = newV.X;
+    lhs.Y = newV.Y;
+    lhs.Z = newV.Z;
 }

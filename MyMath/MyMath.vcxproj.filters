@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Complex">
+      <UniqueIdentifier>{0a34e095-ed9f-484b-8d54-24123c1fc370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vector">
+      <UniqueIdentifier>{f60fc252-1160-42a7-a5af-2f4fb1318115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Matrix">
+      <UniqueIdentifier>{de920623-f6ff-429b-a6ea-bd5cc824c69f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Matrix\Matrix3x3.h">
+      <Filter>Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Matrix\Matrix4x4.h">
+      <Filter>Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Complex\Quaternion.h">
+      <Filter>Complex</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vector\Vector2.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vector\Vector3.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vector\Vector4.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assertions.h" />
+    <ClInclude Include="src\MathDefines.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Matrix\Matrix3x3.cpp">
+      <Filter>Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Matrix\Matrix4x4.cpp">
+      <Filter>Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Complex\Quaternion.cpp">
+      <Filter>Complex</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector\Vector2.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector\Vector3.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector\Vector4.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

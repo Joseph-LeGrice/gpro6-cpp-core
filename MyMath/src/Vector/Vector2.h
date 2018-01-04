@@ -2,12 +2,12 @@
 
 struct Vector2
 {
-	FLOAT X;
-	FLOAT Y;
+	float X;
+	float Y;
 
-    static FLOAT Magnitude(const Vector2& v);
+    static float Magnitude(const Vector2& v);
     static void Normalize(Vector2& v);
-    static FLOAT Dot(const Vector2& a, const Vector2& b);
+    static float Dot(const Vector2& a, const Vector2& b);
 };
 
 Vector2 operator+(const Vector2& lhs, const Vector2& rhs);

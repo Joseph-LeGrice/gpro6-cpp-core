@@ -18,24 +18,6 @@
     <ClCompile Include="Core\DataStructures\Color.cpp">
       <Filter>Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="Core\DataStructures\Matrix3x3.cpp">
-      <Filter>Core\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\DataStructures\Matrix4x4.cpp">
-      <Filter>Core\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\DataStructures\Quaternion.cpp">
-      <Filter>Core\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\DataStructures\Vector2.cpp">
-      <Filter>Core\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\DataStructures\Vector3.cpp">
-      <Filter>Core\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\DataStructures\Vector4.cpp">
-      <Filter>Core\DataStructures</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Graphics\Buffers\ConstantBufferInterface.cpp">
       <Filter>Core\Graphics\Buffers</Filter>
     </ClCompile>
@@ -137,24 +119,6 @@
       <Filter>Extra\TransformSync</Filter>
     </ClInclude>
     <ClInclude Include="Core\DataStructures\Color.h">
-      <Filter>Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\DataStructures\Matrix3x3.h">
-      <Filter>Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\DataStructures\Matrix4x4.h">
-      <Filter>Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\DataStructures\Quaternion.h">
-      <Filter>Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\DataStructures\Vector2.h">
-      <Filter>Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\DataStructures\Vector3.h">
-      <Filter>Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\DataStructures\Vector4.h">
       <Filter>Core\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="Core\Graphics\Buffers\ConstantBuffer.h">
@@ -262,9 +226,6 @@
     <ClInclude Include="Core\Utilities\Logging.h">
       <Filter>Core\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Utilities\MathHelper.h">
-      <Filter>Core\Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Utilities\MeshHelper.h">
       <Filter>Core\Utilities</Filter>
     </ClInclude>
@@ -290,7 +251,6 @@
       <Filter>Core\AssetManagement</Filter>
     </ClInclude>
     <ClInclude Include="Core\SystemManagement\SystemManagerDefinition.hpp" />
-    <ClInclude Include="Core\Utilities\Assertions.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

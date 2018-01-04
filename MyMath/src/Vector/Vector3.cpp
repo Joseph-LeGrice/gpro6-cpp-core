@@ -1,13 +1,19 @@
-#include "stdafx.h"
 #include "Vector3.h"
 #include "Vector4.h"
-#include "Quaternion.h"
+#include "Complex/Quaternion.h"
 
-#include <math.h>
+#include <sstream>
 
 Vector3::operator Vector4()
 {
     return Vector4(X, Y, Z, 0);
+}
+
+Vector3::operator std::string()
+{
+    std::stringstream ss;
+    ss << "{ " << X << ", " << Y << ", " << Z << " }";
+    return ss.str();
 }
 
 Vector3 operator+(const Vector3& lhs, const Vector3& rhs)
@@ -50,7 +56,7 @@ Vector3 operator*(const Vector3& lhs, const Quaternion& rhs)
     Quaternion pureComponent = { 0, lhs.X, lhs.Y, lhs.Z };
     Quaternion conjugate = Quaternion::Conjugate(rhs);
     Quaternion pureResult = (rhs * pureComponent) * conjugate;
-    return pureResult.V;
+    return { pureResult.X, pureResult.Y, pureResult.Z };
 }
 
 Vector3 operator/(const Vector3& first, const float factor)
@@ -75,7 +81,7 @@ void operator*=(Vector3& lhs, const Quaternion& rhs)
     Quaternion pureComponent = { 0, lhs.X, lhs.Y, lhs.Z };
     Quaternion conjugate = Quaternion::Conjugate(rhs);
     Quaternion pureResult = (rhs * pureComponent) * conjugate;
-    lhs = pureResult.V;
+    lhs = { pureResult.X, pureResult.Y, pureResult.Z };
 }
 
 void operator+=(Vector3& lhs, const Vector3& rhs) { lhs.X += rhs.X; lhs.Y += rhs.Y; lhs.Z += rhs.Z; }
@@ -98,14 +104,14 @@ Vector3 Vector3::Forward()
     return { 0, 0, 1 };
 }
 
-FLOAT Vector3::Magnitude(Vector3& v)
+float Vector3::Magnitude(Vector3& v)
 {
 	return sqrtf(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
 }
 
 void Vector3::Normalize(Vector3& v)
 {
-	FLOAT mag = Vector3::Magnitude(v);
+    float mag = Vector3::Magnitude(v);
     if (mag > 0)
     {
         v.X /= mag;
@@ -114,7 +120,7 @@ void Vector3::Normalize(Vector3& v)
     }
 }
 
-FLOAT Vector3::Dot(Vector3 a, Vector3 b)
+float Vector3::Dot(Vector3 a, Vector3 b)
 {
 	return a.X * b.X + a.Y * b.Y * a.Z * b.Z;
 }

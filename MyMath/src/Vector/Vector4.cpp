@@ -1,5 +1,6 @@
-#include "stdafx.h"
-#include "Core/DataStructures/Vector4.h"
+#include "Vector4.h"
+
+#include "Matrix/Matrix4x4.h"
 
 Vector4 Vector4::FromVector3(const Vector3& v3)
 {

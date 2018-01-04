@@ -1,16 +1,17 @@
 #pragma once
 
 #include "Vector3.h"
-#include "Core/DataStructures\Matrix4x4.h"
+
+struct Matrix4x4;
 
 struct Vector4
 {
-	FLOAT X;
-	FLOAT Y;
-	FLOAT Z;
-	FLOAT W;
+	float X;
+	float Y;
+	float Z;
+	float W;
 
-    Vector4(FLOAT x, FLOAT y, FLOAT z, FLOAT w) : X(x), Y(y), Z(z), W(w) { }
+    Vector4(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) { }
     Vector4() : Vector4(0, 0, 0, 0) {}
 
     static Vector4 FromVector3(const Vector3& v3);

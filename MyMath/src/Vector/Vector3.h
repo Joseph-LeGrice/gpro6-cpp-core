@@ -1,31 +1,27 @@
 #pragma once
 
+#include <string>
+
 struct Vector4;
 struct Quaternion;
 
 struct Vector3
 {
-	FLOAT X;
-	FLOAT Y;
-	FLOAT Z;
+	float X;
+	float Y;
+	float Z;
 
     static Vector3 Up();
     static Vector3 Right();
     static Vector3 Forward();
 
-    static FLOAT Magnitude(Vector3& v);
+    static float Magnitude(Vector3& v);
     static void Normalize(Vector3& v);
-    static FLOAT Dot(Vector3 a, Vector3 b);
+    static float Dot(Vector3 a, Vector3 b);
     static Vector3 Cross(Vector3 a, Vector3 b);
 
     operator Vector4();
-
-    operator std::string()
-    {
-        std::stringstream ss;
-        ss << "{ " << X << ", " << Y << ", " << Z << " }";
-        return ss.str();
-    }
+    operator std::string();
 };
 
 Vector3 operator+(const Vector3& first, const Vector3& second);

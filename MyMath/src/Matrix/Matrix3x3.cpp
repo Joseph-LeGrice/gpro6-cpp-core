@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "Core/DataStructures/Matrix3x3.h"
+#include "Matrix3x3.h"
 
 Matrix3x3 operator+(const Matrix3x3& lhs, const Matrix3x3& rhs)
 {

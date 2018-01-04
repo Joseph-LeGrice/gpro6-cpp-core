@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "Core/DataStructures/Vector2.h"
+#include "Vector2.h"
 
 #include <math.h>
 
@@ -37,19 +36,19 @@ void operator-=(Vector2& lhs, const Vector2& rhs) { lhs.X -= rhs.X; lhs.Y -= rhs
 void operator*=(Vector2& lhs, const float rhs) { lhs.X *= rhs; lhs.Y *= rhs; }
 void operator/=(Vector2& lhs, const float rhs) { lhs.X /= rhs; lhs.Y /= rhs; }
 
-FLOAT Vector2::Magnitude(const Vector2& v)
+float Vector2::Magnitude(const Vector2& v)
 {
 	return sqrtf(v.X * v.X + v.Y * v.Y);
 }
 
 void Vector2::Normalize(Vector2& v)
 {
-	FLOAT mag = Vector2::Magnitude(v);
+	float mag = Vector2::Magnitude(v);
 	v.X /= mag;
 	v.Y /= mag;
 }
 
-FLOAT Vector2::Dot(const Vector2& a, const Vector2& b)
+float Vector2::Dot(const Vector2& a, const Vector2& b)
 {
 	return a.X * b.X + a.Y * b.Y;
 }

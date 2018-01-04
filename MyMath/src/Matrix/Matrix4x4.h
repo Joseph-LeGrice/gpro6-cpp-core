@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Matrix3x3.h"
+#include <string>
 
 #define ROW_MAJOR 1
 
+struct Matrix3x3;
 struct Vector4;
 
 struct Matrix4x4
@@ -21,23 +22,13 @@ struct Matrix4x4
 #endif
 
     static void Identity(Matrix4x4& m);
-    void SetRow(unsigned int rowIndex, Vector4 values);
+    //void SetRow(unsigned int rowIndex, const Vector4& values);
     static Matrix4x4 Transpose(Matrix4x4 m);
     static float Determinant(Matrix4x4 m);
     static Matrix4x4 MatrixOfMinors(Matrix4x4 m);
     static Matrix4x4 Inverse(Matrix4x4 m);
 
-    operator std::string()
-    {
-        std::stringstream ss;
-        ss.precision(4);
-        ss << std::fixed
-           << "{ " << M11 << ", " << M21 << ", " << M31 << ", " << M41 << "\n"
-           << "  " << M12 << ", " << M22 << ", " << M32 << ", " << M42 << "\n"
-           << "  " << M13 << ", " << M23 << ", " << M33 << ", " << M43 << "\n"
-           << "  " << M14 << ", " << M24 << ", " << M34 << ", " << M44 << " }";
-        return ss.str();
-    }
+    operator std::string();
 };
 
 Matrix4x4 operator+(const Matrix4x4& lhs, const Matrix4x4 rhs);
