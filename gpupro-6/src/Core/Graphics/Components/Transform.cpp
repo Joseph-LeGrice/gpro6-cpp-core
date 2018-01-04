@@ -1,8 +1,8 @@
 #include "stdafx.h"
 
 #include "Transform.h"
-#include "Core/DataStructures\Matrix4x4.h"
-#include "Core/DataStructures\Vector4.h"
+#include "Matrix/Matrix4x4.h"
+#include "Vector/Vector4.h"
 
 Transform TransformNew()
 {

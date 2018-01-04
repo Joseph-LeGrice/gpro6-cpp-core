@@ -1,4 +1,6 @@
 #pragma once
+#pragma warning(push)
+#pragma warning(disable:4100)
 
 #include <map>
 #include <type_traits>
@@ -16,10 +18,7 @@ public:
 
     template<int I = 0, typename Func>
     inline typename std::enable_if<I == sizeof...(Ts), void>::type
-        ForEachSystem(Func callback)
-    {
-
-    }
+        ForEachSystem(Func callback) { }
 
     template<int I = 0, typename Func>
     inline typename std::enable_if<I < sizeof...(Ts), void>::type
@@ -38,3 +37,4 @@ private:
     std::tuple<Ts...> m_systems;
 };
 
+#pragma warning(pop)

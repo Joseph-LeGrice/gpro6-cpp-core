@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Core/Graphics/GraphicsSystem.h"
-#include "Core/DataStructures/Vector3.h"
-#include "Core/DataStructures/Vector2.h"
+#include "Vector/Vector3.h"
+#include "Vector/Vector2.h"
 
 struct VertexData
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Core/SceneGraph/Components/Util/ComponentType.hpp"
-#include "Core/DataStructures/Matrix4x4.h"
+#include "Matrix/Matrix4x4.h"
 #include "Core/SystemManagement/SystemManager.h"
 #include "Core/Graphics/GraphicsSystem.h"
 

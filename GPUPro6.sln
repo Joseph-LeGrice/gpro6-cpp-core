@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GProLib", "gpupro-6\GPUPro-6.vcxproj", "{DDAA2792-10DB-4F52-9C1B-63EDE21B57F3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{014DDF1E-A801-4CFF-9262-1DED774D5E8F} = {014DDF1E-A801-4CFF-9262-1DED774D5E8F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{86E15B2D-2387-49DB-8894-E2AD83F8458B}"
 	ProjectSection(ProjectDependencies) = postProject

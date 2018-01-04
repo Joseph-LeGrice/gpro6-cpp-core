@@ -1,9 +1,9 @@
 #include "stdafx.h"
+#include "MeshHelper.h"
 
 #include "Core/ResourceManagement/ResourceManager.h"
 #include "Core/Graphics/ResourceTypes/Mesh.h"
-#include "Core/Utilities/MeshHelper.h"
-#include "Core/Utilities/MathHelper.h"
+#include "MathDefines.h"
 
 #include <math.h>
 

@@ -8,7 +8,7 @@
 #include "Core/SystemManagement/SystemManager.h"
 #include "Core/Input/InputSystem.h"
 #include "Core/Time/Time.h"
-#include "Core/Utilities/MathHelper.h"
+#include "MathDefines.h"
 
 NoClipLocomotion::NoClipLocomotion()
 {

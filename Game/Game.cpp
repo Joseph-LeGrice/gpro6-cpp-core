@@ -12,7 +12,6 @@
 #include "Core/SceneGraph/Components/Util/EntityUtil.hpp"
 #include "Core/SceneGraph/Components/Util/ComponentType.hpp"
 #include "Core/SceneGraph/SceneGraph.h"
-#include "Core/DataStructures/Quaternion.h"
 #include "Core/Graphics/ResourceTypes/Shader.h"
 #include "Core/Graphics/ResourceTypes/Material.h"
 #include "Core/Graphics/Buffers/ConstantBufferInterface.h"
@@ -25,8 +24,10 @@
 #include "Extra/Locomotion/NoClipLocomotion.h"
 #include "Extra/TransformSync/TranslationSync.h"
 #include "Core/Utilities/MeshHelper.h"
-#include "Core/Utilities/MathHelper.h"
 #include "Core/GameLoop.h"
+
+#include "Complex/Quaternion.h"
+#include "MathDefines.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,

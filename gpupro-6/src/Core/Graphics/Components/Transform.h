@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Core/SceneGraph/Components/Util/ComponentType.hpp"
-#include "Core/DataStructures\Vector3.h"
-#include "Core/DataStructures\Quaternion.h"
+#include "Vector/Vector3.h"
+#include "Complex/Quaternion.h"
 
 struct Matrix4x4;
 

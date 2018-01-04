@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Core/ResourceManagement/IResource.h"
-#include "Core/DataStructures/Matrix4x4.h"
+#include "Matrix/Matrix4x4.h"
 #include "Core/Graphics/VertexData.h"
 #include <vector>
 

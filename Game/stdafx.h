@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include "targetver.h"
-
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 // Windows Header Files:
 #include <windows.h>
@@ -22,4 +20,4 @@
 #include "Core/Utilities/PointerRelease.hpp"
 #include "Core/Utilities/StaticPointer.hpp"
 #include "Core/Utilities/AutoPointer.hpp"
-#include "Core/Utilities/Assertions.h"
+#include "Assertions.h"
