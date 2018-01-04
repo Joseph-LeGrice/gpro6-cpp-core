@@ -3,6 +3,7 @@
 
 #include "Core/SystemManagement/SystemManager.h"
 #include "Core/Graphics/GraphicsSystem.h"
+#include "Core/DataStructures/Color.h"
 
 DepthStencilBuffer::DepthStencilBuffer(UINT width, UINT height)
 {
@@ -71,8 +72,10 @@ DepthStencilBuffer::~DepthStencilBuffer()
 
 void DepthStencilBuffer::ClearBuffer()
 {
+    Color rtDefaultColor = { 1, 1, 1, 1 };
+
     ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-    deviceContext->ClearRenderTargetView(m_rtBackBuffer, D3DXCOLOR(1, 1, 1, 1));
+    deviceContext->ClearRenderTargetView(m_rtBackBuffer, reinterpret_cast<FLOAT*>(&rtDefaultColor));
     deviceContext->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1, 1);
 }
 

@@ -4,6 +4,7 @@
 #include "Matrix/Matrix4x4.h"
 #include "Core/SystemManagement/SystemManager.h"
 #include "Core/Graphics/GraphicsSystem.h"
+#include "MathDefines.h"
 
 struct Camera
 {
@@ -26,7 +27,7 @@ namespace CameraInternal
 
             float screenNear = 0.1f;
             float screenDepth = 100.0f;
-            float fieldOfView = (float)D3DX_PI / 2.0f;
+            float fieldOfView = PI / 2.0f;
 
             return Camera::CreatePerspective(fieldOfView, aspectRatio, screenNear, screenDepth);
         }

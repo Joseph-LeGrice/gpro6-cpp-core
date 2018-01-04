@@ -2,8 +2,8 @@
 #pragma warning(push)
 #pragma warning(disable: 4127)
 
-#include "D3DX11.h"
-#include "D3DX10.h"
+#include "D3D11.h"
+#include "D3D10.h"
 #include "Core/SystemManagement/SystemManager.h"
 #include "Core/Graphics/GraphicsSystem.h"
 #include "Core/Utilities/Logging.h"

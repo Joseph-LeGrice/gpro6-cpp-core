@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Core/Graphics/ResourceTypes/Shader.h"
 
-#include "D3DX11.h"
+#include <d3dcompiler.h>
 
 #include "Core/Graphics/VertexData.h"
 #include "Core/SystemManagement/SystemManager.h"
@@ -55,7 +55,7 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name)
 {
     AutoRelease<ID3D10Blob> vertexShaderErrorBlob;
     AutoRelease<ID3D10Blob> vertexShaderBlob;
-    HRESULT vertexShaderCompileResult = D3DX11CompileFromFile(filename.c_str(), 0, 0, name.c_str(), "vs_5_0", 0, 0, 0, vertexShaderBlob, vertexShaderErrorBlob, 0);
+    HRESULT vertexShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, 0, name.c_str(), "vs_5_0", 0, 0, vertexShaderBlob, vertexShaderErrorBlob);
 	if (vertexShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)vertexShaderErrorBlob->GetBufferPointer());
@@ -81,7 +81,7 @@ bool Shader::InitHullShader(std::wstring filename, std::string name)
 {
     AutoRelease<ID3D10Blob> hullShaderErrorBlob;
     AutoRelease<ID3D10Blob> hullShaderBlob;
-    HRESULT hullShaderCompileResult = D3DX11CompileFromFile(filename.c_str(), 0, 0, name.c_str(), "hs_5_0", 0, 0, 0, hullShaderBlob, hullShaderErrorBlob, 0);
+    HRESULT hullShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, 0, name.c_str(), "hs_5_0", 0, 0, hullShaderBlob, hullShaderErrorBlob);
 	if (hullShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)hullShaderErrorBlob->GetBufferPointer());
@@ -105,7 +105,7 @@ bool Shader::InitDomainShader(std::wstring filename, std::string name)
 {
     AutoRelease<ID3D10Blob> domainShaderErrorBlob;
     AutoRelease<ID3D10Blob> domainShaderBlob;
-    HRESULT domainShaderCompileResult = D3DX11CompileFromFile(filename.c_str(), 0, 0, name.c_str(), "ds_5_0", 0, 0, 0, domainShaderBlob, domainShaderErrorBlob, 0);
+    HRESULT domainShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, 0, name.c_str(), "ds_5_0", 0, 0, domainShaderBlob, domainShaderErrorBlob);
 	if (domainShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)domainShaderErrorBlob->GetBufferPointer());
@@ -129,7 +129,7 @@ bool Shader::InitGeometryShader(std::wstring filename, std::string name)
 {
     AutoRelease<ID3D10Blob> geomShaderErrorBlob;
     AutoRelease<ID3D10Blob> geomShaderBlob;
-    HRESULT geomShaderCompileResult = D3DX11CompileFromFile(filename.c_str(), 0, 0, name.c_str(), "gs_5_0", 0, 0, 0, geomShaderBlob, geomShaderErrorBlob, 0);
+    HRESULT geomShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, 0, name.c_str(), "gs_5_0", 0, 0, geomShaderBlob, geomShaderErrorBlob);
 	if (geomShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)geomShaderErrorBlob->GetBufferPointer());
@@ -153,7 +153,7 @@ bool Shader::InitPixelShader(std::wstring filename, std::string name)
 {
     AutoRelease<ID3D10Blob> pixelShaderErrorBlob;
     AutoRelease<ID3D10Blob> pixelShaderBlob;
-    HRESULT pixelShaderCompileResult = D3DX11CompileFromFile(filename.c_str(), 0, 0, name.c_str(), "ps_5_0", 0, 0, 0, pixelShaderBlob, pixelShaderErrorBlob, 0);
+    HRESULT pixelShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, 0, name.c_str(), "ps_5_0", 0, 0, pixelShaderBlob, pixelShaderErrorBlob);
 	if (pixelShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)pixelShaderErrorBlob->GetBufferPointer());
