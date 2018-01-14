@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Utilities/Logging.h"
+#include <typeinfo>
 
 template<class T>
 class AutoRelease
@@ -50,7 +51,9 @@ public:
     {
         if (m_pointer != nullptr)
         {
-            LogError("ManualRelease pointer was not manually released!\n");
+            std::stringstream ss;
+            ss << "ManualRelease pointer (" << typeid(T).name() << ") was not manually released!";
+            LogError(ss.str());
         }
     }
 
