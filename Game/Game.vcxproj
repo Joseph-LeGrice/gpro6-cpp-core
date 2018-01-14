@@ -73,13 +73,13 @@
     <IncludePath>$(IncludePath);$(SolutionDir)GPUPro-6\src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
     <IntDir>$(OutDir)temp\</IntDir>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)GPUPro-6\build\output\$(Platform)\$(Configuration);$(SolutionDir)lib\FreeImage\Lib\x32</LibraryPath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)GPUPro-6\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\Lib\x32</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath);$(SolutionDir)GPUPro-6\src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
     <IntDir>$(OutDir)temp\</IntDir>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)GPUPro-6\build\output\$(Platform)\$(Configuration);$(SolutionDir)lib\FreeImage\Lib\x64</LibraryPath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)GPUPro-6\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\Lib\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(IncludePath);$(SolutionDir)GPUPro-6\src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>

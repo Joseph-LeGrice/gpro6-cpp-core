@@ -70,7 +70,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)MyMath\src;$(SolutionDir)googletest\googletest\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)googletest\googletest\msvc\2010\$(Platform)-$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)googletest\googletest\msvc\2010\$(Platform)-$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <LibraryWPath>$(LibraryWPath)</LibraryWPath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
@@ -86,7 +86,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)MyMath\src;$(SolutionDir)googletest\googletest\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)googletest\googletest\msvc\2010\$(Platform)-$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)googletest\googletest\msvc\2010\$(Platform)-$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <LibraryWPath>$(LibraryWPath)</LibraryWPath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>

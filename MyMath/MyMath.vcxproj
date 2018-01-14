@@ -66,8 +66,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)\src;$(IncludePath)</IncludePath>
-    <OutDir>$(ProjectDir)build\output\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)build\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)temp</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir)\src;$(IncludePath)</IncludePath>
@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir)\src;$(IncludePath)</IncludePath>
-    <OutDir>$(ProjectDir)build\output\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)build\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)temp</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)\src;$(IncludePath)</IncludePath>

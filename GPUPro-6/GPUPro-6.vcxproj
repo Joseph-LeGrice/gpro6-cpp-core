@@ -73,14 +73,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)\MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)lib\FreeImage\x32</LibraryPath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\x32</LibraryPath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
     <IntDir>$(OutDir)temp\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)\MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)lib\FreeImage\x64</LibraryPath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\x64</LibraryPath>
     <ExecutablePath>C:\Program Files (x86)\BullseyeCoverage\bin;$(ExecutablePath)</ExecutablePath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
     <IntDir>$(OutDir)temp\</IntDir>
