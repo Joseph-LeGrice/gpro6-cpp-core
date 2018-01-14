@@ -101,6 +101,9 @@
     <ClCompile Include="src\Engine\Core\GameLoop.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Application\Application.cpp">
+      <Filter>Engine\Core\Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -258,6 +261,9 @@
     <ClInclude Include="src\Engine\Core\GameLoop.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Core\Application\Application.h">
+      <Filter>Engine\Core\Application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -319,6 +325,9 @@
     </Filter>
     <Filter Include="Engine\Shaders">
       <UniqueIdentifier>{dfa88832-0aec-4779-bfde-6d8a9e35ef6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Application">
+      <UniqueIdentifier>{ab6f2091-1907-467a-99e9-858799c90621}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

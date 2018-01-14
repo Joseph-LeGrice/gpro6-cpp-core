@@ -25,6 +25,7 @@
 #include "Engine/Extra/TransformSync/TranslationSync.h"
 #include "Engine/Core/Utilities/MeshHelper.h"
 #include "Engine/Core/GameLoop.h"
+#include "Engine/Core/Application/Application.h"
 
 #include "MyMath/Complex/Quaternion.h"
 #include "MyMath/MathDefines.h"
@@ -44,6 +45,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         InitSystemManager();
         InitSceneGraph();
         InitConstantBufferInterface();
+
+        Log(Application::GetResourcePath());
 
         Shader* materialShader = GetResourceManager().Instantiate<Shader>();
         materialShader->InitVertexShader(L"../gpupro-6/src/Engine/Shaders/ForwardRendering.hlsl", "VShader");

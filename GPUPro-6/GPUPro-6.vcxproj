@@ -222,6 +222,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
@@ -263,6 +264,7 @@
     <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
