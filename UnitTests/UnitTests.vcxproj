@@ -154,8 +154,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cc" />
-    <ClCompile Include="src\Quaternion_Tests.cc" />
-    <ClCompile Include="src\Vector3_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Matrix3x3_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Matrix4x4_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Quaternion_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Vector2_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Vector3_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Vector4_Tests.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

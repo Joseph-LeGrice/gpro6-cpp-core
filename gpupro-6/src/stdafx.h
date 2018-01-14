@@ -22,3 +22,5 @@
 #include "Core/Utilities/StaticPointer.hpp"
 #include "Core/Utilities/AutoPointer.hpp"
 #include "Assertions.h"
+#include "Assertions_Math.h"
+

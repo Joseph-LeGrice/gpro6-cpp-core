@@ -2,6 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\main.cc" />
-    <ClCompile Include="src\Quaternion_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Matrix3x3_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Matrix4x4_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Quaternion_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Vector2_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Vector3_Tests.cc" />
+    <ClCompile Include="src\MyMath_Tests\Vector4_Tests.cc" />
   </ItemGroup>
 </Project>
