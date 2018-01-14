@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/SystemManagement/ISystem.h"
-#include "Vector/Vector4.h"
-#include "Vector/Vector2.h"
+#include "MyMath/Vector/Vector4.h"
+#include "MyMath/Vector/Vector2.h"
 #include "Core/DataStructures/Color.h"
 #include "Core/Graphics/Components/Light.h"
 

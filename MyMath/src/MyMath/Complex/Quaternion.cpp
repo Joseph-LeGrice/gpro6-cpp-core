@@ -1,9 +1,9 @@
 #include "Quaternion.h"
-#include "MathDefines.h"
+#include "MyMath/MathDefines.h"
 
-#include "Assertions_Math.h"
-#include "Matrix/Matrix4x4.h"
-#include "Vector/Vector3.h"
+#include "MyMath/Assertions_Math.h"
+#include "MyMath/Matrix/Matrix4x4.h"
+#include "MyMath/Vector/Vector3.h"
 
 #include <math.h>
 #include <sstream>

@@ -26,8 +26,8 @@
 #include "Core/Utilities/MeshHelper.h"
 #include "Core/GameLoop.h"
 
-#include "Complex/Quaternion.h"
-#include "MathDefines.h"
+#include "MyMath/Complex/Quaternion.h"
+#include "MyMath/MathDefines.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,

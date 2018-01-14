@@ -1,8 +1,8 @@
 #pragma once
-#include "Assertions.h"
-#include "Matrix\Matrix4x4.h"
-#include "Vector\Vector3.h"
-#include "Complex\Quaternion.h"
+#include "MyMath/Assertions.h"
+#include "MyMath/Matrix/Matrix4x4.h"
+#include "MyMath/Vector/Vector3.h"
+#include "MyMath/Complex/Quaternion.h"
 
 namespace custom_assert
 {

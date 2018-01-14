@@ -1,4 +1,4 @@
-#include "Vector/Vector2.h"
+#include "MyMath/Vector/Vector2.h"
 #include "gtest/gtest.h"
 
 // Tests to write:

@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector/Vector2.h"
+#include "MyMath/Vector/Vector2.h"
 
 class MouseInput
 {

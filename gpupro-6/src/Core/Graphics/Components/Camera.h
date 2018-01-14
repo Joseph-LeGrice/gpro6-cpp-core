@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Core/SceneGraph/Components/Util/ComponentType.hpp"
-#include "Matrix/Matrix4x4.h"
+#include "MyMath/Matrix/Matrix4x4.h"
 #include "Core/SystemManagement/SystemManager.h"
 #include "Core/Graphics/GraphicsSystem.h"
-#include "MathDefines.h"
+#include "MyMath/MathDefines.h"
 
 struct Camera
 {

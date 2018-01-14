@@ -5,7 +5,7 @@
 #include "Core/Time/Time.h"
 #include "Core/SceneGraph/Components/Util/ComponentArray.hpp"
 #include "Core/SceneGraph/SceneGraph.h"
-#include "Complex/Quaternion.h"
+#include "MyMath/Complex/Quaternion.h"
 #include "Core/SceneGraph/SceneGraph.h"
 #include "Core/Graphics/Components/Transform.h"
 
