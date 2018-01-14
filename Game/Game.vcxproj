@@ -71,14 +71,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(IncludePath);$(SolutionDir)GPUPro-6\src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
-    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\intermediates\Game\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)temp\</IntDir>
     <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)GPUPro-6\build\output\$(Platform)\$(Configuration);$(SolutionDir)lib\FreeImage\Lib\x32</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath);$(SolutionDir)GPUPro-6\src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
-    <OutDir>$(SolutionDir)\build\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\intermediates\Game\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)temp\</IntDir>
     <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)GPUPro-6\build\output\$(Platform)\$(Configuration);$(SolutionDir)lib\FreeImage\Lib\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -172,14 +172,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="MouseRotateSystem.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\MouseRotateSystem.h" />
+    <ClInclude Include="src\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="MouseRotateSystem.cpp" />
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\MouseRotateSystem.cpp" />
+    <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -192,10 +192,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="QuadTessellation.shader" />
-    <None Include="SimpleTexturedQuad.shader" />
-    <None Include="TriTessellation.shader" />
-    <None Include="VolumetricExplosion.shader" />
+    <None Include="src\Shader_Test\QuadTessellation.shader" />
+    <None Include="src\Shader_Test\SimpleTexturedQuad.shader" />
+    <None Include="src\Shader_Test\TriTessellation.shader" />
+    <None Include="src\Shader_Test\VolumetricExplosion.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

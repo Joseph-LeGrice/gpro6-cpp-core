@@ -17,38 +17,38 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="src\MouseRotateSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="src\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MouseRotateSystem.h">
+    <ClInclude Include="src\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="src\MouseRotateSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MouseRotateSystem.cpp">
+    <ClCompile Include="src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="QuadTessellation.shader">
+    <None Include="src\Shader_Test\VolumetricExplosion.shader">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="SimpleTexturedQuad.shader">
+    <None Include="src\Shader_Test\QuadTessellation.shader">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="TriTessellation.shader">
+    <None Include="src\Shader_Test\SimpleTexturedQuad.shader">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="VolumetricExplosion.shader">
+    <None Include="src\Shader_Test\TriTessellation.shader">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
