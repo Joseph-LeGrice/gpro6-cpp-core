@@ -48,17 +48,16 @@ void NoClipLocomotion::VariableTick()
     if (mouseInput.GetMouseButton(0))
     {
         Vector2 mouseDelta = mouseInput.GetDeltaMousePosition();
-
 #if 1
         Vector3 currentUp = playerTransform->m_data.WorldUp();
         Vector3 currentRight = playerTransform->m_data.WorldRight();
         Vector3 currentForward = playerTransform->m_data.WorldForward();
 
-        Vector3 upComponent = currentUp * m_sensitivity * mouseDelta.Y * Time::DeltaTimeStep();
+        Vector3 upComponent = currentUp * m_sensitivity * -mouseDelta.Y * Time::DeltaTimeStep();
         Vector3 rightComponent = currentRight * m_sensitivity * mouseDelta.X * Time::DeltaTimeStep();
         Vector3 newForward = currentForward + upComponent + rightComponent;
 
-        playerTransform->m_data.m_rotation = Quaternion::FromLookRotation(newForward);
+        playerTransform->m_data.SetRotation(Quaternion::FromLookRotation(newForward));
 #else
         Vector3 eulerAngle = Quaternion::ToEuler(playerTransform->m_data.m_rotation);
         eulerAngle.X += m_sensitivity * mouseDelta.Y * Time::DeltaTimeStep();
