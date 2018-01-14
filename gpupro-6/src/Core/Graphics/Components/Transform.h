@@ -13,9 +13,13 @@ struct Transform
 	Vector3 m_scale;
 	Quaternion m_rotation;
 
+    void SetPosition(Vector3 pos);
+    void SetScale(Vector3 scale);
+    void SetRotation(Quaternion rotation);
+
     Vector3 WorldUp();
     Vector3 WorldRight();
-    Vector3 WorldForward(); 
+    Vector3 WorldForward();
 
     static Matrix4x4 GetMatrix(const Transform& t);
     static Matrix4x4 GetCameraViewMatrix(const Transform& t);

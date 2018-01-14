@@ -13,6 +13,30 @@ Transform TransformNew()
 	return t;
 }
 
+void Transform::SetPosition(Vector3 position)
+{
+    custom_assert::not_nan(position);
+    custom_assert::not_inf(position);
+
+    m_position = position;
+}
+
+void Transform::SetScale(Vector3 scale)
+{
+    custom_assert::not_nan(scale);
+    custom_assert::not_inf(scale);
+
+    m_scale = scale;
+}
+
+void Transform::SetRotation(Quaternion rotation)
+{
+    custom_assert::not_nan(rotation);
+    custom_assert::not_inf(rotation);
+
+    m_rotation = rotation;
+}
+
 Vector3 Transform::WorldUp()
 {
     Vector3 result = Vector3::Up() * m_rotation;
