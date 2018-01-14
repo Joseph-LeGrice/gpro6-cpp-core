@@ -1,7 +1,7 @@
 #include "Quaternion.h"
 #include "MathDefines.h"
 
-#include "Assertions.h"
+#include "Assertions_Math.h"
 #include "Matrix/Matrix4x4.h"
 #include "Vector/Vector3.h"
 
@@ -102,12 +102,14 @@ Quaternion Quaternion::FromEuler(const Vector3& degrees)
     return q;
 }
 
-Quaternion Quaternion::FromLookRotation(Vector3 forward, Vector3 up)
+Quaternion Quaternion::FromLookRotation(const Vector3& forward, const Vector3& up)
 {
-    assertion_not_equal(forward, up);
+    custom_assert::not_equal(forward, up);
 
     Vector3 right = Vector3::Cross(up, forward);
     Vector3 trueUp = Vector3::Cross(forward, right);
+    Vector3::Normalize(right);
+    Vector3::Normalize(trueUp);
 
     float m00 = right.X;
     float m01 = trueUp.X;
@@ -120,16 +122,49 @@ Quaternion Quaternion::FromLookRotation(Vector3 forward, Vector3 up)
     float m22 = forward.Z;
 
     Quaternion q;
-    q.W = sqrtf(1.0f + m00 + m11 + m22) * 0.5f;
-    float w4_recip = 1.0f / (4.0f * q.W);
-    q.X = (m21 - m12) * w4_recip;
-    q.Y = (m02 - m20) * w4_recip;
-    q.Z = (m10 - m01) * w4_recip;
+    
+    float tr = m00 + m11 + m22;
+    if (tr > 0)
+    {
+        float S = sqrtf(tr + 1.0f) * 2.0f;
+        q.W = 0.25f * S;
+        q.X = (m21 - m12) / S;
+        q.Y = (m02 - m20) / S;
+        q.Z = (m10 - m01) / S;
+    }
+    else if ((m00 > m11) && (m00 > m22))
+    {
+        float S = sqrt(1.0f + m00 - m11 - m22) * 2;
+        q.W = (m21 - m12) / S;
+        q.X = 0.25f * S;
+        q.Y = (m01 + m10) / S;
+        q.Z = (m02 + m20) / S;
+    }
+    else if (m11 > m22)
+    {
+        float S = sqrt(1.0f + m11 - m00 - m22) * 2;
+        q.W = (m02 - m20) / S;
+        q.X = (m01 + m10) / S;
+        q.Y = 0.25f * S;
+        q.Z = (m12 + m21) / S;
+    }
+    else
+    {
+        float S = sqrt(1.0f + m22 - m00 - m11) * 2;
+        q.W = (m10 - m01) / S;
+        q.X = (m02 + m20) / S;
+        q.Y = (m12 + m21) / S;
+        q.Z = 0.25f * S;
+    }
+
+    Quaternion::Normalize(q);
+    custom_assert::not_inf(q);
+    custom_assert::not_nan(q);
 
     return q;
 }
 
-Quaternion Quaternion::FromLookRotation(Vector3 forward)
+Quaternion Quaternion::FromLookRotation(const Vector3& forward)
 {
     return FromLookRotation(forward, { 0, 1, 0 });
 }

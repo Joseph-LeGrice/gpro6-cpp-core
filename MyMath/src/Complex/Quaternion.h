@@ -18,8 +18,8 @@ struct Quaternion
     static Quaternion FromAxisAngle(Vector3 axis, float angle);
     static Vector3 ToEuler(const Quaternion& q);
     static Quaternion FromEuler(const Vector3& v);
-    static Quaternion FromLookRotation(Vector3 forward);
-    static Quaternion FromLookRotation(Vector3 forward, Vector3 up);
+    static Quaternion FromLookRotation(const Vector3& forward);
+    static Quaternion FromLookRotation(const Vector3& forward, const Vector3& up);
     static Matrix4x4 GetMatrix(const Quaternion& q);
     static void Normalize(Quaternion& q);
     static float Magnitude(const Quaternion& q);

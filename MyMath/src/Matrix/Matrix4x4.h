@@ -35,3 +35,4 @@ Matrix4x4 operator+(const Matrix4x4& lhs, const Matrix4x4 rhs);
 Matrix4x4 operator-(const Matrix4x4& lhs, const Matrix4x4 rhs);
 Matrix4x4 operator*(const Matrix4x4& lhs, const float rhs);
 Matrix4x4 operator*(const Matrix4x4& lhs, const Matrix4x4& rhs);
+bool operator==(const Matrix4x4& lhs, const Matrix4x4& rhs);

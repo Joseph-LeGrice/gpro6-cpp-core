@@ -62,6 +62,17 @@ Matrix4x4 operator*(const Matrix4x4& lhs, const Matrix4x4& rhs)
 	return result;
 }
 
+bool operator==(const Matrix4x4& lhs, const Matrix4x4& rhs)
+{
+    const float error_factor = 1.0f;
+
+    return
+        abs(lhs.M11 - rhs.M11) < error_factor && abs(lhs.M21 - rhs.M21) < error_factor && abs(lhs.M31 - rhs.M31) < error_factor && abs(lhs.M41 - rhs.M41) < error_factor &&
+        abs(lhs.M12 - rhs.M12) < error_factor && abs(lhs.M22 - rhs.M22) < error_factor && abs(lhs.M32 - rhs.M32) < error_factor && abs(lhs.M42 - rhs.M42) < error_factor &&
+        abs(lhs.M13 - rhs.M13) < error_factor && abs(lhs.M23 - rhs.M23) < error_factor && abs(lhs.M33 - rhs.M33) < error_factor && abs(lhs.M43 - rhs.M43) < error_factor &&
+        abs(lhs.M14 - rhs.M14) < error_factor && abs(lhs.M24 - rhs.M24) < error_factor && abs(lhs.M34 - rhs.M34) < error_factor && abs(lhs.M44 - rhs.M44) < error_factor;
+}
+
 void Matrix4x4::Identity(Matrix4x4& m)
 {
 	m.M11 = 1; m.M21 = 0; m.M31 = 0; m.M41 = 0;
