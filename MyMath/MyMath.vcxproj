@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Assertions.h" />
+    <ClInclude Include="src\Assertions_Math.h" />
     <ClInclude Include="src\MathDefines.h" />
     <ClInclude Include="src\Matrix\Matrix3x3.h" />
     <ClInclude Include="src\Matrix\Matrix4x4.h" />
