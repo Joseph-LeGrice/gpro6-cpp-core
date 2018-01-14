@@ -222,103 +222,103 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\GameLoop.cpp" />
-    <ClCompile Include="src\Core\SceneGraph\Components\Entity.cpp" />
-    <ClCompile Include="src\Core\DataStructures\Color.cpp" />
-    <ClCompile Include="src\Core\Graphics\Components\Camera.cpp" />
-    <ClCompile Include="src\Core\Graphics\Components\Transform.cpp" />
-    <ClCompile Include="src\Core\Graphics\Buffers\DepthStencilBuffer.cpp" />
-    <ClCompile Include="src\Core\Graphics\RasterizerState.cpp" />
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Mesh.cpp" />
-    <ClCompile Include="src\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp" />
-    <ClCompile Include="src\Core\Graphics\Buffers\IndexBuffer.cpp" />
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Material.cpp" />
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\StructuredBuffer.cpp" />
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Shader.cpp" />
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Texture2D.cpp" />
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\TextureSampler.cpp" />
-    <ClCompile Include="src\Core\Graphics\Buffers\VertexBuffer.cpp" />
-    <ClCompile Include="src\Core\Input\KeyboardInput.cpp" />
-    <ClCompile Include="src\Core\Input\MouseInput.cpp" />
-    <ClCompile Include="src\Core\SceneGraph\SceneGraph.cpp" />
-    <ClCompile Include="src\Core\SystemManagement\SystemManager.cpp" />
-    <ClCompile Include="src\Extra\Locomotion\NoClipLocomotion.cpp" />
-    <ClCompile Include="src\Core\Graphics\GraphicsSystem.cpp" />
-    <ClCompile Include="src\Core\Input\InputSystem.cpp" />
-    <ClCompile Include="src\Core\SystemManagement\ISystem.cpp" />
-    <ClCompile Include="src\Core\Graphics\LightingSystem.cpp" />
-    <ClCompile Include="src\Core\ResourceManagement\ResourceManager.cpp" />
-    <ClCompile Include="src\Core\Graphics\Buffers\ConstantBufferInterface.cpp" />
-    <ClCompile Include="src\Core\Time\Time.cpp" />
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Texture2DArray.cpp" />
-    <ClCompile Include="src\Extra\TransformSync\TransfromSyncSystem.cpp" />
-    <ClCompile Include="src\Core\Utilities\MeshHelper.cpp" />
-    <ClCompile Include="src\Core\Utilities\PerlinNoise.cpp" />
+    <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
+    <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
+    <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Components\Transform.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\RasterizerState.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.cpp" />
+    <ClCompile Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Shader.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Input\KeyboardInput.cpp" />
+    <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp" />
+    <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraph.cpp" />
+    <ClCompile Include="src\Engine\Core\SystemManagement\SystemManager.cpp" />
+    <ClCompile Include="src\Engine\Extra\Locomotion\NoClipLocomotion.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\Input\InputSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\SystemManagement\ISystem.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\LightingSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.cpp" />
+    <ClCompile Include="src\Engine\Core\Time\Time.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.cpp" />
+    <ClCompile Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\Utilities\MeshHelper.cpp" />
+    <ClCompile Include="src\Engine\Core\Utilities\PerlinNoise.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Core\WindowManagement\WindowManager.cpp" />
+    <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core\GameLoop.h" />
-    <ClInclude Include="src\Core\ResourceManagement\IResource.h" />
-    <ClInclude Include="src\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
-    <ClInclude Include="src\Core\SceneGraph\Components\Util\ComponentType.hpp" />
-    <ClInclude Include="src\Core\SceneGraph\Components\Util\EntityUtil.hpp" />
-    <ClInclude Include="src\Core\Graphics\Components\MeshRenderer.h" />
-    <ClInclude Include="src\Core\DataStructures\Color.h" />
-    <ClInclude Include="src\Core\Graphics\Components\Camera.h" />
-    <ClInclude Include="src\Core\SceneGraph\Components\Entity.h" />
-    <ClInclude Include="src\Core\Graphics\Components\Transform.h" />
-    <ClInclude Include="src\Core\SceneGraph\Components\Util\ComponentArray.hpp" />
-    <ClInclude Include="src\Core\Graphics\Buffers\DepthStencilBuffer.h" />
-    <ClInclude Include="src\Core\Graphics\RasterizerState.h" />
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Mesh.h" />
-    <ClInclude Include="src\Core\SceneGraph\SceneGraphDefinition.hpp" />
-    <ClInclude Include="src\Core\SceneGraph\Components\Util\ComponentReferenceNode.h" />
-    <ClInclude Include="src\Core\Graphics\VertexData.h" />
-    <ClInclude Include="src\Core\Graphics\Buffers\ConstantBuffer.h" />
-    <ClInclude Include="src\Core\Graphics\Buffers\IndexBuffer.h" />
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Material.h" />
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Shader.h" />
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\StructuredBuffer.h" />
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Texture2D.h" />
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\TextureSampler.h" />
-    <ClInclude Include="src\Core\Graphics\Buffers\VertexBuffer.h" />
-    <ClInclude Include="src\Core\Graphics\Components\Light.h" />
-    <ClInclude Include="src\Core\SceneGraph\SceneGraph.h" />
-    <ClInclude Include="src\Core\SystemManagement\SystemManagerDefinition.hpp" />
-    <ClInclude Include="src\Extra\Locomotion\NoClipLocomotion.h" />
-    <ClInclude Include="src\Core\SystemManagement\SystemConfiguration.hpp" />
-    <ClInclude Include="src\Core\Graphics\GraphicsSystem.h" />
-    <ClInclude Include="src\Core\Graphics\LightingSystem.h" />
-    <ClInclude Include="src\Core\Graphics\Buffers\ConstantBufferInterface.h" />
-    <ClInclude Include="src\Core\Input\InputSystem.h" />
-    <ClInclude Include="src\Core\SystemManagement\ISystem.h" />
-    <ClInclude Include="src\Core\ResourceManagement\ResourceManager.h" />
-    <ClInclude Include="src\Core\SystemManagement\SystemManager.h" />
-    <ClInclude Include="src\Core\Time\Time.h" />
-    <ClInclude Include="src\Core\Input\KeyboardInput.h" />
-    <ClInclude Include="src\Core\Input\MouseInput.h" />
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Texture2DArray.h" />
-    <ClInclude Include="src\Extra\TransformSync\TransfromSyncSystem.h" />
-    <ClInclude Include="src\Extra\TransformSync\TranslationSync.h" />
-    <ClInclude Include="src\Core\Utilities\AutoPointer.hpp" />
-    <ClInclude Include="src\Core\Utilities\PointerRelease.hpp" />
-    <ClInclude Include="src\Core\Utilities\Logging.h" />
-    <ClInclude Include="src\Core\Utilities\MeshHelper.h" />
-    <ClInclude Include="src\Core\Utilities\PerlinNoise.h" />
+    <ClInclude Include="src\Engine\Core\GameLoop.h" />
+    <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
+    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\EntityUtil.hpp" />
+    <ClInclude Include="src\Engine\Core\Graphics\Components\MeshRenderer.h" />
+    <ClInclude Include="src\Engine\Core\DataStructures\Color.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Components\Camera.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Entity.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Components\Transform.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentArray.hpp" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\RasterizerState.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphDefinition.hpp" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\VertexData.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Shader.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Components\Light.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.h" />
+    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManagerDefinition.hpp" />
+    <ClInclude Include="src\Engine\Extra\Locomotion\NoClipLocomotion.h" />
+    <ClInclude Include="src\Engine\Core\SystemManagement\SystemConfiguration.hpp" />
+    <ClInclude Include="src\Engine\Core\Graphics\GraphicsSystem.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\LightingSystem.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.h" />
+    <ClInclude Include="src\Engine\Core\Input\InputSystem.h" />
+    <ClInclude Include="src\Engine\Core\SystemManagement\ISystem.h" />
+    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManager.h" />
+    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManager.h" />
+    <ClInclude Include="src\Engine\Core\Time\Time.h" />
+    <ClInclude Include="src\Engine\Core\Input\KeyboardInput.h" />
+    <ClInclude Include="src\Engine\Core\Input\MouseInput.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.h" />
+    <ClInclude Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.h" />
+    <ClInclude Include="src\Engine\Extra\TransformSync\TranslationSync.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\AutoPointer.hpp" />
+    <ClInclude Include="src\Engine\Core\Utilities\PointerRelease.hpp" />
+    <ClInclude Include="src\Engine\Core\Utilities\Logging.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\MeshHelper.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\PerlinNoise.h" />
     <ClInclude Include="src\Resource.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
-    <ClInclude Include="src\Core\WindowManagement\WindowManager.h" />
-    <ClInclude Include="src\Core\Utilities\StaticPointer.hpp" />
+    <ClInclude Include="src\Engine\Core\WindowManagement\WindowManager.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\StaticPointer.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Shaders\CommonInclude.hlsl">
+    <None Include="src\Engine\Shaders\CommonInclude.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Hull</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Hull</ShaderType>
@@ -329,7 +329,7 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <FileType>Document</FileType>
     </None>
-    <None Include="src\Shaders\ForwardRendering.hlsl">
+    <None Include="src\Engine\Shaders\ForwardRendering.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -338,7 +338,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Shaders\Lighting.hlsl">
+    <None Include="src\Engine\Shaders\Lighting.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
@@ -351,12 +351,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Shaders\EnvironmentMap.hlsl">
+    <None Include="src\Engine\Shaders\EnvironmentMap.hlsl">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Shaders\Material.hlsl">
+    <None Include="src\Engine\Shaders\Material.hlsl">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

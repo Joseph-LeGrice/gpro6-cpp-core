@@ -1,262 +1,262 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\Core\DataStructures\Color.cpp">
-      <Filter>Engine\Core\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\Buffers\ConstantBufferInterface.cpp">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\Buffers\DepthStencilBuffer.cpp">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\Buffers\IndexBuffer.cpp">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\Buffers\VertexBuffer.cpp">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\Components\Camera.cpp">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\Components\Transform.cpp">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Material.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Mesh.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Shader.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\StructuredBuffer.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Texture2D.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\Texture2DArray.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\ResourceTypes\TextureSampler.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\GraphicsSystem.cpp">
-      <Filter>Engine\Core\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\LightingSystem.cpp">
-      <Filter>Engine\Core\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Graphics\RasterizerState.cpp">
-      <Filter>Engine\Core\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Input\InputSystem.cpp">
-      <Filter>Engine\Core\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Input\KeyboardInput.cpp">
-      <Filter>Engine\Core\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Input\MouseInput.cpp">
-      <Filter>Engine\Core\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\ResourceManagement\ResourceManager.cpp">
-      <Filter>Engine\Core\ResourceManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\SceneGraph\Components\Entity.cpp">
-      <Filter>Engine\Core\SceneGraph\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\SceneGraph\SceneGraph.cpp">
-      <Filter>Engine\Core\SceneGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\SystemManagement\ISystem.cpp">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Time\Time.cpp">
-      <Filter>Engine\Core\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Utilities\MeshHelper.cpp">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Utilities\PerlinNoise.cpp">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\WindowManagement\WindowManager.cpp">
-      <Filter>Engine\Core\WindowManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Extra\Locomotion\NoClipLocomotion.cpp">
+    <ClCompile Include="src\stdafx.cpp" />
+    <ClCompile Include="src\Engine\Extra\Locomotion\NoClipLocomotion.cpp">
       <Filter>Engine\Extra\Locomotion</Filter>
     </ClCompile>
-    <ClCompile Include="src\Extra\TransformSync\TransfromSyncSystem.cpp">
+    <ClCompile Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.cpp">
       <Filter>Engine\Extra\TransformSync</Filter>
     </ClCompile>
-    <ClCompile Include="src\stdafx.cpp" />
-    <ClCompile Include="src\Core\SystemManagement\SystemManager.cpp">
+    <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp">
+      <Filter>Engine\Core\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.cpp">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.cpp">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.cpp">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.cpp">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Components\Transform.cpp">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Shader.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\LightingSystem.cpp">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\RasterizerState.cpp">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Input\InputSystem.cpp">
+      <Filter>Engine\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Input\KeyboardInput.cpp">
+      <Filter>Engine\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp">
+      <Filter>Engine\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp">
+      <Filter>Engine\Core\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp">
+      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp">
+      <Filter>Engine\Core\SceneGraph\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraph.cpp">
+      <Filter>Engine\Core\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\SystemManagement\ISystem.cpp">
       <Filter>Engine\Core\SystemManagement</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\GameLoop.cpp">
+    <ClCompile Include="src\Engine\Core\SystemManagement\SystemManager.cpp">
+      <Filter>Engine\Core\SystemManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Time\Time.cpp">
+      <Filter>Engine\Core\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Utilities\MeshHelper.cpp">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Utilities\PerlinNoise.cpp">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp">
+      <Filter>Engine\Core\WindowManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\GameLoop.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core\DataStructures\Color.h">
-      <Filter>Engine\Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Buffers\ConstantBuffer.h">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Buffers\ConstantBufferInterface.h">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Buffers\DepthStencilBuffer.h">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Buffers\IndexBuffer.h">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Buffers\VertexBuffer.h">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Components\Camera.h">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Components\Light.h">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Components\MeshRenderer.h">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\Components\Transform.h">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Material.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Mesh.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Shader.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\StructuredBuffer.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Texture2D.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\Texture2DArray.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\ResourceTypes\TextureSampler.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\GraphicsSystem.h">
-      <Filter>Engine\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\LightingSystem.h">
-      <Filter>Engine\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\RasterizerState.h">
-      <Filter>Engine\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Graphics\VertexData.h">
-      <Filter>Engine\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Input\InputSystem.h">
-      <Filter>Engine\Core\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Input\KeyboardInput.h">
-      <Filter>Engine\Core\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Input\MouseInput.h">
-      <Filter>Engine\Core\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\ResourceManagement\IResource.h">
-      <Filter>Engine\Core\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\ResourceManagement\ResourceManager.h">
-      <Filter>Engine\Core\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SceneGraph\Components\Util\ComponentArray.hpp">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SceneGraph\Components\Util\ComponentReferenceNode.h">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SceneGraph\Components\Util\ComponentType.hpp">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SceneGraph\Components\Util\EntityUtil.hpp">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SceneGraph\Components\Entity.h">
-      <Filter>Engine\Core\SceneGraph\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SceneGraph\SceneGraph.h">
-      <Filter>Engine\Core\SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SceneGraph\SceneGraphDefinition.hpp">
-      <Filter>Engine\Core\SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SystemManagement\ISystem.h">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SystemManagement\SystemConfiguration.hpp">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\SystemManagement\SystemManager.h">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Time\Time.h">
-      <Filter>Engine\Core\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Utilities\AutoPointer.hpp">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Utilities\Logging.h">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Utilities\MeshHelper.h">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Utilities\PerlinNoise.h">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Utilities\PointerRelease.hpp">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\WindowManagement\WindowManager.h">
-      <Filter>Engine\Core\WindowManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Extra\Locomotion\NoClipLocomotion.h">
-      <Filter>Engine\Extra\Locomotion</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Extra\TransformSync\TransfromSyncSystem.h">
-      <Filter>Engine\Extra\TransformSync</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Extra\TransformSync\TranslationSync.h">
-      <Filter>Engine\Extra\TransformSync</Filter>
-    </ClInclude>
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
-    <ClInclude Include="src\Core\SystemManagement\SystemManagerDefinition.hpp">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\ResourceManagement\ResourceManagerDefinition.hpp">
-      <Filter>Engine\Core\ResourceManagement</Filter>
-    </ClInclude>
     <ClInclude Include="src\Resource.h">
       <Filter>Engine\Core\ResourceManagement</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\GameLoop.h">
-      <Filter>Engine\Core</Filter>
+    <ClInclude Include="src\Engine\Extra\Locomotion\NoClipLocomotion.h">
+      <Filter>Engine\Extra\Locomotion</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Utilities\StaticPointer.hpp">
+    <ClInclude Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.h">
+      <Filter>Engine\Extra\TransformSync</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Extra\TransformSync\TranslationSync.h">
+      <Filter>Engine\Extra\TransformSync</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\DataStructures\Color.h">
+      <Filter>Engine\Core\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.h">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.h">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.h">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.h">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.h">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Components\Camera.h">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Components\Light.h">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Components\MeshRenderer.h">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Components\Transform.h">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Shader.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\GraphicsSystem.h">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\LightingSystem.h">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\RasterizerState.h">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\VertexData.h">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Input\InputSystem.h">
+      <Filter>Engine\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Input\KeyboardInput.h">
+      <Filter>Engine\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Input\MouseInput.h">
+      <Filter>Engine\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h">
+      <Filter>Engine\Core\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManager.h">
+      <Filter>Engine\Core\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp">
+      <Filter>Engine\Core\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentArray.hpp">
+      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.h">
+      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp">
+      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\EntityUtil.hpp">
+      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Entity.h">
+      <Filter>Engine\Core\SceneGraph\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.h">
+      <Filter>Engine\Core\SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphDefinition.hpp">
+      <Filter>Engine\Core\SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SystemManagement\ISystem.h">
+      <Filter>Engine\Core\SystemManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SystemManagement\SystemConfiguration.hpp">
+      <Filter>Engine\Core\SystemManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManager.h">
+      <Filter>Engine\Core\SystemManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManagerDefinition.hpp">
+      <Filter>Engine\Core\SystemManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Time\Time.h">
+      <Filter>Engine\Core\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Utilities\AutoPointer.hpp">
       <Filter>Engine\Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Utilities\Logging.h">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Utilities\MeshHelper.h">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Utilities\PerlinNoise.h">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Utilities\PointerRelease.hpp">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Utilities\StaticPointer.hpp">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\WindowManagement\WindowManager.h">
+      <Filter>Engine\Core\WindowManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\GameLoop.h">
+      <Filter>Engine\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -322,19 +322,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Shaders\CommonInclude.hlsl">
+    <None Include="src\Engine\Shaders\CommonInclude.hlsl">
       <Filter>Engine\Shaders</Filter>
     </None>
-    <None Include="src\Shaders\ForwardRendering.hlsl">
+    <None Include="src\Engine\Shaders\EnvironmentMap.hlsl">
       <Filter>Engine\Shaders</Filter>
     </None>
-    <None Include="src\Shaders\Lighting.hlsl">
+    <None Include="src\Engine\Shaders\ForwardRendering.hlsl">
       <Filter>Engine\Shaders</Filter>
     </None>
-    <None Include="src\Shaders\Material.hlsl">
+    <None Include="src\Engine\Shaders\Lighting.hlsl">
       <Filter>Engine\Shaders</Filter>
     </None>
-    <None Include="src\Shaders\EnvironmentMap.hlsl">
+    <None Include="src\Engine\Shaders\Material.hlsl">
       <Filter>Engine\Shaders</Filter>
     </None>
   </ItemGroup>

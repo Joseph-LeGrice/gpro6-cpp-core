@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "MouseRotateSystem.h"
-#include "Core/SystemManagement/SystemManager.h"
-#include "Core/Input/InputSystem.h"
-#include "Core/Time/Time.h"
-#include "Core/SceneGraph/Components/Util/ComponentArray.hpp"
-#include "Core/SceneGraph/SceneGraph.h"
+#include "Engine/Core/SystemManagement/SystemManager.h"
+#include "Engine/Core/Input/InputSystem.h"
+#include "Engine/Core/Time/Time.h"
+#include "Engine/Core/SceneGraph/Components/Util/ComponentArray.hpp"
+#include "Engine/Core/SceneGraph/SceneGraph.h"
 #include "MyMath/Complex/Quaternion.h"
-#include "Core/SceneGraph/SceneGraph.h"
-#include "Core/Graphics/Components/Transform.h"
+#include "Engine/Core/SceneGraph/SceneGraph.h"
+#include "Engine/Core/Graphics/Components/Transform.h"
 
 MouseRotateSystem::MouseRotateSystem() : m_velocity(0.0f),
 	m_index(-1), m_hasIndex(false), m_toggleRotate(false)

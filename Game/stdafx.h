@@ -17,7 +17,7 @@
 
 
 // TODO: reference additional headers your program requires here
-#include "Core/Utilities/PointerRelease.hpp"
-#include "Core/Utilities/StaticPointer.hpp"
-#include "Core/Utilities/AutoPointer.hpp"
+#include "Engine/Core/Utilities/PointerRelease.hpp"
+#include "Engine/Core/Utilities/StaticPointer.hpp"
+#include "Engine/Core/Utilities/AutoPointer.hpp"
 #include "MyMath/Assertions.h"
