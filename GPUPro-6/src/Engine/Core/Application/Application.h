@@ -3,7 +3,7 @@
 class Application
 {
 public:
-    static std::wstring GetResourcePath();
+    static std::wstring GetResourcePath(std::wstring relativePath);
     Application();
 
 private:

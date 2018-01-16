@@ -4,9 +4,11 @@
 StaticPointer<Application> Application::s_instance;
 std::wstring Application::s_resourceFullPath;
 
-std::wstring Application::GetResourcePath()
+std::wstring Application::GetResourcePath(std::wstring relativePath)
 {
-    return s_instance->m_resourceFullPath;
+    std::wstringstream ss;
+    ss << s_instance->m_resourceFullPath << relativePath;
+    return ss.str();
 }
 
 Application::Application()
