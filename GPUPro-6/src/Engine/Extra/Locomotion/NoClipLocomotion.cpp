@@ -88,18 +88,18 @@ void NoClipLocomotion::VariableTick()
         moveDelta.X = -1.0f;
     }
 
-    if (keyboardInput.GetKey(kInputKey_R)) //kInputKey_Space))
+    if (keyboardInput.GetKey(kInputKey_SPACE))
     {
         moveDelta.Y = 1.0f;
     }
-    else if (keyboardInput.GetKey(kInputKey_F)) //kInputKey_LeftCtrl))
+    else if (keyboardInput.GetKey(kInputKey_LCONTROL))
     {
         moveDelta.Y = -1.0f;
     }
 
     Vector3::Normalize(moveDelta);
 
-    if (keyboardInput.GetKey(kInputKey_X)) //kInputKey_LeftShift))
+    if (keyboardInput.GetKey(kInputKey_LSHIFT))
     {
         moveDelta *= m_moveBoostSpeed;
     }
@@ -108,7 +108,7 @@ void NoClipLocomotion::VariableTick()
         moveDelta *= m_moveSpeed;
     }
 
-    if (keyboardInput.GetKey(kInputKey_Q)) //kInputKey_LeftShift))
+    if (keyboardInput.GetKey(kInputKey_R))
     {
         playerTransform->m_data.m_position = { 0,0,0 };
     }
