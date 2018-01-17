@@ -108,7 +108,7 @@
       <AdditionalDependencies>GProLib.lib;MyMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PostBuildUtil.py" "$(OutDir)"</Command>
+      <Command>python "$(SolutionDir)BuildUtils\PostBuildUtil.py" -a x86 "$(SolutionDir)\" "$(OutDir)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -130,7 +130,7 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PostBuildUtil.py" "$(OutDir)"</Command>
+      <Command>python "$(SolutionDir)BuildUtils\PostBuildUtil.py" -a x64 "$(SolutionDir)\" "$(OutDir)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,7 +154,7 @@
       <AdditionalDependencies>GProLib.lib;MyMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PostBuildUtil.py" "$(OutDir)"</Command>
+      <Command>python "$(SolutionDir)BuildUtils\PostBuildUtil.py" -a x86 "$(SolutionDir)\" "$(OutDir)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -177,7 +177,7 @@
       <AdditionalDependencies>GProLib.lib;MyMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>python "$(SolutionDir)PostBuildUtil.py" "$(OutDir)"</Command>
+      <Command>python "$(SolutionDir)BuildUtils\PostBuildUtil.py" -a x64 "$(SolutionDir)\" "$(OutDir)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

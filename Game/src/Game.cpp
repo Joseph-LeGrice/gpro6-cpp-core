@@ -46,14 +46,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         InitSceneGraph();
         InitConstantBufferInterface();
 
-        Log(Application::GetResourcePath());
-
         Shader* materialShader = GetResourceManager().Instantiate<Shader>();
-        materialShader->InitVertexShader(L"../gpupro-6/src/Engine/Shaders/ForwardRendering.hlsl", "VShader");
-		materialShader->InitPixelShader(L"../gpupro-6/src/Engine/Shaders/ForwardRendering.hlsl", "PShader");
+
+        std::wstring forwardRenderShaderPath = Application::GetResourcePath(L"Shaders/ForwardRendering.hlsl");
+        materialShader->InitVertexShader(forwardRenderShaderPath, "VShader");
+		materialShader->InitPixelShader(forwardRenderShaderPath, "PShader");
 
         Texture2D* testImageTexture = GetResourceManager().Instantiate<Texture2D>();
-        testImageTexture->InitializeWithBitmap(L"C:\\GPro_Test\\TestImage.png");
+        std::wstring testImagePath = Application::GetResourcePath(L"GameResources/GPro_Test/TestImage.png");
+        testImageTexture->InitializeWithBitmap(testImagePath.c_str());
 
         TextureSampler* textureSampler = GetResourceManager().Instantiate<TextureSampler>();
         textureSampler->Initialize();
@@ -136,17 +137,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         
         //Skybox
         Shader* skyboxShader = GetResourceManager().Instantiate<Shader>();
-        skyboxShader->InitVertexShader(L"../gpupro-6/src/Engine/Shaders/EnvironmentMap.hlsl", "VShader");
-        skyboxShader->InitPixelShader(L"../gpupro-6/src/Engine/Shaders/EnvironmentMap.hlsl", "PShader");
+        std::wstring envMapShaderPath = Application::GetResourcePath(L"Shaders/EnvironmentMap.hlsl");
+        skyboxShader->InitVertexShader(envMapShaderPath, "VShader");
+        skyboxShader->InitPixelShader(envMapShaderPath, "PShader");
 
         Texture2DArray* testCubemap = GetResourceManager().Instantiate<Texture2DArray>();
         testCubemap->InitializeWithBitmaps({
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Right.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Left.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Bottom.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Top.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Front.bmp",
-            L"C:\\GPro_Test\\TheSaMonstaSkyBox1_Back.bmp"
+            Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Right.bmp"),
+            Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Left.bmp"),
+            Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Bottom.bmp"),
+            Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Top.bmp"),
+            Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Front.bmp"),
+            Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
         });
         
         Material* skyboxMat = GetResourceManager().Instantiate<Material>();

@@ -10,8 +10,11 @@ def main():
     args_parsed = arg_parser.parse_args()
     print('Solution Directory: '+args_parsed.solution_directory)
     print('Build Directory: '+args_parsed.build_directory)
+    print('Copying DLL\'s...')
     CopyDLLs.copy_dlls(args_parsed.solution_directory, args_parsed.build_directory, args_parsed.architecture)
+    print('Copying Resource\'s...')
     CopyResources.copy_resources(args_parsed.solution_directory, args_parsed.build_directory)
+    print('Done!')
 
 if __name__ == '__main__':
     main()
