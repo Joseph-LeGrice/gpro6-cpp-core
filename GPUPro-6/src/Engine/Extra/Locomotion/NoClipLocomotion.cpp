@@ -92,14 +92,14 @@ void NoClipLocomotion::VariableTick()
     {
         moveDelta.Y = 1.0f;
     }
-    else if (keyboardInput.GetKey(kInputKey_LCONTROL))
+    else if (keyboardInput.GetKey(kInputKey_CONTROL))
     {
         moveDelta.Y = -1.0f;
     }
 
     Vector3::Normalize(moveDelta);
 
-    if (keyboardInput.GetKey(kInputKey_LSHIFT))
+    if (keyboardInput.GetKey(kInputKey_SHIFT))
     {
         moveDelta *= m_moveBoostSpeed;
     }

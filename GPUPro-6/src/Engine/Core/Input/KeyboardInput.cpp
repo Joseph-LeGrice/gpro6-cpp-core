@@ -46,7 +46,7 @@ bool KeyboardInput::GetKeyUpThisFrame(InputKey key) const
 
 bool KeyboardInput::IsKeyboardKeypress(WPARAM param) const
 {
-	return param >= kInputKey_A && param <= kInputKey_Z;
+	return param >= kInputKey_LBUTTON && param <= kInputKey_OEM_CLEAR;
 }
 
 void KeyboardInput::AdvanceFrame()
