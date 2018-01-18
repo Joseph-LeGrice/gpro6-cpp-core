@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Engine/Core/Graphics/ShaderResource.h"
 #include "Engine/Core/Graphics/ResourceTypes/Shader.h"
 #include "Engine/Core/Graphics/ResourceTypes/Material.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
@@ -18,7 +19,8 @@ typedef ResourceManagerDefinition<
     Texture2D,
     Texture2DArray,
     StructuredBuffer,
-    Material
+    Material,
+    ShaderResource
 > ResourceManager;
 
 ResourceManager& GetResourceManager();

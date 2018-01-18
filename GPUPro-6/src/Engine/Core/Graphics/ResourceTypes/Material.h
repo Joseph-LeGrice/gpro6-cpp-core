@@ -13,9 +13,16 @@ typedef std::unordered_map<size_t, std::vector<size_t>> MeshTransformMap;
 class Material : public IResource
 {
 public:
-    struct ResourceDetails
+
+    struct ShaderResourceDetails
     {
-        int m_resourceIndex; //TODO: Shoukd never be able to bind an invalid or non existant resource here.
+        UINT m_resourceIndex;
+        size_t m_slotIndex;
+    };
+
+    struct SamplerDetails
+    {
+        UINT m_resourceIndex;
         size_t m_slotIndex;
     };
 
@@ -26,18 +33,14 @@ public:
 	
     void SetShaderIndex(UINT16 shaderIndex);
 	
-    void AddTexture2DResource(ResourceDetails rd);
-    void AddTexture2DArrayResource(ResourceDetails rd);
-    void AddStructuredBufferResource(ResourceDetails rd);
-	void AddTextureSampler(ResourceDetails rd);
+    void RegisterShaderResource(ShaderResourceDetails rd);
+    void AddTextureSampler(SamplerDetails rd);
 
     virtual void Release() override;
 
 
 private:
     int m_shaderIndex;
-    std::vector<ResourceDetails> m_texture2dIndexes;
-    std::vector<ResourceDetails> m_texture2dArrayIndexes;
-    std::vector<ResourceDetails> m_structuredBufferIndexes;
-	std::vector<ResourceDetails> m_textureSamplerIndexes;
+    std::vector<ShaderResourceDetails> m_shaderResources;
+	std::vector<SamplerDetails> m_textureSamplerIndexes;
 };

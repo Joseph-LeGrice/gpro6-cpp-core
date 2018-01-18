@@ -56,21 +56,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         std::wstring testImagePath = Application::GetResourcePath(L"GameResources/GPro_Test/TestImage.png");
         testImageTexture->InitializeWithBitmap(testImagePath.c_str());
 
-        TextureSampler* textureSampler = GetResourceManager().Instantiate<TextureSampler>();
-        textureSampler->Initialize();
-
         Material* simpleTestMaterial = GetResourceManager().Instantiate<Material>();
         simpleTestMaterial->SetShaderIndex(materialShader->GetResourceID());
         UINT simpleTestMaterialID = simpleTestMaterial->GetResourceID();
 
         int lightBufferIndex = GetSystemManager().GetSystem<LightingSystem>()->GetBufferResourceIndex();
-        simpleTestMaterial->AddStructuredBufferResource({ lightBufferIndex, 0});
+        StructuredBuffer* lightBuffer = GetResourceManager().GetAsset<StructuredBuffer>(lightBufferIndex);
+        simpleTestMaterial->RegisterShaderResource({ lightBuffer->GetMyResourceViewID(), 0});
+        simpleTestMaterial->RegisterShaderResource({ testImageTexture->GetResourceViewID(), 1 });
 
-        int uvTextureResourceId = static_cast<int>(testImageTexture->GetResourceID());
-        simpleTestMaterial->AddTexture2DResource({ uvTextureResourceId, 1 });
-        
-        int textureSamplerIndex = static_cast<int>(textureSampler->GetResourceID());
-        simpleTestMaterial->AddTextureSampler({ textureSamplerIndex, 0 });
+        TextureSampler* textureSampler = GetResourceManager().Instantiate<TextureSampler>();
+        textureSampler->Initialize();
+        simpleTestMaterial->AddTextureSampler({ textureSampler->GetResourceID(), 0 });
 
         //------------------------------------------------------------------------------------
         // MATERIAL BUFFER STUFF
@@ -154,8 +151,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         Material* skyboxMat = GetResourceManager().Instantiate<Material>();
         UINT skyboxMatID = skyboxMat->GetResourceID();
         skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
-        int cubemapTextureId = static_cast<int>(testCubemap->GetResourceID());
-        skyboxMat->AddTexture2DArrayResource({ cubemapTextureId, 0 });
+        skyboxMat->RegisterShaderResource({ testCubemap->GetMyResourceViewID(), 0 });
 
         EntityComponent& skyboxEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(skyboxEntity);

@@ -74,6 +74,7 @@ public:
 
     operator T**() { return &m_pointer; }
     operator T*() { return m_pointer; }
+    operator T&() { return *m_pointer; }
 
 private:
     T* m_pointer;

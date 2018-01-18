@@ -3,6 +3,7 @@
 class IResource
 {
 public:
+    IResource() { m_resourceId = 999999; }
     IResource(UINT id) : m_resourceId(id) { }
     
     virtual void Release() = 0;

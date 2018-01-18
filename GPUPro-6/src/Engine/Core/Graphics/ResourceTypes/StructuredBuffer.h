@@ -28,18 +28,24 @@ public:
 			return false;
 		}
 
+
 		D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
 		ZeroMemory(&rvDesc, sizeof(D3D11_SHADER_RESOURCE_VIEW_DESC));
 		rvDesc.Format = DXGI_FORMAT_UNKNOWN;
 		rvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
-		rvDesc.Buffer.ElementWidth = m_numberOfElements;
-		HRESULT createResourceViewResult = device->CreateShaderResourceView(m_buffer, &rvDesc, m_resourceView);
-        if (!SUCCEEDED(createResourceViewResult))
+        rvDesc.Buffer.ElementWidth = m_numberOfElements;
+        
+        ShaderResource* myShaderResourceView = GetResourceManager().Instantiate<ShaderResource>();
+        m_myShaderResourceViewId = myShaderResourceView->GetResourceID();
+        
+        bool createdView = myShaderResourceView->CreateViewWithResource(m_buffer, &rvDesc);
+		if (!createdView)
         {
             m_buffer.ReleasePointer();
+            GetResourceManager().Deallocate<ShaderResource>(m_myShaderResourceViewId);
+
             return false;
         }
-
         return true;
 	}
 
@@ -59,7 +65,12 @@ public:
     void BindResource(UINT resourceIndex);
     virtual void Release() override;
 
+    UINT GetMyResourceViewID()
+    {
+        return m_myShaderResourceViewId;
+    }
+
 private:
+    UINT m_myShaderResourceViewId;
 	ManualRelease<ID3D11Buffer> m_buffer;
-    ManualRelease<ID3D11ShaderResourceView> m_resourceView;
 };

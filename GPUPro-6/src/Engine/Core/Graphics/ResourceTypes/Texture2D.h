@@ -11,16 +11,16 @@ public:
     Texture2D(UINT resourceId);
 	~Texture2D();
 
+    UINT GetResourceViewID();
     void InitializeWithBitmap(const wchar_t* filepath);
     //void InitializeWithDimensions(UINT width, UINT width);
-    void BindResource(UINT resourceIndex);
-
+    
     virtual void Release() override;
 
 private:
+    UINT m_myShaderResourceViewId;
     FIBITMAP* m_bitmap;
 	ManualRelease<ID3D11Texture2D> m_pTexture;
-	ManualRelease<ID3D11ShaderResourceView> m_resourceView;
-    
+	
     void CreateResources();
 };

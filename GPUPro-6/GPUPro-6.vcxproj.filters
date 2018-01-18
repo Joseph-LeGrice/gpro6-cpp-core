@@ -104,6 +104,7 @@
     <ClCompile Include="src\Engine\Core\Application\Application.cpp">
       <Filter>Engine\Core\Application</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ShaderResource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -264,6 +265,7 @@
     <ClInclude Include="src\Engine\Core\Application\Application.h">
       <Filter>Engine\Core\Application</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ShaderResource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

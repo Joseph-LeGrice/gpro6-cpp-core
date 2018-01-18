@@ -10,12 +10,15 @@
 Texture2D::Texture2D(UINT resourceId) : IResource(resourceId)
 {
     m_bitmap = nullptr;
-	m_pTexture = nullptr;
-	m_resourceView = nullptr;
 }
 
 Texture2D::~Texture2D()
 {
+}
+
+UINT Texture2D::GetResourceViewID()
+{
+    return m_myShaderResourceViewId;
 }
 
 void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
@@ -67,9 +70,13 @@ void Texture2D::CreateResources()
     HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, m_pTexture);
     if (SUCCEEDED(createTextureResult))
     {
-        HRESULT createResourceViewResult = device->CreateShaderResourceView(m_pTexture, NULL, m_resourceView);
-        if (!SUCCEEDED(createResourceViewResult))
+        ShaderResource* myShaderResourceView = GetResourceManager().Instantiate<ShaderResource>();
+        m_myShaderResourceViewId = myShaderResourceView->GetResourceID();
+
+        bool createdView = myShaderResourceView->CreateViewWithResource(m_pTexture, NULL);
+        if (!createdView)
         {
+            GetResourceManager().Deallocate<ShaderResource>(m_myShaderResourceViewId);
             LogError("Could not create resource view");
         }
     }
@@ -79,16 +86,6 @@ void Texture2D::CreateResources()
     }
 }
 
-void Texture2D::BindResource(UINT resourceIndex)
-{
-    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-    deviceContext->VSSetShaderResources(resourceIndex, 1, m_resourceView);
-    deviceContext->HSSetShaderResources(resourceIndex, 1, m_resourceView);
-    deviceContext->DSSetShaderResources(resourceIndex, 1, m_resourceView);
-    deviceContext->GSSetShaderResources(resourceIndex, 1, m_resourceView);
-    deviceContext->PSSetShaderResources(resourceIndex, 1, m_resourceView);
-}
-
 void Texture2D::Release()
 {
     if (m_bitmap != nullptr)
@@ -96,5 +93,4 @@ void Texture2D::Release()
         FreeImage_Unload(m_bitmap);
     }
     m_pTexture.ReleasePointer();
-    m_resourceView.ReleasePointer();
 }

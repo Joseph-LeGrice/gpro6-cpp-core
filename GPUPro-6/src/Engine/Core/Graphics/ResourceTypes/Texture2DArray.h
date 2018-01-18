@@ -12,15 +12,15 @@ public:
     Texture2DArray(UINT resourceId);
     ~Texture2DArray();
 
+    UINT GetMyResourceViewID();
     void InitializeWithBitmaps(std::vector<std::wstring> filepaths);
-    void BindResource(UINT resourceIndex);
-
+    
     virtual void Release() override;
 
 private:
+    UINT m_myShaderResourceViewId;
     std::vector<FIBITMAP*> m_bitmaps;
     ManualRelease<ID3D11Texture2D> m_pTextureArray;
-    ManualRelease<ID3D11ShaderResourceView> m_resourceView;
 
     void CreateResources(UINT pitch, UINT width, UINT height);
 };

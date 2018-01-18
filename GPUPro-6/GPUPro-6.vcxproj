@@ -224,6 +224,7 @@
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp" />
@@ -266,6 +267,7 @@
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ShaderResource.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />

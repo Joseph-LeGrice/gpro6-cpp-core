@@ -4,18 +4,17 @@
 #include "Engine/Core/SystemManagement/SystemManager.h"
 #include "Engine/Core/Graphics/GraphicsSystem.h"
 #include "Engine/Core/Utilities/Logging.h"
+#include "Engine/Core/Graphics/ShaderResource.h"
+#include "Engine/Core/ResourceManagement/ResourceManager.h"
 
-Texture2DArray::Texture2DArray(UINT resourceId) : IResource(resourceId)
+Texture2DArray::Texture2DArray(UINT resourceId) : IResource(resourceId) { }
+Texture2DArray::~Texture2DArray() { }
+
+
+UINT Texture2DArray::GetMyResourceViewID()
 {
-    m_pTextureArray = nullptr;
-    m_resourceView = nullptr;
+    return m_myShaderResourceViewId;
 }
-
-
-Texture2DArray::~Texture2DArray()
-{
-}
-
 
 void Texture2DArray::InitializeWithBitmaps(std::vector<std::wstring> filepaths)
 {
@@ -102,9 +101,13 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
     HRESULT createTextureResult = device->CreateTexture2D(&desc, data.data(), m_pTextureArray);
     if (SUCCEEDED(createTextureResult))
     {
-        HRESULT createResourceViewResult = device->CreateShaderResourceView(m_pTextureArray, NULL, m_resourceView);
-        if (!SUCCEEDED(createResourceViewResult))
+        ShaderResource* myShaderResourceView = GetResourceManager().Instantiate<ShaderResource>();
+        m_myShaderResourceViewId = myShaderResourceView->GetResourceID();
+
+        bool createdView = myShaderResourceView->CreateViewWithResource(m_pTextureArray, NULL);
+        if (!createdView)
         {
+            GetResourceManager().Deallocate<ShaderResource>(m_myShaderResourceViewId);
             LogError("Could not create resource view");
         }
     }
@@ -112,16 +115,6 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
     {
         LogError("Could not create texture");
     }
-}
-
-void Texture2DArray::BindResource(UINT resourceIndex)
-{
-    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-    deviceContext->VSSetShaderResources(resourceIndex, 1, m_resourceView);
-    deviceContext->HSSetShaderResources(resourceIndex, 1, m_resourceView);
-    deviceContext->DSSetShaderResources(resourceIndex, 1, m_resourceView);
-    deviceContext->GSSetShaderResources(resourceIndex, 1, m_resourceView);
-    deviceContext->PSSetShaderResources(resourceIndex, 1, m_resourceView);
 }
 
 void Texture2DArray::Release()
@@ -132,5 +125,4 @@ void Texture2DArray::Release()
     }
     m_bitmaps.clear();
     m_pTextureArray.ReleasePointer();
-    m_resourceView.ReleasePointer();
 }

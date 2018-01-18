@@ -30,22 +30,12 @@ void Material::SetShaderIndex(UINT16 shaderIndex)
     m_shaderIndex = static_cast<int>(shaderIndex);
 }
 
-void Material::AddTexture2DResource(ResourceDetails rd)
+void Material::RegisterShaderResource(ShaderResourceDetails rd)
 {
-    m_texture2dIndexes.push_back(rd);
+    m_shaderResources.push_back(rd);
 }
 
-void Material::AddTexture2DArrayResource(ResourceDetails rd)
-{
-    m_texture2dArrayIndexes.push_back(rd);
-}
-
-void Material::AddStructuredBufferResource(ResourceDetails rd)
-{
-    m_structuredBufferIndexes.push_back(rd);
-}
-
-void Material::AddTextureSampler(ResourceDetails rd)
+void Material::AddTextureSampler(SamplerDetails rd)
 {
 	m_textureSamplerIndexes.push_back(rd);
 }
@@ -61,39 +51,19 @@ bool Material::BindIfValid()
         Shader* s = GetResourceManager().GetAsset<Shader>(m_shaderIndex);
         if (s != nullptr && s->SetCurrentIfValid())
         {
-            for (size_t i = 0; i < m_texture2dIndexes.size(); ++i)
+            for (size_t i = 0; i < m_shaderResources.size(); ++i)
             {
-                ResourceDetails rd = m_texture2dIndexes[i];
-                Texture2D* tex = GetResourceManager().GetAsset<Texture2D>(rd.m_resourceIndex);
+                ShaderResourceDetails rd = m_shaderResources[i];
+                ShaderResource* tex = GetResourceManager().GetAsset<ShaderResource>(rd.m_resourceIndex);
                 if (tex != nullptr)
                 {
                     tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
-                }
-            }
-
-            for (size_t i = 0; i < m_texture2dArrayIndexes.size(); ++i)
-            {
-                ResourceDetails rd = m_texture2dArrayIndexes[i];
-                Texture2DArray* tex = GetResourceManager().GetAsset<Texture2DArray>(rd.m_resourceIndex);
-                if (tex != nullptr)
-                {
-                    tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
-                }
-            }
-
-            for (size_t i = 0; i < m_structuredBufferIndexes.size(); ++i)
-            {
-                ResourceDetails rd = m_structuredBufferIndexes[i];
-                StructuredBuffer* sb = GetResourceManager().GetAsset<StructuredBuffer>(rd.m_resourceIndex);
-                if (sb != nullptr)
-                {
-                    sb->BindResource(static_cast<UINT>(rd.m_slotIndex));
                 }
             }
 
             for (size_t i = 0; i < m_textureSamplerIndexes.size(); ++i)
             {
-                ResourceDetails rd = m_textureSamplerIndexes[i];
+                SamplerDetails rd = m_textureSamplerIndexes[i];
                 TextureSampler* ts = GetResourceManager().GetAsset<TextureSampler>(rd.m_resourceIndex);
                 if (ts != nullptr)
                 {
