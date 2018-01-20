@@ -5,6 +5,7 @@
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/Graphics/ResourceTypes/Shader.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
+#include "Engine/Core/Graphics/ResourceTypes/Material/SimpleMaterial.h"
 #include "Engine/Core/Graphics/ResourceTypes/Material/StandardMaterial.hpp"
 #include "Engine/Core/Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
@@ -16,6 +17,7 @@ typedef ResourceManagerDefinition<
     Shader,
     ShaderResource,
     StandardMaterial,
+    SimpleMaterial,
     StructuredBuffer,
     Texture2D,
     Texture2DArray,

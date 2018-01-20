@@ -151,7 +151,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
         });
         
-        StandardMaterial* skyboxMat = GetResourceManager().Instantiate<StandardMaterial>(); // FIXME: Do not need a skybox to have this type of material
+        SimpleMaterial* skyboxMat = GetResourceManager().Instantiate<SimpleMaterial>();
         UINT skyboxMatID = skyboxMat->GetResourceID();
         skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
         skyboxMat->RegisterShaderResource({ testCubemap->GetMyResourceViewID(), 0 });

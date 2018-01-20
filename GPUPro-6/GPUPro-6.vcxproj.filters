@@ -113,6 +113,9 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -276,9 +279,6 @@
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\Material.hpp">
       <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.hpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp">
       <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
     </ClInclude>
@@ -293,6 +293,9 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

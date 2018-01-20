@@ -227,6 +227,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
@@ -273,7 +274,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.hpp" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />

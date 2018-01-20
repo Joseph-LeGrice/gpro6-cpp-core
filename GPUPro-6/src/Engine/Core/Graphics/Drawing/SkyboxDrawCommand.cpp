@@ -12,6 +12,6 @@ void SkyboxDrawCommand::PreDrawAll()
 
 bool SkyboxDrawCommand::BindMaterial(MeshRendererComponent& mrc)
 {
-    StandardMaterial* mat = GetResourceManager().GetAsset<StandardMaterial>(mrc.m_data.m_materialIndex);
+    SimpleMaterial* mat = GetResourceManager().GetAsset<SimpleMaterial>(mrc.m_data.m_materialIndex);
     return mat->BindIfValid();
 }
