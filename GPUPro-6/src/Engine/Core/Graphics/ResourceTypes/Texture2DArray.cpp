@@ -4,14 +4,14 @@
 #include "Engine/Core/SystemManagement/SystemManager.h"
 #include "Engine/Core/Graphics/GraphicsSystem.h"
 #include "Engine/Core/Utilities/Logging.h"
-#include "Engine/Core/Graphics/ShaderResource.h"
+#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 
-Texture2DArray::Texture2DArray(UINT resourceId) : IResource(resourceId) { }
+Texture2DArray::Texture2DArray(UINT ai) : IResource(ai) { }
+Texture2DArray::Texture2DArray() : IResource() { }
 Texture2DArray::~Texture2DArray() { }
 
-
-UINT Texture2DArray::GetMyResourceViewID()
+int Texture2DArray::GetMyResourceViewID()
 {
     return m_myShaderResourceViewId;
 }

@@ -9,16 +9,17 @@
 class Texture2DArray : public IResource
 {
 public:
-    Texture2DArray(UINT resourceId);
+    Texture2DArray(UINT ai);
+    Texture2DArray();
     ~Texture2DArray();
 
-    UINT GetMyResourceViewID();
+    int GetMyResourceViewID();
     void InitializeWithBitmaps(std::vector<std::wstring> filepaths);
     
     virtual void Release() override;
 
 private:
-    UINT m_myShaderResourceViewId;
+    int m_myShaderResourceViewId;
     std::vector<FIBITMAP*> m_bitmaps;
     ManualRelease<ID3D11Texture2D> m_pTextureArray;
 

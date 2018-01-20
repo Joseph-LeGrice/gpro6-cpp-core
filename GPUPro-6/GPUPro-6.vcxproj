@@ -224,7 +224,8 @@
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ShaderResource.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp" />
@@ -234,7 +235,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Shader.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.cpp" />
@@ -267,7 +267,7 @@
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ShaderResource.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />

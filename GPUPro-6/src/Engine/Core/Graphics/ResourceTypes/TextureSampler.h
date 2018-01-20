@@ -6,8 +6,9 @@
 class TextureSampler : public IResource
 {
 public:
-	TextureSampler(UINT resourceId);
-	~TextureSampler();
+    TextureSampler(UINT ai);
+    TextureSampler();
+    ~TextureSampler();
 
 	void BindTextureSampler(UINT samplerIndex);
 	bool Initialize();

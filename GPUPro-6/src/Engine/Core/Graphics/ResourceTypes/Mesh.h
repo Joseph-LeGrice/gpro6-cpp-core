@@ -10,7 +10,12 @@ class Mesh : public IResource
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
 
-	Mesh(UINT resourceId);
+    Mesh(UINT ai) : IResource(ai)
+    {
+        m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+        m_indices = std::vector<UINT16>();
+        m_vertexData = std::vector<VertexData>();
+    }
 
 	void SetVertices(std::vector<Vector3>& verts);
 	void SetNormals(std::vector<Vector3>& normals);

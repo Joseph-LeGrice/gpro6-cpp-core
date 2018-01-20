@@ -6,12 +6,10 @@
 #include <vector>
 #include "Engine/Core/SystemManagement/ISystem.h"
 
-class Material;
 class VertexBuffer;
 class IndexBuffer;
 class DepthStencilBuffer;
 class RasterizerState;
-struct Camera;
 
 class GraphicsSystem : public ISystem
 {

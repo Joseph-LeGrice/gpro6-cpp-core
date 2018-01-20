@@ -7,16 +7,12 @@
 #include "Engine/Core/Utilities/PerlinNoise.h"
 #include "FreeImage.h"
 
-Texture2D::Texture2D(UINT resourceId) : IResource(resourceId)
-{
-    m_bitmap = nullptr;
-}
 
-Texture2D::~Texture2D()
-{
-}
+Texture2D::Texture2D(UINT ai) : IResource(ai) { }
+Texture2D::Texture2D() : IResource() { }
+Texture2D::~Texture2D() { }
 
-UINT Texture2D::GetResourceViewID()
+int Texture2D::GetResourceViewID()
 {
     return m_myShaderResourceViewId;
 }

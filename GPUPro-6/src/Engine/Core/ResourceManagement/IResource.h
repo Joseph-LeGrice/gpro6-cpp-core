@@ -3,22 +3,16 @@
 class IResource
 {
 public:
-    IResource() { m_resourceId = 999999; }
-    IResource(UINT id) : m_resourceId(id) { }
+    IResource() : m_resourceId(-1) { }
+    IResource(UINT ai) : m_resourceId(ai) { }
     
     virtual void Release() = 0;
 
-    UINT GetResourceID()
+    int GetResourceID()
     {
         return m_resourceId;
     }
 
-protected:
-    ~IResource()
-    {
-
-    }
-
 private:
-    UINT m_resourceId;
+    int m_resourceId;
 };

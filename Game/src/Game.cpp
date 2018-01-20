@@ -97,9 +97,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //mat.SpecularScale;
         //mat.AlphaThreshold;
         MATERIAL_BUFFER_CONTAINER buf = { mat };
-        MaterialBuffer& mf = GetConstantBufferInterface().GetBuffer<MaterialBuffer>();
-        mf.UpdateBuffer(buf);
-        mf.BindBuffer();
+        StandardMaterialBuffer& smb = GetConstantBufferInterface().GetBuffer<StandardMaterialBuffer>();
+        smb.UpdateBuffer(buf);
+        smb.BindBuffer();
         //------------------------------------------------------------------------------------
 		
         // Light
@@ -148,7 +148,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
         });
         
-        Material* skyboxMat = GetResourceManager().Instantiate<Material>();
+        Material* skyboxMat = GetResourceManager().Instantiate<Material>(); // FIXME: Do not need a skybox to have this type of buffer
         UINT skyboxMatID = skyboxMat->GetResourceID();
         skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
         skyboxMat->RegisterShaderResource({ testCubemap->GetMyResourceViewID(), 0 });

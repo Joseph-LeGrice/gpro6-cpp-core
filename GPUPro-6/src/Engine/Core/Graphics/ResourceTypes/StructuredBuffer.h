@@ -7,7 +7,8 @@
 class StructuredBuffer : public IResource
 {
 public:
-    StructuredBuffer(UINT id) : IResource(id) {}
+    StructuredBuffer(UINT ai) : IResource(ai) { }
+    StructuredBuffer() : IResource() { }
 
     template<class T, UINT m_numberOfElements>
 	bool Initialize()
@@ -65,12 +66,12 @@ public:
     void BindResource(UINT resourceIndex);
     virtual void Release() override;
 
-    UINT GetMyResourceViewID()
+    int GetMyResourceViewID()
     {
         return m_myShaderResourceViewId;
     }
 
 private:
-    UINT m_myShaderResourceViewId;
+    int m_myShaderResourceViewId = -1;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };

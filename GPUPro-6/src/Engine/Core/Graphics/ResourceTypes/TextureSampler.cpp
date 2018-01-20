@@ -3,15 +3,9 @@
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/SystemManagement/SystemManager.h"
 
-TextureSampler::TextureSampler(UINT resourceId) : IResource(resourceId)
-{
-	m_sampler = nullptr;
-}
-
-
-TextureSampler::~TextureSampler()
-{
-}
+TextureSampler::TextureSampler(UINT ai) : IResource(ai) { }
+TextureSampler::TextureSampler() : IResource() { }
+TextureSampler::~TextureSampler() { }
 
 void TextureSampler::BindTextureSampler(UINT samplerIndex)
 {

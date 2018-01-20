@@ -6,40 +6,56 @@
 template<class... Types>
 class ResourceManagerDefinition
 {
-    //TODO: Ideally should be storing some structure which allows for grouping the memory together such that assets 'relevant' to each other exists near to each other.
 public:
     template<class T>
     T* Instantiate()
     {
         std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
-        int index = static_cast<int>(resources.size());
-        resources.resize(index + 1, T(index));
-        return &resources[index];
+        int arrayIndex = static_cast<int>(resources.size());
+        resources.resize(arrayIndex + 1, T(arrayIndex));
+        return &resources[arrayIndex];
     }
 
     template<class T>
-    T* GetAsset(int index)
+    T* GetAsset(int arrayIndex)
     {
         std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
-        if (index > -1 && index < resources.size())
-        {
-            return &resources[index];
-        }
-        else
-        {
-            return nullptr;
-        }
+        return &resources[arrayIndex];
     }
 
+    // Holy crap - A new 'ResourceID' is possible.
+    // A ResourceID is two ints:
+    // 1. The Index of the type in the tuple
+    // 2. The index of the object in the vector
+    //template<int tupleIndex>
+    //typename std::tuple_element<tupleIndex, decltype(m_allResources)>::type::value_type*
+    //    GetAssetByID(int arrayIndex)
+    //{
+    //    return &std::get<i>(m_allResources)[arrayIndex];
+    //}
+
+    //template<int tupleIndex, int arrayIndex>
+    //void Deallocate()
+    //{
+    //    auto resources = std::get<tupleIndex>(m_allResources);
+    //    int lastIndex = static_cast<int>(resources.size()) - 1;
+    //    T& deletedAsset = resources[arrayIndex];
+    //    deletedAsset.Release();
+
+    //    resources[arrayIndex] = resources[lastIndex];
+    //    resources[lastIndex] = deletedAsset;
+    //    resources.resize(lastIndex);
+    //}
+
     template<class T>
-    void Deallocate(int index)
+    void Deallocate(int arrayIndex)
     {
         std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
         int lastIndex = static_cast<int>(resources.size()) - 1;
-        T& deletedAsset = resources[index];
+        T& deletedAsset = resources[arrayIndex];
         deletedAsset.Release();
 
-        resources[index] = resources[lastIndex];
+        resources[arrayIndex] = resources[lastIndex];
         resources[lastIndex] = deletedAsset;
         resources.resize(lastIndex);
     }
@@ -65,3 +81,4 @@ public:
 private:
     std::tuple<std::vector<Types>...> m_allResources;
 };
+

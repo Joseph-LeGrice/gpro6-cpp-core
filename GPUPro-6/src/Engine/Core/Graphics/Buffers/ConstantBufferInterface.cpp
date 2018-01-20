@@ -15,5 +15,6 @@ ConstantBufferInterface& GetConstantBufferInterface()
 
 void DestroyConstantBufferInterface()
 {
+    s_buffer->ReleaseAll();
     delete s_buffer;
 }

@@ -5,8 +5,8 @@
 class ShaderResource : public IResource
 {
 public:
+    ShaderResource(UINT ai) : IResource(ai) { }
     ShaderResource() : IResource() { }
-    ShaderResource(UINT resourceId) : IResource(resourceId) { }
     ~ShaderResource() { }
 
     void BindResource(UINT resourceIndex);

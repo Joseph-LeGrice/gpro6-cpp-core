@@ -29,9 +29,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\Components\Transform.cpp">
       <Filter>Engine\Core\Graphics\Components</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.cpp">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
@@ -104,7 +101,12 @@
     <ClCompile Include="src\Engine\Core\Application\Application.cpp">
       <Filter>Engine\Core\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ShaderResource.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -150,9 +152,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Components\Transform.h">
       <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.h">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
@@ -265,7 +264,12 @@
     <ClInclude Include="src\Engine\Core\Application\Application.h">
       <Filter>Engine\Core\Application</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ShaderResource.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

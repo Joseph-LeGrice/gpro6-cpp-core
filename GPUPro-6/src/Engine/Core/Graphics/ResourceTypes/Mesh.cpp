@@ -2,14 +2,6 @@
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 
-
-Mesh::Mesh(UINT resourceId) : IResource(resourceId)
-{
-	m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
-	m_indices = std::vector<UINT16>();
-	m_vertexData = std::vector<VertexData>();
-}
-
 void Mesh::SetVertices(std::vector<Vector3>& verts)
 {
 	m_vertexData.resize(verts.size());

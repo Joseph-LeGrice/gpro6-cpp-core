@@ -246,7 +246,7 @@ void GraphicsSystem::VariableTick()
         pcb.Projection = proj;
         perCameraBuffer.UpdateBuffer(pcb);
 
-		for (size_t i = 0; i < numberOfMeshRenderers; ++i)
+        for (size_t i = 0; i < numberOfMeshRenderers; ++i)
 		{
             MeshRendererComponent mrc = meshRenderers[i];
             EntityComponent& meshEntity = *GetSceneGraph().GetComponent<EntityComponent>(mrc.m_entityIndex);
@@ -263,7 +263,7 @@ void GraphicsSystem::VariableTick()
                 if (mat.BindIfValid())
                 {
                     TransformComponent* modelTransform = EntityUtil::GetComponent<TransformComponent>(meshEntity);
-                    
+
                     Matrix4x4 model;
                     Matrix4x4::Identity(model);
                     if (modelTransform != nullptr)

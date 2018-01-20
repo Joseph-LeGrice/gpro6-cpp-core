@@ -61,6 +61,11 @@ public:
 			deviceContext->PSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
 		}
 	}
+    
+    void ReleaseBuffer()
+    {
+        m_buffer.ReleasePointer();
+    }
 
 	ConstantBuffer()
 	{
@@ -90,7 +95,39 @@ public:
 	}
 
 private:
-	AutoRelease<ID3D11Buffer> m_buffer;
+	ManualRelease<ID3D11Buffer> m_buffer;
+};
+
+
+template<typename... Types>
+class ConstantBufferInterfaceImpl
+{
+public:
+    template<class T>
+    T& GetBuffer()
+    {
+        return std::get<T>(m_constantBuffers);
+    }
+
+    ConstantBufferInterfaceImpl() = default;
+    ~ConstantBufferInterfaceImpl() = default;
+    ConstantBufferInterfaceImpl(ConstantBufferInterfaceImpl&) = delete;
+
+    template<int I>
+    inline typename std::enable_if<I == sizeof...(Types), void>::type
+        ReleaseAll() { }
+
+    template<int I = 0>
+    inline typename std::enable_if < I < sizeof...(Types)>::type
+        ReleaseAll()
+    {
+        auto buf = std::get<I>(m_constantBuffers);
+        buf.ReleaseBuffer();
+        ReleaseAll<I + 1>();
+    }
+
+private:
+    std::tuple<Types...> m_constantBuffers;
 };
 
 #pragma warning(pop)
