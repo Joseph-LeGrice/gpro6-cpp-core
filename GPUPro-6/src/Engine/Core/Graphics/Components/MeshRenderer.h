@@ -5,7 +5,7 @@
 struct MeshRenderer
 {
     int m_meshIndex;
-    //int m_drawCommandIndex; // 'How to draw me'
+    int m_drawCommandIndex; // 'How to draw me'
     int m_materialIndex; // 'How I am special'
 };
 

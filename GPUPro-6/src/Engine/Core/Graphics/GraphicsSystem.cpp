@@ -5,15 +5,14 @@
 #include "Engine/Core/SceneGraph/SceneGraph.h"
 #include "Engine/Core/SystemManagement/SystemManager.h"
 #include "Engine/Core/WindowManagement/WindowManager.h"
-#include "Engine/Core/Graphics/RasterizerState.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
 #include "Engine/Core/Graphics/Buffers/IndexBuffer.h"
 #include "Engine/Core/Graphics/Buffers/VertexBuffer.h"
+#include "Engine/Core/Graphics/Components/MeshRenderer.h"
 
-#include "Drawing/StandardMaterialDrawCommand.h"
-
+#include "Drawing/DrawCommandList.h"
 
 #include "FreeImage.h"
 #include <iostream>
@@ -112,7 +111,6 @@ bool GraphicsSystem::Initialize()
         m_rasterizerState->SetCullState(kCullStateNoCull);
 
         m_depthStencilBuffer = new DepthStencilBuffer(WindowManager::GetWindowWidth(), WindowManager::GetWindowHeight());
-        m_drawCommand = new StandardMaterialDrawCommand();
 
         return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
     }
@@ -132,7 +130,6 @@ void GraphicsSystem::Deinitalize()
     m_myIndexBuffer.DeletePointer();
     m_rasterizerState.DeletePointer();
     m_depthStencilBuffer.DeletePointer();
-    m_drawCommand.DeletePointer();
 
 #if defined(_DEBUG)
     m_debugInterface->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
@@ -247,7 +244,7 @@ void GraphicsSystem::VariableTick()
         perCameraBuffer.UpdateBuffer(pcb);
 
         //TODO: Chaining of draw commands?
-        m_drawCommand->Draw(view, proj);
+        GetCommandList().ExecuteAllCommands(view, proj);
 	}
 	m_swapchain->Present(0, 0);
 }

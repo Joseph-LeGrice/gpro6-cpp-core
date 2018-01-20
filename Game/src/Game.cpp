@@ -13,7 +13,7 @@
 #include "Engine/Core/SceneGraph/Components/Util/ComponentType.hpp"
 #include "Engine/Core/SceneGraph/SceneGraph.h"
 #include "Engine/Core/Graphics/ResourceTypes/Shader.h"
-#include "Engine/Core/Graphics/ResourceTypes/StandardMaterial.hpp"
+#include "Engine/Core/Graphics/ResourceTypes/Material/StandardMaterial.hpp"
 #include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2DArray.h"
@@ -26,6 +26,9 @@
 #include "Engine/Core/Utilities/MeshHelper.h"
 #include "Engine/Core/GameLoop.h"
 #include "Engine/Core/Application/Application.h"
+
+#include "Engine/Core/Graphics/Components/MeshRenderer.h"
+#include "Engine/Core/Graphics/Drawing/DrawCommandList.h"
 
 #include "MyMath/Complex/Quaternion.h"
 #include "MyMath/MathDefines.h"
@@ -45,6 +48,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         InitSystemManager();
         InitSceneGraph();
         InitConstantBufferInterface();
+        InitializeCommandList();
 
         Shader* materialShader = GetResourceManager().Instantiate<Shader>();
 
@@ -120,6 +124,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         sphereTransform.m_data.m_scale *= 10.0f;
         MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
         sphereRenderer.m_data.m_meshIndex = sphereMeshID;
+        sphereRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardMaterialDrawCommand>()->ID();
         sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
 
         // Camera
@@ -146,7 +151,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
         });
         
-        StandardMaterial* skyboxMat = GetResourceManager().Instantiate<StandardMaterial>(); // FIXME: Do not need a skybox to have this type of buffer
+        StandardMaterial* skyboxMat = GetResourceManager().Instantiate<StandardMaterial>(); // FIXME: Do not need a skybox to have this type of material
         UINT skyboxMatID = skyboxMat->GetResourceID();
         skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
         skyboxMat->RegisterShaderResource({ testCubemap->GetMyResourceViewID(), 0 });
@@ -155,6 +160,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         MeshRendererComponent& skyboxRenderer = EntityUtil::AddComponent<MeshRendererComponent>(skyboxEntity);
         skyboxRenderer.m_enabled = true;
         skyboxRenderer.m_data.m_meshIndex = sphereMeshID;
+        skyboxRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<SkyboxDrawCommand>()->ID();
         skyboxRenderer.m_data.m_materialIndex = skyboxMatID;
 
         // Tell a couple of systems to do things

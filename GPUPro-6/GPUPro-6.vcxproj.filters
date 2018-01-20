@@ -104,7 +104,11 @@
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.cpp">
+      <Filter>Engine\Core\Graphics\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -265,12 +269,23 @@
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\StandardMaterial.hpp" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.hpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\Material.hpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.hpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h">
+      <Filter>Engine\Core\Graphics\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.h">
+      <Filter>Engine\Core\Graphics\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -335,6 +350,12 @@
     </Filter>
     <Filter Include="Engine\Core\Application">
       <UniqueIdentifier>{ab6f2091-1907-467a-99e9-858799c90621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Graphics\ResourceTypes\Material">
+      <UniqueIdentifier>{42ffeda5-f51f-42c0-a981-429cb9cf3268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Graphics\Drawing">
+      <UniqueIdentifier>{e540af14-5b38-401a-a560-a86b648530e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

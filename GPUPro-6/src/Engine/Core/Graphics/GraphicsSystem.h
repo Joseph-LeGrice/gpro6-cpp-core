@@ -5,13 +5,12 @@
 
 #include <vector>
 #include "Engine/Core/SystemManagement/ISystem.h"
-
+#include "RasterizerState.h"
 
 class VertexBuffer;
 class IndexBuffer;
 class DepthStencilBuffer;
 class RasterizerState;
-class StandardMaterialDrawCommand;
 
 class GraphicsSystem : public ISystem
 {
@@ -44,13 +43,11 @@ private:
 #endif
 
 	bool m_isDirty;
-    AutoPointer<RasterizerState> m_rasterizerState;
-    AutoPointer<VertexBuffer> m_myVertexBuffer;
-    AutoPointer<DepthStencilBuffer> m_depthStencilBuffer;
     AutoPointer<IndexBuffer> m_myIndexBuffer;
+    AutoPointer<VertexBuffer> m_myVertexBuffer;
+    AutoPointer<RasterizerState> m_rasterizerState;
+    AutoPointer<DepthStencilBuffer> m_depthStencilBuffer;
     
-    AutoPointer<StandardMaterialDrawCommand> m_drawCommand;
-
 	float m_viewportWidth, m_viewportHeight;
 	
 	void UpdateIfDirty();
