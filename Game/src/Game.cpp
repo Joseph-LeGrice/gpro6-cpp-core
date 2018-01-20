@@ -180,6 +180,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     DestroySceneGraph();
     DestroyResourceManager();
     DestroySystemManager();
+    DestroyCommandList();
 
     WindowManager::ShutdownWindow();
 
