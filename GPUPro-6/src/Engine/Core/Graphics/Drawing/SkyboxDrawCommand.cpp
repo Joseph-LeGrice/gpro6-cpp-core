@@ -4,9 +4,6 @@
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/SystemManagement/SystemManager.h"
 
-#pragma warning(push)
-#pragma warning(disable: 4100)
-
 void SkyboxDrawCommand::PreDrawAll()
 {
     GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
@@ -18,5 +15,3 @@ bool SkyboxDrawCommand::BindMaterial(MeshRendererComponent& mrc)
     StandardMaterial* mat = GetResourceManager().GetAsset<StandardMaterial>(mrc.m_data.m_materialIndex);
     return mat->BindIfValid();
 }
-
-#pragma warning(pop)
