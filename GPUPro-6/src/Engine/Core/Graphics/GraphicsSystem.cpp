@@ -6,12 +6,14 @@
 #include "Engine/Core/SystemManagement/SystemManager.h"
 #include "Engine/Core/WindowManagement/WindowManager.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
-#include "Engine/Core/Graphics/ResourceTypes/Material.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
 #include "Engine/Core/Graphics/Buffers/IndexBuffer.h"
 #include "Engine/Core/Graphics/Buffers/VertexBuffer.h"
+
+#include "Drawing/StandardMaterialDrawCommand.h"
+
 
 #include "FreeImage.h"
 #include <iostream>
@@ -110,6 +112,7 @@ bool GraphicsSystem::Initialize()
         m_rasterizerState->SetCullState(kCullStateNoCull);
 
         m_depthStencilBuffer = new DepthStencilBuffer(WindowManager::GetWindowWidth(), WindowManager::GetWindowHeight());
+        m_drawCommand = new StandardMaterialDrawCommand();
 
         return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
     }
@@ -129,6 +132,7 @@ void GraphicsSystem::Deinitalize()
     m_myIndexBuffer.DeletePointer();
     m_rasterizerState.DeletePointer();
     m_depthStencilBuffer.DeletePointer();
+    m_drawCommand.DeletePointer();
 
 #if defined(_DEBUG)
     m_debugInterface->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
@@ -222,7 +226,6 @@ void GraphicsSystem::VariableTick()
     m_depthStencilBuffer->ClearBuffer();
     m_depthStencilBuffer->SetState();
 
-	UINT16 currentIndex = 0;
     size_t allCamerasSize = GetSceneGraph().GetNumberOfComponents<CameraComponent>();
 	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
 	{
@@ -234,9 +237,6 @@ void GraphicsSystem::VariableTick()
 		Matrix4x4 view = Transform::GetCameraViewMatrix(cameraTransform.m_data);
 		Matrix4x4 proj = cam.m_data.m_projectionMatrix;
 
-        MeshRendererComponent* meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
-        size_t numberOfMeshRenderers = GetSceneGraph().GetNumberOfComponents<MeshRendererComponent>();
-
         PER_CAMERA_BUFFER pcb;
         pcb.EyePos.X = cameraTransform.m_data.m_position.X;
         pcb.EyePos.Y = cameraTransform.m_data.m_position.Y;
@@ -246,43 +246,8 @@ void GraphicsSystem::VariableTick()
         pcb.Projection = proj;
         perCameraBuffer.UpdateBuffer(pcb);
 
-        for (size_t i = 0; i < numberOfMeshRenderers; ++i)
-		{
-            MeshRendererComponent mrc = meshRenderers[i];
-            EntityComponent& meshEntity = *GetSceneGraph().GetComponent<EntityComponent>(mrc.m_entityIndex);
-
-            int meshIndex = mrc.m_data.m_meshIndex;
-            int materialIndex = mrc.m_data.m_materialIndex;
-
-            Mesh& mesh = *GetResourceManager().GetAsset<Mesh>(meshIndex);
-            UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
-
-            if (mrc.m_enabled)
-            {
-                Material& mat = *GetResourceManager().GetAsset<Material>(materialIndex);
-                if (mat.BindIfValid())
-                {
-                    TransformComponent* modelTransform = EntityUtil::GetComponent<TransformComponent>(meshEntity);
-
-                    Matrix4x4 model;
-                    Matrix4x4::Identity(model);
-                    if (modelTransform != nullptr)
-                    {
-                        model = Transform::GetMatrix(modelTransform->m_data);
-                    }
-
-                    PER_OBJECT_BUFFER pob;
-                    pob.ModelViewProjection = proj * view * model;
-                    pob.ModelView = view * model;
-
-                    perObjectBuffer.UpdateBuffer(pob);
-
-                    m_deviceContext->IASetPrimitiveTopology(mesh.m_topology);
-                    m_deviceContext->DrawIndexed(numberOfVerts, currentIndex, 0);
-                }
-            }
-			currentIndex += numberOfVerts;
-		}
+        //TODO: Chaining of draw commands?
+        m_drawCommand->Draw(view, proj);
 	}
 	m_swapchain->Present(0, 0);
 }

@@ -224,7 +224,7 @@
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
@@ -267,7 +267,10 @@
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\StandardMaterial.hpp" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />
@@ -286,7 +289,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\VertexData.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Shader.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.h" />

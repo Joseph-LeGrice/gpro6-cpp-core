@@ -4,9 +4,9 @@
 
 struct MeshRenderer
 {
-    //TODO: MeshRenderer- thoughts. Maybe instead of simple int's, m_meshIndex, m_materialIndex should reference a defined "Resource". Create a new 'ResourceReference' struct which could encode a type and an id. may require serialization to exist, each resource type could be loaded in their own way.
     int m_meshIndex;
-    int m_materialIndex;
+    //int m_drawCommandIndex; // 'How to draw me'
+    int m_materialIndex; // 'How I am special'
 };
 
 namespace MeshRendererInternal

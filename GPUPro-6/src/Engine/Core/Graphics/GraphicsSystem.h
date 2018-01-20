@@ -6,10 +6,12 @@
 #include <vector>
 #include "Engine/Core/SystemManagement/ISystem.h"
 
+
 class VertexBuffer;
 class IndexBuffer;
 class DepthStencilBuffer;
 class RasterizerState;
+class StandardMaterialDrawCommand;
 
 class GraphicsSystem : public ISystem
 {
@@ -46,6 +48,8 @@ private:
     AutoPointer<VertexBuffer> m_myVertexBuffer;
     AutoPointer<DepthStencilBuffer> m_depthStencilBuffer;
     AutoPointer<IndexBuffer> m_myIndexBuffer;
+    
+    AutoPointer<StandardMaterialDrawCommand> m_drawCommand;
 
 	float m_viewportWidth, m_viewportHeight;
 	

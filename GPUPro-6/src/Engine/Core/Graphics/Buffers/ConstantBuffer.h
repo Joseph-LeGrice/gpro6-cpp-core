@@ -25,7 +25,7 @@ class ConstantBuffer
 	static_assert(sizeof(T) <= D3D11_REQ_CONSTANT_BUFFER_ELEMENT_COUNT, "Constant Buffer size must be less than or equal to D3D11_REQ_CONSTANT_BUFFER_ELEMENT_COUNT");
 
 public:
-	void UpdateBuffer(T& data)
+	void UpdateBuffer(const T& data)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
 		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();

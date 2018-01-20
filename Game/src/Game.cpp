@@ -13,7 +13,7 @@
 #include "Engine/Core/SceneGraph/Components/Util/ComponentType.hpp"
 #include "Engine/Core/SceneGraph/SceneGraph.h"
 #include "Engine/Core/Graphics/ResourceTypes/Shader.h"
-#include "Engine/Core/Graphics/ResourceTypes/Material.h"
+#include "Engine/Core/Graphics/ResourceTypes/StandardMaterial.hpp"
 #include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2DArray.h"
@@ -56,7 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         std::wstring testImagePath = Application::GetResourcePath(L"GameResources/GPro_Test/TestImage.png");
         testImageTexture->InitializeWithBitmap(testImagePath.c_str());
 
-        Material* simpleTestMaterial = GetResourceManager().Instantiate<Material>();
+        StandardMaterial* simpleTestMaterial = GetResourceManager().Instantiate<StandardMaterial>();
         simpleTestMaterial->SetShaderIndex(materialShader->GetResourceID());
         UINT simpleTestMaterialID = simpleTestMaterial->GetResourceID();
 
@@ -97,9 +97,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //mat.SpecularScale;
         //mat.AlphaThreshold;
         MATERIAL_BUFFER_CONTAINER buf = { mat };
-        StandardMaterialBuffer& smb = GetConstantBufferInterface().GetBuffer<StandardMaterialBuffer>();
-        smb.UpdateBuffer(buf);
-        smb.BindBuffer();
+        simpleTestMaterial->SetData(buf);
         //------------------------------------------------------------------------------------
 		
         // Light
@@ -148,7 +146,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
         });
         
-        Material* skyboxMat = GetResourceManager().Instantiate<Material>(); // FIXME: Do not need a skybox to have this type of buffer
+        StandardMaterial* skyboxMat = GetResourceManager().Instantiate<StandardMaterial>(); // FIXME: Do not need a skybox to have this type of buffer
         UINT skyboxMatID = skyboxMat->GetResourceID();
         skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
         skyboxMat->RegisterShaderResource({ testCubemap->GetMyResourceViewID(), 0 });

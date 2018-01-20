@@ -101,12 +101,10 @@
     <ClCompile Include="src\Engine\Core\Application\Application.cpp">
       <Filter>Engine\Core\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -264,10 +262,13 @@
     <ClInclude Include="src\Engine\Core\Application\Application.h">
       <Filter>Engine\Core\Application</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.h">
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h">
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\StandardMaterial.hpp" />
+    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material.hpp">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
   </ItemGroup>
