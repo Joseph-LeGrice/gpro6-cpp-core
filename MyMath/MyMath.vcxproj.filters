@@ -42,6 +42,9 @@
     <ClInclude Include="src\MyMath\Assertions.h">
       <Filter>MyMath</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyMath\MyMath.h">
+      <Filter>MyMath</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyMath\Matrix\Matrix3x3.cpp">

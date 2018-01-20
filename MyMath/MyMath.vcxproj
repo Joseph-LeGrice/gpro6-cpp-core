@@ -143,6 +143,7 @@
     <ClInclude Include="src\MyMath\Matrix\Matrix3x3.h" />
     <ClInclude Include="src\MyMath\Matrix\Matrix4x4.h" />
     <ClInclude Include="src\MyMath\Complex\Quaternion.h" />
+    <ClInclude Include="src\MyMath\MyMath.h" />
     <ClInclude Include="src\MyMath\Vector\Vector2.h" />
     <ClInclude Include="src\MyMath\Vector\Vector3.h" />
     <ClInclude Include="src\MyMath\Vector\Vector4.h" />

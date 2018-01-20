@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Material.hpp"
-#include "MyMath/Vector/Vector2.h"
-#include "MyMath/Vector/Vector4.h"
 
 struct MATERIAL_BUFFER
 {

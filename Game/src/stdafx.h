@@ -20,4 +20,4 @@
 #include "Engine/Core/Utilities/PointerRelease.hpp"
 #include "Engine/Core/Utilities/StaticPointer.hpp"
 #include "Engine/Core/Utilities/AutoPointer.hpp"
-#include "MyMath/Assertions.h"
+#include "MyMath/MyMath.h"
