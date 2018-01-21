@@ -21,7 +21,9 @@ public:
         PreDrawAll();
 
         PerObjectBuffer& perObjectBuffer = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
-        ID3D11DeviceContext& deviceContext = *GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+
+        GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
+        ID3D11DeviceContext& deviceContext = *gs->GetGraphicsDeviceContext();
 
         UINT16 currentIndex = 0;
         MeshRendererComponent* meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();

@@ -108,7 +108,7 @@ bool GraphicsSystem::Initialize()
         m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
             
         m_rasterizerState = new RasterizerState();
-        m_rasterizerState->SetCullState(kCullStateNoCull);
+        m_rasterizerState->SetState({ kCullStateBackCull, true });
 
         m_depthStencilBuffer = new DepthStencilBuffer(WindowManager::GetWindowWidth(), WindowManager::GetWindowHeight());
 

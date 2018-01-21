@@ -16,7 +16,7 @@ StandardMaterialDrawCommand::~StandardMaterialDrawCommand()
 void StandardMaterialDrawCommand::PreDrawAll()
 {
     GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
-    gs->GetRasterizerState()->SetCullState(kCullStateBackCull);
+    gs->GetRasterizerState()->SetState({ kCullStateBackCull, true });
 
     m_constantBuffer.BindBuffer();
 }

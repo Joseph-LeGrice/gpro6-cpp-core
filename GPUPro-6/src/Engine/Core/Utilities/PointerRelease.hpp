@@ -27,12 +27,30 @@ public:
 
     bool operator ==(void* p) { return m_pointer == p; }
     bool operator !=(void* p) { return m_pointer != p; }
-    void operator =(T& r) { m_pointer = &r; }
-    void operator =(T* pointer) { m_pointer = pointer; }
+    
     T* operator ->() { return m_pointer; }
 
     operator T**() { return &m_pointer; }
     operator T*() { return m_pointer; }
+    operator T&() { return *m_pointer; }
+
+    void operator =(T& r)
+    {
+        if (m_pointer != nullptr)
+        {
+            ReleasePointer();
+        }
+        m_pointer = &r;
+    }
+
+    void operator =(T* pointer)
+    {
+        if (m_pointer != nullptr)
+        {
+            ReleasePointer();
+        }
+        m_pointer = pointer;
+    }
 
 private:
     T* m_pointer;
@@ -68,13 +86,30 @@ public:
 
     bool operator ==(void* p) { return m_pointer == p; }
     bool operator !=(void* p) { return m_pointer != p; }
-    void operator =(T& r) { m_pointer = &r; }
-    void operator =(T* p) { m_pointer = p; }
+    
     T* operator ->() { return m_pointer; }
 
     operator T**() { return &m_pointer; }
     operator T*() { return m_pointer; }
     operator T&() { return *m_pointer; }
+
+    void operator =(T& r)
+    {
+        if (m_pointer != nullptr)
+        {
+            ReleasePointer();
+        }
+        m_pointer = &r;
+    }
+
+    void operator =(T* pointer)
+    {
+        if (m_pointer != nullptr)
+        {
+            ReleasePointer();
+        }
+        m_pointer = pointer;
+    }
 
 private:
     T* m_pointer;

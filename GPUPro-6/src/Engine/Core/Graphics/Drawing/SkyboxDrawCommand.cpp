@@ -7,7 +7,7 @@
 void SkyboxDrawCommand::PreDrawAll()
 {
     GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
-    gs->GetRasterizerState()->SetCullState(kCullStateFrontCull);
+    gs->GetRasterizerState()->SetState({ kCullStateFrontCull, true });
 }
 
 bool SkyboxDrawCommand::BindMaterial(MeshRendererComponent& mrc)
