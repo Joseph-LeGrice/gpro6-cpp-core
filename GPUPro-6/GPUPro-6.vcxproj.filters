@@ -104,9 +104,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.cpp">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
@@ -118,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp">
       <Filter>Engine\Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp">
+      <Filter>Engine\Core\Graphics\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp">
+      <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -288,9 +291,6 @@
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.h">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.h">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
@@ -302,6 +302,12 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h">
       <Filter>Engine\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.h">
+      <Filter>Engine\Core\Graphics\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.h">
+      <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

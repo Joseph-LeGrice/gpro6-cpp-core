@@ -1,0 +1,17 @@
+#pragma once
+#include "IDrawCommand.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
+
+class StandardOpaqueMaterialDrawCommand : public IDrawCommand<0>
+{
+public:
+    StandardOpaqueMaterialDrawCommand();
+    ~StandardOpaqueMaterialDrawCommand();
+
+protected:
+    virtual void PreDrawAll() override;
+    virtual bool BindMaterial(MeshRendererComponent& mrc) override;
+
+private:
+    ConstantBuffer<MATERIAL_BUFFER_CONTAINER, MATERIAL_BUFFER_SLOT, BIND_ALL> m_constantBuffer;
+};

@@ -5,26 +5,22 @@
 
 enum BlendFactor
 {
-    kBlendZero = 1,
-    kBlendOne = 2,
-    kBlendSrcColor = 3,
-    kBlendSrcColorInv = 4,
-    kBlendSrcAlpha = 5,
-    kBlendSrcAlphaInv = 6,
-    kBlendDestAlpha = 7,
-    kBlendDestAlphaInv = 8,
-    kBlendDestColor = 9,
-    kBlendDestColorInv = 10,
-    kBlendSrcAlphaSat = 11,
-    kBlendBlendFactor = 14,
-    kBlendBlendFactorInv = 15,
-    kBlendSrc1Color = 16,
-    kBlendSrc1ColorInv = 17,
-    kBlendSrc1Alpha = 18,
-    kBlendSrcOneAlphaInv = 19
+    kBlendZero,
+    kBlendOne,
+    kBlendSrc,
+    kBlendSrcInv,
+    kBlendDest,
+    kBlendDestInv
+    //kBlendSrcAlphaSat = 11,
+    //kBlendBlendFactor = 14,
+    //kBlendBlendFactorInv = 15,
+    //kBlendSrc1Color = 16,
+    //kBlendSrc1ColorInv = 17,
+    //kBlendSrc1Alpha = 18,
+    //kBlendSrcOneAlphaInv = 19
 };
 
-enum BlendOp
+enum BlendOperation
 {
     kBlendOpAdd = 1,
     kBlendOpSubtract = 2,
@@ -39,23 +35,23 @@ struct BlendStateDescriptor
 
     BlendFactor m_srcColor = kBlendOne;
     BlendFactor m_destColor = kBlendZero;
-    BlendOp m_colorBlendOp = kBlendOpAdd;
+    BlendOperation m_colorBlendOp = kBlendOpAdd;
     
     BlendFactor m_srcAlpha = kBlendOne;
     BlendFactor m_destAlpha = kBlendZero;
-    BlendOp m_alphaBlendOp = kBlendOpAdd;
+    BlendOperation m_alphaBlendOp = kBlendOpAdd;
 
     UINT8 m_renderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
     BlendStateDescriptor(BOOL enabled) : m_blendEnabled(enabled) { }
 
-    BlendStateDescriptor(BlendFactor bf1, BlendFactor bf2, BlendOp bop) : m_blendEnabled(TRUE),
+    BlendStateDescriptor(BlendFactor bf1, BlendFactor bf2, BlendOperation bop) : m_blendEnabled(TRUE),
         m_srcColor(bf1), m_destColor(bf2), m_colorBlendOp(bop),
         m_srcAlpha(bf1), m_destAlpha(bf2), m_alphaBlendOp(bop)
     { }
 
-    BlendStateDescriptor(BlendFactor colBf1, BlendFactor coBf2, BlendOp colBop,
-        BlendFactor alphaBf1, BlendFactor alphaBf2, BlendOp alphaBop) : m_blendEnabled(TRUE),
+    BlendStateDescriptor(BlendFactor colBf1, BlendFactor coBf2, BlendOperation colBop,
+        BlendFactor alphaBf1, BlendFactor alphaBf2, BlendOperation alphaBop) : m_blendEnabled(TRUE),
         m_srcColor(colBf1), m_destColor(coBf2), m_colorBlendOp(colBop),
         m_srcAlpha(alphaBf1), m_destAlpha(alphaBf2), m_alphaBlendOp(alphaBop)
     { }
@@ -113,5 +109,6 @@ private:
     std::unordered_map<BlendStateDescriptor, ManualRelease<ID3D11BlendState>> m_blendStates;
     
     ManualRelease<ID3D11BlendState>& GetBlendStateForDescriptor(BlendStateDescriptor& bsd);
+    D3D11_BLEND BlendFactorToNative(BlendFactor bf, bool isAlpha);
 };
 

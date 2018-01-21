@@ -84,7 +84,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         mat.SpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
         //mat.Reflectance;
 
-        //mat.Opacity;
+        //mat.Opacity = 0.1f;
         mat.SpecularPower = 10.0f;
         //mat.IndexOfRefraction;
 
@@ -124,7 +124,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         sphereTransform.m_data.m_scale *= 10.0f;
         MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
         sphereRenderer.m_data.m_meshIndex = sphereMeshID;
-        sphereRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardMaterialDrawCommand>()->ID();
+        sphereRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>()->ID();
         sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
 
         // Camera

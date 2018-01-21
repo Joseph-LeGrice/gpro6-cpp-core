@@ -1,16 +1,12 @@
 #pragma once
-
 #include "IDrawCommand.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
-#include "Engine/Core/Graphics/ResourceTypes/Material/StandardMaterial.hpp"
 
-struct MeshRenderer;
-
-class StandardMaterialDrawCommand : public IDrawCommand<0>
+class StandardTransparentMaterialDrawCommand : public IDrawCommand<3>
 {
 public:
-    StandardMaterialDrawCommand();
-    ~StandardMaterialDrawCommand();
+    StandardTransparentMaterialDrawCommand();
+    ~StandardTransparentMaterialDrawCommand();
 
 protected:
     virtual void PreDrawAll() override;
@@ -19,3 +15,4 @@ protected:
 private:
     ConstantBuffer<MATERIAL_BUFFER_CONTAINER, MATERIAL_BUFFER_SLOT, BIND_ALL> m_constantBuffer;
 };
+

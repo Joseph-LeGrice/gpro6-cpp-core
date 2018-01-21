@@ -2,10 +2,10 @@
 #pragma warning(push)
 #pragma warning(disable: 4100)
 
-#include "SkyboxDrawCommand.h"
-#include "MyMath/Matrix/Matrix4x4.h"
-#include "StandardMaterialDrawCommand.h"
 #include <tuple>
+#include "SkyboxDrawCommand.h"
+#include "StandardOpaqueMaterialDrawCommand.h"
+#include "StandardTransparentMaterialDrawCommand.h"
 
 template<class... Commands>
 class DrawCommandListImpl
@@ -35,7 +35,8 @@ private:
 
 typedef DrawCommandListImpl<
     SkyboxDrawCommand,
-    StandardMaterialDrawCommand
+    StandardOpaqueMaterialDrawCommand,
+    StandardTransparentMaterialDrawCommand
 > CommandList;
 
 void InitializeCommandList();

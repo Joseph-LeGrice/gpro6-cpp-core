@@ -227,7 +227,7 @@
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
@@ -267,6 +267,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h" />
@@ -275,7 +276,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardMaterialDrawCommand.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
@@ -331,6 +332,7 @@
     <ClInclude Include="src\targetver.h" />
     <ClInclude Include="src\Engine\Core\WindowManagement\WindowManager.h" />
     <ClInclude Include="src\Engine\Core\Utilities\StaticPointer.hpp" />
+    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Engine\Shaders\CommonInclude.hlsl">
