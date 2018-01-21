@@ -6,6 +6,7 @@
 #include <vector>
 #include "Engine/Core/SystemManagement/ISystem.h"
 #include "RasterizerState.h"
+#include "BlendState.h"
 
 class VertexBuffer;
 class IndexBuffer;
@@ -20,6 +21,8 @@ public:
 	ID3D11DeviceContext* GetGraphicsDeviceContext();
     DepthStencilBuffer* GetDepthStencilBuffer();
     RasterizerState* GetRasterizerState();
+    BlendState* GetBlendState();
+
     void SetDirty();
 
     GraphicsSystem();
@@ -46,6 +49,7 @@ private:
     AutoPointer<IndexBuffer> m_myIndexBuffer;
     AutoPointer<VertexBuffer> m_myVertexBuffer;
     AutoPointer<RasterizerState> m_rasterizerState;
+    AutoPointer<BlendState> m_blendState;
     AutoPointer<DepthStencilBuffer> m_depthStencilBuffer;
     
 	float m_viewportWidth, m_viewportHeight;

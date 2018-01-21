@@ -116,6 +116,9 @@
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.cpp">
       <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -296,6 +299,9 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.h">
       <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\BlendState.h">
+      <Filter>Engine\Core\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

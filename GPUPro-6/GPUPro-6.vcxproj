@@ -222,6 +222,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp" />
     <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp" />
@@ -268,6 +269,7 @@
     <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Core\Graphics\BlendState.h" />
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.h" />

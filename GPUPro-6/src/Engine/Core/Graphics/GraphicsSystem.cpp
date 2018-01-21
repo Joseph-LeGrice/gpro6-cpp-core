@@ -112,6 +112,9 @@ bool GraphicsSystem::Initialize()
 
         m_depthStencilBuffer = new DepthStencilBuffer(WindowManager::GetWindowWidth(), WindowManager::GetWindowHeight());
 
+        m_blendState = new BlendState();
+        m_blendState->SetState({ false });
+
         return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
     }
 
@@ -160,6 +163,11 @@ DepthStencilBuffer* GraphicsSystem::GetDepthStencilBuffer()
 RasterizerState* GraphicsSystem::GetRasterizerState()
 {
     return m_rasterizerState;
+}
+
+BlendState* GraphicsSystem::GetBlendState()
+{
+    return m_blendState;
 }
 
 float GraphicsSystem::GetViewportWidth()

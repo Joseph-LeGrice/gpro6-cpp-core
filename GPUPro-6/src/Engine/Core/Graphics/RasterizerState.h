@@ -32,8 +32,8 @@ namespace std
         {
             using std::size_t;
             using std::hash;
-            return (hash<int>()(obj.m_cullState)
-                    ^ (hash<bool>()(obj.m_enableMSAA) << 1) >> 1);
+            return hash<int>()(obj.m_cullState)
+                ^ (hash<bool>()(obj.m_enableMSAA) << 1);
         }
     };
 }
