@@ -9,5 +9,5 @@ Color operator*(Color rhs, float lhs)
         rhs.B * lhs,
         rhs.A * lhs
     );
-    return rhs;
+    return c;
 }
