@@ -16,6 +16,11 @@ namespace MyMath
         return a <= b ? a : b;
     }
 
+    __forceinline int FloorToInt(float a)
+    {
+        return (int)floor(a);
+    }
+
     __forceinline float Clamp(float value, float minValue, float maxValue)
     {
         return Max(Min(value, maxValue), minValue);
@@ -30,5 +35,10 @@ namespace MyMath
     {
         time = Clamp01(time);
         return a + (b - a) * time;
+    }
+    
+    __forceinline float Lerp(int a, int b, float time)
+    {
+        return Lerp(static_cast<float>(a), static_cast<float>(b), time);
     }
 }
