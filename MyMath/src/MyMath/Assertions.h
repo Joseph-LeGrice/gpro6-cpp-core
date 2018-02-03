@@ -2,43 +2,43 @@
 
 namespace custom_assert
 {
-    inline void is_true(bool x, const char* message = "custom_assert::is_true failed!")
+    __forceinline void is_true(const bool& x)
     {
-        if (!x) throw message;
+        if (!x) throw "Assertion Failed";
     }
     
     template<typename N>
-    inline void range(N x, N xMin, N xMax, const char* message = "custom_assert::in_range failed!")
+    __forceinline void range(const N& x, const N& xMin, const N& xMax)
     {
-        is_true(x >= xMin && x < xMax, message);
+        is_true(x >= xMin && x < xMax);
     }
 
     template<typename N, typename A>
-    inline void in_range(N x, A y, const char* message = "custom_assert::in_range failed!")
+    __forceinline void in_range(const N& x, const A& y)
     {
-        is_true(x >= 0 && x < y.size(), message);
+        is_true(x >= 0 && x < y.size());
     }
 
     template<typename N>
-    inline void equal(N x, N y, const char* message = "custom_assert::equal failed!")
+    __forceinline void equal(const N& x, const N& y)
     {
-        is_true(x == y, message);
+        is_true(x == y);
     }
 
     template<typename N>
-    inline void not_equal(N x, N y, const char* message = "custom_assert::not_equal failed!")
+    __forceinline void not_equal(const N& x, const N& y)
     {
-        is_true(x != y, message);
+        is_true(x != y);
     }
 
     template<typename N>
-    inline void not_nan(N x)
+    __forceinline void not_nan(const N& x)
     {
         is_true(!isnan(x));
     }
 
     template<typename N>
-    inline void not_inf(N x)
+    __forceinline void not_inf(const N& x)
     {
         is_true(!isinf(x));
     }
