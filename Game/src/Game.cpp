@@ -150,7 +150,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         int cameraEntityId = cameraEntity.m_componentIndex;
         TransformComponent& cameraTransform = EntityUtil::AddComponent<TransformComponent>(cameraEntity);
         UINT cameraTransformId = cameraTransform.m_componentIndex;
-        cameraTransform.m_data.m_position = { 0.0f, 0.0f, -50.0f };
+        cameraTransform.m_data.m_position = { 0.0f, 0.0f, -15.0f };
         CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
         //------------------------------------------------------------------------------------
 
