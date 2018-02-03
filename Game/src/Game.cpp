@@ -127,7 +127,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         marchingSquaresMaterial->AddTextureSampler({ textureSampler->GetResourceID(), 0 });
 
         MATERIAL_BUFFER marchinSquaresMatBuf;
-        ZeroMemory(&mat, sizeof(MATERIAL_BUFFER));
+        ZeroMemory(&marchinSquaresMatBuf, sizeof(MATERIAL_BUFFER));
         marchinSquaresMatBuf.DiffuseColor = { 1.0f, 1.0f, 1.0f, 1.0f };
         marchinSquaresMatBuf.SpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
         marchinSquaresMatBuf.SpecularPower = 10.0f;
@@ -135,11 +135,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         MATERIAL_BUFFER_CONTAINER marchinSquaresMatBufBuf = { marchinSquaresMatBuf };
         marchingSquaresMaterial->SetData(marchinSquaresMatBufBuf);
 
-        Mesh* quadMesh = MeshHelper::CreateQuad();
         EntityComponent& quadEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& quadTransform = EntityUtil::AddComponent<TransformComponent>(quadEntity);
+        quadTransform.m_data.m_scale = 5 * Vector3::One();
         MeshRendererComponent& quadRenderer = EntityUtil::AddComponent<MeshRendererComponent>(quadEntity);
-        quadRenderer.m_data.m_meshIndex = quadMesh->GetResourceID();
+        quadRenderer.m_data.m_meshIndex = 0;
         quadRenderer.m_data.m_materialIndex = marchingSquaresMaterial->GetResourceID();
         quadRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>()->ID();
         //------------------------------------------------------------------------------------
