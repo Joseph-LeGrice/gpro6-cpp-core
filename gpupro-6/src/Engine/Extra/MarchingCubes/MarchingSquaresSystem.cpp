@@ -9,7 +9,6 @@ const UINT c_gridSize = 64;
 bool MarchingSquaresSystem::Initialize()
 {
     Texture2D* tex = GetResourceManager().Instantiate<Texture2D>();
-    m_textureResourceId = tex->GetResourceViewID();
 
     Color allColors[c_gridSize * c_gridSize];
     for (int x = 0; x < c_gridSize; x++)
@@ -32,6 +31,8 @@ bool MarchingSquaresSystem::Initialize()
 
     tex->InitializeWithDimensions(c_gridSize, c_gridSize);
     tex->SetPixels(allColors, c_gridSize * c_gridSize);
+  
+    m_textureResourceId = tex->GetResourceViewID();
     return true;
 }
 
