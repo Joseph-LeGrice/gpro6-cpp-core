@@ -20,4 +20,15 @@ namespace MyMath
     {
         return Max(Min(value, maxValue), minValue);
     }
+
+    __forceinline float Clamp01(float value)
+    {
+        return Clamp(value, 0, 1);
+    }
+
+    __forceinline float Lerp(float a, float b, float time)
+    {
+        time = Clamp01(time);
+        return a + (b - a) * time;
+    }
 }

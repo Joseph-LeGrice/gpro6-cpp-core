@@ -146,7 +146,7 @@ Vector3 Vector3::Cross(const Vector3& a, const Vector3& b)
 
 Vector3 Vector3::Lerp(const Vector3& a, const Vector3& b, float time)
 {
-    time = MyMath::Clamp(time, 0.0f, 1.0f);
+    time = MyMath::Clamp01(time);
     Vector3 offset = b - a;
     offset.Normalize();
     return a + offset * time;
