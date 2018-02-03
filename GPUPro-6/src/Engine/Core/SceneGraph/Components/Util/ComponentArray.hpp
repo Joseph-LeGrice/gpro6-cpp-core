@@ -6,9 +6,7 @@ const size_t c_maximumComponents = 250;
 
 template<typename T>
 struct ComponentArray
-{
-    static_assert(std::is_pod<T>::value, "Component must be a POD type!");
-    
+{    
     int InsertComponent(T& newComp)
     {
         if (m_currentSize < c_maximumComponents)
