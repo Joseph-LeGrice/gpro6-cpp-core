@@ -8,9 +8,15 @@ namespace custom_assert
     }
     
     template<typename N>
-    inline void range(N x, N xMin, N xMax, const char* message = "custom_assert::range failed!")
+    inline void range(N x, N xMin, N xMax, const char* message = "custom_assert::in_range failed!")
     {
         is_true(x >= xMin && x < xMax, message);
+    }
+
+    template<typename N, typename A>
+    inline void in_range(N x, A y, const char* message = "custom_assert::in_range failed!")
+    {
+        is_true(x >= 0 && x < y.size(), message);
     }
 
     template<typename N>

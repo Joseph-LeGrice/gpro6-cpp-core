@@ -24,7 +24,7 @@ public:
     virtual void Release() override;
 
 private:
-    int m_myShaderResourceViewId;
+    int m_myShaderResourceViewId = -1;
     FIBITMAP* m_bitmap = nullptr;
 	ManualRelease<ID3D11Texture2D> m_pTexture;
 	

@@ -20,6 +20,7 @@ public:
     T* GetAsset(int arrayIndex)
     {
         std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
+        custom_assert::in_range(arrayIndex, resources);
         return &resources[arrayIndex];
     }
 
@@ -27,6 +28,8 @@ public:
     void Deallocate(int arrayIndex)
     {
         std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
+        custom_assert::in_range(arrayIndex, resources);
+        
         int lastIndex = static_cast<int>(resources.size()) - 1;
         T& deletedAsset = resources[arrayIndex];
         deletedAsset.Release();

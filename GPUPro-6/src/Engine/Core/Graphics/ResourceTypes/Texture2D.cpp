@@ -25,6 +25,7 @@ unsigned int Texture2D::Height()
 
 int Texture2D::GetResourceViewID()
 {
+    custom_assert::is_true(m_myShaderResourceViewId > -1);
     return m_myShaderResourceViewId;
 }
 
