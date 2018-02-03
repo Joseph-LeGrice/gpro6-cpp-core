@@ -89,9 +89,6 @@
     <ClCompile Include="src\Engine\Core\Utilities\MeshHelper.cpp">
       <Filter>Engine\Core\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Utilities\PerlinNoise.cpp">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp">
       <Filter>Engine\Core\WindowManagement</Filter>
     </ClCompile>
@@ -123,6 +120,9 @@
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\Utilities\Noise.cpp">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -262,9 +262,6 @@
     <ClInclude Include="src\Engine\Core\Utilities\MeshHelper.h">
       <Filter>Engine\Core\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Utilities\PerlinNoise.h">
-      <Filter>Engine\Core\Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\Utilities\PointerRelease.hpp">
       <Filter>Engine\Core\Utilities</Filter>
     </ClInclude>
@@ -311,6 +308,9 @@
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\Noise.h">
+      <Filter>Engine\Core\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

@@ -260,7 +260,7 @@
     <ClCompile Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.cpp" />
     <ClCompile Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities\MeshHelper.cpp" />
-    <ClCompile Include="src\Engine\Core\Utilities\PerlinNoise.cpp" />
+    <ClCompile Include="src\Engine\Core\Utilities\Noise.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -328,7 +328,7 @@
     <ClInclude Include="src\Engine\Core\Utilities\PointerRelease.hpp" />
     <ClInclude Include="src\Engine\Core\Utilities\Logging.h" />
     <ClInclude Include="src\Engine\Core\Utilities\MeshHelper.h" />
-    <ClInclude Include="src\Engine\Core\Utilities\PerlinNoise.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\Noise.h" />
     <ClInclude Include="src\Resource.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
