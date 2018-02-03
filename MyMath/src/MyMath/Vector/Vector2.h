@@ -9,7 +9,7 @@ struct Vector2
     static Vector2 Normalized(const Vector2& v);
 
     void Normalize();
-    float Magnitude();
+    float Magnitude() const;
 
     Vector2() : X(0), Y(0) { }
     Vector2(float x, float y) : X(x), Y(y) { }
