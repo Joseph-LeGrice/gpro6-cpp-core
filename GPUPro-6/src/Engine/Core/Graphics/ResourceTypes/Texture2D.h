@@ -5,6 +5,8 @@
 #include "FreeImage.h"
 #include <string>
 
+struct Color;
+
 class Texture2D : public IResource
 {
 public:
@@ -12,10 +14,13 @@ public:
     Texture2D();
     ~Texture2D();
 
+    unsigned int Width();
+    unsigned int Height();
+
     int GetResourceViewID();
     void InitializeWithBitmap(const wchar_t* filepath);
-    //void InitializeWithDimensions(UINT width, UINT width);
-    
+    void InitializeWithDimensions(UINT width, UINT height);
+    void SetPixels(Color cArray[], size_t arraySize);
     virtual void Release() override;
 
 private:

@@ -115,6 +115,8 @@ bool GraphicsSystem::Initialize()
         m_blendState = new BlendState();
         m_blendState->SetState({ false });
 
+        InitConstantBufferInterface();
+
         return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
     }
 

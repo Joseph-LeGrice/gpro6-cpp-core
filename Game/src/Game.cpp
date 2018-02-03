@@ -41,92 +41,110 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
     
+    int returnCode = -1;
     try
 	{
         WindowManager::InitializeWindow();
         
         InitSystemManager();
         InitSceneGraph();
-        InitConstantBufferInterface();
         InitializeCommandList();
 
-        Shader* materialShader = GetResourceManager().Instantiate<Shader>();
-
-        std::wstring forwardRenderShaderPath = Application::GetResourcePath(L"Shaders/ForwardRendering.hlsl");
-        materialShader->InitVertexShader(forwardRenderShaderPath, "VShader");
-		materialShader->InitPixelShader(forwardRenderShaderPath, "PShader");
-
+        //------------------------------------------------------------------------------------
         Texture2D* testImageTexture = GetResourceManager().Instantiate<Texture2D>();
         std::wstring testImagePath = Application::GetResourcePath(L"GameResources/GPro_Test/TestImage.png");
         testImageTexture->InitializeWithBitmap(testImagePath.c_str());
-
-        StandardMaterial* simpleTestMaterial = GetResourceManager().Instantiate<StandardMaterial>();
-        simpleTestMaterial->SetShaderIndex(materialShader->GetResourceID());
-        UINT simpleTestMaterialID = simpleTestMaterial->GetResourceID();
-
-        int lightBufferIndex = GetSystemManager().GetSystem<LightingSystem>()->GetBufferResourceIndex();
-        StructuredBuffer* lightBuffer = GetResourceManager().GetAsset<StructuredBuffer>(lightBufferIndex);
-        simpleTestMaterial->RegisterShaderResource({ lightBuffer->GetMyResourceViewID(), 0});
-        simpleTestMaterial->RegisterShaderResource({ testImageTexture->GetResourceViewID(), 1 });
-
-        TextureSampler* textureSampler = GetResourceManager().Instantiate<TextureSampler>();
-        textureSampler->Initialize();
-        simpleTestMaterial->AddTextureSampler({ textureSampler->GetResourceID(), 0 });
+        //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
-        // MATERIAL BUFFER STUFF
+        int lightBufferIndex = GetSystemManager().GetSystem<LightingSystem>()->GetBufferResourceIndex();
+        StructuredBuffer* lightBuffer = GetResourceManager().GetAsset<StructuredBuffer>(lightBufferIndex);
+        //------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------
+        TextureSampler* textureSampler = GetResourceManager().Instantiate<TextureSampler>();
+        textureSampler->Initialize();
+        //------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------
+        Shader* materialShader = GetResourceManager().Instantiate<Shader>();
+        std::wstring forwardRenderShaderPath = Application::GetResourcePath(L"Shaders/ForwardRendering.hlsl");
+        materialShader->InitVertexShader(forwardRenderShaderPath, "VShader");
+        materialShader->InitPixelShader(forwardRenderShaderPath, "PShader");
+        //------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------
+        StandardMaterial* simpleTestMaterial = GetResourceManager().Instantiate<StandardMaterial>();
+        UINT simpleTestMaterialID = simpleTestMaterial->GetResourceID();
+        simpleTestMaterial->SetShaderIndex(materialShader->GetResourceID());
+        simpleTestMaterial->RegisterShaderResource({ testImageTexture->GetResourceViewID(), 1 });
+        simpleTestMaterial->RegisterShaderResource({ lightBuffer->GetMyResourceViewID(), 0});
+        simpleTestMaterial->AddTextureSampler({ textureSampler->GetResourceID(), 0 });
+
         MATERIAL_BUFFER mat;
         ZeroMemory(&mat, sizeof(MATERIAL_BUFFER));
-        //mat.GlobalAmbient;
-        //mat.AmbientColor;
-        //mat.EmissiveColor;
         mat.DiffuseColor = { 1.0f, 1.0f, 1.0f, 1.0f };
         mat.SpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
-        //mat.Reflectance;
-
-        //mat.Opacity = 0.1f;
         mat.SpecularPower = 10.0f;
-        //mat.IndexOfRefraction;
-
         mat.HasDiffuseTexture = TRUE;
-        //mat.HasAmbientTexture;
-        //mat.HasEmissiveTexture;
-        //mat.HasSpecularTexture;
-        //mat.HasSpecularPowerTexture;
-        //mat.HasNormalTexture;
-        //mat.HasBumpTexture;
-        //mat.HasOpacityTexture;
-        
-        //mat.BumpIntensity;
-        //mat.SpecularScale;
-        //mat.AlphaThreshold;
         MATERIAL_BUFFER_CONTAINER buf = { mat };
         simpleTestMaterial->SetData(buf);
         //------------------------------------------------------------------------------------
 		
+        //------------------------------------------------------------------------------------
+        // Ball Object
+        Mesh* sphereMesh = MeshHelper::CreateSphereUV();
+        UINT sphereMeshID = sphereMesh->GetResourceID();
+
+		EntityComponent& sphereEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        TransformComponent& sphereTransform = EntityUtil::AddComponent<TransformComponent>(sphereEntity);
+        int sphereTransformIndex = sphereTransform.m_componentIndex;
+        //sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+        sphereTransform.m_data.m_position = { 50.0f, 1.0f, 1.0f };
+        sphereTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
+        sphereTransform.m_data.m_scale *= 10.0f;
+        MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
+        sphereRenderer.m_data.m_meshIndex = sphereMeshID;
+        sphereRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>()->ID();
+        sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
+        //------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------
         // Light
         EntityComponent& lightEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& lightTransform = EntityUtil::AddComponent<TransformComponent>(lightEntity);
         lightTransform.m_data.m_position = { 50.0f, 0.0f, 0.0f };
         LightComponent& lightComponent = EntityUtil::AddComponent<LightComponent>(lightEntity);
         lightComponent.m_data.m_range = 250.0f;
+        //------------------------------------------------------------------------------------
 
-		// Ball Object
-        Mesh* sphereMesh = MeshHelper::CreateSphereUV();
-        UINT sphereMeshID = sphereMesh->GetResourceID();
+        //------------------------------------------------------------------------------------
+        // MarchingSquares Testing
+        StandardMaterial* marchingSquaresMaterial = GetResourceManager().Instantiate<StandardMaterial>();
+        marchingSquaresMaterial->SetShaderIndex(materialShader->GetResourceID());
+        marchingSquaresMaterial->RegisterShaderResource({ GetSystemManager().GetSystem<MarchingSquaresSystem>()->GetTextureResourceViewID(), 1 });
+        marchingSquaresMaterial->RegisterShaderResource({ lightBuffer->GetMyResourceViewID(), 0 });
+        marchingSquaresMaterial->AddTextureSampler({ textureSampler->GetResourceID(), 0 });
 
-		EntityComponent& sphereEntity = GetSceneGraph().CreateComponent<EntityComponent>();
-        UINT sphereEntityId = sphereEntity.m_componentIndex;
-        TransformComponent& sphereTransform = EntityUtil::AddComponent<TransformComponent>(sphereEntity);
-        int sphereTransformIndex = sphereTransform.m_componentIndex;
-        //sphereTransform.m_data.m_rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-		sphereTransform.m_data.m_scale = { 1.0f, 1.0f, 1.0f };
-        sphereTransform.m_data.m_scale *= 10.0f;
-        MeshRendererComponent& sphereRenderer = EntityUtil::AddComponent<MeshRendererComponent>(sphereEntity);
-        sphereRenderer.m_data.m_meshIndex = sphereMeshID;
-        sphereRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>()->ID();
-        sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
+        MATERIAL_BUFFER marchinSquaresMatBuf;
+        ZeroMemory(&mat, sizeof(MATERIAL_BUFFER));
+        marchinSquaresMatBuf.DiffuseColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+        marchinSquaresMatBuf.SpecularColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+        marchinSquaresMatBuf.SpecularPower = 10.0f;
+        marchinSquaresMatBuf.HasDiffuseTexture = TRUE;
+        MATERIAL_BUFFER_CONTAINER marchinSquaresMatBufBuf = { marchinSquaresMatBuf };
+        marchingSquaresMaterial->SetData(marchinSquaresMatBufBuf);
 
+        Mesh* quadMesh = MeshHelper::CreateQuad();
+        EntityComponent& quadEntity = GetSceneGraph().CreateComponent<EntityComponent>();
+        TransformComponent& quadTransform = EntityUtil::AddComponent<TransformComponent>(quadEntity);
+        MeshRendererComponent& quadRenderer = EntityUtil::AddComponent<MeshRendererComponent>(quadEntity);
+        quadRenderer.m_data.m_meshIndex = quadMesh->GetResourceID();
+        quadRenderer.m_data.m_materialIndex = marchingSquaresMaterial->GetResourceID();
+        quadRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>()->ID();
+        //------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------
         // Camera
         EntityComponent& cameraEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         int cameraEntityId = cameraEntity.m_componentIndex;
@@ -134,7 +152,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         UINT cameraTransformId = cameraTransform.m_componentIndex;
         cameraTransform.m_data.m_position = { 0.0f, 0.0f, -50.0f };
         CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
-        
+        //------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------
         //Skybox
         Shader* skyboxShader = GetResourceManager().Instantiate<Shader>();
         std::wstring envMapShaderPath = Application::GetResourcePath(L"Shaders/EnvironmentMap.hlsl");
@@ -162,20 +182,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         skyboxRenderer.m_data.m_meshIndex = sphereMeshID;
         skyboxRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<SkyboxDrawCommand>()->ID();
         skyboxRenderer.m_data.m_materialIndex = skyboxMatID;
+        //------------------------------------------------------------------------------------
 
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
         GetSystemManager().GetSystem<GraphicsSystem>()->SetDirty();
         //GetSystemManager().GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
         GetSystemManager().GetSystem<NoClipLocomotion>()->SetPlayer(cameraEntityId);
+
+        returnCode = GameLoop::Run();
 	}
 	catch(...)
 	{
 
 	}
 
-    int returnCode = GameLoop::Run();
-    
     DestroyConstantBufferInterface();
     DestroySceneGraph();
     DestroyResourceManager();

@@ -6,12 +6,14 @@
 #include "Engine/Core/Graphics/LightingSystem.h"
 #include "Engine/Core/Input/InputSystem.h"
 #include "Engine/Extra/Locomotion/NoClipLocomotion.h"
+#include "Engine/Extra/MarchingCubes/MarchingSquaresSystem.h"
 
 typedef SystemManagerDefinition<
     GraphicsSystem,
     LightingSystem,
     InputSystem,
-    NoClipLocomotion
+    NoClipLocomotion,
+    MarchingSquaresSystem
 > SystemManager;
 
 void InitSystemManager();

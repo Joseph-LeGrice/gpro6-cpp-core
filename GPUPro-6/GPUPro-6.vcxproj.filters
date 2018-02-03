@@ -122,6 +122,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -309,6 +310,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.h">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
