@@ -4,7 +4,6 @@
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
 #include "Engine/Core/SystemManagement/SystemManager.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
-#include "Engine/Core/Utilities/PerlinNoise.h"
 #include "Engine/Core/DataStructures/Color.h"
 #include "FreeImage.h"
 
