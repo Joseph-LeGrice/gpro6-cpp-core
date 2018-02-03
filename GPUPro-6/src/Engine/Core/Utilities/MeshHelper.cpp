@@ -74,11 +74,11 @@ Mesh* MeshHelper::CreateSphereUV()
 
 	for (size_t latSlice = 0; latSlice < latitude; ++latSlice)
 	{
-		float phi = (float)latSlice / (latitude - 1.0f) * PI;
+		float phi = (float)latSlice / (latitude - 1.0f) * MyMath::PI;
 		for (size_t lonSlice = 0; lonSlice < longitude; ++lonSlice)
 		{
 			float progression = (float)lonSlice / (longitude - 1.0f);
-			float theta = progression * 2.0f * PI;
+			float theta = progression * 2.0f * MyMath::PI;
 
 			float x = radius * cos(theta) * sin(phi);
 			float y = radius * cos(phi); 

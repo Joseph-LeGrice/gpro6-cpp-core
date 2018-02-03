@@ -97,7 +97,7 @@ void NoClipLocomotion::VariableTick()
         moveDelta.Y = -1.0f;
     }
 
-    Vector3::Normalize(moveDelta);
+    moveDelta.Normalize();
 
     if (keyboardInput.GetKey(kInputKey_SHIFT))
     {

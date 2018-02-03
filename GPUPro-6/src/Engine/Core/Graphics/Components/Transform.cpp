@@ -40,21 +40,21 @@ void Transform::SetRotation(Quaternion rotation)
 Vector3 Transform::WorldUp()
 {
     Vector3 result = Vector3::Up() * m_rotation;
-    Vector3::Normalize(result);
+    result.Normalize();
     return result;
 }
 
 Vector3 Transform::WorldRight()
 {
     Vector3 result = Vector3::Right() * m_rotation;
-    Vector3::Normalize(result);
+    result.Normalize();
     return result;
 }
 
 Vector3 Transform::WorldForward()
 {
     Vector3 result = Vector3::Forward() * m_rotation;
-    Vector3::Normalize(result);
+    result.Normalize();
     return result;
 }
 

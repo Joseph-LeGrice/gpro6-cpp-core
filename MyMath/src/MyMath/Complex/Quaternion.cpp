@@ -66,7 +66,7 @@ Vector3 Quaternion::ToEuler(const Quaternion& q)
     float sinp = 2.0f * (q.W * q.Y - q.Z * q.X);
     if (abs(sinp) >= 1.0f)
     {
-        result.Y = copysign(PI / 2.0f, sinp);
+        result.Y = copysign(MyMath::PI / 2.0f, sinp);
     }
     else
     {
@@ -77,7 +77,7 @@ Vector3 Quaternion::ToEuler(const Quaternion& q)
     float cosy = 1.0f - 2.0f * (q.Y * q.Y + q.Z * q.Z);
     result.Z = atan2f(siny, cosy);
 
-    return result * RadToDeg;
+    return result * MyMath::RadToDeg;
 }
 
 Quaternion Quaternion::FromEuler(const Vector3& v)
@@ -87,9 +87,9 @@ Quaternion Quaternion::FromEuler(const Vector3& v)
 
 Quaternion Quaternion::FromEuler(float pitchDegrees, float yawDegrees, float rollDegrees)
 {
-    float pitchRadians = pitchDegrees * DegToRad;
-    float yawRadians = yawDegrees * DegToRad;
-    float rollRadians = rollDegrees * DegToRad;
+    float pitchRadians = pitchDegrees * MyMath::DegToRad;
+    float yawRadians = yawDegrees * MyMath::DegToRad;
+    float rollRadians = rollDegrees * MyMath::DegToRad;
 
     float cy = cosf(rollRadians * 0.5f);
     float sy = sinf(rollRadians * 0.5f);
@@ -115,8 +115,8 @@ Quaternion Quaternion::FromLookRotation(const Vector3& forward, const Vector3& u
 
     Vector3 right = Vector3::Cross(up, forward);
     Vector3 trueUp = Vector3::Cross(forward, right);
-    Vector3::Normalize(right);
-    Vector3::Normalize(trueUp);
+    right.Normalize();
+    trueUp.Normalize();
 
     float m00 = right.X;
     float m01 = trueUp.X;

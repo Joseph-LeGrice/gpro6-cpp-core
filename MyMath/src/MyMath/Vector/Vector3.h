@@ -18,14 +18,16 @@ struct Vector3
     static Vector3 One();
     static Vector3 Zero();
     
-    static float Magnitude(Vector3& v);
-    static void Normalize(Vector3& v);
-    static float Dot(Vector3 a, Vector3 b);
-    static Vector3 Cross(Vector3 a, Vector3 b);
+    static float Dot(const Vector3& a, const Vector3& b);
+    static Vector3 Cross(const Vector3& a, const Vector3& b);
+    static Vector3 Lerp(const Vector3& a, const Vector3& b, float time);
 
     Vector3() : X(0), Y(0), Z(0) { }
     Vector3(float x, float y, float z) : X(x), Y(y), Z(z) { }
     Vector3(int x, int y, int z) : X(static_cast<float>(x)), Y(static_cast<float>(y)), Z(static_cast<float>(z)) { }
+
+    void Normalize();
+    float Magnitude() const;
 
     operator Vector4();
     operator std::string();

@@ -27,7 +27,7 @@ namespace CameraInternal
 
             float screenNear = 0.1f;
             float screenDepth = 100.0f;
-            float fieldOfView = 60.0f * DegToRad;
+            float fieldOfView = 60.0f * MyMath::DegToRad;
 
             return Camera::CreatePerspective(fieldOfView, aspectRatio, screenNear, screenDepth);
         }
