@@ -10,7 +10,7 @@
 Mesh* MeshHelper::CreateQuad()
 {
     Mesh* result = GetResourceManager().Instantiate<Mesh>();
-	result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+	result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	std::vector<Vector3> verts = std::vector<Vector3>();
 	verts.push_back({ -1.0f, -1.0f, 0.0f });
@@ -34,11 +34,12 @@ Mesh* MeshHelper::CreateQuad()
 	result->SetUVs(uvs);
 
 	std::vector<UINT16> indices = std::vector<UINT16>();
+	indices.push_back(0);
 	indices.push_back(1);
 	indices.push_back(2);
-	indices.push_back(0);
-	indices.push_back(2);
+    indices.push_back(2);
 	indices.push_back(3);
+    indices.push_back(1);
 	result->SetIndices(indices);
 
 	return result;
@@ -114,7 +115,7 @@ Mesh* MeshHelper::CreateSphereUV()
 	}
 
     Mesh* result = GetResourceManager().Instantiate<Mesh>();
-    result->m_topology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+    result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
     result->SetVertices(verts);
     result->SetNormals(norms);
     result->SetUVs(uvs);

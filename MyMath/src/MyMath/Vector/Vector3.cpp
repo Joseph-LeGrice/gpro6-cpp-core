@@ -104,6 +104,15 @@ Vector3 Vector3::Forward()
     return { 0, 0, 1 };
 }
 
+Vector3 Vector3::One()
+{
+    return{ 1, 1, 1 };
+}
+
+Vector3 Vector3::Zero()
+{
+    return{ 0, 0, 0 };
+}
 float Vector3::Magnitude(Vector3& v)
 {
 	return sqrtf(v.X * v.X + v.Y * v.Y + v.Z * v.Z);

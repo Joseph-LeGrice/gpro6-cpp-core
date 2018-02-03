@@ -15,6 +15,9 @@ struct Vector3
     static Vector3 Right();
     static Vector3 Forward();
 
+    static Vector3 One();
+    static Vector3 Zero();
+    
     static float Magnitude(Vector3& v);
     static void Normalize(Vector3& v);
     static float Dot(Vector3 a, Vector3 b);

@@ -80,16 +80,23 @@ Vector3 Quaternion::ToEuler(const Quaternion& q)
     return result * RadToDeg;
 }
 
-Quaternion Quaternion::FromEuler(const Vector3& degrees)
+Quaternion Quaternion::FromEuler(const Vector3& v)
 {
-    Vector3 radians = degrees * DegToRad;
+    return Quaternion::FromEuler(v.X, v.Y, v.Z);
+}
 
-    float cy = cosf(radians.Z * 0.5f);
-    float sy = sinf(radians.Z * 0.5f);
-    float cr = cosf(radians.X * 0.5f);
-    float sr = sinf(radians.X * 0.5f);
-    float cp = cosf(radians.Y * 0.5f);
-    float sp = sinf(radians.Y * 0.5f);
+Quaternion Quaternion::FromEuler(float pitchDegrees, float yawDegrees, float rollDegrees)
+{
+    float pitchRadians = pitchDegrees * DegToRad;
+    float yawRadians = yawDegrees * DegToRad;
+    float rollRadians = rollDegrees * DegToRad;
+
+    float cy = cosf(rollRadians * 0.5f);
+    float sy = sinf(rollRadians * 0.5f);
+    float cr = cosf(pitchRadians * 0.5f);
+    float sr = sinf(pitchRadians * 0.5f);
+    float cp = cosf(yawRadians * 0.5f);
+    float sp = sinf(yawRadians * 0.5f);
 
     Quaternion q;
     q.W   = cy * cr * cp + sy * sr * sp;
