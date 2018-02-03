@@ -79,17 +79,17 @@ namespace Noise
 
     const int c_gradientsMask3D = 15;
 
-    float Smooth(float t)
+    inline float Smooth(float t)
     {
         return t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f);
     }
 
-    float Dot(const Vector2& v, float a, float b)
+    inline float Dot(const Vector2& v, float a, float b)
     {
         return v.X * a + v.Y * b;
     }
 
-    float Dot(Vector3 g, float x, float y, float z)
+    inline float Dot(Vector3 g, float x, float y, float z)
     {
         return g.X * x + g.Y * y + g.Z * z;
     }
