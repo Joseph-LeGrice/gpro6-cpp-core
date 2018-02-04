@@ -284,20 +284,71 @@ namespace Noise
             tz);
     }
 
-    float Perlin3DFractal(Vector3 point, float baseFrequency, float octaves, float lacunarity, float persistence)
+    float CallNoiseFunc(NoiseFuncConfig config, Vector3 point, float frequency)
+    {
+        if (config.m_type == kValue)
+        {
+            switch (config.m_dimensions)
+            {
+                default:
+                case k1D:
+                    return Value1D(point.X, frequency);
+                case k2D:
+                    return Value2D({ point.X, point.Y }, frequency);
+                case k3D:
+                    return Value3D(point, frequency);
+            }
+        }
+        else if (config.m_type == kPerlin)
+        {
+            switch (config.m_dimensions)
+            {
+                default:
+                case k1D:
+                    return Perlin1D(point.X, frequency);
+                case k2D:
+                    return Perlin2D({ point.X, point.Y }, frequency);
+                case k3D:
+                    return Perlin3D(point, frequency);
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    float FractalNoise(Vector3 point, float baseFrequency, NoiseFuncConfig octaveFunctions[], int numOctaves, float lacunarity, float persistence)
     {
         float frequency = baseFrequency;
-        float sum = Perlin3D(point, frequency);
         float amplitude = 1.0f;
         float range = 1.0f;
-        for (int i = 0; i < octaves; i++)
+        
+        float sum = 0;
+        for (int i = 0; i < numOctaves; i++)
         {
+            sum += CallNoiseFunc(octaveFunctions[i], point, frequency) * amplitude;
             frequency *= lacunarity;
             amplitude *= persistence;
             range += amplitude;
-            sum += Perlin3D(point, frequency) * amplitude;
         }
         return sum / range;
     }
 
+    float FractalNoise(Vector3 point, float baseFrequency, NoiseFuncConfig octaveFunction, int numOctaves, float lacunarity, float persistence)
+    {
+        float frequency = baseFrequency;
+        float amplitude = 1.0f;
+        float range = 1.0f;
+
+        float sum = 0;
+        for (int i = 0; i < numOctaves; i++)
+        {
+            sum += CallNoiseFunc(octaveFunction, point, frequency) * amplitude;
+            frequency *= lacunarity;
+            amplitude *= persistence;
+            range += amplitude;
+        }
+        return sum / range;
+    }
 }
