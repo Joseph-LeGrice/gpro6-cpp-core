@@ -16,7 +16,7 @@ StandardOpaqueMaterialDrawCommand::~StandardOpaqueMaterialDrawCommand()
 void StandardOpaqueMaterialDrawCommand::PreDrawAll()
 {
     GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
-    gs->GetRasterizerState()->SetState({ kCullStateBackCull, kFillModeWireframe, true });
+    gs->GetRasterizerState()->SetState({ kCullStateBackCull, kFillModeSolid, true });
     gs->GetBlendState()->SetState({ false });
 
     m_constantBuffer.BindBuffer();

@@ -3,14 +3,15 @@
 #include "Engine/Core/SystemManagement/ISystem.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
 
+class Mesh;
+class Texture2D;
+
 class MarchingSquaresSystem : public ISystem
 {
 public:
-    virtual bool Initialize() override;
-    virtual void VariableTick() override;
-    virtual void Deinitalize() override;
-    int GetTextureResourceViewID();
+    Mesh* CreateMesh(unsigned int size);
+    Texture2D* CreateTexture(unsigned int size);
 
 private:
-    int m_textureResourceId = -1;
+    float GetValue(unsigned int x, unsigned int y, unsigned int size);
 };

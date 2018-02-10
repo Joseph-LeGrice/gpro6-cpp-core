@@ -122,7 +122,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // MarchingSquares Testing
         StandardMaterial* marchingSquaresMaterial = GetResourceManager().Instantiate<StandardMaterial>();
         marchingSquaresMaterial->SetShaderIndex(materialShader->GetResourceID());
-        marchingSquaresMaterial->RegisterShaderResource({ GetSystemManager().GetSystem<MarchingSquaresSystem>()->GetTextureResourceViewID(), 1 });
+        marchingSquaresMaterial->RegisterShaderResource({ testImageTexture->GetResourceViewID(), 1 });
         marchingSquaresMaterial->RegisterShaderResource({ lightBuffer->GetMyResourceViewID(), 0 });
         marchingSquaresMaterial->AddTextureSampler({ textureSampler->GetResourceID(), 0 });
 
@@ -135,11 +135,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         MATERIAL_BUFFER_CONTAINER marchinSquaresMatBufBuf = { marchinSquaresMatBuf };
         marchingSquaresMaterial->SetData(marchinSquaresMatBufBuf);
 
+        Mesh* marching_mesh = GetSystemManager().GetSystem<MarchingSquaresSystem>()->CreateMesh(16);
+
         EntityComponent& quadEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& quadTransform = EntityUtil::AddComponent<TransformComponent>(quadEntity);
         quadTransform.m_data.m_scale = 5 * Vector3::One();
         MeshRendererComponent& quadRenderer = EntityUtil::AddComponent<MeshRendererComponent>(quadEntity);
-        quadRenderer.m_data.m_meshIndex = 0;
+        quadRenderer.m_data.m_meshIndex = marching_mesh->GetResourceID();
         quadRenderer.m_data.m_materialIndex = marchingSquaresMaterial->GetResourceID();
         quadRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>()->ID();
         //------------------------------------------------------------------------------------

@@ -4,55 +4,164 @@
 
 #include "Engine/Core/Utilities/Noise.h"
 
-const int c_gridSize = 512;
+const unsigned int vertex_mappings[16] = {
+    0x00,
+    0x0B,
+    0x16,
+    0x1D,
+    0x68,
+    0x63,
+    0x7E,
+    0x75,
+    0xD0,
+    0xDB,
+    0xC6,
+    0xCD,
+    0xB8,
+    0xB3,
+    0xAE,
+    0xA5
+};
 
-bool MarchingSquaresSystem::Initialize()
+const int triangle_mapping[16][10] = {
+   { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+   { 0, 2, 1, -1, -1, -1, -1, -1, -1, -1    },
+   { 0, 2, 1, -1, -1, -1, -1, -1, -1, -1    },
+   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       },
+   { 0, 1, 2, -1, -1, -1, -1, -1, -1, -1    },
+   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       },
+   { 0, 3, 1, 2, 4, 5, -1, -1, -1, -1       },
+   { 0, 3, 4, 0, 4, 2, 0, 2, 1, -1          },
+   { 0, 1, 2, -1, -1, -1, -1, -1, -1, -1    },
+   { 0, 2, 1, 3, 4, 5, -1, -1, -1, -1       },
+   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       },
+   { 1, 0, 2, 1, 2, 3, 1, 3, 4, -1          },
+   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       },
+   { 3, 4, 2, 3, 2, 1, 3, 1, 0, -1          },
+   { 4, 1, 0, 4, 0, 2, 4, 2, 3, -1          },
+   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       }
+};
+
+Mesh* MarchingSquaresSystem::CreateMesh(unsigned int size)
+{   
+    std::vector<Vector3> verts;
+    std::vector<UINT16> tris;
+
+    Vector3 vert_base[8] = {
+        { 0.0f, 0.0f, 0.0f },
+        { 0.5f, 0.0f, 0.0f },
+        { 1.0f, 0.0f, 0.0f },
+        { 0.0f, 0.5f, 0.0f },
+        { 1.0f, 0.5f, 0.0f },
+        { 0.0f, 1.0f, 0.0f },
+        { 0.5f, 1.0f, 0.0f },
+        { 1.0f, 1.0f, 0.0f }
+    };
+
+    float intensity = 0.5f;
+
+    float cell_size = (float)size / (size - 1);
+for (unsigned int y = 0; y < size - 1; y++)
+    {
+        for (unsigned int x = 0; x < size - 1; x++)
+        {
+            bool value_a = GetValue(x, y, size) >= intensity;
+            bool value_b = GetValue(x + 1, y, size) >= intensity;
+            bool value_c = GetValue(    x, y + 1, size) >= intensity;
+            bool value_d = GetValue(x + 1, y + 1, size) >= intensity;
+
+            uint8_t point_index = 0;
+            point_index |= value_a ? 1 : 0;
+            point_index |= value_b ? 2 : 0;
+            point_index |= value_c ? 4 : 0;
+            point_index |= value_d ? 8 : 0;
+
+            UINT16 offset = (UINT16)verts.size();
+
+            unsigned int vertices = vertex_mappings[point_index];
+            for (int i = 0; i < 8; i++) {
+                unsigned int p = static_cast<unsigned int>(powf(2.0f, static_cast<float>(i)));
+                if ((vertices & p) == p) {
+                    Vector3 v = vert_base[i];
+                    v.X = (v.X * cell_size) - 0.5f * size + x * cell_size;
+                    v.Y = (v.Y * cell_size) - 0.5f * size + y * cell_size;
+                    verts.push_back(v);
+                }
+            }
+
+            
+            for (int i = 0; triangle_mapping[point_index][i] != -1; i++) {
+                UINT16 tri = static_cast<UINT16>(triangle_mapping[point_index][i]) + offset;
+                tris.push_back(tri);
+            }
+        }
+    }
+
+    Mesh* m = GetResourceManager().Instantiate<Mesh>();
+    m->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+    m->SetVertices(verts);
+    m->SetIndices(tris);
+    return m;
+}
+
+Texture2D* MarchingSquaresSystem::CreateTexture(unsigned int size)
 {
-    Texture2D* tex = GetResourceManager().Instantiate<Texture2D>();
-    
-    float freq = 32;
-    float octaves = 6.0f;
-    float lacunarity = 2.5f;
-    float persistance = 0.4f;
+    const int octaves = 4;
+    Noise::NoiseFuncConfig octaveFunc = { Noise::kPerlin, Noise::k3D };
+    float freq = 128;
+    float lacunarity = 1.5f;
+    float persistance = 0.25f;
 
-    float step = 1.0f / c_gridSize;
+    float step = 1.0f / size;
 
     Vector3 point00 = { -0.5f, -0.5f, 0.0f };
     Vector3 point01 = { -0.5f,  0.5f, 0.0f };
-    Vector3 point10 = {  0.5f, -0.5f, 0.0f };
-    Vector3 point11 = {  0.5f,  0.5f, 0.0f };
+    Vector3 point10 = { 0.5f, -0.5f, 0.0f };
+    Vector3 point11 = { 0.5f,  0.5f, 0.0f };
 
-    Color* allColors = new Color[c_gridSize * c_gridSize]();
-    for (int y = 0; y < c_gridSize; y++)
+    Color* allColors = new Color[size * size]();
+    for (unsigned int y = 0; y < size; y++)
     {
         Vector3 point0 = Vector3::Lerp(point00, point01, (y + 0.5f) * step);
         Vector3 point1 = Vector3::Lerp(point10, point11, (y + 0.5f) * step);
-        for (int x = 0; x < c_gridSize; x++)
+        for (unsigned int x = 0; x < size; x++)
         {
-            int index = x + y * c_gridSize;
+            int index = x + y * size;
 
             Vector3 point = Vector3::Lerp(point0, point1, (x + 0.5f) * step);
-            allColors[index] = Color::White() * (Noise::Perlin3DFractal(point, freq, octaves, lacunarity, persistance) * 0.5f + 0.5f);
+            float noiseVal = Noise::FractalNoise(point, freq, octaveFunc, octaves, lacunarity, persistance) * 0.5f + 0.5f;
+
+            allColors[index] = Color::White() * noiseVal;
         }
     }
-    tex->InitializeWithDimensions(c_gridSize, c_gridSize);
-    tex->SetPixels(allColors, c_gridSize * c_gridSize);
-    delete allColors;
+
+    Texture2D* tex = GetResourceManager().Instantiate<Texture2D>();
+    tex->InitializeWithDimensions(size, size);
+    tex->SetPixels(allColors, size * size);
     
-    m_textureResourceId = tex->GetResourceViewID();
-    return true;
+    delete allColors;
+
+    return tex;
 }
 
-void MarchingSquaresSystem::VariableTick()
+float MarchingSquaresSystem::GetValue(unsigned int x, unsigned int y, unsigned int size)
 {
-}
+    float step = 1.0f / size;
+    
+    float radius = size * 0.5f;
+    Vector3 point00 = { -radius, -radius, 0.0f };
+    Vector3 point01 = { -radius,  radius, 0.0f };
+    Vector3 point10 = {  radius, -radius, 0.0f };
+    Vector3 point11 = {  radius,  radius, 0.0f };
+    
+    const int octaves = 4;
+    Noise::NoiseFuncConfig octaveFunc = { Noise::kPerlin, Noise::k3D };
+    float freq = 128;
+    float lacunarity = 1.5f;
+    float persistance = 0.25f;
 
-void MarchingSquaresSystem::Deinitalize()
-{
+    Vector3 point0 = Vector3::Lerp(point00, point01, (y + 0.5f) * step);
+    Vector3 point1 = Vector3::Lerp(point10, point11, (y + 0.5f) * step);
+    Vector3 point = Vector3::Lerp(point0, point1, (x + 0.5f) * step);
+    return Noise::FractalNoise(point, freq, octaveFunc, octaves, lacunarity, persistance) * 0.5f + 0.5f;
 }
-
-int MarchingSquaresSystem::GetTextureResourceViewID()
-{
-    return m_textureResourceId;
-}
-
