@@ -135,7 +135,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         MATERIAL_BUFFER_CONTAINER marchinSquaresMatBufBuf = { marchinSquaresMatBuf };
         marchingSquaresMaterial->SetData(marchinSquaresMatBufBuf);
 
-        Mesh* marching_mesh = GetSystemManager().GetSystem<MarchingSquaresSystem>()->CreateMesh(16);
+        Mesh* marching_mesh = GetSystemManager().GetSystem<MarchingSquaresSystem>()->CreateMesh(2.5f, 64);
 
         EntityComponent& quadEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& quadTransform = EntityUtil::AddComponent<TransformComponent>(quadEntity);

@@ -42,7 +42,7 @@ const int triangle_mapping[16][10] = {
    { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       }
 };
 
-Mesh* MarchingSquaresSystem::CreateMesh(unsigned int size)
+Mesh* MarchingSquaresSystem::CreateMesh(float gridSize, unsigned int resolution)
 {   
     std::vector<Vector3> verts;
     std::vector<UINT16> tris;
@@ -60,15 +60,14 @@ Mesh* MarchingSquaresSystem::CreateMesh(unsigned int size)
 
     float intensity = 0.5f;
 
-    float cell_size = (float)size / (size - 1);
-for (unsigned int y = 0; y < size - 1; y++)
+    for (unsigned int y = 0; y < resolution - 1; y++)
     {
-        for (unsigned int x = 0; x < size - 1; x++)
+        for (unsigned int x = 0; x < resolution - 1; x++)
         {
-            bool value_a = GetValue(x, y, size) >= intensity;
-            bool value_b = GetValue(x + 1, y, size) >= intensity;
-            bool value_c = GetValue(    x, y + 1, size) >= intensity;
-            bool value_d = GetValue(x + 1, y + 1, size) >= intensity;
+            bool value_a = GetValue(    x,     y, resolution) >= intensity;
+            bool value_b = GetValue(x + 1,     y, resolution) >= intensity;
+            bool value_c = GetValue(    x, y + 1, resolution) >= intensity;
+            bool value_d = GetValue(x + 1, y + 1, resolution) >= intensity;
 
             uint8_t point_index = 0;
             point_index |= value_a ? 1 : 0;
@@ -83,13 +82,13 @@ for (unsigned int y = 0; y < size - 1; y++)
                 unsigned int p = static_cast<unsigned int>(powf(2.0f, static_cast<float>(i)));
                 if ((vertices & p) == p) {
                     Vector3 v = vert_base[i];
-                    v.X = (v.X * cell_size) - 0.5f * size + x * cell_size;
-                    v.Y = (v.Y * cell_size) - 0.5f * size + y * cell_size;
-                    verts.push_back(v);
+                    v.X = v.X - 0.5f * resolution + x;
+                    v.Y = v.Y - 0.5f * resolution + y;
+                    v = v / (float)resolution;
+                    verts.push_back(v * (float)gridSize);
                 }
             }
 
-            
             for (int i = 0; triangle_mapping[point_index][i] != -1; i++) {
                 UINT16 tri = static_cast<UINT16>(triangle_mapping[point_index][i]) + offset;
                 tris.push_back(tri);
@@ -106,11 +105,11 @@ for (unsigned int y = 0; y < size - 1; y++)
 
 Texture2D* MarchingSquaresSystem::CreateTexture(unsigned int size)
 {
-    const int octaves = 4;
+    const int octaves = 6;
     Noise::NoiseFuncConfig octaveFunc = { Noise::kPerlin, Noise::k3D };
-    float freq = 128;
-    float lacunarity = 1.5f;
-    float persistance = 0.25f;
+    float freq = 46;
+    float lacunarity = 3.2134f;
+    float persistance = 0.02f;
 
     float step = 1.0f / size;
 

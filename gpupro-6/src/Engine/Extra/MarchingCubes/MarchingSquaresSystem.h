@@ -9,7 +9,7 @@ class Texture2D;
 class MarchingSquaresSystem : public ISystem
 {
 public:
-    Mesh* CreateMesh(unsigned int size);
+    Mesh* CreateMesh(float gridSize, unsigned int resolution);
     Texture2D* CreateTexture(unsigned int size);
 
 private:
