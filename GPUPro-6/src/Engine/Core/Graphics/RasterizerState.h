@@ -10,16 +10,26 @@ enum CullState
     kCullStateBackCull = 3
 };
 
+enum FillMode
+{
+    kFillModeSolid = 1,
+    kFillModeWireframe = 2
+};
+
 struct RasterizerStateDescriptor
 {
     CullState m_cullState = kCullStateBackCull;
+    FillMode m_fillMode = kFillModeSolid;
     bool m_enableMSAA = false;
 
-    RasterizerStateDescriptor(CullState cs, bool msaa) : m_cullState(cs), m_enableMSAA(msaa) { }
+    RasterizerStateDescriptor(CullState cs, FillMode fm, bool msaa) :
+        m_cullState(cs), m_fillMode(fm), m_enableMSAA(msaa) { }
 
     bool operator==(const RasterizerStateDescriptor& other) const
     {
-        return m_cullState == other.m_cullState;
+        return m_cullState == other.m_cullState &&
+            m_fillMode == other.m_fillMode &&
+            m_enableMSAA == other.m_enableMSAA;
     }
 };
 
@@ -32,8 +42,10 @@ namespace std
         {
             using std::size_t;
             using std::hash;
-            return hash<int>()(obj.m_cullState)
-                ^ (hash<bool>()(obj.m_enableMSAA) << 1);
+
+            return ((hash<bool>()(obj.m_enableMSAA)
+                ^ (hash<int>()(obj.m_cullState) << 1)) >> 1)
+                ^ (hash<int>()(obj.m_fillMode) << 1);
         }
     };
 }

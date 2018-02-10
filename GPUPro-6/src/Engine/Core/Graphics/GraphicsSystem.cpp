@@ -108,7 +108,7 @@ bool GraphicsSystem::Initialize()
         m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
             
         m_rasterizerState = new RasterizerState();
-        m_rasterizerState->SetState({ kCullStateBackCull, true });
+        m_rasterizerState->SetState({ kCullStateBackCull, kFillModeSolid, true });
 
         m_depthStencilBuffer = new DepthStencilBuffer(WindowManager::GetWindowWidth(), WindowManager::GetWindowHeight());
 
@@ -203,10 +203,14 @@ void GraphicsSystem::UpdateIfDirty()
 			Mesh& m = *GetResourceManager().GetAsset<Mesh>(meshIndex);
 
 			const std::vector<VertexData>& vertexData = m.GetVertexData();
-			allVerts.insert(allVerts.end(), vertexData.begin(), vertexData.end());
+            UINT16 offset = static_cast<UINT16>(allVerts.size());
+            allVerts.insert(allVerts.end(), vertexData.begin(), vertexData.end());
 
 			const std::vector<UINT16>& indexData = m.GetIndices();
-			allIndices.insert(allIndices.end(), indexData.begin(), indexData.end());
+            for (int p = 0; p < indexData.size(); p++)
+            {
+                allIndices.push_back(indexData[p] + offset);
+            }
 		}
 
 		if (m_myVertexBuffer->TrySetData(allVerts) &&

@@ -27,7 +27,6 @@ ManualRelease<ID3D11RasterizerState>& RasterizerState::GetStateForDescriptor(Ras
     if (m_rasterStates.count(rsd) == 0)
     {
         D3D11_RASTERIZER_DESC desc;
-        desc.FillMode = D3D11_FILL_SOLID;
 
         switch (rsd.m_cullState)
         {
@@ -40,6 +39,17 @@ ManualRelease<ID3D11RasterizerState>& RasterizerState::GetStateForDescriptor(Ras
             default:
             case kCullStateBackCull:
                 desc.CullMode = D3D11_CULL_BACK;
+                break;
+        }
+
+        switch (rsd.m_fillMode)
+        {
+            default:
+            case kFillModeSolid:
+                desc.FillMode = D3D11_FILL_SOLID;
+                break;
+            case kFillModeWireframe:
+                desc.FillMode = D3D11_FILL_WIREFRAME;
                 break;
         }
 

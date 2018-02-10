@@ -7,7 +7,7 @@
 void SkyboxDrawCommand::PreDrawAll()
 {
     GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
-    gs->GetRasterizerState()->SetState({ kCullStateFrontCull, true });
+    gs->GetRasterizerState()->SetState({ kCullStateFrontCull, kFillModeSolid, true });
     gs->GetBlendState()->SetState({ false });
 }
 

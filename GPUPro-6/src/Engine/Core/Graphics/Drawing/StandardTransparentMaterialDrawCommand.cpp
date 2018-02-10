@@ -16,7 +16,7 @@ StandardTransparentMaterialDrawCommand::~StandardTransparentMaterialDrawCommand(
 void StandardTransparentMaterialDrawCommand::PreDrawAll()
 {
     GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
-    gs->GetRasterizerState()->SetState({ kCullStateBackCull, true });
+    gs->GetRasterizerState()->SetState({ kCullStateBackCull, kFillModeSolid, true });
     gs->GetBlendState()->SetState({ kBlendSrc, kBlendDestInv, kBlendOpAdd });
 
     m_constantBuffer.BindBuffer();
