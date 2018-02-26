@@ -12,15 +12,15 @@ namespace Noise
 
     enum NoiseType
     {
-        kValue,
-        kPerlin
+        kNoiseTypeValue,
+        kNoiseTypePerlin
     };
 
     enum NoiseDimension
     {
-        k1D,
-        k2D,
-        k3D
+        kNoiseDimension1D,
+        kNoiseDimension2D,
+        kNoiseDimension3D
     };
 
     struct NoiseFuncConfig

@@ -286,29 +286,29 @@ namespace Noise
 
     float CallNoiseFunc(NoiseFuncConfig config, Vector3 point, float frequency)
     {
-        if (config.m_type == kValue)
+        if (config.m_type == kNoiseTypeValue)
         {
             switch (config.m_dimensions)
             {
                 default:
-                case k1D:
+                case kNoiseDimension1D:
                     return Value1D(point.X, frequency);
-                case k2D:
+                case kNoiseDimension2D:
                     return Value2D({ point.X, point.Y }, frequency);
-                case k3D:
+                case kNoiseDimension3D:
                     return Value3D(point, frequency);
             }
         }
-        else if (config.m_type == kPerlin)
+        else if (config.m_type == kNoiseTypePerlin)
         {
             switch (config.m_dimensions)
             {
                 default:
-                case k1D:
+                case kNoiseDimension1D:
                     return Perlin1D(point.X, frequency);
-                case k2D:
+                case kNoiseDimension2D:
                     return Perlin2D({ point.X, point.Y }, frequency);
-                case k3D:
+                case kNoiseDimension3D:
                     return Perlin3D(point, frequency);
             }
         }

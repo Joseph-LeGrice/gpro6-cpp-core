@@ -94,7 +94,7 @@ Mesh* MarchingSquares2D::CreateMesh(float gridSize, unsigned int resolution)
 Texture2D* MarchingSquares2D::CreateTexture(unsigned int size)
 {
     const int octaves = 6;
-    Noise::NoiseFuncConfig octaveFunc = { Noise::kPerlin, Noise::k3D };
+    Noise::NoiseFuncConfig octaveFunc = { Noise::kNoiseTypePerlin, Noise::kNoiseDimension3D };
     float freq = 46;
     float lacunarity = 3.2134f;
     float persistance = 0.02f;
@@ -142,7 +142,7 @@ float MarchingSquares2D::GetValue(unsigned int x, unsigned int y, unsigned int s
     Vector3 point11 = {  radius,  radius, 0.0f };
     
     const int octaves = 4;
-    Noise::NoiseFuncConfig octaveFunc = { Noise::kPerlin, Noise::k3D };
+    Noise::NoiseFuncConfig octaveFunc = { Noise::kNoiseTypePerlin, Noise::kNoiseDimension3D };
     float freq = 128;
     float lacunarity = 1.5f;
     float persistance = 0.25f;
