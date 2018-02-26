@@ -258,7 +258,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Time\Time.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.cpp" />
-    <ClCompile Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.cpp" />
+    <ClCompile Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.cpp" />
     <ClCompile Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities\MeshHelper.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities\Noise.cpp" />
@@ -322,7 +322,7 @@
     <ClInclude Include="src\Engine\Core\Input\KeyboardInput.h" />
     <ClInclude Include="src\Engine\Core\Input\MouseInput.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.h" />
-    <ClInclude Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.h" />
+    <ClInclude Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.h" />
     <ClInclude Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.h" />
     <ClInclude Include="src\Engine\Extra\TransformSync\TranslationSync.h" />
     <ClInclude Include="src\Engine\Core\Utilities\AutoPointer.hpp" />

@@ -15,3 +15,4 @@ intermediates/
 build/
 .vs/GPUPro6/v14/.suo
 __pycache__/
+*.opendb

@@ -1,48 +1,36 @@
 #include "stdafx.h"
-#include "MarchingSquaresSystem.h"
+#include "MarchingSquares2D.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 
 #include "Engine/Core/Utilities/Noise.h"
 
 const unsigned int vertex_mappings[16] = {
-    0x00,
-    0x0B,
-    0x16,
-    0x1D,
-    0x68,
-    0x63,
-    0x7E,
-    0x75,
-    0xD0,
-    0xDB,
-    0xC6,
-    0xCD,
-    0xB8,
-    0xB3,
-    0xAE,
-    0xA5
+    0x00, 0x0B, 0x16, 0x1D,
+    0x68, 0x63, 0x7E, 0x75,
+    0xD0, 0xDB, 0xC6, 0xCD,
+    0xB8, 0xB3, 0xAE, 0xA5
 };
 
 const int triangle_mapping[16][10] = {
    { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-   { 0, 2, 1, -1, -1, -1, -1, -1, -1, -1    },
-   { 0, 2, 1, -1, -1, -1, -1, -1, -1, -1    },
-   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       },
-   { 0, 1, 2, -1, -1, -1, -1, -1, -1, -1    },
-   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       },
-   { 0, 3, 1, 2, 4, 5, -1, -1, -1, -1       },
-   { 0, 3, 4, 0, 4, 2, 0, 2, 1, -1          },
-   { 0, 1, 2, -1, -1, -1, -1, -1, -1, -1    },
-   { 0, 2, 1, 3, 4, 5, -1, -1, -1, -1       },
-   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       },
-   { 1, 0, 2, 1, 2, 3, 1, 3, 4, -1          },
-   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       },
-   { 3, 4, 2, 3, 2, 1, 3, 1, 0, -1          },
-   { 4, 1, 0, 4, 0, 2, 4, 2, 3, -1          },
-   { 0, 2, 1, 1, 2, 3, -1, -1, -1, -1       }
+   {  0,  2,  1, -1, -1, -1, -1, -1, -1, -1 },
+   {  0,  2,  1, -1, -1, -1, -1, -1, -1, -1 },
+   {  0,  2,  1,  1,  2,  3, -1, -1, -1, -1 },
+   {  0,  1,  2, -1, -1, -1, -1, -1, -1, -1 },
+   {  0,  2,  1,  1,  2,  3, -1, -1, -1, -1 },
+   {  0,  3,  1,  2,  4,  5, -1, -1, -1, -1 },
+   {  0,  3,  4,  0,  4,  2,  0,  2,  1, -1 },
+   {  0,  1,  2, -1, -1, -1, -1, -1, -1, -1 },
+   {  0,  2,  1,  3,  4,  5, -1, -1, -1, -1 },
+   {  0,  2,  1,  1,  2,  3, -1, -1, -1, -1 },
+   {  1,  0,  2,  1,  2,  3,  1,  3,  4, -1 },
+   {  0,  2,  1,  1,  2,  3, -1, -1, -1, -1 },
+   {  3,  4,  2,  3,  2,  1,  3,  1,  0, -1 },
+   {  4,  1,  0,  4,  0,  2,  4,  2,  3, -1 },
+   {  0,  2,  1,  1,  2,  3, -1, -1, -1, -1 }
 };
 
-Mesh* MarchingSquaresSystem::CreateMesh(float gridSize, unsigned int resolution)
+Mesh* MarchingSquares2D::CreateMesh(float gridSize, unsigned int resolution)
 {   
     std::vector<Vector3> verts;
     std::vector<UINT16> tris;
@@ -103,7 +91,7 @@ Mesh* MarchingSquaresSystem::CreateMesh(float gridSize, unsigned int resolution)
     return m;
 }
 
-Texture2D* MarchingSquaresSystem::CreateTexture(unsigned int size)
+Texture2D* MarchingSquares2D::CreateTexture(unsigned int size)
 {
     const int octaves = 6;
     Noise::NoiseFuncConfig octaveFunc = { Noise::kPerlin, Noise::k3D };
@@ -143,7 +131,7 @@ Texture2D* MarchingSquaresSystem::CreateTexture(unsigned int size)
     return tex;
 }
 
-float MarchingSquaresSystem::GetValue(unsigned int x, unsigned int y, unsigned int size)
+float MarchingSquares2D::GetValue(unsigned int x, unsigned int y, unsigned int size)
 {
     float step = 1.0f / size;
     

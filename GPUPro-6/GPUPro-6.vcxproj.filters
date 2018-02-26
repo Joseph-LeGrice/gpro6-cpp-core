@@ -119,9 +119,11 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities\Noise.cpp">
       <Filter>Engine\Core\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.cpp">
+      <Filter>Engine\Extra\MarchingSquares2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,9 +309,11 @@
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.h">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Extra\MarchingCubes\MarchingSquaresSystem.h" />
     <ClInclude Include="src\Engine\Core\Utilities\Noise.h">
       <Filter>Engine\Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.h">
+      <Filter>Engine\Extra\MarchingSquares2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -381,6 +385,9 @@
     </Filter>
     <Filter Include="Engine\Core\Graphics\Drawing">
       <UniqueIdentifier>{e540af14-5b38-401a-a560-a86b648530e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Extra\MarchingSquares2D">
+      <UniqueIdentifier>{f620f216-d0d2-4003-afba-e96e2f262316}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
