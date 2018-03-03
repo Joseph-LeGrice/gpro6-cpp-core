@@ -1,10 +1,17 @@
 #pragma once
+#include <stdexcept>
 
 namespace custom_assert
 {
-    __forceinline void is_true(const bool& x)
+	struct custom_assert_error
+	{
+		const char* m_message;
+		custom_assert_error(const char* message) : m_message(message) { }
+	};
+
+	__forceinline void is_true(const bool& x)
     {
-        if (!x) throw "Assertion Failed";
+		if (!x) throw custom_assert_error("Assertion Failed");
     }
     
     template<typename N>

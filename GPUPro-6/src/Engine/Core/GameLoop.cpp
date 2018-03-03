@@ -37,11 +37,11 @@ void DoLateVariable(ISystem* system)
 
 int GameLoop::InternalRun()
 {
-    try
+    m_running = true;
+    while (m_running)
     {
-        m_running = true;
-        while (m_running)
-        {
+		try
+		{
             Time::s_instance->AdvanceFrame();
 
             while (Time::s_instance->ShouldAdvanceFixedStep())
@@ -53,10 +53,14 @@ int GameLoop::InternalRun()
             GetSystemManager().ForEachSystem(DoVariable);
             GetSystemManager().ForEachSystem(DoLateVariable);
         }
-    }
-    catch (...)
-    {
-
+		catch (const custom_assert::custom_assert_error& e)
+		{
+			Log(e.m_message);
+		}
+		catch (...)
+		{
+			break;
+		}
     }
     return 0;
 }
