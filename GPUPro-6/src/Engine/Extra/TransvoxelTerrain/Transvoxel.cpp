@@ -35,6 +35,8 @@
 // used for a single equivalence class in the modified Marching Cubes algorithm,
 // described in Section 3.2.
 
+#include "stdafx.h"
+
 struct RegularCellData
 {
 	unsigned char	geometryCounts;		// High nibble is vertex count, low nibble is triangle count.

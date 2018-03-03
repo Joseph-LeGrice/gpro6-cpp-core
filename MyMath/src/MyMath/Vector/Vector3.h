@@ -24,7 +24,6 @@ struct Vector3
 
     Vector3() : X(0), Y(0), Z(0) { }
     Vector3(float x, float y, float z) : X(x), Y(y), Z(z) { }
-    Vector3(int x, int y, int z) : X(static_cast<float>(x)), Y(static_cast<float>(y)), Z(static_cast<float>(z)) { }
 
     void Normalize();
     float Magnitude() const;
