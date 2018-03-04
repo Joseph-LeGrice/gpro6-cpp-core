@@ -6,6 +6,11 @@ namespace MyMath
     const float DegToRad = PI / 180.0f;
     const float RadToDeg = 180.0f / PI;
 
+    __forceinline float Pow(float a, float b)
+    {
+        return pow(a, b);
+    }
+
     __forceinline float Max(float a, float b)
     {
         return a >= b ? a : b;
