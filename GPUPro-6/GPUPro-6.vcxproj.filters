@@ -125,6 +125,8 @@
     <ClCompile Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.cpp">
       <Filter>Engine\Extra\MarchingSquares2D</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\Transvoxel.cpp" />
+    <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -315,6 +317,7 @@
     <ClInclude Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.h">
       <Filter>Engine\Extra\MarchingSquares2D</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

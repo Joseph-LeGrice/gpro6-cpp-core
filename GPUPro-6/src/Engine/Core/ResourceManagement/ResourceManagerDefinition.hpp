@@ -30,13 +30,12 @@ public:
         std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
         custom_assert::in_range(arrayIndex, resources);
         
-        int lastIndex = static_cast<int>(resources.size()) - 1;
-        T& deletedAsset = resources[arrayIndex];
-        deletedAsset.Release();
+		int lastIndex = static_cast<int>(resources.size()) - 1;
+		T& deletedAsset = resources[arrayIndex];
+		deletedAsset.Release();
 
-        resources[arrayIndex] = resources[lastIndex];
-        resources[lastIndex] = deletedAsset;
-        resources.resize(lastIndex);
+		resources[arrayIndex] = resources[lastIndex];
+		resources.pop_back();
     }
 
     template<int I = 0>

@@ -31,6 +31,7 @@
 #include "Engine/Core/Graphics/Drawing/DrawCommandList.h"
 
 #include "Engine/Extra/MarchingCubes2D/MarchingSquares2D.h"
+#include "Engine/Extra/TransvoxelTerrain/VoxelTerrain.h"
 
 #include "MyMath/Complex/Quaternion.h"
 #include "MyMath/MathDefines.h"
@@ -136,6 +137,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         marchinSquaresMatBuf.HasDiffuseTexture = TRUE;
         MATERIAL_BUFFER_CONTAINER marchinSquaresMatBufBuf = { marchinSquaresMatBuf };
         marchingSquaresMaterial->SetData(marchinSquaresMatBufBuf);
+
+		VoxelTerrain* vt = new VoxelTerrain();
+		vt->DeallocateMesh();
+		delete vt;
 
         Mesh* marching_mesh = MarchingSquares2D::CreateMesh(2.5f, 64);
 
