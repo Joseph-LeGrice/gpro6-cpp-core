@@ -25,7 +25,8 @@ public:
         GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
         ID3D11DeviceContext& deviceContext = *gs->GetGraphicsDeviceContext();
 
-        UINT16 currentIndex = 0;
+        UINT16 baseVertex = 0;
+        UINT16 baseIndex = 0;
         MeshRendererComponent* meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
         size_t numberOfMeshRenderers = GetSceneGraph().GetNumberOfComponents<MeshRendererComponent>();
 
@@ -35,7 +36,8 @@ public:
             EntityComponent& meshEntity = *GetSceneGraph().GetComponent<EntityComponent>(mrc.m_entityIndex);
 
             Mesh& mesh = *GetResourceManager().GetAsset<Mesh>(mrc.m_data.m_meshIndex);
-            UINT16 numberOfVerts = (UINT16)mesh.GetIndices().size();
+            UINT16 numberOfVerts = (UINT16)mesh.GetVertexData().size();
+            UINT16 numberOfIndices = (UINT16)mesh.GetIndices().size();
 
             if (mrc.m_data.m_drawCommandIndex == c_identifier && mrc.m_enabled)
             {
@@ -57,10 +59,11 @@ public:
                 if (BindMaterial(mrc))
                 {
                     deviceContext.IASetPrimitiveTopology(mesh.m_topology);
-                    deviceContext.DrawIndexed(numberOfVerts, currentIndex, 0);
+                    deviceContext.DrawIndexed(numberOfIndices, baseIndex, baseVertex);
                 }
             }
-            currentIndex += numberOfVerts;
+            baseVertex += numberOfVerts;
+            baseIndex += numberOfIndices;
         }
     }
 

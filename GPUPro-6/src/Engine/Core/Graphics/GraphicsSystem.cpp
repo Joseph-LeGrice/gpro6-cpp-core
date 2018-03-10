@@ -197,13 +197,13 @@ void GraphicsSystem::UpdateIfDirty()
         MeshRendererComponent* const meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
         size_t numberOfMeshRenderers = GetSceneGraph().GetNumberOfComponents<MeshRendererComponent>();
 
-        for (size_t i=0; i< numberOfMeshRenderers; i++)
+        UINT16 offset = 0;
+        for (size_t i = 0; i < numberOfMeshRenderers; i++)
 		{
             int meshIndex = meshRenderers[i].m_data.m_meshIndex;
 			Mesh& m = *GetResourceManager().GetAsset<Mesh>(meshIndex);
 
 			const std::vector<VertexData>& vertexData = m.GetVertexData();
-            UINT16 offset = static_cast<UINT16>(allVerts.size());
             allVerts.insert(allVerts.end(), vertexData.begin(), vertexData.end());
 
 			const std::vector<UINT16>& indexData = m.GetIndices();
@@ -211,6 +211,8 @@ void GraphicsSystem::UpdateIfDirty()
             {
                 allIndices.push_back(indexData[p] + offset);
             }
+
+            offset += static_cast<UINT16>(allVerts.size());
 		}
 
 		if (m_myVertexBuffer->TrySetData(allVerts) &&

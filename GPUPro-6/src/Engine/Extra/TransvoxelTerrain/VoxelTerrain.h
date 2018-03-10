@@ -7,10 +7,10 @@ class Mesh;
 struct EndpointVertexData
 {
     EndpointVertexData() {
-
+        m_vertexStartIndex = 0;
     }
 
-    void SetStartIndex(int vertexIndex) {
+    void SetStartIndex(uint16_t vertexIndex) {
         m_vertexStartIndex = vertexIndex;
     }
 
@@ -20,9 +20,9 @@ struct EndpointVertexData
         m_verticesActive[vertexIndex] = true;
     }
 
-    unsigned int GetTrueVertexIndex(int vertexIndex) const {
+    uint16_t GetTrueVertexIndex(int vertexIndex) const {
         custom_assert::range(vertexIndex, 0, 4);
-        int inc = 0;
+        uint16_t inc = 0;
         for (int i = 0; i < 4; i++)
         {
             if (m_verticesActive[i])
@@ -44,6 +44,10 @@ struct EndpointVertexData
         return m_vertices[vertexIndex];
     }
 
+    Vector3 SetPosition(Vector3 pos) {
+        m_position = pos;
+    }
+
     Vector3 GetPosition() const {
         return m_position;
     }
@@ -52,7 +56,13 @@ private:
     Vector3 m_position;
     Vector3 m_vertices[4];
     bool m_verticesActive[4] = { false, false, false, false };
-    unsigned int m_vertexStartIndex;
+    uint16_t m_vertexStartIndex;
+};
+
+struct VoxelEndpointTriangle
+{
+    int x, y, z;
+    uint16_t corner_index;
 };
 
 class VoxelTerrain
@@ -62,10 +72,10 @@ public:
 	~VoxelTerrain();
 
 	void DeallocateMesh();
-	Mesh* GetMesh();
+	int GetMeshID();
 
 private:
-	static const unsigned int sc_chunkSize = 32;
+	static const unsigned int sc_chunkSize = 16;
 	int8_t m_voxelValues[sc_chunkSize * sc_chunkSize * sc_chunkSize];
     EndpointVertexData m_vertexData[(sc_chunkSize + 1) * (sc_chunkSize + 1) * (sc_chunkSize + 1)];
 
@@ -74,8 +84,8 @@ private:
 	void GenerateVoxelValues();
 	void GenerateMesh();
 
-    EndpointVertexData GetEndpoint(unsigned int voxelX, unsigned int voxelY, unsigned int voxelZ);
-    EndpointVertexData GetCornerEndpoint(unsigned int voxelX, unsigned int voxelY, unsigned int voxelZ, unsigned int corner);
+    EndpointVertexData& GetEndpoint(int voxelX, int voxelY, int voxelZ);
+    EndpointVertexData& GetCornerEndpoint(int voxelX, int voxelY, int voxelZ, unsigned int corner);
     int ShiftVoxelIndex(int voxelIndex, int xDelta, int yDelta, int zDelta);
     std::array<int8_t, 8> GetCorners(unsigned int voxelIndex);
 };

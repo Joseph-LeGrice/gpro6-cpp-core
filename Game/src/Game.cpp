@@ -52,7 +52,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         InitSystemManager();
         InitSceneGraph();
         InitializeCommandList();
-
         //------------------------------------------------------------------------------------
         Texture2D* testImageTexture = GetResourceManager().Instantiate<Texture2D>();
         std::wstring testImagePath = Application::GetResourcePath(L"GameResources/GPro_Test/TestImage.png");
@@ -111,7 +110,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         sphereRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>()->ID();
         sphereRenderer.m_data.m_materialIndex = simpleTestMaterialID;
         //------------------------------------------------------------------------------------
-
+        
         //------------------------------------------------------------------------------------
         // Light
         EntityComponent& lightEntity = GetSceneGraph().CreateComponent<EntityComponent>();
@@ -139,16 +138,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         marchingSquaresMaterial->SetData(marchinSquaresMatBufBuf);
 
 		VoxelTerrain* vt = new VoxelTerrain();
-		vt->DeallocateMesh();
-		delete vt;
-
+		
         Mesh* marching_mesh = MarchingSquares2D::CreateMesh(2.5f, 64);
 
         EntityComponent& quadEntity = GetSceneGraph().CreateComponent<EntityComponent>();
         TransformComponent& quadTransform = EntityUtil::AddComponent<TransformComponent>(quadEntity);
         quadTransform.m_data.m_scale = 5 * Vector3::One();
         MeshRendererComponent& quadRenderer = EntityUtil::AddComponent<MeshRendererComponent>(quadEntity);
-        quadRenderer.m_data.m_meshIndex = marching_mesh->GetResourceID();
+        quadRenderer.m_data.m_meshIndex = vt->GetMeshID(); //marching_mesh->GetResourceID();
         quadRenderer.m_data.m_materialIndex = marchingSquaresMaterial->GetResourceID();
         quadRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>()->ID();
         //------------------------------------------------------------------------------------
@@ -162,7 +159,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         cameraTransform.m_data.m_position = { 0.0f, 0.0f, -15.0f };
         CameraComponent& cameraComponent = EntityUtil::AddComponent<CameraComponent>(cameraEntity);
         //------------------------------------------------------------------------------------
-
+        
         //------------------------------------------------------------------------------------
         //Skybox
         Shader* skyboxShader = GetResourceManager().Instantiate<Shader>();
@@ -192,14 +189,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         skyboxRenderer.m_data.m_drawCommandIndex = GetCommandList().GetCommand<SkyboxDrawCommand>()->ID();
         skyboxRenderer.m_data.m_materialIndex = skyboxMatID;
         //------------------------------------------------------------------------------------
-
+        
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
         GetSystemManager().GetSystem<GraphicsSystem>()->SetDirty();
         //GetSystemManager().GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
         GetSystemManager().GetSystem<NoClipLocomotion>()->SetPlayer(cameraEntityId);
-
         returnCode = GameLoop::Run();
+
+        vt->DeallocateMesh();
+        delete vt;
 	}
 	catch(...)
 	{

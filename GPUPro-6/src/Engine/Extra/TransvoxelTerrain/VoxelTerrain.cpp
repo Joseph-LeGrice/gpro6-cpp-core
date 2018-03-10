@@ -20,9 +20,9 @@ void VoxelTerrain::DeallocateMesh()
 	GetResourceManager().Deallocate<Mesh>(m_meshResourceId);
 }
 
-Mesh* VoxelTerrain::GetMesh()
+int VoxelTerrain::GetMeshID()
 {
-	return GetResourceManager().GetAsset<Mesh>(m_meshResourceId);
+	return m_meshResourceId;
 }
 
 void VoxelTerrain::GenerateVoxelValues()
@@ -45,7 +45,6 @@ void VoxelTerrain::GenerateVoxelValues()
 					(((float)y + 0.5f) / sc_chunkSize) * 2.0f - 1.0f,
 					(((float)z + 0.5f) / sc_chunkSize) * 2.0f - 1.0f
 				};
-				//m_voxelValues[index] = Noise::FractalNoise(position, baseFrequency, noiseConfig, numOctaves, lacunarity, persistance);
 				m_voxelValues[index] = (int8_t)floor(128.0f * Noise::FractalNoise(position, baseFrequency, noiseConfig, numOctaves, lacunarity, persistance)); // save some space this way?
 			}
 		}
@@ -56,34 +55,43 @@ void VoxelTerrain::GenerateMesh()
 {
     std::stringstream ss;
 
-    for (unsigned int z = 0; z < sc_chunkSize - 1; z++)
-	{
-		for (unsigned int y = 0; y < sc_chunkSize - 1; y++)
-		{
-			for (unsigned int x = 0; x < sc_chunkSize - 1; x++)
-			{
-				unsigned int voxelIndex = z * sc_chunkSize * sc_chunkSize + y * sc_chunkSize + x;
+    uint16_t baseVertexIndex = 0;
+    std::vector<VoxelEndpointTriangle> tempTris;
 
+    for (int z = 0; z < sc_chunkSize - 1; z++)
+    {
+        for (int y = 0; y < sc_chunkSize - 1; y++)
+        {
+            for (int x = 0; x < sc_chunkSize - 1; x++)
+            {
+                GetEndpoint(x, y, z).SetPosition({ (float)x, (float)y, (float)z });
+            }
+        }
+    }
+
+    for (int z = 0; z < sc_chunkSize - 1; z++)
+    {
+        for (int y = 0; y < sc_chunkSize - 1; y++)
+        {
+            for (int x = 0; x < sc_chunkSize - 1; x++)
+            {
+                GetEndpoint(x, y, z).SetStartIndex(baseVertexIndex);
+
+                unsigned int voxelIndex = z * sc_chunkSize * sc_chunkSize + y * sc_chunkSize + x;
                 std::array<int8_t, 8> corners = GetCorners(voxelIndex);
 
-				uint8_t caseIndex = 0;
-				for (int i = 0; i < 8; i++)
+                uint8_t caseIndex = 0;
+                for (int i = 0; i < 8; i++)
                 {
-					caseIndex |= (corners[i] >> (7 - i)) & (1 << i);
-				}
+                    caseIndex |= (corners[i] >> (7 - i)) & (1 << i);
+                }
 
-				if ((caseIndex ^ ((corners[7] >> 7) & 0xFF)) != 0)
+                if ((caseIndex ^ ((corners[7] >> 7) & 0xFF)) != 0)
                 {
-					unsigned int classIndex = regularCellClass[caseIndex];
-					RegularCellData rcd = regularCellData[classIndex];
+                    unsigned int classIndex = regularCellClass[caseIndex];
+                    RegularCellData rcd = regularCellData[classIndex];
 
-                    //for (int i = 0; i < rcd.GetVertexCount(); i++)
-                    //{
-                    //    unsigned short vertexDataCode = regularVertexData[caseIndex][i];
-                    //    // Create new Verts or reference old ones?
-                    //}
-
-                    for (int i = 0; i < rcd.GetTriangleCount(); i++) 
+                    for (int i = 0; i < rcd.GetTriangleCount(); i++)
                     {
                         for (int ii = 0; ii < 3; ii++)
                         {
@@ -102,24 +110,27 @@ void VoxelTerrain::GenerateMesh()
                             long d1 = corners[v1];
 
                             long t = (d1 << 8) / (d1 - d0);
-                            if ((t & 0x00FF) != 0) 
+                            if ((t & 0x00FF) != 0)
                             {
                                 // Vertex lies in the interior of the edge. 
                                 ss << "Vertex lies in the interior of the edge." << std::endl;
 
                                 if (dir == 0x8)
                                 {
-                                    //long u = 0x0100 - t;
-                                    //Vector3 Q = p0 * t + p1 * u;
-                                    //GetCornerEndpoint(x, y, z).SetVertexPosition(index, Q);
-                                    //GetCornerEndpoint(x, y, z).GetTrueVertexIndex(index);
+                                    float dist = static_cast<float>(t) / 0x0100;
+                                    ss << dist << std::endl;
+                                    baseVertexIndex++;
+                                    float u = 1.0f - dist;
+                                    Vector3 Q = p0 * dist + p1 * u;
+                                    GetEndpoint(x, y, z).SetVertexPosition(index, Q);
+                                    tempTris.push_back({ x, y, z, index });
                                 }
                                 else
                                 {
                                     int xOffset = (dir & 0x1) == 0x1 ? -1 : 0;
                                     int yOffset = (dir & 0x2) == 0x2 ? -1 : 0;
                                     int zOffset = (dir & 0x4) == 0x4 ? -1 : 0;
-                                    GetEndpoint(x + xOffset, y + yOffset, z + zOffset).GetTrueVertexIndex(index);
+                                    tempTris.push_back({ x + xOffset, y + yOffset, z + zOffset, index });
                                 }
                             }
                             else if (t == 0)
@@ -130,31 +141,60 @@ void VoxelTerrain::GenerateMesh()
                                 {
                                     // This cell owns the vertex. 
                                     ss << "This cell owns the vertex: " << dir << std::endl;
-
+                                    baseVertexIndex++;
+                                    GetEndpoint(x, y, z).SetVertexPosition(index, p1);
+                                    tempTris.push_back({ x, y, z, index });
                                 }
                                 else
                                 {
                                     // Try to reuse corner vertex from a preceding cell. 
                                     ss << "Try to reuse corner vertex from a preceding cell." << std::endl;
+                                    int xOffset = (dir & 0x1) == 0x1 ? -1 : 0;
+                                    int yOffset = (dir & 0x2) == 0x2 ? -1 : 0;
+                                    int zOffset = (dir & 0x4) == 0x4 ? -1 : 0;
+                                    tempTris.push_back({ x + xOffset, y + yOffset, z + zOffset, index });
                                 }
                             }
-                            else 
+                            else
                             {
                                 // Vertex lies at the lower-numbered endpoint. 
                                 ss << "Vertex lies at the lower-numbered endpoint." << std::endl;
                                 // Always try to reuse corner vertex from a preceding cell. 
                                 ss << "Always try to reuse corner vertex from a preceding cell." << std::endl;
+                                int xOffset = (dir & 0x1) == 0x1 ? -1 : 0;
+                                int yOffset = (dir & 0x2) == 0x2 ? -1 : 0;
+                                int zOffset = (dir & 0x4) == 0x4 ? -1 : 0;
+                                tempTris.push_back({ x + xOffset, y + yOffset, z + zOffset, index });
                             }
                         }
                     }
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+    }
+    ss << "Number of verts: " << baseVertexIndex;
     Log(ss.str());
 
     std::vector<Vector3> verts;
+    for (unsigned int i = 0; i < sizeof(m_vertexData) / sizeof(EndpointVertexData); i++)
+    {
+        EndpointVertexData& evd = m_vertexData[i];
+        for (int v = 0; v < 4; v++)
+        {
+            if (evd.HasVertex(v))
+            {
+                verts.push_back(evd.GetVertexPosition(v));
+            }
+        }
+    }
+
     std::vector<UINT16> tris;
+    for (unsigned int i = 0; i < tempTris.size(); i++)
+    {
+        VoxelEndpointTriangle vet = tempTris[i];
+        uint16_t trueVertexIndex = GetEndpoint(vet.x, vet.y, vet.z).GetTrueVertexIndex(vet.corner_index);
+        tris.push_back(trueVertexIndex);
+    }
 
     Mesh* m = GetResourceManager().Instantiate<Mesh>();
 	m->SetVertices(verts);
@@ -184,7 +224,7 @@ std::array<int8_t, 8> VoxelTerrain::GetCorners(unsigned int voxelIndex)
     return corners;
 }
 
-EndpointVertexData VoxelTerrain::GetEndpoint(unsigned int voxelX, unsigned int voxelY, unsigned int voxelZ)
+EndpointVertexData& VoxelTerrain::GetEndpoint(int voxelX, int voxelY, int voxelZ)
 {
     unsigned int shiftedVoxelIndex = (voxelZ + 1) * (sc_chunkSize + 1) * (sc_chunkSize + 1) +
         (voxelY + 1) * (sc_chunkSize + 1) +
@@ -192,7 +232,7 @@ EndpointVertexData VoxelTerrain::GetEndpoint(unsigned int voxelX, unsigned int v
     return m_vertexData[shiftedVoxelIndex];
 }
 
-EndpointVertexData VoxelTerrain::GetCornerEndpoint(unsigned int voxelX, unsigned int voxelY, unsigned int voxelZ, unsigned int corner)
+EndpointVertexData& VoxelTerrain::GetCornerEndpoint(int voxelX, int voxelY, int voxelZ, unsigned int corner)
 {
     unsigned int shiftedVoxelIndex = (voxelZ + 1) * (sc_chunkSize + 1) * (sc_chunkSize + 1) +
         (voxelY + 1) * (sc_chunkSize + 1) +
