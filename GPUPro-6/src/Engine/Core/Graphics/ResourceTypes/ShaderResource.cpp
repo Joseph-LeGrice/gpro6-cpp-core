@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "ShaderResource.h"
 
-#include "Engine/Core/SystemManagement/SystemManager.h"
-
+#include "D3D11.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
 
 void ShaderResource::BindResource(UINT resourceIndex)
 {
-    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = m_graphicsDevice->GetGraphicsDeviceContext();
     deviceContext->VSSetShaderResources(resourceIndex, 1, m_resourceView);
     deviceContext->HSSetShaderResources(resourceIndex, 1, m_resourceView);
     deviceContext->DSSetShaderResources(resourceIndex, 1, m_resourceView);
@@ -16,7 +16,7 @@ void ShaderResource::BindResource(UINT resourceIndex)
 
 bool ShaderResource::CreateViewWithResource(ID3D11Resource& resource, D3D11_SHADER_RESOURCE_VIEW_DESC* desc)
 {
-    ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+    ID3D11Device* device = m_graphicsDevice->GetGraphicsDevice();
     HRESULT hr = device->CreateShaderResourceView(&resource, desc, m_resourceView);
     return SUCCEEDED(hr);
 }

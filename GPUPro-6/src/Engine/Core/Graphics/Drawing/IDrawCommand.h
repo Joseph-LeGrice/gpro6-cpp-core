@@ -2,15 +2,21 @@
 
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/SceneGraph/SceneGraph.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
+
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
 #include "Engine/Core/SceneGraph/Components/Util/EntityUtil.hpp"
+
+#include "Engine/Core/Graphics/GraphicsDevice.h"
 
 
 template<int id>
 class IDrawCommand
 {
 public:
+	IDrawCommand(GraphicsDevice* gfxDevice, SceneGraph* sceneGraph) :
+		m_gfxDevice(gfxDevice),
+		m_sceneGraph(sceneGraph) { }
+
     const int ID()
     {
         return c_identifier;
@@ -22,18 +28,17 @@ public:
 
         PerObjectBuffer& perObjectBuffer = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
 
-        GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
-        ID3D11DeviceContext& deviceContext = *gs->GetGraphicsDeviceContext();
+        ID3D11DeviceContext& deviceContext = *m_gfxDevice->GetGraphicsDeviceContext();
 
         UINT16 baseVertex = 0;
         UINT16 baseIndex = 0;
-        MeshRendererComponent* meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
-        size_t numberOfMeshRenderers = GetSceneGraph().GetNumberOfComponents<MeshRendererComponent>();
+        MeshRendererComponent* meshRenderers = m_sceneGraph->GetComponentArrayPointer<MeshRendererComponent>();
+        size_t numberOfMeshRenderers = m_sceneGraph->GetNumberOfComponents<MeshRendererComponent>();
 
         for (size_t i = 0; i < numberOfMeshRenderers; ++i)
         {
             MeshRendererComponent& mrc = meshRenderers[i];
-            EntityComponent& meshEntity = *GetSceneGraph().GetComponent<EntityComponent>(mrc.m_entityIndex);
+            EntityComponent& meshEntity = *m_sceneGraph->GetComponent<EntityComponent>(mrc.m_entityIndex);
 
             Mesh& mesh = *GetResourceManager().GetAsset<Mesh>(mrc.m_data.m_meshIndex);
             UINT16 numberOfVerts = (UINT16)mesh.GetVertexData().size();
@@ -41,7 +46,7 @@ public:
 
             if (mrc.m_data.m_drawCommandIndex == c_identifier && mrc.m_enabled)
             {
-                TransformComponent* modelTransform = EntityUtil::GetComponent<TransformComponent>(meshEntity);
+                TransformComponent* modelTransform = EntityUtil::GetComponent<TransformComponent>(m_sceneGraph, meshEntity);
 
                 Matrix4x4 model;
                 Matrix4x4::Identity(model);
@@ -68,6 +73,9 @@ public:
     }
 
 protected:
+	GraphicsDevice* m_gfxDevice;
+	SceneGraph* m_sceneGraph;
+
     virtual void PreDrawAll() = 0;
     virtual bool BindMaterial(MeshRendererComponent& mrc) = 0;
 

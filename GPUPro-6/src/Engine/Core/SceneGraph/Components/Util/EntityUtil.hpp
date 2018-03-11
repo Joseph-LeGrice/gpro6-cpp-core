@@ -4,28 +4,28 @@
 
 namespace EntityUtil
 {
-    template<class T>
-    T& AddComponent(EntityComponent& e)
-    {
-        T& newComponent = GetSceneGraph().CreateComponent<T>();
-        LinkComponent<T>(e, newComponent);
-        return newComponent;
-    }
+	template<class T>
+	T& AddComponent(SceneGraph* sceneGraph, EntityComponent& e)
+	{
+		T& newComponent = sceneGraph->CreateComponent<T>();
+		LinkComponent<T>(e, newComponent);
+		return newComponent;
+	}
 
-    template<class T>
-    void RemoveComponent(EntityComponent& e)
-    {
-        T* component = GetComponent<T>(e);
-        UnlinkComponent(e, component);
-        GetSceneGraph().DeleteComponent(component->m_componentIndex);
-    }
+	template<class T>
+	void RemoveComponent(SceneGraph* sceneGraph, EntityComponent& e)
+	{
+		T* component = GetComponent<T>(e);
+		UnlinkComponent(e, component);
+		sceneGraph->DeleteComponent(component->m_componentIndex);
+	}
 
-    template<class T>
-    T* GetComponent(EntityComponent& e)
-    {
-        int componentIndex = GetComponentIndex<T>(e);
-        return GetSceneGraph().GetComponent<T>(componentIndex);
-    }
+	template<class T>
+	T* GetComponent(SceneGraph* sceneGraph, EntityComponent& e)
+	{
+		int componentIndex = GetComponentIndex<T>(e);
+		return sceneGraph->GetComponent<T>(componentIndex);
+	}
 
     template<class T>
     void LinkComponent(EntityComponent& ec, T& component)

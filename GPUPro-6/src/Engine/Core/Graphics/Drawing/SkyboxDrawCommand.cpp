@@ -2,13 +2,14 @@
 #include "SkyboxDrawCommand.h"
 
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
+#include "Engine/Core/Graphics/BlendState.h"
+#include "Engine/Core/Graphics/RasterizerState.h"
+
 
 void SkyboxDrawCommand::PreDrawAll()
 {
-    GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
-    gs->GetRasterizerState()->SetState({ kCullStateFrontCull, kFillModeSolid, true });
-    gs->GetBlendState()->SetState({ false });
+	m_rasterizerState->SetState({ kCullStateFrontCull, kFillModeSolid, true });
+	m_blendState->SetState({ false });
 }
 
 bool SkyboxDrawCommand::BindMaterial(MeshRendererComponent& mrc)

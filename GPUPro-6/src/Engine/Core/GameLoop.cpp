@@ -1,57 +1,45 @@
 #include "stdafx.h"
 #include "GameLoop.h"
-#include "Engine/Core/Time/Time.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
 
-StaticPointer<GameLoop> GameLoop::s_instance;
+#include "Engine/Core/Time/Time.h"
+#include "Engine/Core/SystemManagement/ISystem.h"
 
 int GameLoop::Run()
 {
-    return s_instance->InternalRun();
-}
+	for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+		it != m_systems.end(); it++) {
+		it->get()->Initialize();
+	}
 
-void GameLoop::Stop()
-{
-    s_instance->InternalStop();
-}
-
-void DoFixed(ISystem* system)
-{
-    system->FixedTick();
-}
-
-void DoEarlyVariable(ISystem* system)
-{
-    system->EarlyVariableTick();
-}
-
-void DoVariable(ISystem* system)
-{
-    system->VariableTick();
-}
-
-void DoLateVariable(ISystem* system)
-{
-    system->LateVariableTick();
-}
-
-int GameLoop::InternalRun()
-{
-    m_running = true;
+	m_running = true;
     while (m_running)
     {
 		try
 		{
-            Time::s_instance->AdvanceFrame();
+			m_time.AdvanceFrame();
 
-            while (Time::s_instance->ShouldAdvanceFixedStep())
-            {
-                GetSystemManager().ForEachSystem(DoFixed);
-            }
+			while (m_time.ShouldAdvanceFixedStep())
+			{
+				for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+					it != m_systems.end(); it++) {
+					it->get()->FixedTick();
+				}
+			}
 
-            GetSystemManager().ForEachSystem(DoEarlyVariable);
-            GetSystemManager().ForEachSystem(DoVariable);
-            GetSystemManager().ForEachSystem(DoLateVariable);
+			for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+				it != m_systems.end(); it++) {
+				it->get()->EarlyVariableTick();
+			}
+
+			for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+				it != m_systems.end(); it++) {
+				it->get()->VariableTick();
+			}
+
+			for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+				it != m_systems.end(); it++) {
+				it->get()->LateVariableTick();
+			}
         }
 		catch (const custom_assert::custom_assert_error& e)
 		{
@@ -62,10 +50,16 @@ int GameLoop::InternalRun()
 			break;
 		}
     }
+
+	for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+		it != m_systems.end(); it++) {
+		it->get()->Deinitalize();
+	}
+
     return 0;
 }
 
-void GameLoop::InternalStop()
+void GameLoop::Stop()
 {
     m_running = false;
 }

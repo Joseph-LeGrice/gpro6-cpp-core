@@ -7,262 +7,277 @@
 
 #include <math.h>
 
-Mesh* MeshHelper::CreateQuad()
+int g_quadMeshId = -1;
+int g_sphereUvMeshId = -1;
+int g_cubeMeshId = -1;
+
+Mesh* MeshHelper::Quad()
 {
-    Mesh* result = GetResourceManager().Instantiate<Mesh>();
-	result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-
-	std::vector<Vector3> verts = std::vector<Vector3>();
-	verts.push_back({ -1.0f, -1.0f, 0.0f });
-	verts.push_back({ -1.0f,  1.0f, 0.0f });
-	verts.push_back({  1.0f,  1.0f, 0.0f });
-	verts.push_back({  1.0f, -1.0f, 0.0f });
-	result->SetVertices(verts);
-		
-	std::vector<Vector3> normals = std::vector<Vector3>();
-	normals.push_back({ 0.0f, 0.0f, 1.0f });
-	normals.push_back({ 0.0f, 0.0f, 1.0f });
-	normals.push_back({ 0.0f, 0.0f, 1.0f });
-	normals.push_back({ 0.0f, 0.0f, 1.0f });
-	result->SetNormals(normals);
-
-	std::vector<Vector2> uvs = std::vector<Vector2>();
-	uvs.push_back({ 0.0f, 1.0f });
-	uvs.push_back({ 0.0f, 0.0f });
-	uvs.push_back({ 1.0f, 0.0f });
-	uvs.push_back({ 1.0f, 1.0f });
-	result->SetUVs(uvs);
-
-	std::vector<UINT16> indices = std::vector<UINT16>();
-	indices.push_back(0);
-	indices.push_back(1);
-	indices.push_back(2);
-    indices.push_back(2);
-	indices.push_back(3);
-    indices.push_back(1);
-	result->SetIndices(indices);
-
-	return result;
-}
-
-Mesh* MeshHelper::CreateSphereICO()
-{
-    std::vector<Vector3> verts = std::vector<Vector3>();
-	std::vector<Vector3> norms = std::vector<Vector3>();
-	std::vector<Vector2> uvs = std::vector<Vector2>();
-	std::vector<UINT16> indices = std::vector<UINT16>();
-
-    Mesh* result = GetResourceManager().Instantiate<Mesh>();
-    result->SetVertices(verts);
-    result->SetNormals(norms);
-    result->SetUVs(uvs);
-    result->SetIndices(indices);
-
-	return result;
-}
-
-Mesh* MeshHelper::CreateSphereUV()
-{
-	std::vector<Vector3> verts = std::vector<Vector3>();
-	std::vector<Vector3> norms = std::vector<Vector3>();
-	std::vector<Vector2> uvs = std::vector<Vector2>();
-	std::vector<UINT16> indices = std::vector<UINT16>();
-
-	float radius = 1.0f;
-	size_t latitude = 16;
-	size_t longitude = 16;
-
-	for (size_t latSlice = 0; latSlice < latitude; ++latSlice)
+	if (g_quadMeshId > -1)
 	{
-		float phi = (float)latSlice / (latitude - 1.0f) * MyMath::PI;
-		for (size_t lonSlice = 0; lonSlice < longitude; ++lonSlice)
-		{
-			float progression = (float)lonSlice / (longitude - 1.0f);
-			float theta = progression * 2.0f * MyMath::PI;
-
-			float x = radius * cos(theta) * sin(phi);
-			float y = radius * cos(phi); 
-			float z = radius * sin(theta) * sin(phi);
-			verts.push_back({ x, y, z });
-			norms.push_back({ x, y, z });
-
-			float u = (float)lonSlice / (longitude - 1.0f);
-			float v = 1.0f - (float)latSlice / (latitude - 1.0f);
-			uvs.push_back({ u, v });
-		}
+		return GetResourceManager().GetAsset<Mesh>(g_quadMeshId);
 	}
-
-	for (size_t latSlice = 0; latSlice < latitude - 1; ++latSlice)
+	else
 	{
-		for (size_t lonSlice = 0; lonSlice < longitude - 1; ++lonSlice)
-		{
-			UINT16 offset = (UINT16)(latSlice * latitude);
-			UINT16 v1 = (UINT16)(lonSlice + offset);
-			UINT16 v2 = (UINT16)(lonSlice + 1 + offset);
+		Mesh* result = GetResourceManager().Instantiate<Mesh>();
+		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-			UINT16 nextOffset = (UINT16)((latSlice + 1) * latitude);
-			UINT16 v3 = (UINT16)(lonSlice + nextOffset);
-			UINT16 v4 = (UINT16)(lonSlice + 1 + nextOffset);
+		std::vector<Vector3> verts = std::vector<Vector3>();
+		verts.push_back({ -1.0f, -1.0f, 0.0f });
+		verts.push_back({ -1.0f,  1.0f, 0.0f });
+		verts.push_back({ 1.0f,  1.0f, 0.0f });
+		verts.push_back({ 1.0f, -1.0f, 0.0f });
+		result->SetVertices(verts);
 
-			indices.push_back(v1);
-			indices.push_back(v2);
-			indices.push_back(v3);
+		std::vector<Vector3> normals = std::vector<Vector3>();
+		normals.push_back({ 0.0f, 0.0f, 1.0f });
+		normals.push_back({ 0.0f, 0.0f, 1.0f });
+		normals.push_back({ 0.0f, 0.0f, 1.0f });
+		normals.push_back({ 0.0f, 0.0f, 1.0f });
+		result->SetNormals(normals);
 
-			indices.push_back(v3);
-			indices.push_back(v2);
-			indices.push_back(v4);
-		}
+		std::vector<Vector2> uvs = std::vector<Vector2>();
+		uvs.push_back({ 0.0f, 1.0f });
+		uvs.push_back({ 0.0f, 0.0f });
+		uvs.push_back({ 1.0f, 0.0f });
+		uvs.push_back({ 1.0f, 1.0f });
+		result->SetUVs(uvs);
+
+		std::vector<UINT16> indices = std::vector<UINT16>();
+		indices.push_back(0);
+		indices.push_back(1);
+		indices.push_back(2);
+		indices.push_back(2);
+		indices.push_back(3);
+		indices.push_back(1);
+		result->SetIndices(indices);
+
+		g_quadMeshId = result->GetResourceID();
+
+		return result;
 	}
-
-    Mesh* result = GetResourceManager().Instantiate<Mesh>();
-    result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-    result->SetVertices(verts);
-    result->SetNormals(norms);
-    result->SetUVs(uvs);
-    result->SetIndices(indices);
-
-	return result;
 }
 
-Mesh* MeshHelper::CreateCube()
+Mesh* MeshHelper::SphereUV()
 {
-	std::vector<Vector3> verts = std::vector<Vector3>();
-	std::vector<Vector3> norms = std::vector<Vector3>();
-	std::vector<Vector2> uvs = std::vector<Vector2>();
-	std::vector<UINT16> indices = std::vector<UINT16>();
+	if (g_sphereUvMeshId > -1)
+	{
+		return GetResourceManager().GetAsset<Mesh>(g_sphereUvMeshId);
+	}
+	else
+	{
+		std::vector<Vector3> verts = std::vector<Vector3>();
+		std::vector<Vector3> norms = std::vector<Vector3>();
+		std::vector<Vector2> uvs = std::vector<Vector2>();
+		std::vector<UINT16> indices = std::vector<UINT16>();
 
-	// Front Face
-	verts.push_back({ -1.0f,  1.0f, -1.0f });
-	verts.push_back({ 1.0f,  1.0f, -1.0f });
-	verts.push_back({ -1.0f, -1.0f, -1.0f });
-	verts.push_back({ 1.0f, -1.0f, -1.0f });
+		float radius = 1.0f;
+		size_t latitude = 16;
+		size_t longitude = 16;
 
-	norms.push_back({ 0.0f, 0.0f, -1.0f });
-	norms.push_back({ 0.0f, 0.0f, -1.0f });
-	norms.push_back({ 0.0f, 0.0f, -1.0f });
-	norms.push_back({ 0.0f, 0.0f, -1.0f });
-	
-	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
-	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+		for (size_t latSlice = 0; latSlice < latitude; ++latSlice)
+		{
+			float phi = (float)latSlice / (latitude - 1.0f) * MyMath::PI;
+			for (size_t lonSlice = 0; lonSlice < longitude; ++lonSlice)
+			{
+				float progression = (float)lonSlice / (longitude - 1.0f);
+				float theta = progression * 2.0f * MyMath::PI;
 
-	indices.push_back(0);
-	indices.push_back(1);
-	indices.push_back(2);
-	indices.push_back(2);
-	indices.push_back(1);
-	indices.push_back(3);
+				float x = radius * cos(theta) * sin(phi);
+				float y = radius * cos(phi);
+				float z = radius * sin(theta) * sin(phi);
+				verts.push_back({ x, y, z });
+				norms.push_back({ x, y, z });
 
-	// Left Face
-	verts.push_back({ -1.0f,  1.0f,  1.0f });
-	verts.push_back({ -1.0f,  1.0f, -1.0f });
-	verts.push_back({ -1.0f, -1.0f,  1.0f });
-	verts.push_back({ -1.0f, -1.0f, -1.0f });
+				float u = (float)lonSlice / (longitude - 1.0f);
+				float v = 1.0f - (float)latSlice / (latitude - 1.0f);
+				uvs.push_back({ u, v });
+			}
+		}
 
-	norms.push_back({ -1.0f,  0.0f,  0.0f });
-	norms.push_back({ -1.0f,  0.0f,  0.0f });
-	norms.push_back({ -1.0f,  0.0f,  0.0f }); 
-	norms.push_back({ -1.0f,  0.0f,  0.0f });
+		for (size_t latSlice = 0; latSlice < latitude - 1; ++latSlice)
+		{
+			for (size_t lonSlice = 0; lonSlice < longitude - 1; ++lonSlice)
+			{
+				UINT16 offset = (UINT16)(latSlice * latitude);
+				UINT16 v1 = (UINT16)(lonSlice + offset);
+				UINT16 v2 = (UINT16)(lonSlice + 1 + offset);
 
-	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
-	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+				UINT16 nextOffset = (UINT16)((latSlice + 1) * latitude);
+				UINT16 v3 = (UINT16)(lonSlice + nextOffset);
+				UINT16 v4 = (UINT16)(lonSlice + 1 + nextOffset);
 
-	indices.push_back(4);
-	indices.push_back(5);
-	indices.push_back(6);
-	indices.push_back(6);
-	indices.push_back(5);
-	indices.push_back(7);
-	
-	// Top Face
-	verts.push_back({ -1.0f, 1.0f,  1.0f });
-	verts.push_back({  1.0f, 1.0f,  1.0f });
-	verts.push_back({ -1.0f, 1.0f, -1.0f });
-	verts.push_back({  1.0f, 1.0f, -1.0f });
+				indices.push_back(v1);
+				indices.push_back(v2);
+				indices.push_back(v3);
 
-	norms.push_back({ 0.0f, 1.0f,  0.0f });
-	norms.push_back({ 0.0f, 1.0f,  0.0f });
-	norms.push_back({ 0.0f, 1.0f,  0.0f });
-	norms.push_back({ 0.0f, 1.0f,  0.0f });
+				indices.push_back(v3);
+				indices.push_back(v2);
+				indices.push_back(v4);
+			}
+		}
 
-	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
-	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+		Mesh* result = GetResourceManager().Instantiate<Mesh>();
+		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+		result->SetVertices(verts);
+		result->SetNormals(norms);
+		result->SetUVs(uvs);
+		result->SetIndices(indices);
 
-	indices.push_back(8);
-	indices.push_back(9);
-	indices.push_back(10);
-	indices.push_back(10);
-	indices.push_back(9);
-	indices.push_back(11);
+		g_sphereUvMeshId = result->GetResourceID();
 
-	// Left Face
-	verts.push_back({  1.0f, -1.0f,  1.0f });
-	verts.push_back({  1.0f, -1.0f, -1.0f });
-	verts.push_back({  1.0f,  1.0f,  1.0f });
-	verts.push_back({  1.0f,  1.0f, -1.0f });
+		return result;
+	}
+}
 
-	norms.push_back({ -1.0f,  0.0f,  0.0f });
-	norms.push_back({ -1.0f,  0.0f,  0.0f });
-	norms.push_back({ -1.0f,  0.0f,  0.0f });
-	norms.push_back({ -1.0f,  0.0f,  0.0f });
+Mesh* MeshHelper::Cube()
+{
+	if (g_cubeMeshId > -1)
+	{
+		return GetResourceManager().GetAsset<Mesh>(g_cubeMeshId);
+	}
+	else
+	{
+		std::vector<Vector3> verts = std::vector<Vector3>();
+		std::vector<Vector3> norms = std::vector<Vector3>();
+		std::vector<Vector2> uvs = std::vector<Vector2>();
+		std::vector<UINT16> indices = std::vector<UINT16>();
 
-	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
-	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+		// Front Face
+		verts.push_back({ -1.0f,  1.0f, -1.0f });
+		verts.push_back({ 1.0f,  1.0f, -1.0f });
+		verts.push_back({ -1.0f, -1.0f, -1.0f });
+		verts.push_back({ 1.0f, -1.0f, -1.0f });
 
-	indices.push_back(12);
-	indices.push_back(13);
-	indices.push_back(14);
-	indices.push_back(14);
-	indices.push_back(13);
-	indices.push_back(15);
-	
-	// Bottom Face
-	verts.push_back({  1.0f, -1.0f,  1.0f });
-	verts.push_back({ -1.0f, -1.0f,  1.0f });
-	verts.push_back({  1.0f, -1.0f, -1.0f });
-	verts.push_back({ -1.0f, -1.0f, -1.0f });
+		norms.push_back({ 0.0f, 0.0f, -1.0f });
+		norms.push_back({ 0.0f, 0.0f, -1.0f });
+		norms.push_back({ 0.0f, 0.0f, -1.0f });
+		norms.push_back({ 0.0f, 0.0f, -1.0f });
 
-	norms.push_back({ 0.0f, -1.0f,  0.0f });
-	norms.push_back({ 0.0f, -1.0f,  0.0f });
-	norms.push_back({ 0.0f, -1.0f,  0.0f });
-	norms.push_back({ 0.0f, -1.0f,  0.0f });
+		uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
+		uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
 
-	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
-	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+		indices.push_back(0);
+		indices.push_back(1);
+		indices.push_back(2);
+		indices.push_back(2);
+		indices.push_back(1);
+		indices.push_back(3);
 
-	indices.push_back(16);
-	indices.push_back(17);
-	indices.push_back(18);
-	indices.push_back(18);
-	indices.push_back(17);
-	indices.push_back(19);
+		// Left Face
+		verts.push_back({ -1.0f,  1.0f,  1.0f });
+		verts.push_back({ -1.0f,  1.0f, -1.0f });
+		verts.push_back({ -1.0f, -1.0f,  1.0f });
+		verts.push_back({ -1.0f, -1.0f, -1.0f });
 
-	// Back Face
-	verts.push_back({ -1.0f, -1.0f, 1.0f });
-	verts.push_back({  1.0f, -1.0f, 1.0f });
-	verts.push_back({ -1.0f,  1.0f, 1.0f });
-	verts.push_back({  1.0f,  1.0f, 1.0f });
+		norms.push_back({ -1.0f,  0.0f,  0.0f });
+		norms.push_back({ -1.0f,  0.0f,  0.0f });
+		norms.push_back({ -1.0f,  0.0f,  0.0f });
+		norms.push_back({ -1.0f,  0.0f,  0.0f });
 
-	norms.push_back({ 0.0f, 0.0f,  1.0f });
-	norms.push_back({ 0.0f, 0.0f,  1.0f });
-	norms.push_back({ 0.0f, 0.0f,  1.0f });
-	norms.push_back({ 0.0f, 0.0f,  1.0f });
+		uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
+		uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
 
-	uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
-	uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+		indices.push_back(4);
+		indices.push_back(5);
+		indices.push_back(6);
+		indices.push_back(6);
+		indices.push_back(5);
+		indices.push_back(7);
 
-	indices.push_back(20);
-	indices.push_back(21);
-	indices.push_back(22);
-	indices.push_back(22);
-	indices.push_back(21);
-	indices.push_back(23);
+		// Top Face
+		verts.push_back({ -1.0f, 1.0f,  1.0f });
+		verts.push_back({ 1.0f, 1.0f,  1.0f });
+		verts.push_back({ -1.0f, 1.0f, -1.0f });
+		verts.push_back({ 1.0f, 1.0f, -1.0f });
 
-    Mesh* result = GetResourceManager().Instantiate<Mesh>();
-    result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-    result->SetVertices(verts);
-    result->SetNormals(norms);
-    result->SetUVs(uvs);
-    result->SetIndices(indices);
+		norms.push_back({ 0.0f, 1.0f,  0.0f });
+		norms.push_back({ 0.0f, 1.0f,  0.0f });
+		norms.push_back({ 0.0f, 1.0f,  0.0f });
+		norms.push_back({ 0.0f, 1.0f,  0.0f });
 
-	return result;
+		uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
+		uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+
+		indices.push_back(8);
+		indices.push_back(9);
+		indices.push_back(10);
+		indices.push_back(10);
+		indices.push_back(9);
+		indices.push_back(11);
+
+		// Left Face
+		verts.push_back({ 1.0f, -1.0f,  1.0f });
+		verts.push_back({ 1.0f, -1.0f, -1.0f });
+		verts.push_back({ 1.0f,  1.0f,  1.0f });
+		verts.push_back({ 1.0f,  1.0f, -1.0f });
+
+		norms.push_back({ -1.0f,  0.0f,  0.0f });
+		norms.push_back({ -1.0f,  0.0f,  0.0f });
+		norms.push_back({ -1.0f,  0.0f,  0.0f });
+		norms.push_back({ -1.0f,  0.0f,  0.0f });
+
+		uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
+		uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+
+		indices.push_back(12);
+		indices.push_back(13);
+		indices.push_back(14);
+		indices.push_back(14);
+		indices.push_back(13);
+		indices.push_back(15);
+
+		// Bottom Face
+		verts.push_back({ 1.0f, -1.0f,  1.0f });
+		verts.push_back({ -1.0f, -1.0f,  1.0f });
+		verts.push_back({ 1.0f, -1.0f, -1.0f });
+		verts.push_back({ -1.0f, -1.0f, -1.0f });
+
+		norms.push_back({ 0.0f, -1.0f,  0.0f });
+		norms.push_back({ 0.0f, -1.0f,  0.0f });
+		norms.push_back({ 0.0f, -1.0f,  0.0f });
+		norms.push_back({ 0.0f, -1.0f,  0.0f });
+
+		uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
+		uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+
+		indices.push_back(16);
+		indices.push_back(17);
+		indices.push_back(18);
+		indices.push_back(18);
+		indices.push_back(17);
+		indices.push_back(19);
+
+		// Back Face
+		verts.push_back({ -1.0f, -1.0f, 1.0f });
+		verts.push_back({ 1.0f, -1.0f, 1.0f });
+		verts.push_back({ -1.0f,  1.0f, 1.0f });
+		verts.push_back({ 1.0f,  1.0f, 1.0f });
+
+		norms.push_back({ 0.0f, 0.0f,  1.0f });
+		norms.push_back({ 0.0f, 0.0f,  1.0f });
+		norms.push_back({ 0.0f, 0.0f,  1.0f });
+		norms.push_back({ 0.0f, 0.0f,  1.0f });
+
+		uvs.push_back({ 0.0f, 1.0f }); uvs.push_back({ 1.0f, 1.0f });
+		uvs.push_back({ 0.0f, 0.0f }); uvs.push_back({ 1.0f, 0.0f });
+
+		indices.push_back(20);
+		indices.push_back(21);
+		indices.push_back(22);
+		indices.push_back(22);
+		indices.push_back(21);
+		indices.push_back(23);
+
+		Mesh* result = GetResourceManager().Instantiate<Mesh>();
+		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+		result->SetVertices(verts);
+		result->SetNormals(norms);
+		result->SetUVs(uvs);
+		result->SetIndices(indices);
+
+		g_cubeMeshId = result->GetResourceID();
+
+		return result;
+	}
 }

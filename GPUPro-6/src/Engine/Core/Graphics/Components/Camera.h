@@ -2,8 +2,7 @@
 
 #include "Engine/Core/SceneGraph/Components/Util/ComponentType.hpp"
 #include "MyMath/Matrix/Matrix4x4.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
-#include "Engine/Core/Graphics/GraphicsSystem.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "MyMath/MathDefines.h"
 
 struct Camera
@@ -19,10 +18,10 @@ namespace CameraInternal
 {
     struct InitCamera
     {
-        Camera operator()()
+        Camera operator()(GraphicsDevice* gfxDevice)
         {
-            float viewportWidth = GetSystemManager().GetSystem<GraphicsSystem>()->GetViewportWidth();
-            float viewportHeight = GetSystemManager().GetSystem<GraphicsSystem>()->GetViewportHeight();
+            float viewportWidth = gfxDevice->GetViewportWidth();
+            float viewportHeight = gfxDevice->GetViewportHeight();
             float aspectRatio = viewportWidth / viewportHeight;
 
             float screenNear = 0.1f;

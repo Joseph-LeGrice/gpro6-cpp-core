@@ -1,7 +1,10 @@
 #pragma once
 
-#include "D3D11.h"
 #include <unordered_map>
+
+struct ID3D11BlendState;
+class GraphicsDevice;
+enum D3D11_BLEND;
 
 enum BlendFactor
 {
@@ -41,32 +44,14 @@ struct BlendStateDescriptor
     BlendFactor m_destAlpha = kBlendZero;
     BlendOperation m_alphaBlendOp = kBlendOpAdd;
 
-    UINT8 m_renderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+    UINT8 m_renderTargetWriteMask;
 
-    BlendStateDescriptor(BOOL enabled) : m_blendEnabled(enabled) { }
-
-    BlendStateDescriptor(BlendFactor bf1, BlendFactor bf2, BlendOperation bop) : m_blendEnabled(TRUE),
-        m_srcColor(bf1), m_destColor(bf2), m_colorBlendOp(bop),
-        m_srcAlpha(bf1), m_destAlpha(bf2), m_alphaBlendOp(bop)
-    { }
-
+    BlendStateDescriptor(BOOL enabled);
+    BlendStateDescriptor(BlendFactor bf1, BlendFactor bf2, BlendOperation bop);
     BlendStateDescriptor(BlendFactor colBf1, BlendFactor coBf2, BlendOperation colBop,
-        BlendFactor alphaBf1, BlendFactor alphaBf2, BlendOperation alphaBop) : m_blendEnabled(TRUE),
-        m_srcColor(colBf1), m_destColor(coBf2), m_colorBlendOp(colBop),
-        m_srcAlpha(alphaBf1), m_destAlpha(alphaBf2), m_alphaBlendOp(alphaBop)
-    { }
+        BlendFactor alphaBf1, BlendFactor alphaBf2, BlendOperation alphaBop);
 
-    bool operator==(const BlendStateDescriptor& other) const
-    {
-        return m_blendEnabled == other.m_blendEnabled == true &&
-            m_srcColor == other.m_srcColor &&
-            m_destColor == other.m_destColor &&
-            m_colorBlendOp == other.m_colorBlendOp &&
-            m_srcAlpha == other.m_srcAlpha &&
-            m_destAlpha == other.m_destAlpha &&
-            m_alphaBlendOp == other.m_alphaBlendOp &&
-            m_renderTargetWriteMask == other.m_renderTargetWriteMask;
-    }
+    bool operator==(const BlendStateDescriptor& other) const;
 };
 
 namespace std
@@ -100,12 +85,13 @@ namespace std
 class BlendState
 {
 public:
-    BlendState();
+	BlendState(GraphicsDevice* gfxDevice) : m_gfxDevice(gfxDevice) { }
     ~BlendState();
 
     void SetState(BlendStateDescriptor bsd);
 
 private:
+	GraphicsDevice* m_gfxDevice;
     std::unordered_map<BlendStateDescriptor, ManualRelease<ID3D11BlendState>> m_blendStates;
     
     ManualRelease<ID3D11BlendState>& GetBlendStateForDescriptor(BlendStateDescriptor& bsd);

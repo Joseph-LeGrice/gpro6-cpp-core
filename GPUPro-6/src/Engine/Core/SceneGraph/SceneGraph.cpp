@@ -5,15 +5,15 @@ SceneGraph* g_sceneGraph;
 
 void InitSceneGraph()
 {
-    g_sceneGraph = new SceneGraph();
+	g_sceneGraph = new SceneGraph();
 }
 
 SceneGraph& GetSceneGraph()
 {
-    return *g_sceneGraph;
+	return *g_sceneGraph;
 }
 
 void DestroySceneGraph()
 {
-    delete g_sceneGraph;
+	delete g_sceneGraph;
 }

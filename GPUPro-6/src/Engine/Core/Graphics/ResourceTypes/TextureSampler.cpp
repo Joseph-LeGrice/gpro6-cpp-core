@@ -1,15 +1,16 @@
 #include "stdafx.h"
-#include "Engine/Core/Graphics/ResourceTypes/TextureSampler.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
+#include "TextureSampler.h"
 
-TextureSampler::TextureSampler(UINT ai) : IResource(ai) { }
+#include "D3D11.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
+
+
 TextureSampler::TextureSampler() : IResource() { }
 TextureSampler::~TextureSampler() { }
 
 void TextureSampler::BindTextureSampler(UINT samplerIndex)
 {
-	ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+	ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
     deviceContext->VSSetSamplers(samplerIndex, 1, m_sampler);
     deviceContext->HSSetSamplers(samplerIndex, 1, m_sampler);
     deviceContext->DSSetSamplers(samplerIndex, 1, m_sampler);
@@ -32,7 +33,7 @@ bool TextureSampler::Initialize()
 	desc.MinLOD = 0;
 	desc.MaxLOD = 0;
 
-	ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+	ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
 	HRESULT createSamplerResult = device->CreateSamplerState(&desc, m_sampler);
 	return SUCCEEDED(createSamplerResult);
 }

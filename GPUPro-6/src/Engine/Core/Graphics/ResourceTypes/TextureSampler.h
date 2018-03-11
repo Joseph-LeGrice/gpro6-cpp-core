@@ -1,12 +1,14 @@
 #pragma once
 
-#include "D3D11.h"
 #include "Engine/Core/ResourceManagement/IResource.h"
+
+struct ID3D11SamplerState;
+class GraphicsDevice;
 
 class TextureSampler : public IResource
 {
 public:
-    TextureSampler(UINT ai);
+    TextureSampler(GraphicsDevice* gfxDevice, UINT ai) : IResource(ai), m_gfxDevice(gfxDevice) { }
     TextureSampler();
     ~TextureSampler();
 
@@ -17,5 +19,6 @@ public:
     virtual void Release() override;
 
 private:
+	GraphicsDevice* m_gfxDevice;
 	ManualRelease<ID3D11SamplerState> m_sampler;
 };

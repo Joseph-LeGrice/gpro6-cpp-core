@@ -4,20 +4,9 @@
 #include "Engine/Core/SceneGraph/Components/Entity.h"
 #include "Engine/Core/SceneGraph/Components/Util/EntityUtil.hpp"
 #include "Engine/Core/Graphics/Components/Transform.h"
-#include "Engine/Core/SceneGraph/SceneGraph.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
+
 #include "Engine/Core/Input/InputSystem.h"
 #include "Engine/Core/Time/Time.h"
-#include "MyMath/MathDefines.h"
-
-NoClipLocomotion::NoClipLocomotion()
-{
-}
-
-
-NoClipLocomotion::~NoClipLocomotion()
-{
-}
 
 void NoClipLocomotion::SetPlayer(int entityId)
 {
@@ -31,20 +20,19 @@ void NoClipLocomotion::VariableTick()
         return;
     }
 
-    EntityComponent* player = GetSceneGraph().GetComponent<EntityComponent>(m_playerEntityId);
+    EntityComponent* player = m_sceneGraph.GetComponent<EntityComponent>(m_playerEntityId);
     if (player == nullptr)
     {
         return;
     }
 
-    TransformComponent* playerTransform = EntityUtil::GetComponent<TransformComponent>(*player);
+    TransformComponent* playerTransform = EntityUtil::GetComponent<TransformComponent>(&m_sceneGraph, *player);
     if (playerTransform == nullptr)
     {
         return;
     }
     
-    InputSystem* inputSys = GetSystemManager().GetSystem<InputSystem>();
-    const MouseInput& mouseInput = inputSys->GetMouse();
+    const MouseInput& mouseInput = m_inputSystem.GetMouse();
     if (mouseInput.GetMouseButton(0))
     {
         Vector2 mouseDelta = mouseInput.GetDeltaMousePosition();
@@ -68,7 +56,7 @@ void NoClipLocomotion::VariableTick()
 #endif
     }
 
-    const KeyboardInput& keyboardInput = inputSys->GetKeyboard();
+    const KeyboardInput& keyboardInput = m_inputSystem.GetKeyboard();
     Vector3 moveDelta = { 0, 0, 0 };
     if (keyboardInput.GetKey(kInputKey_W))
     {

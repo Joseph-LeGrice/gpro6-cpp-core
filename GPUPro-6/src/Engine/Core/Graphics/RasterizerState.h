@@ -1,7 +1,9 @@
 #pragma once
 
-#include "D3D11.h"
 #include <unordered_map>
+
+class GraphicsDevice;
+struct ID3D11RasterizerState;
 
 enum CullState
 {
@@ -53,12 +55,13 @@ namespace std
 class RasterizerState
 {
 public:
-    RasterizerState();
+	RasterizerState(GraphicsDevice* gfxDevice) : m_gfxDevice(gfxDevice) { }
     ~RasterizerState();
 
     void SetState(RasterizerStateDescriptor rsd);
 
 private:
+	GraphicsDevice* m_gfxDevice;
     std::unordered_map<RasterizerStateDescriptor, ManualRelease<ID3D11RasterizerState>> m_rasterStates;
 
     ManualRelease<ID3D11RasterizerState>& RasterizerState::GetStateForDescriptor(RasterizerStateDescriptor rsd);

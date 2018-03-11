@@ -1,4 +1,6 @@
 #pragma once
+#pragma warning(push)
+#pragma warning(disable:4100)
 
 #include <vector>
 #include <tuple>
@@ -8,34 +10,36 @@ class ResourceManagerDefinition
 {
 public:
     template<class T>
-    T* Instantiate()
+    T* Instantiate() // FIXME
     {
-        std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
-        int arrayIndex = static_cast<int>(resources.size());
-        resources.resize(arrayIndex + 1, T(arrayIndex));
-        return &resources[arrayIndex];
+        //std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
+        //int arrayIndex = static_cast<int>(resources.size());
+        //resources.resize(arrayIndex + 1, T(arrayIndex));
+        //return &resources[arrayIndex];
+		return nullptr;
     }
 
     template<class T>
-    T* GetAsset(int arrayIndex)
+    T* GetAsset(int arrayIndex) // FIXME
     {
-        std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
-        custom_assert::in_range(arrayIndex, resources);
-        return &resources[arrayIndex];
+        //std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
+        //custom_assert::in_range(arrayIndex, resources);
+        //return &resources[arrayIndex];
+		return nullptr;
     }
 
     template<class T>
     void Deallocate(int arrayIndex)
     {
-        std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
-        custom_assert::in_range(arrayIndex, resources);
-        
-		int lastIndex = static_cast<int>(resources.size()) - 1;
-		T& deletedAsset = resources[arrayIndex];
-		deletedAsset.Release();
+		//std::vector<T>& resources = std::get<std::vector<T>>(m_allResources);
+		//custom_assert::in_range(arrayIndex, resources);
+		//
+		//int lastIndex = static_cast<int>(resources.size()) - 1;
+		//T& deletedAsset = resources[arrayIndex];
+		//deletedAsset.Release();
 
-		resources[arrayIndex] = resources[lastIndex];
-		resources.pop_back();
+		//resources[arrayIndex] = resources[lastIndex];
+		//resources.pop_back();
     }
 
     template<int I = 0>
@@ -47,16 +51,17 @@ public:
     inline typename std::enable_if < I < sizeof...(Types), void>::type
         DeallocateAll()
     {
-        auto resources = std::get<I>(m_allResources);
-        for (size_t i = 0; i < resources.size(); i++)
-        {
-            resources[i].Release();
-        }
-        resources.clear();
-        DeallocateAll<I + 1>();
+        //auto resources = std::get<I>(m_allResources);
+        //for (size_t i = 0; i < resources.size(); i++)
+        //{
+        //    resources[i].Release();
+        //}
+        //resources.clear();
+        //DeallocateAll<I + 1>();
     }
 
 private:
-    std::tuple<std::vector<Types>...> m_allResources;
+    //std::tuple<std::vector<Types>...> m_allResources;
 };
 
+#pragma warning(pop)

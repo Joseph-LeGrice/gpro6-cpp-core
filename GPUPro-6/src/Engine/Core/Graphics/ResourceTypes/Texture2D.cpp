@@ -1,14 +1,16 @@
 #include "stdafx.h"
 
 #include "Engine/Core/Utilities/Logging.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/DataStructures/Color.h"
+
+#include "D3D11.h"
 #include "FreeImage.h"
 
 
-Texture2D::Texture2D(UINT ai) : IResource(ai) { }
+Texture2D::Texture2D(UINT ai, GraphicsDevice* gfxDevice) : IResource(ai), m_gfxDevice(gfxDevice) { }
 Texture2D::Texture2D() : IResource() { }
 Texture2D::~Texture2D() { }
 
@@ -106,7 +108,7 @@ void Texture2D::CreateResources()
     data.SysMemPitch = pitch;
     data.SysMemSlicePitch = pitch * height;
 
-    ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+    ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
     HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, m_pTexture);
     if (SUCCEEDED(createTextureResult))
     {

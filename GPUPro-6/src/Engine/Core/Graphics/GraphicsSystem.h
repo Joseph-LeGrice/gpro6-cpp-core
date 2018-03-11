@@ -1,58 +1,32 @@
 #pragma once
 
-#include "D3D11.h"
-#include "D3D10.h"
-
-#include <vector>
+//#include <vector>
 #include "Engine/Core/SystemManagement/ISystem.h"
-#include "RasterizerState.h"
-#include "BlendState.h"
 
-class VertexBuffer;
-class IndexBuffer;
-class DepthStencilBuffer;
+#include "Engine/Core/SceneGraph/SceneGraph.h"
+
+class BlendState;
+class MeshManager;
+class GraphicsDevice;
 class RasterizerState;
+class DepthStencilBuffer;
 
 class GraphicsSystem : public ISystem
 {
 public:
-    IDXGISwapChain* GetSwapChain();
-    ID3D11Device* GetGraphicsDevice();
-	ID3D11DeviceContext* GetGraphicsDeviceContext();
-    DepthStencilBuffer* GetDepthStencilBuffer();
-    RasterizerState* GetRasterizerState();
-    BlendState* GetBlendState();
-
-    void SetDirty();
-
-    GraphicsSystem();
-    GraphicsSystem(const GraphicsSystem&) = delete;
-    virtual ~GraphicsSystem();
+	GraphicsSystem(BlendState& blendState,
+		MeshManager& meshManager,
+		GraphicsDevice& gfxDevice,
+		DepthStencilBuffer& depthStencilBuffer,
+		SceneGraph& sceneGraph);
 
     virtual bool Initialize() override;
-    virtual void Deinitalize() override;
     virtual void VariableTick() override;
 
-	float GetViewportWidth();
-	float GetViewportHeight();
-
 private:
-    ManualRelease<ID3D11Device> m_device;
-    ManualRelease<ID3D11DeviceContext> m_deviceContext;
-    ManualRelease<IDXGISwapChain> m_swapchain;
-
-#if defined(_DEBUG)
-    ManualRelease<ID3D11Debug> m_debugInterface;
-#endif
-
-	bool m_isDirty;
-    AutoPointer<IndexBuffer> m_myIndexBuffer;
-    AutoPointer<VertexBuffer> m_myVertexBuffer;
-    AutoPointer<RasterizerState> m_rasterizerState;
-    AutoPointer<BlendState> m_blendState;
-    AutoPointer<DepthStencilBuffer> m_depthStencilBuffer;
-    
-	float m_viewportWidth, m_viewportHeight;
-	
-	void UpdateIfDirty();
+	SceneGraph& m_sceneGraph;
+	BlendState& m_blendState;
+	MeshManager& m_meshManager;
+	GraphicsDevice& m_gfxDevice;
+	DepthStencilBuffer& m_depthStencilBuffer;
 };

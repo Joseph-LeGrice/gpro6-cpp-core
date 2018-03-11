@@ -2,6 +2,13 @@
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 
+#include "D3D11.h"
+
+Mesh::Mesh(UINT ai) : IResource(ai)
+{
+	m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+}
+
 void Mesh::SetVertices(std::vector<Vector3>& verts)
 {
 	m_vertexData.resize(verts.size());

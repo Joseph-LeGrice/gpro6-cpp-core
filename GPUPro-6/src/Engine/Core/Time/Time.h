@@ -1,5 +1,4 @@
 #pragma once
-#include "Engine/Core/SystemManagement/ISystem.h"
 #include <chrono>
 
 typedef std::chrono::steady_clock::time_point TimePoint;

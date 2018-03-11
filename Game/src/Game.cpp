@@ -19,10 +19,9 @@
 #include "Engine/Core/Graphics/ResourceTypes/Texture2DArray.h"
 #include "Engine/Core/Graphics/ResourceTypes/StructuredBuffer.h"
 #include "Engine/Core/Graphics/ResourceTypes/TextureSampler.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
+
 #include "Engine/Core/WindowManagement/WindowManager.h"
 #include "Engine/Extra/Locomotion/NoClipLocomotion.h"
-#include "Engine/Extra/TransformSync/TranslationSync.h"
 #include "Engine/Core/Utilities/MeshHelper.h"
 #include "Engine/Core/GameLoop.h"
 #include "Engine/Core/Application/Application.h"
@@ -45,7 +44,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
     
     int returnCode = -1;
-    try
+    /*
+	try
 	{
         WindowManager::InitializeWindow();
         
@@ -192,7 +192,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
-        GetSystemManager().GetSystem<GraphicsSystem>()->SetDirty();
+        m_gfxDevice->SetDirty();
         //GetSystemManager().GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
         GetSystemManager().GetSystem<NoClipLocomotion>()->SetPlayer(cameraEntityId);
         returnCode = GameLoop::Run();
@@ -212,6 +212,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     DestroyCommandList();
 
     WindowManager::ShutdownWindow();
-
+	*/
 	return returnCode;
 }

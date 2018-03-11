@@ -1,22 +1,12 @@
 #include "stdafx.h"
 #include "Engine/Core/Graphics/LightingSystem.h"
 
+#include "Engine/Core/Graphics/Components/Light.h"
 #include "Engine/Core/SceneGraph/Components/Util/EntityUtil.hpp"
-#include "Engine/Core/SceneGraph/SceneGraph.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/StructuredBuffer.h"
 
 #define MAX_LIGHTS 5
-
-LightingSystem::LightingSystem()
-{
-
-}
-
-LightingSystem::~LightingSystem()
-{
-
-}
 
 bool LightingSystem::Initialize()
 {
@@ -36,14 +26,14 @@ void LightingSystem::VariableTick()
     LIGHT_BUFFER lights[MAX_LIGHTS];
     ZeroMemory(&lights, MAX_LIGHTS * sizeof(LIGHT_BUFFER));
 
-    LightComponent* const allLights = GetSceneGraph().GetComponentArrayPointer<LightComponent>();
-    size_t numLights = GetSceneGraph().GetNumberOfComponents<LightComponent>();
+    LightComponent* const allLights = m_sceneGraph.GetComponentArrayPointer<LightComponent>();
+    size_t numLights = m_sceneGraph.GetNumberOfComponents<LightComponent>();
 
     for (size_t i = 0; i < min(numLights, MAX_LIGHTS); ++i)
     {
         LightComponent& light = allLights[i];
-        EntityComponent* lightEntity = GetSceneGraph().GetComponent<EntityComponent>(light.m_entityIndex);
-        TransformComponent* lightTransform = EntityUtil::GetComponent<TransformComponent>(*lightEntity);
+        EntityComponent* lightEntity = m_sceneGraph.GetComponent<EntityComponent>(light.m_entityIndex);
+        TransformComponent* lightTransform = EntityUtil::GetComponent<TransformComponent>(&m_sceneGraph, *lightEntity);
 
         lights[i].PositionWS = Vector4::FromVector3(lightTransform->m_data.m_position);
         lights[i].DirectionWS = { 0.0f, 0.0f, 0.0f, 0.0f };

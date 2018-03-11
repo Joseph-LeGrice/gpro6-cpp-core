@@ -5,9 +5,6 @@
     <ClCompile Include="src\Engine\Extra\Locomotion\NoClipLocomotion.cpp">
       <Filter>Engine\Extra\Locomotion</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.cpp">
-      <Filter>Engine\Extra\TransformSync</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp">
       <Filter>Engine\Core\DataStructures</Filter>
     </ClCompile>
@@ -77,12 +74,6 @@
     <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraph.cpp">
       <Filter>Engine\Core\SceneGraph</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\SystemManagement\ISystem.cpp">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\SystemManagement\SystemManager.cpp">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Time\Time.cpp">
       <Filter>Engine\Core\Time</Filter>
     </ClCompile>
@@ -127,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\Transvoxel.cpp" />
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.cpp" />
+    <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
+    <ClCompile Include="src\Engine\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -136,12 +130,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Extra\Locomotion\NoClipLocomotion.h">
       <Filter>Engine\Extra\Locomotion</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.h">
-      <Filter>Engine\Extra\TransformSync</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Extra\TransformSync\TranslationSync.h">
-      <Filter>Engine\Extra\TransformSync</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\DataStructures\Color.h">
       <Filter>Engine\Core\DataStructures</Filter>
@@ -245,15 +233,6 @@
     <ClInclude Include="src\Engine\Core\SystemManagement\ISystem.h">
       <Filter>Engine\Core\SystemManagement</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemConfiguration.hpp">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManager.h">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManagerDefinition.hpp">
-      <Filter>Engine\Core\SystemManagement</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\Time\Time.h">
       <Filter>Engine\Core\Time</Filter>
     </ClInclude>
@@ -318,6 +297,9 @@
       <Filter>Engine\Extra\MarchingSquares2D</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.h" />
+    <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h" />
+    <ClInclude Include="src\Engine\di.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

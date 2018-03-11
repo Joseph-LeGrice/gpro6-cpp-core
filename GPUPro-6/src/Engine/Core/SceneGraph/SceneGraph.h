@@ -7,17 +7,16 @@
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
 #include "Engine/Core/Graphics/Components/Light.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Extra/TransformSync/TranslationSync.h"
 
+
+//TODO Rewrite for runtime adding of new types
 typedef SceneGraphDefinition<
     TransformComponent,
     CameraComponent,
     MeshRendererComponent,
     EntityComponent,
-    LightComponent,
-    TranslationSyncComponent
+    LightComponent
 > SceneGraph;
 
 void InitSceneGraph();
-SceneGraph& GetSceneGraph();
 void DestroySceneGraph();

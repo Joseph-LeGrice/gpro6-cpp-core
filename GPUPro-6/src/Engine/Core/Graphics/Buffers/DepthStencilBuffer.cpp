@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "DepthStencilBuffer.h"
 
-#include "Engine/Core/SystemManagement/SystemManager.h"
-#include "Engine/Core/Graphics/GraphicsSystem.h"
+#include "D3D11.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/DataStructures/Color.h"
 
-DepthStencilBuffer::DepthStencilBuffer(UINT width, UINT height)
+DepthStencilBuffer::DepthStencilBuffer(UINT width, UINT height, GraphicsDevice* gfxDevice) : m_gfxDevice(gfxDevice)
 {
     D3D11_TEXTURE2D_DESC desc;
     ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
@@ -20,7 +20,7 @@ DepthStencilBuffer::DepthStencilBuffer(UINT width, UINT height)
     desc.SampleDesc.Quality = 0;
     desc.Usage = D3D11_USAGE_DEFAULT;
 
-    ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+    ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
     HRESULT hr = device->CreateTexture2D(&desc, nullptr, m_buffer);
     if (FAILED(hr))
     {
@@ -48,7 +48,7 @@ DepthStencilBuffer::DepthStencilBuffer(UINT width, UINT height)
         return;
     }
 
-    IDXGISwapChain* swapchain = GetSystemManager().GetSystem<GraphicsSystem>()->GetSwapChain();
+    IDXGISwapChain* swapchain = m_gfxDevice->GetSwapChain();
     ID3D11Texture2D* pBackBuffer;
     hr = swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
     if (FAILED(hr))
@@ -74,14 +74,14 @@ void DepthStencilBuffer::ClearBuffer()
 {
     Color rtDefaultColor = { 1, 1, 1, 1 };
     FLOAT* color = reinterpret_cast<FLOAT*>(&rtDefaultColor);
-    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
     deviceContext->ClearRenderTargetView(m_rtBackBuffer, color);
     deviceContext->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1, 1);
 }
 
 void DepthStencilBuffer::SetState()
 {
-    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
     deviceContext->OMSetRenderTargets(1, m_rtBackBuffer, m_depthStencilView);
     deviceContext->OMSetDepthStencilState(m_depthStencilState, 1);
 }

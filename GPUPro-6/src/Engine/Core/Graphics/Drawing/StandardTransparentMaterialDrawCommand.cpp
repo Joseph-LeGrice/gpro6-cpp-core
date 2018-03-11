@@ -1,25 +1,20 @@
 #include "stdafx.h"
 #include "StandardTransparentMaterialDrawCommand.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
 
-
-StandardTransparentMaterialDrawCommand::StandardTransparentMaterialDrawCommand()
-{
-}
-
+#include "Engine/Core/Graphics/BlendState.h"
+#include "Engine/Core/Graphics/RasterizerState.h"
 
 StandardTransparentMaterialDrawCommand::~StandardTransparentMaterialDrawCommand()
 {
-    m_constantBuffer.ReleaseBuffer();
+    m_constantBuffer->ReleaseBuffer();
 }
 
 void StandardTransparentMaterialDrawCommand::PreDrawAll()
 {
-    GraphicsSystem* gs = GetSystemManager().GetSystem<GraphicsSystem>();
-    gs->GetRasterizerState()->SetState({ kCullStateBackCull, kFillModeSolid, true });
-    gs->GetBlendState()->SetState({ kBlendSrc, kBlendDestInv, kBlendOpAdd });
+	m_rasterizerState->SetState({ kCullStateBackCull, kFillModeSolid, true });
+    m_blendState->SetState({ kBlendSrc, kBlendDestInv, kBlendOpAdd });
 
-    m_constantBuffer.BindBuffer();
+    m_constantBuffer->BindBuffer();
 }
 
 bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRendererComponent& mrc)
@@ -27,7 +22,7 @@ bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRendererComponent&
     StandardMaterial* mat = GetResourceManager().GetAsset<StandardMaterial>(mrc.m_data.m_materialIndex);
     if (mat->BindIfValid())
     {
-        m_constantBuffer.UpdateBuffer(mat->GetData());
+        m_constantBuffer->UpdateBuffer(mat->GetData());
         return true;
     }
     else

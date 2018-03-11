@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MarchingSquares2D.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/DataStructures/Color.h"
 
 #include "Engine/Core/Utilities/Noise.h"
 

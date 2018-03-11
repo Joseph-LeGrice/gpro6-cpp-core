@@ -4,8 +4,7 @@
 
 #include "D3D11.h"
 #include "D3D10.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
-#include "Engine/Core/Graphics/GraphicsSystem.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Utilities/Logging.h"
 
 enum BindFlags
@@ -28,7 +27,7 @@ public:
 	void UpdateBuffer(const T& data)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
 		HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(bufferMapResult))
 		{
@@ -39,7 +38,7 @@ public:
 
 	void BindBuffer()
 	{
-		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
 		if ((m_bindFlags & BIND_VERTEX) == BIND_VERTEX)
 		{
 			deviceContext->VSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
@@ -67,7 +66,7 @@ public:
         m_buffer.ReleasePointer();
     }
 
-	ConstantBuffer()
+	ConstantBuffer(GraphicsDevice* gfxDevice) : m_gfxDevice(gfxDevice)
 	{
 		T initialData;
 		ZeroMemory(&initialData, sizeof(T));
@@ -83,7 +82,7 @@ public:
 		ZeroMemory(&data, sizeof(data));
 		data.pSysMem = &initialData;
 
-		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+		ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
 		if (!SUCCEEDED(device->CreateBuffer(&desc, &data, m_buffer)))
 		{
 			LogError("[ConstantBuffer] Could not Create Buffer!");
@@ -95,6 +94,7 @@ public:
 	}
 
 private:
+	GraphicsDevice* m_gfxDevice;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };
 
@@ -104,9 +104,10 @@ class ConstantBufferInterfaceImpl
 {
 public:
     template<class T>
-    T& GetBuffer()
+    T* GetBuffer()
     {
-        return std::get<T>(m_constantBuffers);
+		//return std::get<T>(m_constantBuffers);
+		return nullptr;
     }
 
     ConstantBufferInterfaceImpl() = default;
@@ -121,13 +122,13 @@ public:
     inline typename std::enable_if < I < sizeof...(Types)>::type
         ReleaseAll()
     {
-        auto buf = std::get<I>(m_constantBuffers);
-        buf.ReleaseBuffer();
-        ReleaseAll<I + 1>();
+        //auto buf = std::get<I>(m_constantBuffers);
+        //buf.ReleaseBuffer();
+        //ReleaseAll<I + 1>();
     }
 
 private:
-    std::tuple<Types...> m_constantBuffers;
+    //std::tuple<Types...> m_constantBuffers;
 };
 
 #pragma warning(pop)

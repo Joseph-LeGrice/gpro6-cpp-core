@@ -1,7 +1,6 @@
 #include "stdafx.h"
 
 #include "Engine/Core/Graphics/Components/Camera.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
 #include "Engine/Core/Graphics/GraphicsSystem.h"
 
 Camera Camera::CreateOrthographic(float size, float depth, float aspectRatio)

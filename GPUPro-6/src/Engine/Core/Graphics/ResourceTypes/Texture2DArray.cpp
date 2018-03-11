@@ -1,13 +1,15 @@
 #include "stdafx.h"
 
 #include "Texture2DArray.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
-#include "Engine/Core/Graphics/GraphicsSystem.h"
-#include "Engine/Core/Utilities/Logging.h"
-#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
 
-Texture2DArray::Texture2DArray(UINT ai) : IResource(ai) { }
+#include "D3D11.h"
+#include "FreeImage.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
+#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
+
+
+Texture2DArray::Texture2DArray(UINT ai, GraphicsDevice* gfxDevice) : IResource(ai), m_gfxDevice(gfxDevice) { }
 Texture2DArray::Texture2DArray() : IResource() { }
 Texture2DArray::~Texture2DArray() { }
 
@@ -97,7 +99,7 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
         data.push_back(thisData);
     }
 
-    ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+    ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
     HRESULT createTextureResult = device->CreateTexture2D(&desc, data.data(), m_pTextureArray);
     if (SUCCEEDED(createTextureResult))
     {

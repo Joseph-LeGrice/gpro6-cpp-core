@@ -40,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -135,15 +135,15 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;d3dx10.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;D3DCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>python "$(SolutionDir)BuildUtils\PostBuildUtil.py" -a x64 "$(SolutionDir)\" "$(OutDir)\"</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -229,8 +229,10 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
+    <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp" />
@@ -248,22 +250,20 @@
     <ClCompile Include="src\Engine\Core\Input\KeyboardInput.cpp" />
     <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraph.cpp" />
-    <ClCompile Include="src\Engine\Core\SystemManagement\SystemManager.cpp" />
     <ClCompile Include="src\Engine\Extra\Locomotion\NoClipLocomotion.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Input\InputSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\SystemManagement\ISystem.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\LightingSystem.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Time\Time.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.cpp" />
     <ClCompile Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.cpp" />
-    <ClCompile Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities\MeshHelper.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities\Noise.cpp" />
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\Transvoxel.cpp" />
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.cpp" />
+    <ClCompile Include="src\Engine\Main.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -281,9 +281,11 @@
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
+    <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />
@@ -310,23 +312,19 @@
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Components\Light.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.h" />
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManagerDefinition.hpp" />
+    <ClInclude Include="src\Engine\di.hpp" />
     <ClInclude Include="src\Engine\Extra\Locomotion\NoClipLocomotion.h" />
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsSystem.h" />
     <ClInclude Include="src\Engine\Core\Graphics\LightingSystem.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.h" />
     <ClInclude Include="src\Engine\Core\Input\InputSystem.h" />
     <ClInclude Include="src\Engine\Core\SystemManagement\ISystem.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManager.h" />
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManager.h" />
     <ClInclude Include="src\Engine\Core\Time\Time.h" />
     <ClInclude Include="src\Engine\Core\Input\KeyboardInput.h" />
     <ClInclude Include="src\Engine\Core\Input\MouseInput.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.h" />
     <ClInclude Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.h" />
-    <ClInclude Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.h" />
-    <ClInclude Include="src\Engine\Extra\TransformSync\TranslationSync.h" />
     <ClInclude Include="src\Engine\Core\Utilities\AutoPointer.hpp" />
     <ClInclude Include="src\Engine\Core\Utilities\PointerRelease.hpp" />
     <ClInclude Include="src\Engine\Core\Utilities\Logging.h" />

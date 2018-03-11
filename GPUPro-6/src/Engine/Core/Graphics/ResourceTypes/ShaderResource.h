@@ -1,11 +1,15 @@
 #pragma once
 #include "Engine/Core/ResourceManagement/IResource.h"
-#include "D3D11.h"
+
+struct ID3D11Resource;
+struct D3D11_SHADER_RESOURCE_VIEW_DESC;
+struct ID3D11ShaderResourceView;
+class GraphicsDevice;
 
 class ShaderResource : public IResource
 {
 public:
-    ShaderResource(UINT ai) : IResource(ai) { }
+    ShaderResource(GraphicsDevice* graphicsDevice, UINT ai) : IResource(ai), m_graphicsDevice(graphicsDevice) { }
     ShaderResource() : IResource() { }
     ~ShaderResource() { }
 
@@ -16,5 +20,8 @@ public:
 
 protected:
     ManualRelease<ID3D11ShaderResourceView> m_resourceView;
+
+private:
+	GraphicsDevice* m_graphicsDevice;
 };
 
