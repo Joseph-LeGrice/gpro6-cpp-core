@@ -15,7 +15,7 @@ RasterizerState::~RasterizerState()
 void RasterizerState::SetState(RasterizerStateDescriptor rsd)
 {
     ManualRelease<ID3D11RasterizerState>& rasterState = GetStateForDescriptor(rsd);
-    ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = m_gfxDevice.GetGraphicsDeviceContext();
     deviceContext->RSSetState(rasterState);
 }
 
@@ -60,7 +60,7 @@ ManualRelease<ID3D11RasterizerState>& RasterizerState::GetStateForDescriptor(Ras
         desc.AntialiasedLineEnable = FALSE;
 
         ManualRelease<ID3D11RasterizerState> rasterState;
-        ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
+        ID3D11Device* device = m_gfxDevice.GetGraphicsDevice();
         device->CreateRasterizerState(&desc, rasterState);
         m_rasterStates[rsd] = rasterState;
     }

@@ -12,6 +12,10 @@
 #include "Engine/Core/Graphics/LightingSystem.h"
 #include "Engine/Extra/Locomotion/NoClipLocomotion.h"
 
+#include "Engine/Core/WindowManagement/WindowManager.h"
+
+#include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
+
 #include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/Buffers/IndexBuffer.h"
@@ -41,6 +45,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			NoClipLocomotion,
 			InputSystem>()
 
+		// Specify ConstantBuffers
+
 		// Specify the IResourceManager::
 		//, di::bind<IResourceManager>().to<ResourceManager>()
 
@@ -51,7 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//, di::bind<IComponent*[]>().to<Camera, Transform>()
 	);
 	
-	auto game = injector.create<GameLoop>();
+	GameLoop& game = injector.create<GameLoop&>();
 	return game.Run();
 }
 

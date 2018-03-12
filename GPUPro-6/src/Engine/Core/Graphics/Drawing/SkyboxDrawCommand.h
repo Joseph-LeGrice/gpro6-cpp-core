@@ -8,7 +8,7 @@ class BlendState;
 class SkyboxDrawCommand : public IDrawCommand<1>
 {
 public:
-	SkyboxDrawCommand(GraphicsDevice* gfxDevice,
+	SkyboxDrawCommand(GraphicsDevice& gfxDevice,
 		SceneGraph* sceneGraph,
 		RasterizerState* rasterizerState,
 		BlendState* blendState) :

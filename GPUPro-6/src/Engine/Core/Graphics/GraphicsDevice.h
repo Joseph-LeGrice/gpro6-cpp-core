@@ -1,5 +1,6 @@
 #pragma once
 
+class WindowManager;
 struct ID3D11Device;
 struct ID3D11DeviceContext;
 struct IDXGISwapChain;
@@ -8,7 +9,7 @@ struct ID3D11Debug;
 class GraphicsDevice
 {
 public:
-	GraphicsDevice();
+	GraphicsDevice(WindowManager& windowManager);
 	~GraphicsDevice();
 
 	IDXGISwapChain* GetSwapChain();
@@ -19,6 +20,7 @@ public:
 	void Present();
 
 private:
+	WindowManager& m_windowManager;
 	ManualRelease<ID3D11Device> m_device;
 	ManualRelease<ID3D11DeviceContext> m_deviceContext;
 	ManualRelease<IDXGISwapChain> m_swapchain;

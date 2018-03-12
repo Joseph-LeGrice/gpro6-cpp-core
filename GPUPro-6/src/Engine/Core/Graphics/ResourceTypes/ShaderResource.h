@@ -9,8 +9,7 @@ class GraphicsDevice;
 class ShaderResource : public IResource
 {
 public:
-    ShaderResource(GraphicsDevice* graphicsDevice, UINT ai) : IResource(ai), m_graphicsDevice(graphicsDevice) { }
-    ShaderResource() : IResource() { }
+    ShaderResource(GraphicsDevice& graphicsDevice, UINT ai) : IResource(ai), m_gfxDevice(graphicsDevice) { }
     ~ShaderResource() { }
 
     void BindResource(UINT resourceIndex);
@@ -22,6 +21,6 @@ protected:
     ManualRelease<ID3D11ShaderResourceView> m_resourceView;
 
 private:
-	GraphicsDevice* m_graphicsDevice;
+	GraphicsDevice& m_gfxDevice;
 };
 

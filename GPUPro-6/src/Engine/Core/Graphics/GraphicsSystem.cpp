@@ -32,23 +32,6 @@ GraphicsSystem::GraphicsSystem(BlendState& blendState,
 	FreeImage_SetOutputMessage(FreeImageOutput);
 }
 
-
-bool GraphicsSystem::Initialize() //FIXME
-{
-	Log("Hiya - Fix me plz");
-	//m_rasterizerState = new RasterizerState();
-	//m_rasterizerState->SetState({ kCullStateBackCull, kFillModeSolid, true });
-
-    //m_depthStencilBuffer = new DepthStencilBuffer(WindowManager::GetWindowWidth(), WindowManager::GetWindowHeight());
-
-    //m_blendState = new BlendState();
-    //m_blendState->SetState({ false });
-
-    //InitConstantBufferInterface();
-
-	return false;
-}
-
 void GraphicsSystem::VariableTick()
 {
 	m_meshManager.BindBuffers();

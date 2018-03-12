@@ -23,12 +23,12 @@ public:
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
 
-	Shader(UINT resourceId, GraphicsDevice* gfxDevice);
+	Shader(UINT resourceId, GraphicsDevice& gfxDevice);
 
     virtual void Release() override;
 
 private:
-	GraphicsDevice* m_gfxDevice;
+	GraphicsDevice& m_gfxDevice;
     ManualRelease<ID3D11InputLayout> m_inputLayout;
     ManualRelease<ID3D11VertexShader> m_vertexShader;
     ManualRelease<ID3D11PixelShader> m_pixelShader;

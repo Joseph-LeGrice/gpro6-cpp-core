@@ -6,7 +6,7 @@
 
 int GameLoop::Run()
 {
-	for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
 		it != m_systems.end(); it++) {
 		it->get()->Initialize();
 	}
@@ -20,23 +20,23 @@ int GameLoop::Run()
 
 			while (m_time.ShouldAdvanceFixedStep())
 			{
-				for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+				for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
 					it != m_systems.end(); it++) {
 					it->get()->FixedTick();
 				}
 			}
 
-			for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+			for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
 				it != m_systems.end(); it++) {
 				it->get()->EarlyVariableTick();
 			}
 
-			for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+			for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
 				it != m_systems.end(); it++) {
 				it->get()->VariableTick();
 			}
 
-			for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+			for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
 				it != m_systems.end(); it++) {
 				it->get()->LateVariableTick();
 			}
@@ -51,7 +51,7 @@ int GameLoop::Run()
 		}
     }
 
-	for (std::vector<std::unique_ptr<ISystem>>::iterator it = m_systems.begin();
+	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
 		it != m_systems.end(); it++) {
 		it->get()->Deinitalize();
 	}

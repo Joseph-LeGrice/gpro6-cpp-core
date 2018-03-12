@@ -9,7 +9,10 @@ class ISystem;
 class GameLoop
 {
 public:
-	GameLoop(Time& time, std::vector<std::unique_ptr<ISystem>> systems) : m_time(time), m_systems(systems) { }
+	GameLoop::GameLoop(Time& time, std::vector<std::shared_ptr<ISystem>> systems) : 
+		m_time(time),
+		m_systems(systems) { }
+	GameLoop(const GameLoop&) = delete;
     ~GameLoop() = default;
 
 	int Run();
@@ -17,6 +20,6 @@ public:
 
 private:
 	Time& m_time;
-	std::vector<std::unique_ptr<ISystem>>& m_systems;
+	std::vector<std::shared_ptr<ISystem>> m_systems;
 	bool m_running;
 };

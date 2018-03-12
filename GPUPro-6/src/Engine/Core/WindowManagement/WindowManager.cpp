@@ -2,81 +2,75 @@
 #include "WindowManager.h"
 #include "Engine/Core/Input/InputSystem.h"
 
-UINT WindowManager::s_windowWidth = 0;
-UINT WindowManager::s_windowHeight = 0;
-HWND WindowManager::s_hwnd = nullptr;
-LPCWSTR WindowManager::s_applicationName = nullptr;
-HINSTANCE WindowManager::s_hInstance = nullptr;
-
-void WindowManager::InitializeWindow()
+WindowManager::WindowManager()
 {
     //DEVMODE dmScreenSettings;
     int posX, posY;
 
-    s_hInstance = GetModuleHandle(NULL);
-    s_applicationName = L"Game";
+    m_hInstance = GetModuleHandle(NULL);
+    m_applicationName = L"Game";
 
     WNDCLASSEX wc;
     wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
     wc.lpfnWndProc = InputSystem::WndProc;
     wc.cbClsExtra = 0;
     wc.cbWndExtra = 0;
-    wc.hInstance = s_hInstance;
+    wc.hInstance = m_hInstance;
     wc.hIcon = LoadIcon(NULL, IDI_WINLOGO);
     wc.hIconSm = wc.hIcon;
     wc.hCursor = LoadCursor(NULL, IDC_ARROW);
     wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
     wc.lpszMenuName = NULL;
-    wc.lpszClassName = s_applicationName;
+    wc.lpszClassName = m_applicationName;
     wc.cbSize = sizeof(WNDCLASSEX);
 
     RegisterClassEx(&wc);
 
-    s_windowWidth = 800;
-    s_windowHeight = 600;
+    m_windowWidth = 800;
+    m_windowHeight = 600;
 
-    posX = (GetSystemMetrics(SM_CXSCREEN) - s_windowWidth) / 2;
-    posY = (GetSystemMetrics(SM_CYSCREEN) - s_windowHeight) / 2;
+    posX = (GetSystemMetrics(SM_CXSCREEN) - m_windowWidth) / 2;
+    posY = (GetSystemMetrics(SM_CYSCREEN) - m_windowHeight) / 2;
 
-    s_hwnd = CreateWindowEx(
+    m_hwnd = CreateWindowEx(
         NULL,
-        s_applicationName,
-        s_applicationName,
+        m_applicationName,
+        m_applicationName,
         WS_OVERLAPPEDWINDOW,
         posX,
         posY,
-        s_windowWidth,
-        s_windowHeight,
+        m_windowWidth,
+        m_windowHeight,
         NULL,
         NULL,
-        s_hInstance,
+        m_hInstance,
         NULL);
 
-    ShowWindow(s_hwnd, SW_SHOW);
-    SetForegroundWindow(s_hwnd);
-    SetFocus(s_hwnd);
+    ShowWindow(m_hwnd, SW_SHOW);
+    SetForegroundWindow(m_hwnd);
+    SetFocus(m_hwnd);
 }
 
-void WindowManager::ShutdownWindow()
+WindowManager::~WindowManager()
 {
-    DestroyWindow(s_hwnd);
-    s_hwnd = nullptr;
+    DestroyWindow(m_hwnd);
+    m_hwnd = nullptr;
 
-    UnregisterClass(s_applicationName, s_hInstance);
-    s_hInstance = nullptr;
+    UnregisterClass(m_applicationName, m_hInstance);
+    m_hInstance = nullptr;
 }
 
 HWND& WindowManager::GetHWND()
 {
-    return s_hwnd;
+    return m_hwnd;
 }
 
 UINT WindowManager::GetWindowWidth()
 {
-    return s_windowWidth;
+    return m_windowWidth;
 }
 
 UINT WindowManager::GetWindowHeight()
 {
-    return s_windowHeight;
+    return m_windowHeight;
 }

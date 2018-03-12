@@ -1,8 +1,6 @@
 #pragma once
 
-//#include <vector>
 #include "Engine/Core/SystemManagement/ISystem.h"
-
 #include "Engine/Core/SceneGraph/SceneGraph.h"
 
 class BlendState;
@@ -20,7 +18,6 @@ public:
 		DepthStencilBuffer& depthStencilBuffer,
 		SceneGraph& sceneGraph);
 
-    virtual bool Initialize() override;
     virtual void VariableTick() override;
 
 private:

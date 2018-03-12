@@ -192,7 +192,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         
         // Tell a couple of systems to do things
         // TODO: Remove SetDirty() from GraphicsSystem
-        m_gfxDevice->SetDirty();
+        m_gfxDevice.SetDirty();
         //GetSystemManager().GetSystem<MouseRotateSystem>()->SetTransformIndexToRotate(sphereTransformIndex);
         GetSystemManager().GetSystem<NoClipLocomotion>()->SetPlayer(cameraEntityId);
         returnCode = GameLoop::Run();

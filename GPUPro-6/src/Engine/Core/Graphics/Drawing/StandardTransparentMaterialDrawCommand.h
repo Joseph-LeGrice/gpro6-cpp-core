@@ -9,7 +9,7 @@ class StandardTransparentMaterialDrawCommand : public IDrawCommand<3>
 {
 public:
 
-	StandardTransparentMaterialDrawCommand(GraphicsDevice* gfxDevice,
+	StandardTransparentMaterialDrawCommand(GraphicsDevice& gfxDevice,
 		SceneGraph* sceneGraph,
 		RasterizerState* rasterizerState,
 		BlendState* blendState,

@@ -11,7 +11,7 @@ class GraphicsDevice;
 class Texture2D : public IResource
 {
 public:
-    Texture2D(UINT ai, GraphicsDevice* gfxDevice);
+    Texture2D(UINT ai, GraphicsDevice& gfxDevice);
     Texture2D();
     ~Texture2D();
 
@@ -25,7 +25,7 @@ public:
     virtual void Release() override;
 
 private:
-	GraphicsDevice* m_gfxDevice;
+	GraphicsDevice& m_gfxDevice;
     int m_myShaderResourceViewId = -1;
     FIBITMAP* m_bitmap = nullptr;
 	ManualRelease<ID3D11Texture2D> m_pTexture;

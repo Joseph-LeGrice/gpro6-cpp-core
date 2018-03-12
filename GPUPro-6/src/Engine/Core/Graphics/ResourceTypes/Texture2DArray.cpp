@@ -9,9 +9,7 @@
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 
 
-Texture2DArray::Texture2DArray(UINT ai, GraphicsDevice* gfxDevice) : IResource(ai), m_gfxDevice(gfxDevice) { }
-Texture2DArray::Texture2DArray() : IResource() { }
-Texture2DArray::~Texture2DArray() { }
+Texture2DArray::Texture2DArray(UINT ai, GraphicsDevice& gfxDevice) : IResource(ai), m_gfxDevice(gfxDevice) { }
 
 int Texture2DArray::GetMyResourceViewID()
 {
@@ -99,7 +97,7 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
         data.push_back(thisData);
     }
 
-    ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
+    ID3D11Device* device = m_gfxDevice.GetGraphicsDevice();
     HRESULT createTextureResult = device->CreateTexture2D(&desc, data.data(), m_pTextureArray);
     if (SUCCEEDED(createTextureResult))
     {

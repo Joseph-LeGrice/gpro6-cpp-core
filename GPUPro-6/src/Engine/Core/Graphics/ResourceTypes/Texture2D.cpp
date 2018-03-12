@@ -10,9 +10,7 @@
 #include "FreeImage.h"
 
 
-Texture2D::Texture2D(UINT ai, GraphicsDevice* gfxDevice) : IResource(ai), m_gfxDevice(gfxDevice) { }
-Texture2D::Texture2D() : IResource() { }
-Texture2D::~Texture2D() { }
+Texture2D::Texture2D(UINT ai, GraphicsDevice& gfxDevice) : IResource(ai), m_gfxDevice(gfxDevice) { }
 
 unsigned int Texture2D::Width()
 {
@@ -108,7 +106,7 @@ void Texture2D::CreateResources()
     data.SysMemPitch = pitch;
     data.SysMemSlicePitch = pitch * height;
 
-    ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
+    ID3D11Device* device = m_gfxDevice.GetGraphicsDevice();
     HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, m_pTexture);
     if (SUCCEEDED(createTextureResult))
     {

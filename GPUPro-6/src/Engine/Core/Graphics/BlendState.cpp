@@ -19,7 +19,7 @@ void BlendState::SetState(BlendStateDescriptor bsd)
     
     UINT sampleMask = 0xFFFFFFFF;
     
-    ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = m_gfxDevice.GetGraphicsDeviceContext();
     deviceContext->OMSetBlendState(blendState, NULL, sampleMask);
 }
 
@@ -47,7 +47,7 @@ ManualRelease<ID3D11BlendState>& BlendState::GetBlendStateForDescriptor(BlendSta
         bDesc.RenderTarget[0] = rtbDesc;
 
         ManualRelease<ID3D11BlendState> blendState;
-        ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
+        ID3D11Device* device = m_gfxDevice.GetGraphicsDevice();
         device->CreateBlendState(&bDesc, blendState);
         m_blendStates[bsd] = blendState;
     }

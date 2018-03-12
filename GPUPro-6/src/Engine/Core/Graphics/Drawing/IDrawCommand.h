@@ -13,7 +13,7 @@ template<int id>
 class IDrawCommand
 {
 public:
-	IDrawCommand(GraphicsDevice* gfxDevice, SceneGraph* sceneGraph) :
+	IDrawCommand(GraphicsDevice& gfxDevice, SceneGraph* sceneGraph) :
 		m_gfxDevice(gfxDevice),
 		m_sceneGraph(sceneGraph) { }
 
@@ -28,7 +28,7 @@ public:
 
         PerObjectBuffer& perObjectBuffer = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
 
-        ID3D11DeviceContext& deviceContext = *m_gfxDevice->GetGraphicsDeviceContext();
+        ID3D11DeviceContext& deviceContext = *m_gfxDevice.GetGraphicsDeviceContext();
 
         UINT16 baseVertex = 0;
         UINT16 baseIndex = 0;
@@ -73,7 +73,7 @@ public:
     }
 
 protected:
-	GraphicsDevice* m_gfxDevice;
+	GraphicsDevice& m_gfxDevice;
 	SceneGraph* m_sceneGraph;
 
     virtual void PreDrawAll() = 0;

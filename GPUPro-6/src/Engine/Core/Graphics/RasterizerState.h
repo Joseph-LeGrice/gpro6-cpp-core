@@ -55,13 +55,13 @@ namespace std
 class RasterizerState
 {
 public:
-	RasterizerState(GraphicsDevice* gfxDevice) : m_gfxDevice(gfxDevice) { }
+	RasterizerState(GraphicsDevice& gfxDevice) : m_gfxDevice(gfxDevice) { }
     ~RasterizerState();
 
     void SetState(RasterizerStateDescriptor rsd);
 
 private:
-	GraphicsDevice* m_gfxDevice;
+	GraphicsDevice& m_gfxDevice;
     std::unordered_map<RasterizerStateDescriptor, ManualRelease<ID3D11RasterizerState>> m_rasterStates;
 
     ManualRelease<ID3D11RasterizerState>& RasterizerState::GetStateForDescriptor(RasterizerStateDescriptor rsd);

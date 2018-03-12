@@ -85,13 +85,13 @@ namespace std
 class BlendState
 {
 public:
-	BlendState(GraphicsDevice* gfxDevice) : m_gfxDevice(gfxDevice) { }
+	BlendState(GraphicsDevice& gfxDevice) : m_gfxDevice(gfxDevice) { }
     ~BlendState();
 
     void SetState(BlendStateDescriptor bsd);
 
 private:
-	GraphicsDevice* m_gfxDevice;
+	GraphicsDevice& m_gfxDevice;
     std::unordered_map<BlendStateDescriptor, ManualRelease<ID3D11BlendState>> m_blendStates;
     
     ManualRelease<ID3D11BlendState>& GetBlendStateForDescriptor(BlendStateDescriptor& bsd);

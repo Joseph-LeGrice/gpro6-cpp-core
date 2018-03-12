@@ -27,7 +27,7 @@ public:
 	void UpdateBuffer(const T& data)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = m_gfxDevice.GetGraphicsDeviceContext();
 		HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(bufferMapResult))
 		{
@@ -38,7 +38,7 @@ public:
 
 	void BindBuffer()
 	{
-		ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = m_gfxDevice.GetGraphicsDeviceContext();
 		if ((m_bindFlags & BIND_VERTEX) == BIND_VERTEX)
 		{
 			deviceContext->VSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
@@ -66,7 +66,7 @@ public:
         m_buffer.ReleasePointer();
     }
 
-	ConstantBuffer(GraphicsDevice* gfxDevice) : m_gfxDevice(gfxDevice)
+	ConstantBuffer(GraphicsDevice& gfxDevice) : m_gfxDevice(gfxDevice)
 	{
 		T initialData;
 		ZeroMemory(&initialData, sizeof(T));
@@ -82,7 +82,7 @@ public:
 		ZeroMemory(&data, sizeof(data));
 		data.pSysMem = &initialData;
 
-		ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
+		ID3D11Device* device = m_gfxDevice.GetGraphicsDevice();
 		if (!SUCCEEDED(device->CreateBuffer(&desc, &data, m_buffer)))
 		{
 			LogError("[ConstantBuffer] Could not Create Buffer!");
@@ -94,7 +94,7 @@ public:
 	}
 
 private:
-	GraphicsDevice* m_gfxDevice;
+	GraphicsDevice& m_gfxDevice;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };
 

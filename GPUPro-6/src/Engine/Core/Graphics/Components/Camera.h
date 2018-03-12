@@ -18,10 +18,10 @@ namespace CameraInternal
 {
     struct InitCamera
     {
-        Camera operator()(GraphicsDevice* gfxDevice)
+        Camera operator()(GraphicsDevice& gfxDevice)
         {
-            float viewportWidth = gfxDevice->GetViewportWidth();
-            float viewportHeight = gfxDevice->GetViewportHeight();
+            float viewportWidth = gfxDevice.GetViewportWidth();
+            float viewportHeight = gfxDevice.GetViewportHeight();
             float aspectRatio = viewportWidth / viewportHeight;
 
             float screenNear = 0.1f;

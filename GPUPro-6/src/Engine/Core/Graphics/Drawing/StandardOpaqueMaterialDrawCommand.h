@@ -8,7 +8,7 @@ class BlendState;
 class StandardOpaqueMaterialDrawCommand : public IDrawCommand<0>
 {
 public:
-	StandardOpaqueMaterialDrawCommand(GraphicsDevice* gfxDevice,
+	StandardOpaqueMaterialDrawCommand(GraphicsDevice& gfxDevice,
 		SceneGraph* sceneGraph,
 		RasterizerState* rasterizerState,
 		BlendState* blendState,

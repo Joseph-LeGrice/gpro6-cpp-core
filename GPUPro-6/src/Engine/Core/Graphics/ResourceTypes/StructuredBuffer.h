@@ -7,8 +7,9 @@
 class StructuredBuffer : public IResource
 {
 public:
-    StructuredBuffer(UINT ai) : IResource(ai) { }
-    StructuredBuffer() : IResource() { }
+    StructuredBuffer(UINT ai, GraphicsDevice& gfxDevice) : 
+		IResource(ai),
+		m_gfxDevice(gfxDevice) { }
 
     template<class T, UINT m_numberOfElements>
 	bool Initialize()
@@ -22,7 +23,7 @@ public:
 		bDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 		bDesc.StructureByteStride = sizeof(T);
 
-		ID3D11Device* device = m_gfxDevice->GetGraphicsDevice();
+		ID3D11Device* device = m_gfxDevice.GetGraphicsDevice();
 		HRESULT createBufferResult = device->CreateBuffer(&bDesc, NULL, m_buffer);
 		if (!SUCCEEDED(createBufferResult))
 		{
@@ -54,7 +55,7 @@ public:
     void UpdateBuffer(T& newData)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = m_gfxDevice->GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = m_gfxDevice.GetGraphicsDeviceContext();
 		HRESULT mapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(mapResult))
 		{
@@ -72,7 +73,7 @@ public:
     }
 
 private:
-	GraphicsDevice* m_gfxDevice;
+	GraphicsDevice& m_gfxDevice;
     int m_myShaderResourceViewId = -1;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };

@@ -1,14 +1,13 @@
 #include "stdafx.h"
 #include "GraphicsDevice.h"
-
 #include "D3D11.h"
 #include "Engine/Core/WindowManagement/WindowManager.h"
 
 
-GraphicsDevice::GraphicsDevice()
+GraphicsDevice::GraphicsDevice(WindowManager& windowManager) : m_windowManager(windowManager)
 {
-	m_viewportWidth = static_cast<float>(WindowManager::GetWindowWidth());
-	m_viewportHeight = static_cast<float>(WindowManager::GetWindowHeight());
+	m_viewportWidth = static_cast<float>(m_windowManager.GetWindowWidth());
+	m_viewportHeight = static_cast<float>(m_windowManager.GetWindowHeight());
 
 	// Initialize Direct3D
 	DXGI_SWAP_CHAIN_DESC scd;
@@ -16,10 +15,10 @@ GraphicsDevice::GraphicsDevice()
 
 	scd.BufferCount = 1;
 	scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	scd.BufferDesc.Width = WindowManager::GetWindowWidth();
-	scd.BufferDesc.Height = WindowManager::GetWindowHeight();
+	scd.BufferDesc.Width = m_windowManager.GetWindowWidth();
+	scd.BufferDesc.Height = m_windowManager.GetWindowHeight();
 	scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	scd.OutputWindow = WindowManager::GetHWND();
+	scd.OutputWindow = m_windowManager.GetHWND();
 	scd.SampleDesc.Count = 1;
 	scd.SampleDesc.Quality = 0;
 	scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
