@@ -8,8 +8,8 @@
 
 void SkyboxDrawCommand::PreDrawAll()
 {
-	m_rasterizerState->SetState({ kCullStateFrontCull, kFillModeSolid, true });
-	m_blendState->SetState({ false });
+	m_rasterizerState.SetState({ kCullStateFrontCull, kFillModeSolid, true });
+	m_blendState.SetState({ false });
 }
 
 bool SkyboxDrawCommand::BindMaterial(MeshRendererComponent& mrc)

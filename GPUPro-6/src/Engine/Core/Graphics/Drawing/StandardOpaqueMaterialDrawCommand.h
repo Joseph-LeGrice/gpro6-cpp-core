@@ -1,18 +1,18 @@
 #pragma once
 #include "IDrawCommand.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
 
 class RasterizerState;
 class BlendState;
+class StandardMaterialBuffer;
 
 class StandardOpaqueMaterialDrawCommand : public IDrawCommand<0>
 {
 public:
 	StandardOpaqueMaterialDrawCommand(GraphicsDevice& gfxDevice,
-		SceneGraph* sceneGraph,
-		RasterizerState* rasterizerState,
-		BlendState* blendState,
-		ConstantBuffer<MATERIAL_BUFFER_CONTAINER, MATERIAL_BUFFER_SLOT, BIND_ALL>* constantBuffer) :
+		SceneGraph& sceneGraph,
+		RasterizerState& rasterizerState,
+		BlendState& blendState,
+        StandardMaterialBuffer& constantBuffer) :
 		IDrawCommand(gfxDevice, sceneGraph),
 		m_rasterizerState(rasterizerState),
 		m_blendState(blendState),
@@ -24,7 +24,7 @@ protected:
     virtual bool BindMaterial(MeshRendererComponent& mrc) override;
 
 private:
-	RasterizerState* m_rasterizerState;
-	BlendState* m_blendState;
-	ConstantBuffer<MATERIAL_BUFFER_CONTAINER, MATERIAL_BUFFER_SLOT, BIND_ALL>* m_constantBuffer;
+	RasterizerState& m_rasterizerState;
+	BlendState& m_blendState;
+	StandardMaterialBuffer& m_constantBuffer;
 };

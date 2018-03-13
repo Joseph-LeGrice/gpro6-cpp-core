@@ -8,9 +8,6 @@
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp">
       <Filter>Engine\Core\DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.cpp">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.cpp">
       <Filter>Engine\Core\Graphics\Buffers</Filter>
     </ClCompile>
@@ -121,6 +118,10 @@
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
     <ClCompile Include="src\Engine\Main.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -133,12 +134,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\DataStructures\Color.h">
       <Filter>Engine\Core\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.h">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.h">
-      <Filter>Engine\Core\Graphics\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.h">
       <Filter>Engine\Core\Graphics\Buffers</Filter>
@@ -300,6 +295,12 @@
     <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h" />
     <ClInclude Include="src\Engine\di.hpp" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.h">
+      <Filter>Engine\Core\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

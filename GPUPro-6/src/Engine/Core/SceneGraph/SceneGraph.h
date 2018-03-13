@@ -8,8 +8,7 @@
 #include "Engine/Core/Graphics/Components/Light.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
 
-
-//TODO Rewrite for runtime adding of new types
+//TODO Rewrite for runtime adding of new types?
 typedef SceneGraphDefinition<
     TransformComponent,
     CameraComponent,
@@ -17,6 +16,3 @@ typedef SceneGraphDefinition<
     EntityComponent,
     LightComponent
 > SceneGraph;
-
-void InitSceneGraph();
-void DestroySceneGraph();

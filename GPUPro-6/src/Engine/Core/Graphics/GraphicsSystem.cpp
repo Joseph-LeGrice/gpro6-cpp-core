@@ -1,4 +1,6 @@
 #include "stdafx.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerCameraBuffer.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
 #include "Engine/Core/WindowManagement/WindowManager.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
@@ -23,12 +25,16 @@ GraphicsSystem::GraphicsSystem(BlendState& blendState,
 	MeshManager& meshManager,
 	GraphicsDevice& gfxDevice,
 	DepthStencilBuffer& depthStencilBuffer,
-	SceneGraph& sceneGraph) :
+	SceneGraph& sceneGraph,
+    PerObjectBuffer& perObjectBuffer,
+    PerCameraBuffer& perCameraBuffer) :
 	m_blendState(blendState),
 	m_meshManager(meshManager),
 	m_gfxDevice(gfxDevice),
 	m_depthStencilBuffer(depthStencilBuffer),
-	m_sceneGraph(sceneGraph) {
+	m_sceneGraph(sceneGraph),
+    m_perObjectBuffer(perObjectBuffer),
+    m_perCameraBuffer(perCameraBuffer) {
 	FreeImage_SetOutputMessage(FreeImageOutput);
 }
 
@@ -36,11 +42,8 @@ void GraphicsSystem::VariableTick()
 {
 	m_meshManager.BindBuffers();
 	
-    PerObjectBuffer* perObjectBuffer = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
-    perObjectBuffer->BindBuffer();
-
-    PerCameraBuffer* perCameraBuffer = GetConstantBufferInterface().GetBuffer<PerCameraBuffer>();
-    perCameraBuffer->BindBuffer();
+    m_perObjectBuffer.BindBuffer();
+    m_perCameraBuffer.BindBuffer();
 
     m_depthStencilBuffer.ClearBuffer();
     m_depthStencilBuffer.SetState();
@@ -63,7 +66,7 @@ void GraphicsSystem::VariableTick()
         pcb.EyePos.W = 1;
         pcb.View = view;
         pcb.Projection = proj;
-        perCameraBuffer->UpdateBuffer(pcb);
+        m_perCameraBuffer.PushData(pcb);
 
         //TODO: Chaining of draw commands?
         GetCommandList().ExecuteAllCommands(view, proj);

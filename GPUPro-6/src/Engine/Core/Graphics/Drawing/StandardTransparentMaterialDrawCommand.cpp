@@ -3,18 +3,19 @@
 
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
 
 StandardTransparentMaterialDrawCommand::~StandardTransparentMaterialDrawCommand()
 {
-    m_constantBuffer->ReleaseBuffer();
+    m_constantBuffer.ReleaseBuffer();
 }
 
 void StandardTransparentMaterialDrawCommand::PreDrawAll()
 {
-	m_rasterizerState->SetState({ kCullStateBackCull, kFillModeSolid, true });
-    m_blendState->SetState({ kBlendSrc, kBlendDestInv, kBlendOpAdd });
+	m_rasterizerState.SetState({ kCullStateBackCull, kFillModeSolid, true });
+    m_blendState.SetState({ kBlendSrc, kBlendDestInv, kBlendOpAdd });
 
-    m_constantBuffer->BindBuffer();
+    m_constantBuffer.BindBuffer();
 }
 
 bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRendererComponent& mrc)
@@ -22,7 +23,7 @@ bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRendererComponent&
     StandardMaterial* mat = GetResourceManager().GetAsset<StandardMaterial>(mrc.m_data.m_materialIndex);
     if (mat->BindIfValid())
     {
-        m_constantBuffer->UpdateBuffer(mat->GetData());
+        m_constantBuffer.PushData(mat->GetData());
         return true;
     }
     else

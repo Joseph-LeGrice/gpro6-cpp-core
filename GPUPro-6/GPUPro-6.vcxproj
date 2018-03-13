@@ -223,9 +223,12 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp" />
     <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp" />
@@ -255,7 +258,6 @@
     <ClCompile Include="src\Engine\Core\Input\InputSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\LightingSystem.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Time\Time.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.cpp" />
     <ClCompile Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.cpp" />
@@ -272,11 +274,14 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h" />
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h" />
@@ -302,7 +307,7 @@
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphDefinition.hpp" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.h" />
     <ClInclude Include="src\Engine\Core\Graphics\VertexData.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\Material.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Shader.h" />
@@ -316,7 +321,6 @@
     <ClInclude Include="src\Engine\Extra\Locomotion\NoClipLocomotion.h" />
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsSystem.h" />
     <ClInclude Include="src\Engine\Core\Graphics\LightingSystem.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.h" />
     <ClInclude Include="src\Engine\Core\Input\InputSystem.h" />
     <ClInclude Include="src\Engine\Core\SystemManagement\ISystem.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManager.h" />
@@ -337,6 +341,7 @@
     <ClInclude Include="src\Engine\Core\WindowManagement\WindowManager.h" />
     <ClInclude Include="src\Engine\Core\Utilities\StaticPointer.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Engine\Shaders\CommonInclude.hlsl">

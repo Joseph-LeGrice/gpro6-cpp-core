@@ -6,18 +6,22 @@
 class BlendState;
 class MeshManager;
 class GraphicsDevice;
+class PerObjectBuffer;
+class PerCameraBuffer;
 class RasterizerState;
 class DepthStencilBuffer;
+
 
 class GraphicsSystem : public ISystem
 {
 public:
-	GraphicsSystem(BlendState& blendState,
-		MeshManager& meshManager,
-		GraphicsDevice& gfxDevice,
-		DepthStencilBuffer& depthStencilBuffer,
-		SceneGraph& sceneGraph);
-
+    GraphicsSystem(BlendState& blendState,
+        MeshManager& meshManager,
+        GraphicsDevice& gfxDevice,
+        DepthStencilBuffer& depthStencilBuffer,
+        SceneGraph& sceneGraph,
+        PerObjectBuffer& perObjectBuffer,
+        PerCameraBuffer& perCameraBuffer);
     virtual void VariableTick() override;
 
 private:
@@ -25,5 +29,7 @@ private:
 	BlendState& m_blendState;
 	MeshManager& m_meshManager;
 	GraphicsDevice& m_gfxDevice;
+    PerObjectBuffer& m_perObjectBuffer;
+    PerCameraBuffer& m_perCameraBuffer;
 	DepthStencilBuffer& m_depthStencilBuffer;
 };

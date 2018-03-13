@@ -14,7 +14,9 @@
 
 #include "Engine/Core/WindowManagement/WindowManager.h"
 
-#include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerCameraBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
 
 #include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/Graphics/BlendState.h"
@@ -45,7 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			NoClipLocomotion,
 			InputSystem>()
 
-		// Specify ConstantBuffers
+		// Specify ConstantBuffers?
 
 		// Specify the IResourceManager::
 		//, di::bind<IResourceManager>().to<ResourceManager>()

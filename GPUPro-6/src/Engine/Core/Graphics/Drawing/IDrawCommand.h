@@ -13,7 +13,7 @@ template<int id>
 class IDrawCommand
 {
 public:
-	IDrawCommand(GraphicsDevice& gfxDevice, SceneGraph* sceneGraph) :
+	IDrawCommand(GraphicsDevice& gfxDevice, SceneGraph& sceneGraph) :
 		m_gfxDevice(gfxDevice),
 		m_sceneGraph(sceneGraph) { }
 
@@ -74,7 +74,7 @@ public:
 
 protected:
 	GraphicsDevice& m_gfxDevice;
-	SceneGraph* m_sceneGraph;
+	SceneGraph& m_sceneGraph;
 
     virtual void PreDrawAll() = 0;
     virtual bool BindMaterial(MeshRendererComponent& mrc) = 0;
