@@ -1,20 +1,22 @@
 #pragma once
 #include "IDrawCommand.h"
+#include "Engine/Core/Graphics/Components/MeshRenderer.h"
 
 class StandardMaterialBuffer;
 class RasterizerState;
 class BlendState;
 
-class StandardTransparentMaterialDrawCommand : public IDrawCommand<3>
+class StandardTransparentMaterialDrawCommand : public IDrawCommand
 {
 public:
 
 	StandardTransparentMaterialDrawCommand(GraphicsDevice& gfxDevice,
+        PerObjectBuffer& perObjectBuffer,
 		SceneGraph& sceneGraph,
 		RasterizerState& rasterizerState,
 		BlendState& blendState,
 		StandardMaterialBuffer& constantBuffer) :
-		IDrawCommand(gfxDevice, sceneGraph),
+		IDrawCommand(3, perObjectBuffer, gfxDevice, sceneGraph),
 		m_rasterizerState(rasterizerState),
 		m_blendState(blendState),
 		m_constantBuffer(constantBuffer) { }

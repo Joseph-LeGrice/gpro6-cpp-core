@@ -68,9 +68,6 @@
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp">
       <Filter>Engine\Core\SceneGraph\Components</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraph.cpp">
-      <Filter>Engine\Core\SceneGraph</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Time\Time.cpp">
       <Filter>Engine\Core\Time</Filter>
     </ClCompile>
@@ -88,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
@@ -122,6 +116,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -265,9 +260,6 @@
       <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.h">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h">

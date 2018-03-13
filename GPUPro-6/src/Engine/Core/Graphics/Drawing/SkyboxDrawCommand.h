@@ -5,14 +5,16 @@
 class RasterizerState;
 class BlendState;
 
-class SkyboxDrawCommand : public IDrawCommand<1>
+
+class SkyboxDrawCommand : public IDrawCommand
 {
 public:
 	SkyboxDrawCommand(GraphicsDevice& gfxDevice,
+        PerObjectBuffer& perObjectBuffer,
 		SceneGraph& sceneGraph,
 		RasterizerState& rasterizerState,
 		BlendState& blendState) :
-		IDrawCommand(gfxDevice, sceneGraph),
+		IDrawCommand(1, perObjectBuffer, gfxDevice, sceneGraph),
 		m_rasterizerState(rasterizerState),
 		m_blendState(blendState) { }
 

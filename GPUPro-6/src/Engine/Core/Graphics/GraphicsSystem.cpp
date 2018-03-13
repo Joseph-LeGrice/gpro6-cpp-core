@@ -1,12 +1,15 @@
 #include "stdafx.h"
+#include "GraphicsSystem.h"
+
+#include "Engine/Core/Mesh/MeshManager.h"
+#include "Engine/Core/Graphics/BlendState.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
+#include "Engine/Core/Graphics/Drawing/IDrawCommand.h"
+#include "Engine/Core/WindowManagement/WindowManager.h"
+#include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
+#include "Engine/Core/SceneGraph/Components/Util/EntityUtil.hpp"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerCameraBuffer.h"
-#include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
-#include "Engine/Core/WindowManagement/WindowManager.h"
-#include "Engine/Core/Graphics/GraphicsDevice.h"
-#include "Engine/Core/Graphics/BlendState.h"
-#include "Engine/Core/Mesh/MeshManager.h"
-#include "Drawing/DrawCommandList.h"
 
 #include "FreeImage.h"
 
@@ -27,14 +30,16 @@ GraphicsSystem::GraphicsSystem(BlendState& blendState,
 	DepthStencilBuffer& depthStencilBuffer,
 	SceneGraph& sceneGraph,
     PerObjectBuffer& perObjectBuffer,
-    PerCameraBuffer& perCameraBuffer) :
+    PerCameraBuffer& perCameraBuffer,
+    std::vector<std::shared_ptr<IDrawCommand>> commands) :
 	m_blendState(blendState),
 	m_meshManager(meshManager),
 	m_gfxDevice(gfxDevice),
 	m_depthStencilBuffer(depthStencilBuffer),
 	m_sceneGraph(sceneGraph),
     m_perObjectBuffer(perObjectBuffer),
-    m_perCameraBuffer(perCameraBuffer) {
+    m_perCameraBuffer(perCameraBuffer),
+    m_commands(commands) {
 	FreeImage_SetOutputMessage(FreeImageOutput);
 }
 
@@ -68,8 +73,10 @@ void GraphicsSystem::VariableTick()
         pcb.Projection = proj;
         m_perCameraBuffer.PushData(pcb);
 
-        //TODO: Chaining of draw commands?
-        GetCommandList().ExecuteAllCommands(view, proj);
+        for (int i = 0; i < m_commands.size(); i++)
+        {
+            m_commands[i]->Draw(view, proj);
+        }
 	}
 	m_gfxDevice.Present();
 }

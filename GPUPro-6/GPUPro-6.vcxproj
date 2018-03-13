@@ -229,7 +229,7 @@
     <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
@@ -252,7 +252,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Input\KeyboardInput.cpp" />
     <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp" />
-    <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraph.cpp" />
     <ClCompile Include="src\Engine\Extra\Locomotion\NoClipLocomotion.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Input\InputSystem.cpp" />
@@ -282,7 +281,6 @@
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.h" />

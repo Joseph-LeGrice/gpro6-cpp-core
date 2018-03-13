@@ -1,8 +1,5 @@
 #include "stdafx.h"
 
-
-
-
 #include "Engine/Core/GameLoop.h"
 #include "Engine/Core/Time/Time.h"
 
@@ -58,7 +55,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Specify Components?
 		//, di::bind<IComponent*[]>().to<Camera, Transform>()
 	);
-	
+
 	GameLoop& game = injector.create<GameLoop&>();
 	return game.Run();
 }

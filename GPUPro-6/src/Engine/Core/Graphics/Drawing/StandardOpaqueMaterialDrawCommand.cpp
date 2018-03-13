@@ -5,6 +5,7 @@
 #include "Engine/Core/Graphics/ResourceTypes/Material/StandardMaterial.hpp"
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
+#include "Engine/Core/ResourceManagement/ResourceManager.h"
 
 StandardOpaqueMaterialDrawCommand::~StandardOpaqueMaterialDrawCommand()
 {

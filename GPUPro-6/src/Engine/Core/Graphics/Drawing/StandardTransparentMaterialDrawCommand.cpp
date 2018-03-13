@@ -4,6 +4,8 @@
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
+#include "Engine/Core/Graphics/ResourceTypes/Material/StandardMaterial.hpp"
+#include "Engine/Core/ResourceManagement/ResourceManager.h"
 
 StandardTransparentMaterialDrawCommand::~StandardTransparentMaterialDrawCommand()
 {
