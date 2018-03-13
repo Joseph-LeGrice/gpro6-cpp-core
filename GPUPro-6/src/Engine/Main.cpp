@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#include "Engine/Core/WindowManagement/WindowManager.h"
+
 #include "Engine/Core/GameLoop.h"
 #include "Engine/Core/Time/Time.h"
 
@@ -9,14 +11,20 @@
 #include "Engine/Core/Graphics/LightingSystem.h"
 #include "Engine/Extra/Locomotion/NoClipLocomotion.h"
 
-#include "Engine/Core/WindowManagement/WindowManager.h"
+// IDrawCommands
+#include "Engine/Core/Graphics/Drawing/SkyboxDrawCommand.h"
+#include "Engine/Core/Graphics/Drawing/StandardOpaqueMaterialDrawCommand.h"
+#include "Engine/Core/Graphics/Drawing/StandardTransparentMaterialDrawCommand.h"
 
+// ConstantBuffers
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerCameraBuffer.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
 
+// Etc
 #include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/Graphics/BlendState.h"
+#include "Engine/Core/Graphics/RasterizerState.h"
 #include "Engine/Core/Graphics/Buffers/IndexBuffer.h"
 #include "Engine/Core/Graphics/Buffers/VertexBuffer.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
@@ -44,13 +52,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			NoClipLocomotion,
 			InputSystem>()
 
-		// Specify ConstantBuffers?
-
 		// Specify the IResourceManager::
 		//, di::bind<IResourceManager>().to<ResourceManager>()
 
 		// Specify all Draw Commands:
-		//, di::bind<IDrawCommand*[]>().to<SkyboxDrawCommand, OpaqueDrawCommand, TranslucentDrawCommand>()
+		, di::bind<IDrawCommand*[]>().to<SkyboxDrawCommand, StandardOpaqueMaterialDrawCommand, StandardTransparentMaterialDrawCommand>()
 
 		// Specify Components?
 		//, di::bind<IComponent*[]>().to<Camera, Transform>()
