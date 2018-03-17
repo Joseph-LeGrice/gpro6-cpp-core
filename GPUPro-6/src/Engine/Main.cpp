@@ -50,16 +50,36 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			GraphicsSystem,
 			LightingSystem,
 			NoClipLocomotion,
-			InputSystem>()
-
-		// Specify the IResourceManager::
-		//, di::bind<IResourceManager>().to<ResourceManager>()
+			InputSystem>(),
 
 		// Specify all Draw Commands:
-		, di::bind<IDrawCommand*[]>().to<SkyboxDrawCommand, StandardOpaqueMaterialDrawCommand, StandardTransparentMaterialDrawCommand>()
+		di::bind<IDrawCommand*[]>().to<
+            SkyboxDrawCommand,
+            StandardOpaqueMaterialDrawCommand, 
+            StandardTransparentMaterialDrawCommand>()
+
+        // Specify the IResourceManager::
+        //di::bind<IResourceManager>().to<ResourceManager>()  
+        
+        // Specify valid ResourceTypes?
+        //di::bind<IResource*[]>().to<
+        //  Mesh,
+        //  Shader,
+        //  ShaderResource,
+        //  StandardMaterial,
+        //  SimpleMaterial,
+        //  StructuredBuffer,
+        //  Texture2D,
+        //  Texture2DArray,
+        //  TextureSampler>()
 
 		// Specify Components?
-		//, di::bind<IComponent*[]>().to<Camera, Transform>()
+		//di::bind<IComponent*[]>().to<
+        //  TransformComponent,
+        //  CameraComponent,
+        //  MeshRendererComponent,
+        //  EntityComponent,
+        //  LightComponent>()
 	);
 
 	GameLoop& game = injector.create<GameLoop&>();
