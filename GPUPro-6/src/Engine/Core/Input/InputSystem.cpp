@@ -22,7 +22,7 @@ void InputSystem::VariableTick()
 
 		if (msg.message == WM_QUIT)
 		{
-			//m_gameLoop->Stop(); //FIXME
+			m_gameLoop->Stop();
 		}
 
 		m_mouseInput.HandleInput(msg);

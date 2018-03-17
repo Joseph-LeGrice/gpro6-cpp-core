@@ -117,6 +117,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.cpp" />
+    <ClCompile Include="src\Engine\Core\SystemManagement\SystemContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -293,6 +294,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.h" />
+    <ClInclude Include="src\Engine\Core\SystemManagement\SystemContainer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

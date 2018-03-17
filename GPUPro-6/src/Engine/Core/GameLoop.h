@@ -1,25 +1,19 @@
 #pragma once
 
-#include <vector>
-#include <memory>
-
 class Time;
-class ISystem;
+class SystemContainer;
 
 class GameLoop
 {
 public:
-	GameLoop::GameLoop(Time& time, std::vector<std::shared_ptr<ISystem>> systems) : 
-		m_time(time),
-		m_systems(systems) { }
+	GameLoop::GameLoop(Time& time) : m_time(time) { }
 	GameLoop(const GameLoop&) = delete;
     ~GameLoop() = default;
 
-	int Run();
+	int Run(SystemContainer& systems);
 	void Stop();
 
 private:
 	Time& m_time;
-	std::vector<std::shared_ptr<ISystem>> m_systems;
 	bool m_running;
 };

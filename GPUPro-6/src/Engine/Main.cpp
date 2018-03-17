@@ -6,6 +6,7 @@
 #include "Engine/Core/Time/Time.h"
 
 // ISystem's
+#include "Engine/Core/SystemManagement/SystemContainer.h"
 #include "Engine/Core/Graphics/GraphicsSystem.h"
 #include "Engine/Core/Input/InputSystem.h"
 #include "Engine/Core/Graphics/LightingSystem.h"
@@ -21,6 +22,8 @@
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
 
+#include "Engine/Core/SceneGraph/SceneGraphDefinition.hpp"
+
 // Etc
 #include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/Graphics/BlendState.h"
@@ -34,6 +37,9 @@
 #pragma warning(disable:4458)
 
 #include "boost/di.hpp"
+#include "boost/di/extension/policies/uml_dumper.hpp"
+#include "boost/di/extension/bindings/constructor_bindings.hpp"
+
 namespace di = boost::di;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -75,15 +81,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// Specify Components?
 		//di::bind<IComponent*[]>().to<
-        //  TransformComponent,
-        //  CameraComponent,
-        //  MeshRendererComponent,
-        //  EntityComponent,
-        //  LightComponent>()
+		//  TransformComponent,
+		//  CameraComponent,
+		//  MeshRendererComponent,
+		//  EntityComponent,
+		//  LightComponent>()
 	);
 
 	GameLoop& game = injector.create<GameLoop&>();
-	return game.Run();
+	SystemContainer& sc = injector.create<SystemContainer&>();
+	return game.Run(sc);
+
+	//injector.create<GameLoop&>();
+	return 0;
 }
 
 #pragma warning(pop)

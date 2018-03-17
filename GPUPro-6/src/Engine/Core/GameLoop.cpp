@@ -2,14 +2,11 @@
 #include "GameLoop.h"
 
 #include "Engine/Core/Time/Time.h"
-#include "Engine/Core/SystemManagement/ISystem.h"
+#include "Engine/Core/SystemManagement/SystemContainer.h"
 
-int GameLoop::Run()
+int GameLoop::Run(SystemContainer& systems)
 {
-	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
-		it != m_systems.end(); it++) {
-		it->get()->Initialize();
-	}
+	systems.InitializeAll();
 
 	m_running = true;
     while (m_running)
@@ -20,26 +17,12 @@ int GameLoop::Run()
 
 			while (m_time.ShouldAdvanceFixedStep())
 			{
-				for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
-					it != m_systems.end(); it++) {
-					it->get()->FixedTick();
-				}
+				systems.FixedTickAll();
 			}
 
-			for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
-				it != m_systems.end(); it++) {
-				it->get()->EarlyVariableTick();
-			}
-
-			for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
-				it != m_systems.end(); it++) {
-				it->get()->VariableTick();
-			}
-
-			for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
-				it != m_systems.end(); it++) {
-				it->get()->LateVariableTick();
-			}
+			systems.EarlyVariableTickAll();
+			systems.VariableTickAll();
+			systems.LateVariableTickAll();
         }
 		catch (const custom_assert::custom_assert_error& e)
 		{
@@ -49,12 +32,9 @@ int GameLoop::Run()
 		{
 			break;
 		}
-    }
-
-	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
-		it != m_systems.end(); it++) {
-		it->get()->Deinitalize();
 	}
+
+	systems.DeinitializeAll();
 
     return 0;
 }
