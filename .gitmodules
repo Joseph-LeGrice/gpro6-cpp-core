@@ -1,3 +1,6 @@
 [submodule "googletest"]
 	path = googletest
 url=https://github.com/Joseph-LeGrice/googletest.git
+[submodule "boost-di"]
+	path = boost-di
+	url = https://github.com/boost-experimental/di.git

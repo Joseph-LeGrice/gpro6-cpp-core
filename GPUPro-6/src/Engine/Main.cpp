@@ -33,7 +33,7 @@
 #pragma warning(disable:4100)
 #pragma warning(disable:4458)
 
-#include "Engine/di.hpp"
+#include "boost/di.hpp"
 namespace di = boost::di;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
