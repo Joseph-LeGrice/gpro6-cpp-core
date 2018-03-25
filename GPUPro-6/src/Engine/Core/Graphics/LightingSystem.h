@@ -3,7 +3,6 @@
 #include "MyMath/Vector/Vector4.h"
 #include "MyMath/Vector/Vector2.h"
 #include "Engine/Core/DataStructures/Color.h"
-#include "Engine/Core/SceneGraph/SceneGraph.h"
 
 struct LIGHT_BUFFER
 {
@@ -21,19 +20,23 @@ struct LIGHT_BUFFER
     Vector2 Padding;
 };
 
+class SceneGraphManager;
+class ResourceManager;
 
 class LightingSystem : public ISystem
 {
 public:
-	LightingSystem(SceneGraph& sceneGraph) :
-		m_sceneGraph(sceneGraph) { }
+	LightingSystem(SceneGraphManager& sceneGraphManager, ResourceManager& resourceManager) :
+		m_sceneGraphManager(sceneGraphManager),
+		m_resourceManager(resourceManager) { }
 
-    virtual bool Initialize() override;
+    virtual void Initialize() override;
     virtual void VariableTick() override;
 
     int GetBufferResourceIndex();
 
 private:
-	SceneGraph& m_sceneGraph;
+	SceneGraphManager& m_sceneGraphManager;
+	ResourceManager& m_resourceManager;
     int m_lightBufferIndex;
 };

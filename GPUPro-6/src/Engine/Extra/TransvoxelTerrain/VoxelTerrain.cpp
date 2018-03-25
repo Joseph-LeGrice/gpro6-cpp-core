@@ -5,7 +5,7 @@
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Transvoxel.cpp"
 
-VoxelTerrain::VoxelTerrain()
+VoxelTerrain::VoxelTerrain(ResourceManager& resourceManager) : m_resourceManager(resourceManager)
 {
 	GenerateVoxelValues();
 	GenerateMesh();
@@ -17,7 +17,7 @@ VoxelTerrain::~VoxelTerrain()
 
 void VoxelTerrain::DeallocateMesh()
 {
-	GetResourceManager().Deallocate<Mesh>(m_meshResourceId);
+	m_resourceManager.Deallocate<Mesh>(m_meshResourceId);
 }
 
 int VoxelTerrain::GetMeshID()
@@ -196,10 +196,10 @@ void VoxelTerrain::GenerateMesh()
         tris.push_back(trueVertexIndex);
     }
 
-    Mesh* m = GetResourceManager().Instantiate<Mesh>();
+    Mesh* m = m_resourceManager.Instantiate<Mesh>();
 	m->SetVertices(verts);
 	m->SetIndices(tris);
-	m_meshResourceId = m->GetResourceID();
+	m_meshResourceId = static_cast<int>(m->GetResourceIndex());
 }
 
 int VoxelTerrain::ShiftVoxelIndex(int voxelIndex, int xDelta, int yDelta, int zDelta)

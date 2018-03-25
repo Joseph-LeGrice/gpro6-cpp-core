@@ -5,48 +5,48 @@
 
 void SystemContainer::InitializeAll()
 {
-	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
+	for (std::vector<ISystem*>::iterator it = m_systems.begin();
 		it != m_systems.end(); it++) {
-		it->get()->Initialize();
+		(*it)->Initialize();
 	}
 }
 
 void SystemContainer::FixedTickAll()
 {
-	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
+	for (std::vector<ISystem*>::iterator it = m_systems.begin();
 		it != m_systems.end(); it++) {
-		it->get()->FixedTick();
+		(*it)->FixedTick();
 	}
 }
 
 void SystemContainer::EarlyVariableTickAll()
 {
-	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
+	for (std::vector<ISystem*>::iterator it = m_systems.begin();
 		it != m_systems.end(); it++) {
-		it->get()->EarlyVariableTick();
+		(*it)->EarlyVariableTick();
 	}
 }
 
 void SystemContainer::VariableTickAll()
 {
-	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
+	for (std::vector<ISystem*>::iterator it = m_systems.begin();
 		it != m_systems.end(); it++) {
-		it->get()->VariableTick();
+		(*it)->VariableTick();
 	}
 }
 
 void SystemContainer::LateVariableTickAll()
 {
-	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
+	for (std::vector<ISystem*>::iterator it = m_systems.begin();
 		it != m_systems.end(); it++) {
-		it->get()->LateVariableTick();
+		(*it)->LateVariableTick();
 	}
 }
 
 void SystemContainer::DeinitializeAll()
 {
-	for (std::vector<std::shared_ptr<ISystem>>::iterator it = m_systems.begin();
+	for (std::vector<ISystem*>::iterator it = m_systems.begin();
 		it != m_systems.end(); it++) {
-		it->get()->Deinitalize();
+		(*it)->Deinitalize();
 	}
 }

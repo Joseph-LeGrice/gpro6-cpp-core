@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Engine/Core/DataStructures/Color.h"
-#include "Engine/Core/SceneGraph/Components/Util/ComponentType.hpp"
+#include "Engine/Core/SceneGraph/IComponent.h"
 
 enum LightType
 {
@@ -10,31 +10,23 @@ enum LightType
     kLightType_Directional = 2
 };
 
-struct Light
+struct Light : IComponent
 {
     Color m_color;
     FLOAT m_range;
     FLOAT m_intensity;
     FLOAT m_spotlightAngle;
     LightType m_type;
+
+	Light(int componentIndex) : IComponent(componentIndex)
+	{
+		m_type = kLightType_Point;
+		m_range = 100.0f;
+		m_color = Color::White();
+		m_intensity = 1.0f;
+	}
+
+	static ComponentTypeID GetComponentType() {
+		return 3;
+	}
 };
-
-namespace LightInternal
-{
-    struct InitLight
-    {
-        Light operator()()
-        {
-            Light newLight;
-            ZeroMemory(&newLight, sizeof(newLight));
-            newLight.m_type = kLightType_Point;
-            newLight.m_range = 100.0f;
-            newLight.m_color = Color::White();
-            newLight.m_intensity = 1.0f;
-
-            return newLight;
-        }
-    };
-}
-
-typedef ComponentRegistrationInfo<Light, 3, LightInternal::InitLight> LightComponent;

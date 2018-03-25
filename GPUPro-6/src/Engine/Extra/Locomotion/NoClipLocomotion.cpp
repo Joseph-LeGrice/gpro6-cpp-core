@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "NoClipLocomotion.h"
 
+#include "Engine/Core/SceneGraph/SceneGraphManager.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/SceneGraph/Components/Util/EntityUtil.hpp"
 #include "Engine/Core/Graphics/Components/Transform.h"
 
 #include "Engine/Core/Input/InputSystem.h"
@@ -20,13 +20,13 @@ void NoClipLocomotion::VariableTick()
         return;
     }
 
-    EntityComponent* player = m_sceneGraph.GetComponent<EntityComponent>(m_playerEntityId);
+    Entity* player = m_sceneGraphManager.GetCurrentScene().GetComponent<Entity>(m_playerEntityId);
     if (player == nullptr)
     {
         return;
     }
 
-    TransformComponent* playerTransform = EntityUtil::GetComponent<TransformComponent>(&m_sceneGraph, *player);
+    Transform* playerTransform = player->GetComponent<Transform>(m_sceneGraphManager.GetCurrentScene());
     if (playerTransform == nullptr)
     {
         return;
@@ -37,22 +37,22 @@ void NoClipLocomotion::VariableTick()
     {
         Vector2 mouseDelta = mouseInput.GetDeltaMousePosition();
 #if 1
-        Vector3 currentUp = playerTransform->m_data.WorldUp();
-        Vector3 currentRight = playerTransform->m_data.WorldRight();
-        Vector3 currentForward = playerTransform->m_data.WorldForward();
+        Vector3 currentUp = playerTransform->WorldUp();
+        Vector3 currentRight = playerTransform->WorldRight();
+        Vector3 currentForward = playerTransform->WorldForward();
 
         Vector3 upComponent = currentUp * m_sensitivity * -mouseDelta.Y * Time::DeltaTimeStep();
         Vector3 rightComponent = currentRight * m_sensitivity * mouseDelta.X * Time::DeltaTimeStep();
         Vector3 newForward = currentForward + upComponent + rightComponent;
 
-        playerTransform->m_data.SetRotation(Quaternion::FromLookRotation(newForward));
+        playerTransform->SetRotation(Quaternion::FromLookRotation(newForward));
 #else
-        Vector3 eulerAngle = Quaternion::ToEuler(playerTransform->m_data.m_rotation);
+        Vector3 eulerAngle = Quaternion::ToEuler(playerTransform->m_rotation);
         eulerAngle.X += m_sensitivity * mouseDelta.Y * Time::DeltaTimeStep();
         eulerAngle.Y += m_sensitivity * mouseDelta.X * Time::DeltaTimeStep();
         eulerAngle.Z = 0;
         
-        playerTransform->m_data.m_rotation = Quaternion::FromEuler(eulerAngle);
+        playerTransform->m_rotation = Quaternion::FromEuler(eulerAngle);
 #endif
     }
 
@@ -98,11 +98,11 @@ void NoClipLocomotion::VariableTick()
 
     if (keyboardInput.GetKey(kInputKey_R))
     {
-        playerTransform->m_data.m_position = { 0,0,0 };
+        playerTransform->m_position = { 0,0,0 };
     }
 
     moveDelta *= Time::DeltaTimeStep();
-    moveDelta *= playerTransform->m_data.m_rotation;
+    moveDelta *= playerTransform->m_rotation;
     
-    playerTransform->m_data.m_position += moveDelta;
+    playerTransform->m_position += moveDelta;
 }

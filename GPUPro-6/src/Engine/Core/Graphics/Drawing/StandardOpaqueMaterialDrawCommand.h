@@ -11,11 +11,12 @@ class StandardOpaqueMaterialDrawCommand : public IDrawCommand
 public:
 	StandardOpaqueMaterialDrawCommand(GraphicsDevice& gfxDevice,
         PerObjectBuffer& perObjectBuffer,
-		SceneGraph& sceneGraph,
+		SceneGraphManager& sceneGraphManager,
+		ResourceManager& resourceManager,
 		RasterizerState& rasterizerState,
 		BlendState& blendState,
         StandardMaterialBuffer& constantBuffer) :
-		IDrawCommand(0, perObjectBuffer, gfxDevice, sceneGraph),
+		IDrawCommand(0, perObjectBuffer, gfxDevice, sceneGraphManager, resourceManager),
 		m_rasterizerState(rasterizerState),
 		m_blendState(blendState),
 		m_constantBuffer(constantBuffer) { }
@@ -23,7 +24,7 @@ public:
 
 protected:
     virtual void PreDrawAll() override;
-    virtual bool BindMaterial(MeshRendererComponent& mrc) override;
+    virtual bool BindMaterial(MeshRenderer& mrc) override;
 
 private:
 	RasterizerState& m_rasterizerState;

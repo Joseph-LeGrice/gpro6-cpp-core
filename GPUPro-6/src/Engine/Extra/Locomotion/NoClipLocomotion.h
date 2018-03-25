@@ -1,22 +1,21 @@
 #pragma once
 #include "Engine/Core/SystemManagement/ISystem.h"
-#include "Engine/Core/SceneGraph/SceneGraph.h"
 
 class InputSystem;
-
+class SceneGraphManager;
 
 class NoClipLocomotion : public ISystem
 {
 public:
-    NoClipLocomotion(SceneGraph& sceneGraph, InputSystem& inputSystem) :
-		m_sceneGraph(sceneGraph),
+    NoClipLocomotion(SceneGraphManager& sceneGraphManager, InputSystem& inputSystem) :
+		m_sceneGraphManager(sceneGraphManager),
 		m_inputSystem(inputSystem) { }
 
     void SetPlayer(int entityId);
     virtual void VariableTick() override;
 
 private:
-	SceneGraph& m_sceneGraph;
+	SceneGraphManager& m_sceneGraphManager;
 	InputSystem& m_inputSystem;
     int m_playerEntityId = -1;
 

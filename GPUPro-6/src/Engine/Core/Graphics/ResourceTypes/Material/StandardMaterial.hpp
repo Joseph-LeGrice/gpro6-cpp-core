@@ -3,5 +3,11 @@
 #include "Material.hpp"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
 
-
-typedef Material<MATERIAL_BUFFER_CONTAINER> StandardMaterial;
+class StandardMaterial : public Material<MATERIAL_BUFFER_CONTAINER>
+{
+public:
+	static ResourceTypeID GetResourceType()
+	{
+		return 10;
+	}
+};

@@ -233,9 +233,11 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceManagement\IResource.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceReferences.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp" />
@@ -252,12 +254,12 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Input\KeyboardInput.cpp" />
     <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp" />
+    <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraphManager.cpp" />
     <ClCompile Include="src\Engine\Core\SystemManagement\SystemContainer.cpp" />
     <ClCompile Include="src\Engine\Extra\Locomotion\NoClipLocomotion.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Input\InputSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\LightingSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
     <ClCompile Include="src\Engine\Core\Time\Time.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.cpp" />
     <ClCompile Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.cpp" />
@@ -266,6 +268,7 @@
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\Transvoxel.cpp" />
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.cpp" />
     <ClCompile Include="src\Engine\Main.cpp" />
+    <None Include="src\Engine\Main_BoostDI.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -291,9 +294,8 @@
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
     <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
-    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
+    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceReferences.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\EntityUtil.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\Components\MeshRenderer.h" />
     <ClInclude Include="src\Engine\Core\DataStructures\Color.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Components\Camera.h" />
@@ -303,7 +305,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\RasterizerState.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphDefinition.hpp" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.h" />
     <ClInclude Include="src\Engine\Core\Graphics\VertexData.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.h" />
@@ -315,7 +317,8 @@
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Components\Light.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.hpp" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphManager.h" />
     <ClInclude Include="src\Engine\Core\SystemManagement\SystemContainer.h" />
     <ClInclude Include="src\Engine\di.hpp" />
     <ClInclude Include="src\Engine\Extra\Locomotion\NoClipLocomotion.h" />

@@ -1,15 +1,11 @@
 #include "stdafx.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "ResourceManager.h"
 
-ResourceManager* s_instance = new ResourceManager();
-
-ResourceManager& GetResourceManager()
+ResourceManager::ResourceManager(std::vector<ResourceTypeID> resourceTypes, GraphicsDevice& gfxDevice) : m_resourceReferences(gfxDevice, *this)
 {
-    return *s_instance;
-}
-
-void DestroyResourceManager()
-{
-    s_instance->DeallocateAll();
-    delete s_instance;
+	m_resourceListMap = std::unordered_map<ResourceTypeID, std::vector<IResource*>>();
+	for (auto it = resourceTypes.begin(); it != resourceTypes.end(); it++)
+	{
+		m_resourceListMap.insert({ *it, std::vector<IResource*>() });
+	}
 }

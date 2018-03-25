@@ -1,18 +1,25 @@
 #pragma once
 
+typedef uint16_t ResourceTypeID;
+
+class ResourceReferences;
+
 class IResource
 {
 public:
-    IResource() : m_resourceId(-1) { }
-    IResource(int ai) : m_resourceId(ai) { }
+	IResource(size_t resourceIndex, ResourceReferences& resourceReferences) : 
+		m_resourceIndex(resourceIndex),
+		m_resourceReferences(resourceReferences) { }
     
+	virtual ~IResource() = default;
     virtual void Release() = 0;
 
-    int GetResourceID()
-    {
-        return m_resourceId;
-    }
+	size_t GetResourceIndex();
+
+protected:
+	ResourceReferences& GetResourceReferences();
 
 private:
-    int m_resourceId;
+	size_t m_resourceIndex;
+	ResourceReferences& m_resourceReferences;
 };

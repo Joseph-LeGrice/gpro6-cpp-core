@@ -1,28 +1,86 @@
 #pragma once
 
-#include "Engine/Core/ResourceManagement/ResourceManagerDefinition.hpp"
+#include <unordered_map>
 
-#include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
-#include "Engine/Core/Graphics/ResourceTypes/Shader.h"
-#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
-#include "Engine/Core/Graphics/ResourceTypes/Material/SimpleMaterial.h"
-#include "Engine/Core/Graphics/ResourceTypes/Material/StandardMaterial.hpp"
-#include "Engine/Core/Graphics/ResourceTypes/StructuredBuffer.h"
-#include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
-#include "Engine/Core/Graphics/ResourceTypes/Texture2DArray.h"
-#include "Engine/Core/Graphics/ResourceTypes/TextureSampler.h"
+#include "IResource.h"
+#include "ResourceReferences.h"
 
-typedef ResourceManagerDefinition<
-    Mesh,
-    Shader,
-    ShaderResource,
-    StandardMaterial,
-    SimpleMaterial,
-    StructuredBuffer,
-    Texture2D,
-    Texture2DArray,
-    TextureSampler
-> ResourceManager;
+class GraphicsDevice;
 
-ResourceManager& GetResourceManager();
-void DestroyResourceManager();
+class ResourceManager
+{
+public:
+	template<class T>
+	std::vector<T*> GetAllAssetsOfType()
+	{
+		struct CastComponent { T* operator ()(IResource* value) const { return dynamic_cast<T*>(value); } };
+
+		ResourceTypeID typeId = T::GetResourceType();
+		if (m_resourceListMap.count(typeId) > 0)
+		{
+			std::vector<IResource*>& existing = m_resourceListMap[typeId];
+			std::vector<T*> result;
+			std::transform(existing.begin(), existing.end(), result.begin(), CastComponent());
+			return result;
+		}
+		else
+		{
+			return std::vector<T*>();
+		}
+	}
+
+	template<class T>
+	T* GetAsset(size_t arrayIndex)
+	{
+		ResourceTypeID typeId = T::GetResourceType();
+		if (m_resourceListMap.count(typeId) > 0)
+		{
+			std::vector<IResource*>& existing = m_resourceListMap[typeId];
+			if (existing.size() > 0 && arrayIndex < existing.size())
+			{
+				return dynamic_cast<T*>(existing[arrayIndex]);
+			}
+		}
+		return nullptr;
+	}
+
+	template<class T>
+	T* Instantiate()
+	{
+		ResourceTypeID typeId = T::GetResourceType();
+		if (m_resourceListMap.count(typeId) > 0)
+		{
+			std::vector<IResource*>& resources = m_resourceListMap[typeId];
+
+			size_t index = resources.size();
+			T* newResource = new T(index, m_resourceReferences);
+			resources.push_back(newResource);
+
+			return dynamic_cast<T*>(resources[index]);
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+
+	template<class T>
+	void Deallocate(int index)
+	{
+		ResourceTypeID typeId = T::GetResourceType();
+		if (m_resourceListMap.count(typeId) > 0)
+		{
+			std::vector<IResource*>& resources = m_resourceListMap[typeId];
+			size_t length = resources.size();
+			resources[index] = resources[length - 1];
+			resources.resize(length - 1);
+		}
+	}
+
+	ResourceManager(std::vector<ResourceTypeID> resourceTypes, GraphicsDevice& gfxDevice);
+	~ResourceManager() = default;
+
+private:
+	std::unordered_map<ResourceTypeID, std::vector<IResource*>> m_resourceListMap;
+	ResourceReferences m_resourceReferences;
+};

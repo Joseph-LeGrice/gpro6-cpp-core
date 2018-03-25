@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "Engine/Core/SystemManagement/ISystem.h"
 #include "Engine/Core/Input/MouseInput.h"
 #include "Engine/Core/Input/KeyboardInput.h"
@@ -11,7 +9,7 @@ class GameLoop;
 class InputSystem : public ISystem
 {
 public:
-	InputSystem::InputSystem(std::shared_ptr<GameLoop> gameLoop) : m_gameLoop(gameLoop) { }
+	InputSystem::InputSystem(GameLoop& gameLoop) : m_gameLoop(gameLoop) { }
     InputSystem(const InputSystem&) = delete;
 
 	void SetHWND(HWND hwnd);
@@ -24,7 +22,7 @@ public:
 
 private:
 	HWND m_hwnd;
-	std::shared_ptr<GameLoop> m_gameLoop;
+	GameLoop& m_gameLoop;
 	MouseInput m_mouseInput;
 	KeyboardInput m_keyboardInput;
 };

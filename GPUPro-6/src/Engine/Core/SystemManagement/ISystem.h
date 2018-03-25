@@ -7,7 +7,7 @@ public:
 	virtual ~ISystem() noexcept = default;
 	ISystem(const ISystem&) = delete;
 
-	virtual bool Initialize() { return true; }
+	virtual void Initialize() { }
 	virtual void FixedTick() { }
 	virtual void EarlyVariableTick() { }
     virtual void VariableTick() { }

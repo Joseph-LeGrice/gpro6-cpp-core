@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MeshHelper.h"
+#include "D3D11.h"
 
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
@@ -11,15 +12,15 @@ int g_quadMeshId = -1;
 int g_sphereUvMeshId = -1;
 int g_cubeMeshId = -1;
 
-Mesh* MeshHelper::Quad()
+Mesh* MeshHelper::Quad(ResourceManager& resourceManager)
 {
 	if (g_quadMeshId > -1)
 	{
-		return GetResourceManager().GetAsset<Mesh>(g_quadMeshId);
+		return resourceManager.GetAsset<Mesh>(g_quadMeshId);
 	}
 	else
 	{
-		Mesh* result = GetResourceManager().Instantiate<Mesh>();
+		Mesh* result = resourceManager.Instantiate<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 		std::vector<Vector3> verts = std::vector<Vector3>();
@@ -52,17 +53,17 @@ Mesh* MeshHelper::Quad()
 		indices.push_back(1);
 		result->SetIndices(indices);
 
-		g_quadMeshId = result->GetResourceID();
+		g_quadMeshId = static_cast<int>(result->GetResourceIndex());
 
 		return result;
 	}
 }
 
-Mesh* MeshHelper::SphereUV()
+Mesh* MeshHelper::SphereUV(ResourceManager& resourceManager)
 {
 	if (g_sphereUvMeshId > -1)
 	{
-		return GetResourceManager().GetAsset<Mesh>(g_sphereUvMeshId);
+		return resourceManager.GetAsset<Mesh>(g_sphereUvMeshId);
 	}
 	else
 	{
@@ -117,24 +118,24 @@ Mesh* MeshHelper::SphereUV()
 			}
 		}
 
-		Mesh* result = GetResourceManager().Instantiate<Mesh>();
+		Mesh* result = resourceManager.Instantiate<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 		result->SetVertices(verts);
 		result->SetNormals(norms);
 		result->SetUVs(uvs);
 		result->SetIndices(indices);
 
-		g_sphereUvMeshId = result->GetResourceID();
+		g_sphereUvMeshId = static_cast<int>(result->GetResourceIndex());
 
 		return result;
 	}
 }
 
-Mesh* MeshHelper::Cube()
+Mesh* MeshHelper::Cube(ResourceManager& resourceManager)
 {
 	if (g_cubeMeshId > -1)
 	{
-		return GetResourceManager().GetAsset<Mesh>(g_cubeMeshId);
+		return resourceManager.GetAsset<Mesh>(g_cubeMeshId);
 	}
 	else
 	{
@@ -269,14 +270,14 @@ Mesh* MeshHelper::Cube()
 		indices.push_back(21);
 		indices.push_back(23);
 
-		Mesh* result = GetResourceManager().Instantiate<Mesh>();
+		Mesh* result = resourceManager.Instantiate<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 		result->SetVertices(verts);
 		result->SetNormals(norms);
 		result->SetUVs(uvs);
 		result->SetIndices(indices);
 
-		g_cubeMeshId = result->GetResourceID();
+		g_cubeMeshId = static_cast<int>(result->GetResourceIndex());
 
 		return result;
 	}

@@ -20,9 +20,9 @@ void StandardTransparentMaterialDrawCommand::PreDrawAll()
     m_constantBuffer.BindBuffer();
 }
 
-bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRendererComponent& mrc)
+bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRenderer& mrc)
 {
-    StandardMaterial* mat = GetResourceManager().GetAsset<StandardMaterial>(mrc.m_data.m_materialIndex);
+    StandardMaterial* mat = m_resourceManager.GetAsset<StandardMaterial>(mrc.m_materialIndex);
     if (mat->BindIfValid())
     {
         m_constantBuffer.PushData(mat->GetData());

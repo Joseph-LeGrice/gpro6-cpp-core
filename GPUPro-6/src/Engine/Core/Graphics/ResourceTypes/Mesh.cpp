@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/ResourceManagement/ResourceReferences.h"
 
 #include "D3D11.h"
 
-Mesh::Mesh(UINT ai) : IResource(ai)
+Mesh::Mesh(size_t resourceIndex, ResourceReferences& resourceReferences) : IResource(resourceIndex, resourceReferences)
 {
 	m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 }

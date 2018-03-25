@@ -2,8 +2,10 @@
 #include "SkyboxDrawCommand.h"
 
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/Graphics/Components/MeshRenderer.h"
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
+#include "Engine/Core/Graphics/ResourceTypes/Material/SimpleMaterial.h"
 
 
 void SkyboxDrawCommand::PreDrawAll()
@@ -12,8 +14,8 @@ void SkyboxDrawCommand::PreDrawAll()
 	m_blendState.SetState({ false });
 }
 
-bool SkyboxDrawCommand::BindMaterial(MeshRendererComponent& mrc)
+bool SkyboxDrawCommand::BindMaterial(MeshRenderer& mrc)
 {
-    SimpleMaterial* mat = GetResourceManager().GetAsset<SimpleMaterial>(mrc.m_data.m_materialIndex);
+    SimpleMaterial* mat = m_resourceManager.GetAsset<SimpleMaterial>(mrc.m_materialIndex);
     return mat->BindIfValid();
 }

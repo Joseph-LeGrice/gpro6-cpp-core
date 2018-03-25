@@ -4,11 +4,13 @@
 
 struct ID3D11SamplerState;
 class GraphicsDevice;
+class ResourceReferences;
 
 class TextureSampler : public IResource
 {
 public:
-    TextureSampler(GraphicsDevice& gfxDevice, UINT ai) : IResource(ai), m_gfxDevice(gfxDevice) { }
+    TextureSampler(size_t resourceIndex, ResourceReferences& resourceReferences) :
+		IResource(resourceIndex, resourceReferences) { }
 
 	void BindTextureSampler(UINT samplerIndex);
 	bool Initialize();
@@ -16,7 +18,11 @@ public:
 
     virtual void Release() override;
 
+	static ResourceTypeID GetResourceType()
+	{
+		return 6;
+	}
+
 private:
-	GraphicsDevice& m_gfxDevice;
 	ManualRelease<ID3D11SamplerState> m_sampler;
 };

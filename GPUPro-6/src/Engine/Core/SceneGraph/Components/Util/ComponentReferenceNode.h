@@ -1,14 +1,14 @@
 #pragma once
 
 #include <vector>
-#include "Engine/Core/SceneGraph/Components/Util/ComponentType.hpp"
+#include "Engine/Core/SceneGraph/IComponent.h"
 
 
 static const unsigned int c_maxComponentsOfSameType = 10;
 
 struct ComponentReferenceNode
 {
-    ComponentType m_componentType;
+    ComponentTypeID m_componentType;
 
     int m_height;
     ComponentReferenceNode* m_leftChild;

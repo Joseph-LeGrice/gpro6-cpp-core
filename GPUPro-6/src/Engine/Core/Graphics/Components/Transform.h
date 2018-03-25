@@ -1,43 +1,37 @@
 #pragma once
 
-#include "Engine/Core/SceneGraph/Components/Util/ComponentType.hpp"
+#include "Engine/Core/SceneGraph/IComponent.h"
 #include "MyMath/Vector/Vector3.h"
 #include "MyMath/Complex/Quaternion.h"
 
 struct Matrix4x4;
 
-struct Transform
+struct Transform : IComponent
 {
-    // TODO: Child / Parent functionality
-    Vector3 m_position;
+	// TODO: Child / Parent functionality
+	Vector3 m_position;
 	Vector3 m_scale;
 	Quaternion m_rotation;
 
-    void SetPosition(Vector3 pos);
-    void SetScale(Vector3 scale);
-    void SetRotation(Quaternion rotation);
+	void SetPosition(Vector3 pos);
+	void SetScale(Vector3 scale);
+	void SetRotation(Quaternion rotation);
 
-    Vector3 WorldUp();
-    Vector3 WorldRight();
-    Vector3 WorldForward();
+	Vector3 WorldUp();
+	Vector3 WorldRight();
+	Vector3 WorldForward();
 
-    static Matrix4x4 GetMatrix(const Transform& t);
-    static Matrix4x4 GetCameraViewMatrix(const Transform& t);
+	Matrix4x4 GetMatrix();
+	Matrix4x4 GetCameraViewMatrix();
+	
+	Transform(int componentIndex) : IComponent(componentIndex)
+	{
+		m_scale = { 1.0f, 1.0f, 1.0f };
+		m_position = { 0.0f, 0.0f, 0.0f };
+		m_rotation = Quaternion::Identity();
+	}
+
+	static ComponentTypeID GetComponentType() {
+		return 1;
+	}
 };
-
-namespace TransformInternal
-{
-    struct InitTransform
-    {
-        Transform operator()()
-        {
-            Transform t;
-            t.m_scale = { 1.0f, 1.0f, 1.0f };
-            t.m_position = { 0.0f, 0.0f, 0.0f };
-            t.m_rotation = Quaternion::Identity();
-            return t;
-        }
-    };
-}
-
-typedef ComponentRegistrationInfo<Transform, 1, TransformInternal::InitTransform> TransformComponent;

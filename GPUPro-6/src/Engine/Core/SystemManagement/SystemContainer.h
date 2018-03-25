@@ -1,14 +1,13 @@
 #pragma once
 
 #include <vector>
-#include <memory>
 
 class ISystem;
 
 class SystemContainer
 {
 public:
-	SystemContainer(std::vector<std::shared_ptr<ISystem>> systems) :
+	SystemContainer(std::vector<ISystem*> systems) :
 		m_systems(systems) { }
 	SystemContainer(const SystemContainer&) = delete;
 	~SystemContainer() = default;
@@ -21,5 +20,5 @@ public:
 	void DeinitializeAll();
 
 private:
-	std::vector<std::shared_ptr<ISystem>> m_systems;
+	std::vector<ISystem*> m_systems;
 };

@@ -1,36 +1,19 @@
 #pragma once
 
-#include "Engine/Core/SceneGraph/Components/Util/ComponentType.hpp"
+#include "Engine/Core/SceneGraph/IComponent.h"
 #include "MyMath/Matrix/Matrix4x4.h"
-#include "Engine/Core/Graphics/GraphicsDevice.h"
-#include "MyMath/MathDefines.h"
 
-struct Camera
+struct Camera : IComponent
 {
     Matrix4x4 m_projectionMatrix;
     //TODO: Add reference field for skybox?
 
-    static Camera CreateOrthographic(float size, float depth, float aspectRatio);
-    static Camera CreatePerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar);
+    void SetOrthographic(float size, float depth, float aspectRatio);
+	void SetPerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar);
+
+	Camera(int componentIndex) : IComponent(componentIndex) { }
+
+	static ComponentTypeID GetComponentType() {
+		return 2;
+	}
 };
-
-namespace CameraInternal
-{
-    struct InitCamera
-    {
-        Camera operator()(GraphicsDevice& gfxDevice)
-        {
-            float viewportWidth = gfxDevice.GetViewportWidth();
-            float viewportHeight = gfxDevice.GetViewportHeight();
-            float aspectRatio = viewportWidth / viewportHeight;
-
-            float screenNear = 0.1f;
-            float screenDepth = 100.0f;
-            float fieldOfView = 60.0f * MyMath::DegToRad;
-
-            return Camera::CreatePerspective(fieldOfView, aspectRatio, screenNear, screenDepth);
-        }
-    };
-}
-
-typedef ComponentRegistrationInfo<Camera, 2, CameraInternal::InitCamera> CameraComponent;

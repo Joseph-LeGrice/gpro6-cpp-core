@@ -1,13 +1,14 @@
 #include "stdafx.h"
 #include "IDrawCommand.h"
 
-#include "Engine/Core/SceneGraph/SceneGraph.h"
+#include "Engine/Core/SceneGraph/SceneGraphManager.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
+#include "Engine/Core/SceneGraph/Components/Entity.h"
+#include "Engine/Core/Graphics/Components/Transform.h"
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
-#include "Engine/Core/SceneGraph/SceneGraph.h"
-#include "Engine/Core/SceneGraph/Components/Util/EntityUtil.hpp"
+#include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
 
 const int IDrawCommand::ID()
 {
@@ -22,27 +23,25 @@ void IDrawCommand::Draw(Matrix4x4 view, Matrix4x4 proj)
 
     UINT16 baseVertex = 0;
     UINT16 baseIndex = 0;
-    MeshRendererComponent* meshRenderers = m_sceneGraph.GetComponentArrayPointer<MeshRendererComponent>();
-    size_t numberOfMeshRenderers = m_sceneGraph.GetNumberOfComponents<MeshRendererComponent>();
-
-    for (size_t i = 0; i < numberOfMeshRenderers; ++i)
+    std::vector<MeshRenderer*> meshRenderers = m_sceneGraphManager.GetCurrentScene().GetComponentArrayPointer<MeshRenderer>();
+    for (size_t i = 0; i < meshRenderers.size(); ++i)
     {
-        MeshRendererComponent& mrc = meshRenderers[i];
-        EntityComponent& meshEntity = *m_sceneGraph.GetComponent<EntityComponent>(mrc.m_entityIndex);
+        MeshRenderer* mrc = meshRenderers[i];
+        Entity* meshEntity = m_sceneGraphManager.GetCurrentScene().GetComponent<Entity>(mrc->GetEntityIndex());
 
-        Mesh& mesh = *GetResourceManager().GetAsset<Mesh>(mrc.m_data.m_meshIndex);
-        UINT16 numberOfVerts = (UINT16)mesh.GetVertexData().size();
-        UINT16 numberOfIndices = (UINT16)mesh.GetIndices().size();
+        Mesh* mesh = m_resourceManager.GetAsset<Mesh>(mrc->m_meshIndex);
+        UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
+        UINT16 numberOfIndices = (UINT16)mesh->GetIndices().size();
 
-        if (mrc.m_data.m_drawCommandIndex == c_identifier && mrc.m_enabled)
+        if (mrc->m_drawCommandIndex == c_identifier && mrc->IsEnabled())
         {
-            TransformComponent* modelTransform = EntityUtil::GetComponent<TransformComponent>(&m_sceneGraph, meshEntity);
+            Transform* modelTransform = meshEntity->GetComponent<Transform>(m_sceneGraphManager.GetCurrentScene());
 
             Matrix4x4 model;
             Matrix4x4::Identity(model);
             if (modelTransform != nullptr)
             {
-                model = Transform::GetMatrix(modelTransform->m_data);
+                model = modelTransform->GetMatrix();
             }
 
             PER_OBJECT_BUFFER pob;
@@ -51,9 +50,9 @@ void IDrawCommand::Draw(Matrix4x4 view, Matrix4x4 proj)
 
             m_perObjectBuffer.PushData(pob);
 
-            if (BindMaterial(mrc))
+            if (BindMaterial(*mrc))
             {
-                deviceContext.IASetPrimitiveTopology(mesh.m_topology);
+                deviceContext.IASetPrimitiveTopology(mesh->m_topology);
                 deviceContext.DrawIndexed(numberOfIndices, baseIndex, baseVertex);
             }
         }

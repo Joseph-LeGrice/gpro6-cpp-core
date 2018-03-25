@@ -2,14 +2,15 @@
 
 #include "D3D11.h"
 #include "Engine/Core/ResourceManagement/IResource.h"
+#include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
+#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 
 class StructuredBuffer : public IResource
 {
 public:
-    StructuredBuffer(UINT ai, GraphicsDevice& gfxDevice) : 
-		IResource(ai),
-		m_gfxDevice(gfxDevice) { }
+    StructuredBuffer(size_t resourceIndex, ResourceReferences& resourceReferences) :
+		IResource(resourceIndex, resourceReferences) { }
 
     template<class T, UINT m_numberOfElements>
 	bool Initialize()
@@ -23,7 +24,7 @@ public:
 		bDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 		bDesc.StructureByteStride = sizeof(T);
 
-		ID3D11Device* device = m_gfxDevice.GetGraphicsDevice();
+		ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
 		HRESULT createBufferResult = device->CreateBuffer(&bDesc, NULL, m_buffer);
 		if (!SUCCEEDED(createBufferResult))
 		{
@@ -37,14 +38,14 @@ public:
 		rvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
         rvDesc.Buffer.ElementWidth = m_numberOfElements;
         
-        ShaderResource* myShaderResourceView = GetResourceManager().Instantiate<ShaderResource>();
-        m_myShaderResourceViewId = myShaderResourceView->GetResourceID();
+        ShaderResource* myShaderResourceView = GetResourceReferences().GetResourceManager().Instantiate<ShaderResource>();
+		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetResourceIndex());
         
         bool createdView = myShaderResourceView->CreateViewWithResource(m_buffer, &rvDesc);
 		if (!createdView)
         {
             m_buffer.ReleasePointer();
-            GetResourceManager().Deallocate<ShaderResource>(m_myShaderResourceViewId);
+			GetResourceReferences().GetResourceManager().Deallocate<ShaderResource>(m_myShaderResourceViewId);
 
             return false;
         }
@@ -55,7 +56,7 @@ public:
     void UpdateBuffer(T& newData)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = m_gfxDevice.GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = GetResourceReferences().GetGraphicsDevice().GetGraphicsDeviceContext();
 		HRESULT mapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(mapResult))
 		{
@@ -72,8 +73,12 @@ public:
         return m_myShaderResourceViewId;
     }
 
+	static ResourceTypeID GetResourceType()
+	{
+		return 4;
+	}
+
 private:
-	GraphicsDevice& m_gfxDevice;
     int m_myShaderResourceViewId = -1;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };

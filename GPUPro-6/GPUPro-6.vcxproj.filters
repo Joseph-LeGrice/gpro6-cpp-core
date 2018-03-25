@@ -59,9 +59,6 @@
     <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp">
       <Filter>Engine\Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp">
-      <Filter>Engine\Core\ResourceManagement</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp">
       <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
     </ClCompile>
@@ -89,9 +86,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp">
       <Filter>Engine\Core\Graphics</Filter>
     </ClCompile>
@@ -110,7 +104,6 @@
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\Transvoxel.cpp" />
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.cpp" />
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
     <ClCompile Include="src\Engine\Main.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.cpp" />
@@ -118,6 +111,14 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\SystemManagement\SystemContainer.cpp" />
+    <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraphManager.cpp" />
+    <ClCompile Include="src\Engine\Main_BoostDI.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceReferences.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceManagement\IResource.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -194,12 +195,6 @@
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h">
       <Filter>Engine\Core\ResourceManagement</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManager.h">
-      <Filter>Engine\Core\ResourceManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp">
-      <Filter>Engine\Core\ResourceManagement</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentArray.hpp">
       <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
     </ClInclude>
@@ -209,17 +204,8 @@
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp">
       <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\EntityUtil.hpp">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Entity.h">
       <Filter>Engine\Core\SceneGraph\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.h">
-      <Filter>Engine\Core\SceneGraph</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphDefinition.hpp">
-      <Filter>Engine\Core\SceneGraph</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\SystemManagement\ISystem.h">
       <Filter>Engine\Core\SystemManagement</Filter>
@@ -286,7 +272,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.h" />
     <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h" />
     <ClInclude Include="src\Engine\di.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.h">
       <Filter>Engine\Core\Graphics\Buffers</Filter>
@@ -295,6 +280,18 @@
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.h" />
     <ClInclude Include="src\Engine\Core\SystemManagement\SystemContainer.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphManager.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.hpp">
+      <Filter>Engine\Core\SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceReferences.h" />
+    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManager.h">
+      <Filter>Engine\Core\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h">
+      <Filter>Engine\Core\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
+#include <vector>
 
 #include "Engine/Core/SystemManagement/ISystem.h"
-#include "Engine/Core/SceneGraph/SceneGraph.h"
 
 class BlendState;
 class MeshManager;
@@ -11,6 +11,7 @@ class GraphicsDevice;
 class PerObjectBuffer;
 class PerCameraBuffer;
 class RasterizerState;
+class SceneGraphManager;
 class DepthStencilBuffer;
 
 class GraphicsSystem : public ISystem
@@ -20,19 +21,21 @@ public:
         MeshManager& meshManager,
         GraphicsDevice& gfxDevice,
         DepthStencilBuffer& depthStencilBuffer,
-        SceneGraph& sceneGraph,
+		SceneGraphManager& sceneGraphManager,
         PerObjectBuffer& perObjectBuffer,
         PerCameraBuffer& perCameraBuffer,
-        std::vector<std::shared_ptr<IDrawCommand>> commands);
+        std::vector<IDrawCommand*>& commands);
+
+	virtual void Initialize() override;
     virtual void VariableTick() override;
 
 private:
-	SceneGraph& m_sceneGraph;
+	SceneGraphManager& m_sceneGraphManager;
 	BlendState& m_blendState;
 	MeshManager& m_meshManager;
 	GraphicsDevice& m_gfxDevice;
     PerObjectBuffer& m_perObjectBuffer;
     PerCameraBuffer& m_perCameraBuffer;
 	DepthStencilBuffer& m_depthStencilBuffer;
-    std::vector<std::shared_ptr<IDrawCommand>> m_commands;
+    std::vector<IDrawCommand*>& m_commands;
 };

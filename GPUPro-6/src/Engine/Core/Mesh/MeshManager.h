@@ -4,6 +4,7 @@
 
 class IndexBuffer;
 class VertexBuffer;
+class ResourceManager;
 class Mesh;
 
 struct MeshInfo
@@ -17,10 +18,12 @@ struct MeshInfo
 class MeshManager
 {
 public:
-	MeshManager(IndexBuffer* indexBuffer,
-		VertexBuffer* vertexBuffer) :
+	MeshManager(IndexBuffer& indexBuffer,
+		VertexBuffer& vertexBuffer,
+		ResourceManager& resourceManager) :
 		m_indexBuffer(indexBuffer),
-		m_vertexBuffer(vertexBuffer) { }
+		m_vertexBuffer(vertexBuffer),
+		m_resourceManager(resourceManager) { }
 	~MeshManager();
 
 	void BindBuffers();
@@ -29,9 +32,10 @@ public:
 	MeshInfo GetMapping(Mesh* m);
 
 private:
-	IndexBuffer* m_indexBuffer;
-	VertexBuffer* m_vertexBuffer;
-	std::unordered_map<int, MeshInfo> m_meshInfoMapping;
+	IndexBuffer& m_indexBuffer;
+	VertexBuffer& m_vertexBuffer;
+	ResourceManager& m_resourceManager;
+	std::unordered_map<size_t, MeshInfo> m_meshInfoMapping;
 
 	void RefreshBuffers();
 };

@@ -1,19 +1,20 @@
 #pragma once
 
-#include "Engine/Core/SceneGraph/SceneGraph.h"
-#include "Engine/Core/Graphics/Components/MeshRenderer.h"
-
-class PerObjectBuffer;
 class GraphicsDevice;
+class PerObjectBuffer;
+class SceneGraphManager;
+class ResourceManager;
+struct MeshRenderer;
 
 class IDrawCommand
 {
 public:
-	IDrawCommand(int id, PerObjectBuffer& perObjectBuffer, GraphicsDevice& gfxDevice, SceneGraph& sceneGraph) :
+	IDrawCommand(int id, PerObjectBuffer& perObjectBuffer, GraphicsDevice& gfxDevice, SceneGraphManager& sceneGraphManager, ResourceManager& resourceManager) :
         c_identifier(id),
 		m_gfxDevice(gfxDevice),
         m_perObjectBuffer(perObjectBuffer),
-		m_sceneGraph(sceneGraph) { }
+		m_sceneGraphManager(sceneGraphManager),
+		m_resourceManager(resourceManager) { }
 
     const int ID();
     void Draw(Matrix4x4 view, Matrix4x4 proj);
@@ -21,10 +22,11 @@ public:
 protected:
     PerObjectBuffer& m_perObjectBuffer;
 	GraphicsDevice& m_gfxDevice;
-	SceneGraph& m_sceneGraph;
+	SceneGraphManager& m_sceneGraphManager;
+	ResourceManager& m_resourceManager;
 
     virtual void PreDrawAll() = 0;
-    virtual bool BindMaterial(MeshRendererComponent& mrc) = 0;
+    virtual bool BindMaterial(MeshRenderer& mrc) = 0;
 
 private:
     const int c_identifier;

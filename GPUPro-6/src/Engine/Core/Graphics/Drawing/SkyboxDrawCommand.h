@@ -2,25 +2,26 @@
 
 #include "IDrawCommand.h"
 
-class RasterizerState;
 class BlendState;
-
+class RasterizerState;
+struct MeshRenderer;
 
 class SkyboxDrawCommand : public IDrawCommand
 {
 public:
 	SkyboxDrawCommand(GraphicsDevice& gfxDevice,
         PerObjectBuffer& perObjectBuffer,
-		SceneGraph& sceneGraph,
+		SceneGraphManager& sceneGraphManager,
+		ResourceManager& resourceManager,
 		RasterizerState& rasterizerState,
 		BlendState& blendState) :
-		IDrawCommand(1, perObjectBuffer, gfxDevice, sceneGraph),
+		IDrawCommand(1, perObjectBuffer, gfxDevice, sceneGraphManager, resourceManager),
 		m_rasterizerState(rasterizerState),
 		m_blendState(blendState) { }
 
 protected:
     virtual void PreDrawAll() override;
-    virtual bool BindMaterial(MeshRendererComponent& mrc) override;
+    virtual bool BindMaterial(MeshRenderer& mrc) override;
 
 private:
 	RasterizerState& m_rasterizerState;

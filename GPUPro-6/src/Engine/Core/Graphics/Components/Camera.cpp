@@ -3,7 +3,7 @@
 #include "Engine/Core/Graphics/Components/Camera.h"
 #include "Engine/Core/Graphics/GraphicsSystem.h"
 
-Camera Camera::CreateOrthographic(float size, float depth, float aspectRatio)
+void Camera::SetOrthographic(float size, float depth, float aspectRatio)
 {
 	Matrix4x4 result;
 	Matrix4x4::Identity(result);
@@ -16,12 +16,10 @@ Camera Camera::CreateOrthographic(float size, float depth, float aspectRatio)
 	//result.M41 = -1;
 	//result.M42 = -1;
 
-	Camera c;
-	c.m_projectionMatrix = result;
-	return c;
+	m_projectionMatrix = result;
 }
 
-Camera Camera::CreatePerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
+void Camera::SetPerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar)
 {
 	Matrix4x4 result;
 	Matrix4x4::Identity(result);
@@ -40,7 +38,5 @@ Camera Camera::CreatePerspective(float fieldOfViewRadians, float aspectRatio, fl
 	result.M43 = -(2 * screenFar * screenNear) / (screenFar - screenNear);
 	result.M44 = 0;
 
-	Camera c;
-	c.m_projectionMatrix = result;
-	return c;
+	m_projectionMatrix = result;
 }

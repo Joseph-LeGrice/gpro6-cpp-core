@@ -4,15 +4,6 @@
 #include "MyMath/Matrix/Matrix4x4.h"
 #include "MyMath/Vector/Vector4.h"
 
-Transform TransformNew()
-{
-	Transform t;
-	t.m_scale = { 1.0f, 1.0f, 1.0f };
-	t.m_position = { 0.0f, 0.0f, 0.0f };
-	t.m_rotation = Quaternion::Identity();
-	return t;
-}
-
 void Transform::SetPosition(Vector3 position)
 {
     custom_assert::not_nan(position);
@@ -58,16 +49,16 @@ Vector3 Transform::WorldForward()
     return result;
 }
 
-Matrix4x4 Transform::GetMatrix(const Transform& t)
+Matrix4x4 Transform::GetMatrix()
 {
-	return Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)) *
-		Vector4::GetScaleMatrix(Vector4::FromVector3(t.m_scale)) *
-		Quaternion::GetMatrix(t.m_rotation);
+	return Vector4::GetTranslationMatrix(Vector4::FromVector3(m_position)) *
+		Vector4::GetScaleMatrix(Vector4::FromVector3(m_scale)) *
+		Quaternion::GetMatrix(m_rotation);
 }
 
-Matrix4x4 Transform::GetCameraViewMatrix(const Transform& t)
+Matrix4x4 Transform::GetCameraViewMatrix()
 {
-    Matrix4x4 TR = Vector4::GetTranslationMatrix(Vector4::FromVector3(t.m_position)) *
-        Quaternion::GetMatrix(t.m_rotation);
+    Matrix4x4 TR = Vector4::GetTranslationMatrix(Vector4::FromVector3(m_position)) *
+        Quaternion::GetMatrix(m_rotation);
 	return Matrix4x4::Inverse(TR);
 }
