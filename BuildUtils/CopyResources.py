@@ -7,7 +7,7 @@ RESOURCE_DIRECTORIES = [
         "dst": "Shaders"
     },
     {
-        "src": "Game\\src\\Resources",
+        "src": "GPUPro-6\\\src\\Resources",
         "dst": "GameResources"
     }
 ]
