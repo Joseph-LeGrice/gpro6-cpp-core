@@ -1,5 +1,5 @@
 
-abstract class MonoScript
+abstract class ISystem
 {
     public virtual void Initialize() { }
     public virtual void EarlyTick() { }

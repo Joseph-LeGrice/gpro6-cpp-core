@@ -112,7 +112,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\SystemManagement\SystemContainer.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraphManager.cpp" />
-    <ClCompile Include="src\Engine\Main_BoostDI.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceReferences.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\IResource.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
@@ -383,5 +382,6 @@
     <None Include="src\Engine\Shaders\Material.hlsl">
       <Filter>Engine\Shaders</Filter>
     </None>
+    <None Include="src\Engine\Main_BoostDI.cpp" />
   </ItemGroup>
 </Project>
