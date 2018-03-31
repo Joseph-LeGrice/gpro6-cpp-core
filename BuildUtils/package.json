@@ -9,6 +9,7 @@
   "author": "Joseph Le Grice",
   "license": "ISC",
   "dependencies": {
+    "@types/bluebird": "^3.5.20",
     "@types/cross-spawn": "^6.0.0",
     "argparse": "^1.0.10",
     "bluebird": "^3.5.1",

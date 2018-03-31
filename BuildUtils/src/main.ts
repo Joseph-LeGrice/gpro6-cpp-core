@@ -65,7 +65,7 @@ if (args.package_resources) {
 }
 
 if (args.build_mono_project) {
-    console.log(`Copying Resource's...`);
+    console.log(`Building Mono Projects...`);
     if (args.mono_project_directory) {
         BuildMonoProject(args.solution_directory, args.mono_project_directory);
     } else {

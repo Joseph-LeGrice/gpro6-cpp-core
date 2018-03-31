@@ -5,28 +5,38 @@ import execa from 'execa'
 const MONO_COMPILER = `C:/Program Files/Mono/bin/mcs`;
 const MONO_LIB_PATH = `C:/Program Files/Mono/lib`;
 
-const MONO_OPTIONS = ["-target:library"];
-
 const MONO_AOT_ASSEMBLY_OUTPUT_PATH = `MonoScripts/MonoScripts.dll`;
 
-const MONO_FILES = [
-    "ISystem.cs",
-    "TestScript.cs"
+const EXCLUDED_DIRECTORIES = [
+    "obj",
+    "bin"
 ];
 
-const MONO_LIBS = [];
+function getFiles(directory: string, results: string[]) : void {
+    fs.readdirSync(directory).forEach((f, index, array) => {
+        const fullPath = path.join(directory, f);
+        if (fs.statSync(fullPath).isDirectory()
+            && EXCLUDED_DIRECTORIES.findIndex((v, i ,o) => { return  v === f; }) !== -1) {
+            getFiles(fullPath, results);
+        } else {
+            const extension = fullPath.substring(fullPath.lastIndexOf('.'));
+            if (extension === '.cs') {
+                results.push(fullPath);
+            }
+        }
+    });
+}
 
 export async function BuildMonoProject(solutionDirectory: string, monoProjectDirectory: string) {
     console.log(`Building Mono Project: ${monoProjectDirectory}`);
-    const args: string[] = [];
     
-    for (const option of MONO_OPTIONS) {
-        args.push(option);
-    }
+    const args: string[] = [];
+    args.push("-target:library");
 
-    // TODO: Find *.cs files under directory
-    for (const monoScript of MONO_FILES) {
-        const monoScriptPath = path.join(monoProjectDirectory, monoScript);
+    const allFiles: string[] = [];
+    getFiles(monoProjectDirectory, allFiles);
+    for (const monoScriptPath of allFiles) {
+        console.log(monoScriptPath);
         args.push(monoScriptPath);
     }
 
