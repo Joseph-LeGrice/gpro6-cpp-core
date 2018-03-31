@@ -21,3 +21,5 @@ __pycache__/
 *.db-wal
 *.suo
 BuildUtils/node_modules/
+BuildUtils/dist/
+BuildUtils/out/

@@ -15,7 +15,7 @@
                 "--copy-dlls", "--package-resources", "--build-mono-project",
                 "--solution-directory", "${workspaceFolder}/..",
                 "--build-directory", "${workspaceFolder}/out",
-                "--mono-project-directory", "${workspaceFolder}/../MonoProject"
+                "--mono-project-directory", "${workspaceFolder}/../MonoScripts"
             ]
         }
     ]
