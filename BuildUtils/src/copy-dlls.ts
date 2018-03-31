@@ -1,21 +1,11 @@
 import * as path from 'path'
 import * as fs from 'fs-extra'
+import { DllConfig } from './data/config-files';
 
-class DllConfig { [arch: string] : { "src": string; "dst": string } };
-
-const DLLS: DllConfig[] = [
-    {
-        "x86": { "src" : "lib/FreeImage/x86/FreeImage.dll", "dst" : "FreeImage.dll" },
-        "x64": { "src" : "lib/FreeImage/x64/FreeImage.dll", "dst" : "FreeImage.dll" }
-    }
-]
-
-export function CopyDLLs(solutionDir: string, buildPath: string, arch: string): void {
-    for (const dllPath of DLLS) {
-        const srcPath = path.join(solutionDir, dllPath[arch]["src"]);
-        const dstPath = path.join(buildPath, dllPath[arch]["dst"]);
-        fs.copySync(srcPath, dstPath, {
-            "overwrite": true
-        });
-    }
+export function CopyDLLs(dll: DllConfig, rootDirectory: string, buildPath: string, arch: string): void {
+    const srcPath = path.join(rootDirectory, dll[arch].relativeSourceDirectory);
+    const dstPath = path.join(buildPath, dll[arch].relativeTargetDirectory);
+    fs.copySync(srcPath, dstPath, {
+        "overwrite": true
+    });
 }

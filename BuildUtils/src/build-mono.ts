@@ -1,11 +1,10 @@
 import * as path from 'path'
 import * as fs from 'fs-extra'
 import execa from 'execa'
+import { MonoBuildConfig } from './data/config-files';
 
 const MONO_COMPILER = `C:/Program Files/Mono/bin/mcs`;
 const MONO_LIB_PATH = `C:/Program Files/Mono/lib`;
-
-const MONO_AOT_ASSEMBLY_OUTPUT_PATH = `MonoScripts/MonoScripts.dll`;
 
 const EXCLUDED_DIRECTORIES = [
     "obj",
@@ -27,21 +26,23 @@ function getFiles(directory: string, results: string[]) : void {
     });
 }
 
-export async function BuildMonoProject(solutionDirectory: string, monoProjectDirectory: string) {
-    console.log(`Building Mono Project: ${monoProjectDirectory}`);
+export async function BuildMonoProject(monoProject: MonoBuildConfig, rootDirectory: string, buildDirectory: string) {
+    console.log(`Building Mono Project: ${monoProject.relativeProjectDirectory}`);
     
     const args: string[] = [];
     args.push("-target:library");
+    args.push(`-out:${path.join(buildDirectory, monoProject.relativeTargetDirectory)}`);
 
+    const fullPath = path.join(rootDirectory, monoProject.relativeProjectDirectory);
     const allFiles: string[] = [];
-    getFiles(monoProjectDirectory, allFiles);
+    getFiles(fullPath, allFiles);
     for (const monoScriptPath of allFiles) {
         console.log(monoScriptPath);
         args.push(monoScriptPath);
     }
-
-    const outputDirectory = "-out:" + path.join(solutionDirectory, MONO_AOT_ASSEMBLY_OUTPUT_PATH);
-    args.push(outputDirectory);
     
-    await execa(MONO_COMPILER, args, { stdio: 'inherit' });
+    const exec = execa(MONO_COMPILER, args);
+    exec.stdout.on('data', data => console.log(data.toString()));
+    exec.stderr.on('data', data => console.log(data.toString()));
+    await exec;
 }

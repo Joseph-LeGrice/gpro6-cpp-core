@@ -1,4 +1,6 @@
 import * as argparse from 'argparse'
+import * as fs from 'fs-extra'
+import { Config } from './data/config-files'
 import { CopyDLLs } from './copy-dlls'
 import { CopyResources } from './copy-resources'
 import { BuildMonoProject } from './build-mono'
@@ -8,68 +10,47 @@ const argParser = new argparse.ArgumentParser({
 });
 
 argParser.addArgument(["-a", "--architecture"], {
-    "choices": ["x64", "x86"],
-    "help": "Should be either x86 or x64",
-    "defaultValue": "x64"
-});
-
-argParser.addArgument(["--copy-dlls"], {
-    "action": "storeTrue",
-    "help": "Copy DLL's"
-});
-
-argParser.addArgument(["--package-resources"], {
-    "action": "storeTrue",
-    "help": "Package Resource Files"
-});
-
-argParser.addArgument(["--build-mono-project"], {
-    "action": "storeTrue",
-    "help": "Package Resource Files"
-});
-
-argParser.addArgument(["--solution-directory"], {
-    "required": true,
-    "help": "The root directory of the solution"
+    choices: ["x64", "x86"],
+    defaultValue: "x64",
+    help: "Should be either x86 or x64"
 });
 
 argParser.addArgument(["--build-directory"], {
-    "help": "The build output directory"
+    required: true,
+    type: 'string',
+    help: "The build output directory"
 });
 
-argParser.addArgument(["--mono-project-directory"], {
-    "help": "The Mono Project Directory"
+argParser.addArgument(["--config-file"], {
+    required: true,
+    type: 'string',
+    help: "The Configuration File"
 });
 
 const args = argParser.parseArgs();
 
-console.log('Solution Directory: '+args.solution_directory);
-console.log('Build Directory: '+args.build_directory);
+const rootDirectory: string = args.config_file.substring(0, args.config_file.lastIndexOf("/"));
+const jsonText = fs.readFileSync(args.config_file, { encoding: 'utf8' });
+const configuration = <Config>JSON.parse(jsonText);
 
-if (args.copy_dlls) {
+if (configuration.dlls) {
     console.log(`Copying DLL's...`);
-    if (args.build_directory) {
-        CopyDLLs(args.solution_directory, args.build_directory, args.architecture);
-    } else {
-        console.log(`ERROR! Missing build_directory`);
+    for (const dll of configuration.dlls) {
+        CopyDLLs(dll, rootDirectory, args.build_directory, args.architecture);
     }
 }
 
-if (args.package_resources) {
-    console.log(`Copying Resource's...`);
-    if (args.build_directory) {
-        CopyResources(args.solution_directory, args.build_directory);
-    } else {
-        console.log(`ERROR! Missing build_directory`);
+if (configuration.resources) {
+    console.log(`Copying Resources...`);
+    for (const resource of configuration.resources) {
+        CopyResources(resource, rootDirectory, args.build_directory);
     }
 }
 
-if (args.build_mono_project) {
+if (configuration.monoProjects) {
     console.log(`Building Mono Projects...`);
-    if (args.mono_project_directory) {
-        BuildMonoProject(args.solution_directory, args.mono_project_directory);
-    } else {
-        console.log(`ERROR! Missing mono_project_directory`);
+    for (const monoProject of configuration.monoProjects) {
+        BuildMonoProject(monoProject, rootDirectory, args.build_directory);
     }
 }
 
