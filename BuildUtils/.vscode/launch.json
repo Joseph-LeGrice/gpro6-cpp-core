@@ -12,10 +12,8 @@
             "program": "${workspaceFolder}/dist/main.js",
             "args": [
                 "-a", "x64",
-                "--copy-dlls", "--package-resources", "--build-mono-project",
-                "--solution-directory", "${workspaceFolder}/..",
                 "--build-directory", "${workspaceFolder}/out",
-                "--mono-project-directory", "${workspaceFolder}/../MonoScripts"
+                "--config-file", "${workspaceFolder}/default-config.json"
             ]
         }
     ]
