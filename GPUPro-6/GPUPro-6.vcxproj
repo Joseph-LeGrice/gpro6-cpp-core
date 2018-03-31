@@ -115,7 +115,7 @@
       <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;d3dx10.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x86 --copy-dlls --package-resources --build-mono-project --solution-directory "$(SolutionDir)\" --build-directory "$(OutDir)\" --mono-project-directory $(SolutionDir)MonoScripts</Command>
+      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x86 --build-directory "$(OutDir)\" --config-file $(SolutionDir)post-build-config.json</Command>
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,7 +142,7 @@
       <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;D3DCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x64 --copy-dlls --package-resources --build-mono-project --solution-directory "$(SolutionDir)\" --build-directory "$(OutDir)\" --mono-project-directory $(SolutionDir)MonoScripts</Command>
+      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x64 --build-directory "$(OutDir)\" --config-file $(SolutionDir)post-build-config.json</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -173,7 +173,7 @@
       <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;d3dx10.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x86 --copy-dlls --package-resources --build-mono-project --solution-directory "$(SolutionDir)\" --build-directory "$(OutDir)\" --mono-project-directory $(SolutionDir)MonoScripts</Command>
+      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x86 --build-directory "$(OutDir)\" --config-file $(SolutionDir)post-build-config.json</Command>
     </PostBuildEvent>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -208,7 +208,7 @@
       <LinkStatus>true</LinkStatus>
     </Link>
     <PostBuildEvent>
-      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x64 --copy-dlls --package-resources --build-mono-project --solution-directory "$(SolutionDir)\" --build-directory "$(OutDir)\" --mono-project-directory $(SolutionDir)MonoScripts</Command>
+      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x64 --build-directory "$(OutDir)\" --config-file $(SolutionDir)post-build-config.json</Command>
     </PostBuildEvent>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>

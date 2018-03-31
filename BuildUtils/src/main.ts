@@ -1,5 +1,6 @@
-import * as argparse from 'argparse'
+import * as path from 'path'
 import * as fs from 'fs-extra'
+import * as argparse from 'argparse'
 import { Config } from './data/config-files'
 import { CopyDLLs } from './copy-dlls'
 import { CopyResources } from './copy-resources'
@@ -29,7 +30,7 @@ argParser.addArgument(["--config-file"], {
 
 const args = argParser.parseArgs();
 
-const rootDirectory: string = args.config_file.substring(0, args.config_file.lastIndexOf("/"));
+const rootDirectory: string = path.dirname(args.config_file);
 const jsonText = fs.readFileSync(args.config_file, { encoding: 'utf8' });
 const configuration = <Config>JSON.parse(jsonText);
 
