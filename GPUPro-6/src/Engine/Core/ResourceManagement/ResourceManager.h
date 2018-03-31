@@ -72,13 +72,17 @@ public:
 		{
 			std::vector<IResource*>& resources = m_resourceListMap[typeId];
 			size_t length = resources.size();
+			
+			resources[index]->Release();
+			delete resources[index];
+
 			resources[index] = resources[length - 1];
 			resources.resize(length - 1);
 		}
 	}
 
 	ResourceManager(std::vector<ResourceTypeID> resourceTypes, GraphicsDevice& gfxDevice);
-	~ResourceManager() = default;
+	~ResourceManager();
 
 private:
 	std::unordered_map<ResourceTypeID, std::vector<IResource*>> m_resourceListMap;

@@ -21,7 +21,7 @@ class ConstantBuffer
 public:
     ConstantBuffer(GraphicsDevice& gfxDevice) :
         m_gfxDevice(gfxDevice) { }
-    ~ConstantBuffer();
+    virtual ~ConstantBuffer();
 
     void BindBuffer();
     void ReleaseBuffer();

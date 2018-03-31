@@ -142,5 +142,42 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// System Container + Game Loop Entry
 	SystemContainer* systemContainer = new SystemContainer(*allSystems);
-	return gameLoop->Run(*systemContainer);
+	
+	int result = gameLoop->Run(*systemContainer);
+
+	for (auto it = allSystems->begin(); it != allSystems->end(); it++)
+	{
+		delete *it;
+	}
+
+	for (auto it = commands->begin(); it != commands->end(); it++)
+	{
+		delete *it;
+	}
+
+	delete systemContainer;
+
+	delete depthStencilBuffer;
+	delete rasterizerState;
+	delete meshManager;
+	delete blendState;
+
+	delete standardMaterialBuffer;
+	delete perCameraBuffer;
+	delete perObjectBuffer;
+	delete vertexBuffer;
+	delete indexBuffer;
+
+	delete resourceManager;
+
+	delete sceneGraphManager;
+	delete sceneGraph;
+
+	delete gameLoop;
+	delete time;
+
+	delete windowManager;
+	delete gfxDevice;
+
+	return result;
 }
