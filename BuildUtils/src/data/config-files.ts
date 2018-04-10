@@ -13,7 +13,8 @@ export interface DllConfig
 
 export interface ResourceConfig
 {
-    relativeSourceDirectory: string;
+    absoluteSourceDirectory?: string;
+    relativeSourceDirectory?: string;
     relativeTargetDirectory: string;
 };
 

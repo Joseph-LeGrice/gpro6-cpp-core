@@ -118,6 +118,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp">
       <Filter>Engine\Core\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Mono\MonoSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -291,6 +292,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h">
       <Filter>Engine\Core\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Core\Mono\MonoSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

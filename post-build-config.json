@@ -2,11 +2,11 @@
     "resources": [
         {
             "relativeSourceDirectory": "GPUPro-6/src/Engine/Shaders",
-            "relativeTargetDirectory": "Shaders"
+            "relativeTargetDirectory": "Resources/Shaders"
         },
         {
             "relativeSourceDirectory": "GPUPro-6/src/Resources",
-            "relativeTargetDirectory": "GameResources"
+            "relativeTargetDirectory": "Resources/GameResources"
         }
     ],
     "dlls": [

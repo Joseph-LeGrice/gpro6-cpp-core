@@ -3,7 +3,7 @@ import * as fs from 'fs-extra'
 import * as argparse from 'argparse'
 import { Config } from './data/config-files'
 import { CopyDLLs } from './copy-dlls'
-import { CopyResources } from './copy-resources'
+import { CopyResource } from './copy-resources'
 import { BuildMonoProject } from './build-mono'
 
 const argParser = new argparse.ArgumentParser({
@@ -44,7 +44,7 @@ if (configuration.dlls) {
 if (configuration.resources) {
     console.log(`Copying Resources...`);
     for (const resource of configuration.resources) {
-        CopyResources(resource, rootDirectory, args.build_directory);
+        CopyResource(resource, rootDirectory, args.build_directory);
     }
 }
 

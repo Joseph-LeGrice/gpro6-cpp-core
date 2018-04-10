@@ -3,8 +3,8 @@ import * as fs from 'fs-extra'
 import execa from 'execa'
 import { MonoBuildConfig } from './data/config-files';
 
-const MONO_COMPILER = `C:/Program Files/Mono/bin/mcs`;
-const MONO_LIB_PATH = `C:/Program Files/Mono/lib`;
+const MONO_COMPILER = `C:/Mono/bin/mcs`;
+const MONO_LIB_PATH = `C:/Mono/lib`;
 
 const EXCLUDED_DIRECTORIES = [
     "obj",
