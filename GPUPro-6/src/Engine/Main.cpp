@@ -54,6 +54,7 @@
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2DArray.h"
 #include "Engine/Core/Graphics/ResourceTypes/TextureSampler.h"
+#include "Core/GlobalStaticReferences.h"
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -147,6 +148,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// System Container + Game Loop Entry
 	SystemContainer* systemContainer = new SystemContainer(*allSystems);
 	
+	GlobalStaticReferences* refs = new GlobalStaticReferences(systemContainer);
+
 	int result = gameLoop->Run(*systemContainer);
 
 	for (auto it = allSystems->begin(); it != allSystems->end(); it++)
@@ -159,6 +162,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		delete *it;
 	}
 
+	delete refs;
 	delete systemContainer;
 
 	delete depthStencilBuffer;

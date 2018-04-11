@@ -208,6 +208,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp" />
@@ -266,6 +267,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h" />
     <ClInclude Include="src\Engine\Core\Application\Application.h" />

@@ -119,6 +119,7 @@
       <Filter>Engine\Core\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Mono\MonoSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -293,6 +294,7 @@
       <Filter>Engine\Core\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Mono\MonoSystem.h" />
+    <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
