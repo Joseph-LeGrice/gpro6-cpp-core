@@ -8,18 +8,33 @@
 #include <mono/metadata/assembly.h>
 #pragma warning(pop)
 
+MonoSystem::MonoSystem(MonoObject* object)
+{
+	m_object = object;
+	m_class = mono_object_get_class(object);
+	//mono_class_get_method_from_name()
+}
+
 void MonoSystem::Initialize()
 {
-	mono_set_dirs("C:\\Mono\\lib", "C:\\Mono\\etc");
-	m_domain = mono_jit_init("GPUPro-6");
-	m_assembly = mono_domain_assembly_open(m_domain, "MonoScripts.dll");
 }
 
 void MonoSystem::Deinitalize()
 {
-	mono_assembly_close(m_assembly);
-	m_assembly = nullptr;
+}
 
-	mono_jit_cleanup(m_domain);
-	m_domain = nullptr;
+void MonoSystem::FixedTick()
+{
+}
+
+void MonoSystem::EarlyVariableTick()
+{
+}
+
+void MonoSystem::VariableTick()
+{
+}
+
+void MonoSystem::LateVariableTick()
+{
 }
