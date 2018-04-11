@@ -23,3 +23,5 @@ __pycache__/
 BuildUtils/node_modules/
 BuildUtils/dist/
 BuildUtils/out/
+MonoScripts/bin/
+MonoScripts/obj/
