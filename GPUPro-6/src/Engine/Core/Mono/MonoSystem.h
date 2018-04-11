@@ -8,6 +8,8 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
+typedef void (*MonoSimpleMethodStub) ();
+
 class MonoSystem : public ISystem
 {
 public:
@@ -23,4 +25,13 @@ public:
 private:
 	MonoClass* m_class;
 	MonoObject* m_object;
+
+	MonoSimpleMethodStub m_initMethod = nullptr;
+	MonoSimpleMethodStub m_deinitMethod = nullptr;
+	MonoSimpleMethodStub m_fixedTickMethod = nullptr;
+	MonoSimpleMethodStub m_earlyVariableTickMethod = nullptr;
+	MonoSimpleMethodStub m_variableTickMethod = nullptr;
+	MonoSimpleMethodStub m_lateVariableTickMethod = nullptr;
+
+	void GetMethodThunk(const char* methodName, MonoSimpleMethodStub& funcPointer);
 };
