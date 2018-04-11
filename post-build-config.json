@@ -18,8 +18,9 @@
     "monoProjects": [
         {
             "relativeProjectDirectory": "MonoScripts",
-            "relativeTargetDirectory": "MonoScripts.dll",
-            "libraries": []
+            "relativeTargetDirectory": "MonoScripts.exe",
+            "libraries": [],
+            "type": "exe"
         }
     ]
 }
