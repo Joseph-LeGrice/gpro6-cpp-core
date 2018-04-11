@@ -12,6 +12,8 @@ public:
 	SystemContainer(const SystemContainer&) = delete;
 	~SystemContainer() = default;
 
+	void RegisterSystem(ISystem* newSystem);
+
 	void InitializeAll();
 	void FixedTickAll();
 	void EarlyVariableTickAll();
