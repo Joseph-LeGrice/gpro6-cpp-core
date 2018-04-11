@@ -23,4 +23,5 @@ export interface MonoBuildConfig
     relativeProjectDirectory: string;
     relativeTargetDirectory: string;
     libraries: string[];
+    type: "library" | "exe" | "module" | "winexe";
 };

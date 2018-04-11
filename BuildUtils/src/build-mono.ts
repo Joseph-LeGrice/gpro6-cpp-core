@@ -30,7 +30,7 @@ export async function BuildMonoProject(monoProject: MonoBuildConfig, rootDirecto
     console.log(`Building Mono Project: ${monoProject.relativeProjectDirectory}`);
     
     const args: string[] = [];
-    args.push("-target:library");
+    args.push(`-target:${monoProject.type}`);
     args.push(`-out:${path.join(buildDirectory, monoProject.relativeTargetDirectory)}`);
 
     const fullPath = path.join(rootDirectory, monoProject.relativeProjectDirectory);
