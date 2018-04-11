@@ -147,17 +147,17 @@ class TestSystem : ISystem
         */
     }
 
-    public override void EarlyTick()
+    // public override void EarlyTick()
+    // {
+    //     Console.WriteLine("EarlyTick");
+    // }
+
+    public override void VariableTick()
     {
-        Console.WriteLine("EarlyTick");
+        Console.WriteLine("VariableTick");
     }
 
-    public override void Tick()
-    {
-        Console.WriteLine("Tick");
-    }
-
-    public override void LateTick()
+    public override void LateVariableTick()
     {
         Console.WriteLine("LateTick");
     }
