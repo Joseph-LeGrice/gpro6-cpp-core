@@ -15,8 +15,24 @@ void MonoSystem::GetMethodThunk(const char* methodName, MonoSimpleMethodStub& fu
 	{
 		funcPointer = (MonoSimpleMethodStub)mono_method_get_unmanaged_thunk(method);
 	}
+	else
+	{
+		funcPointer = nullptr;
+	}
 }
 
+void MonoSystem::CallMethod(MonoSimpleMethodStub& funcPointer)
+{
+	if (funcPointer != nullptr)
+	{
+		MonoException* ex = NULL;
+		funcPointer(m_object, &ex);
+
+		if (ex != nullptr)
+		{
+		}
+	}
+}
 
 MonoSystem::MonoSystem(MonoObject* object)
 {
@@ -33,48 +49,30 @@ MonoSystem::MonoSystem(MonoObject* object)
 
 void MonoSystem::Initialize()
 {
-	if (m_initMethod != nullptr)
-	{
-		m_initMethod();
-	}
+	CallMethod(m_initMethod);
 }
 
 void MonoSystem::Deinitalize()
 {
-	if (m_deinitMethod != nullptr)
-	{
-		m_deinitMethod();
-	}
+	CallMethod(m_deinitMethod);
 }
 
 void MonoSystem::FixedTick()
 {
-	if (m_fixedTickMethod != nullptr)
-	{
-		m_fixedTickMethod();
-	}
+	CallMethod(m_fixedTickMethod);
 }
 
 void MonoSystem::EarlyVariableTick()
 {
-	if (m_earlyVariableTickMethod != nullptr)
-	{
-		m_earlyVariableTickMethod();
-	}
+	CallMethod(m_earlyVariableTickMethod);
 }
 
 void MonoSystem::VariableTick()
 {
-	if (m_variableTickMethod != nullptr)
-	{
-		m_variableTickMethod();
-	}
+	CallMethod(m_variableTickMethod);
 }
 
 void MonoSystem::LateVariableTick()
 {
-	if (m_lateVariableTickMethod != nullptr)
-	{
-		m_lateVariableTickMethod();
-	}
+	CallMethod(m_lateVariableTickMethod);
 }

@@ -8,7 +8,7 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-typedef void (*MonoSimpleMethodStub) ();
+typedef void (*MonoSimpleMethodStub) (MonoObject*, MonoException**);
 
 class MonoSystem : public ISystem
 {
@@ -34,4 +34,5 @@ private:
 	MonoSimpleMethodStub m_lateVariableTickMethod = nullptr;
 
 	void GetMethodThunk(const char* methodName, MonoSimpleMethodStub& funcPointer);
+	void CallMethod(MonoSimpleMethodStub& funcPointer);
 };
