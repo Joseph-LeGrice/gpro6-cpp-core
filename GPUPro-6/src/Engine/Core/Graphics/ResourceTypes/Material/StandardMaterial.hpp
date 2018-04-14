@@ -7,5 +7,5 @@
 class StandardMaterial : public Material<MATERIAL_BUFFER_CONTAINER>
 {
 public:
-	static const RegisterResource<StandardMaterial, 10> static_registration;
+	REGISTER_RESOURCE(StandardMaterial, 10)
 };

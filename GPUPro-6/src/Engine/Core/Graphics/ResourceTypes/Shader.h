@@ -25,7 +25,7 @@ public:
 	bool InitPixelShader(std::wstring filename, std::string name);
 
 	virtual void Release() override;
-	static const RegisterResource<Shader, 1> static_registration;
+	REGISTER_RESOURCE(Shader, 1)
 
 private:
     ManualRelease<ID3D11InputLayout> m_inputLayout;

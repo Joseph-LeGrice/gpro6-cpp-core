@@ -15,7 +15,7 @@ public:
 	bool IsValid();
 
     virtual void Release() override;
-	static const RegisterResource<TextureSampler, 6> static_registration;
+	REGISTER_RESOURCE(TextureSampler, 6)
 
 private:
 	ManualRelease<ID3D11SamplerState> m_sampler;

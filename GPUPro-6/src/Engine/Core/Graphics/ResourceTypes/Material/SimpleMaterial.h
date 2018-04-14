@@ -6,5 +6,5 @@
 class SimpleMaterial : public Material<void>
 {
 public:
-	static const RegisterResource<SimpleMaterial, 11> static_registration;
+	REGISTER_RESOURCE(SimpleMaterial, 11)
 };

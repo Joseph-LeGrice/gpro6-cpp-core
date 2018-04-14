@@ -21,7 +21,7 @@ public:
     void SetPixels(Color cArray[], size_t arraySize);
     virtual void Release() override;
 
-	static const RegisterResource<Texture2D, 5> static_registration;
+	REGISTER_RESOURCE(Texture2D, 5)
 
 private:
     int m_myShaderResourceViewIndex = -1;

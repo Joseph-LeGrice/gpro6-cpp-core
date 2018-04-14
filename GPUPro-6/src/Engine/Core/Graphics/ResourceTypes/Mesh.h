@@ -24,10 +24,9 @@ public:
 	const std::vector<UINT16>& GetIndices();
 
     virtual void Release() override;
-	static const RegisterResource<Mesh, 0> static_registration;
+	REGISTER_RESOURCE(Mesh, 0)
 
 private:
-
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
 };

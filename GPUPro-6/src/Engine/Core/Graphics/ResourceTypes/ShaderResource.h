@@ -14,7 +14,7 @@ public:
     bool CreateViewWithResource(ID3D11Resource& resource, D3D11_SHADER_RESOURCE_VIEW_DESC* desc);
 
     virtual void Release() override;
-	static const RegisterResource<ShaderResource, 2> static_registration;
+	REGISTER_RESOURCE(ShaderResource, 2)
 
 protected:
     ManualRelease<ID3D11ShaderResourceView> m_resourceView;
