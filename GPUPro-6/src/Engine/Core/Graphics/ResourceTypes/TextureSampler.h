@@ -9,9 +9,6 @@ class GraphicsDevice;
 class TextureSampler : public IResource
 {
 public:
-    TextureSampler(size_t resourceIndex) :
-		IResource(resourceIndex) { }
-
 	void BindTextureSampler(UINT samplerIndex);
 	bool Initialize();
 	bool IsValid();

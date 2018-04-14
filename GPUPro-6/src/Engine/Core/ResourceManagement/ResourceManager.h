@@ -51,7 +51,8 @@ public:
 			std::vector<IResource*>& resources = m_resourceListMap[typeId];
 
 			size_t index = resources.size();
-			T* newResource = new T(index);
+			T* newResource = new T();
+			newResource->m_resourceIndex = index;
 			resources.push_back(newResource);
 
 			return dynamic_cast<T*>(resources[index]);
@@ -75,6 +76,8 @@ public:
 			delete resources[index];
 
 			resources[index] = resources[length - 1];
+			resources[index]->m_resourceIndex = index;
+
 			resources.resize(length - 1);
 		}
 	}

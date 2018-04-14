@@ -23,9 +23,6 @@ public:
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
 
-	Shader::Shader(size_t resourceIndex) :
-		IResource(resourceIndex) { }
-
     virtual void Release() override;
 
 	static ResourceTypeID GetResourceType()

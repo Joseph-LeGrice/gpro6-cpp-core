@@ -94,8 +94,6 @@ public:
 		int m_slotIndex;
 	};
 
-	Material(size_t resourceIndex) : IResource(resourceIndex) { }
-
 	bool BindIfValid()
 	{
 		if (m_shaderIndex > -1)

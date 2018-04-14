@@ -12,7 +12,7 @@ class Mesh : public IResource
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
 
-	Mesh(size_t resourceType);
+	Mesh();
 
 	void SetVertices(std::vector<Vector3>& verts);
 	void SetNormals(std::vector<Vector3>& normals);

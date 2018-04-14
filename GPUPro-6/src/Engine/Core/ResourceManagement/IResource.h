@@ -4,9 +4,10 @@ typedef uint16_t ResourceTypeID;
 
 class IResource
 {
+	friend class ResourceManager;
+
 public:
-	IResource(size_t resourceIndex) : 
-		m_resourceIndex(resourceIndex) { }
+	IResource() { }
     
 	virtual ~IResource() = default;
     virtual void Release() = 0;

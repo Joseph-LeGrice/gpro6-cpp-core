@@ -11,9 +11,6 @@ struct FIBITMAP;
 class Texture2DArray : public IResource
 {
 public:
-	Texture2DArray::Texture2DArray(size_t resourceIndex) :
-		IResource(resourceIndex) { }
-
     int GetMyResourceViewID();
     void InitializeWithBitmaps(std::vector<std::wstring> filepaths);
     

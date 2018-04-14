@@ -10,9 +10,6 @@
 class StructuredBuffer : public IResource
 {
 public:
-    StructuredBuffer(size_t resourceIndex) :
-		IResource(resourceIndex) { }
-
     template<class T, UINT m_numberOfElements>
 	bool Initialize()
 	{

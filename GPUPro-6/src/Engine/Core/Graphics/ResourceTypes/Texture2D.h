@@ -11,9 +11,6 @@ struct ID3D11Texture2D;
 class Texture2D : public IResource
 {
 public:
-	Texture2D::Texture2D(size_t resourceIndex) :
-		IResource(resourceIndex) { }
-
     unsigned int Width();
     unsigned int Height();
 

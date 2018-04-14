@@ -4,7 +4,7 @@
 
 #include "D3D11.h"
 
-Mesh::Mesh(size_t resourceIndex) : IResource(resourceIndex)
+Mesh::Mesh() : IResource()
 {
 	m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 }
