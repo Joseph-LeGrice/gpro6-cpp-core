@@ -62,5 +62,8 @@ void SystemContainer::DeinitializeAll()
 	for (std::vector<ISystem*>::iterator it = systems.begin();
 		it != systems.end(); it++) {
 		(*it)->Deinitalize();
+		if (system->IsInitialized()) {
+			system->Deinitalize();
+		}
 	}
 }
