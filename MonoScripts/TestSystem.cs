@@ -4,7 +4,7 @@ class TestSystem
 {
     public TestSystem()
     {
-        SystemInterface.RegisterSystem(this);
+        MonoSystemInterface.RegisterSystem(this);
     }
 
     private void Initialize()

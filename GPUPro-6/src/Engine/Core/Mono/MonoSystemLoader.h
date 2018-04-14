@@ -5,7 +5,6 @@
 #pragma warning(push)
 #pragma warning(disable:4201)
 #include <mono/metadata/metadata.h>
-#include <mono/metadata/object.h>
 #pragma warning(pop)
 
 class MonoSystemLoader : public ISystem
