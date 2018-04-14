@@ -55,6 +55,7 @@ void MonoSystem::Initialize()
 
 void MonoSystem::Deinitalize()
 {
+	ISystem::Deinitalize();
 	CallMethod(m_deinitMethod);
 }
 

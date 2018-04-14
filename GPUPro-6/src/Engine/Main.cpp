@@ -149,7 +149,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// System Container + Game Loop Entry
 	SystemContainer* systemContainer = new SystemContainer(*allSystems);
 	
-	GlobalStaticReferences* refs = new GlobalStaticReferences(systemContainer);
+	GlobalStaticReferences* refs = new GlobalStaticReferences(systemContainer, monoSystemLoader);
 
 	int result = gameLoop->Run(*systemContainer);
 

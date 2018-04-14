@@ -14,6 +14,8 @@ static void RegisterSystemInstance(MonoObject* object)
 	MonoSystem* newSystem = new MonoSystem(object);
 	SystemContainer* sysContainer = GlobalStaticReferences::Instance()->GetSystemContainer();
 	sysContainer->RegisterSystem(newSystem);
+	MonoSystemLoader* systemLoader = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
+	systemLoader->RegisterSubsystem(newSystem);
 }
 
 void MonoSystemLoader::Initialize()
@@ -40,6 +42,7 @@ void MonoSystemLoader::Initialize()
 
 void MonoSystemLoader::Deinitalize()
 {
+	ISystem::Deinitalize();
 	mono_jit_cleanup(m_domain);
 	m_assembly = nullptr;
 	m_domain = nullptr;
