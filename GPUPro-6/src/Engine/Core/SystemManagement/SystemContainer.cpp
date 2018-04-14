@@ -26,7 +26,9 @@ void SystemContainer::FixedTickAll()
 	auto systems = m_systems;
 	for (std::vector<ISystem*>::iterator it = systems.begin();
 		it != systems.end(); it++) {
-		(*it)->FixedTick();
+		if ((*it)->IsInitialized()) {
+			(*it)->FixedTick();
+		}
 	}
 }
 
@@ -35,7 +37,9 @@ void SystemContainer::EarlyVariableTickAll()
 	auto systems = m_systems;
 	for (std::vector<ISystem*>::iterator it = systems.begin();
 		it != systems.end(); it++) {
-		(*it)->EarlyVariableTick();
+		if ((*it)->IsInitialized()) {
+			(*it)->EarlyVariableTick();
+		}
 	}
 }
 
@@ -44,7 +48,9 @@ void SystemContainer::VariableTickAll()
 	auto systems = m_systems;
 	for (std::vector<ISystem*>::iterator it = systems.begin();
 		it != systems.end(); it++) {
-		(*it)->VariableTick();
+		if ((*it)->IsInitialized()) {
+			(*it)->VariableTick();
+		}
 	}
 }
 
@@ -53,7 +59,9 @@ void SystemContainer::LateVariableTickAll()
 	auto systems = m_systems;
 	for (std::vector<ISystem*>::iterator it = systems.begin();
 		it != systems.end(); it++) {
-		(*it)->LateVariableTick();
+		if ((*it)->IsInitialized()) {
+			(*it)->LateVariableTick();
+		}
 	}
 }
 
