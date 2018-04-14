@@ -85,17 +85,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GraphicsDevice* gfxDevice = new GraphicsDevice(*windowManager);
 
 	// Resource Manager
-	std::vector<ResourceTypeID> resourceTypeList;
-	resourceTypeList.push_back(Mesh::GetResourceType());
-	resourceTypeList.push_back(Shader::GetResourceType());
-	resourceTypeList.push_back(ShaderResource::GetResourceType());
-	resourceTypeList.push_back(StructuredBuffer::GetResourceType());
-	resourceTypeList.push_back(Texture2D::GetResourceType());
-	resourceTypeList.push_back(Texture2DArray::GetResourceType());
-	resourceTypeList.push_back(TextureSampler::GetResourceType());
-	resourceTypeList.push_back(StandardMaterial::GetResourceType());
-	resourceTypeList.push_back(SimpleMaterial::GetResourceType());
-	ResourceManager* resourceManager = new ResourceManager(resourceTypeList);
+	ResourceManager* resourceManager = new ResourceManager();
 
 	// Buffers
 	IndexBuffer* indexBuffer = new IndexBuffer(*gfxDevice);

@@ -71,10 +71,7 @@ public:
         return m_myShaderResourceViewId;
     }
 
-	static ResourceTypeID GetResourceType()
-	{
-		return 4;
-	}
+	static const RegisterResource<StructuredBuffer, 4> static_registration;
 
 private:
     int m_myShaderResourceViewId = -1;

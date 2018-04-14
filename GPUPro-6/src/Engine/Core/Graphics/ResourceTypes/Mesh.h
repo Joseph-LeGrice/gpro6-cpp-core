@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Core/ResourceManagement/IResource.h"
+#include "Engine/Core/ResourceManagement/ResourceTypeMapping.h"
 #include "Engine/Core/Graphics/VertexData.h"
 #include <vector>
 
@@ -23,13 +24,10 @@ public:
 	const std::vector<UINT16>& GetIndices();
 
     virtual void Release() override;
-
-	static ResourceTypeID GetResourceType()
-	{
-		return 0;
-	}
+	static const RegisterResource<Mesh, 0> static_registration;
 
 private:
+
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
 };

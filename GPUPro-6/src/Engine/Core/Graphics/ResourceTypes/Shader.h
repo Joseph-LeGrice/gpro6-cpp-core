@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Engine/Core/ResourceManagement/IResource.h"
+#include "Engine/Core/ResourceManagement/ResourceTypeMapping.h"
 
 class GraphicsDevice;
 struct ID3D11InputLayout;
@@ -23,12 +24,8 @@ public:
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
 
-    virtual void Release() override;
-
-	static ResourceTypeID GetResourceType()
-	{
-		return 1;
-	}
+	virtual void Release() override;
+	static const RegisterResource<Shader, 1> static_registration;
 
 private:
     ManualRelease<ID3D11InputLayout> m_inputLayout;
@@ -38,4 +35,3 @@ private:
     ManualRelease<ID3D11HullShader> m_hullShader;
     ManualRelease<ID3D11DomainShader> m_domainShader;
 };
-

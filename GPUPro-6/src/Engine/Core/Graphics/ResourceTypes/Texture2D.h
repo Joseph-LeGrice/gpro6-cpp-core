@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Core/ResourceManagement/IResource.h"
+#include "Engine/Core/ResourceManagement/ResourceTypeMapping.h"
 #include <string>
 
 struct Color;
@@ -20,10 +21,7 @@ public:
     void SetPixels(Color cArray[], size_t arraySize);
     virtual void Release() override;
 
-	static ResourceTypeID GetResourceType()
-	{
-		return 5;
-	}
+	static const RegisterResource<Texture2D, 5> static_registration;
 
 private:
     int m_myShaderResourceViewIndex = -1;

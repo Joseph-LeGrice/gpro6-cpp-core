@@ -10,7 +10,7 @@ public:
 	IResource() { }
     
 	virtual ~IResource() = default;
-    virtual void Release() = 0;
+	virtual void Release() = 0;
 
 	size_t GetResourceIndex();
 
