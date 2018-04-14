@@ -11,7 +11,6 @@ struct ID3D11PixelShader;
 struct ID3D11GeometryShader;
 struct ID3D11HullShader;
 struct ID3D11DomainShader;
-class ResourceReferences;
 
 class Shader : public IResource
 {
@@ -24,8 +23,8 @@ public:
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
 
-	Shader::Shader(size_t resourceIndex, ResourceReferences& resourceReferences) :
-		IResource(resourceIndex, resourceReferences) { }
+	Shader::Shader(size_t resourceIndex) :
+		IResource(resourceIndex) { }
 
     virtual void Release() override;
 

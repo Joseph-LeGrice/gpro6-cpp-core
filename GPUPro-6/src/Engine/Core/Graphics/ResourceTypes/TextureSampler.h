@@ -4,13 +4,13 @@
 
 struct ID3D11SamplerState;
 class GraphicsDevice;
-class ResourceReferences;
+
 
 class TextureSampler : public IResource
 {
 public:
-    TextureSampler(size_t resourceIndex, ResourceReferences& resourceReferences) :
-		IResource(resourceIndex, resourceReferences) { }
+    TextureSampler(size_t resourceIndex) :
+		IResource(resourceIndex) { }
 
 	void BindTextureSampler(UINT samplerIndex);
 	bool Initialize();

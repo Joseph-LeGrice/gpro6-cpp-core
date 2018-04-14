@@ -1,9 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-
 #include "IResource.h"
-#include "ResourceReferences.h"
 
 class GraphicsDevice;
 
@@ -53,7 +51,7 @@ public:
 			std::vector<IResource*>& resources = m_resourceListMap[typeId];
 
 			size_t index = resources.size();
-			T* newResource = new T(index, m_resourceReferences);
+			T* newResource = new T(index);
 			resources.push_back(newResource);
 
 			return dynamic_cast<T*>(resources[index]);
@@ -81,10 +79,9 @@ public:
 		}
 	}
 
-	ResourceManager(std::vector<ResourceTypeID> resourceTypes, GraphicsDevice& gfxDevice);
+	ResourceManager(std::vector<ResourceTypeID> resourceTypes);
 	~ResourceManager();
 
 private:
 	std::unordered_map<ResourceTypeID, std::vector<IResource*>> m_resourceListMap;
-	ResourceReferences m_resourceReferences;
 };

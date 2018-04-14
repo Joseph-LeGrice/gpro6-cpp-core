@@ -5,12 +5,13 @@
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
+#include "Engine/Core/GlobalStaticReferences.h"
 
 class StructuredBuffer : public IResource
 {
 public:
-    StructuredBuffer(size_t resourceIndex, ResourceReferences& resourceReferences) :
-		IResource(resourceIndex, resourceReferences) { }
+    StructuredBuffer(size_t resourceIndex) :
+		IResource(resourceIndex) { }
 
     template<class T, UINT m_numberOfElements>
 	bool Initialize()
@@ -24,7 +25,7 @@ public:
 		bDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 		bDesc.StructureByteStride = sizeof(T);
 
-		ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
+		ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
 		HRESULT createBufferResult = device->CreateBuffer(&bDesc, NULL, m_buffer);
 		if (!SUCCEEDED(createBufferResult))
 		{
@@ -38,14 +39,14 @@ public:
 		rvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
         rvDesc.Buffer.ElementWidth = m_numberOfElements;
         
-        ShaderResource* myShaderResourceView = GetResourceReferences().GetResourceManager().Instantiate<ShaderResource>();
+        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->Instantiate<ShaderResource>();
 		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetResourceIndex());
         
         bool createdView = myShaderResourceView->CreateViewWithResource(m_buffer, &rvDesc);
 		if (!createdView)
         {
             m_buffer.ReleasePointer();
-			GetResourceReferences().GetResourceManager().Deallocate<ShaderResource>(m_myShaderResourceViewId);
+			GlobalStaticReferences::Instance()->GetResourceManager()->Deallocate<ShaderResource>(m_myShaderResourceViewId);
 
             return false;
         }
@@ -56,7 +57,7 @@ public:
     void UpdateBuffer(T& newData)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = GetResourceReferences().GetGraphicsDevice().GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDeviceContext();
 		HRESULT mapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 		if (SUCCEEDED(mapResult))
 		{

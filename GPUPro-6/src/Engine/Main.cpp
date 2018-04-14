@@ -45,7 +45,6 @@
 
 // Resources
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
-#include "Engine/Core/ResourceManagement/ResourceReferences.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/Graphics/ResourceTypes/Shader.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
@@ -96,7 +95,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	resourceTypeList.push_back(TextureSampler::GetResourceType());
 	resourceTypeList.push_back(StandardMaterial::GetResourceType());
 	resourceTypeList.push_back(SimpleMaterial::GetResourceType());
-	ResourceManager* resourceManager = new ResourceManager(resourceTypeList, *gfxDevice);
+	ResourceManager* resourceManager = new ResourceManager(resourceTypeList);
 
 	// Buffers
 	IndexBuffer* indexBuffer = new IndexBuffer(*gfxDevice);
@@ -149,7 +148,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// System Container + Game Loop Entry
 	SystemContainer* systemContainer = new SystemContainer(*allSystems);
 	
-	GlobalStaticReferences* refs = new GlobalStaticReferences(systemContainer, monoSystemLoader);
+	GlobalStaticReferences* refs = new GlobalStaticReferences(
+		systemContainer,
+		monoSystemLoader,
+		gfxDevice,
+		resourceManager
+	);
 
 	int result = gameLoop->Run(*systemContainer);
 

@@ -6,7 +6,7 @@
 #include "FreeImage.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
-#include "Engine/Core/ResourceManagement/ResourceReferences.h"
+#include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 
 
@@ -96,17 +96,17 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
         data.push_back(thisData);
     }
 
-    ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
+    ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
     HRESULT createTextureResult = device->CreateTexture2D(&desc, data.data(), m_pTextureArray);
     if (SUCCEEDED(createTextureResult))
     {
-        ShaderResource* myShaderResourceView = GetResourceReferences().GetResourceManager().Instantiate<ShaderResource>();
+        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->Instantiate<ShaderResource>();
 		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetResourceIndex());
 
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTextureArray, NULL);
         if (!createdView)
         {
-			GetResourceReferences().GetResourceManager().Deallocate<ShaderResource>(m_myShaderResourceViewId);
+			GlobalStaticReferences::Instance()->GetResourceManager()->Deallocate<ShaderResource>(m_myShaderResourceViewId);
             LogError("Could not create resource view");
         }
     }

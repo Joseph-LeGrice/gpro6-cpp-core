@@ -3,7 +3,7 @@
 #include "Engine/Core/Utilities/Logging.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
-#include "Engine/Core/ResourceManagement/ResourceReferences.h"
+#include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/DataStructures/Color.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
@@ -106,17 +106,17 @@ void Texture2D::CreateResources()
     data.SysMemPitch = pitch;
     data.SysMemSlicePitch = pitch * height;
 
-    ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
+    ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
     HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, m_pTexture);
     if (SUCCEEDED(createTextureResult))
     {
-        ShaderResource* myShaderResourceView = GetResourceReferences().GetResourceManager().Instantiate<ShaderResource>();
+        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->Instantiate<ShaderResource>();
 		m_myShaderResourceViewIndex = static_cast<int>(myShaderResourceView->GetResourceIndex());
 
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTexture, NULL);
         if (!createdView)
         {
-			GetResourceReferences().GetResourceManager().Deallocate<ShaderResource>(m_myShaderResourceViewIndex);
+			GlobalStaticReferences::Instance()->GetResourceManager()->Deallocate<ShaderResource>(m_myShaderResourceViewIndex);
             LogError("Could not create resource view");
         }
     }

@@ -7,7 +7,7 @@
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Graphics/VertexData.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
-#include "Engine/Core/ResourceManagement/ResourceReferences.h"
+#include "Engine/Core/GlobalStaticReferences.h"
 
 static const D3D11_INPUT_ELEMENT_DESC g_inputLayoutScheme[] =
 {
@@ -36,7 +36,7 @@ bool Shader::SetCurrentIfValid()
 	}
 	else
 	{
-		ID3D11DeviceContext* deviceContext = GetResourceReferences().GetGraphicsDevice().GetGraphicsDeviceContext();
+		ID3D11DeviceContext* deviceContext = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDeviceContext();
 		deviceContext->IASetInputLayout(m_inputLayout);
 		deviceContext->VSSetShader(m_vertexShader, NULL, 0);
 
@@ -70,7 +70,7 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name)
     bool result = false;
 	if (SUCCEEDED(vertexShaderCompileResult))
 	{
-		ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
+		ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
 		HRESULT createdVertexShader  = device->CreateVertexShader(vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), NULL, m_vertexShader);
 		if (SUCCEEDED(createdVertexShader))
 		{
@@ -95,7 +95,7 @@ bool Shader::InitHullShader(std::wstring filename, std::string name)
 
 	if (SUCCEEDED(hullShaderCompileResult))
 	{
-		ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
+		ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
 		HRESULT createdHullShader = device->CreateHullShader(hullShaderBlob->GetBufferPointer(), hullShaderBlob->GetBufferSize(), NULL, m_hullShader);
 		
 		return SUCCEEDED(createdHullShader);
@@ -119,7 +119,7 @@ bool Shader::InitDomainShader(std::wstring filename, std::string name)
 
 	if (SUCCEEDED(domainShaderCompileResult))
 	{
-		ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
+		ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
 		HRESULT createdDomainShader = device->CreateDomainShader(domainShaderBlob->GetBufferPointer(), domainShaderBlob->GetBufferSize(), 0, m_domainShader);
 
 		return SUCCEEDED(createdDomainShader);
@@ -143,7 +143,7 @@ bool Shader::InitGeometryShader(std::wstring filename, std::string name)
 
 	if (SUCCEEDED(geomShaderCompileResult))
 	{
-		ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
+		ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
 		HRESULT createdGeometryShader = device->CreateGeometryShader(geomShaderBlob->GetBufferPointer(), geomShaderBlob->GetBufferSize(), NULL, m_geometryShader);
 
 		return SUCCEEDED(createdGeometryShader);
@@ -167,7 +167,7 @@ bool Shader::InitPixelShader(std::wstring filename, std::string name)
 
 	if (SUCCEEDED(pixelShaderCompileResult))
 	{
-		ID3D11Device* device = GetResourceReferences().GetGraphicsDevice().GetGraphicsDevice();
+		ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
 		HRESULT createdPixelShader = device->CreatePixelShader(pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize(), NULL, m_pixelShader);
 
 		return SUCCEEDED(createdPixelShader);

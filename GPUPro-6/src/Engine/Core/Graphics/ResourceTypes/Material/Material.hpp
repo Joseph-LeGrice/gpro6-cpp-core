@@ -2,11 +2,11 @@
 
 #include <vector>
 #include "Engine/Core/ResourceManagement/IResource.h"
-#include "Engine/Core/ResourceManagement/ResourceReferences.h"
 #include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/Shader.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 #include "Engine/Core/Graphics/ResourceTypes/TextureSampler.h"
+#include "Engine/Core/GlobalStaticReferences.h"
 
 template<class T> // TODO: COULD ALSO PASS IN NUM OF TEXTURES ALLOWED HERE?
 class Material : public IResource
@@ -18,19 +18,19 @@ public:
         int m_slotIndex;
     };
 
-    Material(size_t resourceIndex, ResourceReferences& resourceReferences) : IResource(resourceIndex, resourceReferences) { }
+    Material(size_t resourceIndex) : IResource(resourceIndex) { }
 
     bool BindIfValid()
     {
         if (m_shaderIndex > -1)
         {
-            Shader* s = GetResourceReferences().GetResourceManager().GetAsset<Shader>(m_shaderIndex);
+            Shader* s = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<Shader>(m_shaderIndex);
             if (s != nullptr && s->SetCurrentIfValid())
             {
                 for (size_t i = 0; i < m_shaderResources.size(); ++i)
                 {
                     ResourceDetails rd = m_shaderResources[i];
-                    ShaderResource* tex = GetResourceReferences().GetResourceManager().GetAsset<ShaderResource>(rd.m_resourceIndex);
+                    ShaderResource* tex = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<ShaderResource>(rd.m_resourceIndex);
                     if (tex != nullptr)
                     {
                         tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
@@ -40,7 +40,7 @@ public:
                 for (size_t i = 0; i < m_textureSamplerIndexes.size(); ++i)
                 {
                     ResourceDetails rd = m_textureSamplerIndexes[i];
-                    TextureSampler* ts = GetResourceReferences().GetResourceManager().GetAsset<TextureSampler>(rd.m_resourceIndex);
+                    TextureSampler* ts = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<TextureSampler>(rd.m_resourceIndex);
                     if (ts != nullptr)
                     {
                         ts->BindTextureSampler(static_cast<UINT>(rd.m_slotIndex));
@@ -94,19 +94,19 @@ public:
 		int m_slotIndex;
 	};
 
-	Material(size_t resourceIndex, ResourceReferences& resourceReferences) : IResource(resourceIndex, resourceReferences) { }
+	Material(size_t resourceIndex) : IResource(resourceIndex) { }
 
 	bool BindIfValid()
 	{
 		if (m_shaderIndex > -1)
 		{
-			Shader* s = GetResourceReferences().GetResourceManager().GetAsset<Shader>(m_shaderIndex);
+			Shader* s = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<Shader>(m_shaderIndex);
 			if (s != nullptr && s->SetCurrentIfValid())
 			{
 				for (size_t i = 0; i < m_shaderResources.size(); ++i)
 				{
 					ResourceDetails rd = m_shaderResources[i];
-					ShaderResource* tex = GetResourceReferences().GetResourceManager().GetAsset<ShaderResource>(rd.m_resourceIndex);
+					ShaderResource* tex = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<ShaderResource>(rd.m_resourceIndex);
 					if (tex != nullptr)
 					{
 						tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
@@ -116,7 +116,7 @@ public:
 				for (size_t i = 0; i < m_textureSamplerIndexes.size(); ++i)
 				{
 					ResourceDetails rd = m_textureSamplerIndexes[i];
-					TextureSampler* ts = GetResourceReferences().GetResourceManager().GetAsset<TextureSampler>(rd.m_resourceIndex);
+					TextureSampler* ts = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<TextureSampler>(rd.m_resourceIndex);
 					if (ts != nullptr)
 					{
 						ts->BindTextureSampler(static_cast<UINT>(rd.m_slotIndex));

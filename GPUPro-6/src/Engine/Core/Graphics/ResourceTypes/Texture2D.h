@@ -6,13 +6,13 @@
 struct Color;
 struct FIBITMAP;
 struct ID3D11Texture2D;
-class ResourceReferences;
+
 
 class Texture2D : public IResource
 {
 public:
-	Texture2D::Texture2D(size_t resourceIndex, ResourceReferences& resourceReferences) :
-		IResource(resourceIndex, resourceReferences) { }
+	Texture2D::Texture2D(size_t resourceIndex) :
+		IResource(resourceIndex) { }
 
     unsigned int Width();
     unsigned int Height();

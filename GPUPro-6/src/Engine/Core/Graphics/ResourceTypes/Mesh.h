@@ -5,14 +5,14 @@
 #include <vector>
 
 enum D3D_PRIMITIVE_TOPOLOGY;
-class ResourceReferences;
+
 
 class Mesh : public IResource
 {
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
 
-	Mesh(size_t resourceType, ResourceReferences& resourceReferences);
+	Mesh(size_t resourceType);
 
 	void SetVertices(std::vector<Vector3>& verts);
 	void SetNormals(std::vector<Vector3>& normals);
