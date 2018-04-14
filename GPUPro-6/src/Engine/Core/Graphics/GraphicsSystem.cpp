@@ -48,6 +48,8 @@ GraphicsSystem::GraphicsSystem(BlendState& blendState,
 
 void GraphicsSystem::Initialize()
 {
+	ISystem::Initialize();
+
 	//float viewportWidth = m_gfxDevice.GetViewportWidth();
 	//float viewportHeight = m_gfxDevice.GetViewportHeight();
 	//float aspectRatio = viewportWidth / viewportHeight;

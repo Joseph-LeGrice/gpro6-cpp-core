@@ -49,6 +49,7 @@ MonoSystem::MonoSystem(MonoObject* object)
 
 void MonoSystem::Initialize()
 {
+	ISystem::Initialize();
 	CallMethod(m_initMethod);
 }
 

@@ -14,7 +14,9 @@ void SystemContainer::InitializeAll()
 	auto systems = m_systems;
 	for (std::vector<ISystem*>::iterator it = systems.begin();
 		it != systems.end(); it++) {
-		(*it)->Initialize();
+		if (!(*it)->IsInitialized()) {
+			(*it)->Initialize();
+		}
 	}
 }
 

@@ -6,11 +6,11 @@
 
 int GameLoop::Run(SystemContainer& systems)
 {
-	systems.InitializeAll();
-
 	m_running = true;
     while (m_running)
     {
+		systems.InitializeAll();
+
 		try
 		{
 			m_time.AdvanceFrame();

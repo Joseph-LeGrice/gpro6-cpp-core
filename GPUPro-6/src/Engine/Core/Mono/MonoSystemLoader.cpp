@@ -18,6 +18,8 @@ static void RegisterSystemInstance(MonoObject* object)
 
 void MonoSystemLoader::Initialize()
 {
+	ISystem::Initialize();
+
 	mono_set_dirs("C:\\Mono\\lib", "C:\\Mono\\etc");
 	m_domain = mono_jit_init("GPUPro-6");
 	m_assembly = mono_domain_assembly_open(m_domain, "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\build\\x64-Debug\\MonoScripts.exe");

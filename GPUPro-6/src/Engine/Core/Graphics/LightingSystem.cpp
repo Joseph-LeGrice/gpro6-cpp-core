@@ -12,7 +12,8 @@
 
 void LightingSystem::Initialize()
 {
-    StructuredBuffer* buf = m_resourceManager.Instantiate<StructuredBuffer>();
+	ISystem::Initialize();
+	StructuredBuffer* buf = m_resourceManager.Instantiate<StructuredBuffer>();
 	if (buf != nullptr)
 	{
 		buf->Initialize<LIGHT_BUFFER, MAX_LIGHTS>();
