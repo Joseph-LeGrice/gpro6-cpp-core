@@ -7,6 +7,7 @@
 
 #include <mono/jit/jit.h>
 #include <mono/metadata/mono-config.h>
+#include <mono/metadata/mono-gc.h>
 #include <mono/metadata/assembly.h>
 
 static void RegisterSystemInstance(MonoObject* object)
@@ -37,6 +38,8 @@ void MonoSystemLoader::Initialize()
 		std::stringstream ss;
 		ss << "Return Value: " << retVal;
 		Log(ss.str());
+
+		mono_domain_finalize(m_domain, 5);
 	}
 }
 
