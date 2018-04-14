@@ -12,8 +12,8 @@
 #include "Engine/Core/Graphics/GraphicsSystem.h"
 #include "Engine/Core/Input/InputSystem.h"
 #include "Engine/Core/Graphics/LightingSystem.h"
-#include "Core/Mono/MonoSystemLoader.h"
-#include "Engine/Core/Mono/MonoSystem.h"
+#include "Engine/Core/Scripting/ScriptedSystemLoader.h"
+#include "Engine/Core/Scripting/ScriptedSystem.h"
 #include "Engine/Extra/Locomotion/NoClipLocomotion.h"
 
 // IDrawCommands
@@ -143,7 +143,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	NoClipLocomotion* noClipLocomotion = new NoClipLocomotion(*sceneGraphManager, *inputSystem);
 	allSystems->push_back(noClipLocomotion);
 
-	MonoSystemLoader* monoSystemLoader = new MonoSystemLoader();
+	ScriptedSystemLoader* monoSystemLoader = new ScriptedSystemLoader();
 	allSystems->push_back(monoSystemLoader);
 
 	// System Container + Game Loop Entry

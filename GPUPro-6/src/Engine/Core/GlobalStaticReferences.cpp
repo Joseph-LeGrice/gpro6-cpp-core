@@ -3,7 +3,7 @@
 
 GlobalStaticReferences* GlobalStaticReferences::s_instance;
 
-GlobalStaticReferences::GlobalStaticReferences(SystemContainer* sysContainer, MonoSystemLoader* monoSystemLoader) :
+GlobalStaticReferences::GlobalStaticReferences(SystemContainer* sysContainer, ScriptedSystemLoader* monoSystemLoader) :
 	m_systemContainer(sysContainer),
 	m_monoSystemLoader(monoSystemLoader)
 {
@@ -20,7 +20,7 @@ SystemContainer* GlobalStaticReferences::GetSystemContainer()
 	return m_systemContainer;
 }
 
-MonoSystemLoader* GlobalStaticReferences::GetMonoSystemLoader()
+ScriptedSystemLoader* GlobalStaticReferences::GetMonoSystemLoader()
 {
 	return m_monoSystemLoader;
 }

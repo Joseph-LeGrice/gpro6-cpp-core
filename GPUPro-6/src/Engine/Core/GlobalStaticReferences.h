@@ -1,20 +1,20 @@
 #pragma once
 
 class SystemContainer;
-class MonoSystemLoader;
+class ScriptedSystemLoader;
 
 class GlobalStaticReferences
 {
 public:
-	GlobalStaticReferences(SystemContainer* sysContainer, MonoSystemLoader* monoSystemLoader);
+	GlobalStaticReferences(SystemContainer* sysContainer, ScriptedSystemLoader* monoSystemLoader);
 
 	static GlobalStaticReferences* Instance();
 	SystemContainer* GetSystemContainer();
-	MonoSystemLoader* GetMonoSystemLoader();
+	ScriptedSystemLoader* GetMonoSystemLoader();
 	
 
 private:
 	static GlobalStaticReferences* s_instance;
 	SystemContainer* m_systemContainer;
-	MonoSystemLoader* m_monoSystemLoader;
+	ScriptedSystemLoader* m_monoSystemLoader;
 };

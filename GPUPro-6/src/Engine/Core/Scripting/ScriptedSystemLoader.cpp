@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include "MonoSystemLoader.h"
+#include "ScriptedSystemLoader.h"
 
-#include "MonoSystem.h"
-#include "MonoSystemInterface.h"
+#include "ScriptedSystem.h"
+#include "ScriptedSystemInterface.h"
 
 #include <mono/jit/jit.h>
 #include <mono/metadata/mono-config.h>
 #include <mono/metadata/assembly.h>
 
-void MonoSystemLoader::Initialize()
+void ScriptedSystemLoader::Initialize()
 {
 	ISystem::Initialize();
 
@@ -16,7 +16,7 @@ void MonoSystemLoader::Initialize()
 	m_domain = mono_jit_init("GPUPro-6");
 	m_assembly = mono_domain_assembly_open(m_domain, "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\build\\x64-Debug\\MonoScripts.exe");
 	
-	mono_add_internal_call("MonoSystemInterface::RegisterSystem", MonoSystemInterface::RegisterSystemInstance);
+	mono_add_internal_call("MonoSystemInterface::RegisterSystem", ScriptedSystemInterface::RegisterSystemInstance);
 
 	if (m_assembly != NULL)
 	{
@@ -34,7 +34,7 @@ void MonoSystemLoader::Initialize()
 	}
 }
 
-void MonoSystemLoader::Deinitalize()
+void ScriptedSystemLoader::Deinitalize()
 {
 	ISystem::Deinitalize();
 	mono_jit_cleanup(m_domain);

@@ -118,9 +118,10 @@
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp">
       <Filter>Engine\Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Mono\MonoSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\Mono\MonoSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemInterface.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -294,9 +295,10 @@
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h">
       <Filter>Engine\Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Mono\MonoSystem.h" />
-    <ClInclude Include="src\Engine\Core\Mono\MonoSystemLoader.h" />
     <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemInterface.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

@@ -221,8 +221,9 @@
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
-    <ClCompile Include="src\Engine\Core\Mono\MonoSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\Mono\MonoSystemLoader.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemInterface.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\IResource.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceReferences.cpp" />
@@ -282,8 +283,9 @@
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
     <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
-    <ClInclude Include="src\Engine\Core\Mono\MonoSystem.h" />
-    <ClInclude Include="src\Engine\Core\Mono\MonoSystemLoader.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemInterface.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceReferences.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />

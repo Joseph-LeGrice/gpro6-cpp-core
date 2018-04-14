@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "MonoSystem.h"
+#include "ScriptedSystem.h"
 
 #pragma warning(push)
 #pragma warning(disable:4201)
@@ -8,7 +8,7 @@
 #include <mono/metadata/assembly.h>
 #pragma warning(pop)
 
-void MonoSystem::GetMethodThunk(const char* methodName, MonoSimpleMethodStub& funcPointer)
+void ScriptedSystem::GetMethodThunk(const char* methodName, MonoSimpleMethodStub& funcPointer)
 {
 	MonoMethod* method = mono_class_get_method_from_name(m_class, methodName, 0);
 	if (method != nullptr)
@@ -21,7 +21,7 @@ void MonoSystem::GetMethodThunk(const char* methodName, MonoSimpleMethodStub& fu
 	}
 }
 
-void MonoSystem::CallMethod(MonoSimpleMethodStub& funcPointer)
+void ScriptedSystem::CallMethod(MonoSimpleMethodStub& funcPointer)
 {
 	if (funcPointer != nullptr)
 	{
@@ -37,7 +37,7 @@ void MonoSystem::CallMethod(MonoSimpleMethodStub& funcPointer)
 	}
 }
 
-MonoSystem::MonoSystem(MonoObject* object)
+ScriptedSystem::ScriptedSystem(MonoObject* object)
 {
 	m_objectHandle = mono_gchandle_new(object, FALSE);
 	m_class = mono_object_get_class(object);
@@ -50,35 +50,35 @@ MonoSystem::MonoSystem(MonoObject* object)
 	GetMethodThunk("LateVariableTick", m_lateVariableTickMethod);
 }
 
-void MonoSystem::Initialize()
+void ScriptedSystem::Initialize()
 {
 	ISystem::Initialize();
 	CallMethod(m_initMethod);
 }
 
-void MonoSystem::Deinitalize()
+void ScriptedSystem::Deinitalize()
 {
 	ISystem::Deinitalize();
 	CallMethod(m_deinitMethod);
 	mono_gchandle_free(m_objectHandle);
 }
 
-void MonoSystem::FixedTick()
+void ScriptedSystem::FixedTick()
 {
 	CallMethod(m_fixedTickMethod);
 }
 
-void MonoSystem::EarlyVariableTick()
+void ScriptedSystem::EarlyVariableTick()
 {
 	CallMethod(m_earlyVariableTickMethod);
 }
 
-void MonoSystem::VariableTick()
+void ScriptedSystem::VariableTick()
 {
 	CallMethod(m_variableTickMethod);
 }
 
-void MonoSystem::LateVariableTick()
+void ScriptedSystem::LateVariableTick()
 {
 	CallMethod(m_lateVariableTickMethod);
 }

@@ -7,7 +7,7 @@
 #include <mono/metadata/metadata.h>
 #pragma warning(pop)
 
-class MonoSystemLoader : public ISystem
+class ScriptedSystemLoader : public ISystem
 {
 	virtual void Initialize() override;
 	virtual void Deinitalize() override;

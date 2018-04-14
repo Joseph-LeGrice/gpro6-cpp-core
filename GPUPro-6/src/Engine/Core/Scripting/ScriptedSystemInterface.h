@@ -5,7 +5,7 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-class MonoSystemInterface
+class ScriptedSystemInterface
 {
 public:
 	static void RegisterSystemInstance(MonoObject* object);

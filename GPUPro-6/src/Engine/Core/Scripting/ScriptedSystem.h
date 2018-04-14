@@ -11,7 +11,7 @@
 
 typedef void (*MonoSimpleMethodStub) (MonoObject*, MonoException**);
 
-class MonoSystem : public ISystem
+class ScriptedSystem : public ISystem
 {
 public:
 	virtual void FixedTick() override;
@@ -21,7 +21,7 @@ public:
 	virtual void Initialize() override;
 	virtual void Deinitalize() override;
 
-	MonoSystem(MonoObject* object);
+	ScriptedSystem(MonoObject* object);
 
 private:
 	MonoClass* m_class;
