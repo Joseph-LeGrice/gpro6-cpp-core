@@ -1,28 +1,33 @@
 using System;
 
-class TestSystem : ISystem
+class TestSystem
 {
-    public override void Initialize()
+    public TestSystem()
+    {
+        SystemInterface.RegisterSystem(this);
+    }
+
+    private void Initialize()
     {
         Console.WriteLine("Initialize");
     }
 
-    // public override void EarlyTick()
+    // private override void EarlyTick()
     // {
     //     Console.WriteLine("EarlyTick");
     // }
 
-    public override void VariableTick()
+    private void VariableTick()
     {
         Console.WriteLine("VariableTick");
     }
 
-    public override void LateVariableTick()
+    private void LateVariableTick()
     {
         Console.WriteLine("LateTick");
     }
 
-    public override void Deinitialize()
+    private void Deinitialize()
     {
         Console.WriteLine("Deinitialize");
     }
