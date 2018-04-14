@@ -25,18 +25,21 @@ void MonoSystem::CallMethod(MonoSimpleMethodStub& funcPointer)
 {
 	if (funcPointer != nullptr)
 	{
+		MonoObject* obj = mono_gchandle_get_target(m_objectHandle);
 		MonoException* ex = NULL;
-		funcPointer(m_object, &ex);
+
+		funcPointer(obj, &ex);
 
 		if (ex != nullptr)
 		{
+			Log("Exception Thrown");
 		}
 	}
 }
 
 MonoSystem::MonoSystem(MonoObject* object)
 {
-	m_object = object;
+	m_objectHandle = mono_gchandle_new(object, FALSE);
 	m_class = mono_object_get_class(object);
 
 	GetMethodThunk("Initialize", m_initMethod);
@@ -57,6 +60,7 @@ void MonoSystem::Deinitalize()
 {
 	ISystem::Deinitalize();
 	CallMethod(m_deinitMethod);
+	mono_gchandle_free(m_objectHandle);
 }
 
 void MonoSystem::FixedTick()

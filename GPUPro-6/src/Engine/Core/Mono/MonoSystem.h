@@ -6,6 +6,7 @@
 #pragma warning(disable:4201)
 #include <mono/metadata/class.h>
 #include <mono/metadata/object.h>
+#include <mono/metadata/exception.h>
 #pragma warning(pop)
 
 typedef void (*MonoSimpleMethodStub) (MonoObject*, MonoException**);
@@ -24,7 +25,7 @@ public:
 
 private:
 	MonoClass* m_class;
-	MonoObject* m_object;
+	uint32_t m_objectHandle;
 
 	MonoSimpleMethodStub m_initMethod = nullptr;
 	MonoSimpleMethodStub m_deinitMethod = nullptr;
