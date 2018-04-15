@@ -1,43 +1,60 @@
 #include "stdafx.h"
 #include "ResourceTypeMapping.h"
 
-std::map<ResourceTypeID, CreateResourceCallback> ResourceTypeMappings::s_typeMappings;
-std::vector<ScriptedResourceMap> ResourceTypeMappings::s_scriptedTypeMap;
+ResourceTypeMappings& ResourceTypeMappings::Instance()
+{
+	static ResourceTypeMappings s_instance;
+	return s_instance;
+}
+
+ScriptedResourceMap* ResourceTypeMappings::GetMapObject(ResourceTypeID typeId)
+{
+	for (int i = 0; i < m_scriptedTypeMap.size(); i++)
+	{
+		ScriptedResourceMap& srm = m_scriptedTypeMap[i];
+		if (srm.unmanagedType == typeId)
+		{
+			return &srm;
+		}
+	}
+	return nullptr;
+}
+
+ScriptedResourceMap* ResourceTypeMappings::GetMapObject(const char* managedTypeName)
+{
+	for (int i = 0; i < m_scriptedTypeMap.size(); i++)
+	{
+		ScriptedResourceMap& srm = m_scriptedTypeMap[i];
+		if (srm.managedTypeName == managedTypeName)
+		{
+			return &srm;
+		}
+	}
+	return nullptr;
+}
 
 void ResourceTypeMappings::RegisterType(ResourceTypeID typeId, CreateResourceCallback resourceCallback, const char* managedTypeName)
 {
-	custom_assert::is_true(s_typeMappings.count(typeId) == 0, "TypeID already registered!");
-	s_typeMappings.insert({ typeId, resourceCallback });
-	s_scriptedTypeMap.push_back({ typeId, managedTypeName });
+	custom_assert::is_true(Instance().GetMapObject(typeId) == nullptr, "ResourceTypeID has already been registered");
+	Instance().m_scriptedTypeMap.push_back({ typeId, managedTypeName, resourceCallback });
 }
 
 IResource* ResourceTypeMappings::CreateType(ResourceTypeID typeId)
 {
-	return s_typeMappings[typeId]();
+	ScriptedResourceMap* mapping = GetMapObject(typeId);
+	return mapping->createCallback();
 }
 
 ResourceTypeID ResourceTypeMappings::GetResourceType(const char* managedTypeName)
 {
-	for (int i = 0; i < s_scriptedTypeMap.size(); i++)
-	{
-		ScriptedResourceMap srm = s_scriptedTypeMap[i];
-		if (srm.managedTypeName== managedTypeName)
-		{
-			return srm.unmanagedType;
-		}
-	}
-	throw "Resource Type does not exist for managed type";
+	ScriptedResourceMap* mapping = GetMapObject(managedTypeName);
+	custom_assert::is_true(mapping != nullptr, "Resource Type does not exist for managed type");
+	return mapping->unmanagedType;
 }
 
 const char* ResourceTypeMappings::GetManagedTypeName(ResourceTypeID typeId)
 {
-	for (int i = 0; i < s_scriptedTypeMap.size(); i++)
-	{
-		ScriptedResourceMap srm = s_scriptedTypeMap[i];
-		if (srm.unmanagedType == typeId)
-		{
-			return srm.managedTypeName;
-		}
-	}
-	throw "Managed type does not exist for resource type";
+	ScriptedResourceMap* mapping = GetMapObject(typeId);
+	custom_assert::is_true(mapping != nullptr, "Resource Type does not exist for typeId");
+	return mapping->managedTypeName;
 }

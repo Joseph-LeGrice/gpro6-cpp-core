@@ -22,7 +22,7 @@ IResource* ResourceManager::CreateResource(ResourceTypeID typeId)
 		std::vector<IResource*>& resources = m_resourceListMap[typeId];
 
 		size_t index = resources.size();
-		IResource* newResource = ResourceTypeMappings::CreateType(typeId);
+		IResource* newResource = ResourceTypeMappings::Instance().CreateType(typeId);
 		newResource->m_resourceIndex = index;
 		newResource->ConstructManagedObject();
 		resources.push_back(newResource);
