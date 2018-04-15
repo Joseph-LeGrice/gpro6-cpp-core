@@ -9,71 +9,65 @@ class GraphicsDevice;
 class ResourceManager
 {
 public:
-	template<class T>
-	std::vector<T*> GetAllResourcesOfType()
-	{
-		struct CastComponent { T* operator ()(IResource* value) const { return static_cast<T*>(value); } };
-
-		ResourceTypeID typeId = T::GetResourceType();
-		if (m_resourceListMap.count(typeId) > 0)
-		{
-			std::vector<IResource*>& existing = m_resourceListMap[typeId];
-			std::vector<T*> result;
-			std::transform(existing.begin(), existing.end(), result.begin(), CastComponent());
-			return result;
-		}
-		else
-		{
-			return std::vector<T*>();
-		}
-	}
-
-	template<class T>
-	T* GetResource(size_t arrayIndex)
-	{
-		ResourceTypeID typeId = T::GetResourceTypeID();
-		if (m_resourceListMap.count(typeId) > 0)
-		{
-			std::vector<IResource*>& existing = m_resourceListMap[typeId];
-			if (existing.size() > 0 && arrayIndex < existing.size())
-			{
-				return static_cast<T*>(existing[arrayIndex]);
-			}
-		}
-		return nullptr;
-	}
-
-
-	template<class T>
-	T* CreateResource()
-	{
-		ResourceTypeID typeId = T::GetResourceTypeID();
-		return static_cast<T*>(CreateResource(typeId));
-	}
+	~ResourceManager(); 
 
 	IResource* CreateResource(ResourceTypeID typeId);
+	void DestroyResource(ResourceTypeID typeId, int index);
+	std::vector<IResource*> GetAllResourcesOfType(ResourceTypeID typeId);
+	IResource* GetResource(ResourceTypeID typeId, size_t arrayIndex);
 
 	template<class T>
-	void DestroyResource(int index)
-	{
-		ResourceTypeID typeId = T::GetResourceTypeID();
-		if (m_resourceListMap.count(typeId) > 0)
-		{
-			std::vector<IResource*>& resources = m_resourceListMap[typeId];
-			size_t length = resources.size();
-			
-			resources[index]->Release();
-			delete resources[index];
+	T* CreateResource();
 
-			resources[index] = resources[length - 1];
-			resources[index]->m_resourceIndex = index;
+	template<class T>
+	void DestroyResource(int index);
 
-			resources.resize(length - 1);
-		}
-	}
+	template<class T>
+	T* GetResource(size_t arrayIndex);
 
-	~ResourceManager();
+	template<class T>
+	std::vector<T*> GetAllResourcesOfType();
 
 private:
 	std::unordered_map<ResourceTypeID, std::vector<IResource*>> m_resourceListMap;
 };
+
+template<class T>
+T* ResourceManager::CreateResource()
+{
+	ResourceTypeID typeId = T::GetResourceTypeID();
+	return static_cast<T*>(CreateResource(typeId));
+}
+
+template<class T>
+void ResourceManager::DestroyResource(int index)
+{
+	ResourceTypeID typeId = T::GetResourceTypeID();
+	DestroyResource(typeId, index);
+}
+
+template<class T>
+std::vector<T*> ResourceManager::GetAllResourcesOfType()
+{
+	struct CastComponent { T* operator ()(IResource* value) const { return static_cast<T*>(value); } };
+
+	ResourceTypeID typeId = T::GetResourceType();
+	std::vector<T*> result = GetAllResourcesOfType(typeId);
+	std::transform(existing.begin(), existing.end(), result.begin(), CastComponent());
+	return result;
+}
+
+template<class T>
+T* ResourceManager::GetResource(size_t arrayIndex)
+{
+	ResourceTypeID typeId = T::GetResourceTypeID();
+	IResource* result = GetResource(typeId, arrayIndex);
+	if (result != nullptr)
+	{
+		return static_cast<T*>(result);
+	}
+	else
+	{
+		return nullptr;
+	}
+}
