@@ -111,6 +111,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// ISystems
 	std::vector<ISystem*>* allSystems = new std::vector<ISystem*>();
+	
+	ScriptedSystemLoader* monoSystemLoader = new ScriptedSystemLoader();
+	allSystems->push_back(monoSystemLoader);
+	
 	GraphicsSystem* graphicSystem = new GraphicsSystem(
 		*blendState,
 		*meshManager,
@@ -131,9 +135,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	NoClipLocomotion* noClipLocomotion = new NoClipLocomotion(*sceneGraphManager, *inputSystem);
 	allSystems->push_back(noClipLocomotion);
-
-	ScriptedSystemLoader* monoSystemLoader = new ScriptedSystemLoader();
-	allSystems->push_back(monoSystemLoader);
 
 	// System Container + Game Loop Entry
 	SystemContainer* systemContainer = new SystemContainer(*allSystems);

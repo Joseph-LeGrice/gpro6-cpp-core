@@ -7,6 +7,7 @@
 #include <mono/jit/jit.h>
 #include <mono/metadata/mono-config.h>
 #include <mono/metadata/assembly.h>
+#include "API/ResourceManagerAPI.h"
 
 void ScriptedSystemLoader::Initialize()
 {
@@ -18,6 +19,8 @@ void ScriptedSystemLoader::Initialize()
 	m_image = mono_assembly_get_image(m_assembly);
 	
 	mono_add_internal_call("MonoSystemInterface::RegisterSystem", ScriptedSystemInterface::RegisterSystemInstance);
+
+	ResourceManagerAPI::RegisterMonoMethods();
 
 	if (m_assembly != NULL)
 	{
@@ -46,7 +49,10 @@ void ScriptedSystemLoader::Deinitalize()
 MonoObject* ScriptedSystemLoader::CreateObject(const char* typeName)
 {
 	MonoClass* managedClass = mono_class_from_name(m_image, "", typeName);
+	custom_assert::is_true(managedClass != nullptr, "Managed class does not exist for typeName");
+
 	MonoObject* managedObject = mono_object_new(m_domain, managedClass);
 	mono_runtime_object_init(managedObject);
+	
 	return managedObject;
 }
