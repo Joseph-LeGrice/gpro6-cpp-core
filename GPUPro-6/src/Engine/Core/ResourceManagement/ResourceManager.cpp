@@ -24,6 +24,7 @@ IResource* ResourceManager::CreateResource(ResourceTypeID typeId)
 		size_t index = resources.size();
 		IResource* newResource = ResourceTypeMappings::CreateType(typeId);
 		newResource->m_resourceIndex = index;
+		newResource->ConstructManagedObject();
 		resources.push_back(newResource);
 
 		return resources[index];

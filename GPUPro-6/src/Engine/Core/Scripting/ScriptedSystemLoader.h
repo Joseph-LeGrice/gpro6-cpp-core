@@ -5,14 +5,19 @@
 #pragma warning(push)
 #pragma warning(disable:4201)
 #include <mono/metadata/metadata.h>
+#include <mono/metadata/object.h>
 #pragma warning(pop)
 
 class ScriptedSystemLoader : public ISystem
 {
+public:
 	virtual void Initialize() override;
 	virtual void Deinitalize() override;
 
+	MonoObject* CreateObject(const char* typeName);
+
 private:
+	MonoImage* m_image;
 	MonoDomain* m_domain;
 	MonoAssembly* m_assembly;
 };

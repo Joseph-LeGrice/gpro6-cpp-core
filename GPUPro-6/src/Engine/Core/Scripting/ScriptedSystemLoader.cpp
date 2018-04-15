@@ -15,6 +15,7 @@ void ScriptedSystemLoader::Initialize()
 	mono_set_dirs("C:\\Mono\\lib", "C:\\Mono\\etc");
 	m_domain = mono_jit_init("GPUPro-6");
 	m_assembly = mono_domain_assembly_open(m_domain, "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\build\\x64-Debug\\MonoScripts.exe");
+	m_image = mono_assembly_get_image(m_assembly);
 	
 	mono_add_internal_call("MonoSystemInterface::RegisterSystem", ScriptedSystemInterface::RegisterSystemInstance);
 
@@ -40,4 +41,12 @@ void ScriptedSystemLoader::Deinitalize()
 	mono_jit_cleanup(m_domain);
 	m_assembly = nullptr;
 	m_domain = nullptr;
+}
+
+MonoObject* ScriptedSystemLoader::CreateObject(const char* typeName)
+{
+	MonoClass* managedClass = mono_class_from_name(m_image, "", typeName);
+	MonoObject* managedObject = mono_object_new(m_domain, managedClass);
+	mono_runtime_object_init(managedObject);
+	return managedObject;
 }
