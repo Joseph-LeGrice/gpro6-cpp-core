@@ -222,6 +222,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceTypeMapping.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\ResourceManagerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
@@ -284,6 +285,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
     <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceTypeMapping.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\ResourceManagerAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemInterface.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
