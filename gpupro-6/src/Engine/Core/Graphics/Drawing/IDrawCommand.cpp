@@ -29,7 +29,7 @@ void IDrawCommand::Draw(Matrix4x4 view, Matrix4x4 proj)
         MeshRenderer* mrc = meshRenderers[i];
         Entity* meshEntity = m_sceneGraphManager.GetCurrentScene().GetComponent<Entity>(mrc->GetEntityIndex());
 
-        Mesh* mesh = m_resourceManager.GetAsset<Mesh>(mrc->m_meshIndex);
+        Mesh* mesh = m_resourceManager.GetResource<Mesh>(mrc->m_meshIndex);
         UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
         UINT16 numberOfIndices = (UINT16)mesh->GetIndices().size();
 

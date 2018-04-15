@@ -100,7 +100,7 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
     HRESULT createTextureResult = device->CreateTexture2D(&desc, data.data(), m_pTextureArray);
     if (SUCCEEDED(createTextureResult))
     {
-        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->Instantiate<ShaderResource>();
+        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource<ShaderResource>();
 		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetResourceIndex());
 
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTextureArray, NULL);

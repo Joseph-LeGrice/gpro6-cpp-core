@@ -196,7 +196,7 @@ void VoxelTerrain::GenerateMesh()
         tris.push_back(trueVertexIndex);
     }
 
-    Mesh* m = m_resourceManager.Instantiate<Mesh>();
+    Mesh* m = m_resourceManager.CreateResource<Mesh>();
 	m->SetVertices(verts);
 	m->SetIndices(tris);
 	m_meshResourceId = static_cast<int>(m->GetResourceIndex());

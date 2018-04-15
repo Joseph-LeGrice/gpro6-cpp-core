@@ -6,7 +6,7 @@
 
 #define REGISTER_RESOURCE(T, typeId) \
 public: \
-	static const char* GetName() { return #T; } \
+	const char* GetName() override { return #T; } \
 	static ResourceTypeID GetResourceTypeID() { return static_registration.GetTypeID(); } \
 private: \
 	static RegisterResource<T, typeId> static_registration;
@@ -25,7 +25,8 @@ struct RegisterResource
 {
 	RegisterResource()
 	{
-		ResourceTypeMappings::RegisterType(typeId, &CreateCallback, T::GetName());
+		T temp;
+		ResourceTypeMappings::RegisterType(typeId, &CreateCallback, temp.GetName());
 	}
 
 	ResourceTypeID GetTypeID() const

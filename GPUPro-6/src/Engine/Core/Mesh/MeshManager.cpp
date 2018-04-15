@@ -49,7 +49,7 @@ void MeshManager::RefreshBuffers()
 	for (std::unordered_map<size_t, MeshInfo>::iterator it = m_meshInfoMapping.begin();
 		it != m_meshInfoMapping.end(); it++)
 	{
-		Mesh* m = m_resourceManager.GetAsset<Mesh>(it->first);
+		Mesh* m = m_resourceManager.GetResource<Mesh>(it->first);
 
 		size_t indexStart = indices.size(); 
 		size_t vertStart = verts.size();

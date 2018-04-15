@@ -89,7 +89,7 @@ Mesh* MarchingSquares2D::CreateMesh(ResourceManager& resourceManager, float grid
         }
     }
 
-    Mesh* m = resourceManager.Instantiate<Mesh>();
+    Mesh* m = resourceManager.CreateResource<Mesh>();
     m->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
     m->SetVertices(verts);
     m->SetIndices(tris);
@@ -127,7 +127,7 @@ Texture2D* MarchingSquares2D::CreateTexture(ResourceManager& resourceManager, un
         }
     }
 
-    Texture2D* tex = resourceManager.Instantiate<Texture2D>();
+    Texture2D* tex = resourceManager.CreateResource<Texture2D>();
     tex->InitializeWithDimensions(size, size);
     tex->SetPixels(allColors, size * size);
     

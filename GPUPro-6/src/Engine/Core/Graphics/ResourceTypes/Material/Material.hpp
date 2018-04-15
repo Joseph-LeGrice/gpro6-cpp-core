@@ -22,13 +22,13 @@ public:
     {
         if (m_shaderIndex > -1)
         {
-            Shader* s = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<Shader>(m_shaderIndex);
+            Shader* s = GlobalStaticReferences::Instance()->GetResourceManager()->GetResource<Shader>(m_shaderIndex);
             if (s != nullptr && s->SetCurrentIfValid())
             {
                 for (size_t i = 0; i < m_shaderResources.size(); ++i)
                 {
                     ResourceDetails rd = m_shaderResources[i];
-                    ShaderResource* tex = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<ShaderResource>(rd.m_resourceIndex);
+                    ShaderResource* tex = GlobalStaticReferences::Instance()->GetResourceManager()->GetResource<ShaderResource>(rd.m_resourceIndex);
                     if (tex != nullptr)
                     {
                         tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
@@ -38,7 +38,7 @@ public:
                 for (size_t i = 0; i < m_textureSamplerIndexes.size(); ++i)
                 {
                     ResourceDetails rd = m_textureSamplerIndexes[i];
-                    TextureSampler* ts = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<TextureSampler>(rd.m_resourceIndex);
+                    TextureSampler* ts = GlobalStaticReferences::Instance()->GetResourceManager()->GetResource<TextureSampler>(rd.m_resourceIndex);
                     if (ts != nullptr)
                     {
                         ts->BindTextureSampler(static_cast<UINT>(rd.m_slotIndex));
@@ -96,13 +96,13 @@ public:
 	{
 		if (m_shaderIndex > -1)
 		{
-			Shader* s = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<Shader>(m_shaderIndex);
+			Shader* s = GlobalStaticReferences::Instance()->GetResourceManager()->GetResource<Shader>(m_shaderIndex);
 			if (s != nullptr && s->SetCurrentIfValid())
 			{
 				for (size_t i = 0; i < m_shaderResources.size(); ++i)
 				{
 					ResourceDetails rd = m_shaderResources[i];
-					ShaderResource* tex = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<ShaderResource>(rd.m_resourceIndex);
+					ShaderResource* tex = GlobalStaticReferences::Instance()->GetResourceManager()->GetResource<ShaderResource>(rd.m_resourceIndex);
 					if (tex != nullptr)
 					{
 						tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
@@ -112,7 +112,7 @@ public:
 				for (size_t i = 0; i < m_textureSamplerIndexes.size(); ++i)
 				{
 					ResourceDetails rd = m_textureSamplerIndexes[i];
-					TextureSampler* ts = GlobalStaticReferences::Instance()->GetResourceManager()->GetAsset<TextureSampler>(rd.m_resourceIndex);
+					TextureSampler* ts = GlobalStaticReferences::Instance()->GetResourceManager()->GetResource<TextureSampler>(rd.m_resourceIndex);
 					if (ts != nullptr)
 					{
 						ts->BindTextureSampler(static_cast<UINT>(rd.m_slotIndex));

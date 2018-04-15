@@ -16,11 +16,11 @@ Mesh* MeshHelper::Quad(ResourceManager& resourceManager)
 {
 	if (g_quadMeshId > -1)
 	{
-		return resourceManager.GetAsset<Mesh>(g_quadMeshId);
+		return resourceManager.GetResource<Mesh>(g_quadMeshId);
 	}
 	else
 	{
-		Mesh* result = resourceManager.Instantiate<Mesh>();
+		Mesh* result = resourceManager.CreateResource<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 		std::vector<Vector3> verts = std::vector<Vector3>();
@@ -63,7 +63,7 @@ Mesh* MeshHelper::SphereUV(ResourceManager& resourceManager)
 {
 	if (g_sphereUvMeshId > -1)
 	{
-		return resourceManager.GetAsset<Mesh>(g_sphereUvMeshId);
+		return resourceManager.GetResource<Mesh>(g_sphereUvMeshId);
 	}
 	else
 	{
@@ -118,7 +118,7 @@ Mesh* MeshHelper::SphereUV(ResourceManager& resourceManager)
 			}
 		}
 
-		Mesh* result = resourceManager.Instantiate<Mesh>();
+		Mesh* result = resourceManager.CreateResource<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 		result->SetVertices(verts);
 		result->SetNormals(norms);
@@ -135,7 +135,7 @@ Mesh* MeshHelper::Cube(ResourceManager& resourceManager)
 {
 	if (g_cubeMeshId > -1)
 	{
-		return resourceManager.GetAsset<Mesh>(g_cubeMeshId);
+		return resourceManager.GetResource<Mesh>(g_cubeMeshId);
 	}
 	else
 	{
@@ -270,7 +270,7 @@ Mesh* MeshHelper::Cube(ResourceManager& resourceManager)
 		indices.push_back(21);
 		indices.push_back(23);
 
-		Mesh* result = resourceManager.Instantiate<Mesh>();
+		Mesh* result = resourceManager.CreateResource<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 		result->SetVertices(verts);
 		result->SetNormals(norms);

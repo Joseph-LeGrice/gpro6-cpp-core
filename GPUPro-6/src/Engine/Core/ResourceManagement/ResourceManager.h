@@ -29,7 +29,7 @@ public:
 	}
 
 	template<class T>
-	T* GetAsset(size_t arrayIndex)
+	T* GetResource(size_t arrayIndex)
 	{
 		ResourceTypeID typeId = T::GetResourceTypeID();
 		if (m_resourceListMap.count(typeId) > 0)
@@ -43,31 +43,15 @@ public:
 		return nullptr;
 	}
 
-	IResource* Instantiate(ResourceTypeID typeId)
-	{
-		if (m_resourceListMap.count(typeId) > 0)
-		{
-			std::vector<IResource*>& resources = m_resourceListMap[typeId];
-
-			size_t index = resources.size();
-			IResource* newResource = ResourceTypeMappings::CreateType(typeId);
-			newResource->m_resourceIndex = index;
-			resources.push_back(newResource);
-
-			return resources[index];
-		}
-		else
-		{
-			return nullptr;
-		}
-	}
 
 	template<class T>
-	T* Instantiate()
+	T* CreateResource()
 	{
 		ResourceTypeID typeId = T::GetResourceTypeID();
-		return static_cast<T*>(Instantiate(typeId));
+		return static_cast<T*>(CreateResource(typeId));
 	}
+
+	IResource* CreateResource(ResourceTypeID typeId);
 
 	template<class T>
 	void Deallocate(int index)

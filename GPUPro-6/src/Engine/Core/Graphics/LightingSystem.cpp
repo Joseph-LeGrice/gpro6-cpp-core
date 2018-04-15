@@ -13,7 +13,7 @@
 void LightingSystem::Initialize()
 {
 	ISystem::Initialize();
-	StructuredBuffer* buf = m_resourceManager.Instantiate<StructuredBuffer>();
+	StructuredBuffer* buf = m_resourceManager.CreateResource<StructuredBuffer>();
 	if (buf != nullptr)
 	{
 		buf->Initialize<LIGHT_BUFFER, MAX_LIGHTS>();
@@ -49,7 +49,7 @@ void LightingSystem::VariableTick()
         lights[i].Selected = TRUE;
     }
 
-    StructuredBuffer* lightBuf = m_resourceManager.GetAsset<StructuredBuffer>(m_lightBufferIndex);
+    StructuredBuffer* lightBuf = m_resourceManager.GetResource<StructuredBuffer>(m_lightBufferIndex);
     if (lightBuf != nullptr)
     {
         lightBuf->UpdateBuffer(*lights);

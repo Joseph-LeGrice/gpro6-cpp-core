@@ -36,7 +36,7 @@ public:
 		rvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
         rvDesc.Buffer.ElementWidth = m_numberOfElements;
         
-        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->Instantiate<ShaderResource>();
+        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource<ShaderResource>();
 		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetResourceIndex());
         
         bool createdView = myShaderResourceView->CreateViewWithResource(m_buffer, &rvDesc);
