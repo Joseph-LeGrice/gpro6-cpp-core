@@ -4,13 +4,16 @@
 #include <vector>
 #include "IResource.h"
 
-#define REGISTER_RESOURCE(T, typeId) \
+template<typename T>
+ResourceTypeID GetResourceTypeID() { throw "Unknown TypeID"; }
+
+#define DEFINE_RESOURCE(T) \
 public: \
 	const char* GetName() override { return #T; } \
-	static ResourceTypeID GetResourceTypeID() { return static_registration.GetTypeID(); } \
-private: \
-	static RegisterResource<T, typeId> static_registration;
 
+#define REGISTER_RESOURCE(T, typeId) \
+const RegisterResource<T, typeId> static_registration_##T; \
+template<> inline ResourceTypeID GetResourceTypeID<T>() { return static_registration_##T.GetTypeID(); }
 
 typedef IResource* (*CreateResourceCallback)();
 

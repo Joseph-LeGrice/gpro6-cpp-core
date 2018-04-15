@@ -5,6 +5,6 @@
 
 class SimpleMaterial : public Material<void>
 {
-public:
-	REGISTER_RESOURCE(SimpleMaterial, 11)
+DEFINE_RESOURCE(SimpleMaterial)
 };
+REGISTER_RESOURCE(SimpleMaterial, 11)

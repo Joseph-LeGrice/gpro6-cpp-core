@@ -10,6 +10,7 @@ enum D3D_PRIMITIVE_TOPOLOGY;
 
 class Mesh : public IResource
 {
+DEFINE_RESOURCE(Mesh)
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
 
@@ -24,9 +25,10 @@ public:
 	const std::vector<UINT16>& GetIndices();
 
     virtual void Release() override;
-	REGISTER_RESOURCE(Mesh, 0)
 
 private:
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
 };
+
+REGISTER_RESOURCE(Mesh, 0)

@@ -9,6 +9,7 @@
 
 class StructuredBuffer : public IResource
 {
+DEFINE_RESOURCE(StructuredBuffer)
 public:
     template<class T, UINT m_numberOfElements>
 	bool Initialize()
@@ -71,9 +72,9 @@ public:
         return m_myShaderResourceViewId;
     }
 
-	REGISTER_RESOURCE(StructuredBuffer, 4)
 
 private:
     int m_myShaderResourceViewId = -1;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };
+REGISTER_RESOURCE(StructuredBuffer, 4)

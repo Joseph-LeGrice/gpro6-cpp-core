@@ -50,6 +50,8 @@ public:
         return false;
     }
 
+	void Release() override { }
+
     T& GetData()
     {
         return m_data;

@@ -6,6 +6,6 @@
 
 class StandardMaterial : public Material<MATERIAL_BUFFER_CONTAINER>
 {
-public:
-	REGISTER_RESOURCE(StandardMaterial, 10)
+DEFINE_RESOURCE(StandardMaterial)
 };
+REGISTER_RESOURCE(StandardMaterial, 10)

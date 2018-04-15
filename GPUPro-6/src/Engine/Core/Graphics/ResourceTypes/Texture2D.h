@@ -11,6 +11,7 @@ struct ID3D11Texture2D;
 
 class Texture2D : public IResource
 {
+DEFINE_RESOURCE(Texture2D)
 public:
     unsigned int Width();
     unsigned int Height();
@@ -21,8 +22,6 @@ public:
     void SetPixels(Color cArray[], size_t arraySize);
     virtual void Release() override;
 
-	REGISTER_RESOURCE(Texture2D, 5)
-
 private:
     int m_myShaderResourceViewIndex = -1;
     FIBITMAP* m_bitmap = nullptr;
@@ -30,3 +29,4 @@ private:
 	
     void CreateResources();
 };
+REGISTER_RESOURCE(Texture2D, 5)

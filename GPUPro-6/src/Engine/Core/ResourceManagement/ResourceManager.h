@@ -32,14 +32,14 @@ private:
 template<class T>
 T* ResourceManager::CreateResource()
 {
-	ResourceTypeID typeId = T::GetResourceTypeID();
+	ResourceTypeID typeId = GetResourceTypeID<T>();
 	return static_cast<T*>(CreateResource(typeId));
 }
 
 template<class T>
 void ResourceManager::DestroyResource(int index)
 {
-	ResourceTypeID typeId = T::GetResourceTypeID();
+	ResourceTypeID typeId = GetResourceTypeID<T>();
 	DestroyResource(typeId, index);
 }
 
@@ -48,7 +48,7 @@ std::vector<T*> ResourceManager::GetAllResourcesOfType()
 {
 	struct CastComponent { T* operator ()(IResource* value) const { return static_cast<T*>(value); } };
 
-	ResourceTypeID typeId = T::GetResourceType();
+	ResourceTypeID typeId = GetResourceTypeID<T>();
 	std::vector<T*> result = GetAllResourcesOfType(typeId);
 	std::transform(existing.begin(), existing.end(), result.begin(), CastComponent());
 	return result;
@@ -57,7 +57,7 @@ std::vector<T*> ResourceManager::GetAllResourcesOfType()
 template<class T>
 T* ResourceManager::GetResource(size_t arrayIndex)
 {
-	ResourceTypeID typeId = T::GetResourceTypeID();
+	ResourceTypeID typeId = GetResourceTypeID<T>();
 	IResource* result = GetResource(typeId, arrayIndex);
 	if (result != nullptr)
 	{

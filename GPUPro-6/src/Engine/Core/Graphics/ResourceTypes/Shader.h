@@ -15,6 +15,8 @@ struct ID3D11DomainShader;
 
 class Shader : public IResource
 {
+DEFINE_RESOURCE(Shader)
+
 public:
 	bool SetCurrentIfValid();
 
@@ -25,7 +27,6 @@ public:
 	bool InitPixelShader(std::wstring filename, std::string name);
 
 	virtual void Release() override;
-	REGISTER_RESOURCE(Shader, 1)
 
 private:
     ManualRelease<ID3D11InputLayout> m_inputLayout;
@@ -35,3 +36,4 @@ private:
     ManualRelease<ID3D11HullShader> m_hullShader;
     ManualRelease<ID3D11DomainShader> m_domainShader;
 };
+REGISTER_RESOURCE(Shader, 1)

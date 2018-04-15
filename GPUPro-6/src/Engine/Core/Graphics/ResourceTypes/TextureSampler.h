@@ -9,14 +9,15 @@ class GraphicsDevice;
 
 class TextureSampler : public IResource
 {
+DEFINE_RESOURCE(TextureSampler)
 public:
 	void BindTextureSampler(UINT samplerIndex);
 	bool Initialize();
 	bool IsValid();
 
     virtual void Release() override;
-	REGISTER_RESOURCE(TextureSampler, 6)
 
 private:
 	ManualRelease<ID3D11SamplerState> m_sampler;
 };
+REGISTER_RESOURCE(TextureSampler, 6)
