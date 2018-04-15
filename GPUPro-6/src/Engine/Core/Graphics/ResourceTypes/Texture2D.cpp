@@ -116,7 +116,7 @@ void Texture2D::CreateResources()
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTexture, NULL);
         if (!createdView)
         {
-			GlobalStaticReferences::Instance()->GetResourceManager()->Deallocate<ShaderResource>(m_myShaderResourceViewIndex);
+			GlobalStaticReferences::Instance()->GetResourceManager()->DestroyResource<ShaderResource>(m_myShaderResourceViewIndex);
             LogError("Could not create resource view");
         }
     }

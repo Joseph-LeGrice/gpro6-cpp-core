@@ -2,9 +2,6 @@
 
 #include <unordered_map>
 #include "IResource.h"
-#include "ResourceTypeMapping.h"
-
-class GraphicsDevice;
 
 class ResourceManager
 {

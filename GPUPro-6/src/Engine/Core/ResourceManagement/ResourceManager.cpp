@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ResourceManager.h"
+#include "ResourceTypeMapping.h"
 
 ResourceManager::~ResourceManager()
 {

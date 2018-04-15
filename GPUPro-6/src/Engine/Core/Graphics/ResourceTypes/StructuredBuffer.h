@@ -43,7 +43,7 @@ public:
 		if (!createdView)
         {
             m_buffer.ReleasePointer();
-			GlobalStaticReferences::Instance()->GetResourceManager()->Deallocate<ShaderResource>(m_myShaderResourceViewId);
+			GlobalStaticReferences::Instance()->GetResourceManager()->DestroyResource<ShaderResource>(m_myShaderResourceViewId);
 
             return false;
         }
