@@ -10,7 +10,7 @@ class ResourceManager
 {
 public:
 	template<class T>
-	std::vector<T*> GetAllAssetsOfType()
+	std::vector<T*> GetAllResourcesOfType()
 	{
 		struct CastComponent { T* operator ()(IResource* value) const { return static_cast<T*>(value); } };
 
@@ -54,7 +54,7 @@ public:
 	IResource* CreateResource(ResourceTypeID typeId);
 
 	template<class T>
-	void Deallocate(int index)
+	void DestroyResource(int index)
 	{
 		ResourceTypeID typeId = T::GetResourceTypeID();
 		if (m_resourceListMap.count(typeId) > 0)

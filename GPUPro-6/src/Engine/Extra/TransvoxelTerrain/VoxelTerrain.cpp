@@ -17,7 +17,7 @@ VoxelTerrain::~VoxelTerrain()
 
 void VoxelTerrain::DeallocateMesh()
 {
-	m_resourceManager.Deallocate<Mesh>(m_meshResourceId);
+	m_resourceManager.DestroyResource<Mesh>(m_meshResourceId);
 }
 
 int VoxelTerrain::GetMeshID()
