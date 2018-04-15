@@ -27,6 +27,8 @@ public:
 
 private:
 	std::unordered_map<ResourceTypeID, std::vector<IResource*>> m_resourceListMap;
+
+	std::vector<IResource*>& GetResourceList(ResourceTypeID typeId);
 };
 
 template<class T>

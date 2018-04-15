@@ -30,7 +30,8 @@ struct RegisterResource
 	RegisterResource()
 	{
 		T temp;
-		ResourceTypeMappings::Instance().RegisterType(typeId, &CreateCallback, temp.GetName());
+		ResourceTypeMappings& instance = ResourceTypeMappings::Instance();
+		instance.RegisterType(typeId, &CreateCallback, temp.GetName());
 	}
 
 	ResourceTypeID GetTypeID() const

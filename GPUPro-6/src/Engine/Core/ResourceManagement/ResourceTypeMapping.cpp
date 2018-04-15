@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ResourceTypeMapping.h"
+#include <string>
 
 ResourceTypeMappings& ResourceTypeMappings::Instance()
 {
@@ -25,7 +26,7 @@ ScriptedResourceMap* ResourceTypeMappings::GetMapObject(const char* managedTypeN
 	for (int i = 0; i < m_scriptedTypeMap.size(); i++)
 	{
 		ScriptedResourceMap& srm = m_scriptedTypeMap[i];
-		if (srm.managedTypeName == managedTypeName)
+		if (strcmp(srm.managedTypeName, managedTypeName) == 0)
 		{
 			return &srm;
 		}
@@ -35,8 +36,10 @@ ScriptedResourceMap* ResourceTypeMappings::GetMapObject(const char* managedTypeN
 
 void ResourceTypeMappings::RegisterType(ResourceTypeID typeId, CreateResourceCallback resourceCallback, const char* managedTypeName)
 {
-	custom_assert::is_true(Instance().GetMapObject(typeId) == nullptr, "ResourceTypeID has already been registered");
-	Instance().m_scriptedTypeMap.push_back({ typeId, managedTypeName, resourceCallback });
+	if (GetMapObject(typeId) == nullptr)
+	{
+		m_scriptedTypeMap.push_back({ typeId, managedTypeName, resourceCallback });
+	}
 }
 
 IResource* ResourceTypeMappings::CreateType(ResourceTypeID typeId)

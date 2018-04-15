@@ -27,4 +27,5 @@ private:
 	uint32_t m_objectHandle;
 
 	void ConstructManagedObject();
+	void ReleaseManagedObject();
 };

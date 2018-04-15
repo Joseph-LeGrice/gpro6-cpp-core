@@ -15,41 +15,46 @@ ResourceManager::~ResourceManager()
 	}
 }
 
-IResource* ResourceManager::CreateResource(ResourceTypeID typeId)
+std::vector<IResource*>& ResourceManager::GetResourceList(ResourceTypeID typeId)
 {
 	if (m_resourceListMap.count(typeId) > 0)
 	{
-		std::vector<IResource*>& resources = m_resourceListMap[typeId];
-
-		size_t index = resources.size();
-		IResource* newResource = ResourceTypeMappings::Instance().CreateType(typeId);
-		newResource->m_resourceIndex = index;
-		newResource->ConstructManagedObject();
-		resources.push_back(newResource);
-
-		return resources[index];
+		return m_resourceListMap[typeId];
 	}
 	else
 	{
-		return nullptr;
+		std::vector<IResource*> newVector;
+		m_resourceListMap.insert({ typeId, newVector });
+		return m_resourceListMap[typeId];
 	}
+}
+
+IResource* ResourceManager::CreateResource(ResourceTypeID typeId)
+{
+	std::vector<IResource*>& resources = GetResourceList(typeId);
+
+	size_t index = resources.size();
+	IResource* newResource = ResourceTypeMappings::Instance().CreateType(typeId);
+	newResource->m_resourceIndex = index;
+	newResource->ConstructManagedObject();
+	resources.push_back(newResource);
+
+	return resources[index];
 }
 
 void ResourceManager::DestroyResource(ResourceTypeID typeId, int index)
 {
-	if (m_resourceListMap.count(typeId) > 0)
-	{
-		std::vector<IResource*>& resources = m_resourceListMap[typeId];
-		size_t length = resources.size();
+	std::vector<IResource*>& resources = GetResourceList(typeId);
+	size_t length = resources.size();
 
-		resources[index]->Release();
-		delete resources[index];
+	resources[index]->Release();
+	resources[index]->ReleaseManagedObject();
+	delete resources[index];
 
-		resources[index] = resources[length - 1];
-		resources[index]->m_resourceIndex = index;
+	resources[index] = resources[length - 1];
+	resources[index]->m_resourceIndex = index;
 
-		resources.resize(length - 1);
-	}
+	resources.resize(length - 1);
 }
 
 std::vector<IResource*> ResourceManager::GetAllResourcesOfType(ResourceTypeID typeId)
@@ -66,13 +71,14 @@ std::vector<IResource*> ResourceManager::GetAllResourcesOfType(ResourceTypeID ty
 
 IResource* ResourceManager::GetResource(ResourceTypeID typeId, size_t arrayIndex)
 {
-	if (m_resourceListMap.count(typeId) > 0)
+	std::vector<IResource*>& resources = GetResourceList(typeId);
+
+	if (resources.size() > 0 && arrayIndex < resources.size())
 	{
-		std::vector<IResource*>& existing = m_resourceListMap[typeId];
-		if (existing.size() > 0 && arrayIndex < existing.size())
-		{
-			return existing[arrayIndex];
-		}
+		return resources[arrayIndex];
 	}
-	return nullptr;
+	else
+	{
+		return nullptr;
+	}
 }

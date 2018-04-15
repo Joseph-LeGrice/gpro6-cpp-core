@@ -21,11 +21,15 @@ void IResource::ConstructManagedObject()
 	m_objectHandle = mono_gchandle_new(managedObject, FALSE);
 }
 
+void IResource::ReleaseManagedObject()
+{
+	mono_gchandle_free(m_objectHandle);
+}
+
 IResource::IResource()
 {
 }
 
 IResource::~IResource()
 {
-	mono_gchandle_free(m_objectHandle);
 }
