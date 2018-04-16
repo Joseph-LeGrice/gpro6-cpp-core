@@ -1,12 +1,31 @@
 #include "stdafx.h"
 #include "Texture2DAPI.h"
 
+#include "Engine/Core/GlobalStaticReferences.h"
+#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
+#include <glib.h>
+
+std::wstring GetUTF16(MonoString* ms)
+{
+	mono_unichar2* pathStr = mono_string_to_utf16(ms);
+	std::wstringstream ss;
+	int i = 0;
+	while (pathStr[i] != NULL)
+	{
+		ss << static_cast<wchar_t>(pathStr[i]);
+		i++;
+	}
+	g_free(static_cast<void*>(pathStr));
+	return ss.str();
+}
+
 void Texture2DAPI::InitializeWithBitmap(int instanceid, MonoString* path)
 {
-	const char* pathStr = mono_string_to_utf8(path);
-	std::stringstream ss;
-	ss << instanceid << " - " << pathStr;
-	Log(ss.str());
+	std::wstring pathStr = GetUTF16(path);
+	ResourceManager* rm = GlobalStaticReferences::Instance()->GetResourceManager();
+	Texture2D* t = rm->GetResource<Texture2D>(instanceid);
+	t->InitializeWithBitmap(pathStr.c_str());
 }
 
 void Texture2DAPI::RegisterMonoMethods()

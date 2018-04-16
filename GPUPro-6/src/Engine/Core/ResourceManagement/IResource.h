@@ -26,6 +26,7 @@ private:
 	size_t m_resourceIndex;
 	uint32_t m_objectHandle;
 
+	void SetResourceIndex(size_t resourceIndex);
 	void ConstructManagedObject();
 	void ReleaseManagedObject();
 };

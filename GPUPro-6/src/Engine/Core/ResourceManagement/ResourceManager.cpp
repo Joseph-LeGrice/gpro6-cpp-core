@@ -35,8 +35,8 @@ IResource* ResourceManager::CreateResource(ResourceTypeID typeId)
 
 	size_t index = resources.size();
 	IResource* newResource = ResourceTypeMappings::Instance().CreateType(typeId);
-	newResource->m_resourceIndex = index;
 	newResource->ConstructManagedObject();
+	newResource->SetResourceIndex(index);
 	resources.push_back(newResource);
 
 	return resources[index];
@@ -52,7 +52,7 @@ void ResourceManager::DestroyResource(ResourceTypeID typeId, int index)
 	delete resources[index];
 
 	resources[index] = resources[length - 1];
-	resources[index]->m_resourceIndex = index;
+	resources[index]->SetResourceIndex(index);
 
 	resources.resize(length - 1);
 }

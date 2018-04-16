@@ -7,8 +7,8 @@ static class Application
     {
         get 
         {
-            string assemblyPath = Assembly.GetEntryAssembly().Location;
-            return Path.Combine(assemblyPath, "Resources/");
+            string assemblyPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            return Path.Combine(assemblyPath, "Resources").Replace("/", "\\\\");
         }
     }
 }

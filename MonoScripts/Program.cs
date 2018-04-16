@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 class Program
@@ -9,7 +10,7 @@ class Program
 
         //------------------------------------------------------------------------------------
         Texture2D testImageTexture = ResourceManager.CreateResource<Texture2D>();
-        string testImagePath = Application.ResourcePath + "GameResources/GPro_Test/TestImage.png";
+        string testImagePath = Path.Combine(Application.ResourcePath, "GameResources\\GPro_Test\\TestImage.png");
         testImageTexture.InitializeWithBitmap(testImagePath);
         //------------------------------------------------------------------------------------
 

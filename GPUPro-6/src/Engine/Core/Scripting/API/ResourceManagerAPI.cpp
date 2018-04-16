@@ -8,6 +8,8 @@ MonoObject* ResourceManagerAPI::CreateResource(MonoString* className)
 {
 	const char* classNameReal = mono_string_to_utf8(className);
 	ResourceTypeID resourceId = ResourceTypeMappings::Instance().GetResourceType(classNameReal);
+	mono_free((void*)classNameReal);
+
 	IResource* newResourceUnmanaged = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource(resourceId);
 	return newResourceUnmanaged->GetManagedObject();
 }

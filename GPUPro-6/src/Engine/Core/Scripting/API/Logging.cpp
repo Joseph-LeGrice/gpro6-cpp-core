@@ -6,6 +6,7 @@ void Logging::LogMessage(MonoString* message)
 {
 	const char* msg = mono_string_to_utf8(message);
 	Log(msg);
+	mono_free((void*)msg);
 }
 
 void Logging::RegisterMonoMethods()
