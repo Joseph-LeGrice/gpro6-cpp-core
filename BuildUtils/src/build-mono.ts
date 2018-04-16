@@ -15,7 +15,7 @@ function getFiles(directory: string, results: string[]) : void {
     fs.readdirSync(directory).forEach((f, index, array) => {
         const fullPath = path.join(directory, f);
         if (fs.statSync(fullPath).isDirectory()
-            && EXCLUDED_DIRECTORIES.findIndex((v, i ,o) => { return  v === f; }) !== -1) {
+            && EXCLUDED_DIRECTORIES.findIndex((v, i ,o) => { return  v === f; }) === -1) {
             getFiles(fullPath, results);
         } else {
             const extension = fullPath.substring(fullPath.lastIndexOf('.'));
