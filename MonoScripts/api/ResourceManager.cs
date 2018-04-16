@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class ResourceManagerAPI
+class ResourceManager
 {
 	//static MonoObject* GetResource(int resourceIndex);
     //static MonoArray* GetAllResourcesOfType(MonoType resourceType);
