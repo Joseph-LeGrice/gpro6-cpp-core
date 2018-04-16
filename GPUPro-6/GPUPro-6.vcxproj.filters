@@ -123,6 +123,8 @@
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\ResourceManagerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceTypeMapping.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -301,6 +303,8 @@
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\ResourceManagerAPI.h" />
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceTypeMapping.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\Logging.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

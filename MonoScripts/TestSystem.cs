@@ -9,26 +9,26 @@ class TestSystem
 
     private void Initialize()
     {
-        Console.WriteLine("Initialize");
+        Logging.LogMessage("Initialized a system");
     }
 
     // private override void EarlyTick()
     // {
-    //     Console.WriteLine("EarlyTick");
+    //     Logging.LogMessage("EarlyTick");
     // }
 
-    private void VariableTick()
-    {
-        Console.WriteLine("VariableTick");
-    }
+    // private void VariableTick()
+    // {
+    //     Logging.LogMessage("VariableTick");
+    // }
 
-    private void LateVariableTick()
-    {
-        Console.WriteLine("LateTick");
-    }
+    // private void LateVariableTick()
+    // {
+    //     Logging.LogMessage("LateTick");
+    // }
 
     private void Deinitialize()
     {
-        Console.WriteLine("Deinitialize");
+        Logging.LogMessage("Deinitialized a system");
     }
 }

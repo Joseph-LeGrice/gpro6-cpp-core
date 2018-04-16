@@ -7,7 +7,10 @@
 #include <mono/jit/jit.h>
 #include <mono/metadata/mono-config.h>
 #include <mono/metadata/assembly.h>
+
 #include "API/ResourceManagerAPI.h"
+#include "API/types/Texture2DAPI.h"
+#include "API/Logging.h"
 
 void ScriptedSystemLoader::Initialize()
 {
@@ -18,9 +21,10 @@ void ScriptedSystemLoader::Initialize()
 	m_assembly = mono_domain_assembly_open(m_domain, "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\build\\x64-Debug\\MonoScripts.exe");
 	m_image = mono_assembly_get_image(m_assembly);
 	
-	mono_add_internal_call("MonoSystemInterface::RegisterSystem", ScriptedSystemInterface::RegisterSystemInstance);
-
+	ScriptedSystemInterface::RegisterMonoMethods();
 	ResourceManagerAPI::RegisterMonoMethods();
+	Texture2DAPI::RegisterMonoMethods();
+	Logging::RegisterMonoMethods();
 
 	if (m_assembly != NULL)
 	{
@@ -29,11 +33,7 @@ void ScriptedSystemLoader::Initialize()
 			"MonoSystemLoader"
 		};
 
-		int retVal = mono_jit_exec(m_domain, m_assembly, argc, argv);
-		std::stringstream ss;
-		ss << "Return Value: " << retVal;
-		Log(ss.str());
-
+		mono_jit_exec(m_domain, m_assembly, argc, argv);
 		mono_domain_finalize(m_domain, 5);
 	}
 }

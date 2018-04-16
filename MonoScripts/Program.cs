@@ -8,9 +8,9 @@ class Program
         TestSystem test = new TestSystem();
 
         //------------------------------------------------------------------------------------
-        Texture2D testImageTexture = ResourceManagerAPI.CreateResource<Texture2D>();
-        // std::wstring testImagePath = Application::GetResourcePath(L"GameResources/GPro_Test/TestImage.png");
-        // testImageTexture->InitializeWithBitmap(testImagePath.c_str());
+        Texture2D testImageTexture = ResourceManager.CreateResource<Texture2D>();
+        string testImagePath = Application.ResourcePath + "GameResources/GPro_Test/TestImage.png";
+        testImageTexture.InitializeWithBitmap(testImagePath);
         //------------------------------------------------------------------------------------
 
         /*

@@ -14,3 +14,8 @@ void ScriptedSystemInterface::RegisterSystemInstance(MonoObject* object)
 	ScriptedSystemLoader* systemLoader = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
 	systemLoader->RegisterSubsystem(newSystem);
 }
+
+void ScriptedSystemInterface::RegisterMonoMethods()
+{
+	mono_add_internal_call("MonoSystemInterface::RegisterSystem", ScriptedSystemInterface::RegisterSystemInstance);
+}

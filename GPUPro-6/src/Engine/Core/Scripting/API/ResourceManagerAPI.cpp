@@ -14,7 +14,7 @@ MonoObject* ResourceManagerAPI::CreateResource(MonoString* className)
 
 void ResourceManagerAPI::RegisterMonoMethods()
 {
-	mono_add_internal_call("ResourceManagerAPI::CreateResource", ResourceManagerAPI::CreateResource);
+	mono_add_internal_call("ResourceManager::CreateResource", ResourceManagerAPI::CreateResource);
 	//mono_add_internal_call("ResourceManagerAPI::DestroyResource", ResourceManagerAPI::DestroyResource);
 	//mono_add_internal_call("ResourceManagerAPI::GetAllResourcesOfType", ResourceManagerAPI::GetAllResourcesOfType);
 	//mono_add_internal_call("ResourceManagerAPI::GetResource", ResourceManagerAPI::GetResource);

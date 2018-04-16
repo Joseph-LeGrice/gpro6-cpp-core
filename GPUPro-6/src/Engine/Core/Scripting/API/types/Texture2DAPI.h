@@ -5,9 +5,9 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-struct ScriptedSystemInterface
+struct Texture2DAPI
 {
-	static void RegisterSystemInstance(MonoObject* object);
+	static void InitializeWithBitmap(int instanceid, MonoString* path);
 
 	static void RegisterMonoMethods();
 };
