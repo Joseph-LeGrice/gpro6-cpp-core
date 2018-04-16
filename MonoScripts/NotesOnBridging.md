@@ -1,7 +1,6 @@
 # Notes on C# Bridging
 
 ## List of Systems to Bridge:
-- SystemManager -> GetSystem
 - SceneGraph -> CreateComponent
 - ResourceManager -> CreateResource
 - VoxelTerrain -> CreateTerrain
@@ -25,4 +24,4 @@
 
 ## Utilities
 - Application::GetResourcePath
-- DrawCommands
+- DrawCommands?

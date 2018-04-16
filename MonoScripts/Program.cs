@@ -7,13 +7,13 @@ class Program
     {
         TestSystem test = new TestSystem();
 
-        /*
         //------------------------------------------------------------------------------------
-        Texture2D* testImageTexture = m_resourceManager.Instantiate<Texture2D>();
-        std::wstring testImagePath = Application::GetResourcePath(L"GameResources/GPro_Test/TestImage.png");
-        testImageTexture->InitializeWithBitmap(testImagePath.c_str());
+        Texture2D testImageTexture = ResourceManagerAPI.CreateResource<Texture2D>();
+        // std::wstring testImagePath = Application::GetResourcePath(L"GameResources/GPro_Test/TestImage.png");
+        // testImageTexture->InitializeWithBitmap(testImagePath.c_str());
         //------------------------------------------------------------------------------------
 
+        /*
         //------------------------------------------------------------------------------------
         int lightBufferIndex = GetSystemManager().GetSystem<LightingSystem>()->GetBufferResourceIndex();
         StructuredBuffer* lightBuffer = m_resourceManager.GetAsset<StructuredBuffer>(lightBufferIndex);
