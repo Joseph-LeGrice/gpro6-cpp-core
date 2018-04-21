@@ -1,9 +1,5 @@
 #pragma once
-
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include <mono/metadata/object.h>
-#pragma warning(pop)
+#include "Engine/Core/Scripting/ManagedObject.h"
 
 typedef uint16_t ResourceTypeID;
 
@@ -15,18 +11,16 @@ public:
 	IResource();
 	virtual ~IResource();
 
-	virtual void Release() = 0;
+	virtual void Initialize();
+	virtual void Release();
 	virtual const char* GetName() = 0;
 
-	MonoObject* GetManagedObject();
-
+	ManagedObject* GetManagedObject();
 	size_t GetResourceIndex();
 
 private:
+	ManagedObject* m_managedObject = nullptr;
 	size_t m_resourceIndex;
-	uint32_t m_objectHandle;
 
 	void SetResourceIndex(size_t resourceIndex);
-	void ConstructManagedObject();
-	void ReleaseManagedObject();
 };

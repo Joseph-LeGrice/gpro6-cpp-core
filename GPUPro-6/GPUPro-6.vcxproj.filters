@@ -125,6 +125,7 @@
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceTypeMapping.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ManagedObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -305,6 +306,7 @@
     <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceTypeMapping.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\Logging.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ManagedObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

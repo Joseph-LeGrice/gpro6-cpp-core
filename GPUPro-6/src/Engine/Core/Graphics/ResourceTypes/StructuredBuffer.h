@@ -12,7 +12,7 @@ class StructuredBuffer : public IResource
 DEFINE_RESOURCE(StructuredBuffer)
 public:
     template<class T, UINT m_numberOfElements>
-	bool Initialize()
+	bool CreateBuffer()
 	{
 		D3D11_BUFFER_DESC bDesc;
 		ZeroMemory(&bDesc, sizeof(D3D11_BUFFER_DESC));

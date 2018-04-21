@@ -15,8 +15,10 @@ void TextureSampler::BindTextureSampler(UINT samplerIndex)
     deviceContext->PSSetSamplers(samplerIndex, 1, m_sampler);
 }
 
-bool TextureSampler::Initialize()
+void TextureSampler::Initialize()
 {
+	IResource::Initialize();
+
 	D3D11_SAMPLER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_SAMPLER_DESC));
 	desc.Filter = D3D11_FILTER_ANISOTROPIC;
@@ -32,7 +34,7 @@ bool TextureSampler::Initialize()
 
 	ID3D11Device* device = GlobalStaticReferences::Instance()->GetGraphicsDevice()->GetGraphicsDevice();
 	HRESULT createSamplerResult = device->CreateSamplerState(&desc, m_sampler);
-	return SUCCEEDED(createSamplerResult);
+	custom_assert::is_true(SUCCEEDED(createSamplerResult));
 }
 
 bool TextureSampler::IsValid()

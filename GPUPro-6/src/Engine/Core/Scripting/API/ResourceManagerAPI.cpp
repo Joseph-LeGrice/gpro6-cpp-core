@@ -10,8 +10,10 @@ MonoObject* ResourceManagerAPI::CreateResource(MonoString* className)
 	ResourceTypeID resourceId = ResourceTypeMappings::Instance().GetResourceType(classNameReal);
 	mono_free((void*)classNameReal);
 
-	IResource* newResourceUnmanaged = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource(resourceId);
-	return newResourceUnmanaged->GetManagedObject();
+	ResourceManager* rm = GlobalStaticReferences::Instance()->GetResourceManager();
+	IResource* newResourceUnmanaged = rm->CreateResource(resourceId);
+	ManagedObject* managedObj = newResourceUnmanaged->GetManagedObject();
+	return managedObj->GetManagedObject();
 }
 
 void ResourceManagerAPI::RegisterMonoMethods()

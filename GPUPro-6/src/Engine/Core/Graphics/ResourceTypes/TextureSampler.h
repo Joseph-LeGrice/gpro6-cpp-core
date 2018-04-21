@@ -12,7 +12,7 @@ class TextureSampler : public IResource
 DEFINE_RESOURCE(TextureSampler)
 public:
 	void BindTextureSampler(UINT samplerIndex);
-	bool Initialize();
+	void Initialize() override;
 	bool IsValid();
 
     virtual void Release() override;
