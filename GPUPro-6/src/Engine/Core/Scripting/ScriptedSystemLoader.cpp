@@ -12,6 +12,10 @@
 #include "API/types/Texture2DAPI.h"
 #include "API/Logging.h"
 
+#include "Engine/Core/GlobalStaticReferences.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
+#include "ManagedObject.h"
+
 void ScriptedSystemLoader::Initialize()
 {
 	ISystem::Initialize();
@@ -46,13 +50,18 @@ void ScriptedSystemLoader::Deinitalize()
 	m_domain = nullptr;
 }
 
-MonoObject* ScriptedSystemLoader::CreateObject(const char* typeName)
+ManagedObject* ScriptedSystemLoader::CreateObject(const char* typeName)
 {
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	ManagedObject* instance = tom->Create<ManagedObject>();
+
 	MonoClass* managedClass = mono_class_from_name(m_image, "", typeName);
 	custom_assert::is_true(managedClass != nullptr, "Managed class does not exist for typeName");
 
 	MonoObject* managedObject = mono_object_new(m_domain, managedClass);
 	mono_runtime_object_init(managedObject);
 	
-	return managedObject;
+	instance->m_objectHandle = mono_gchandle_new(managedObject, FALSE);
+
+	return instance;
 }

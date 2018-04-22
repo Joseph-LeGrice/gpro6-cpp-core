@@ -34,4 +34,4 @@ private:
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
 };
-REGISTER_RESOURCE(Mesh, 0)
+REGISTER_TYPE(Mesh, 0)

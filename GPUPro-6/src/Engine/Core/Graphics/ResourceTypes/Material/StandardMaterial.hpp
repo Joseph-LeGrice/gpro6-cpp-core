@@ -12,4 +12,4 @@ public:
 		return TO_STRING(StandardMaterial);
 	}
 };
-REGISTER_RESOURCE(StandardMaterial, 10)
+REGISTER_TYPE(StandardMaterial, 10)

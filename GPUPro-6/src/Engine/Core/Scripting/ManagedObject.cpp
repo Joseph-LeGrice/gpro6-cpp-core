@@ -4,6 +4,11 @@
 
 #include "Engine/Core/Scripting/ScriptedSystemLoader.h"
 
+ManagedObject::~ManagedObject()
+{
+	mono_gchandle_free(m_objectHandle);
+}
+
 MonoObject* ManagedObject::GetManagedObject()
 {
 	return mono_gchandle_get_target(m_objectHandle);
@@ -15,20 +20,4 @@ void ManagedObject::SetFieldValue(const char* fieldName, void* value)
 	MonoClass* managedClass = mono_object_get_class(managedObject);
 	MonoClassField* field = mono_class_get_field_from_name(managedClass, fieldName);
 	mono_field_set_value(managedObject, field, value);
-}
-
-ManagedObject* ManagedObject::ConstructManagedObject(const char* className)
-{
-	ScriptedSystemLoader* monoLoader = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
-	MonoObject* managedObject = monoLoader->CreateObject(className);
-	ManagedObjectID objId = mono_gchandle_new(managedObject, FALSE);
-	return new ManagedObject(objId);
-}
-
-void ManagedObject::ReleaseManagedObject(ManagedObject** obj)
-{
-	ManagedObject* objPointer = *obj;
-	mono_gchandle_free(objPointer->m_objectHandle);
-	delete objPointer;
-	obj = nullptr;
 }

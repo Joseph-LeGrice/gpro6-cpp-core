@@ -11,4 +11,4 @@ public:
 		return TO_STRING(SimpleMaterial);
 	}
 };
-REGISTER_RESOURCE(SimpleMaterial, 11)
+REGISTER_TYPE(SimpleMaterial, 11)

@@ -24,4 +24,4 @@ public:
 private:
 	ManualRelease<ID3D11SamplerState> m_sampler;
 };
-REGISTER_RESOURCE(TextureSampler, 6)
+REGISTER_TYPE(TextureSampler, 6)

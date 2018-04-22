@@ -34,4 +34,4 @@ private:
 	
     void CreateResources();
 };
-REGISTER_RESOURCE(Texture2D, 5)
+REGISTER_TYPE(Texture2D, 5)

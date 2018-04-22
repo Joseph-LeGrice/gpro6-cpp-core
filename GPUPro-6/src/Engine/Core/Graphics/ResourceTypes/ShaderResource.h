@@ -23,4 +23,4 @@ public:
 protected:
     ManualRelease<ID3D11ShaderResourceView> m_resourceView;
 };
-REGISTER_RESOURCE(ShaderResource, 2)
+REGISTER_TYPE(ShaderResource, 2)

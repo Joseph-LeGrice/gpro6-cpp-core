@@ -8,6 +8,14 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
+class ManagedObject;
+
+//struct ManagedObjectMap
+//{
+//	TypeID m_nativeTypeId;
+//	InstanceID m_nativeInstanceId;
+//	InstanceID m_managedObjectId;
+//};
 
 class ScriptedSystemLoader : public ISystem
 {
@@ -15,7 +23,7 @@ public:
 	virtual void Initialize() override;
 	virtual void Deinitalize() override;
 
-	MonoObject* CreateObject(const char* typeName);
+	ManagedObject* CreateObject(const char* typeName);
 
 private:
 	MonoImage* m_image;

@@ -12,7 +12,11 @@ MonoObject* ResourceManagerAPI::CreateResource(MonoString* className)
 
 	ResourceManager* rm = GlobalStaticReferences::Instance()->GetResourceManager();
 	IResource* newResourceUnmanaged = rm->CreateResource(resourceId);
-	ManagedObject* managedObj = newResourceUnmanaged->GetManagedObject();
+
+	InstanceID managedObjectId;
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	ManagedObject* managedObj = tom->GetInstance<ManagedObject>(managedObjectId);
+
 	return managedObj->GetManagedObject();
 }
 

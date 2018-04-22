@@ -38,4 +38,4 @@ private:
     ManualRelease<ID3D11HullShader> m_hullShader;
     ManualRelease<ID3D11DomainShader> m_domainShader;
 };
-REGISTER_RESOURCE(Shader, 1)
+REGISTER_TYPE(Shader, 1)

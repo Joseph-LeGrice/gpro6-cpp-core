@@ -81,4 +81,4 @@ private:
     int m_myShaderResourceViewId = -1;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };
-REGISTER_RESOURCE(StructuredBuffer, 4)
+REGISTER_TYPE(StructuredBuffer, 4)

@@ -17,10 +17,4 @@ public:
 private:
 	TypeID m_typeId;
 	InstanceID m_instanceId;
-
-	void SetInstanceID(InstanceID iid)
-	{
-		m_instanceId = iid;
-		//m_managedObject->SetFieldValue("m_resourceIndex", &m_instanceId);
-	}
 };
