@@ -313,6 +313,7 @@
     <ClInclude Include="src\Engine\Core\RTTI\RTTI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\HelperCreationMethods.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

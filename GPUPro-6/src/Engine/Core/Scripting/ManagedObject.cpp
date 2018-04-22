@@ -6,7 +6,10 @@
 
 ManagedObject::~ManagedObject()
 {
-	mono_gchandle_free(m_objectHandle);
+	if (m_objectHandle != 0)
+	{
+		mono_gchandle_free(m_objectHandle);
+	}
 }
 
 MonoObject* ManagedObject::GetManagedObject()

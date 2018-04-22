@@ -27,6 +27,8 @@ public:
 		return TO_STRING(Texture2D);
 	}
 
+	virtual void DoCreationActions() override;
+
 private:
     int m_myShaderResourceViewIndex = -1;
     FIBITMAP* m_bitmap = nullptr;
