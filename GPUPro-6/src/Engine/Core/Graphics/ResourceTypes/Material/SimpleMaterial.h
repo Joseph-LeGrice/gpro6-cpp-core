@@ -1,10 +1,14 @@
 #pragma once
 
 #include "Material.hpp"
-#include "Engine/Core/ResourceManagement/ResourceTypeMapping.h"
+
 
 class SimpleMaterial : public Material<void>
 {
-DEFINE_RESOURCE(SimpleMaterial)
+public:
+	virtual const char* GetTypeName() override
+	{
+		return TO_STRING(SimpleMaterial);
+	}
 };
 REGISTER_RESOURCE(SimpleMaterial, 11)

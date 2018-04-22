@@ -9,7 +9,6 @@
 
 class StructuredBuffer : public IResource
 {
-DEFINE_RESOURCE(StructuredBuffer)
 public:
     template<class T, UINT m_numberOfElements>
 	bool CreateBuffer()
@@ -38,7 +37,7 @@ public:
         rvDesc.Buffer.ElementWidth = m_numberOfElements;
         
         ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource<ShaderResource>();
-		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetResourceIndex());
+		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetInstanceID());
         
         bool createdView = myShaderResourceView->CreateViewWithResource(m_buffer, &rvDesc);
 		if (!createdView)
@@ -64,14 +63,19 @@ public:
 		}
 	}
 
-    void BindResource(UINT resourceIndex);
+	void BindResource(UINT resourceIndex);
+	
+	virtual const char* GetTypeName() override
+	{
+		return TO_STRING(StructuredBuffer);
+	}
+
     virtual void Release() override;
 
     int GetMyResourceViewID()
     {
         return m_myShaderResourceViewId;
     }
-
 
 private:
     int m_myShaderResourceViewId = -1;

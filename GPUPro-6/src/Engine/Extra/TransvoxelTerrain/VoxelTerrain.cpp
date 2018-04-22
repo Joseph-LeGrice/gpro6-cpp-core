@@ -199,7 +199,7 @@ void VoxelTerrain::GenerateMesh()
     Mesh* m = m_resourceManager.CreateResource<Mesh>();
 	m->SetVertices(verts);
 	m->SetIndices(tris);
-	m_meshResourceId = static_cast<int>(m->GetResourceIndex());
+	m_meshResourceId = static_cast<int>(m->GetInstanceID());
 }
 
 int VoxelTerrain::ShiftVoxelIndex(int voxelIndex, int xDelta, int yDelta, int zDelta)

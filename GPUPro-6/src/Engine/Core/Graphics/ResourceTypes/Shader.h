@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include "Engine/Core/ResourceManagement/IResource.h"
-#include "Engine/Core/ResourceManagement/ResourceTypeMapping.h"
 
 class GraphicsDevice;
 struct ID3D11InputLayout;
@@ -15,8 +14,6 @@ struct ID3D11DomainShader;
 
 class Shader : public IResource
 {
-DEFINE_RESOURCE(Shader)
-
 public:
 	bool SetCurrentIfValid();
 
@@ -25,6 +22,11 @@ public:
 	bool InitDomainShader(std::wstring filename, std::string name);
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
+
+	virtual const char* GetTypeName() override
+	{
+		return TO_STRING(Shader);
+	}
 
 	virtual void Release() override;
 

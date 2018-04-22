@@ -1,9 +1,8 @@
 #pragma once
 #include "Engine/Core/Scripting/ManagedObject.h"
+#include "Engine/Core/RTTI/ITypedObject.h"
 
-typedef uint16_t ResourceTypeID;
-
-class IResource
+class IResource : public ITypedObject
 {
 	friend class ResourceManager;
 
@@ -13,14 +12,9 @@ public:
 
 	virtual void Initialize();
 	virtual void Release();
-	virtual const char* GetName() = 0;
 
-	ManagedObject* GetManagedObject();
-	size_t GetResourceIndex();
+	ManagedObject* GetManagedObject(); // TODO: Remove this - binding a managed + native object should be easy to configure and require no extra code
 
 private:
 	ManagedObject* m_managedObject = nullptr;
-	size_t m_resourceIndex;
-
-	void SetResourceIndex(size_t resourceIndex);
 };

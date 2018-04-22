@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Engine/Core/ResourceManagement/IResource.h"
-#include "Engine/Core/ResourceManagement/ResourceTypeMapping.h"
+
 #include "Engine/Core/Graphics/VertexData.h"
 #include <vector>
 
@@ -10,7 +10,6 @@ enum D3D_PRIMITIVE_TOPOLOGY;
 
 class Mesh : public IResource
 {
-DEFINE_RESOURCE(Mesh)
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
 
@@ -24,11 +23,15 @@ public:
 	const std::vector<VertexData>& GetVertexData();
 	const std::vector<UINT16>& GetIndices();
 
+	virtual const char* GetTypeName() override
+	{
+		return TO_STRING(Mesh);
+	}
+
     virtual void Release() override;
 
 private:
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
 };
-
 REGISTER_RESOURCE(Mesh, 0)

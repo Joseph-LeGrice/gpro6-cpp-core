@@ -4,6 +4,7 @@ class GraphicsDevice;
 class ResourceManager;
 class SystemContainer;
 class ScriptedSystemLoader;
+class TypedObjectManager;
 
 class GlobalStaticReferences
 {
@@ -11,11 +12,13 @@ public:
 	GlobalStaticReferences(SystemContainer* sysContainer,
 		ScriptedSystemLoader* monoSystemLoader,
 		GraphicsDevice* graphicsDevice,
-		ResourceManager* resourceManager);
+		ResourceManager* resourceManager,
+		TypedObjectManager* typedObjectManager);
 
 	static GlobalStaticReferences* Instance();
 	
 	GraphicsDevice* GetGraphicsDevice();
+	TypedObjectManager* GetTypedObjectManager();
 	ResourceManager* GetResourceManager();
 	SystemContainer* GetSystemContainer();
 	ScriptedSystemLoader* GetMonoSystemLoader();
@@ -27,4 +30,5 @@ private:
 	SystemContainer* m_systemContainer;
 	ResourceManager* m_resourceManager;
 	ScriptedSystemLoader* m_monoSystemLoader;
+	TypedObjectManager* m_typedObjectManager;
 };

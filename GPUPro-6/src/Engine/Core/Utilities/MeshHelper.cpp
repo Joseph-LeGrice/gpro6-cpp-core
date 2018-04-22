@@ -53,7 +53,7 @@ Mesh* MeshHelper::Quad(ResourceManager& resourceManager)
 		indices.push_back(1);
 		result->SetIndices(indices);
 
-		g_quadMeshId = static_cast<int>(result->GetResourceIndex());
+		g_quadMeshId = static_cast<int>(result->GetInstanceID());
 
 		return result;
 	}
@@ -125,7 +125,7 @@ Mesh* MeshHelper::SphereUV(ResourceManager& resourceManager)
 		result->SetUVs(uvs);
 		result->SetIndices(indices);
 
-		g_sphereUvMeshId = static_cast<int>(result->GetResourceIndex());
+		g_sphereUvMeshId = static_cast<int>(result->GetInstanceID());
 
 		return result;
 	}
@@ -277,7 +277,7 @@ Mesh* MeshHelper::Cube(ResourceManager& resourceManager)
 		result->SetUVs(uvs);
 		result->SetIndices(indices);
 
-		g_cubeMeshId = static_cast<int>(result->GetResourceIndex());
+		g_cubeMeshId = static_cast<int>(result->GetInstanceID());
 
 		return result;
 	}

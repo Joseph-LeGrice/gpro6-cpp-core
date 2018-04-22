@@ -8,6 +8,7 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
+
 class ScriptedSystemLoader : public ISystem
 {
 public:

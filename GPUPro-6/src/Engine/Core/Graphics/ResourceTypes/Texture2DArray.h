@@ -16,7 +16,7 @@ public:
     
     virtual void Release() override;
 
-	static ResourceTypeID GetResourceType()
+	static TypeID GetResourceType()
 	{
 		return 7;
 	}

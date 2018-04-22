@@ -22,3 +22,5 @@
 #include "Engine/Core/Utilities/StaticPointer.hpp"
 #include "Engine/Core/Utilities/AutoPointer.hpp"
 #include "MyMath/MyMath.h"
+
+#define TO_STRING(T) #T

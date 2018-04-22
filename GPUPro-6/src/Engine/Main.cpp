@@ -36,6 +36,7 @@
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
 
 // Etc
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
@@ -139,11 +140,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// System Container + Game Loop Entry
 	SystemContainer* systemContainer = new SystemContainer(*allSystems);
 	
+	TypedObjectManager* tom = new TypedObjectManager();
+
 	GlobalStaticReferences* refs = new GlobalStaticReferences(
 		systemContainer,
 		monoSystemLoader,
 		gfxDevice,
-		resourceManager
+		resourceManager,
+		tom
 	);
 
 	int result = gameLoop->Run(*systemContainer);

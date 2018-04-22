@@ -18,7 +18,7 @@ void MeshManager::BindBuffers()
 
 void MeshManager::RegisterMesh(Mesh* m)
 {
-	size_t resourceIndex = m->GetResourceIndex();
+	InstanceID resourceIndex = m->GetInstanceID();
 	if (m_meshInfoMapping.count(resourceIndex) == 0) {
 		m_meshInfoMapping.insert({ resourceIndex, {} });
 		RefreshBuffers();
@@ -27,7 +27,7 @@ void MeshManager::RegisterMesh(Mesh* m)
 
 void MeshManager::UnregisterMesh(Mesh* m)
 {
-	size_t resourceIndex = m->GetResourceIndex();
+	InstanceID resourceIndex = m->GetInstanceID();
 	if (m_meshInfoMapping.count(resourceIndex) != 0) {
 		m_meshInfoMapping.erase(m_meshInfoMapping.find(resourceIndex));
 		RefreshBuffers();
@@ -36,7 +36,7 @@ void MeshManager::UnregisterMesh(Mesh* m)
 
 MeshInfo MeshManager::GetMapping(Mesh* m)
 {
-	size_t resourceIndex = m->GetResourceIndex();
+	InstanceID resourceIndex = m->GetInstanceID();
 	custom_assert::is_true(m_meshInfoMapping.count(resourceIndex) != 0, "No mapping exists for Mesh!");
 	return m_meshInfoMapping[resourceIndex];
 }
@@ -46,7 +46,7 @@ void MeshManager::RefreshBuffers()
 	std::vector<VertexData> verts;
 	std::vector<uint16_t> indices;
 
-	for (std::unordered_map<size_t, MeshInfo>::iterator it = m_meshInfoMapping.begin();
+	for (std::unordered_map<InstanceID, MeshInfo>::iterator it = m_meshInfoMapping.begin();
 		it != m_meshInfoMapping.end(); it++)
 	{
 		Mesh* m = m_resourceManager.GetResource<Mesh>(it->first);

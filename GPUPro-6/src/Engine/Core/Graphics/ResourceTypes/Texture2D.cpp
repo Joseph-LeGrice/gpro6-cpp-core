@@ -111,7 +111,7 @@ void Texture2D::CreateResources()
     if (SUCCEEDED(createTextureResult))
     {
         ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource<ShaderResource>();
-		m_myShaderResourceViewIndex = static_cast<int>(myShaderResourceView->GetResourceIndex());
+		m_myShaderResourceViewIndex = static_cast<int>(myShaderResourceView->GetInstanceID());
 
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTexture, NULL);
         if (!createdView)

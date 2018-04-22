@@ -2,10 +2,14 @@
 
 #include "Material.hpp"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
-#include "Engine/Core/ResourceManagement/ResourceTypeMapping.h"
+
 
 class StandardMaterial : public Material<MATERIAL_BUFFER_CONTAINER>
 {
-DEFINE_RESOURCE(StandardMaterial)
+public:
+	virtual const char* GetTypeName() override
+	{
+		return TO_STRING(StandardMaterial);
+	}
 };
 REGISTER_RESOURCE(StandardMaterial, 10)

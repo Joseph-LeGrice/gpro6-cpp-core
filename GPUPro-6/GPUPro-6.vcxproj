@@ -221,7 +221,9 @@
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
-    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceTypeMapping.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
+    <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
+    <ClCompile Include="src\Engine\Core\RTTI\TypeMapping.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\ResourceManagerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.cpp" />
@@ -230,7 +232,6 @@
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\IResource.cpp" />
-    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp" />
@@ -287,7 +288,10 @@
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
     <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
-    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceTypeMapping.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\RTTI.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\TypedObjectManager.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\TypeMapping.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\ITypedObject.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\Logging.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\ResourceManagerAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.h" />

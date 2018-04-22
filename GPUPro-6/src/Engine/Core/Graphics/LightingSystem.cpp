@@ -17,7 +17,7 @@ void LightingSystem::Initialize()
 	if (buf != nullptr)
 	{
 		buf->CreateBuffer<LIGHT_BUFFER, MAX_LIGHTS>();
-		m_lightBufferIndex = static_cast<int>(buf->GetResourceIndex());
+		m_lightBufferIndex = static_cast<int>(buf->GetInstanceID());
 	}
 }
 

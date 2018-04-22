@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Engine/Core/ResourceManagement/IResource.h"
-#include "Engine/Core/ResourceManagement/ResourceTypeMapping.h"
+
 #include <string>
 
 struct Color;
@@ -11,7 +11,6 @@ struct ID3D11Texture2D;
 
 class Texture2D : public IResource
 {
-DEFINE_RESOURCE(Texture2D)
 public:
     unsigned int Width();
     unsigned int Height();
@@ -20,7 +19,13 @@ public:
     void InitializeWithBitmap(const wchar_t* filepath);
     void InitializeWithDimensions(UINT width, UINT height);
     void SetPixels(Color cArray[], size_t arraySize);
-    virtual void Release() override;
+    
+	virtual void Release() override;
+
+	virtual const char* GetTypeName() override
+	{
+		return TO_STRING(Texture2D);
+	}
 
 private:
     int m_myShaderResourceViewIndex = -1;

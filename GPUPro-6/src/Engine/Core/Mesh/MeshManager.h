@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include "Engine/Core/RTTI/RTTI.h"
 
 class IndexBuffer;
 class VertexBuffer;
@@ -35,7 +36,7 @@ private:
 	IndexBuffer& m_indexBuffer;
 	VertexBuffer& m_vertexBuffer;
 	ResourceManager& m_resourceManager;
-	std::unordered_map<size_t, MeshInfo> m_meshInfoMapping;
+	std::unordered_map<InstanceID, MeshInfo> m_meshInfoMapping;
 
 	void RefreshBuffers();
 };

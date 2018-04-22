@@ -6,11 +6,13 @@ GlobalStaticReferences* GlobalStaticReferences::s_instance;
 GlobalStaticReferences::GlobalStaticReferences(SystemContainer* sysContainer,
 	ScriptedSystemLoader* monoSystemLoader,
 	GraphicsDevice* graphicsDevice,
-	ResourceManager* resourceManager) :
+	ResourceManager* resourceManager,
+	TypedObjectManager* typedObjectManager) :
 	m_systemContainer(sysContainer),
 	m_monoSystemLoader(monoSystemLoader),
 	m_graphicsDevice(graphicsDevice),
-	m_resourceManager(resourceManager)
+	m_resourceManager(resourceManager),
+	m_typedObjectManager(typedObjectManager)
 {
 	s_instance = this;
 }
@@ -28,6 +30,11 @@ SystemContainer* GlobalStaticReferences::GetSystemContainer()
 GraphicsDevice* GlobalStaticReferences::GetGraphicsDevice()
 {
 	return m_graphicsDevice;
+}
+
+TypedObjectManager* GlobalStaticReferences::GetTypedObjectManager()
+{
+	return m_typedObjectManager;
 }
 
 ResourceManager* GlobalStaticReferences::GetResourceManager()
