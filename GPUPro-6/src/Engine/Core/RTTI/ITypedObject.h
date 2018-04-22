@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TypeMapping.h"
+#include "TypeNameMapping.h"
 #include "RTTI.h"
 
 class ITypedObject
@@ -15,6 +15,5 @@ public:
 	}
 
 private:
-	TypeID m_typeId;
 	InstanceID m_instanceId;
 };

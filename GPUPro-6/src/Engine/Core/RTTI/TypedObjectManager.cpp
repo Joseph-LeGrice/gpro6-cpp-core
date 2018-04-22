@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TypedObjectManager.h"
-#include "Engine/Core/RTTI/TypeMapping.h"
+#include "Engine/Core/RTTI/TypeNameMapping.h"
 
 TypedObjectManager::~TypedObjectManager()
 {
@@ -33,8 +33,7 @@ ITypedObject* TypedObjectManager::Create(TypeID typeId)
 	std::vector<ITypedObject*>& resources = GetInstanceList(typeId);
 
 	size_t index = resources.size();
-	ITypedObject* newObject = TypeMappings::Instance().CreateType(typeId);
-	newObject->m_typeId = typeId;
+	ITypedObject* newObject = TypeNameMappings::Instance().CreateType(typeId);
 	newObject->m_instanceId = static_cast<InstanceID>(index); // TODO: InstanceID -> ArrayIndex lookup table
 	resources.push_back(newObject);
 

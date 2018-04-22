@@ -124,9 +124,10 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ManagedObject.cpp" />
-    <ClCompile Include="src\Engine\Core\RTTI\TypeMapping.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.cpp" />
+    <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -308,9 +309,10 @@
     <ClInclude Include="src\Engine\Core\Scripting\API\Logging.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ManagedObject.h" />
     <ClInclude Include="src\Engine\Core\RTTI\ITypedObject.h" />
-    <ClInclude Include="src\Engine\Core\RTTI\TypeMapping.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypedObjectManager.h" />
     <ClInclude Include="src\Engine\Core\RTTI\RTTI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

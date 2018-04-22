@@ -10,8 +10,8 @@ typedef ITypedObject* (*CreateNativeObjectCallback)();
 
 struct ScriptedTypeMap
 {
-	TypeID unmanagedType;
-	const char* managedTypeName;
+	TypeID typeId;
+	const char* typeName;
 	CreateNativeObjectCallback createCallback;
 };
 
@@ -20,7 +20,7 @@ struct RegisterType
 {
 	RegisterType()
 	{
-		TypeMappings& instance = TypeMappings::Instance();
+		TypeNameMappings& instance = TypeNameMappings::Instance();
 		instance.RegisterType(typeId, &CreateCallback, m_protoInstance.GetTypeName());
 	}
 
@@ -38,19 +38,19 @@ private:
 	}
 };
 
-class TypeMappings
+class TypeNameMappings
 {
 public:
 	ITypedObject* CreateType(TypeID typeId);
-	TypeID GetNativeTypeID(const char* managedTypeName);
-	const char* GetManagedTypeName(TypeID typeId);
+	TypeID GetTypeID(const char* managedTypeName);
+	const char* GetTypeName(TypeID typeId);
 
 	void RegisterType(TypeID typeId, CreateNativeObjectCallback callback, const char* managedTypeName);
 
-	static TypeMappings& Instance();
+	static TypeNameMappings& Instance();
 
 private:
 	std::vector<ScriptedTypeMap> m_scriptedTypeMap;
-	ScriptedTypeMap* TypeMappings::GetMapObject(TypeID typeId);
-	ScriptedTypeMap* TypeMappings::GetMapObject(const char* managedTypeName);
+	ScriptedTypeMap* TypeNameMappings::GetMapObject(TypeID typeId);
+	ScriptedTypeMap* TypeNameMappings::GetMapObject(const char* managedTypeName);
 };

@@ -5,6 +5,7 @@ class ResourceManager;
 class SystemContainer;
 class ScriptedSystemLoader;
 class TypedObjectManager;
+class NativeToManagedInstanceMap;
 
 class GlobalStaticReferences
 {
@@ -13,15 +14,17 @@ public:
 		ScriptedSystemLoader* monoSystemLoader,
 		GraphicsDevice* graphicsDevice,
 		ResourceManager* resourceManager,
-		TypedObjectManager* typedObjectManager);
+		TypedObjectManager* typedObjectManager,
+		NativeToManagedInstanceMap* nativeToManagedInstanceMap);
 
 	static GlobalStaticReferences* Instance();
 	
 	GraphicsDevice* GetGraphicsDevice();
-	TypedObjectManager* GetTypedObjectManager();
 	ResourceManager* GetResourceManager();
 	SystemContainer* GetSystemContainer();
 	ScriptedSystemLoader* GetMonoSystemLoader();
+	TypedObjectManager* GetTypedObjectManager();
+	NativeToManagedInstanceMap* GetNativeToManagedInstanceMap();
 
 private:
 	static GlobalStaticReferences* s_instance;
@@ -31,4 +34,5 @@ private:
 	ResourceManager* m_resourceManager;
 	ScriptedSystemLoader* m_monoSystemLoader;
 	TypedObjectManager* m_typedObjectManager;
+	NativeToManagedInstanceMap* m_nativeToManagedInstanceMap;
 };

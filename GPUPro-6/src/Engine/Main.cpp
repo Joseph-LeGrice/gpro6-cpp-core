@@ -36,6 +36,7 @@
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
 
 // Etc
+#include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/Graphics/BlendState.h"
@@ -141,13 +142,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	SystemContainer* systemContainer = new SystemContainer(*allSystems);
 	
 	TypedObjectManager* tom = new TypedObjectManager();
+	NativeToManagedInstanceMap* n2m = new NativeToManagedInstanceMap();
 
 	GlobalStaticReferences* refs = new GlobalStaticReferences(
 		systemContainer,
 		monoSystemLoader,
 		gfxDevice,
 		resourceManager,
-		tom
+		tom,
+		n2m
 	);
 
 	int result = gameLoop->Run(*systemContainer);

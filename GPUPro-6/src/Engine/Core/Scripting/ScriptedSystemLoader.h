@@ -10,13 +10,6 @@
 
 class ManagedObject;
 
-//struct ManagedObjectMap
-//{
-//	TypeID m_nativeTypeId;
-//	InstanceID m_nativeInstanceId;
-//	InstanceID m_managedObjectId;
-//};
-
 class ScriptedSystemLoader : public ISystem
 {
 public:

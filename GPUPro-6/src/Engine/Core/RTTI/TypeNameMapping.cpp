@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "TypeMapping.h"
+#include "TypeNameMapping.h"
 #include "ITypedObject.h"
 #include <string>
 
-TypeMappings& TypeMappings::Instance()
+TypeNameMappings& TypeNameMappings::Instance()
 {
-	static TypeMappings s_instance;
+	static TypeNameMappings s_instance;
 	return s_instance;
 }
 
-ScriptedTypeMap* TypeMappings::GetMapObject(TypeID typeId)
+ScriptedTypeMap* TypeNameMappings::GetMapObject(TypeID typeId)
 {
 	for (int i = 0; i < m_scriptedTypeMap.size(); i++)
 	{
 		ScriptedTypeMap& srm = m_scriptedTypeMap[i];
-		if (srm.unmanagedType == typeId)
+		if (srm.typeId == typeId)
 		{
 			return &srm;
 		}
@@ -22,12 +22,12 @@ ScriptedTypeMap* TypeMappings::GetMapObject(TypeID typeId)
 	return nullptr;
 }
 
-ScriptedTypeMap* TypeMappings::GetMapObject(const char* managedTypeName)
+ScriptedTypeMap* TypeNameMappings::GetMapObject(const char* managedTypeName)
 {
 	for (int i = 0; i < m_scriptedTypeMap.size(); i++)
 	{
 		ScriptedTypeMap& srm = m_scriptedTypeMap[i];
-		if (strcmp(srm.managedTypeName, managedTypeName) == 0)
+		if (strcmp(srm.typeName, managedTypeName) == 0)
 		{
 			return &srm;
 		}
@@ -35,7 +35,7 @@ ScriptedTypeMap* TypeMappings::GetMapObject(const char* managedTypeName)
 	return nullptr;
 }
 
-void TypeMappings::RegisterType(TypeID typeId, CreateNativeObjectCallback resourceCallback, const char* managedTypeName)
+void TypeNameMappings::RegisterType(TypeID typeId, CreateNativeObjectCallback resourceCallback, const char* managedTypeName)
 {
 	if (GetMapObject(typeId) == nullptr)
 	{
@@ -43,22 +43,22 @@ void TypeMappings::RegisterType(TypeID typeId, CreateNativeObjectCallback resour
 	}
 }
 
-ITypedObject* TypeMappings::CreateType(TypeID typeId)
+ITypedObject* TypeNameMappings::CreateType(TypeID typeId)
 {
 	ScriptedTypeMap* mapping = GetMapObject(typeId);
 	return mapping->createCallback();
 }
 
-TypeID TypeMappings::GetNativeTypeID(const char* managedTypeName)
+TypeID TypeNameMappings::GetTypeID(const char* managedTypeName)
 {
 	ScriptedTypeMap* mapping = GetMapObject(managedTypeName);
 	custom_assert::is_true(mapping != nullptr, "Type does not exist for managed type");
-	return mapping->unmanagedType;
+	return mapping->typeId;
 }
 
-const char* TypeMappings::GetManagedTypeName(TypeID typeId)
+const char* TypeNameMappings::GetTypeName(TypeID typeId)
 {
 	ScriptedTypeMap* mapping = GetMapObject(typeId);
 	custom_assert::is_true(mapping != nullptr, "Type does not exist for typeId");
-	return mapping->managedTypeName;
+	return mapping->typeName;
 }
