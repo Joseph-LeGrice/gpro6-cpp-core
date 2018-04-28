@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "Engine/Core/ResourceManagement/IResource.h"
+#include "Engine/Core/RTTI/ITypedObject.h"
 
 class GraphicsDevice;
 struct ID3D11InputLayout;
@@ -12,7 +12,7 @@ struct ID3D11GeometryShader;
 struct ID3D11HullShader;
 struct ID3D11DomainShader;
 
-class Shader : public IResource
+class Shader : public ITypedObject
 {
 REGISTER_TYPE(Shader);
 public:
@@ -24,7 +24,7 @@ public:
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
 
-	virtual void Release() override;
+	virtual void Finalize() override;
 
 private:
     ManualRelease<ID3D11InputLayout> m_inputLayout;

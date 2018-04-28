@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SkyboxDrawCommand.h"
 
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
@@ -16,6 +16,6 @@ void SkyboxDrawCommand::PreDrawAll()
 
 bool SkyboxDrawCommand::BindMaterial(MeshRenderer& mrc)
 {
-    SimpleMaterial* mat = m_resourceManager.GetResource<SimpleMaterial>(mrc.m_materialIndex);
+    SimpleMaterial* mat = m_resourceManager.GetInstance<SimpleMaterial>(mrc.m_materialIndex);
     return mat->BindIfValid();
 }

@@ -15,9 +15,9 @@ void TextureSampler::BindTextureSampler(UINT samplerIndex)
     deviceContext->PSSetSamplers(samplerIndex, 1, m_sampler);
 }
 
-void TextureSampler::Initialize()
+void TextureSampler::Establish()
 {
-	IResource::Initialize();
+	ITypedObject::Establish();
 
 	D3D11_SAMPLER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_SAMPLER_DESC));
@@ -42,7 +42,7 @@ bool TextureSampler::IsValid()
 	return m_sampler != nullptr;
 }
 
-void TextureSampler::Release()
+void TextureSampler::Finalize()
 {
     m_sampler.ReleasePointer();
 }

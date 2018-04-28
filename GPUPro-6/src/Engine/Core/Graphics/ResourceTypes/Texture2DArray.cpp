@@ -5,7 +5,7 @@
 #include "D3D11.h"
 #include "FreeImage.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 
@@ -17,7 +17,7 @@ int Texture2DArray::GetMyResourceViewID()
 
 void Texture2DArray::InitializeWithBitmaps(std::vector<std::wstring> filepaths)
 {
-    Release();
+    Finalize();
 
     for (size_t filepathIndex = 0; filepathIndex < filepaths.size(); filepathIndex++)
     {
@@ -32,7 +32,7 @@ void Texture2DArray::InitializeWithBitmaps(std::vector<std::wstring> filepaths)
         else
         {
             LogError("Could not load bitmap FREE_IMAGE_FORMAT == FIF_UNKNOWN");
-            Release();
+            Finalize();
             break;
         }
     }
@@ -55,17 +55,17 @@ void Texture2DArray::InitializeWithBitmaps(std::vector<std::wstring> filepaths)
 
         if (dimensionsMatch)
         {
-            CreateResources(pitch, width, height);
+            Creates(pitch, width, height);
         }
         else
         {
             LogError("Dimensions of bitmaps in the array are not consistent");
-            Release();
+            Finalize();
         }
     }
 }
 
-void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
+void Texture2DArray::Creates(UINT pitch, UINT width, UINT height)
 {
     UINT arraySize = static_cast<UINT>(m_bitmaps.size());
     DXGI_FORMAT pixelFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -81,7 +81,7 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
     desc.Usage = D3D11_USAGE_DEFAULT;
     desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 
-    //TODO: Create separate TextureCube IResource class
+    //TODO: Create separate TextureCube ITypedObject class
     desc.MiscFlags = D3D11_RESOURCE_MISC_TEXTURECUBE;
     
     std::vector<D3D11_SUBRESOURCE_DATA> data;
@@ -100,13 +100,13 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
     HRESULT createTextureResult = device->CreateTexture2D(&desc, data.data(), m_pTextureArray);
     if (SUCCEEDED(createTextureResult))
     {
-        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource<ShaderResource>();
+        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetTypedObjectManager()->Create<ShaderResource>();
 		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetInstanceID());
 
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTextureArray, NULL);
         if (!createdView)
         {
-			GlobalStaticReferences::Instance()->GetResourceManager()->DestroyResource<ShaderResource>(m_myShaderResourceViewId);
+			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_myShaderResourceViewId);
             LogError("Could not create resource view");
         }
     }
@@ -116,7 +116,7 @@ void Texture2DArray::CreateResources(UINT pitch, UINT width, UINT height)
     }
 }
 
-void Texture2DArray::Release()
+void Texture2DArray::Finalize()
 {
     for (size_t i = 0; i < m_bitmaps.size(); i++)
     {

@@ -6,7 +6,7 @@
 
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Graphics/VertexData.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 
 static const D3D11_INPUT_ELEMENT_DESC g_inputLayoutScheme[] =
@@ -18,7 +18,7 @@ static const D3D11_INPUT_ELEMENT_DESC g_inputLayoutScheme[] =
 	{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 };
 
-void Shader::Release()
+void Shader::Finalize()
 {
     m_inputLayout.ReleasePointer();
     m_vertexShader.ReleasePointer();

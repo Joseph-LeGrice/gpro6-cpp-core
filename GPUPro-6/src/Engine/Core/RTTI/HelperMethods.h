@@ -17,14 +17,14 @@ ITypedObject* CreateManagedInstance()
 {
 	T* obj = new T();
 	TypeID nativeTypeId = obj->GetTypeName();
+	InstanceID nativeInstanceId = obj->GetInstanceID();
 
 	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	
 	ManagedTypeID managedTypeId = ntmip->GetManagedTypeID(nativeTypeId);
 	ManagedObject* mo = ssl->CreateObject(managedTypeId);
-
-	InstanceID nativeInstanceId = obj->GetInstanceID();
+	mo->SetFieldValue("m_instanceId", &nativeInstanceId);
 
 	NativeToManagedInstance ntmi(nativeInstanceId, mo->GetInstanceID());
 	ntmip->CreateInstanceMapping(nativeTypeId, ntmi);

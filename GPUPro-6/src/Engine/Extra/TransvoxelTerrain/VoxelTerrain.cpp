@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "VoxelTerrain.h"
 #include "Engine/Core/Utilities/Noise.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Transvoxel.cpp"
 
-VoxelTerrain::VoxelTerrain(ResourceManager& resourceManager) : m_resourceManager(resourceManager)
+VoxelTerrain::VoxelTerrain(TypedObjectManager& resourceManager) : m_typedObjectManager(resourceManager)
 {
 	GenerateVoxelValues();
 	GenerateMesh();
@@ -17,7 +17,7 @@ VoxelTerrain::~VoxelTerrain()
 
 void VoxelTerrain::DeallocateMesh()
 {
-	m_resourceManager.DestroyResource<Mesh>(m_meshResourceId);
+	m_typedObjectManager.Delete<Mesh>(m_meshResourceId);
 }
 
 int VoxelTerrain::GetMeshID()
@@ -196,7 +196,7 @@ void VoxelTerrain::GenerateMesh()
         tris.push_back(trueVertexIndex);
     }
 
-    Mesh* m = m_resourceManager.CreateResource<Mesh>();
+    Mesh* m = m_typedObjectManager.Create<Mesh>();
 	m->SetVertices(verts);
 	m->SetIndices(tris);
 	m_meshResourceId = static_cast<int>(m->GetInstanceID());

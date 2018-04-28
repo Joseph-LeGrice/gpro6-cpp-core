@@ -5,7 +5,7 @@
 
 class IndexBuffer;
 class VertexBuffer;
-class ResourceManager;
+class TypedObjectManager;
 class Mesh;
 
 struct MeshInfo
@@ -21,7 +21,7 @@ class MeshManager
 public:
 	MeshManager(IndexBuffer& indexBuffer,
 		VertexBuffer& vertexBuffer,
-		ResourceManager& resourceManager) :
+		TypedObjectManager& resourceManager) :
 		m_indexBuffer(indexBuffer),
 		m_vertexBuffer(vertexBuffer),
 		m_resourceManager(resourceManager) { }
@@ -35,7 +35,7 @@ public:
 private:
 	IndexBuffer& m_indexBuffer;
 	VertexBuffer& m_vertexBuffer;
-	ResourceManager& m_resourceManager;
+	TypedObjectManager& m_resourceManager;
 	std::unordered_map<InstanceID, MeshInfo> m_meshInfoMapping;
 
 	void RefreshBuffers();

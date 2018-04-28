@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class StandardMaterial : IResource
+class StandardMaterial : ITypedObject
 {
     [MethodImpl(MethodImplOptions.InternalCall)]    
     public extern static void SetShaderIndex(int resourceId);

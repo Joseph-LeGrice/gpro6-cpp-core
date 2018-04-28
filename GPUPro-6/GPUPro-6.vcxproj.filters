@@ -112,7 +112,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\SystemManagement\SystemContainer.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraphManager.cpp" />
-    <ClCompile Include="src\Engine\Core\ResourceManagement\IResource.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp">
       <Filter>Engine\Core\Graphics</Filter>
     </ClCompile>
@@ -120,15 +119,14 @@
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\ResourceManagerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ManagedObject.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
-    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\HelperMethods.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\TypedObjectManagerAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -201,9 +199,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Input\MouseInput.h">
       <Filter>Engine\Core\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h">
-      <Filter>Engine\Core\ResourceManagement</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentArray.hpp">
       <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
@@ -295,9 +290,6 @@
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.hpp">
       <Filter>Engine\Core\SceneGraph</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManager.h">
-      <Filter>Engine\Core\ResourceManagement</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h">
       <Filter>Engine\Core\Graphics</Filter>
     </ClInclude>
@@ -305,7 +297,6 @@
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemInterface.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\ResourceManagerAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\Logging.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ManagedObject.h" />
@@ -315,6 +306,7 @@
     <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
     <ClInclude Include="src\Engine\Core\RTTI\HelperMethods.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\TypedObjectManagerAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

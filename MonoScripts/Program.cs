@@ -9,7 +9,7 @@ class Program
         TestSystem test = new TestSystem();
 
         //------------------------------------------------------------------------------------
-        Texture2D testImageTexture = ResourceManager.CreateResource<Texture2D>();
+        Texture2D testImageTexture = TypedObjectManager.Create<Texture2D>();
         string testImagePath = Path.Combine(Application.ResourcePath, "GameResources\\GPro_Test\\TestImage.png");
         testImageTexture.InitializeWithBitmap(testImagePath);
         //------------------------------------------------------------------------------------

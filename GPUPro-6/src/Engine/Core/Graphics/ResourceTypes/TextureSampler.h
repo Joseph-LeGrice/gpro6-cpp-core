@@ -1,21 +1,21 @@
 #pragma once
 
-#include "Engine/Core/ResourceManagement/IResource.h"
+#include "Engine/Core/RTTI/ITypedObject.h"
 
 
 struct ID3D11SamplerState;
 class GraphicsDevice;
 
 
-class TextureSampler : public IResource
+class TextureSampler : public ITypedObject
 {
 REGISTER_TYPE(TextureSampler);
 public:
 	void BindTextureSampler(UINT samplerIndex);
-	void Initialize() override;
 	bool IsValid();
 
-    virtual void Release() override;
+	virtual void Establish() override;
+    virtual void Finalize() override;
 
 private:
 	ManualRelease<ID3D11SamplerState> m_sampler;

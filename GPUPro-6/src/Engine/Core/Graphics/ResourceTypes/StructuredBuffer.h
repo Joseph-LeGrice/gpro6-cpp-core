@@ -1,13 +1,13 @@
 #pragma once
 
 #include "D3D11.h"
-#include "Engine/Core/ResourceManagement/IResource.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/ITypedObject.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 
-class StructuredBuffer : public IResource
+class StructuredBuffer : public ITypedObject
 {
 REGISTER_TYPE(StructuredBuffer);
 public:
@@ -37,14 +37,14 @@ public:
 		rvDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
         rvDesc.Buffer.ElementWidth = m_numberOfElements;
         
-        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource<ShaderResource>();
+        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetTypedObjectManager()->Create<ShaderResource>();
 		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetInstanceID());
         
         bool createdView = myShaderResourceView->CreateViewWithResource(m_buffer, &rvDesc);
 		if (!createdView)
         {
             m_buffer.ReleasePointer();
-			GlobalStaticReferences::Instance()->GetResourceManager()->DestroyResource<ShaderResource>(m_myShaderResourceViewId);
+			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_myShaderResourceViewId);
 
             return false;
         }
@@ -66,7 +66,7 @@ public:
 
 	void BindResource(UINT resourceIndex);
 	
-    virtual void Release() override;
+    virtual void Finalize() override;
 
     int GetMyResourceViewID()
     {

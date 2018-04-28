@@ -3,7 +3,7 @@
 #include <array>
 
 class Mesh;
-class ResourceManager;
+class TypedObjectManager;
 
 struct EndpointVertexData
 {
@@ -69,7 +69,7 @@ struct VoxelEndpointTriangle
 class VoxelTerrain
 {
 public:
-	VoxelTerrain(ResourceManager& resourceManager);
+	VoxelTerrain(TypedObjectManager& resourceManager);
 	~VoxelTerrain();
 
 	void DeallocateMesh();
@@ -77,7 +77,7 @@ public:
 
 private:
 	static const unsigned int sc_chunkSize = 16;
-	ResourceManager& m_resourceManager;
+	TypedObjectManager& m_typedObjectManager;
 	int8_t m_voxelValues[sc_chunkSize * sc_chunkSize * sc_chunkSize];
     EndpointVertexData m_vertexData[(sc_chunkSize + 1) * (sc_chunkSize + 1) * (sc_chunkSize + 1)];
 

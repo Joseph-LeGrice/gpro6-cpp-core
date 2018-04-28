@@ -5,12 +5,12 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-struct ResourceManagerAPI
+struct TypedObjectManagerAPI
 {
-	static MonoObject* CreateResource(MonoString* className);
-	//static void DestroyResource(MonoType* object); //TODO
+	static MonoObject* Create(MonoString* className);
+	//static void Delete(MonoType* object); //TODO
 	//static MonoArray* GetAllResourcesOfType(MonoType resourceType); //TODO
-	//static MonoObject* GetResource(int resourceIndex); //TODO
+	//static MonoObject* GetInstance(int resourceIndex); //TODO
 
 	static void RegisterMonoMethods();
 };

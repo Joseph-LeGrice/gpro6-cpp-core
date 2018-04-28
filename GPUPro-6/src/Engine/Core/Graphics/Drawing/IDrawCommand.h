@@ -3,13 +3,13 @@
 class GraphicsDevice;
 class PerObjectBuffer;
 class SceneGraphManager;
-class ResourceManager;
+class TypedObjectManager;
 struct MeshRenderer;
 
 class IDrawCommand
 {
 public:
-	IDrawCommand(int id, PerObjectBuffer& perObjectBuffer, GraphicsDevice& gfxDevice, SceneGraphManager& sceneGraphManager, ResourceManager& resourceManager) :
+	IDrawCommand(int id, PerObjectBuffer& perObjectBuffer, GraphicsDevice& gfxDevice, SceneGraphManager& sceneGraphManager, TypedObjectManager& resourceManager) :
         c_identifier(id),
 		m_gfxDevice(gfxDevice),
         m_perObjectBuffer(perObjectBuffer),
@@ -23,7 +23,7 @@ protected:
     PerObjectBuffer& m_perObjectBuffer;
 	GraphicsDevice& m_gfxDevice;
 	SceneGraphManager& m_sceneGraphManager;
-	ResourceManager& m_resourceManager;
+	TypedObjectManager& m_resourceManager;
 
     virtual void PreDrawAll() = 0;
     virtual bool BindMaterial(MeshRenderer& mrc) = 0;

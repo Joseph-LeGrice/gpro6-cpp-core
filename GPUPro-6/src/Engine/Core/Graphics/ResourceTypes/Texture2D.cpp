@@ -4,7 +4,7 @@
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
 #include "Engine/Core/GlobalStaticReferences.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/DataStructures/Color.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 
@@ -22,7 +22,7 @@ unsigned int Texture2D::Height()
     return FreeImage_GetHeight(m_bitmap);
 }
 
-int Texture2D::GetResourceViewID()
+int Texture2D::GetInstanceViewID()
 {
     custom_assert::is_true(m_myShaderResourceViewIndex > -1);
     return m_myShaderResourceViewIndex;
@@ -30,7 +30,7 @@ int Texture2D::GetResourceViewID()
 
 void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
 {
-    Release();
+    Finalize();
 
     FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeU(filepath);
     if (fif != FIF_UNKNOWN)
@@ -39,7 +39,7 @@ void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
         m_bitmap = FreeImage_ConvertTo32Bits(bmp);
         FreeImage_Unload(bmp);
 
-        CreateResources();
+        Creates();
     }
     else
     {
@@ -77,10 +77,10 @@ void Texture2D::SetPixels(Color cArray[], size_t arraySize)
         }
     }
 
-    CreateResources();
+    Creates();
 }
 
-void Texture2D::CreateResources()
+void Texture2D::Creates()
 {
     DXGI_FORMAT pixelFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
     UINT width = FreeImage_GetWidth(m_bitmap);
@@ -110,13 +110,13 @@ void Texture2D::CreateResources()
     HRESULT createTextureResult = device->CreateTexture2D(&desc, &data, m_pTexture);
     if (SUCCEEDED(createTextureResult))
     {
-        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetResourceManager()->CreateResource<ShaderResource>();
+        ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetTypedObjectManager()->Create<ShaderResource>();
 		m_myShaderResourceViewIndex = static_cast<int>(myShaderResourceView->GetInstanceID());
 
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTexture, NULL);
         if (!createdView)
         {
-			GlobalStaticReferences::Instance()->GetResourceManager()->DestroyResource<ShaderResource>(m_myShaderResourceViewIndex);
+			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_myShaderResourceViewIndex);
             LogError("Could not create resource view");
         }
     }
@@ -126,7 +126,7 @@ void Texture2D::CreateResources()
     }
 }
 
-void Texture2D::Release()
+void Texture2D::Finalize()
 {
     if (m_bitmap != nullptr)
     {

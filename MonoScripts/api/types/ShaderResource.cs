@@ -1,5 +1,5 @@
 
-class ShaderResource : IResource
+class ShaderResource : ITypedObject
 {
 
 }

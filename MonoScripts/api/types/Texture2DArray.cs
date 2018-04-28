@@ -1,5 +1,5 @@
 
-class Texture2DArray : IResource
+class Texture2DArray : ITypedObject
 {
 
 }

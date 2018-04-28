@@ -1,17 +1,17 @@
 using System.Runtime.CompilerServices;
 
-class ResourceManager
+class TypedObjectManager
 {
 	//static MonoObject* GetResource(int resourceIndex);
     //static MonoArray* GetAllResourcesOfType(MonoType resourceType);
     //static void DestroyResource(MonoObject* object);
     
     [MethodImplAttribute(MethodImplOptions.InternalCall)]
-	private extern static object CreateResource(string resourceType);
+	private extern static object Create(string resourceType);
 	
-    public static T CreateResource<T>()
+    public static T Create<T>()
     {
-        return (T)CreateResource(typeof(T).Name);
+        return (T)Create(typeof(T).Name);
     }
 	
 }

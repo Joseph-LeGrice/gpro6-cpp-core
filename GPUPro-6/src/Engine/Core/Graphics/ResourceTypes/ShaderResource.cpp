@@ -22,7 +22,7 @@ bool ShaderResource::CreateViewWithResource(ID3D11Resource& resource, D3D11_SHAD
     return SUCCEEDED(hr);
 }
 
-void ShaderResource::Release()
+void ShaderResource::Finalize()
 {
     m_resourceView.ReleasePointer();
 }

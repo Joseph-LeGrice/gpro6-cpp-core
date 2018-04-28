@@ -5,7 +5,7 @@
 #include "Engine/Core/Graphics/Components/Light.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
 #include "Engine/Core/Graphics/Components/Transform.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/StructuredBuffer.h"
 
 #define MAX_LIGHTS 5
@@ -13,7 +13,7 @@
 void LightingSystem::Initialize()
 {
 	ISystem::Initialize();
-	StructuredBuffer* buf = m_resourceManager.CreateResource<StructuredBuffer>();
+	StructuredBuffer* buf = m_resourceManager.Create<StructuredBuffer>();
 	if (buf != nullptr)
 	{
 		buf->CreateBuffer<LIGHT_BUFFER, MAX_LIGHTS>();
@@ -49,7 +49,7 @@ void LightingSystem::VariableTick()
         lights[i].Selected = TRUE;
     }
 
-    StructuredBuffer* lightBuf = m_resourceManager.GetResource<StructuredBuffer>(m_lightBufferIndex);
+    StructuredBuffer* lightBuf = m_resourceManager.GetInstance<StructuredBuffer>(m_lightBufferIndex);
     if (lightBuf != nullptr)
     {
         lightBuf->UpdateBuffer(*lights);

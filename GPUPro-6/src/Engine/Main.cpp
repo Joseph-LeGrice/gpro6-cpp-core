@@ -47,7 +47,6 @@
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
 
 // Resources
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/Graphics/ResourceTypes/Shader.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
@@ -88,7 +87,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GraphicsDevice* gfxDevice = new GraphicsDevice(*windowManager);
 
 	// Resource Manager
-	ResourceManager* resourceManager = new ResourceManager();
+	TypedObjectManager* tom = new TypedObjectManager();
 
 	// Buffers
 	IndexBuffer* indexBuffer = new IndexBuffer(*gfxDevice);
@@ -99,17 +98,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Graphics State Helpers
 	BlendState* blendState = new BlendState(*gfxDevice);
-	MeshManager* meshManager = new MeshManager(*indexBuffer, *vertexBuffer, *resourceManager);
+	MeshManager* meshManager = new MeshManager(*indexBuffer, *vertexBuffer, *tom);
 	RasterizerState* rasterizerState = new RasterizerState(*gfxDevice);
 	DepthStencilBuffer* depthStencilBuffer = new DepthStencilBuffer(*windowManager, *gfxDevice);
 
 	// IDrawCommands
 	std::vector<IDrawCommand*>* commands = new std::vector<IDrawCommand*>();
-	SkyboxDrawCommand* skyboxDrawCommand = new SkyboxDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *resourceManager, *rasterizerState, *blendState);
+	SkyboxDrawCommand* skyboxDrawCommand = new SkyboxDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *tom, *rasterizerState, *blendState);
 	commands->push_back(skyboxDrawCommand);
-	StandardOpaqueMaterialDrawCommand* standardOpaqueMaterialDrawCommand = new StandardOpaqueMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *resourceManager, *rasterizerState, *blendState, *standardMaterialBuffer);
+	StandardOpaqueMaterialDrawCommand* standardOpaqueMaterialDrawCommand = new StandardOpaqueMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *tom, *rasterizerState, *blendState, *standardMaterialBuffer);
 	commands->push_back(standardOpaqueMaterialDrawCommand);
-	StandardTransparentMaterialDrawCommand* standardTransparentMaterialDrawCommand = new StandardTransparentMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *resourceManager, *rasterizerState, *blendState, *standardMaterialBuffer);
+	StandardTransparentMaterialDrawCommand* standardTransparentMaterialDrawCommand = new StandardTransparentMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *tom, *rasterizerState, *blendState, *standardMaterialBuffer);
 	commands->push_back(standardTransparentMaterialDrawCommand);
 
 	// ISystems
@@ -133,7 +132,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	InputSystem* inputSystem = new InputSystem(*gameLoop);
 	allSystems->push_back(inputSystem);
 
-	LightingSystem* lightingSystem = new LightingSystem(*sceneGraphManager, *resourceManager);
+	LightingSystem* lightingSystem = new LightingSystem(*sceneGraphManager, *tom);
 	allSystems->push_back(lightingSystem);
 
 	NoClipLocomotion* noClipLocomotion = new NoClipLocomotion(*sceneGraphManager, *inputSystem);
@@ -142,14 +141,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// System Container + Game Loop Entry
 	SystemContainer* systemContainer = new SystemContainer(*allSystems);
 	
-	TypedObjectManager* tom = new TypedObjectManager();
 	NativeToManagedInstanceMap* n2m = new NativeToManagedInstanceMap();
 
 	GlobalStaticReferences* refs = new GlobalStaticReferences(
 		systemContainer,
 		monoSystemLoader,
 		gfxDevice,
-		resourceManager,
 		tom,
 		n2m
 	);
@@ -182,7 +179,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	delete vertexBuffer;
 	delete indexBuffer;
 
-	delete resourceManager;
+	delete tom;
 
 	delete sceneGraphManager;
 	delete sceneGraph;

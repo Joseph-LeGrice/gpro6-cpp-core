@@ -21,12 +21,12 @@ struct LIGHT_BUFFER
 };
 
 class SceneGraphManager;
-class ResourceManager;
+class TypedObjectManager;
 
 class LightingSystem : public ISystem
 {
 public:
-	LightingSystem(SceneGraphManager& sceneGraphManager, ResourceManager& resourceManager) :
+	LightingSystem(SceneGraphManager& sceneGraphManager, TypedObjectManager& resourceManager) :
 		m_sceneGraphManager(sceneGraphManager),
 		m_resourceManager(resourceManager) { }
 
@@ -37,6 +37,6 @@ public:
 
 private:
 	SceneGraphManager& m_sceneGraphManager;
-	ResourceManager& m_resourceManager;
+	TypedObjectManager& m_resourceManager;
     int m_lightBufferIndex;
 };

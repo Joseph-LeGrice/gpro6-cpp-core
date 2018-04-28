@@ -1,5 +1,5 @@
 
-class Mesh : IResource
+class Mesh : ITypedObject
 {
 
 }

@@ -93,11 +93,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Specify Components?
 		di::bind<>().named(test_name).to(componentMapping)
 		//di::bind<>().named(component_map).to(componentMapping)
-		// Specify the IResourceManager::
-		//di::bind<IResourceManager>().to<ResourceManager>()  
+		// Specify the ITypedObjectManager::
+		//di::bind<ITypedObjectManager>().to<TypedObjectManager>()  
 
 		// Specify valid ResourceTypes?
-		//di::bind<IResource*[]>().to<
+		//di::bind<ITypedObject*[]>().to<
 		//  Mesh,
 		//  Shader,
 		//  ShaderResource,

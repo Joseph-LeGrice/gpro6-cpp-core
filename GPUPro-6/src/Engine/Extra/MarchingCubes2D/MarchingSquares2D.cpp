@@ -2,7 +2,7 @@
 #include "MarchingSquares2D.h"
 #include "D3D11.h"
 
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/DataStructures/Color.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
@@ -35,7 +35,7 @@ const int triangle_mapping[16][10] = {
    {  0,  2,  1,  1,  2,  3, -1, -1, -1, -1 }
 };
 
-Mesh* MarchingSquares2D::CreateMesh(ResourceManager& resourceManager, float gridSize, unsigned int resolution)
+Mesh* MarchingSquares2D::CreateMesh(TypedObjectManager& resourceManager, float gridSize, unsigned int resolution)
 {   
     std::vector<Vector3> verts;
     std::vector<UINT16> tris;
@@ -89,14 +89,14 @@ Mesh* MarchingSquares2D::CreateMesh(ResourceManager& resourceManager, float grid
         }
     }
 
-    Mesh* m = resourceManager.CreateResource<Mesh>();
+    Mesh* m = resourceManager.Create<Mesh>();
     m->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
     m->SetVertices(verts);
     m->SetIndices(tris);
     return m;
 }
 
-Texture2D* MarchingSquares2D::CreateTexture(ResourceManager& resourceManager, unsigned int size)
+Texture2D* MarchingSquares2D::CreateTexture(TypedObjectManager& resourceManager, unsigned int size)
 {
     const int octaves = 6;
     Noise::NoiseFuncConfig octaveFunc = { Noise::kNoiseTypePerlin, Noise::kNoiseDimension3D };
@@ -127,7 +127,7 @@ Texture2D* MarchingSquares2D::CreateTexture(ResourceManager& resourceManager, un
         }
     }
 
-    Texture2D* tex = resourceManager.CreateResource<Texture2D>();
+    Texture2D* tex = resourceManager.Create<Texture2D>();
     tex->InitializeWithDimensions(size, size);
     tex->SetPixels(allColors, size * size);
     

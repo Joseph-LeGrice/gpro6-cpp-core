@@ -2,7 +2,7 @@
 #include "Texture2DAPI.h"
 
 #include "Engine/Core/GlobalStaticReferences.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
 #include <glib.h>
 
@@ -23,8 +23,8 @@ std::wstring GetUTF16(MonoString* ms)
 void Texture2DAPI::InitializeWithBitmap(int instanceid, MonoString* path)
 {
 	std::wstring pathStr = GetUTF16(path);
-	ResourceManager* rm = GlobalStaticReferences::Instance()->GetResourceManager();
-	Texture2D* t = rm->GetResource<Texture2D>(instanceid);
+	TypedObjectManager* rm = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	Texture2D* t = rm->GetInstance<Texture2D>(instanceid);
 	t->InitializeWithBitmap(pathStr.c_str());
 }
 

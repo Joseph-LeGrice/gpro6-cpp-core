@@ -5,7 +5,7 @@
 #include "Engine/Core/Graphics/RasterizerState.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
 #include "Engine/Core/Graphics/ResourceTypes/Material/StandardMaterial.hpp"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 
 StandardTransparentMaterialDrawCommand::~StandardTransparentMaterialDrawCommand()
 {
@@ -22,7 +22,7 @@ void StandardTransparentMaterialDrawCommand::PreDrawAll()
 
 bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRenderer& mrc)
 {
-    StandardMaterial* mat = m_resourceManager.GetResource<StandardMaterial>(mrc.m_materialIndex);
+    StandardMaterial* mat = m_resourceManager.GetInstance<StandardMaterial>(mrc.m_materialIndex);
     if (mat->BindIfValid())
     {
         m_constantBuffer.PushData(mat->GetData());

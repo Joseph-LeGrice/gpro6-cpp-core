@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 
 #include "D3D11.h"
 
-Mesh::Mesh() : IResource()
+Mesh::Mesh()
 {
 	m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 }
@@ -58,6 +58,6 @@ const std::vector<UINT16>& Mesh::GetIndices()
 	return m_indices;
 }
 
-void Mesh::Release()
+void Mesh::Finalize()
 {
 }

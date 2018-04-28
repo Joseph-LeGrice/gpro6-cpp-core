@@ -7,7 +7,7 @@
 #include "Engine/Core/Graphics/Components/Transform.h"
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
 
 const int IDrawCommand::ID()
@@ -29,7 +29,7 @@ void IDrawCommand::Draw(Matrix4x4 view, Matrix4x4 proj)
         MeshRenderer* mrc = meshRenderers[i];
         Entity* meshEntity = m_sceneGraphManager.GetCurrentScene().GetComponent<Entity>(mrc->GetEntityIndex());
 
-        Mesh* mesh = m_resourceManager.GetResource<Mesh>(mrc->m_meshIndex);
+        Mesh* mesh = m_resourceManager.GetInstance<Mesh>(mrc->m_meshIndex);
         UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
         UINT16 numberOfIndices = (UINT16)mesh->GetIndices().size();
 

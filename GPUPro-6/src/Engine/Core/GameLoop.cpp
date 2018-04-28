@@ -9,10 +9,10 @@ int GameLoop::Run(SystemContainer& systems)
 	m_running = true;
     while (m_running)
     {
-		systems.InitializeAll();
-
 		try
 		{
+			systems.InitializeAll();
+
 			m_time.AdvanceFrame();
 
 			while (m_time.ShouldAdvanceFixedStep())
@@ -27,10 +27,6 @@ int GameLoop::Run(SystemContainer& systems)
 		catch (const custom_assert::custom_assert_error& e)
 		{
 			Log(e.m_message);
-		}
-		catch (...)
-		{
-			break;
 		}
 	}
 

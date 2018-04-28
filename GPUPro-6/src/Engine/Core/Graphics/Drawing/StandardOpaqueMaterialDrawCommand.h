@@ -12,7 +12,7 @@ public:
 	StandardOpaqueMaterialDrawCommand(GraphicsDevice& gfxDevice,
         PerObjectBuffer& perObjectBuffer,
 		SceneGraphManager& sceneGraphManager,
-		ResourceManager& resourceManager,
+		TypedObjectManager& resourceManager,
 		RasterizerState& rasterizerState,
 		BlendState& blendState,
         StandardMaterialBuffer& constantBuffer) :

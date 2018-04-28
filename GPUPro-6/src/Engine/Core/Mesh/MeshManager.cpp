@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MeshManager.h"
 
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "Engine/Core/Graphics/Buffers/IndexBuffer.h"
 #include "Engine/Core/Graphics/Buffers/VertexBuffer.h"
@@ -49,7 +49,7 @@ void MeshManager::RefreshBuffers()
 	for (std::unordered_map<InstanceID, MeshInfo>::iterator it = m_meshInfoMapping.begin();
 		it != m_meshInfoMapping.end(); it++)
 	{
-		Mesh* m = m_resourceManager.GetResource<Mesh>(it->first);
+		Mesh* m = m_resourceManager.GetInstance<Mesh>(it->first);
 
 		size_t indexStart = indices.size(); 
 		size_t vertStart = verts.size();

@@ -1,5 +1,5 @@
 
-class StructuredBuffer : IResource
+class StructuredBuffer : ITypedObject
 {
 
 }

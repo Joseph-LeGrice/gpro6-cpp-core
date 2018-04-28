@@ -1,5 +1,5 @@
 
-class TextureSampler : IResource
+class TextureSampler : ITypedObject
 {
 
 }

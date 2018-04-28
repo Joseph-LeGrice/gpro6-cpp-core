@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class Texture2D : IResource
+class Texture2D : ITypedObject
 {
     [MethodImpl(MethodImplOptions.InternalCall)]
     private extern static void InitializeWithBitmap(int instanceid, string bitmapPath);

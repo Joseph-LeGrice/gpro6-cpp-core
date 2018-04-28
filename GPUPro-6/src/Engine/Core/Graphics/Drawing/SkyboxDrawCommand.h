@@ -12,7 +12,7 @@ public:
 	SkyboxDrawCommand(GraphicsDevice& gfxDevice,
         PerObjectBuffer& perObjectBuffer,
 		SceneGraphManager& sceneGraphManager,
-		ResourceManager& resourceManager,
+		TypedObjectManager& resourceManager,
 		RasterizerState& rasterizerState,
 		BlendState& blendState) :
 		IDrawCommand(1, perObjectBuffer, gfxDevice, sceneGraphManager, resourceManager),

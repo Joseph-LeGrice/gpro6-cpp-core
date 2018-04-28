@@ -2,7 +2,7 @@
 #include "MeshHelper.h"
 #include "D3D11.h"
 
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
 #include "MyMath/MathDefines.h"
 
@@ -12,15 +12,15 @@ int g_quadMeshId = -1;
 int g_sphereUvMeshId = -1;
 int g_cubeMeshId = -1;
 
-Mesh* MeshHelper::Quad(ResourceManager& resourceManager)
+Mesh* MeshHelper::Quad(TypedObjectManager& resourceManager)
 {
 	if (g_quadMeshId > -1)
 	{
-		return resourceManager.GetResource<Mesh>(g_quadMeshId);
+		return resourceManager.GetInstance<Mesh>(g_quadMeshId);
 	}
 	else
 	{
-		Mesh* result = resourceManager.CreateResource<Mesh>();
+		Mesh* result = resourceManager.Create<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 		std::vector<Vector3> verts = std::vector<Vector3>();
@@ -59,11 +59,11 @@ Mesh* MeshHelper::Quad(ResourceManager& resourceManager)
 	}
 }
 
-Mesh* MeshHelper::SphereUV(ResourceManager& resourceManager)
+Mesh* MeshHelper::SphereUV(TypedObjectManager& resourceManager)
 {
 	if (g_sphereUvMeshId > -1)
 	{
-		return resourceManager.GetResource<Mesh>(g_sphereUvMeshId);
+		return resourceManager.GetInstance<Mesh>(g_sphereUvMeshId);
 	}
 	else
 	{
@@ -118,7 +118,7 @@ Mesh* MeshHelper::SphereUV(ResourceManager& resourceManager)
 			}
 		}
 
-		Mesh* result = resourceManager.CreateResource<Mesh>();
+		Mesh* result = resourceManager.Create<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 		result->SetVertices(verts);
 		result->SetNormals(norms);
@@ -131,11 +131,11 @@ Mesh* MeshHelper::SphereUV(ResourceManager& resourceManager)
 	}
 }
 
-Mesh* MeshHelper::Cube(ResourceManager& resourceManager)
+Mesh* MeshHelper::Cube(TypedObjectManager& resourceManager)
 {
 	if (g_cubeMeshId > -1)
 	{
-		return resourceManager.GetResource<Mesh>(g_cubeMeshId);
+		return resourceManager.GetInstance<Mesh>(g_cubeMeshId);
 	}
 	else
 	{
@@ -270,7 +270,7 @@ Mesh* MeshHelper::Cube(ResourceManager& resourceManager)
 		indices.push_back(21);
 		indices.push_back(23);
 
-		Mesh* result = resourceManager.CreateResource<Mesh>();
+		Mesh* result = resourceManager.Create<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 		result->SetVertices(verts);
 		result->SetNormals(norms);

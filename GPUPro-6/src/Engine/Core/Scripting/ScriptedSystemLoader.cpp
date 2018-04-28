@@ -8,7 +8,7 @@
 #include <mono/metadata/mono-config.h>
 #include <mono/metadata/assembly.h>
 
-#include "API/ResourceManagerAPI.h"
+#include "API/TypedObjectManagerAPI.h"
 #include "API/types/Texture2DAPI.h"
 #include "API/Logging.h"
 
@@ -26,7 +26,7 @@ void ScriptedSystemLoader::Initialize()
 	m_image = mono_assembly_get_image(m_assembly);
 	
 	ScriptedSystemInterface::RegisterMonoMethods();
-	ResourceManagerAPI::RegisterMonoMethods();
+	TypedObjectManagerAPI::RegisterMonoMethods();
 	Texture2DAPI::RegisterMonoMethods();
 	Logging::RegisterMonoMethods();
 

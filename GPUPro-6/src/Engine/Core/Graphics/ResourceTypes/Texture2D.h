@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Core/ResourceManagement/IResource.h"
+#include "Engine/Core/RTTI/ITypedObject.h"
 
 #include <string>
 
@@ -9,7 +9,7 @@ struct FIBITMAP;
 struct ID3D11Texture2D;
 
 
-class Texture2D : public IResource
+class Texture2D : public ITypedObject
 {
 public:
 	REGISTER_TYPE(Texture2D);
@@ -17,12 +17,12 @@ public:
     unsigned int Width();
     unsigned int Height();
 
-    int GetResourceViewID();
+    int GetInstanceViewID();
     void InitializeWithBitmap(const wchar_t* filepath);
     void InitializeWithDimensions(UINT width, UINT height);
     void SetPixels(Color cArray[], size_t arraySize);
     
-	virtual void Release() override;
+	virtual void Finalize() override;
 	
 
 private:
@@ -30,5 +30,5 @@ private:
     FIBITMAP* m_bitmap = nullptr;
 	ManualRelease<ID3D11Texture2D> m_pTexture;
 	
-    void CreateResources();
+    void Creates();
 };

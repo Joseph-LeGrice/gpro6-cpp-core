@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class Shader : IResource
+class Shader : ITypedObject
 {
     [MethodImpl(MethodImplOptions.InternalCall)]
     public extern static void InitVertexShader(string path, string name);
