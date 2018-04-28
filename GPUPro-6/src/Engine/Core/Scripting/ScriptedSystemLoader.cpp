@@ -50,12 +50,12 @@ void ScriptedSystemLoader::Deinitalize()
 	m_domain = nullptr;
 }
 
-ManagedObject* ScriptedSystemLoader::CreateObject(const char* typeName)
+ManagedObject* ScriptedSystemLoader::CreateObject(ManagedTypeID typeName)
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	ManagedObject* instance = tom->Create<ManagedObject>();
 
-	MonoClass* managedClass = mono_class_from_name(m_image, "", typeName);
+	MonoClass* managedClass = mono_class_from_name(m_image, "", typeName.c_str());
 	custom_assert::is_true(managedClass != nullptr, "Managed class does not exist for typeName");
 
 	MonoObject* managedObject = mono_object_new(m_domain, managedClass);

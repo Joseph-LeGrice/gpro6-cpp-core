@@ -9,6 +9,7 @@
 
 class StructuredBuffer : public IResource
 {
+REGISTER_TYPE(StructuredBuffer);
 public:
     template<class T, UINT m_numberOfElements>
 	bool CreateBuffer()
@@ -65,11 +66,6 @@ public:
 
 	void BindResource(UINT resourceIndex);
 	
-	virtual const char* GetTypeName() override
-	{
-		return TO_STRING(StructuredBuffer);
-	}
-
     virtual void Release() override;
 
     int GetMyResourceViewID()
@@ -81,4 +77,3 @@ private:
     int m_myShaderResourceViewId = -1;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };
-REGISTER_TYPE(StructuredBuffer, 4)

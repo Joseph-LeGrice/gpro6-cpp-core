@@ -9,6 +9,7 @@ class GraphicsDevice;
 
 class TextureSampler : public IResource
 {
+REGISTER_TYPE(TextureSampler);
 public:
 	void BindTextureSampler(UINT samplerIndex);
 	void Initialize() override;
@@ -16,12 +17,6 @@ public:
 
     virtual void Release() override;
 
-	virtual const char* GetTypeName() override
-	{
-		return TO_STRING(TextureSampler);
-	}
-
 private:
 	ManualRelease<ID3D11SamplerState> m_sampler;
 };
-REGISTER_TYPE(TextureSampler, 6)

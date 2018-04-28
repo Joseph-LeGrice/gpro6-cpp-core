@@ -14,6 +14,7 @@ struct ID3D11DomainShader;
 
 class Shader : public IResource
 {
+REGISTER_TYPE(Shader);
 public:
 	bool SetCurrentIfValid();
 
@@ -22,11 +23,6 @@ public:
 	bool InitDomainShader(std::wstring filename, std::string name);
 	bool InitGeometryShader(std::wstring filename, std::string name);
 	bool InitPixelShader(std::wstring filename, std::string name);
-
-	virtual const char* GetTypeName() override
-	{
-		return TO_STRING(Shader);
-	}
 
 	virtual void Release() override;
 
@@ -38,4 +34,3 @@ private:
     ManualRelease<ID3D11HullShader> m_hullShader;
     ManualRelease<ID3D11DomainShader> m_domainShader;
 };
-REGISTER_TYPE(Shader, 1)

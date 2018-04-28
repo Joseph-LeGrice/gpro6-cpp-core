@@ -10,6 +10,7 @@ enum D3D_PRIMITIVE_TOPOLOGY;
 
 class Mesh : public IResource
 {
+REGISTER_TYPE(Mesh);
 public:
 	D3D_PRIMITIVE_TOPOLOGY m_topology;
 
@@ -23,15 +24,9 @@ public:
 	const std::vector<VertexData>& GetVertexData();
 	const std::vector<UINT16>& GetIndices();
 
-	virtual const char* GetTypeName() override
-	{
-		return TO_STRING(Mesh);
-	}
-
     virtual void Release() override;
 
 private:
 	std::vector<UINT16> m_indices;
 	std::vector<VertexData> m_vertexData;
 };
-REGISTER_TYPE(Mesh, 0)

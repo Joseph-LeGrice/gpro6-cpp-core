@@ -1,19 +1,19 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
+
 #include "Engine/Core/RTTI/RTTI.h"
+
 class ManagedObject;
 
-struct NativeToManagedObject
+struct NativeToManagedInstance
 {
-	TypeID m_nativeTypeId;
 	InstanceID m_nativeInstanceId;
 	InstanceID m_managedObjectId;
 
-	NativeToManagedObject(TypeID nativeTypeId,
-		InstanceID nativeInstanceId,
+	NativeToManagedInstance(InstanceID nativeInstanceId,
 		InstanceID managedObjectId) :
-		m_nativeTypeId(nativeTypeId),
 		m_nativeInstanceId(nativeInstanceId),
 		m_managedObjectId(managedObjectId) { }
 };
@@ -22,8 +22,12 @@ class NativeToManagedInstanceMap
 {
 public:
 	ManagedObject* GetManagedObject(TypeID nativeTypeId, InstanceID nativeObjectId);
-	void CreateMapping(NativeToManagedObject ntmo);
+
+	ManagedTypeID GetManagedTypeID(TypeID nativeTypeId);
+	void CreateTypeMapping(TypeID nativeTypeId, ManagedTypeID managedTypeId);
+	void CreateInstanceMapping(TypeID nativeTypeId, NativeToManagedInstance instanceMapping);
 
 private:
-	std::vector<NativeToManagedObject> m_nativeManagedObjects;
+	std::unordered_map<TypeID, ManagedTypeID> m_typeMapping;
+	std::unordered_map<TypeID, std::vector<NativeToManagedInstance>> m_activeMappedInstances;
 };

@@ -6,10 +6,5 @@
 
 class StandardMaterial : public Material<MATERIAL_BUFFER_CONTAINER>
 {
-public:
-	virtual const char* GetTypeName() override
-	{
-		return TO_STRING(StandardMaterial);
-	}
+REGISTER_TYPE(StandardMaterial);
 };
-REGISTER_TYPE(StandardMaterial, 10)

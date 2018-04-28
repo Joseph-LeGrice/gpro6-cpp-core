@@ -36,6 +36,7 @@
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
 
 // Etc
+#include "Engine/Core/RTTI/HelperMethods.h"
 #include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Mesh/MeshManager.h"
@@ -152,6 +153,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		tom,
 		n2m
 	);
+
+	RegisterAllTypes();
 
 	int result = gameLoop->Run(*systemContainer);
 

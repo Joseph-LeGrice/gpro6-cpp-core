@@ -35,7 +35,6 @@ ITypedObject* TypedObjectManager::Create(TypeID typeId)
 	size_t index = resources.size();
 	ITypedObject* newObject = TypeNameMappings::Instance().CreateType(typeId);
 	newObject->m_instanceId = static_cast<InstanceID>(index); // TODO: InstanceID -> ArrayIndex lookup table, so InstanceID's can be constant
-	newObject->DoCreationActions();
 	resources.push_back(newObject);
 
 	return resources[index];

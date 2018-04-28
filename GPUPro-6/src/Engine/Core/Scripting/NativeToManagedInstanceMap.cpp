@@ -7,21 +7,31 @@
 
 ManagedObject* NativeToManagedInstanceMap::GetManagedObject(TypeID nativeTypeId, InstanceID nativeObjectId)
 {
-	for (int i = 0; i < m_nativeManagedObjects.size(); i++)
+	std::vector<NativeToManagedInstance>& activeInstances = m_activeMappedInstances.at(nativeTypeId);
+	for (int i = 0; i < activeInstances.size(); i++)
 	{
-		NativeToManagedObject ntmo = m_nativeManagedObjects[i];
-		if (ntmo.m_nativeTypeId == nativeTypeId && 
-			ntmo.m_nativeInstanceId == nativeObjectId)
+		NativeToManagedInstance obj = activeInstances[i];
+		if (obj.m_nativeInstanceId == nativeObjectId)
 		{
 			TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-			ManagedObject* mo = tom->GetInstance<ManagedObject>(ntmo.m_managedObjectId);
+			ManagedObject* mo = tom->GetInstance<ManagedObject>(obj.m_managedObjectId);
 			return mo;
 		}
 	}
 	return nullptr;
 }
 
-void NativeToManagedInstanceMap::CreateMapping(NativeToManagedObject ntmo)
+ManagedTypeID NativeToManagedInstanceMap::GetManagedTypeID(TypeID nativeTypeId)
 {
-	m_nativeManagedObjects.push_back(ntmo);
+	return m_typeMapping[nativeTypeId];
+}
+
+void NativeToManagedInstanceMap::CreateTypeMapping(TypeID nativeTypeId, ManagedTypeID managedTypeId)
+{
+	m_typeMapping.insert({ nativeTypeId, managedTypeId });
+}
+
+void NativeToManagedInstanceMap::CreateInstanceMapping(TypeID nativeTypeId, NativeToManagedInstance instanceMapping)
+{
+	m_activeMappedInstances[nativeTypeId].push_back(instanceMapping);
 }

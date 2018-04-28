@@ -12,6 +12,8 @@ struct ID3D11Texture2D;
 class Texture2D : public IResource
 {
 public:
+	REGISTER_TYPE(Texture2D);
+
     unsigned int Width();
     unsigned int Height();
 
@@ -21,13 +23,7 @@ public:
     void SetPixels(Color cArray[], size_t arraySize);
     
 	virtual void Release() override;
-
-	virtual const char* GetTypeName() override
-	{
-		return TO_STRING(Texture2D);
-	}
-
-	virtual void DoCreationActions() override;
+	
 
 private:
     int m_myShaderResourceViewIndex = -1;
@@ -36,4 +32,3 @@ private:
 	
     void CreateResources();
 };
-REGISTER_TYPE(Texture2D, 5)

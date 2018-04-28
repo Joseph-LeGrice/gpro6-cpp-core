@@ -10,16 +10,12 @@ struct FIBITMAP;
 
 class Texture2DArray : public IResource
 {
+REGISTER_TYPE(Texture2DArray)
 public:
     int GetMyResourceViewID();
     void InitializeWithBitmaps(std::vector<std::wstring> filepaths);
     
     virtual void Release() override;
-
-	static TypeID GetResourceType()
-	{
-		return 7;
-	}
 
 private:
     int m_myShaderResourceViewId;

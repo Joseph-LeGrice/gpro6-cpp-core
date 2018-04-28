@@ -8,8 +8,6 @@
 #include "Engine/Core/DataStructures/Color.h"
 #include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
 
-#include "Engine/Core/RTTI/HelperCreationMethods.h"
-
 #include "D3D11.h"
 #include "FreeImage.h"
 
@@ -135,9 +133,4 @@ void Texture2D::Release()
         FreeImage_Unload(m_bitmap);
     }
     m_pTexture.ReleasePointer();
-}
-
-void Texture2D::DoCreationActions()
-{
-	CreateManagedCounterpart(this, "Texture2D");
 }

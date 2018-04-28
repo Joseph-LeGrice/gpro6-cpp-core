@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Core/SystemManagement/ISystem.h"
+#include "Engine/Core/RTTI/RTTI.h"
 
 #pragma warning(push)
 #pragma warning(disable:4201)
@@ -16,7 +17,7 @@ public:
 	virtual void Initialize() override;
 	virtual void Deinitalize() override;
 
-	ManagedObject* CreateObject(const char* typeName);
+	ManagedObject* CreateObject(ManagedTypeID typeName);
 
 private:
 	MonoImage* m_image;

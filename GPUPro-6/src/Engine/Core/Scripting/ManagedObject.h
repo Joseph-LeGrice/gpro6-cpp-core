@@ -6,23 +6,19 @@
 #pragma warning(pop)
 #include "Engine/Core/RTTI/ITypedObject.h"
 
-typedef uint32_t ManagedObjectID;
+typedef uint32_t ManagedObjectHandle;
 
 class ManagedObject : public ITypedObject
 {
 friend class ScriptedSystemLoader;
+REGISTER_TYPE(ManagedObject);
 public:
 	~ManagedObject();
 
 	MonoObject* GetManagedObject();
 	void SetFieldValue(const char* fieldName, void* value);
 
-	virtual const char* GetTypeName() override
-	{
-		return TO_STRING(ManagedObject);
-	}
-
 private:
-	ManagedObjectID m_objectHandle;
+	//ManagedTypeID m_typeId;
+	ManagedObjectHandle m_objectHandle = 0;
 };
-REGISTER_TYPE(ManagedObject, 42);

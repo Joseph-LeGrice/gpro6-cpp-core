@@ -7,19 +7,16 @@
 
 MonoObject* ResourceManagerAPI::CreateResource(MonoString* className)
 {
-	const char* classNameReal = mono_string_to_utf8(className);
-	TypeID resourceId = TypeNameMappings::Instance().GetTypeID(classNameReal);
-	mono_free((void*)classNameReal);
+	const char* nativeTypeId = mono_string_to_utf8(className);
 
 	ResourceManager* rm = GlobalStaticReferences::Instance()->GetResourceManager();
-	IResource* newResourceUnmanaged = rm->CreateResource(resourceId);
-	const char* nativeTypeName = newResourceUnmanaged->GetTypeName(); //FIXME: This really sucks. Shouldn't have to do this if possible!
-
-	TypeID nativeTypeId = TypeNameMappings::Instance().GetTypeID(nativeTypeName);
+	IResource* newResourceUnmanaged = rm->CreateResource(nativeTypeId);
 	InstanceID nativeObjectId = newResourceUnmanaged->GetInstanceID();
 
 	NativeToManagedInstanceMap* n2m = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	ManagedObject* managedObj = n2m->GetManagedObject(nativeTypeId, nativeObjectId);
+
+	mono_free((void*)nativeTypeId);
 
 	return managedObj->GetManagedObject();
 }

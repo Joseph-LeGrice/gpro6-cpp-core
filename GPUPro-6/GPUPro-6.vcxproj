@@ -222,6 +222,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
+    <ClCompile Include="src\Engine\Core\RTTI\HelperMethods.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
@@ -289,7 +290,7 @@
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
     <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
     <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
-    <ClInclude Include="src\Engine\Core\RTTI\HelperCreationMethods.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\HelperMethods.h" />
     <ClInclude Include="src\Engine\Core\RTTI\RTTI.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypedObjectManager.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
