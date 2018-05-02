@@ -3,8 +3,9 @@ import * as fs from 'fs-extra'
 import execa from 'execa'
 import { MonoBuildConfig } from './data/config-files';
 
-const MONO_COMPILER = `C:/Mono/bin/mcs`;
-const MONO_LIB_PATH = `C:/Mono/lib`;
+const SDK_ROOT: string = <string>process.env.MONO_SDK_ROOT;
+const MONO_COMPILER = path.join(SDK_ROOT, 'bin/mcs')
+const MONO_LIB_PATH = path.join(SDK_ROOT, 'lib');
 
 const EXCLUDED_DIRECTORIES = [
     "obj",

@@ -72,31 +72,31 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_INCLUDE)</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_ROOT)\$(Platform)\lib\$(Configuration)</LibraryPath>
+    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_SDK_ROOT)\include\mono-2.0</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_SDK_ROOT)\lib</LibraryPath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
     <IntDir>$(OutDir)temp\</IntDir>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_INCLUDE)</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_ROOT)\$(Platform)\lib\$(Configuration)</LibraryPath>
+    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_SDK_ROOT)\include\mono-2.0</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_SDK_ROOT)\lib</LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
     <IntDir>$(OutDir)temp\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_INCLUDE)</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_ROOT)\$(Platform)\lib\$(Configuration)</LibraryPath>
+    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_SDK_ROOT)\include\mono-2.0</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_SDK_ROOT)\lib</LibraryPath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
     <IntDir>$(OutDir)temp\</IntDir>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_INCLUDE)</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_ROOT)\$(Platform)\lib\$(Configuration)</LibraryPath>
+    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_SDK_ROOT)\include\mono-2.0</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_SDK_ROOT)\lib</LibraryPath>
     <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
     <IntDir>$(OutDir)temp\</IntDir>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
@@ -114,9 +114,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;D3DCompiler.lib;ws2_32.lib;psapi.lib;ole32.lib;winmm.lib;oleaut32.lib;advapi32.lib;version.lib;mswsock.lib;libmono-static-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x86 --build-directory "$(OutDir)\" --config-file $(SolutionDir)post-build-config.json</Command>
+      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x86 --build-directory "$(OutDir)\" --config-file "$(SolutionDir)post-build-config.json"</Command>
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -140,9 +141,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;D3DCompiler.lib;ws2_32.lib;psapi.lib;ole32.lib;winmm.lib;oleaut32.lib;advapi32.lib;version.lib;mswsock.lib;libmono-static-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x64 --build-directory "$(OutDir)\" --config-file $(SolutionDir)post-build-config.json</Command>
+      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x64 --build-directory "$(OutDir)\" --config-file "$(SolutionDir)post-build-config.json"</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -169,9 +171,10 @@
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
       <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;D3DCompiler.lib;ws2_32.lib;psapi.lib;ole32.lib;winmm.lib;oleaut32.lib;advapi32.lib;version.lib;mswsock.lib;libmono-static-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x86 --build-directory "$(OutDir)\" --config-file $(SolutionDir)post-build-config.json</Command>
+      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x86 --build-directory "$(OutDir)\" --config-file "$(SolutionDir)post-build-config.json"</Command>
     </PostBuildEvent>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -196,9 +199,10 @@
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
       <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;D3DCompiler.lib;ws2_32.lib;psapi.lib;ole32.lib;winmm.lib;oleaut32.lib;advapi32.lib;version.lib;mswsock.lib;libmono-static-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x64 --build-directory "$(OutDir)\" --config-file $(SolutionDir)post-build-config.json</Command>
+      <Command>node "$(SolutionDir)BuildUtils\dist\main.js" -a x64 --build-directory "$(OutDir)\" --config-file "$(SolutionDir)post-build-config.json"</Command>
     </PostBuildEvent>
     <ProjectReference />
     <Lib>
