@@ -234,7 +234,7 @@
     <ClCompile Include="src\Engine\Core\Scripting\ManagedObject.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemInterface.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\ScriptedSystemInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
@@ -303,7 +303,7 @@
     <ClInclude Include="src\Engine\Core\Scripting\ManagedObject.h" />
     <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemInterface.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\ScriptedSystemInterface.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\Components\MeshRenderer.h" />

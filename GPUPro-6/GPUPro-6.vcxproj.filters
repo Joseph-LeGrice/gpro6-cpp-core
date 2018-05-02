@@ -117,7 +117,6 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
@@ -127,6 +126,7 @@
     <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\HelperMethods.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\TypedObjectManagerAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\ScriptedSystemInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -295,7 +295,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemInterface.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\Logging.h" />
@@ -307,6 +306,7 @@
     <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
     <ClInclude Include="src\Engine\Core\RTTI\HelperMethods.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\TypedObjectManagerAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\ScriptedSystemInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

@@ -2,7 +2,7 @@
 #include "ScriptedSystemLoader.h"
 
 #include "ScriptedSystem.h"
-#include "ScriptedSystemInterface.h"
+#include "API/ScriptedSystemInterface.h"
 
 #include <mono/jit/jit.h>
 #include <mono/metadata/mono-config.h>
@@ -32,6 +32,13 @@ void ScriptedSystemLoader::Initialize()
 
 	if (m_assembly != NULL)
 	{
+        // Notes for later:
+        //   Currently I have an entry point for C# here.
+        //   This is due to the fact I have no serialization.
+        //   I create the mono objects here, in this method call.
+        //   Ideally I will eventually remove this entry point.
+        //   Instead, all mono objects would be created via deserialization process.
+        
 		const int argc = 1;
 		char* argv[argc] = {
 			"MonoSystemLoader"
