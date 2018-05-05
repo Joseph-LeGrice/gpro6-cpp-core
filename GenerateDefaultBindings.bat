@@ -1,0 +1,1 @@
+%CODE_GENERATOR% --input-directory "C:\Users\Joe\Development\C++ Projects\GPUPro6\gpupro-6\src\Engine\Core\Scripting\Bindings" --output-cpp-directory "C:\Users\Joe\Development\C++ Projects\GPUPro6\gpupro-6\src\Engine\Core\Scripting\API\cpp-gen" --output-cs-directory "C:\Users\Joe\Development\C++ Projects\GPUPro6\gpupro-6\src\Engine\Core\Scripting\API\cs-gen"

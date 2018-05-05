@@ -23,24 +23,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\Components\Transform.cpp">
       <Filter>Engine\Core\Graphics\Components</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Shader.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp">
       <Filter>Engine\Core\Graphics</Filter>
     </ClCompile>
@@ -80,9 +62,6 @@
     <ClCompile Include="src\Engine\Core\Application\Application.cpp">
       <Filter>Engine\Core\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
@@ -118,15 +97,44 @@
     <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\ManagedObject.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\HelperMethods.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\TypedObjectManagerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\ScriptedSystemInterface.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Mesh.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Shader.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\ResourceTypes\ShaderResource.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\ResourceTypes\StructuredBuffer.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Texture2D.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Texture2DArray.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\ResourceTypes\TextureSampler.cpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\ResourceTypes\ManagedObject.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\MeshAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderResourceAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\SimpleMaterialAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\StandardMaterialAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\StructuredBufferAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DArrayAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\TextureSamplerAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -160,24 +168,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Components\Transform.h">
       <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Shader.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsSystem.h">
       <Filter>Engine\Core\Graphics</Filter>
@@ -242,23 +232,11 @@
     <ClInclude Include="src\Engine\Core\Application\Application.h">
       <Filter>Engine\Core\Application</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\Material.hpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp">
-      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h">
       <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.h">
-      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h">
       <Filter>Engine\Core\Graphics</Filter>
@@ -296,9 +274,7 @@
     <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\types\Texture2DAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\Logging.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\ManagedObject.h" />
     <ClInclude Include="src\Engine\Core\RTTI\ITypedObject.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypedObjectManager.h" />
     <ClInclude Include="src\Engine\Core\RTTI\RTTI.h" />
@@ -307,6 +283,46 @@
     <ClInclude Include="src\Engine\Core\RTTI\HelperMethods.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\TypedObjectManagerAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\ScriptedSystemInterface.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Material\Material.hpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Material\SimpleMaterial.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Material\StandardMaterial.hpp">
+      <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Mesh.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Shader.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\ShaderResource.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\StructuredBuffer.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Texture2D.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Texture2DArray.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\TextureSampler.h">
+      <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\ResourceTypes\ManagedObject.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\MeshAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderResourceAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\SimpleMaterialAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\StandardMaterialAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\StructuredBufferAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DArrayAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\TextureSamplerAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -399,5 +415,14 @@
       <Filter>Engine\Shaders</Filter>
     </None>
     <None Include="src\Engine\Main_BoostDI.cpp" />
+    <None Include="src\Engine\Core\Scripting\Bindings\Texture2D.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\Mesh.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\Shader.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\ShaderResource.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\SimpleMaterial.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\StandardMaterial.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\StructuredBuffer.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\Texture2DAray.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\TextureSampler.json" />
   </ItemGroup>
 </Project>
