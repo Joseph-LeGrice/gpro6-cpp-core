@@ -8,5 +8,5 @@
 class Texture2DAPI
 {
 	static void RegisterCalls();
-
+	static void InitializeWithBitmap(int managedInstanceId, const wchar_t* arg0);
 };

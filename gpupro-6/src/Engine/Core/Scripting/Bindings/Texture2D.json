@@ -3,5 +3,13 @@
     "nativeClassName": "Texture2D",
     "managedClassName": "Texture2D",
     "methods": [
+        {
+            "methodType": "instance",
+            "methodName": "InitializeWithBitmap",
+            "returnTypeInfo": "void",
+            "argInfo": [
+                "string"
+            ]
+        }
     ]
 }
