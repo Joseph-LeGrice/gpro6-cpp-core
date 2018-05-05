@@ -8,7 +8,7 @@ typedef int32_t InstanceID;
 
 #define REGISTER_TYPE(T) \
 public: \
-virtual const char* GetTypeName() override \
+static TypeID GetTypeID() \
 { \
-	return TO_STRING(T); \
+	return std::string(TO_STRING(T)); \
 }

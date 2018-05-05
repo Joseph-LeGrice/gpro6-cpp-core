@@ -34,16 +34,14 @@ private:
 template<class T>
 T* TypedObjectManager::Create()
 {
-	T proto;
-	TypeID typeId = proto.GetTypeName();
+	TypeID typeId = T::GetTypeID();
 	return static_cast<T*>(Create(typeId));
 }
 
 template<class T>
 void TypedObjectManager::Delete(InstanceID objId)
 {
-	T proto;
-	TypeID typeId = proto.GetTypeName();
+	TypeID typeId = T::GetTypeID();
 	Delete(typeId, objId);
 }
 
@@ -52,8 +50,7 @@ std::vector<T*> TypedObjectManager::GetAllInstances()
 {
 	struct CastComponent { T* operator ()(ITypedObject* value) const { return static_cast<T*>(value); } };
 
-	T proto;
-	TypeID typeId = proto.GetTypeName();
+	TypeID typeId = T::GetTypeID();
 	std::vector<T*> result = GetAllInstances(typeId);
 	std::transform(existing.begin(), existing.end(), result.begin(), CastComponent());
 	return result;
@@ -62,8 +59,7 @@ std::vector<T*> TypedObjectManager::GetAllInstances()
 template<class T>
 T* TypedObjectManager::GetInstance(InstanceID objId)
 {
-	T proto;
-	TypeID typeId = proto.GetTypeName();
+	TypeID typeId = T::GetTypeID();
 	ITypedObject* result = GetInstance(typeId, objId);
 	if (result != nullptr)
 	{

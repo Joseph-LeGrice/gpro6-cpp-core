@@ -10,8 +10,6 @@ public:
 	virtual void Establish() { }
 	virtual void Finalize() { }
 
-	virtual const char* GetTypeName() = 0;
-	
 	InstanceID GetInstanceID()
 	{
 		return m_instanceId;
