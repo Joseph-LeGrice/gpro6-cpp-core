@@ -2,7 +2,7 @@
 #include "MeshManager.h"
 
 #include "Engine/Core/RTTI/TypedObjectManager.h"
-#include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
+#include "Engine/Core/ResourceTypes/Mesh.h"
 #include "Engine/Core/Graphics/Buffers/IndexBuffer.h"
 #include "Engine/Core/Graphics/Buffers/VertexBuffer.h"
 

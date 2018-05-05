@@ -2,11 +2,11 @@
 
 #include "Engine/Core/Utilities/Logging.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
-#include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
+#include "Engine/Core/ResourceTypes/Texture2D.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/DataStructures/Color.h"
-#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
+#include "Engine/Core/ResourceTypes/ShaderResource.h"
 
 #include "D3D11.h"
 #include "FreeImage.h"

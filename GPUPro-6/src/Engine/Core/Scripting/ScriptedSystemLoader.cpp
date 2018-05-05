@@ -9,12 +9,11 @@
 #include <mono/metadata/assembly.h>
 
 #include "API/TypedObjectManagerAPI.h"
-#include "API/types/Texture2DAPI.h"
 #include "API/Logging.h"
 
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
-#include "ManagedObject.h"
+#include "Engine/Core/ResourceTypes/ManagedObject.h"
 
 void ScriptedSystemLoader::Initialize()
 {
@@ -27,7 +26,6 @@ void ScriptedSystemLoader::Initialize()
 	
 	ScriptedSystemInterface::RegisterMonoMethods();
 	TypedObjectManagerAPI::RegisterMonoMethods();
-	Texture2DAPI::RegisterMonoMethods();
 	Logging::RegisterMonoMethods();
 
 	if (m_assembly != NULL)

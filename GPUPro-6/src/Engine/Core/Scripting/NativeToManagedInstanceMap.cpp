@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "NativeToManagedInstanceMap.h"
-#include "ManagedObject.h"
+#include "Engine/Core/ResourceTypes/ManagedObject.h"
 
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"

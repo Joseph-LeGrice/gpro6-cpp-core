@@ -47,15 +47,15 @@
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
 
 // Resources
-#include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
-#include "Engine/Core/Graphics/ResourceTypes/Shader.h"
-#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
-#include "Engine/Core/Graphics/ResourceTypes/Material/SimpleMaterial.h"
-#include "Engine/Core/Graphics/ResourceTypes/Material/StandardMaterial.hpp"
-#include "Engine/Core/Graphics/ResourceTypes/StructuredBuffer.h"
-#include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
-#include "Engine/Core/Graphics/ResourceTypes/Texture2DArray.h"
-#include "Engine/Core/Graphics/ResourceTypes/TextureSampler.h"
+#include "Engine/Core/ResourceTypes/Mesh.h"
+#include "Engine/Core/ResourceTypes/Shader.h"
+#include "Engine/Core/ResourceTypes/ShaderResource.h"
+#include "Engine/Core/ResourceTypes/Material/SimpleMaterial.h"
+#include "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp"
+#include "Engine/Core/ResourceTypes/StructuredBuffer.h"
+#include "Engine/Core/ResourceTypes/Texture2D.h"
+#include "Engine/Core/ResourceTypes/Texture2DArray.h"
+#include "Engine/Core/ResourceTypes/TextureSampler.h"
 #include "Core/GlobalStaticReferences.h"
 
 

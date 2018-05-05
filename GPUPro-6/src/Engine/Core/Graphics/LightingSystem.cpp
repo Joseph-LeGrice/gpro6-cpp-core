@@ -6,7 +6,7 @@
 #include "Engine/Core/SceneGraph/Components/Entity.h"
 #include "Engine/Core/Graphics/Components/Transform.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
-#include "Engine/Core/Graphics/ResourceTypes/StructuredBuffer.h"
+#include "Engine/Core/ResourceTypes/StructuredBuffer.h"
 
 #define MAX_LIGHTS 5
 

@@ -7,7 +7,7 @@
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/GlobalStaticReferences.h"
-#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
+#include "Engine/Core/ResourceTypes/ShaderResource.h"
 
 
 int Texture2DArray::GetMyResourceViewID()

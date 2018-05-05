@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
+#include "Engine/Core/ResourceTypes/Mesh.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 #include "D3D11.h"

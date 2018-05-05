@@ -3,7 +3,7 @@
 #include "D3D11.h"
 
 #include "Engine/Core/RTTI/TypedObjectManager.h"
-#include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
+#include "Engine/Core/ResourceTypes/Mesh.h"
 #include "MyMath/MathDefines.h"
 
 #include <math.h>

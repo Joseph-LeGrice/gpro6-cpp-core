@@ -2,7 +2,7 @@
 #include "VoxelTerrain.h"
 #include "Engine/Core/Utilities/Noise.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
-#include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
+#include "Engine/Core/ResourceTypes/Mesh.h"
 #include "Transvoxel.cpp"
 
 VoxelTerrain::VoxelTerrain(TypedObjectManager& resourceManager) : m_typedObjectManager(resourceManager)

@@ -5,7 +5,7 @@
 #include "Engine/Core/Graphics/Components/MeshRenderer.h"
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
-#include "Engine/Core/Graphics/ResourceTypes/Material/SimpleMaterial.h"
+#include "Engine/Core/ResourceTypes/Material/SimpleMaterial.h"
 
 
 void SkyboxDrawCommand::PreDrawAll()

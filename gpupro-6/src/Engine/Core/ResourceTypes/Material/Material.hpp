@@ -3,9 +3,9 @@
 #include <vector>
 #include "Engine/Core/RTTI/ITypedObject.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
-#include "Engine/Core/Graphics/ResourceTypes/Shader.h"
-#include "Engine/Core/Graphics/ResourceTypes/ShaderResource.h"
-#include "Engine/Core/Graphics/ResourceTypes/TextureSampler.h"
+#include "Engine/Core/ResourceTypes/Shader.h"
+#include "Engine/Core/ResourceTypes/ShaderResource.h"
+#include "Engine/Core/ResourceTypes/TextureSampler.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 
 template<class T> // TODO: COULD ALSO PASS IN NUM OF TEXTURES ALLOWED HERE?

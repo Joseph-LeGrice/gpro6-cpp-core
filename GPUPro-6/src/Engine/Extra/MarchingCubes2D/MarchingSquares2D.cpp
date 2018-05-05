@@ -4,8 +4,8 @@
 
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/DataStructures/Color.h"
-#include "Engine/Core/Graphics/ResourceTypes/Mesh.h"
-#include "Engine/Core/Graphics/ResourceTypes/Texture2D.h"
+#include "Engine/Core/ResourceTypes/Mesh.h"
+#include "Engine/Core/ResourceTypes/Texture2D.h"
 
 #include "Engine/Core/Utilities/Noise.h"
 
