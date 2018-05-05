@@ -1,0 +1,7 @@
+{
+    "nativeIncludePath": "Engine/Core/ResourceTypes/Shader.h",
+    "nativeClassName": "Shader",
+    "managedClassName": "Shader",
+    "methods": [
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "nativeIncludePath": "Engine/Core/ResourceTypes/Texture2DArray.h",
+    "nativeClassName": "Texture2DArray",
+    "managedClassName": "Texture2DArray",
+    "methods": [
+    ]
+}

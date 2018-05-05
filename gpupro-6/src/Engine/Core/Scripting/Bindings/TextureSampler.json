@@ -1,0 +1,7 @@
+{
+    "nativeIncludePath": "Engine/Core/ResourceTypes/TextureSampler.h",
+    "nativeClassName": "TextureSampler",
+    "managedClassName": "TextureSampler",
+    "methods": [
+    ]
+}

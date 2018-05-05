@@ -1,0 +1,7 @@
+{
+    "nativeIncludePath": "Engine/Core/ResourceTypes/Mesh.h",
+    "nativeClassName": "Mesh",
+    "managedClassName": "Mesh",
+    "methods": [
+    ]
+}

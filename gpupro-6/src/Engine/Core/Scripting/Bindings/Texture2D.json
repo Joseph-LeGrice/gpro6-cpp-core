@@ -1,0 +1,7 @@
+{
+    "nativeIncludePath": "Engine/Core/ResourceTypes/Texture2D.h",
+    "nativeClassName": "Texture2D",
+    "managedClassName": "Texture2D",
+    "methods": [
+    ]
+}
