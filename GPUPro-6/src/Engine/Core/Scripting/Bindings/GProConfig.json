@@ -1,0 +1,78 @@
+{
+  "namespace": "GPro",
+  "outputCppDirectory": "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\src\\Engine\\Core\\Scripting\\API\\cpp-gen",
+  "outputCsDirectory": "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\src\\Engine\\Core\\Scripting\\API\\cs-gen",
+  "fileBindings": [
+    {
+      "includePath": "Engine/Core/ResourceTypes/Mesh.h",
+      "nativeClassName": "Mesh",
+      "managedClassName": "Mesh",
+      "methods": [
+      ]
+    },
+    {
+      "includePath": "Engine/Core/ResourceTypes/TextureSampler.h",
+      "nativeClassName": "TextureSampler",
+      "managedClassName": "TextureSampler",
+      "methods": [
+      ]
+    },
+    {
+      "includePath": "Engine/Core/ResourceTypes/Texture2DArray.h",
+      "nativeClassName": "Texture2DArray",
+      "managedClassName": "Texture2DArray",
+      "methods": [
+      ]
+    },
+    {
+      "includePath": "Engine/Core/ResourceTypes/Texture2D.h",
+      "nativeClassName": "Texture2D",
+      "managedClassName": "Texture2D",
+      "methods": [
+        {
+          "methodType": "instance",
+          "methodName": "InitializeWithBitmap",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "string"
+          ]
+        }
+      ]
+    },
+    {
+      "includePath": "Engine/Core/ResourceTypes/StructuredBuffer.h",
+      "nativeClassName": "StructuredBuffer",
+      "managedClassName": "StructuredBuffer",
+      "methods": [
+      ]
+    },
+    {
+      "includePath": "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp",
+      "nativeClassName": "StandardMaterial",
+      "managedClassName": "StandardMaterial",
+      "methods": [
+      ]
+    },
+    {
+      "includePath": "Engine/Core/ResourceTypes/Material/SimpleMaterial.h",
+      "nativeClassName": "SimpleMaterial",
+      "managedClassName": "SimpleMaterial",
+      "methods": [
+      ]
+    },
+    {
+      "includePath": "Engine/Core/ResourceTypes/ShaderResource.h",
+      "nativeClassName": "ShaderResource",
+      "managedClassName": "ShaderResource",
+      "methods": [
+      ]
+    },
+    {
+      "includePath": "Engine/Core/ResourceTypes/Shader.h",
+      "nativeClassName": "Shader",
+      "managedClassName": "Shader",
+      "methods": [
+      ]
+    }
+  ]
+}

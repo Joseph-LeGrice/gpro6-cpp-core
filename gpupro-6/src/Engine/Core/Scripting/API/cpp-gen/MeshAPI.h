@@ -7,6 +7,7 @@
 
 class MeshAPI
 {
+public:
 	static void RegisterCalls();
 
 };

@@ -7,6 +7,7 @@
 
 class Texture2DAPI
 {
+public:
 	static void RegisterCalls();
 	static void InitializeWithBitmap(int managedInstanceId, const wchar_t* arg0);
 };

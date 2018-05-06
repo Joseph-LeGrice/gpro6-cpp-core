@@ -1,7 +1,0 @@
-{
-    "nativeIncludePath": "Engine/Core/ResourceTypes/StructuredBuffer.h",
-    "nativeClassName": "StructuredBuffer",
-    "managedClassName": "StructuredBuffer",
-    "methods": [
-    ]
-}

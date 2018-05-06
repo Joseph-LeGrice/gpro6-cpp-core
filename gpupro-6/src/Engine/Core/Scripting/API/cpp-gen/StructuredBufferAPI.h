@@ -7,6 +7,7 @@
 
 class StructuredBufferAPI
 {
+public:
 	static void RegisterCalls();
 
 };

@@ -7,6 +7,7 @@
 
 class StandardMaterialAPI
 {
+public:
 	static void RegisterCalls();
 
 };

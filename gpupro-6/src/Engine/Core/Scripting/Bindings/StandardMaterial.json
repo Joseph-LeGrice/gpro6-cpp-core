@@ -1,7 +1,0 @@
-{
-    "nativeIncludePath": "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp",
-    "nativeClassName": "StandardMaterial",
-    "managedClassName": "StandardMaterial",
-    "methods": [
-    ]
-}

@@ -1,7 +1,0 @@
-{
-    "nativeIncludePath": "Engine/Core/ResourceTypes/Material/SimpleMaterial.h",
-    "nativeClassName": "SimpleMaterial",
-    "managedClassName": "SimpleMaterial",
-    "methods": [
-    ]
-}

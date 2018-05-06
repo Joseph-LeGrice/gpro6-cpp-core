@@ -228,6 +228,7 @@
     <ClCompile Include="src\Engine\Core\RTTI\HelperMethods.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\MeshAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderResourceAPI.cpp" />
@@ -274,15 +275,7 @@
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\Transvoxel.cpp" />
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.cpp" />
     <ClCompile Include="src\Engine\Main.cpp" />
-    <None Include="src\Engine\Core\Scripting\Bindings\Mesh.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\Shader.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\ShaderResource.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\SimpleMaterial.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\StandardMaterial.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\StructuredBuffer.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\Texture2D.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\Texture2DAray.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\TextureSampler.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\GProConfig.json" />
     <None Include="src\Engine\Main_BoostDI.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -314,6 +307,7 @@
     <ClInclude Include="src\Engine\Core\RTTI\TypedObjectManager.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
     <ClInclude Include="src\Engine\Core\RTTI\ITypedObject.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\MeshAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderResourceAPI.h" />
@@ -426,4 +420,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

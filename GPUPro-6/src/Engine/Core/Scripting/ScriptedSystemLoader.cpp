@@ -8,6 +8,7 @@
 #include <mono/metadata/mono-config.h>
 #include <mono/metadata/assembly.h>
 
+#include "API/cpp-gen/GProBindingRegistration.h"
 #include "API/TypedObjectManagerAPI.h"
 #include "API/Logging.h"
 
@@ -24,6 +25,8 @@ void ScriptedSystemLoader::Initialize()
 	m_assembly = mono_domain_assembly_open(m_domain, "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\build\\x64-Debug\\MonoScripts.exe");
 	m_image = mono_assembly_get_image(m_assembly);
 	
+	GPro::RegisterAllCalls();
+
 	ScriptedSystemInterface::RegisterMonoMethods();
 	TypedObjectManagerAPI::RegisterMonoMethods();
 	Logging::RegisterMonoMethods();

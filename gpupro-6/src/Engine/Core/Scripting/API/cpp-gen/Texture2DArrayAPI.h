@@ -7,6 +7,7 @@
 
 class Texture2DArrayAPI
 {
+public:
 	static void RegisterCalls();
 
 };

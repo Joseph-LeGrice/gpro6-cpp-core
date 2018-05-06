@@ -7,6 +7,7 @@
 
 class ShaderAPI
 {
+public:
 	static void RegisterCalls();
 
 };

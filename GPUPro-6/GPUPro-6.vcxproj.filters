@@ -135,6 +135,7 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DArrayAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\TextureSamplerAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -323,6 +324,7 @@
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DArrayAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\TextureSamplerAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -415,14 +417,6 @@
       <Filter>Engine\Shaders</Filter>
     </None>
     <None Include="src\Engine\Main_BoostDI.cpp" />
-    <None Include="src\Engine\Core\Scripting\Bindings\Texture2D.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\Mesh.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\Shader.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\ShaderResource.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\SimpleMaterial.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\StandardMaterial.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\StructuredBuffer.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\Texture2DAray.json" />
-    <None Include="src\Engine\Core\Scripting\Bindings\TextureSampler.json" />
+    <None Include="src\Engine\Core\Scripting\Bindings\GProConfig.json" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@
 
 class TextureSamplerAPI
 {
+public:
 	static void RegisterCalls();
 
 };

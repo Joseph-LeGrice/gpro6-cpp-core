@@ -7,19 +7,19 @@
 #include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 
 
-std::wstring GetUTF16(MonoString* ms)
-{
-    mono_unichar2* pathStr = mono_string_to_utf16(ms);
-    std::wstringstream ss;
-    int i = 0;
-    while (pathStr[i] != NULL)
-    {
-        ss << static_cast<wchar_t>(pathStr[i]);
-        i++;
-    }
-    mono_free(static_cast<void*>(pathStr));
-    return ss.str();
-}
+//std::wstring GetUTF16(MonoString* ms)
+//{
+//    mono_unichar2* pathStr = mono_string_to_utf16(ms);
+//    std::wstringstream ss;
+//    int i = 0;
+//    while (pathStr[i] != NULL)
+//    {
+//        ss << static_cast<wchar_t>(pathStr[i]);
+//        i++;
+//    }
+//    mono_free(static_cast<void*>(pathStr));
+//    return ss.str();
+//}
 
 MonoObject* TypedObjectManagerAPI::Create(MonoString* className)
 {
