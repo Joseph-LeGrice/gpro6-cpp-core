@@ -5,9 +5,11 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-class Texture2DArrayAPI
+namespace GPro
 {
-public:
-	static void RegisterCalls();
+	namespace Texture2DArrayAPI
+	{
+		extern void RegisterCalls();
 
+	};
 };

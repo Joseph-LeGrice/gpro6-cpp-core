@@ -4,7 +4,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/ShaderResource.h"
 
-void ShaderResourceAPI::RegisterCalls()
+void GPro::ShaderResourceAPI::RegisterCalls()
 {
 }
 

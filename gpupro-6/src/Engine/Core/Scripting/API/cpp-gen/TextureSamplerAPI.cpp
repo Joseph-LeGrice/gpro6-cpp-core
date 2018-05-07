@@ -4,7 +4,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/TextureSampler.h"
 
-void TextureSamplerAPI::RegisterCalls()
+void GPro::TextureSamplerAPI::RegisterCalls()
 {
 }
 

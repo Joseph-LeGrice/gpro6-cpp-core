@@ -5,9 +5,11 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-class StandardMaterialAPI
+namespace GPro
 {
-public:
-	static void RegisterCalls();
+	namespace StandardMaterialAPI
+	{
+		extern void RegisterCalls();
 
+	};
 };

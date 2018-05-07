@@ -4,7 +4,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/StructuredBuffer.h"
 
-void StructuredBufferAPI::RegisterCalls()
+void GPro::StructuredBufferAPI::RegisterCalls()
 {
 }
 

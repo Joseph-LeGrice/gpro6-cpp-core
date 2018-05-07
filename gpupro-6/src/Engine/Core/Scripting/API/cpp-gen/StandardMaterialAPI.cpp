@@ -4,7 +4,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp"
 
-void StandardMaterialAPI::RegisterCalls()
+void GPro::StandardMaterialAPI::RegisterCalls()
 {
 }
 

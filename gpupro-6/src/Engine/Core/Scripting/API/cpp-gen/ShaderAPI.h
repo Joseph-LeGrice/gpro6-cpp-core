@@ -5,9 +5,11 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-class ShaderAPI
+namespace GPro
 {
-public:
-	static void RegisterCalls();
+	namespace ShaderAPI
+	{
+		extern void RegisterCalls();
 
+	};
 };

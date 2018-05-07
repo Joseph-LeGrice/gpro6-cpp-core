@@ -5,9 +5,11 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-class Texture2DAPI
+namespace GPro
 {
-public:
-	static void RegisterCalls();
-	static void InitializeWithBitmap(int managedInstanceId, const wchar_t* arg0);
+	namespace Texture2DAPI
+	{
+		extern void RegisterCalls();
+		extern void InitializeWithBitmap(int managedInstanceId, const wchar_t* arg0);
+	};
 };

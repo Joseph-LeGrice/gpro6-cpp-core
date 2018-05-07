@@ -4,7 +4,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/Texture2DArray.h"
 
-void Texture2DArrayAPI::RegisterCalls()
+void GPro::Texture2DArrayAPI::RegisterCalls()
 {
 }
 

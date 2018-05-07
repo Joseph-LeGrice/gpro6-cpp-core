@@ -5,29 +5,25 @@
   "fileBindings": [
     {
       "includePath": "Engine/Core/ResourceTypes/Mesh.h",
-      "nativeClassName": "Mesh",
-      "managedClassName": "Mesh",
+      "name": "Mesh",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/TextureSampler.h",
-      "nativeClassName": "TextureSampler",
-      "managedClassName": "TextureSampler",
+      "name": "TextureSampler",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Texture2DArray.h",
-      "nativeClassName": "Texture2DArray",
-      "managedClassName": "Texture2DArray",
+      "name": "Texture2DArray",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Texture2D.h",
-      "nativeClassName": "Texture2D",
-      "managedClassName": "Texture2D",
+      "name": "Texture2D",
       "methods": [
         {
           "methodType": "instance",
@@ -41,36 +37,31 @@
     },
     {
       "includePath": "Engine/Core/ResourceTypes/StructuredBuffer.h",
-      "nativeClassName": "StructuredBuffer",
-      "managedClassName": "StructuredBuffer",
+      "name": "StructuredBuffer",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp",
-      "nativeClassName": "StandardMaterial",
-      "managedClassName": "StandardMaterial",
+      "name": "StandardMaterial",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Material/SimpleMaterial.h",
-      "nativeClassName": "SimpleMaterial",
-      "managedClassName": "SimpleMaterial",
+      "name": "SimpleMaterial",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/ShaderResource.h",
-      "nativeClassName": "ShaderResource",
-      "managedClassName": "ShaderResource",
+      "name": "ShaderResource",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Shader.h",
-      "nativeClassName": "Shader",
-      "managedClassName": "Shader",
+      "name": "Shader",
       "methods": [
       ]
     }

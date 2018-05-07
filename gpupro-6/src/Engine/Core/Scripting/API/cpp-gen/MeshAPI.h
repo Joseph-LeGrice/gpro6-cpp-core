@@ -5,9 +5,11 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-class MeshAPI
+namespace GPro
 {
-public:
-	static void RegisterCalls();
+	namespace MeshAPI
+	{
+		extern void RegisterCalls();
 
+	};
 };

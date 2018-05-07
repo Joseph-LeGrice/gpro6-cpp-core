@@ -10,6 +10,8 @@
 #include "ShaderResourceAPI.h"
 #include "ShaderAPI.h"
 
+using namespace GPro;
+
 void GPro::RegisterAllCalls()
 {
 	MeshAPI::RegisterCalls();

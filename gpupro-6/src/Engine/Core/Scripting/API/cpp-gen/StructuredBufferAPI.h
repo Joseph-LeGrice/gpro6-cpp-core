@@ -5,9 +5,11 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-class StructuredBufferAPI
+namespace GPro
 {
-public:
-	static void RegisterCalls();
+	namespace StructuredBufferAPI
+	{
+		extern void RegisterCalls();
 
+	};
 };

@@ -5,9 +5,11 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-class TextureSamplerAPI
+namespace GPro
 {
-public:
-	static void RegisterCalls();
+	namespace TextureSamplerAPI
+	{
+		extern void RegisterCalls();
 
+	};
 };
