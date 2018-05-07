@@ -1,21 +1,21 @@
 #include "stdafx.h"
-#include "ScriptedSystemInterface.h"
-
+#include "ScriptedSystemInterfaceAPI.h"
 #include "Engine/Core/GlobalStaticReferences.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Scripting/ScriptedSystem.h"
 #include "Engine/Core/Scripting/ScriptedSystemLoader.h"
 #include "Engine/Core/SystemManagement/SystemContainer.h"
 
-void ScriptedSystemInterface::RegisterSystemInstance(MonoObject* object)
+void GPro::ScriptedSystemInterfaceAPI::RegisterCalls()
 {
-	ScriptedSystem* newSystem = new ScriptedSystem(object);
+	mono_add_internal_call("ScriptedSystemInterface::RegisterSystemInstance", GPro::ScriptedSystemInterfaceAPI::RegisterSystemInstance);
+}
+
+void GPro::ScriptedSystemInterfaceAPI::RegisterSystemInstance(MonoObject* arg0)
+{
+	ScriptedSystem* newSystem = new ScriptedSystem(arg0);
 	SystemContainer* sysContainer = GlobalStaticReferences::Instance()->GetSystemContainer();
 	sysContainer->RegisterSystem(newSystem);
 	ScriptedSystemLoader* systemLoader = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
 	systemLoader->RegisterSubsystem(newSystem);
-}
-
-void ScriptedSystemInterface::RegisterMonoMethods()
-{
-	mono_add_internal_call("MonoSystemInterface::RegisterSystem", ScriptedSystemInterface::RegisterSystemInstance);
 }

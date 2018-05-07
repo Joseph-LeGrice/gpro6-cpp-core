@@ -5,9 +5,11 @@
 #include <mono/metadata/object.h>
 #pragma warning(pop)
 
-struct ScriptedSystemInterface
+namespace GPro
 {
-	static void RegisterSystemInstance(MonoObject* object);
-
-	static void RegisterMonoMethods();
+	namespace LoggingAPI
+	{
+		extern void RegisterCalls();
+		extern void LogMessage(MonoString* arg0);
+	};
 };

@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Texture2DAPI.h"
 #include "Engine/Core/GlobalStaticReferences.h"
-#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/Texture2D.h"
+
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 
 void GPro::Texture2DAPI::RegisterCalls()
 {

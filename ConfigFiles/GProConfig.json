@@ -6,24 +6,28 @@
     {
       "includePath": "Engine/Core/ResourceTypes/Mesh.h",
       "name": "Mesh",
+      "subdirectory": "types",      
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/TextureSampler.h",
       "name": "TextureSampler",
+      "subdirectory": "types",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Texture2DArray.h",
       "name": "Texture2DArray",
+      "subdirectory": "types",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Texture2D.h",
       "name": "Texture2D",
+      "subdirectory": "types",
       "methods": [
         {
           "methodType": "instance",
@@ -38,31 +42,78 @@
     {
       "includePath": "Engine/Core/ResourceTypes/StructuredBuffer.h",
       "name": "StructuredBuffer",
+      "subdirectory": "types",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp",
       "name": "StandardMaterial",
+      "subdirectory": "types",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Material/SimpleMaterial.h",
       "name": "SimpleMaterial",
+      "subdirectory": "types",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/ShaderResource.h",
       "name": "ShaderResource",
+      "subdirectory": "types",
       "methods": [
       ]
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Shader.h",
       "name": "Shader",
+      "subdirectory": "types",
       "methods": [
+      ]
+    },
+    {
+      "name": "TypedObjectManager",
+      "subdirectory": "",
+      "methods": [
+        {
+          "methodType": "static",
+          "methodName": "Create",
+          "returnTypeInfo": "object",
+          "argInfo": [
+            "string"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ScriptedSystemInterface",
+      "subdirectory": "",
+      "methods": [
+        {
+          "methodType": "static",
+          "methodName": "RegisterSystemInstance",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "object"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Logging",
+      "subdirectory": "",
+      "methods": [
+        {
+          "methodType": "static",
+          "methodName": "LogMessage",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "string"
+          ]
+        }
       ]
     }
   ]

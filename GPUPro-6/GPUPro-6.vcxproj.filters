@@ -97,13 +97,10 @@
     <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\Logging.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\HelperMethods.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\TypedObjectManagerAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\ScriptedSystemInterface.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceTypes\Mesh.cpp">
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
@@ -126,16 +123,19 @@
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\ResourceTypes\ManagedObject.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\MeshAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderResourceAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\SimpleMaterialAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\StandardMaterialAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\StructuredBufferAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DArrayAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\TextureSamplerAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\MeshAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\ShaderAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\ShaderResourceAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\SimpleMaterialAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\StandardMaterialAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\StructuredBufferAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DArrayAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\TextureSamplerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -275,15 +275,12 @@
     <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\Logging.h" />
     <ClInclude Include="src\Engine\Core\RTTI\ITypedObject.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypedObjectManager.h" />
     <ClInclude Include="src\Engine\Core\RTTI\RTTI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
     <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
     <ClInclude Include="src\Engine\Core\RTTI\HelperMethods.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\TypedObjectManagerAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\ScriptedSystemInterface.h" />
     <ClInclude Include="src\Engine\Core\ResourceTypes\Material\Material.hpp">
       <Filter>Engine\Core\Graphics\ResourceTypes\Material</Filter>
     </ClInclude>
@@ -315,16 +312,19 @@
       <Filter>Engine\Core\Graphics\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\ResourceTypes\ManagedObject.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\MeshAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ShaderResourceAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\SimpleMaterialAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\StandardMaterialAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\StructuredBufferAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\Texture2DArrayAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\TextureSamplerAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\MeshAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\ShaderAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\ShaderResourceAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\SimpleMaterialAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\StandardMaterialAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\StructuredBufferAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DArrayAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\TextureSamplerAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

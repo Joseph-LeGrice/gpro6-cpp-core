@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Engine\Core\RTTI\ITypedObject.h"
 
 class ISystem
 {

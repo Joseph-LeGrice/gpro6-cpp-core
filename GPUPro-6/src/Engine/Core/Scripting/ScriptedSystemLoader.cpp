@@ -1,16 +1,12 @@
 #include "stdafx.h"
-#include "ScriptedSystemLoader.h"
-
 #include "ScriptedSystem.h"
-#include "API/ScriptedSystemInterface.h"
+#include "ScriptedSystemLoader.h"
 
 #include <mono/jit/jit.h>
 #include <mono/metadata/mono-config.h>
 #include <mono/metadata/assembly.h>
 
 #include "API/cpp-gen/GProBindingRegistration.h"
-#include "API/TypedObjectManagerAPI.h"
-#include "API/Logging.h"
 
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
@@ -26,10 +22,6 @@ void ScriptedSystemLoader::Initialize()
 	m_image = mono_assembly_get_image(m_assembly);
 	
 	GPro::RegisterAllCalls();
-
-	ScriptedSystemInterface::RegisterMonoMethods();
-	TypedObjectManagerAPI::RegisterMonoMethods();
-	Logging::RegisterMonoMethods();
 
 	if (m_assembly != NULL)
 	{

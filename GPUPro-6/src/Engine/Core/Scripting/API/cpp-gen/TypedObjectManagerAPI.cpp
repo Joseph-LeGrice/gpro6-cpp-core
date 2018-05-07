@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "TypedObjectManagerAPI.h"
-
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/ManagedObject.h"
@@ -21,9 +20,14 @@
 //    return ss.str();
 //}
 
-MonoObject* TypedObjectManagerAPI::Create(MonoString* className)
+void GPro::TypedObjectManagerAPI::RegisterCalls()
 {
-	const char* nativeTypeId = mono_string_to_utf8(className);
+	mono_add_internal_call("TypedObjectManager::Create", GPro::TypedObjectManagerAPI::Create);
+}
+
+MonoObject* GPro::TypedObjectManagerAPI::Create(MonoString* arg0)
+{
+	const char* nativeTypeId = mono_string_to_utf8(arg0);
 
 	TypedObjectManager* rm = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	ITypedObject* newInstance = rm->Create(nativeTypeId);
@@ -35,12 +39,4 @@ MonoObject* TypedObjectManagerAPI::Create(MonoString* className)
 	mono_free((void*)nativeTypeId);
 
 	return managedObj->GetManagedObject();
-}
-
-void TypedObjectManagerAPI::RegisterMonoMethods()
-{
-	mono_add_internal_call("TypedObjectManager::Create", TypedObjectManagerAPI::Create);
-	//mono_add_internal_call("TypedObjectManagerAPI::Delete", TypedObjectManagerAPI::Delete);
-	//mono_add_internal_call("TypedObjectManagerAPI::GetAllResourcesOfType", TypedObjectManagerAPI::GetAllResourcesOfType);
-	//mono_add_internal_call("TypedObjectManagerAPI::GetInstance", TypedObjectManagerAPI::GetInstance);
 }
