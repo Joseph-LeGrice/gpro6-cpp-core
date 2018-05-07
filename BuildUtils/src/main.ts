@@ -4,7 +4,6 @@ import * as argparse from 'argparse'
 import { Config } from './data/config-files'
 import { CopyDLLs } from './copy-dlls'
 import { CopyResource } from './copy-resources'
-import { BuildMonoProject } from './build-mono'
 
 const argParser = new argparse.ArgumentParser({
     "description": "Post Build Script for GPUPro"
@@ -45,13 +44,6 @@ if (configuration.resources) {
     console.log(`Copying Resources...`);
     for (const resource of configuration.resources) {
         CopyResource(resource, rootDirectory, args.build_directory);
-    }
-}
-
-if (configuration.monoProjects) {
-    console.log(`Building Mono Projects...`);
-    for (const monoProject of configuration.monoProjects) {
-        BuildMonoProject(monoProject, rootDirectory, args.build_directory);
     }
 }
 

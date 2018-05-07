@@ -1,7 +1,7 @@
 {
   "namespace": "GPro",
-  "outputCppDirectory": "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\src\\Engine\\Core\\Scripting\\API\\cpp-gen",
-  "outputCsDirectory": "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\src\\Engine\\Core\\Scripting\\API\\cs-gen",
+  "outputCppDirectory": "../GPUPro-6/src/Engine/Core/Scripting/API/cpp-gen",
+  "outputCsDirectory": "../Scripting/GPro",
   "fileBindings": [
     {
       "includePath": "Engine/Core/ResourceTypes/Mesh.h",
