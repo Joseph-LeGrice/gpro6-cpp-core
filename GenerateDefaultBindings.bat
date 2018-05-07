@@ -1,2 +1,2 @@
-%CODE_GENERATOR% ConfigFiles\GProConfig.json"
+%CODE_GENERATOR% ConfigFiles\GProConfig.json
 %MONO_BUILDER% ConfigFiles\build-gpro.json
