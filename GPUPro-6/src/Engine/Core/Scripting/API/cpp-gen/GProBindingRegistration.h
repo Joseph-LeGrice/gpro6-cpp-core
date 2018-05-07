@@ -2,5 +2,5 @@
 
 namespace GPro
 {
-	void RegisterAllCalls();
+	extern void RegisterAllCalls();
 };
