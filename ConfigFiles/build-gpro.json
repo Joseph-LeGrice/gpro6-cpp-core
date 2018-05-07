@@ -1,7 +1,7 @@
 [
     {
-        "relativeProjectDirectory": "../Scripting/GPro",
-        "relativeTargetDirectory": "../Scripting/GPro/out/GPro.dll",
+        "projectDir": "../Scripting/GPro",
+        "outDir": "../Scripting/GPro/out/GPro.dll",
         "libraries": [],
         "type": "library"
     }
