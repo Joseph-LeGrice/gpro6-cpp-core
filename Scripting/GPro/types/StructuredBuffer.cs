@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class StructuredBuffer : ITypedObject
+public class StructuredBuffer : ITypedObject
 {
 	//// GENERATED
 	//// GENERATED

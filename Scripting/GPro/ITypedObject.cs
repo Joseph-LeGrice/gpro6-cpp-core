@@ -1,5 +1,5 @@
 
-abstract class ITypedObject
+public abstract class ITypedObject
 {
     private int m_instanceId;
 

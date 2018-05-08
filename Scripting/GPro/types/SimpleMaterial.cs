@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class SimpleMaterial : ITypedObject
+public class SimpleMaterial : ITypedObject
 {
 	//// GENERATED
 	//// GENERATED

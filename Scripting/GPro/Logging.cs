@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class Logging : ITypedObject
+public class Logging : ITypedObject
 {
 	//// GENERATED
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]

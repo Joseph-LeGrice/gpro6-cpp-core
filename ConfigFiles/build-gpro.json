@@ -4,5 +4,13 @@
         "outDir": "../Scripting/GPro/out/GPro.dll",
         "libraries": [],
         "type": "library"
+    },
+    {
+        "projectDir": "../Scripting/MonoScripts",
+        "outDir": "../Scripting/MonoScripts/out/MonoScripts.exe",
+        "libraries": [
+            "../Scripting/GPro/out/GPro.dll"
+        ],
+        "type": "exe"
     }
 ]

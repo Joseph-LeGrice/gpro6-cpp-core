@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class Shader : ITypedObject
+public class Shader : ITypedObject
 {
 	//// GENERATED
 	//// GENERATED

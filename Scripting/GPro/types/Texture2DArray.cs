@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class Texture2DArray : ITypedObject
+public class Texture2DArray : ITypedObject
 {
 	//// GENERATED
 	//// GENERATED

@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class TypedObjectManager : ITypedObject
+public class TypedObjectManager : ITypedObject
 {
 	//// GENERATED
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]

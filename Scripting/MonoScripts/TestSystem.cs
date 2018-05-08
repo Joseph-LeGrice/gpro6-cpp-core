@@ -1,10 +1,10 @@
 using System;
 
-class TestSystem
+public class TestSystem
 {
     public TestSystem()
     {
-        MonoSystemInterface.RegisterSystem(this);
+        ScriptedSystemInterface.RegisterSystemInstance(this);
     }
 
     private void Initialize()

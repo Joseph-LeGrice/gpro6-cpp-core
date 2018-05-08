@@ -1,8 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-  </PropertyGroup>
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Reference Include="GPro">
+      <HintPath>..\GPro\GPro.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />  
+    <Compile Include="TestSystem.cs" />  
+  </ItemGroup>
+  <Target Name="Compile">
+    <Csc Sources="@(Compile)"/>    
+  </Target>
 </Project>

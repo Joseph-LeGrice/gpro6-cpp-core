@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class ScriptedSystemInterface : ITypedObject
+public class ScriptedSystemInterface : ITypedObject
 {
 	//// GENERATED
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]

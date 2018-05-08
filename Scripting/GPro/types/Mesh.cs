@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class Mesh : ITypedObject
+public class Mesh : ITypedObject
 {
 	//// GENERATED
 	//// GENERATED

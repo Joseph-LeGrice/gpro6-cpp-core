@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 
@@ -9,7 +9,8 @@ class Program
         TestSystem test = new TestSystem();
 
         //------------------------------------------------------------------------------------
-        Texture2D testImageTexture = TypedObjectManager.Create<Texture2D>();
+        string typeId = typeof(Texture2D).Name; // TODO: Helper Method in TypedObjectManager.
+        Texture2D testImageTexture = (Texture2D)TypedObjectManager.Create(typeId);
         string testImagePath = Path.Combine(Application.ResourcePath, "GameResources\\GPro_Test\\TestImage.png");
         testImageTexture.InitializeWithBitmap(testImagePath);
         //------------------------------------------------------------------------------------

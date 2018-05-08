@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-class TextureSampler : ITypedObject
+public class TextureSampler : ITypedObject
 {
 	//// GENERATED
 	//// GENERATED

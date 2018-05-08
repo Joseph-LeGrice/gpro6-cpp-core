@@ -1,7 +1,7 @@
 using System.IO;
 using System.Reflection;
 
-static class Application
+public static class Application
 {
     public static string ResourcePath
     {
