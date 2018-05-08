@@ -1,6 +1,14 @@
 {
     "resources": [
         {
+            "relativeSourceDirectory": "../Scripting/MonoScripts/out/MonoScripts.exe",
+            "relativeTargetDirectory": "MonoScripts.exe"
+        },
+        {
+            "relativeSourceDirectory": "../Scripting/GPro/out/GPro.dll",
+            "relativeTargetDirectory": "GPro.dll"
+        },
+        {
             "relativeSourceDirectory": "../GPUPro-6/src/Engine/Shaders",
             "relativeTargetDirectory": "Resources/Shaders"
         },
