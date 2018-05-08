@@ -7,7 +7,7 @@
 
 void GPro::Texture2DAPI::RegisterCalls()
 {
-	mono_add_internal_call("Texture2D::InitializeWithBitmap(int managedInstanceId, string arg0)", GPro::Texture2DAPI::InitializeWithBitmap);
+	mono_add_internal_call("Texture2D::InitializeWithBitmap(int,string)", GPro::Texture2DAPI::InitializeWithBitmap);
 }
 
 void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, const wchar_t* arg0)

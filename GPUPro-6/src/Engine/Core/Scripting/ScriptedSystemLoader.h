@@ -23,4 +23,7 @@ private:
 	MonoImage* m_image;
 	MonoDomain* m_domain;
 	MonoAssembly* m_assembly;
+
+	MonoImage* m_gproImage;
+	MonoAssembly* m_gproAssembly;
 };
