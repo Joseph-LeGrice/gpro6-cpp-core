@@ -9,7 +9,8 @@ namespace GPro
 {
 	namespace Texture2DArrayAPI
 	{
+// ## Generated Code ##
 		extern void RegisterCalls();
-
+// ## Generated Code ##
 	};
 };

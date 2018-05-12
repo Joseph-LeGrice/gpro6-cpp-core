@@ -2,9 +2,9 @@ using System.Runtime.CompilerServices;
 
 public class Logging : ITypedObject
 {
-	//// GENERATED
+// ## Generated Code ##
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
 	public extern static void LogMessage(string arg0);
 
-	//// GENERATED
+// ## Generated Code ##
 }

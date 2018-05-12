@@ -5,6 +5,14 @@
 #include "Engine/Core/ResourceTypes/ManagedObject.h"
 #include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 
+// ## Generated Code ##
+void GPro::TypedObjectManagerAPI::RegisterCalls()
+{
+	mono_add_internal_call("TypedObjectManager::Create", GPro::TypedObjectManagerAPI::Create);
+}
+
+
+// ## Generated Code ##
 
 //std::wstring GetUTF16(MonoString* ms)
 //{
@@ -19,11 +27,6 @@
 //    mono_free(static_cast<void*>(pathStr));
 //    return ss.str();
 //}
-
-void GPro::TypedObjectManagerAPI::RegisterCalls()
-{
-	mono_add_internal_call("TypedObjectManager::Create", GPro::TypedObjectManagerAPI::Create);
-}
 
 MonoObject* GPro::TypedObjectManagerAPI::Create(MonoString* arg0)
 {

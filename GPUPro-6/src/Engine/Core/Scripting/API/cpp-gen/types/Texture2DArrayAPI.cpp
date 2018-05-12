@@ -5,7 +5,10 @@
 
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
+// ## Generated Code ##
 void GPro::Texture2DArrayAPI::RegisterCalls()
 {
 }
 
+
+// ## Generated Code ##

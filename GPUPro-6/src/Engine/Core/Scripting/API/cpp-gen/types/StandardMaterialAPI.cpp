@@ -5,7 +5,10 @@
 
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
+// ## Generated Code ##
 void GPro::StandardMaterialAPI::RegisterCalls()
 {
 }
 
+
+// ## Generated Code ##

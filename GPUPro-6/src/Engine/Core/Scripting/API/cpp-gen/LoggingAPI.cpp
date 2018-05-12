@@ -3,10 +3,14 @@
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
+// ## Generated Code ##
 void GPro::LoggingAPI::RegisterCalls()
 {
 	mono_add_internal_call("Logging::LogMessage", GPro::LoggingAPI::LogMessage);
 }
+
+
+// ## Generated Code ##
 
 void GPro::LoggingAPI::LogMessage(MonoString* arg0)
 {

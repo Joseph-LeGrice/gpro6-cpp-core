@@ -9,7 +9,10 @@ namespace GPro
 {
 	namespace TypedObjectManagerAPI
 	{
+// ## Generated Code ##
 		extern void RegisterCalls();
+
 		extern MonoObject* Create(MonoString* arg0);
+// ## Generated Code ##
 	};
 };

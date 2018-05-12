@@ -6,10 +6,14 @@
 #include "Engine/Core/Scripting/ScriptedSystemLoader.h"
 #include "Engine/Core/SystemManagement/SystemContainer.h"
 
+// ## Generated Code ##
 void GPro::ScriptedSystemInterfaceAPI::RegisterCalls()
 {
 	mono_add_internal_call("ScriptedSystemInterface::RegisterSystemInstance", GPro::ScriptedSystemInterfaceAPI::RegisterSystemInstance);
 }
+
+
+// ## Generated Code ##
 
 void GPro::ScriptedSystemInterfaceAPI::RegisterSystemInstance(MonoObject* arg0)
 {

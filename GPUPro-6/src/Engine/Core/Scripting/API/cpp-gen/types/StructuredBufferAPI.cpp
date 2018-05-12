@@ -5,7 +5,10 @@
 
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
+// ## Generated Code ##
 void GPro::StructuredBufferAPI::RegisterCalls()
 {
 }
 
+
+// ## Generated Code ##

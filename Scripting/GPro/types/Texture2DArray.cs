@@ -2,6 +2,5 @@ using System.Runtime.CompilerServices;
 
 public class Texture2DArray : ITypedObject
 {
-	//// GENERATED
-	//// GENERATED
+// ## Generated Code ##// ## Generated Code ##
 }

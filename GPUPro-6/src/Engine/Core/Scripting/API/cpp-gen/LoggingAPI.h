@@ -9,7 +9,10 @@ namespace GPro
 {
 	namespace LoggingAPI
 	{
+// ## Generated Code ##
 		extern void RegisterCalls();
+
 		extern void LogMessage(MonoString* arg0);
+// ## Generated Code ##
 	};
 };

@@ -9,7 +9,8 @@ namespace GPro
 {
 	namespace ShaderResourceAPI
 	{
+// ## Generated Code ##
 		extern void RegisterCalls();
-
+// ## Generated Code ##
 	};
 };

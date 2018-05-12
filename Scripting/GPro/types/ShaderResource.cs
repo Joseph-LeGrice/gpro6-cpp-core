@@ -2,6 +2,5 @@ using System.Runtime.CompilerServices;
 
 public class ShaderResource : ITypedObject
 {
-	//// GENERATED
-	//// GENERATED
+// ## Generated Code ##// ## Generated Code ##
 }

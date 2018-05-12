@@ -9,7 +9,8 @@ namespace GPro
 {
 	namespace StructuredBufferAPI
 	{
+// ## Generated Code ##
 		extern void RegisterCalls();
-
+// ## Generated Code ##
 	};
 };

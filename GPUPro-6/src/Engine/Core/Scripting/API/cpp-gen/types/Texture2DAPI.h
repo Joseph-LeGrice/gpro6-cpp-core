@@ -9,7 +9,10 @@ namespace GPro
 {
 	namespace Texture2DAPI
 	{
+// ## Generated Code ##
 		extern void RegisterCalls();
+
 		extern void InitializeWithBitmap(int managedInstanceId, const wchar_t* arg0);
+// ## Generated Code ##
 	};
 };

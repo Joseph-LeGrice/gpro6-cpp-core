@@ -5,6 +5,7 @@
 
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
+// ## Generated Code ##
 void GPro::Texture2DAPI::RegisterCalls()
 {
 	mono_add_internal_call("Texture2D::InitializeWithBitmap(int,string)", GPro::Texture2DAPI::InitializeWithBitmap);
@@ -16,3 +17,4 @@ void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, const wchar
 	Texture2D* nativeClassInstance = tom->GetInstance<Texture2D>(managedInstanceId);
 	nativeClassInstance->InitializeWithBitmap(arg0);
 }
+// ## Generated Code ##
