@@ -15,6 +15,6 @@ int GPro::StructuredBufferAPI::GetMyResourceViewID(int managedInstanceId)
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	StructuredBuffer* nativeClassInstance = tom->GetInstance<StructuredBuffer>(managedInstanceId);
-	nativeClassInstance->GetMyResourceViewID();
+	return nativeClassInstance->GetMyResourceViewID();
 }
 // ## Generated Code ##

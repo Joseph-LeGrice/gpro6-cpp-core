@@ -14,3 +14,9 @@ std::wstring MonoMarshall::GetUTF16String(MonoString* ms)
 	mono_free(static_cast<void*>(pathStr));
 	return ss.str();
 }
+
+extern std::vector<std::wstring> MonoMarshall::GetStringVector(MonoArray* ma)
+{
+	UNREFERENCED_PARAMETER(ma);
+	return std::vector<std::wstring>();
+}

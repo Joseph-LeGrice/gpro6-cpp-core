@@ -25,7 +25,9 @@
           "methodType": "instance",
           "methodName": "InitializeWithBitmaps",
           "returnTypeInfo": "void",
-          "argInfo": []
+          "argInfo": [
+            "array-string"
+          ]
         }
       ]
     },

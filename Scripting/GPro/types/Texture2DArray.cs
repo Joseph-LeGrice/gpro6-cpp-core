@@ -4,10 +4,10 @@ public class Texture2DArray : ITypedObject
 {
 // ## Generated Code ##
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void InitializeWithBitmaps(int instanceid);
-	public void InitializeWithBitmaps()
+	private extern static void InitializeWithBitmaps(int instanceid, string arg0);
+	public void InitializeWithBitmaps(string arg0)
 	{
-		InitializeWithBitmaps(InstanceID);
+		InitializeWithBitmaps(InstanceID, arg0);
 	}
 
 // ## Generated Code ##
