@@ -65,14 +65,14 @@ public:
         m_shaderIndex = shaderIndex;
     }
 
-    void RegisterShaderResource(ResourceDetails rd)
+	void RegisterShaderResource(int resourceIndex, int slotIndex)
     {
-        m_shaderResources.push_back(rd);
+		m_shaderResources.push_back({ resourceIndex, slotIndex });
     }
 
-    void AddTextureSampler(ResourceDetails rd)
+	void AddTextureSampler(int resourceIndex, int slotIndex)
     {
-        m_textureSamplerIndexes.push_back(rd);
+		m_textureSamplerIndexes.push_back({ resourceIndex, slotIndex });
     }
 
 private:
@@ -129,14 +129,14 @@ public:
 		m_shaderIndex = shaderIndex;
 	}
 
-	void RegisterShaderResource(ResourceDetails rd)
+	void RegisterShaderResource(int resourceIndex, int slotIndex)
 	{
-		m_shaderResources.push_back(rd);
+		m_shaderResources.push_back({ resourceIndex, slotIndex });
 	}
 
-	void AddTextureSampler(ResourceDetails rd)
+	void AddTextureSampler(int resourceIndex, int slotIndex)
 	{
-		m_textureSamplerIndexes.push_back(rd);
+		m_textureSamplerIndexes.push_back({ resourceIndex, slotIndex });
 	}
 
 private:
