@@ -155,7 +155,7 @@ bool Shader::InitGeometryShader(std::wstring filename, std::wstring name)
 }
 
 	
-bool Shader::InitPixelShader(std::wstring filename, std::string name)
+bool Shader::InitPixelShader(std::wstring filename, std::wstring name)
 {
     AutoRelease<ID3D10Blob> pixelShaderErrorBlob;
     AutoRelease<ID3D10Blob> pixelShaderBlob;

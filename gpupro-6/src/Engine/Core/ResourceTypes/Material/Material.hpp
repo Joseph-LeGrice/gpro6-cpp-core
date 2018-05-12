@@ -60,7 +60,7 @@ public:
         m_data = data;
     }
 
-    void SetShaderIndex(UINT16 shaderIndex)
+    void SetShaderIndex(int shaderIndex)
     {
         m_shaderIndex = shaderIndex;
     }
@@ -124,7 +124,7 @@ public:
 		return false;
 	}
 
-	void SetShaderIndex(UINT16 shaderIndex)
+	void SetShaderIndex(int shaderIndex)
 	{
 		m_shaderIndex = shaderIndex;
 	}
