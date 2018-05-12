@@ -12,7 +12,7 @@ namespace GPro
 // ## Generated Code ##
 		extern void RegisterCalls();
 
-		extern void InitializeWithBitmap(int managedInstanceId, const wchar_t* arg0);
+		extern void InitializeWithBitmap(int managedInstanceId, MonoString* arg0);
 // ## Generated Code ##
 	};
 };

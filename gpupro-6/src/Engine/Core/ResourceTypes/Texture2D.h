@@ -18,7 +18,7 @@ public:
     unsigned int Height();
 
     int GetInstanceViewID();
-    void InitializeWithBitmap(const wchar_t* filepath);
+    void InitializeWithBitmap(std::wstring filepath);
     void InitializeWithDimensions(UINT width, UINT height);
     void SetPixels(Color cArray[], size_t arraySize);
     

@@ -28,14 +28,14 @@ int Texture2D::GetInstanceViewID()
     return m_myShaderResourceViewIndex;
 }
 
-void Texture2D::InitializeWithBitmap(const wchar_t* filepath)
+void Texture2D::InitializeWithBitmap(std::wstring filepath)
 {
     Finalize();
 
-    FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeU(filepath);
+    FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeU(filepath.c_str());
     if (fif != FIF_UNKNOWN)
     {
-        FIBITMAP* bmp = FreeImage_LoadU(fif, filepath);
+        FIBITMAP* bmp = FreeImage_LoadU(fif, filepath.c_str());
         m_bitmap = FreeImage_ConvertTo32Bits(bmp);
         FreeImage_Unload(bmp);
 
