@@ -242,6 +242,7 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DArrayAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\TextureSamplerAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\MonoMarshallHelpers.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
@@ -321,6 +322,7 @@
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DArrayAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\TextureSamplerAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\MonoMarshallHelpers.h" />
     <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />

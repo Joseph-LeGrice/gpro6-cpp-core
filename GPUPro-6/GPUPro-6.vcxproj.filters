@@ -136,6 +136,7 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\MonoMarshallHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -325,6 +326,7 @@
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\MonoMarshallHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
