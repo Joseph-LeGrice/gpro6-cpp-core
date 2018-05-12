@@ -18,11 +18,11 @@ REGISTER_TYPE(Shader);
 public:
 	bool SetCurrentIfValid();
 
-	bool InitVertexShader(std::wstring filename, std::string name);
-	bool InitHullShader(std::wstring filename, std::string name);
-	bool InitDomainShader(std::wstring filename, std::string name);
-	bool InitGeometryShader(std::wstring filename, std::string name);
-	bool InitPixelShader(std::wstring filename, std::string name);
+	bool InitVertexShader(std::wstring filename, std::wstring name);
+	bool InitHullShader(std::wstring filename, std::wstring name);
+	bool InitDomainShader(std::wstring filename, std::wstring name);
+	bool InitGeometryShader(std::wstring filename, std::wstring name);
+	bool InitPixelShader(std::wstring filename, std::wstring name);
 
 	virtual void Finalize() override;
 

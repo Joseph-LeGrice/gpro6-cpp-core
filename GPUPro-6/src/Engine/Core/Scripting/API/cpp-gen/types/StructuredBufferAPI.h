@@ -11,6 +11,8 @@ namespace GPro
 	{
 // ## Generated Code ##
 		extern void RegisterCalls();
+
+		extern int GetMyResourceViewID(int managedInstanceId);
 // ## Generated Code ##
 	};
 };

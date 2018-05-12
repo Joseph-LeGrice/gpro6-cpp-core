@@ -11,6 +11,10 @@ namespace GPro
 	{
 // ## Generated Code ##
 		extern void RegisterCalls();
+
+		extern void SetShaderIndex(int managedInstanceId, int arg0);
+
+		extern void RegisterShaderResource(int managedInstanceId, int arg0, int arg1);
 // ## Generated Code ##
 	};
 };

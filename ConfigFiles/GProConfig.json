@@ -14,14 +14,19 @@
       "includePath": "Engine/Core/ResourceTypes/TextureSampler.h",
       "name": "TextureSampler",
       "subdirectory": "types",
-      "methods": [
-      ]
+      "methods": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Texture2DArray.h",
       "name": "Texture2DArray",
       "subdirectory": "types",
       "methods": [
+        {
+          "methodType": "instance",
+          "methodName": "InitializeWithBitmaps",
+          "returnTypeInfo": "void",
+          "argInfo": []
+        }
       ]
     },
     {
@@ -44,6 +49,12 @@
       "name": "StructuredBuffer",
       "subdirectory": "types",
       "methods": [
+        {
+          "methodType": "instance",
+          "methodName": "GetMyResourceViewID",
+          "returnTypeInfo": "int",
+          "argInfo": []
+        }
       ]
     },
     {
@@ -51,6 +62,23 @@
       "name": "StandardMaterial",
       "subdirectory": "types",
       "methods": [
+        {
+          "methodType": "instance",
+          "methodName": "SetShaderIndex",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "int"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "methodName": "RegisterShaderResource",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "int",
+            "int"
+          ]
+        }
       ]
     },
     {
@@ -58,6 +86,23 @@
       "name": "SimpleMaterial",
       "subdirectory": "types",
       "methods": [
+        {
+          "methodType": "instance",
+          "methodName": "SetShaderIndex",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "int"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "methodName": "RegisterShaderResource",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "int",
+            "int"
+          ]
+        }
       ]
     },
     {
@@ -72,6 +117,51 @@
       "name": "Shader",
       "subdirectory": "types",
       "methods": [
+        {
+          "methodType": "instance",
+          "methodName": "InitVertexShader",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "string",
+            "string"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "methodName": "InitPixelShader",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "string",
+            "string"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "methodName": "InitGeometryShader",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "string",
+            "string"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "methodName": "InitHullShader",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "string",
+            "string"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "methodName": "InitDomainShader",
+          "returnTypeInfo": "void",
+          "argInfo": [
+            "string",
+            "string"
+          ]
+        }
       ]
     },
     {

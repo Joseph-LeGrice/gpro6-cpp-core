@@ -1,0 +1,10 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "./GProConfig.json"
+            ],
+            "url": "./binding-generation-schema.json"
+        }
+    ]
+}

@@ -11,6 +11,8 @@ namespace GPro
 	{
 // ## Generated Code ##
 		extern void RegisterCalls();
+
+		extern void InitializeWithBitmaps(int managedInstanceId);
 // ## Generated Code ##
 	};
 };

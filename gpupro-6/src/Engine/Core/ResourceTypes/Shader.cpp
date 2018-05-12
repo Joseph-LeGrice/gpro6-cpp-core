@@ -57,11 +57,11 @@ bool Shader::SetCurrentIfValid()
 	}
 }
 
-bool Shader::InitVertexShader(std::wstring filename, std::string name)
+bool Shader::InitVertexShader(std::wstring filename, std::wstring name)
 {
     AutoRelease<ID3D10Blob> vertexShaderErrorBlob;
     AutoRelease<ID3D10Blob> vertexShaderBlob;
-    HRESULT vertexShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, name.c_str(), "vs_5_0", 0, 0, vertexShaderBlob, vertexShaderErrorBlob);
+    HRESULT vertexShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, ws2s(name).c_str(), "vs_5_0", 0, 0, vertexShaderBlob, vertexShaderErrorBlob);
 	if (vertexShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)vertexShaderErrorBlob->GetBufferPointer());
@@ -83,11 +83,11 @@ bool Shader::InitVertexShader(std::wstring filename, std::string name)
 }
 
 
-bool Shader::InitHullShader(std::wstring filename, std::string name)
+bool Shader::InitHullShader(std::wstring filename, std::wstring name)
 {
     AutoRelease<ID3D10Blob> hullShaderErrorBlob;
     AutoRelease<ID3D10Blob> hullShaderBlob;
-    HRESULT hullShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, name.c_str(), "hs_5_0", 0, 0, hullShaderBlob, hullShaderErrorBlob);
+    HRESULT hullShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, ws2s(name).c_str(), "hs_5_0", 0, 0, hullShaderBlob, hullShaderErrorBlob);
 	if (hullShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)hullShaderErrorBlob->GetBufferPointer());
@@ -107,11 +107,11 @@ bool Shader::InitHullShader(std::wstring filename, std::string name)
 }
 
 
-bool Shader::InitDomainShader(std::wstring filename, std::string name)
+bool Shader::InitDomainShader(std::wstring filename, std::wstring name)
 {
     AutoRelease<ID3D10Blob> domainShaderErrorBlob;
     AutoRelease<ID3D10Blob> domainShaderBlob;
-    HRESULT domainShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, name.c_str(), "ds_5_0", 0, 0, domainShaderBlob, domainShaderErrorBlob);
+    HRESULT domainShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, ws2s(name).c_str(), "ds_5_0", 0, 0, domainShaderBlob, domainShaderErrorBlob);
 	if (domainShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)domainShaderErrorBlob->GetBufferPointer());
@@ -131,11 +131,11 @@ bool Shader::InitDomainShader(std::wstring filename, std::string name)
 }
 
 
-bool Shader::InitGeometryShader(std::wstring filename, std::string name)
+bool Shader::InitGeometryShader(std::wstring filename, std::wstring name)
 {
     AutoRelease<ID3D10Blob> geomShaderErrorBlob;
     AutoRelease<ID3D10Blob> geomShaderBlob;
-    HRESULT geomShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, name.c_str(), "gs_5_0", 0, 0, geomShaderBlob, geomShaderErrorBlob);
+    HRESULT geomShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, ws2s(name).c_str(), "gs_5_0", 0, 0, geomShaderBlob, geomShaderErrorBlob);
 	if (geomShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)geomShaderErrorBlob->GetBufferPointer());
@@ -159,7 +159,7 @@ bool Shader::InitPixelShader(std::wstring filename, std::string name)
 {
     AutoRelease<ID3D10Blob> pixelShaderErrorBlob;
     AutoRelease<ID3D10Blob> pixelShaderBlob;
-    HRESULT pixelShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, name.c_str(), "ps_5_0", 0, 0, pixelShaderBlob, pixelShaderErrorBlob);
+    HRESULT pixelShaderCompileResult = D3DCompileFromFile(filename.c_str(), 0, D3D_COMPILE_STANDARD_FILE_INCLUDE, ws2s(name).c_str(), "ps_5_0", 0, 0, pixelShaderBlob, pixelShaderErrorBlob);
 	if (pixelShaderErrorBlob != nullptr)
 	{
 		OutputDebugStringA((char*)pixelShaderErrorBlob->GetBufferPointer());

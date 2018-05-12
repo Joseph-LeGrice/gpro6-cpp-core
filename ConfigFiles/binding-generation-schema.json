@@ -1,0 +1,84 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Binding Generation Configuration",
+    "type": "object",
+    "required": [
+        "namespace",
+        "outputCppDirectory",
+        "outputCsDirectory",
+        "fileBindings"
+    ],
+    "properties": {
+        "namespace": {
+            "type": "string"
+        },
+        "outputCppDirectory": {
+            "type": "string"
+        },
+        "outputCsDirectory": {
+            "type": "string"
+        },
+        "fileBindings": {
+            "type": "array",
+            "items": {
+                "title": "File Configuration",
+                "type": "object",
+                "required": [
+                    "nativeIncludePath",
+                    "nativeClassName",
+                    "managedClassName",
+                    "methods"
+                ],
+                "properties": {
+                    "nativeIncludePath": {
+                        "type": "string"
+                    },
+                    "nativeClassName": {
+                        "type": "string"
+                    },
+                    "managedClassName": {
+                        "type": "string"
+                    },
+                    "methods": {
+                        "type": "array",
+                        "items": {
+                            "title": "Method Info",
+                            "type": "object",
+                            "required": [
+                                "methodType",
+                                "methodName",
+                                "returnTypeInfo",
+                                "argInfo"
+                            ],"properties": {
+                                "methodType": {
+                                    "type": "string",
+                                    "enum": [
+                                        "instance",
+                                        "static"
+                                    ]
+                                },
+                                "methodName": {
+                                    "type": "string"
+                                },
+                                "returnTypeInfo": {
+                                    "type": "string"
+                                },
+                                "argInfo": {
+                                    "type": "string",
+                                    "enum": [
+                                        "void",
+                                        "int",
+                                        "float",
+                                        "double",
+                                        "char",
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

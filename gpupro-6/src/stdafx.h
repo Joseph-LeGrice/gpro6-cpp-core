@@ -24,3 +24,5 @@
 #include "MyMath/MyMath.h"
 
 #define TO_STRING(T) #T
+
+extern std::string ws2s(const std::wstring& wstr);

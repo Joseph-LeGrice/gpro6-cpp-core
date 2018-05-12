@@ -8,7 +8,13 @@
 // ## Generated Code ##
 void GPro::StructuredBufferAPI::RegisterCalls()
 {
+	mono_add_internal_call("StructuredBuffer::GetMyResourceViewID(int,)", GPro::StructuredBufferAPI::GetMyResourceViewID);
 }
 
-
+int GPro::StructuredBufferAPI::GetMyResourceViewID(int managedInstanceId)
+{
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	StructuredBuffer* nativeClassInstance = tom->GetInstance<StructuredBuffer>(managedInstanceId);
+	nativeClassInstance->GetMyResourceViewID();
+}
 // ## Generated Code ##
