@@ -6,7 +6,7 @@
 
 struct Matrix4x4;
 
-struct Transform : IComponent
+struct Transform : public IComponent
 {
 REGISTER_TYPE(Transform);
 

@@ -3,7 +3,7 @@
 #include "Engine/Core/SceneGraph/IComponent.h"
 #include "MyMath/Matrix/Matrix4x4.h"
 
-struct Camera : IComponent
+struct Camera : public IComponent
 {
 REGISTER_TYPE(Camera);
 

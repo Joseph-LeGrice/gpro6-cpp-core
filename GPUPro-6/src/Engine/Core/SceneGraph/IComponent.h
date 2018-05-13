@@ -3,7 +3,7 @@
 
 typedef uint16_t ComponentTypeID;
 
-class IComponent : ITypedObject
+class IComponent : public ITypedObject
 {
 public:
 	int GetEntityIndex() {

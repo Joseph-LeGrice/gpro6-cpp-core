@@ -2,7 +2,7 @@
 
 #include "Engine/Core/SceneGraph/IComponent.h"
 
-struct MeshRenderer : IComponent
+struct MeshRenderer : public IComponent
 {
 REGISTER_TYPE(MeshRenderer);
 

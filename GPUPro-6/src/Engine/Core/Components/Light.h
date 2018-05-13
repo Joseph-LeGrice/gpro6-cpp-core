@@ -10,7 +10,7 @@ enum LightType
     kLightType_Directional = 2
 };
 
-struct Light : IComponent
+struct Light : public IComponent
 {
 REGISTER_TYPE(Light);
 	Color m_color;

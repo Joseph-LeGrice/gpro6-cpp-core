@@ -10,7 +10,7 @@
 
 static const unsigned int c_numberOfComponentTypesAllowed = 10;
 
-struct Entity : ITypedObject
+struct Entity : public ITypedObject
 {
 	REGISTER_TYPE(Entity);
     ComponentReferenceNode* m_rootNode;
