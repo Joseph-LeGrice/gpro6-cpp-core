@@ -4,10 +4,10 @@
 #include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
-#include "Engine/Core/Graphics/Components/Camera.h"
+#include "Engine/Core/Components/Camera.h"
 #include "Engine/Core/SceneGraph/SceneGraphManager.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/Graphics/Components/Transform.h"
+#include "Engine/Core/Components/Transform.h"
 #include "Engine/Core/Graphics/Drawing/IDrawCommand.h"
 #include "Engine/Core/WindowManagement/WindowManager.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
@@ -31,7 +31,7 @@ GraphicsSystem::GraphicsSystem(BlendState& blendState,
 	MeshManager& meshManager,
 	GraphicsDevice& gfxDevice,
 	DepthStencilBuffer& depthStencilBuffer,
-	SceneGraphManager& sceneGraphManager,
+	TypedObjectManager& typedObjectManager,
 	PerObjectBuffer& perObjectBuffer,
     PerCameraBuffer& perCameraBuffer,
     std::vector<IDrawCommand*>& commands) :
@@ -39,7 +39,7 @@ GraphicsSystem::GraphicsSystem(BlendState& blendState,
 	m_meshManager(meshManager),
 	m_gfxDevice(gfxDevice),
 	m_depthStencilBuffer(depthStencilBuffer),
-	m_sceneGraphManager(sceneGraphManager),
+	m_typedObjectManager(typedObjectManager),
     m_perObjectBuffer(perObjectBuffer),
     m_perCameraBuffer(perCameraBuffer),
     m_commands(commands) {
@@ -73,13 +73,13 @@ void GraphicsSystem::VariableTick()
     m_depthStencilBuffer.ClearBuffer();
     m_depthStencilBuffer.SetState();
 
-	std::vector<Camera*> allCameras = m_sceneGraphManager.GetCurrentScene().GetComponentArrayPointer<Camera>();
+	std::vector<Camera*> allCameras = m_typedObjectManager.GetAllInstances<Camera>();
     for (size_t cameraIndex = 0; cameraIndex < allCameras.size(); ++cameraIndex)
 	{
 		Camera* cam = allCameras[cameraIndex];
 
-        Entity* cameraEntity = m_sceneGraphManager.GetCurrentScene().GetComponent<Entity>(cam->GetEntityIndex());
-        Transform* cameraTransform = cameraEntity->GetComponent<Transform>(m_sceneGraphManager.GetCurrentScene());
+        Entity* cameraEntity = m_typedObjectManager.GetInstance<Entity>(cam->GetEntityIndex());
+        Transform* cameraTransform = cameraEntity->GetComponent<Transform>(m_typedObjectManager);
 
 		Matrix4x4 view = cameraTransform->GetCameraViewMatrix();
 		Matrix4x4 proj = cam->m_projectionMatrix;

@@ -248,8 +248,8 @@
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Components\Transform.cpp" />
+    <ClCompile Include="src\Engine\Core\Components\Camera.cpp" />
+    <ClCompile Include="src\Engine\Core\Components\Transform.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\RasterizerState.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceTypes\Mesh.cpp" />
@@ -327,11 +327,11 @@
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />
-    <ClInclude Include="src\Engine\Core\Graphics\Components\MeshRenderer.h" />
+    <ClInclude Include="src\Engine\Core\Components\MeshRenderer.h" />
     <ClInclude Include="src\Engine\Core\DataStructures\Color.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Camera.h" />
+    <ClInclude Include="src\Engine\Core\Components\Camera.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Entity.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Transform.h" />
+    <ClInclude Include="src\Engine\Core\Components\Transform.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentArray.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\RasterizerState.h" />
@@ -347,7 +347,7 @@
     <ClInclude Include="src\Engine\Core\ResourceTypes\Texture2D.h" />
     <ClInclude Include="src\Engine\Core\ResourceTypes\TextureSampler.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Light.h" />
+    <ClInclude Include="src\Engine\Core\Components\Light.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.hpp" />
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphManager.h" />
     <ClInclude Include="src\Engine\Core\SystemManagement\SystemContainer.h" />

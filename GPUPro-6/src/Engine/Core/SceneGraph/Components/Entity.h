@@ -2,6 +2,7 @@
 
 #include "Engine/Core/SceneGraph/IComponent.h"
 #include "Engine/Core/SceneGraph/Components/Util/ComponentReferenceNode.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 
 #include <vector>
 #include "Engine/Core/SceneGraph/SceneGraph.hpp"
@@ -9,14 +10,15 @@
 
 static const unsigned int c_numberOfComponentTypesAllowed = 10;
 
-struct Entity : IComponent
+struct Entity : ITypedObject
 {
+	REGISTER_TYPE(Entity);
     ComponentReferenceNode* m_rootNode;
     ComponentReferenceNode m_nodePool[c_numberOfComponentTypesAllowed];
     bool m_activeNodeIndexPool[c_numberOfComponentTypesAllowed];
     unsigned int m_currentNumberOfNodesActive;
 
-	Entity(int componentIndex) : IComponent(componentIndex)
+	Entity()
 	{
 		for (size_t i = 0; i < c_numberOfComponentTypesAllowed; i++)
 		{
@@ -33,26 +35,26 @@ struct Entity : IComponent
 	}
 
 	template<class T>
-	T& AddComponent(SceneGraph& sceneGraph)
+	T& AddComponent(TypedObjectManager& typedObjectManager)
 	{
-		T& newComponent = sceneGraph.CreateComponent<T>();
+		T& newComponent = typedObjectManager.Create<T>();
 		LinkComponent<T>(newComponent);
 		return newComponent;
 	}
 
 	template<class T>
-	void RemoveComponent(SceneGraph& sceneGraph)
+	void RemoveComponent(TypedObjectManager& typedObjectManager)
 	{
 		T* component = GetComponent<T>();
 		UnlinkComponent(component);
-		sceneGraph.DeleteComponent(component->m_componentIndex);
+		typedObjectManager.Delete<T>(component->GetInstanceID());
 	}
 
 	template<class T>
-	T* GetComponent(SceneGraph& sceneGraph)
+	T* GetComponent(TypedObjectManager& typedObjectManager)
 	{
 		int componentIndex = GetComponentIndex();
-		return sceneGraph.GetComponent<T>(componentIndex);
+		return typedObjectManager.GetInstance<T>(componentIndex);
 	}
 
 	template<class T>
@@ -60,12 +62,12 @@ struct Entity : IComponent
 	{
 		if (m_currentNumberOfNodesActive < c_numberOfComponentTypesAllowed - 1)
 		{
-			ComponentReferenceNode* nodeInserted = Insert(GetComponentType(), component.m_componentIndex, m_rootNode);
-			component.m_entityIndex = ec.m_componentIndex;
+			ComponentReferenceNode* nodeInserted = Insert(GetComponentType(), component.GetInstanceID(), m_rootNode);
+			component.m_entityIndex = GetInstanceID();
 
-			if (nodeInserted != nullptr && ec.m_data.m_rootNode == nullptr)
+			if (nodeInserted != nullptr && m_data.m_rootNode == nullptr)
 			{
-				ec.m_data.m_rootNode = nodeInserted;
+				m_data.m_rootNode = nodeInserted;
 			}
 		}
 	}
@@ -73,7 +75,7 @@ struct Entity : IComponent
 	template<class T>
 	void UnlinkComponent(T& component)
 	{
-		Delete(GetComponentType(), component.m_componentIndex, m_rootNode);
+		Delete(GetComponentType(), component.GetInstanceID(), m_rootNode);
 		component.m_entityIndex = -1;
 	}
 

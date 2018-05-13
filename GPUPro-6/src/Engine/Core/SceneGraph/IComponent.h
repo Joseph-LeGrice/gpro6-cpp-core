@@ -1,16 +1,11 @@
 #pragma once
+#include "Engine/Core/RTTI/ITypedObject.h"
 
 typedef uint16_t ComponentTypeID;
 
-struct IComponent
+class IComponent : ITypedObject
 {
 public:
-	IComponent(int componentIndex) :
-		m_componentIndex(componentIndex),
-		m_entityIndex(-1),
-		m_enabled(true) { }
-	virtual ~IComponent() = default;
-
 	int GetEntityIndex() {
 		return m_entityIndex;
 	}
@@ -24,7 +19,6 @@ public:
 	}
 
 private:
-	int m_componentIndex;
 	int m_entityIndex;
-	bool m_enabled;
+	bool m_enabled = true;
 };

@@ -11,7 +11,7 @@ class GraphicsDevice;
 class PerObjectBuffer;
 class PerCameraBuffer;
 class RasterizerState;
-class SceneGraphManager;
+class TypedObjectManager;
 class DepthStencilBuffer;
 
 class GraphicsSystem : public ISystem
@@ -21,7 +21,7 @@ public:
         MeshManager& meshManager,
         GraphicsDevice& gfxDevice,
         DepthStencilBuffer& depthStencilBuffer,
-		SceneGraphManager& sceneGraphManager,
+		TypedObjectManager& typedObjectManager,
         PerObjectBuffer& perObjectBuffer,
         PerCameraBuffer& perCameraBuffer,
         std::vector<IDrawCommand*>& commands);
@@ -30,7 +30,7 @@ public:
     virtual void VariableTick() override;
 
 private:
-	SceneGraphManager& m_sceneGraphManager;
+	TypedObjectManager& m_typedObjectManager;
 	BlendState& m_blendState;
 	MeshManager& m_meshManager;
 	GraphicsDevice& m_gfxDevice;

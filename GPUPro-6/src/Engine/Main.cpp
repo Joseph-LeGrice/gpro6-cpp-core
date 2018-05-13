@@ -30,10 +30,10 @@
 #include "Engine/Core/SceneGraph/SceneGraph.hpp"
 #include "Engine/Core/SceneGraph/SceneGraphManager.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/Graphics/Components/Camera.h"
-#include "Engine/Core/Graphics/Components/Light.h"
-#include "Engine/Core/Graphics/Components/Transform.h"
-#include "Engine/Core/Graphics/Components/MeshRenderer.h"
+#include "Engine/Core/Components/Camera.h"
+#include "Engine/Core/Components/Light.h"
+#include "Engine/Core/Components/Transform.h"
+#include "Engine/Core/Components/MeshRenderer.h"
 
 // Etc
 #include "Engine/Core/RTTI/HelperMethods.h"
@@ -79,7 +79,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	componentTypeList.push_back(MeshRenderer::GetComponentType());
 	componentTypeList.push_back(Entity::GetComponentType());
 	componentTypeList.push_back(Light::GetComponentType());
-	SceneGraph* sceneGraph = new SceneGraph(componentTypeList);
+	SceneGraph* sceneGraph = new SceneGraph(); // componentTypeList);
 	SceneGraphManager* sceneGraphManager = new SceneGraphManager(*sceneGraph);
 
 	// Graphics Device
@@ -87,7 +87,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GraphicsDevice* gfxDevice = new GraphicsDevice(*windowManager);
 
 	// Resource Manager
-	TypedObjectManager* tom = new TypedObjectManager();
+	TypedObjectManager* typedObjectManager = new TypedObjectManager();
 
 	// Buffers
 	IndexBuffer* indexBuffer = new IndexBuffer(*gfxDevice);
@@ -98,17 +98,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Graphics State Helpers
 	BlendState* blendState = new BlendState(*gfxDevice);
-	MeshManager* meshManager = new MeshManager(*indexBuffer, *vertexBuffer, *tom);
+	MeshManager* meshManager = new MeshManager(*indexBuffer, *vertexBuffer, *typedObjectManager);
 	RasterizerState* rasterizerState = new RasterizerState(*gfxDevice);
 	DepthStencilBuffer* depthStencilBuffer = new DepthStencilBuffer(*windowManager, *gfxDevice);
 
 	// IDrawCommands
 	std::vector<IDrawCommand*>* commands = new std::vector<IDrawCommand*>();
-	SkyboxDrawCommand* skyboxDrawCommand = new SkyboxDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *tom, *rasterizerState, *blendState);
+	SkyboxDrawCommand* skyboxDrawCommand = new SkyboxDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState);
 	commands->push_back(skyboxDrawCommand);
-	StandardOpaqueMaterialDrawCommand* standardOpaqueMaterialDrawCommand = new StandardOpaqueMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *tom, *rasterizerState, *blendState, *standardMaterialBuffer);
+	StandardOpaqueMaterialDrawCommand* standardOpaqueMaterialDrawCommand = new StandardOpaqueMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState, *standardMaterialBuffer);
 	commands->push_back(standardOpaqueMaterialDrawCommand);
-	StandardTransparentMaterialDrawCommand* standardTransparentMaterialDrawCommand = new StandardTransparentMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *sceneGraphManager, *tom, *rasterizerState, *blendState, *standardMaterialBuffer);
+	StandardTransparentMaterialDrawCommand* standardTransparentMaterialDrawCommand = new StandardTransparentMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState, *standardMaterialBuffer);
 	commands->push_back(standardTransparentMaterialDrawCommand);
 
 	// ISystems
@@ -122,7 +122,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		*meshManager,
 		*gfxDevice,
 		*depthStencilBuffer,
-		*sceneGraphManager,
+		*typedObjectManager,
 		*perObjectBuffer,
 		*perCameraBuffer,
 		*commands
@@ -132,10 +132,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	InputSystem* inputSystem = new InputSystem(*gameLoop);
 	allSystems->push_back(inputSystem);
 
-	LightingSystem* lightingSystem = new LightingSystem(*sceneGraphManager, *tom);
+	LightingSystem* lightingSystem = new LightingSystem(*typedObjectManager);
 	allSystems->push_back(lightingSystem);
 
-	NoClipLocomotion* noClipLocomotion = new NoClipLocomotion(*sceneGraphManager, *inputSystem);
+	NoClipLocomotion* noClipLocomotion = new NoClipLocomotion(*typedObjectManager, *inputSystem);
 	allSystems->push_back(noClipLocomotion);
 
 	// System Container + Game Loop Entry
@@ -147,7 +147,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		systemContainer,
 		monoSystemLoader,
 		gfxDevice,
-		tom,
+		typedObjectManager,
 		n2m
 	);
 
@@ -179,7 +179,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	delete vertexBuffer;
 	delete indexBuffer;
 
-	delete tom;
+	delete typedObjectManager;
 
 	delete sceneGraphManager;
 	delete sceneGraph;

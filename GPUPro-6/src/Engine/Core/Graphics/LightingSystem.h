@@ -26,9 +26,8 @@ class TypedObjectManager;
 class LightingSystem : public ISystem
 {
 public:
-	LightingSystem(SceneGraphManager& sceneGraphManager, TypedObjectManager& resourceManager) :
-		m_sceneGraphManager(sceneGraphManager),
-		m_resourceManager(resourceManager) { }
+	LightingSystem(TypedObjectManager& resourceManager) :
+		m_typedObjectManager(resourceManager) { }
 
     virtual void Initialize() override;
     virtual void VariableTick() override;
@@ -36,7 +35,6 @@ public:
     int GetBufferResourceIndex();
 
 private:
-	SceneGraphManager& m_sceneGraphManager;
-	TypedObjectManager& m_resourceManager;
+	TypedObjectManager& m_typedObjectManager;
     int m_lightBufferIndex;
 };

@@ -51,7 +51,8 @@ std::vector<T*> TypedObjectManager::GetAllInstances()
 	struct CastComponent { T* operator ()(ITypedObject* value) const { return static_cast<T*>(value); } };
 
 	TypeID typeId = T::GetTypeID();
-	std::vector<T*> result = GetAllInstances(typeId);
+	std::vector<ITypedObject*> existing = GetAllInstances(typeId);
+	std::vector<T*> result;
 	std::transform(existing.begin(), existing.end(), result.begin(), CastComponent());
 	return result;
 }

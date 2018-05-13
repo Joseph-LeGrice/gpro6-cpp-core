@@ -4,8 +4,8 @@
 #include "Engine/Core/SceneGraph/SceneGraphManager.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/Graphics/Components/Transform.h"
-#include "Engine/Core/Graphics/Components/MeshRenderer.h"
+#include "Engine/Core/Components/Transform.h"
+#include "Engine/Core/Components/MeshRenderer.h"
 #include "Engine/Core/ResourceTypes/Mesh.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
@@ -23,19 +23,19 @@ void IDrawCommand::Draw(Matrix4x4 view, Matrix4x4 proj)
 
     UINT16 baseVertex = 0;
     UINT16 baseIndex = 0;
-    std::vector<MeshRenderer*> meshRenderers = m_sceneGraphManager.GetCurrentScene().GetComponentArrayPointer<MeshRenderer>();
+    std::vector<MeshRenderer*> meshRenderers = m_typedObjectManager.GetAllInstances<MeshRenderer>();
     for (size_t i = 0; i < meshRenderers.size(); ++i)
     {
         MeshRenderer* mrc = meshRenderers[i];
-        Entity* meshEntity = m_sceneGraphManager.GetCurrentScene().GetComponent<Entity>(mrc->GetEntityIndex());
+        Entity* meshEntity = m_typedObjectManager.GetInstance<Entity>(mrc->GetEntityIndex());
 
-        Mesh* mesh = m_resourceManager.GetInstance<Mesh>(mrc->m_meshIndex);
+        Mesh* mesh = m_typedObjectManager.GetInstance<Mesh>(mrc->m_meshIndex);
         UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
         UINT16 numberOfIndices = (UINT16)mesh->GetIndices().size();
 
         if (mrc->m_drawCommandIndex == c_identifier && mrc->IsEnabled())
         {
-            Transform* modelTransform = meshEntity->GetComponent<Transform>(m_sceneGraphManager.GetCurrentScene());
+            Transform* modelTransform = meshEntity->GetComponent<Transform>(m_typedObjectManager);
 
             Matrix4x4 model;
             Matrix4x4::Identity(model);

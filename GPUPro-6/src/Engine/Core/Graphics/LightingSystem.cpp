@@ -2,9 +2,9 @@
 #include "Engine/Core/Graphics/LightingSystem.h"
 
 #include "Engine/Core/SceneGraph/SceneGraphManager.h"
-#include "Engine/Core/Graphics/Components/Light.h"
+#include "Engine/Core/Components/Light.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/Graphics/Components/Transform.h"
+#include "Engine/Core/Components/Transform.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/StructuredBuffer.h"
 
@@ -13,7 +13,7 @@
 void LightingSystem::Initialize()
 {
 	ISystem::Initialize();
-	StructuredBuffer* buf = m_resourceManager.Create<StructuredBuffer>();
+	StructuredBuffer* buf = m_typedObjectManager.Create<StructuredBuffer>();
 	if (buf != nullptr)
 	{
 		buf->CreateBuffer<LIGHT_BUFFER, MAX_LIGHTS>();
@@ -26,12 +26,12 @@ void LightingSystem::VariableTick()
     LIGHT_BUFFER lights[MAX_LIGHTS];
     ZeroMemory(&lights, MAX_LIGHTS * sizeof(LIGHT_BUFFER));
 
-    std::vector<Light*> const allLights = m_sceneGraphManager.GetCurrentScene().GetComponentArrayPointer<Light>();
+    std::vector<Light*> const allLights = m_typedObjectManager.GetAllInstances<Light>();
     for (size_t i = 0; i < min(allLights.size(), MAX_LIGHTS); ++i)
     {
 		Light* light = allLights[i];
-        Entity* lightEntity = m_sceneGraphManager.GetCurrentScene().GetComponent<Entity>(light->GetEntityIndex());
-        Transform* lightTransform = lightEntity->GetComponent<Transform>(m_sceneGraphManager.GetCurrentScene());
+        Entity* lightEntity = m_typedObjectManager.GetInstance<Entity>(light->GetEntityIndex());
+        Transform* lightTransform = lightEntity->GetComponent<Transform>(m_typedObjectManager);
 
         lights[i].PositionWS = Vector4::FromVector3(lightTransform->m_position);
         lights[i].DirectionWS = { 0.0f, 0.0f, 0.0f, 0.0f };
@@ -49,7 +49,7 @@ void LightingSystem::VariableTick()
         lights[i].Selected = TRUE;
     }
 
-    StructuredBuffer* lightBuf = m_resourceManager.GetInstance<StructuredBuffer>(m_lightBufferIndex);
+    StructuredBuffer* lightBuf = m_typedObjectManager.GetInstance<StructuredBuffer>(m_lightBufferIndex);
     if (lightBuf != nullptr)
     {
         lightBuf->UpdateBuffer(*lights);

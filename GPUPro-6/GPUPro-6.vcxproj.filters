@@ -17,12 +17,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.cpp">
       <Filter>Engine\Core\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Components\Transform.cpp">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp">
       <Filter>Engine\Core\Graphics</Filter>
     </ClCompile>
@@ -137,6 +131,12 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\MonoMarshallHelpers.cpp" />
+    <ClCompile Include="src\Engine\Core\Components\Camera.cpp">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Components\Transform.cpp">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -158,18 +158,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.h">
       <Filter>Engine\Core\Graphics\Buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Camera.h">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Light.h">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Components\MeshRenderer.h">
-      <Filter>Engine\Core\Graphics\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Transform.h">
-      <Filter>Engine\Core\Graphics\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsSystem.h">
       <Filter>Engine\Core\Graphics</Filter>
@@ -265,7 +253,6 @@
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.h" />
     <ClInclude Include="src\Engine\Core\SystemManagement\SystemContainer.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphManager.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.hpp">
       <Filter>Engine\Core\SceneGraph</Filter>
@@ -327,6 +314,19 @@
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\MonoMarshallHelpers.h" />
+    <ClInclude Include="src\Engine\Core\Components\Transform.h">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Components\Camera.h">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Components\Light.h">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Components\MeshRenderer.h">
+      <Filter>Engine\Core\Graphics\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

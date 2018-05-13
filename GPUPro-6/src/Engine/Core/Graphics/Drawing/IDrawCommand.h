@@ -2,19 +2,17 @@
 
 class GraphicsDevice;
 class PerObjectBuffer;
-class SceneGraphManager;
 class TypedObjectManager;
 struct MeshRenderer;
 
 class IDrawCommand
 {
 public:
-	IDrawCommand(int id, PerObjectBuffer& perObjectBuffer, GraphicsDevice& gfxDevice, SceneGraphManager& sceneGraphManager, TypedObjectManager& resourceManager) :
+	IDrawCommand(int id, PerObjectBuffer& perObjectBuffer, GraphicsDevice& gfxDevice, TypedObjectManager& resourceManager) :
         c_identifier(id),
 		m_gfxDevice(gfxDevice),
         m_perObjectBuffer(perObjectBuffer),
-		m_sceneGraphManager(sceneGraphManager),
-		m_resourceManager(resourceManager) { }
+		m_typedObjectManager(resourceManager) { }
 
     const int ID();
     void Draw(Matrix4x4 view, Matrix4x4 proj);
@@ -22,8 +20,7 @@ public:
 protected:
     PerObjectBuffer& m_perObjectBuffer;
 	GraphicsDevice& m_gfxDevice;
-	SceneGraphManager& m_sceneGraphManager;
-	TypedObjectManager& m_resourceManager;
+	TypedObjectManager& m_typedObjectManager;
 
     virtual void PreDrawAll() = 0;
     virtual bool BindMaterial(MeshRenderer& mrc) = 0;

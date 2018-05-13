@@ -12,13 +12,14 @@ enum LightType
 
 struct Light : IComponent
 {
-    Color m_color;
+REGISTER_TYPE(Light);
+	Color m_color;
     FLOAT m_range;
     FLOAT m_intensity;
     FLOAT m_spotlightAngle;
     LightType m_type;
 
-	Light(int componentIndex) : IComponent(componentIndex)
+	Light() : IComponent()
 	{
 		m_type = kLightType_Point;
 		m_range = 100.0f;

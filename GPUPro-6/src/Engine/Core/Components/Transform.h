@@ -8,6 +8,8 @@ struct Matrix4x4;
 
 struct Transform : IComponent
 {
+REGISTER_TYPE(Transform);
+
 	// TODO: Child / Parent functionality
 	Vector3 m_position;
 	Vector3 m_scale;
@@ -24,7 +26,7 @@ struct Transform : IComponent
 	Matrix4x4 GetMatrix();
 	Matrix4x4 GetCameraViewMatrix();
 	
-	Transform(int componentIndex) : IComponent(componentIndex)
+	Transform() : IComponent()
 	{
 		m_scale = { 1.0f, 1.0f, 1.0f };
 		m_position = { 0.0f, 0.0f, 0.0f };

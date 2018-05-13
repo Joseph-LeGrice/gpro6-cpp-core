@@ -29,10 +29,10 @@
 #include "Engine/Core/SceneGraph/SceneGraph.hpp"
 #include "Engine/Core/SceneGraph/SceneGraphManager.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/Graphics/Components/Camera.h"
-#include "Engine/Core/Graphics/Components/Light.h"
-#include "Engine/Core/Graphics/Components/Transform.h"
-#include "Engine/Core/Graphics/Components/MeshRenderer.h"
+#include "Engine/Core/Components/Camera.h"
+#include "Engine/Core/Components/Light.h"
+#include "Engine/Core/Components/Transform.h"
+#include "Engine/Core/Components/MeshRenderer.h"
 
 // Etc
 #include "Engine/Core/Mesh/MeshManager.h"

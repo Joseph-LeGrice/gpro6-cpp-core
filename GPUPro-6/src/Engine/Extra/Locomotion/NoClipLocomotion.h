@@ -2,20 +2,20 @@
 #include "Engine/Core/SystemManagement/ISystem.h"
 
 class InputSystem;
-class SceneGraphManager;
+class TypedObjectManager;
 
 class NoClipLocomotion : public ISystem
 {
 public:
-    NoClipLocomotion(SceneGraphManager& sceneGraphManager, InputSystem& inputSystem) :
-		m_sceneGraphManager(sceneGraphManager),
+    NoClipLocomotion(TypedObjectManager& typedObjectManager, InputSystem& inputSystem) :
+		m_typedObjectManager(typedObjectManager),
 		m_inputSystem(inputSystem) { }
 
     void SetPlayer(int entityId);
     virtual void VariableTick() override;
 
 private:
-	SceneGraphManager& m_sceneGraphManager;
+	TypedObjectManager& m_typedObjectManager;
 	InputSystem& m_inputSystem;
     int m_playerEntityId = -1;
 

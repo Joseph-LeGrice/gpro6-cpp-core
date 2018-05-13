@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "Engine/Core/Graphics/Components/Camera.h"
+#include "Engine/Core/Components/Camera.h"
 #include "Engine/Core/Graphics/GraphicsSystem.h"
 
 void Camera::SetOrthographic(float size, float depth, float aspectRatio)

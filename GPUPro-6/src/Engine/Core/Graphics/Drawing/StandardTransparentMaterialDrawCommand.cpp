@@ -22,7 +22,7 @@ void StandardTransparentMaterialDrawCommand::PreDrawAll()
 
 bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRenderer& mrc)
 {
-    StandardMaterial* mat = m_resourceManager.GetInstance<StandardMaterial>(mrc.m_materialIndex);
+    StandardMaterial* mat = m_typedObjectManager.GetInstance<StandardMaterial>(mrc.m_materialIndex);
     if (mat->BindIfValid())
     {
         m_constantBuffer.PushData(mat->GetData());

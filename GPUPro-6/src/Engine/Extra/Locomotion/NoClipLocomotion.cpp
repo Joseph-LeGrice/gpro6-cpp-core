@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "NoClipLocomotion.h"
 
-#include "Engine/Core/SceneGraph/SceneGraphManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/Graphics/Components/Transform.h"
+#include "Engine/Core/Components/Transform.h"
 
 #include "Engine/Core/Input/InputSystem.h"
 #include "Engine/Core/Time/Time.h"
@@ -20,13 +20,13 @@ void NoClipLocomotion::VariableTick()
         return;
     }
 
-    Entity* player = m_sceneGraphManager.GetCurrentScene().GetComponent<Entity>(m_playerEntityId);
+    Entity* player = m_typedObjectManager.GetInstance<Entity>(m_playerEntityId);
     if (player == nullptr)
     {
         return;
     }
 
-    Transform* playerTransform = player->GetComponent<Transform>(m_sceneGraphManager.GetCurrentScene());
+    Transform* playerTransform = player->GetComponent<Transform>(m_typedObjectManager);
     if (playerTransform == nullptr)
     {
         return;
