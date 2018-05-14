@@ -14,8 +14,4 @@ REGISTER_TYPE(MeshRenderer);
 		IComponent(),
 		m_meshIndex(-1),
 		m_materialIndex(-1) { }
-
-	static ComponentTypeID GetComponentType() {
-		return 4;
-	}
 };

@@ -73,13 +73,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GameLoop* gameLoop = new GameLoop(*time);
 	
 	// Scene Management
-	std::vector<ComponentTypeID> componentTypeList;
-	componentTypeList.push_back(Transform::GetComponentType());
-	componentTypeList.push_back(Camera::GetComponentType());
-	componentTypeList.push_back(MeshRenderer::GetComponentType());
-	componentTypeList.push_back(Entity::GetComponentType());
-	componentTypeList.push_back(Light::GetComponentType());
-	SceneGraph* sceneGraph = new SceneGraph(); // componentTypeList);
+	SceneGraph* sceneGraph = new SceneGraph();
 	SceneGraphManager* sceneGraphManager = new SceneGraphManager(*sceneGraph);
 
 	// Graphics Device

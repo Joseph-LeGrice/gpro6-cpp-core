@@ -32,8 +32,4 @@ REGISTER_TYPE(Transform);
 		m_position = { 0.0f, 0.0f, 0.0f };
 		m_rotation = Quaternion::Identity();
 	}
-
-	static ComponentTypeID GetComponentType() {
-		return 1;
-	}
 };

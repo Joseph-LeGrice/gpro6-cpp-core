@@ -12,8 +12,4 @@ REGISTER_TYPE(Camera);
 
     void SetOrthographic(float size, float depth, float aspectRatio);
 	void SetPerspective(float fieldOfViewRadians, float aspectRatio, float screenNear, float screenFar);
-
-	static ComponentTypeID GetComponentType() {
-		return 2;
-	}
 };
