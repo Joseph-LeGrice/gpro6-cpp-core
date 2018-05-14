@@ -6,15 +6,16 @@
     {
       "includePath": "Engine/Core/ResourceTypes/Mesh.h",
       "name": "Mesh",
-      "subdirectory": "types",      
-      "methods": [
-      ]
+      "subdirectory": "types",
+      "methods": [],
+      "properties": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/TextureSampler.h",
       "name": "TextureSampler",
       "subdirectory": "types",
-      "methods": []
+      "methods": [],
+      "properties": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Texture2DArray.h",
@@ -23,13 +24,14 @@
       "methods": [
         {
           "methodType": "instance",
-          "methodName": "InitializeWithBitmaps",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "InitializeWithBitmaps",
+          "returnType": "void",
+          "args": [
             "array-string"
           ]
         }
-      ]
+      ],
+      "properties": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Texture2D.h",
@@ -38,13 +40,14 @@
       "methods": [
         {
           "methodType": "instance",
-          "methodName": "InitializeWithBitmap",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "InitializeWithBitmap",
+          "returnType": "void",
+          "args": [
             "string"
           ]
         }
-      ]
+      ],
+      "properties": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/StructuredBuffer.h",
@@ -53,11 +56,12 @@
       "methods": [
         {
           "methodType": "instance",
-          "methodName": "GetMyResourceViewID",
-          "returnTypeInfo": "int",
-          "argInfo": []
+          "name": "GetMyResourceViewID",
+          "returnType": "int",
+          "args": []
         }
-      ]
+      ],
+      "properties": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp",
@@ -66,22 +70,23 @@
       "methods": [
         {
           "methodType": "instance",
-          "methodName": "SetShaderIndex",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "SetShaderIndex",
+          "returnType": "void",
+          "args": [
             "int"
           ]
         },
         {
           "methodType": "instance",
-          "methodName": "RegisterShaderResource",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "RegisterShaderResource",
+          "returnType": "void",
+          "args": [
             "int",
             "int"
           ]
         }
-      ]
+      ],
+      "properties": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Material/SimpleMaterial.h",
@@ -90,29 +95,29 @@
       "methods": [
         {
           "methodType": "instance",
-          "methodName": "SetShaderIndex",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "SetShaderIndex",
+          "returnType": "void",
+          "args": [
             "int"
           ]
         },
         {
           "methodType": "instance",
-          "methodName": "RegisterShaderResource",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "RegisterShaderResource",
+          "returnType": "void",
+          "args": [
             "int",
             "int"
           ]
         }
-      ]
+      ],
+      "properties": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/ShaderResource.h",
       "name": "ShaderResource",
       "subdirectory": "types",
-      "methods": [
-      ]
+      "methods": []
     },
     {
       "includePath": "Engine/Core/ResourceTypes/Shader.h",
@@ -121,50 +126,81 @@
       "methods": [
         {
           "methodType": "instance",
-          "methodName": "InitVertexShader",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "InitVertexShader",
+          "returnType": "void",
+          "args": [
             "string",
             "string"
           ]
         },
         {
           "methodType": "instance",
-          "methodName": "InitPixelShader",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "InitPixelShader",
+          "returnType": "void",
+          "args": [
             "string",
             "string"
           ]
         },
         {
           "methodType": "instance",
-          "methodName": "InitGeometryShader",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "InitGeometryShader",
+          "returnType": "void",
+          "args": [
             "string",
             "string"
           ]
         },
         {
           "methodType": "instance",
-          "methodName": "InitHullShader",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "InitHullShader",
+          "returnType": "void",
+          "args": [
             "string",
             "string"
           ]
         },
         {
           "methodType": "instance",
-          "methodName": "InitDomainShader",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "InitDomainShader",
+          "returnType": "void",
+          "args": [
             "string",
             "string"
           ]
         }
-      ]
+      ],
+      "properties": []
+    },
+    {
+      "name": "Camera",
+      "subdirectory": "components",
+      "methods": [],
+      "properties": []
+    },
+    {
+      "name": "Light",
+      "subdirectory": "components",
+      "methods": [],
+      "properties": []
+    },
+    {
+      "name": "MeshRenderer",
+      "subdirectory": "components",
+      "methods": [],
+      "properties": []
+    },
+    {
+      "name": "Transform",
+      "subdirectory": "components",
+      "methods": [],
+      "properties": []
+    },
+    {
+      "name": "Entity",
+      "subdirectory": "",
+      "methods": [],
+      "properties": []
     },
     {
       "name": "TypedObjectManager",
@@ -172,13 +208,14 @@
       "methods": [
         {
           "methodType": "static",
-          "methodName": "Create",
-          "returnTypeInfo": "object",
-          "argInfo": [
+          "name": "Create",
+          "returnType": "object",
+          "args": [
             "string"
           ]
         }
-      ]
+      ],
+      "properties": []
     },
     {
       "name": "ScriptedSystemInterface",
@@ -186,13 +223,14 @@
       "methods": [
         {
           "methodType": "static",
-          "methodName": "RegisterSystemInstance",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "RegisterSystemInstance",
+          "returnType": "void",
+          "args": [
             "object"
           ]
         }
-      ]
+      ],
+      "properties": []
     },
     {
       "name": "Logging",
@@ -200,13 +238,14 @@
       "methods": [
         {
           "methodType": "static",
-          "methodName": "LogMessage",
-          "returnTypeInfo": "void",
-          "argInfo": [
+          "name": "LogMessage",
+          "returnType": "void",
+          "args": [
             "string"
           ]
         }
-      ]
+      ],
+      "properties": []
     }
   ]
 }

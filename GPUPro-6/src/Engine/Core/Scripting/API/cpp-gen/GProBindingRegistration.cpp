@@ -9,6 +9,11 @@
 #include "types/SimpleMaterialAPI.h"
 #include "types/ShaderResourceAPI.h"
 #include "types/ShaderAPI.h"
+#include "components/CameraAPI.h"
+#include "components/LightAPI.h"
+#include "components/MeshRendererAPI.h"
+#include "components/TransformAPI.h"
+#include "EntityAPI.h"
 #include "TypedObjectManagerAPI.h"
 #include "ScriptedSystemInterfaceAPI.h"
 #include "LoggingAPI.h"
@@ -26,6 +31,11 @@ void GPro::RegisterAllCalls()
 	SimpleMaterialAPI::RegisterCalls();
 	ShaderResourceAPI::RegisterCalls();
 	ShaderAPI::RegisterCalls();
+	CameraAPI::RegisterCalls();
+	LightAPI::RegisterCalls();
+	MeshRendererAPI::RegisterCalls();
+	TransformAPI::RegisterCalls();
+	EntityAPI::RegisterCalls();
 	TypedObjectManagerAPI::RegisterCalls();
 	ScriptedSystemInterfaceAPI::RegisterCalls();
 	LoggingAPI::RegisterCalls();

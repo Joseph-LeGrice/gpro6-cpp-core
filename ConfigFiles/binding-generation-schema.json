@@ -27,7 +27,8 @@
                     "nativeIncludePath",
                     "nativeClassName",
                     "managedClassName",
-                    "methods"
+                    "methods",
+                    "properties"
                 ],
                 "properties": {
                     "nativeIncludePath": {
@@ -46,26 +47,28 @@
                             "type": "object",
                             "required": [
                                 "methodType",
-                                "methodName",
-                                "returnTypeInfo",
-                                "argInfo"
+                                "name",
+                                "returnType",
+                                "args"
                             ],"properties": {
                                 "methodType": {
                                     "type": "string",
                                     "enum": [
                                         "instance",
-                                        "static"
+                                        "static",
+                                        "ivar"
                                     ]
                                 },
-                                "methodName": {
+                                "name": {
                                     "type": "string"
                                 },
-                                "returnTypeInfo": {
+                                "returnType": {
                                     "type": "string"
                                 },
-                                "argInfo": {
-                                    "type": "string",
+                                "args": {
+                                    "type":"string",
                                     "enum": [
+                                        "object",
                                         "void",
                                         "int",
                                         "float",
@@ -73,6 +76,36 @@
                                         "char",
                                         "string"
                                     ]
+                                }
+                            }
+                        }
+                    },
+                    "properties": {
+                        "type": "array",
+                        "items": {
+                            "title": "Property Binding Info",
+                            "type": "object",
+                            "required": [
+                                "getter",
+                                "setter",
+                                "name",
+                                "nativeName",
+                                "returnType"
+                            ],"properties": {
+                                "getter": {
+                                    "type": "boolean"
+                                },
+                                "setter": {
+                                    "type": "boolean"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "nativeName": {
+                                    "type": "string"
+                                },
+                                "returnType": {
+                                    "type": "string"
                                 }
                             }
                         }

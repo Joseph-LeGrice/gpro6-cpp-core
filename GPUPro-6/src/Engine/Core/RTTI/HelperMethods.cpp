@@ -20,14 +20,14 @@
 
 void RegisterAllTypes()
 {
-	RegisterManagedType<Texture2D>("Texture2D");
 	RegisterManagedType<Mesh>("Mesh");
 	RegisterManagedType<Shader>("Shader");
+	RegisterManagedType<Texture2D>("Texture2D");
 	RegisterManagedType<ShaderResource>("ShaderResource");
-	RegisterManagedType<StructuredBuffer>("StructuredBuffer");
 	RegisterManagedType<Texture2DArray>("Texture2DArray");
 	RegisterManagedType<TextureSampler>("TextureSampler");
 	RegisterManagedType<SimpleMaterial>("SimpleMaterial");
+	RegisterManagedType<StructuredBuffer>("StructuredBuffer");
 	RegisterManagedType<StandardMaterial>("StandardMaterial");
 	RegisterType<ManagedObject>();
 

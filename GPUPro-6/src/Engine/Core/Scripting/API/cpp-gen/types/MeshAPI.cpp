@@ -9,6 +9,4 @@
 void GPro::MeshAPI::RegisterCalls()
 {
 }
-
-
 // ## Generated Code ##
