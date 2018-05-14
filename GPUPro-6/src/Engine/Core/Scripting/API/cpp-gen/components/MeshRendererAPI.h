@@ -11,6 +11,15 @@ namespace GPro
 	{
 // ## Generated Code ##
 		extern void RegisterCalls();
+
+		int Get_MeshIndex(int managedInstanceId);
+		void Set_MeshIndex(int managedInstanceId, int val);
+
+		int Get_DrawCommandIndex(int managedInstanceId);
+		void Set_DrawCommandIndex(int managedInstanceId, int val);
+
+		int Get_MaterialIndex(int managedInstanceId);
+		void Set_MaterialIndex(int managedInstanceId, int val);
 // ## Generated Code ##
 	};
 };

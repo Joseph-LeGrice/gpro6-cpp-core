@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "EntityAPI.h"
 #include "Engine/Core/GlobalStaticReferences.h"
+#include "Engine/Core/SceneGraph/Components/Entity.h"
+
 #include "Engine/Core/Scripting/MonoMarshallHelpers.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 

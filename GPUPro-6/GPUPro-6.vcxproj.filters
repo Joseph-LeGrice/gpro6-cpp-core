@@ -137,6 +137,11 @@
     <ClCompile Include="src\Engine\Core\Components\Transform.cpp">
       <Filter>Engine\Core\Graphics\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\CameraAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\LightAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\MeshRendererAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\TransformAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -327,6 +332,11 @@
       <Filter>Engine\Core\Graphics\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\CameraAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\LightAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\MeshRendererAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\TransformAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

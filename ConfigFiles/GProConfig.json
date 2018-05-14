@@ -175,30 +175,57 @@
     {
       "name": "Camera",
       "subdirectory": "components",
+      "includePath": "Engine/Core/Components/Camera.h",
       "methods": [],
       "properties": []
     },
     {
       "name": "Light",
       "subdirectory": "components",
+      "includePath": "Engine/Core/Components/Light.h",
       "methods": [],
       "properties": []
     },
     {
       "name": "MeshRenderer",
       "subdirectory": "components",
+      "includePath": "Engine/Core/Components/MeshRenderer.h",
       "methods": [],
-      "properties": []
+      "properties": [
+        {
+          "getter": true,
+          "setter": true,
+          "name": "MeshIndex",
+          "nativeName": "m_meshIndex",
+          "returnType": "int"
+        },
+        {
+          "getter": true,
+          "setter": true,
+          "name": "DrawCommandIndex",
+          "nativeName": "m_drawCommandIndex",
+          "returnType": "int"
+        },
+        {
+          "getter": true,
+          "setter": true,
+          "name": "MaterialIndex",
+          "nativeName": "m_materialIndex",
+          "returnType": "int"
+        }
+      ]
     },
     {
       "name": "Transform",
       "subdirectory": "components",
+      "includePath": "Engine/Core/Components/Transform.h",
       "methods": [],
       "properties": []
     },
     {
       "name": "Entity",
       "subdirectory": "",
+      "includePath": "Engine/Core/SceneGraph/Components/Entity.h",
       "methods": [],
       "properties": []
     },
