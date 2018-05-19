@@ -18,6 +18,7 @@ public:
 	virtual void Deinitalize() override;
 
 	ManagedObject* CreateObject(ManagedTypeID typeName);
+	MonoObject* BoxValueInClass(void* value, ManagedTypeID typeName);
 
 private:
 	MonoImage* m_image;

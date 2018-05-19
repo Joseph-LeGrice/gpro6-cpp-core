@@ -10,7 +10,7 @@ class SkyboxDrawCommand : public IDrawCommand
 {
 public:
 	SkyboxDrawCommand(GraphicsDevice& gfxDevice,
-        PerObjectBuffer& perObjectBuffer,
+        ConstantBuffer& perObjectBuffer,
 		TypedObjectManager& resourceManager,
 		RasterizerState& rasterizerState,
 		BlendState& blendState) :

@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "MonoMarshallHelpers.h"
 
+#include "ScriptedSystemLoader.h"
+#include "Engine/Core/GlobalStaticReferences.h"
+
 std::wstring MonoMarshall::GetUTF16String(MonoString* ms)
 {
 	mono_unichar2* pathStr = mono_string_to_utf16(ms);
@@ -56,4 +59,47 @@ extern Matrix3x3 MonoMarshall::GetMatrix3x3(MonoObject* mo)
 {
 	Matrix3x3* val = static_cast<Matrix3x3*>(mono_object_unbox(mo));
 	return *val;
+}
+
+
+extern Quaternion MonoMarshall::GetQuaternion(MonoObject* mo)
+{
+	Quaternion* val = static_cast<Quaternion*>(mono_object_unbox(mo));
+	return *val;
+}
+
+extern MonoObject* MonoMarshall::GetManagedVector4(Vector4 val)
+{
+	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
+	return ssl->BoxValueInClass(&val, "Vector4");
+}
+
+extern MonoObject* MonoMarshall::GetManagedVector3(Vector3 val)
+{
+	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
+	return ssl->BoxValueInClass(&val, "Vector3");
+}
+
+extern MonoObject* MonoMarshall::GetManagedVector2(Vector2 val)
+{
+	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
+	return ssl->BoxValueInClass(&val, "Vector2");
+}
+
+extern MonoObject* MonoMarshall::GetManagedMatrix4x4(Matrix4x4 val)
+{
+	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
+	return ssl->BoxValueInClass(&val, "Matrix4x4");
+}
+
+extern MonoObject* MonoMarshall::GetManagedMatrix3x3(Matrix3x3 val)
+{
+	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
+	return ssl->BoxValueInClass(&val, "Matrix3x3");
+}
+
+extern MonoObject* MonoMarshall::GetManagedQuaternion(Quaternion val)
+{
+	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
+	return ssl->BoxValueInClass(&val, "Quaternion");
 }

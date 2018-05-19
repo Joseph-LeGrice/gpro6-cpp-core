@@ -213,16 +213,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp" />
     <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Material.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceTypes\ShaderResource.cpp" />
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\HelperMethods.cpp" />
@@ -236,17 +235,16 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MeshAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderResourceAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\StructuredBufferAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\Texture2DAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\Texture2DArrayAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\TextureSamplerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\MeshAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\ShaderAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\ShaderResourceAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\SimpleMaterialAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\StandardMaterialAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\StructuredBufferAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DArrayAPI.cpp" />
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\types\TextureSamplerAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\MonoMarshallHelpers.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
@@ -291,22 +289,17 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerObjectBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h" />
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\PerCameraBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.h" />
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h" />
-    <ClInclude Include="src\Engine\Core\ResourceTypes\Material\SimpleMaterial.h" />
     <ClInclude Include="src\Engine\Core\ResourceTypes\ShaderResource.h" />
-    <ClInclude Include="src\Engine\Core\ResourceTypes\Material\StandardMaterial.hpp" />
     <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
     <ClInclude Include="src\Engine\Core\RTTI\HelperMethods.h" />
     <ClInclude Include="src\Engine\Core\RTTI\RTTI.h" />
@@ -321,17 +314,16 @@
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MeshAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderResourceAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\StructuredBufferAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\Texture2DAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\Texture2DArrayAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\TextureSamplerAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\MeshAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\ShaderAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\ShaderResourceAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\SimpleMaterialAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\StandardMaterialAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\StructuredBufferAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\Texture2DArrayAPI.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\types\TextureSamplerAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\MonoMarshallHelpers.h" />
     <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
@@ -349,9 +341,9 @@
     <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.h" />
     <ClInclude Include="src\Engine\Core\Graphics\VertexData.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\ConstantBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.h" />
-    <ClInclude Include="src\Engine\Core\ResourceTypes\Material\Material.hpp" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Material.h" />
     <ClInclude Include="src\Engine\Core\ResourceTypes\Shader.h" />
     <ClInclude Include="src\Engine\Core\ResourceTypes\StructuredBuffer.h" />
     <ClInclude Include="src\Engine\Core\ResourceTypes\Texture2D.h" />
@@ -384,7 +376,6 @@
     <ClInclude Include="src\Engine\Core\WindowManagement\WindowManager.h" />
     <ClInclude Include="src\Engine\Core\Utilities\StaticPointer.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffers\StandardMaterialBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Engine\Shaders\CommonInclude.hlsl">

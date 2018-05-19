@@ -8,7 +8,7 @@
 #include "Engine/Core/Components/MeshRenderer.h"
 #include "Engine/Core/ResourceTypes/Mesh.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
 
 const int IDrawCommand::ID()
 {
@@ -18,6 +18,8 @@ const int IDrawCommand::ID()
 void IDrawCommand::Draw(Matrix4x4 view, Matrix4x4 proj)
 {
     PreDrawAll();
+
+	m_perObjectBuffer.BindBuffer(1, BIND_ALL);
 
     ID3D11DeviceContext& deviceContext = *m_gfxDevice.GetGraphicsDeviceContext();
 
@@ -48,7 +50,7 @@ void IDrawCommand::Draw(Matrix4x4 view, Matrix4x4 proj)
             pob.ModelViewProjection = proj * view * model;
             pob.ModelView = view * model;
 
-            m_perObjectBuffer.PushData(pob);
+            m_perObjectBuffer.UpdateBuffer(&pob, sizeof(PER_OBJECT_BUFFER));
 
             if (BindMaterial(*mrc))
             {

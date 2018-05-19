@@ -69,3 +69,8 @@ ManagedObject* ScriptedSystemLoader::CreateObject(ManagedTypeID typeName)
 
 	return instance;
 }
+
+MonoObject* ScriptedSystemLoader::BoxValueInClass(void* value, ManagedTypeID typeName)
+{
+	return mono_value_box(m_domain, mono_class_from_name(m_gproImage, "", "Vector3"), value);
+}

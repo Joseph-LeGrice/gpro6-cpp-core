@@ -8,8 +8,8 @@
 #include "Engine/Core/ResourceTypes/Texture2DArray.h"
 #include "Engine/Core/ResourceTypes/TextureSampler.h"
 #include "Engine/Core/ResourceTypes/ManagedObject.h"
-#include "Engine/Core/ResourceTypes/Material/SimpleMaterial.h"
-#include "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp"
+#include "Engine/Core/ResourceTypes/Material.h"
+
 
 #include "Engine/Core/Components/Camera.h"
 #include "Engine/Core/Components/Light.h"
@@ -26,9 +26,9 @@ void RegisterAllTypes()
 	RegisterManagedType<ShaderResource>("ShaderResource");
 	RegisterManagedType<Texture2DArray>("Texture2DArray");
 	RegisterManagedType<TextureSampler>("TextureSampler");
-	RegisterManagedType<SimpleMaterial>("SimpleMaterial");
+	RegisterManagedType<Material>("Material");
 	RegisterManagedType<StructuredBuffer>("StructuredBuffer");
-	RegisterManagedType<StandardMaterial>("StandardMaterial");
+	RegisterManagedType<Material>("Material");
 	RegisterType<ManagedObject>();
 
 	RegisterType<Transform>();

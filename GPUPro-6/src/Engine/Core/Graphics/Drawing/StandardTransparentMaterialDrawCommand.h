@@ -2,7 +2,7 @@
 #include "IDrawCommand.h"
 #include "Engine/Core/Components/MeshRenderer.h"
 
-class StandardMaterialBuffer;
+class ConstantBuffer;
 class RasterizerState;
 class BlendState;
 
@@ -11,11 +11,11 @@ class StandardTransparentMaterialDrawCommand : public IDrawCommand
 public:
 
 	StandardTransparentMaterialDrawCommand(GraphicsDevice& gfxDevice,
-        PerObjectBuffer& perObjectBuffer,
+        ConstantBuffer& perObjectBuffer,
 		TypedObjectManager& resourceManager,
 		RasterizerState& rasterizerState,
 		BlendState& blendState,
-		StandardMaterialBuffer& constantBuffer) :
+		ConstantBuffer& constantBuffer) :
 		IDrawCommand(3, perObjectBuffer, gfxDevice, resourceManager),
 		m_rasterizerState(rasterizerState),
 		m_blendState(blendState),
@@ -29,6 +29,6 @@ protected:
 private:
 	RasterizerState& m_rasterizerState;
 	BlendState& m_blendState;
-    StandardMaterialBuffer& m_constantBuffer;
+	ConstantBuffer& m_constantBuffer;
 };
 

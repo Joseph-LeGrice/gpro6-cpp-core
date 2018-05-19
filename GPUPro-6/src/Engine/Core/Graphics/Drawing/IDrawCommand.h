@@ -1,24 +1,30 @@
 #pragma once
 
 class GraphicsDevice;
-class PerObjectBuffer;
+class ConstantBuffer;
 class TypedObjectManager;
 struct MeshRenderer;
+
+struct PER_OBJECT_BUFFER
+{
+	Matrix4x4 ModelViewProjection;
+	Matrix4x4 ModelView;
+};
 
 class IDrawCommand
 {
 public:
-	IDrawCommand(int id, PerObjectBuffer& perObjectBuffer, GraphicsDevice& gfxDevice, TypedObjectManager& resourceManager) :
+	IDrawCommand(int id, ConstantBuffer& constantBuffer, GraphicsDevice& gfxDevice, TypedObjectManager& resourceManager) :
         c_identifier(id),
 		m_gfxDevice(gfxDevice),
-        m_perObjectBuffer(perObjectBuffer),
+        m_perObjectBuffer(constantBuffer),
 		m_typedObjectManager(resourceManager) { }
 
     const int ID();
     void Draw(Matrix4x4 view, Matrix4x4 proj);
 
 protected:
-    PerObjectBuffer& m_perObjectBuffer;
+    ConstantBuffer& m_perObjectBuffer;
 	GraphicsDevice& m_gfxDevice;
 	TypedObjectManager& m_typedObjectManager;
 

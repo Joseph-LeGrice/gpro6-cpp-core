@@ -22,8 +22,8 @@
 
 // ConstantBuffers
 #include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerCameraBuffer.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
 
 // Scene + IComponents
 #include "Engine/Core/SceneGraph/SceneGraph.hpp"
@@ -101,8 +101,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//  Mesh,
 		//  Shader,
 		//  ShaderResource,
-		//  StandardMaterial,
-		//  SimpleMaterial,
+		//  Material,
+		//  Material,
 		//  StructuredBuffer,
 		//  Texture2D,
 		//  Texture2DArray,

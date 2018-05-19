@@ -5,8 +5,7 @@
 #include "resources/Texture2DArrayAPI.h"
 #include "resources/Texture2DAPI.h"
 #include "resources/StructuredBufferAPI.h"
-#include "resources/StandardMaterialAPI.h"
-#include "resources/SimpleMaterialAPI.h"
+#include "resources/MaterialAPI.h"
 #include "resources/ShaderResourceAPI.h"
 #include "resources/ShaderAPI.h"
 #include "components/CameraAPI.h"
@@ -27,8 +26,7 @@ void GPro::RegisterAllCalls()
 	Texture2DArrayAPI::RegisterCalls();
 	Texture2DAPI::RegisterCalls();
 	StructuredBufferAPI::RegisterCalls();
-	StandardMaterialAPI::RegisterCalls();
-	SimpleMaterialAPI::RegisterCalls();
+	MaterialAPI::RegisterCalls();
 	ShaderResourceAPI::RegisterCalls();
 	ShaderAPI::RegisterCalls();
 	CameraAPI::RegisterCalls();

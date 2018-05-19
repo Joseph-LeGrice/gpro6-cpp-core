@@ -11,8 +11,7 @@
 #include "Engine/Core/Graphics/Drawing/IDrawCommand.h"
 #include "Engine/Core/WindowManagement/WindowManager.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerCameraBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
 
 #include "FreeImage.h"
 
@@ -32,15 +31,13 @@ GraphicsSystem::GraphicsSystem(BlendState& blendState,
 	GraphicsDevice& gfxDevice,
 	DepthStencilBuffer& depthStencilBuffer,
 	TypedObjectManager& typedObjectManager,
-	PerObjectBuffer& perObjectBuffer,
-    PerCameraBuffer& perCameraBuffer,
+	ConstantBuffer& perCameraBuffer,
     std::vector<IDrawCommand*>& commands) :
 	m_blendState(blendState),
 	m_meshManager(meshManager),
 	m_gfxDevice(gfxDevice),
 	m_depthStencilBuffer(depthStencilBuffer),
 	m_typedObjectManager(typedObjectManager),
-    m_perObjectBuffer(perObjectBuffer),
     m_perCameraBuffer(perCameraBuffer),
     m_commands(commands) {
 	FreeImage_SetOutputMessage(FreeImageOutput);
@@ -67,8 +64,7 @@ void GraphicsSystem::VariableTick()
 {
 	m_meshManager.BindBuffers();
 	
-    m_perObjectBuffer.BindBuffer();
-    m_perCameraBuffer.BindBuffer();
+    m_perCameraBuffer.BindBuffer(0, BIND_ALL);
 
     m_depthStencilBuffer.ClearBuffer();
     m_depthStencilBuffer.SetState();
@@ -91,7 +87,7 @@ void GraphicsSystem::VariableTick()
         pcb.EyePos.W = 1;
         pcb.View = view;
         pcb.Projection = proj;
-        m_perCameraBuffer.PushData(pcb);
+        m_perCameraBuffer.UpdateBuffer(&pcb, sizeof(PER_CAMERA_BUFFER));
 
         for (int i = 0; i < m_commands.size(); i++)
         {

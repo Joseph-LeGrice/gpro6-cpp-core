@@ -7,7 +7,7 @@
 
 namespace GPro
 {
-	namespace StandardMaterialAPI
+	namespace MaterialAPI
 	{
 // ## Generated Code ##
 		extern void RegisterCalls();

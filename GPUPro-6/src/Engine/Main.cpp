@@ -21,11 +21,6 @@
 #include "Engine/Core/Graphics/Drawing/StandardOpaqueMaterialDrawCommand.h"
 #include "Engine/Core/Graphics/Drawing/StandardTransparentMaterialDrawCommand.h"
 
-// ConstantBuffers
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerCameraBuffer.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/PerObjectBuffer.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffers/StandardMaterialBuffer.h"
-
 // Scene + IComponents
 #include "Engine/Core/SceneGraph/SceneGraph.hpp"
 #include "Engine/Core/SceneGraph/SceneGraphManager.h"
@@ -43,6 +38,7 @@
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/RasterizerState.h"
 #include "Engine/Core/Graphics/Buffers/IndexBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
 #include "Engine/Core/Graphics/Buffers/VertexBuffer.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
 
@@ -50,8 +46,8 @@
 #include "Engine/Core/ResourceTypes/Mesh.h"
 #include "Engine/Core/ResourceTypes/Shader.h"
 #include "Engine/Core/ResourceTypes/ShaderResource.h"
-#include "Engine/Core/ResourceTypes/Material/SimpleMaterial.h"
-#include "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp"
+#include "Engine/Core/ResourceTypes/Material.h"
+
 #include "Engine/Core/ResourceTypes/StructuredBuffer.h"
 #include "Engine/Core/ResourceTypes/Texture2D.h"
 #include "Engine/Core/ResourceTypes/Texture2DArray.h"
@@ -86,9 +82,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Buffers
 	IndexBuffer* indexBuffer = new IndexBuffer(*gfxDevice);
 	VertexBuffer* vertexBuffer = new VertexBuffer(*gfxDevice);
-	PerObjectBuffer* perObjectBuffer = new PerObjectBuffer(*gfxDevice);
-	PerCameraBuffer* perCameraBuffer = new PerCameraBuffer(*gfxDevice);
-	StandardMaterialBuffer* standardMaterialBuffer = new StandardMaterialBuffer(*gfxDevice);
+	ConstantBuffer* perObjectBuffer = new ConstantBuffer(*gfxDevice);
+	ConstantBuffer* perCameraBuffer = new ConstantBuffer(*gfxDevice);
+	ConstantBuffer* standardConstantBuffer = new ConstantBuffer(*gfxDevice);
 
 	// Graphics State Helpers
 	BlendState* blendState = new BlendState(*gfxDevice);
@@ -100,9 +96,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	std::vector<IDrawCommand*>* commands = new std::vector<IDrawCommand*>();
 	SkyboxDrawCommand* skyboxDrawCommand = new SkyboxDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState);
 	commands->push_back(skyboxDrawCommand);
-	StandardOpaqueMaterialDrawCommand* standardOpaqueMaterialDrawCommand = new StandardOpaqueMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState, *standardMaterialBuffer);
+	StandardOpaqueMaterialDrawCommand* standardOpaqueMaterialDrawCommand = new StandardOpaqueMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState, *standardConstantBuffer);
 	commands->push_back(standardOpaqueMaterialDrawCommand);
-	StandardTransparentMaterialDrawCommand* standardTransparentMaterialDrawCommand = new StandardTransparentMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState, *standardMaterialBuffer);
+	StandardTransparentMaterialDrawCommand* standardTransparentMaterialDrawCommand = new StandardTransparentMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState, *standardConstantBuffer);
 	commands->push_back(standardTransparentMaterialDrawCommand);
 
 	// ISystems
@@ -117,7 +113,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		*gfxDevice,
 		*depthStencilBuffer,
 		*typedObjectManager,
-		*perObjectBuffer,
 		*perCameraBuffer,
 		*commands
 	);
@@ -167,7 +162,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	delete meshManager;
 	delete blendState;
 
-	delete standardMaterialBuffer;
+	delete standardConstantBuffer;
 	delete perCameraBuffer;
 	delete perObjectBuffer;
 	delete vertexBuffer;
