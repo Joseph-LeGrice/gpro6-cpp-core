@@ -27,3 +27,33 @@ extern std::vector<std::wstring> MonoMarshall::GetStringVector(MonoArray* ma)
 	}
 	return result;
 }
+
+extern Vector4 MonoMarshall::GetVector4(MonoObject* mo)
+{
+	Vector4* val = static_cast<Vector4*>(mono_object_unbox(mo));
+	return *val;
+}
+
+extern Vector3 MonoMarshall::GetVector3(MonoObject* mo)
+{
+	Vector3* val = static_cast<Vector3*>(mono_object_unbox(mo));
+	return *val;
+}
+
+extern Vector2 MonoMarshall::GetVector2(MonoObject* mo)
+{
+	Vector2* val = static_cast<Vector2*>(mono_object_unbox(mo));
+	return *val;
+}
+
+extern Matrix4x4 MonoMarshall::GetMatrix4x4(MonoObject* mo)
+{
+	Matrix4x4* val = static_cast<Matrix4x4*>(mono_object_unbox(mo));
+	return *val;
+}
+
+extern Matrix3x3 MonoMarshall::GetMatrix3x3(MonoObject* mo)
+{
+	Matrix3x3* val = static_cast<Matrix3x3*>(mono_object_unbox(mo));
+	return *val;
+}
