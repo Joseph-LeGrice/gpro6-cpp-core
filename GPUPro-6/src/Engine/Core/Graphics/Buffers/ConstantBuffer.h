@@ -27,7 +27,7 @@ public:
     void ReleaseBuffer();
 
 protected:
-    void InitBuffer(size_t length);
+    void InitBuffer(UINT length);
 
 private:
 	GraphicsDevice& m_gfxDevice;

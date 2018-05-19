@@ -21,42 +21,42 @@ MonoObject* GPro::TransformAPI::Get_position(int managedInstanceId)
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
-	return nativeClassInstance->m_position;
+	return MonoMarshall::GetManagedVector3(nativeClassInstance->m_position);
 }
 
 void GPro::TransformAPI::Set_position(int managedInstanceId, MonoObject* value)
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
-	nativeClassInstance->m_position = value;
+	nativeClassInstance->m_position = MonoMarshall::GetVector3(value);
 }
 
 MonoObject* GPro::TransformAPI::Get_scale(int managedInstanceId)
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
-	return nativeClassInstance->m_scale;
+	return MonoMarshall::GetManagedVector3(nativeClassInstance->m_scale);
 }
 
 void GPro::TransformAPI::Set_scale(int managedInstanceId, MonoObject* value)
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
-	nativeClassInstance->m_scale = value;
+	nativeClassInstance->m_scale = MonoMarshall::GetVector3(value);
 }
 
 MonoObject* GPro::TransformAPI::Get_rotation(int managedInstanceId)
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
-	return nativeClassInstance->m_rotation;
+	return MonoMarshall::GetManagedQuaternion(nativeClassInstance->m_rotation);
 }
 
 void GPro::TransformAPI::Set_rotation(int managedInstanceId, MonoObject* value)
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
-	nativeClassInstance->m_rotation = value;
+	nativeClassInstance->m_rotation = MonoMarshall::GetQuaternion(value);
 }
 
 // ## Generated Code ##

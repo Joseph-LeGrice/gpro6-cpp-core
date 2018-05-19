@@ -12,7 +12,7 @@ void ConstantBuffer::ReleaseBuffer()
 }
 
 
-void ConstantBuffer::InitBuffer(size_t length)
+void ConstantBuffer::InitBuffer(UINT length)
 {
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
