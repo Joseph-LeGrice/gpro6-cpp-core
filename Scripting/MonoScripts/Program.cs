@@ -17,23 +17,23 @@ class Program
         /*
         //------------------------------------------------------------------------------------
         int lightBufferIndex = GetSystemManager().GetSystem<LightingSystem>()->GetBufferResourceIndex();
-        StructuredBuffer* lightBuffer = m_resourceManager.GetAsset<StructuredBuffer>(lightBufferIndex);
+        StructuredBuffer lightBuffer = TypedObjectManager.GetInstance<StructuredBuffer>(lightBufferIndex);
         //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
-        TextureSampler* textureSampler = m_resourceManager.Instantiate<TextureSampler>();
+        TextureSampler textureSampler = TypedObjectManager.Create<TextureSampler>();
         textureSampler->Initialize();
         //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
-        Shader* materialShader = m_resourceManager.Instantiate<Shader>();
+        Shader materialShader = TypedObjectManager.Create<Shader>();
         std::wstring forwardRenderShaderPath = Application::GetResourcePath(L"Shaders/ForwardRendering.hlsl");
         materialShader->InitVertexShader(forwardRenderShaderPath, "VShader");
         materialShader->InitPixelShader(forwardRenderShaderPath, "PShader");
         //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
-        StandardMaterial* simpleTestMaterial = m_resourceManager.Instantiate<StandardMaterial>();
+        StandardMaterial simpleTestMaterial = TypedObjectManager.Create<StandardMaterial>();
         UINT simpleTestMaterialID = simpleTestMaterial->GetResourceID();
         simpleTestMaterial->SetShaderIndex(materialShader->GetResourceID());
         simpleTestMaterial->RegisterShaderResource({ testImageTexture->GetResourceViewID(), 1 });
@@ -52,7 +52,7 @@ class Program
 		
         //------------------------------------------------------------------------------------
         // Ball Object
-        Mesh* sphereMesh = MeshHelper::CreateSphereUV();
+        Mesh sphereMesh = MeshHelper::CreateSphereUV();
         UINT sphereMeshID = sphereMesh->GetResourceID();
 
 		Entity& sphereEntity = GetSceneGraph().CreateComponent<Entity>();
@@ -79,7 +79,7 @@ class Program
 
         //------------------------------------------------------------------------------------
         // MarchingSquares Testing
-        StandardMaterial* marchingSquaresMaterial = m_resourceManager.Instantiate<StandardMaterial>();
+        StandardMaterial marchingSquaresMaterial = TypedObjectManager.Create<StandardMaterial>();
         marchingSquaresMaterial->SetShaderIndex(materialShader->GetResourceID());
         marchingSquaresMaterial->RegisterShaderResource({ testImageTexture->GetResourceViewID(), 1 });
         marchingSquaresMaterial->RegisterShaderResource({ lightBuffer->GetMyResourceViewID(), 0 });
@@ -94,9 +94,9 @@ class Program
         MATERIAL_BUFFER_CONTAINER marchinSquaresMatBufBuf = { marchinSquaresMatBuf };
         marchingSquaresMaterial->SetData(marchinSquaresMatBufBuf);
 
-		VoxelTerrain* vt = new VoxelTerrain();
+		VoxelTerrain vt = new VoxelTerrain();
 		
-        Mesh* marching_mesh = MarchingSquares2D::CreateMesh(2.5f, 64);
+        Mesh marching_mesh = MarchingSquares2D::CreateMesh(2.5f, 64);
 
         Entity& quadEntity = GetSceneGraph().CreateComponent<Entity>();
         Transform& quadTransform = Entity::AddComponent<Transform>(quadEntity);
@@ -119,12 +119,12 @@ class Program
         
         //------------------------------------------------------------------------------------
         //Skybox
-        Shader* skyboxShader = m_resourceManager.Instantiate<Shader>();
+        Shader skyboxShader = TypedObjectManager.Create<Shader>();
         std::wstring envMapShaderPath = Application::GetResourcePath(L"Shaders/EnvironmentMap.hlsl");
         skyboxShader->InitVertexShader(envMapShaderPath, "VShader");
         skyboxShader->InitPixelShader(envMapShaderPath, "PShader");
 
-        Texture2DArray* testCubemap = m_resourceManager.Instantiate<Texture2DArray>();
+        Texture2DArray testCubemap = TypedObjectManager.Create<Texture2DArray>();
         testCubemap->InitializeWithBitmaps({
             Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Right.bmp"),
             Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Left.bmp"),
@@ -134,7 +134,7 @@ class Program
             Application::GetResourcePath(L"GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
         });
         
-        SimpleMaterial* skyboxMat = m_resourceManager.Instantiate<SimpleMaterial>();
+        SimpleMaterial skyboxMat = TypedObjectManager.Create<SimpleMaterial>();
         UINT skyboxMatID = skyboxMat->GetResourceID();
         skyboxMat->SetShaderIndex(skyboxShader->GetResourceID());
         skyboxMat->RegisterShaderResource({ testCubemap->GetMyResourceViewID(), 0 });

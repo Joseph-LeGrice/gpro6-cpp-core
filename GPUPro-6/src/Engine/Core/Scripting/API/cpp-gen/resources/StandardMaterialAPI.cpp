@@ -3,6 +3,7 @@
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp"
 
+#include "Engine/Core/Scripting/MonoMarshallHelpers.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##

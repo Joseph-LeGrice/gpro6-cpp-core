@@ -20,4 +20,3 @@ void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString*
 	nativeClassInstance->InitializeWithBitmap(arg0_marshalled);
 }
 // ## Generated Code ##
-
