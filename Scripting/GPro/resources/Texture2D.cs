@@ -11,5 +11,14 @@ public class Texture2D : ITypedObject
 		InitializeWithBitmap(InstanceID, arg0);
 	}
 
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static int GetResourceViewID(int instanceid);
+
+	public int GetResourceViewID()
+	{
+		return GetResourceViewID(InstanceID);
+	}
+
 // ## Generated Code ##
 }

@@ -40,7 +40,6 @@ class Program
         simpleTestMaterial.AddTextureSampler(textureSampler.InstanceID, 0);
 
         MATERIAL_BUFFER mat;
-        ZeroMemory(mat, sizeof(MATERIAL_BUFFER));
         mat.DiffuseColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         mat.SpecularColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         mat.SpecularPower = 10.0f;
@@ -85,7 +84,6 @@ class Program
         marchingSquaresMaterial.AddTextureSampler(textureSampler.InstanceID, 0);
 
         MATERIAL_BUFFER marchinSquaresMatBuf;
-        ZeroMemory(marchinSquaresMatBuf, sizeof(MATERIAL_BUFFER));
         marchinSquaresMatBuf.DiffuseColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         marchinSquaresMatBuf.SpecularColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         marchinSquaresMatBuf.SpecularPower = 10.0f;
@@ -136,7 +134,7 @@ class Program
         
         Material skyboxMat = TypedObjectManager.Create<Material>();
         skyboxMat.SetShaderIndex(skyboxShader.InstanceID);
-        skyboxMat.RegisterShaderResource(testCubemap.GetMyResourceViewID(), 0);
+        skyboxMat.RegisterShaderResource(testCubemap.GetResourceViewID(), 0);
 
         Entity skyboxEntity = TypedObjectManager.Create<Entity>();
         MeshRenderer skyboxRenderer = Entity::AddComponent<MeshRenderer>(skyboxEntity);

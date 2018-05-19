@@ -22,7 +22,7 @@ unsigned int Texture2D::Height()
     return FreeImage_GetHeight(m_bitmap);
 }
 
-int Texture2D::GetInstanceViewID()
+int Texture2D::GetResourceViewID()
 {
     custom_assert::is_true(m_myShaderResourceViewIndex > -1);
     return m_myShaderResourceViewIndex;

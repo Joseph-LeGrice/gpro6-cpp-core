@@ -10,6 +10,7 @@
 void GPro::Texture2DAPI::RegisterCalls()
 {
 	mono_add_internal_call("Texture2D::InitializeWithBitmap(int,string)", GPro::Texture2DAPI::InitializeWithBitmap);
+	mono_add_internal_call("Texture2D::GetResourceViewID(int)", GPro::Texture2DAPI::GetResourceViewID);
 }
 
 void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString* arg0)
@@ -18,5 +19,12 @@ void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString*
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Texture2D* nativeClassInstance = tom->GetInstance<Texture2D>(managedInstanceId);
 	nativeClassInstance->InitializeWithBitmap(arg0_marshalled);
+}
+
+int GPro::Texture2DAPI::GetResourceViewID(int managedInstanceId)
+{
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	Texture2D* nativeClassInstance = tom->GetInstance<Texture2D>(managedInstanceId);
+	return nativeClassInstance->GetResourceViewID();
 }
 // ## Generated Code ##

@@ -17,7 +17,7 @@ public:
     unsigned int Width();
     unsigned int Height();
 
-    int GetInstanceViewID();
+	InstanceID GetResourceViewID();
     void InitializeWithBitmap(std::wstring filepath);
     void InitializeWithDimensions(UINT width, UINT height);
     void SetPixels(Color cArray[], size_t arraySize);
@@ -26,7 +26,7 @@ public:
 	
 
 private:
-    int m_myShaderResourceViewIndex = -1;
+    InstanceID m_myShaderResourceViewIndex = -1;
     FIBITMAP* m_bitmap = nullptr;
 	ManualRelease<ID3D11Texture2D> m_pTexture;
 	

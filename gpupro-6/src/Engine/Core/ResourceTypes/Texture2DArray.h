@@ -12,13 +12,13 @@ class Texture2DArray : public ITypedObject
 {
 REGISTER_TYPE(Texture2DArray)
 public:
-    int GetMyResourceViewID();
+    InstanceID GetResourceViewID();
     void InitializeWithBitmaps(std::vector<std::wstring> filepaths);
     
     virtual void Finalize() override;
 
 private:
-    int m_myShaderResourceViewId;
+	InstanceID m_myShaderResourceViewId;
     std::vector<FIBITMAP*> m_bitmaps;
     ManualRelease<ID3D11Texture2D> m_pTextureArray;
 

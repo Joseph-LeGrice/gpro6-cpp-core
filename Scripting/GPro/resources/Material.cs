@@ -20,5 +20,14 @@ public class Material : ITypedObject
 		RegisterShaderResource(InstanceID, arg0, arg1);
 	}
 
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void AddTextureSampler(int instanceid, int arg0, int arg1);
+
+	public void AddTextureSampler(int arg0, int arg1)
+	{
+		AddTextureSampler(InstanceID, arg0, arg1);
+	}
+
 // ## Generated Code ##
 }

@@ -10,7 +10,7 @@
 #include "Engine/Core/ResourceTypes/ShaderResource.h"
 
 
-int Texture2DArray::GetMyResourceViewID()
+InstanceID Texture2DArray::GetResourceViewID()
 {
     return m_myShaderResourceViewId;
 }

@@ -13,6 +13,8 @@ namespace GPro
 		extern void RegisterCalls();
 
 		extern void InitializeWithBitmaps(int managedInstanceId, MonoArray* arg0);
+
+		extern int GetResourceViewID(int managedInstanceId);
 // ## Generated Code ##
 	};
 };
