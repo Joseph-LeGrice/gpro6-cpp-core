@@ -21,6 +21,34 @@ ManagedObject* NativeToManagedInstanceMap::GetManagedObject(TypeID nativeTypeId,
 	return nullptr;
 }
 
+InstanceID NativeToManagedInstanceMap::GetNativeInstanceID(InstanceID managedInstanceId)
+{
+	std::vector<NativeToManagedInstance>& activeInstances = m_activeMappedInstances.at(ManagedObject::GetTypeID());
+	for (int i = 0; i < activeInstances.size(); i++)
+	{
+		NativeToManagedInstance obj = activeInstances[i];
+		if (obj.m_managedObjectId == managedInstanceId)
+		{
+			return obj.m_nativeInstanceId;
+		}
+	}
+	return InvalidInstanceID;
+}
+
+InstanceID NativeToManagedInstanceMap::GetManagedInstanceID(TypeID nativeTypeId, InstanceID nativeInstanceId)
+{
+	std::vector<NativeToManagedInstance>& activeInstances = m_activeMappedInstances.at(nativeTypeId);
+	for (int i = 0; i < activeInstances.size(); i++)
+	{
+		NativeToManagedInstance obj = activeInstances[i];
+		if (obj.m_nativeInstanceId == nativeInstanceId)
+		{
+			return obj.m_managedObjectId;
+		}
+	}
+	return InvalidInstanceID;
+}
+
 ManagedTypeID NativeToManagedInstanceMap::GetManagedTypeID(TypeID nativeTypeId)
 {
 	return m_typeMapping[nativeTypeId];

@@ -3,6 +3,7 @@
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/Components/Transform.h"
 
+#include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 #include "Engine/Core/Scripting/MonoMarshallHelpers.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
@@ -19,43 +20,55 @@ void GPro::TransformAPI::RegisterCalls()
 
 MonoObject* GPro::TransformAPI::Get_position(int managedInstanceId)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
+	Transform* nativeClassInstance = tom->GetInstance<Transform>(nativeInstanceId);
 	return MonoMarshall::GetManagedVector3(nativeClassInstance->m_position);
 }
 
 void GPro::TransformAPI::Set_position(int managedInstanceId, MonoObject* value)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
+	Transform* nativeClassInstance = tom->GetInstance<Transform>(nativeInstanceId);
 	nativeClassInstance->m_position = MonoMarshall::GetVector3(value);
 }
 
 MonoObject* GPro::TransformAPI::Get_scale(int managedInstanceId)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
+	Transform* nativeClassInstance = tom->GetInstance<Transform>(nativeInstanceId);
 	return MonoMarshall::GetManagedVector3(nativeClassInstance->m_scale);
 }
 
 void GPro::TransformAPI::Set_scale(int managedInstanceId, MonoObject* value)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
+	Transform* nativeClassInstance = tom->GetInstance<Transform>(nativeInstanceId);
 	nativeClassInstance->m_scale = MonoMarshall::GetVector3(value);
 }
 
 MonoObject* GPro::TransformAPI::Get_rotation(int managedInstanceId)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
+	Transform* nativeClassInstance = tom->GetInstance<Transform>(nativeInstanceId);
 	return MonoMarshall::GetManagedQuaternion(nativeClassInstance->m_rotation);
 }
 
 void GPro::TransformAPI::Set_rotation(int managedInstanceId, MonoObject* value)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Transform* nativeClassInstance = tom->GetInstance<Transform>(managedInstanceId);
+	Transform* nativeClassInstance = tom->GetInstance<Transform>(nativeInstanceId);
 	nativeClassInstance->m_rotation = MonoMarshall::GetQuaternion(value);
 }
 

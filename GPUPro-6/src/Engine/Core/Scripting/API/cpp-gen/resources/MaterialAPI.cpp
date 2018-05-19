@@ -3,6 +3,7 @@
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/ResourceTypes/Material.h"
 
+#include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 #include "Engine/Core/Scripting/MonoMarshallHelpers.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
@@ -16,22 +17,28 @@ void GPro::MaterialAPI::RegisterCalls()
 
 void GPro::MaterialAPI::SetShaderIndex(int managedInstanceId, int arg0)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(managedInstanceId);
+	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
 	nativeClassInstance->SetShaderIndex(arg0);
 }
 
 void GPro::MaterialAPI::RegisterShaderResource(int managedInstanceId, int arg0, int arg1)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(managedInstanceId);
+	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
 	nativeClassInstance->RegisterShaderResource(arg0, arg1);
 }
 
 void GPro::MaterialAPI::AddTextureSampler(int managedInstanceId, int arg0, int arg1)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(managedInstanceId);
+	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
 	nativeClassInstance->AddTextureSampler(arg0, arg1);
 }
 // ## Generated Code ##

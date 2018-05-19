@@ -74,7 +74,7 @@ class Program
         Light lightComponent = Entity::AddComponent<LightComponent>(lightEntity);
         lightComponent.Range = 250.0f;
         //------------------------------------------------------------------------------------
-
+/*
         //------------------------------------------------------------------------------------
         // MarchingSquares Testing
         Material marchingSquaresMaterial = TypedObjectManager.Create<Material>();
@@ -103,7 +103,7 @@ class Program
         quadRenderer.MaterialIndex = marchingSquaresMaterial.InstanceID;
         quadRenderer.DrawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>().ID();
         //------------------------------------------------------------------------------------
-
+*/
         //------------------------------------------------------------------------------------
         // Camera
         Entity cameraEntity = TypedObjectManager.Create<Entity>();

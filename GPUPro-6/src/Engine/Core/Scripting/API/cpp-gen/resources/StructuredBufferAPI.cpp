@@ -3,6 +3,7 @@
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/ResourceTypes/StructuredBuffer.h"
 
+#include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 #include "Engine/Core/Scripting/MonoMarshallHelpers.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
@@ -14,8 +15,10 @@ void GPro::StructuredBufferAPI::RegisterCalls()
 
 int GPro::StructuredBufferAPI::GetMyResourceViewID(int managedInstanceId)
 {
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	StructuredBuffer* nativeClassInstance = tom->GetInstance<StructuredBuffer>(managedInstanceId);
+	StructuredBuffer* nativeClassInstance = tom->GetInstance<StructuredBuffer>(nativeInstanceId);
 	return nativeClassInstance->GetMyResourceViewID();
 }
 // ## Generated Code ##

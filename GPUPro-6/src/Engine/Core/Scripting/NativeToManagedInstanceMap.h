@@ -23,7 +23,10 @@ class NativeToManagedInstanceMap
 public:
 	ManagedObject* GetManagedObject(TypeID nativeTypeId, InstanceID nativeObjectId);
 
+	InstanceID GetNativeInstanceID(InstanceID managedInstanceId);
+	InstanceID GetManagedInstanceID(TypeID nativeTypeId,  InstanceID nativeInstanceId);
 	ManagedTypeID GetManagedTypeID(TypeID nativeTypeId);
+
 	void CreateTypeMapping(TypeID nativeTypeId, ManagedTypeID managedTypeId);
 	void CreateInstanceMapping(TypeID nativeTypeId, NativeToManagedInstance instanceMapping);
 

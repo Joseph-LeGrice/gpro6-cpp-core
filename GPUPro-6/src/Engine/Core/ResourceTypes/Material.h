@@ -52,13 +52,11 @@ public:
 
     bool BindIfValid();
 
-	//void SetFloat4(std::string, Vector3);
+	//void SetFloat4(std::string, Vector4);
 	//void SetFloat3(std::string, Vector3);
-	//void SetFloat2(std::string, Vector3);
-	//void SetFloat(std::string, Vector3);
-	//void SetInteger(std::string, Vector3);
-	//void SetTexture(std::string, Vector3);
-	//void SetTextureSampler(std::string, Vector3);
+	//void SetFloat2(std::string, Vector2);
+	//void SetFloat(std::string, float);
+	//void SetInteger(std::string, int);
 
     void SetShaderIndex(int shaderIndex);
 	void RegisterShaderResource(int resourceIndex, int slotIndex);
