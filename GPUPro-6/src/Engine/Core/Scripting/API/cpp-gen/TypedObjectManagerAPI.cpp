@@ -9,12 +9,13 @@
 void GPro::TypedObjectManagerAPI::RegisterCalls()
 {
 	mono_add_internal_call("TypedObjectManager::Create", GPro::TypedObjectManagerAPI::Create);
+	mono_add_internal_call("TypedObjectManager::GetInstance", GPro::TypedObjectManagerAPI::GetInstance);
 }
 
 
 // ## Generated Code ##
 
-MonoObject* GPro::TypedObjectManagerAPI::Create(MonoString* arg0)
+extern MonoObject* GPro::TypedObjectManagerAPI::Create(MonoString* arg0)
 {
 	const char* nativeTypeId = mono_string_to_utf8(arg0);
 
@@ -27,5 +28,14 @@ MonoObject* GPro::TypedObjectManagerAPI::Create(MonoString* arg0)
 
 	mono_free((void*)nativeTypeId);
 
+	return managedObj->GetManagedObject();
+}
+
+extern MonoObject* GPro::TypedObjectManagerAPI::GetInstance(MonoString* arg0, int arg1)
+{
+	const char* nativeTypeId = mono_string_to_utf8(arg0);
+
+	NativeToManagedInstanceMap* n2m = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	ManagedObject* managedObj = n2m->GetManagedObject(nativeTypeId, arg1);
 	return managedObj->GetManagedObject();
 }

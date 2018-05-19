@@ -13,6 +13,8 @@ namespace GPro
 		extern void RegisterCalls();
 
 		extern MonoObject* Create(MonoString* arg0);
+
+		extern MonoObject* GetInstance(MonoString* arg0, int arg1);
 // ## Generated Code ##
 	};
 };
