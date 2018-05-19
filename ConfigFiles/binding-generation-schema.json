@@ -24,20 +24,19 @@
                 "title": "File Configuration",
                 "type": "object",
                 "required": [
-                    "nativeIncludePath",
-                    "nativeClassName",
-                    "managedClassName",
+                    "name",
+                    "subdirectory",
                     "methods",
                     "properties"
                 ],
                 "properties": {
-                    "nativeIncludePath": {
+                    "includePath": {
                         "type": "string"
                     },
-                    "nativeClassName": {
+                    "name": {
                         "type": "string"
                     },
-                    "managedClassName": {
+                    "subdirectory": {
                         "type": "string"
                     },
                     "methods": {
@@ -63,19 +62,43 @@
                                     "type": "string"
                                 },
                                 "returnType": {
-                                    "type": "string"
-                                },
-                                "args": {
-                                    "type":"string",
+                                    "type": "string",
                                     "enum": [
-                                        "object",
                                         "void",
+                                        "object",                                        
                                         "int",
                                         "float",
                                         "double",
                                         "char",
-                                        "string"
+                                        "string",
+                                        "array-string",
+                                        "vector4",
+                                        "vector3",
+                                        "vector2",
+                                        "matrix4x4",
+                                        "matrix3x3"
                                     ]
+                                },
+                                "args": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "enum": [
+                                            "void",
+                                            "object",
+                                            "int",
+                                            "float",
+                                            "double",
+                                            "char",
+                                            "string",
+                                            "array-string",
+                                            "vector4",
+                                            "vector3",
+                                            "vector2",
+                                            "matrix4x4",
+                                            "matrix3x3"
+                                        ]
+                                    }
                                 }
                             }
                         }
@@ -105,7 +128,21 @@
                                     "type": "string"
                                 },
                                 "returnType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "enum": [
+                                        "object",
+                                        "int",
+                                        "float",
+                                        "double",
+                                        "char",
+                                        "string",
+                                        "array-string",
+                                        "vector4",
+                                        "vector3",
+                                        "vector2",
+                                        "matrix4x4",
+                                        "matrix3x3"
+                                    ]
                                 }
                             }
                         }
