@@ -1,4 +1,4 @@
-struct Quaternion
+public struct Quaternion
 {
     float w;
     float x;

@@ -1,4 +1,4 @@
-struct Matrix4x4
+public struct Matrix4x4
 {
     float m11, m21, m31, m41;
     float m12, m22, m32, m42;

@@ -1,5 +1,4 @@
-
-struct Vector2
+public struct Vector2
 {
     float x;
     float y;

@@ -1,4 +1,4 @@
-struct Vector3
+public struct Vector3
 {
     float x;
     float y;

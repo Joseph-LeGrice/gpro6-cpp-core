@@ -1,4 +1,4 @@
-struct Vector4
+public struct Vector4
 {
     float x;
     float y;
