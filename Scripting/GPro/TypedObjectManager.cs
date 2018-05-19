@@ -17,9 +17,9 @@ public class TypedObjectManager : ITypedObject
 		return (T)Create(typeId);
 	}
 
-	public static T GetInstance<T>()
+	public static T GetInstance<T>(int instanceId)
 	{
 		string typeId = typeof(T).Name;
-		return (T)GetInstance(typeId);
+		return (T)GetInstance(typeId, instanceId);
 	}
 }

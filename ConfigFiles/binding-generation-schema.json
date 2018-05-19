@@ -24,19 +24,20 @@
                 "title": "File Configuration",
                 "type": "object",
                 "required": [
-                    "name",
-                    "subdirectory",
+                    "nativeIncludePath",
+                    "nativeClassName",
+                    "managedClassName",
                     "methods",
                     "properties"
                 ],
                 "properties": {
-                    "includePath": {
+                    "nativeIncludePath": {
                         "type": "string"
                     },
-                    "name": {
+                    "nativeClassName": {
                         "type": "string"
                     },
-                    "subdirectory": {
+                    "managedClassName": {
                         "type": "string"
                     },
                     "methods": {
@@ -76,7 +77,8 @@
                                         "vector3",
                                         "vector2",
                                         "matrix4x4",
-                                        "matrix3x3"
+                                        "matrix3x3",
+                                        "quaternion"
                                     ]
                                 },
                                 "args": {
@@ -96,7 +98,8 @@
                                             "vector3",
                                             "vector2",
                                             "matrix4x4",
-                                            "matrix3x3"
+                                            "matrix3x3",
+                                            "quaternion"
                                         ]
                                     }
                                 }
@@ -141,7 +144,8 @@
                                         "vector3",
                                         "vector2",
                                         "matrix4x4",
-                                        "matrix3x3"
+                                        "matrix3x3",
+                                        "quaternion"
                                     ]
                                 }
                             }

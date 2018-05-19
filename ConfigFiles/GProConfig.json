@@ -64,33 +64,8 @@
       "properties": []
     },
     {
-      "includePath": "Engine/Core/ResourceTypes/Material/StandardMaterial.hpp",
-      "name": "StandardMaterial",
-      "subdirectory": "resources",
-      "methods": [
-        {
-          "methodType": "instance",
-          "name": "SetShaderIndex",
-          "returnType": "void",
-          "args": [
-            "int"
-          ]
-        },
-        {
-          "methodType": "instance",
-          "name": "RegisterShaderResource",
-          "returnType": "void",
-          "args": [
-            "int",
-            "int"
-          ]
-        }
-      ],
-      "properties": []
-    },
-    {
-      "includePath": "Engine/Core/ResourceTypes/Material/SimpleMaterial.h",
-      "name": "SimpleMaterial",
+      "includePath": "Engine/Core/ResourceTypes/Material.h",
+      "name": "Material",
       "subdirectory": "resources",
       "methods": [
         {
@@ -185,7 +160,15 @@
       "subdirectory": "components",
       "includePath": "Engine/Core/Components/Light.h",
       "methods": [],
-      "properties": []
+      "properties": [
+        {
+          "getter": true,
+          "setter": true,
+          "name": "Range",
+          "nativeName": "m_range",
+          "returnType": "float"
+        }
+      ]
     },
     {
       "name": "MeshRenderer",
@@ -221,7 +204,29 @@
       "subdirectory": "components",
       "includePath": "Engine/Core/Components/Transform.h",
       "methods": [],
-      "properties": []
+      "properties": [
+        {
+          "getter": true,
+          "setter": true,
+          "name": "position",
+          "nativeName": "m_position",
+          "returnType": "vector3"
+        },
+        {
+          "getter": true,
+          "setter": true,
+          "name": "scale",
+          "nativeName": "m_scale",
+          "returnType": "vector3"
+        },
+        {
+          "getter": true,
+          "setter": true,
+          "name": "rotation",
+          "nativeName": "m_rotation",
+          "returnType": "quaternion"
+        }
+      ]
     },
     {
       "name": "Entity",
