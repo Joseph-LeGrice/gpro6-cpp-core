@@ -105,6 +105,70 @@
             "int",
             "int"
           ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetInteger",
+          "returnType": "void",
+          "args": [
+            "string", "int"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetBoolean",
+          "returnType": "void",
+          "args": [
+            "string", "bool"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetFloat",
+          "returnType": "void",
+          "args": [
+            "string", "float"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetFloat2",
+          "returnType": "void",
+          "args": [
+            "string", "vector2"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetFloat3",
+          "returnType": "void",
+          "args": [
+            "string", "vector3"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetFloat4",
+          "returnType": "void",
+          "args": [
+            "string", "vector4"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetMatrix3x3",
+          "returnType": "void",
+          "args": [
+            "string", "matrix3x3"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetMatrix4x4",
+          "returnType": "void",
+          "args": [
+            "string", "matrix4x4"
+          ]
         }
       ],
       "properties": []
