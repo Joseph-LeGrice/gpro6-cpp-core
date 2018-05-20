@@ -22,8 +22,8 @@ ScriptedTypeMap* TypeNameMappings::GetMapObject(TypeID typeId)
 	return nullptr;
 }
 
-ITypedObject* TypeNameMappings::CreateType(TypeID typeId)
+ITypedObject* TypeNameMappings::CreateType(TypeID typeId, InstanceID nativeInstanceId)
 {
 	ScriptedTypeMap* mapping = GetMapObject(typeId);
-	return mapping->createCallback();
+	return mapping->createCallback(nativeInstanceId);
 }

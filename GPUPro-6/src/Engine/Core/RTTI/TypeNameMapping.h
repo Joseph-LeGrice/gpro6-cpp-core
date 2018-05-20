@@ -6,7 +6,7 @@
 
 class ITypedObject;
 
-typedef ITypedObject* (*CreateNativeObjectCallback)();
+typedef ITypedObject* (*CreateNativeObjectCallback)(InstanceID nativeInstanceId);
 
 struct ScriptedTypeMap
 {
@@ -23,7 +23,7 @@ template<typename T>
 friend static void RegisterManagedType(ManagedTypeID);
 
 public:
-	ITypedObject* CreateType(TypeID typeId);
+	ITypedObject* CreateType(TypeID typeId, InstanceID nativeInstanceId);
 	static TypeNameMappings& Instance();
 
 private:

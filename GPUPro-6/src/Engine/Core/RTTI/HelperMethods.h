@@ -7,17 +7,17 @@
 extern void RegisterAllTypes();
 
 template<class T>
-ITypedObject* CreateInstance()
+ITypedObject* CreateInstance(InstanceID nativeInstanceId)
 {
+	UNREFERENCED_PARAMETER(nativeInstanceId);
 	return new T();
 }
 
 template<class T>
-ITypedObject* CreateManagedInstance()
+ITypedObject* CreateManagedInstance(InstanceID nativeInstanceId)
 {
 	T* obj = new T();
 	TypeID nativeTypeId = T::GetTypeID();
-	InstanceID nativeInstanceId = obj->GetInstanceID();
 
 	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
