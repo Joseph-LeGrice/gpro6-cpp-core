@@ -16,7 +16,7 @@ void GPro::StructuredBufferAPI::RegisterCalls()
 int GPro::StructuredBufferAPI::GetMyResourceViewID(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(StructuredBuffer::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	StructuredBuffer* nativeClassInstance = tom->GetInstance<StructuredBuffer>(nativeInstanceId);
 	return nativeClassInstance->GetMyResourceViewID();

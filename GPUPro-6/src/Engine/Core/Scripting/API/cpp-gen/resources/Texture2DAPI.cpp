@@ -18,7 +18,7 @@ void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString*
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Texture2D::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Texture2D* nativeClassInstance = tom->GetInstance<Texture2D>(nativeInstanceId);
 	nativeClassInstance->InitializeWithBitmap(arg0_marshalled);
@@ -27,7 +27,7 @@ void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString*
 int GPro::Texture2DAPI::GetResourceViewID(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Texture2D::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Texture2D* nativeClassInstance = tom->GetInstance<Texture2D>(nativeInstanceId);
 	return nativeClassInstance->GetResourceViewID();

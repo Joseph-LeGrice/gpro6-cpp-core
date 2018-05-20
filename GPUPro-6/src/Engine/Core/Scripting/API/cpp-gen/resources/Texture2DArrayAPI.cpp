@@ -18,7 +18,7 @@ void GPro::Texture2DArrayAPI::InitializeWithBitmaps(int managedInstanceId, MonoA
 {
 	std::vector<std::wstring> arg0_marshalled = MonoMarshall::GetStringVector(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Texture2DArray::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Texture2DArray* nativeClassInstance = tom->GetInstance<Texture2DArray>(nativeInstanceId);
 	nativeClassInstance->InitializeWithBitmaps(arg0_marshalled);
@@ -27,7 +27,7 @@ void GPro::Texture2DArrayAPI::InitializeWithBitmaps(int managedInstanceId, MonoA
 int GPro::Texture2DArrayAPI::GetResourceViewID(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Texture2DArray::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Texture2DArray* nativeClassInstance = tom->GetInstance<Texture2DArray>(nativeInstanceId);
 	return nativeClassInstance->GetResourceViewID();

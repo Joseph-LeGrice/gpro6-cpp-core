@@ -17,7 +17,7 @@ void GPro::LightAPI::RegisterCalls()
 float GPro::LightAPI::Get_Range(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Light::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Light* nativeClassInstance = tom->GetInstance<Light>(nativeInstanceId);
 	return nativeClassInstance->m_range;
@@ -26,7 +26,7 @@ float GPro::LightAPI::Get_Range(int managedInstanceId)
 void GPro::LightAPI::Set_Range(int managedInstanceId, float value)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Light::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Light* nativeClassInstance = tom->GetInstance<Light>(nativeInstanceId);
 	nativeClassInstance->m_range = value;

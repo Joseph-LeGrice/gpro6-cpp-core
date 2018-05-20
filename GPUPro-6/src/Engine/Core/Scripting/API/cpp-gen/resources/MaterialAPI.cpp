@@ -18,7 +18,7 @@ void GPro::MaterialAPI::RegisterCalls()
 void GPro::MaterialAPI::SetShaderIndex(int managedInstanceId, int arg0)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
 	nativeClassInstance->SetShaderIndex(arg0);
@@ -27,7 +27,7 @@ void GPro::MaterialAPI::SetShaderIndex(int managedInstanceId, int arg0)
 void GPro::MaterialAPI::RegisterShaderResource(int managedInstanceId, int arg0, int arg1)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
 	nativeClassInstance->RegisterShaderResource(arg0, arg1);
@@ -36,7 +36,7 @@ void GPro::MaterialAPI::RegisterShaderResource(int managedInstanceId, int arg0, 
 void GPro::MaterialAPI::AddTextureSampler(int managedInstanceId, int arg0, int arg1)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(managedInstanceId);
+	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
 	nativeClassInstance->AddTextureSampler(arg0, arg1);
