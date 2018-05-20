@@ -22,9 +22,6 @@ struct Vector3
     static Vector3 Cross(const Vector3& a, const Vector3& b);
     static Vector3 Lerp(const Vector3& a, const Vector3& b, float time);
 
-    Vector3() : X(0), Y(0), Z(0) { }
-    Vector3(float x, float y, float z) : X(x), Y(y), Z(z) { }
-
     void Normalize();
     float Magnitude() const;
 

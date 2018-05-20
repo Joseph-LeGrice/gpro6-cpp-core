@@ -24,13 +24,5 @@ void StandardTransparentMaterialDrawCommand::PreDrawAll()
 bool StandardTransparentMaterialDrawCommand::BindMaterial(MeshRenderer& mrc)
 {
     Material* mat = m_typedObjectManager.GetInstance<Material>(mrc.m_materialIndex);
-    if (mat->BindIfValid())
-    {
-        m_constantBuffer.UpdateBuffer(mat->GetData(), mat->GetDataLength());
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+	return mat->BindIfValid(&m_constantBuffer);
 }

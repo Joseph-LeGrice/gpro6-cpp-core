@@ -2,7 +2,7 @@
 #include "Noise.h"
 
 #include <math.h>
-
+/*
 namespace Noise
 {
     const int c_perlinHashMask = 255;
@@ -351,4 +351,27 @@ namespace Noise
         }
         return sum / range;
     }
+}
+*/
+
+float Noise::FractalNoise(Vector3 point, float baseFrequency, NoiseFuncConfig octaveFunction, int numOctaves, float lacunarity, float persistence)
+{
+	UNREFERENCED_PARAMETER(point);
+	UNREFERENCED_PARAMETER(baseFrequency);
+	UNREFERENCED_PARAMETER(octaveFunction);
+	UNREFERENCED_PARAMETER(numOctaves);
+	UNREFERENCED_PARAMETER(lacunarity);
+	UNREFERENCED_PARAMETER(persistence);
+	throw "TODO: Re-Implement me";
+}
+
+float Noise::FractalNoise(Vector3 point, float baseFrequency, NoiseFuncConfig octaveFunctions[], int numOctaves, float lacunarity, float persistence)
+{
+	UNREFERENCED_PARAMETER(point);
+	UNREFERENCED_PARAMETER(baseFrequency);
+	UNREFERENCED_PARAMETER(octaveFunctions);
+	UNREFERENCED_PARAMETER(numOctaves);
+	UNREFERENCED_PARAMETER(lacunarity);
+	UNREFERENCED_PARAMETER(persistence);
+	throw "TODO: Re-Implement me";
 }

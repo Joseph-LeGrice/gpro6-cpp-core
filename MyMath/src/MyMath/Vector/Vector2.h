@@ -10,9 +10,6 @@ struct Vector2
 
     void Normalize();
     float Magnitude() const;
-
-    Vector2() : X(0), Y(0) { }
-    Vector2(float x, float y) : X(x), Y(y) { }
 };
 
 Vector2 operator+(const Vector2& lhs, const Vector2& rhs);

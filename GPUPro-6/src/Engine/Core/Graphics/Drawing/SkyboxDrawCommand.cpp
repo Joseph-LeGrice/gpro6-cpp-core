@@ -17,5 +17,5 @@ void SkyboxDrawCommand::PreDrawAll()
 bool SkyboxDrawCommand::BindMaterial(MeshRenderer& mrc)
 {
     Material* mat = m_typedObjectManager.GetInstance<Material>(mrc.m_materialIndex);
-    return mat->BindIfValid();
+    return mat->BindIfValid(nullptr);
 }

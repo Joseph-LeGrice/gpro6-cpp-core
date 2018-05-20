@@ -7,7 +7,12 @@
 
 Vector3::operator Vector4()
 {
-    return Vector4(X, Y, Z, 0);
+	Vector4 v;
+	v.X = X;
+	v.Y = Y;
+	v.Z = Z;
+	v.W = 0;
+	return v;
 }
 
 Vector3::operator std::string()

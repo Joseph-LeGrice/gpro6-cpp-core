@@ -16,5 +16,5 @@ public:
 	}
 
 private:
-	InstanceID m_instanceId = -1;
+	InstanceID m_instanceId = InvalidInstanceID;
 };

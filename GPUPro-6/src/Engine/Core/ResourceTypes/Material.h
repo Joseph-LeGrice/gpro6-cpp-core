@@ -1,7 +1,9 @@
 #pragma once
 
 #include <vector>
+
 #include "Engine/Core/RTTI/ITypedObject.h"
+#include "Engine/Core/DataStructures/MaterialPropertyList.h"
 
 //struct MATERIAL_BUFFER
 //{
@@ -37,33 +39,35 @@
 //	MATERIAL_BUFFER buf;
 //};
 
+class ConstantBuffer;
+
 class Material : public ITypedObject
 {
 REGISTER_TYPE(Material);
 public:
-    struct ResourceDetails
-    {
-        int m_resourceIndex;
-        int m_slotIndex;
-    };
+	bool BindIfValid(ConstantBuffer* buffer);
 
-    void* GetData();
-	size_t GetDataLength();
-
-    bool BindIfValid();
-
-	//void SetFloat4(std::string, Vector4);
-	//void SetFloat3(std::string, Vector3);
-	//void SetFloat2(std::string, Vector2);
-	//void SetFloat(std::string, float);
-	//void SetInteger(std::string, int);
+	void SetInteger(std::wstring name, int value);
+	void SetFloat(std::wstring name, float value);
+	void SetFloat2(std::wstring name, Vector2 value);
+	void SetFloat3(std::wstring name, Vector3 value);
+	void SetFloat4(std::wstring name, Vector4 value);
+	void SetMatrix3x3(std::wstring name, Matrix3x3 value);
+	void SetMatrix4x4(std::wstring name, Matrix4x4 value);
 
     void SetShaderIndex(int shaderIndex);
 	void RegisterShaderResource(int resourceIndex, int slotIndex);
 	void AddTextureSampler(int resourceIndex, int slotIndex);
 
 private:
+	struct ResourceDetails
+	{
+		int m_resourceIndex;
+		int m_slotIndex;
+	};
+
     int m_shaderIndex = -1;
-    std::vector<ResourceDetails> m_shaderResources;
+	MaterialPropertyList m_properties;
+	std::vector<ResourceDetails> m_shaderResources;
 	std::vector<ResourceDetails> m_textureSamplerIndexes;
 };
