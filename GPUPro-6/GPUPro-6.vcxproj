@@ -109,6 +109,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,7 +136,7 @@
       </AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -162,6 +163,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -191,6 +193,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -212,6 +215,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\DataStructures\MaterialPropertyList.cpp" />
     <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp" />
@@ -267,6 +271,7 @@
     <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraphManager.cpp" />
     <ClCompile Include="src\Engine\Core\SystemManagement\SystemContainer.cpp" />
+    <ClCompile Include="src\Engine\Core\Utilities\HeapAllocation.cpp" />
     <ClCompile Include="src\Engine\Extra\Locomotion\NoClipLocomotion.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Input\InputSystem.cpp" />
@@ -291,6 +296,7 @@
     <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Core\DataStructures\MaterialPropertyList.h" />
     <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h" />
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
@@ -353,6 +359,7 @@
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.hpp" />
     <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphManager.h" />
     <ClInclude Include="src\Engine\Core\SystemManagement\SystemContainer.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\HeapAllocation.h" />
     <ClInclude Include="src\Engine\di.hpp" />
     <ClInclude Include="src\Engine\Extra\Locomotion\NoClipLocomotion.h" />
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsSystem.h" />

@@ -139,6 +139,7 @@
     <ClCompile Include="src\Engine\Core\ResourceTypes\Material.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Utilities\HeapAllocation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -324,6 +325,7 @@
       <Filter>Engine\Core\Graphics\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\HeapAllocation.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
