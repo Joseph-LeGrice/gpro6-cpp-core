@@ -86,6 +86,16 @@ void MaterialPropertyList::SetInteger(std::wstring name, int value)
 	}
 }
 
+
+void MaterialPropertyList::SetBoolean(std::wstring name, bool value)
+{
+	Property* p = GetProperty(name);
+	if (p != nullptr && p->m_valueType == kBooleanProperty)
+	{
+		p->m_value.booleanValue = value;
+	}
+}
+
 void MaterialPropertyList::SetFloat(std::wstring name, float value)
 {
 	Property* p = GetProperty(name);

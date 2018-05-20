@@ -48,6 +48,7 @@ public:
 	bool BindIfValid(ConstantBuffer* buffer);
 
 	void SetInteger(std::wstring name, int value);
+	void SetBoolean(std::wstring name, bool value);
 	void SetFloat(std::wstring name, float value);
 	void SetFloat2(std::wstring name, Vector2 value);
 	void SetFloat3(std::wstring name, Vector3 value);
