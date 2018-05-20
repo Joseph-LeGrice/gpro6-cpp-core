@@ -29,5 +29,77 @@ public class Material : ITypedObject
 		AddTextureSampler(InstanceID, arg0, arg1);
 	}
 
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void SetInteger(int instanceid, string arg0, int arg1);
+
+	public void SetInteger(string arg0, int arg1)
+	{
+		SetInteger(InstanceID, arg0, arg1);
+	}
+
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void SetBoolean(int instanceid, string arg0, bool arg1);
+
+	public void SetBoolean(string arg0, bool arg1)
+	{
+		SetBoolean(InstanceID, arg0, arg1);
+	}
+
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void SetFloat(int instanceid, string arg0, float arg1);
+
+	public void SetFloat(string arg0, float arg1)
+	{
+		SetFloat(InstanceID, arg0, arg1);
+	}
+
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void SetFloat2(int instanceid, string arg0, Vector2 arg1);
+
+	public void SetFloat2(string arg0, Vector2 arg1)
+	{
+		SetFloat2(InstanceID, arg0, arg1);
+	}
+
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void SetFloat3(int instanceid, string arg0, Vector3 arg1);
+
+	public void SetFloat3(string arg0, Vector3 arg1)
+	{
+		SetFloat3(InstanceID, arg0, arg1);
+	}
+
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void SetFloat4(int instanceid, string arg0, Vector4 arg1);
+
+	public void SetFloat4(string arg0, Vector4 arg1)
+	{
+		SetFloat4(InstanceID, arg0, arg1);
+	}
+
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void SetMatrix3x3(int instanceid, string arg0, Matrix3x3 arg1);
+
+	public void SetMatrix3x3(string arg0, Matrix3x3 arg1)
+	{
+		SetMatrix3x3(InstanceID, arg0, arg1);
+	}
+
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void SetMatrix4x4(int instanceid, string arg0, Matrix4x4 arg1);
+
+	public void SetMatrix4x4(string arg0, Matrix4x4 arg1)
+	{
+		SetMatrix4x4(InstanceID, arg0, arg1);
+	}
+
 // ## Generated Code ##
 }
