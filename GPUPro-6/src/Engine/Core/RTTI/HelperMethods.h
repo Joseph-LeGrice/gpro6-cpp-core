@@ -24,7 +24,8 @@ ITypedObject* CreateManagedInstance(InstanceID nativeInstanceId)
 	
 	ManagedTypeID managedTypeId = ntmip->GetManagedTypeID(nativeTypeId);
 	ManagedObject* mo = ssl->CreateObject(managedTypeId);
-	mo->SetFieldValue("m_instanceId", &nativeInstanceId);
+	InstanceID managedInstanceId = mo->GetInstanceID();
+	mo->SetFieldValue("m_instanceId", &managedInstanceId);
 
 	NativeToManagedInstance ntmi(nativeInstanceId, mo->GetInstanceID());
 	ntmip->CreateInstanceMapping(nativeTypeId, ntmi);
