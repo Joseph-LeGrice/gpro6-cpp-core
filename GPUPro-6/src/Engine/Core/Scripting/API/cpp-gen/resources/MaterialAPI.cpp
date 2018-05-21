@@ -80,58 +80,53 @@ void GPro::MaterialAPI::SetFloat(int managedInstanceId, MonoString* arg0, float 
 	nativeClassInstance->SetFloat(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetFloat2(int managedInstanceId, MonoString* arg0, MonoObject* arg1)
+void GPro::MaterialAPI::SetFloat2(int managedInstanceId, MonoString* arg0, Vector2 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	Vector2 arg1_marshalled = MonoMarshall::GetVector2(arg1);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
-	nativeClassInstance->SetFloat2(arg0_marshalled, arg1_marshalled);
+	nativeClassInstance->SetFloat2(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetFloat3(int managedInstanceId, MonoString* arg0, MonoObject* arg1)
+void GPro::MaterialAPI::SetFloat3(int managedInstanceId, MonoString* arg0, Vector3 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	Vector3 arg1_marshalled = MonoMarshall::GetVector3(arg1);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
-	nativeClassInstance->SetFloat3(arg0_marshalled, arg1_marshalled);
+	nativeClassInstance->SetFloat3(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetFloat4(int managedInstanceId, MonoString* arg0, MonoObject* arg1)
+void GPro::MaterialAPI::SetFloat4(int managedInstanceId, MonoString* arg0, Vector4 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	Vector4 arg1_marshalled = MonoMarshall::GetVector4(arg1);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
-	nativeClassInstance->SetFloat4(arg0_marshalled, arg1_marshalled);
+	nativeClassInstance->SetFloat4(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetMatrix3x3(int managedInstanceId, MonoString* arg0, MonoObject* arg1)
+void GPro::MaterialAPI::SetMatrix3x3(int managedInstanceId, MonoString* arg0, Matrix3x3 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	Matrix3x3 arg1_marshalled = MonoMarshall::GetMatrix3x3(arg1);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
-	nativeClassInstance->SetMatrix3x3(arg0_marshalled, arg1_marshalled);
+	nativeClassInstance->SetMatrix3x3(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetMatrix4x4(int managedInstanceId, MonoString* arg0, MonoObject* arg1)
+void GPro::MaterialAPI::SetMatrix4x4(int managedInstanceId, MonoString* arg0, Matrix4x4 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	Matrix4x4 arg1_marshalled = MonoMarshall::GetMatrix4x4(arg1);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
-	nativeClassInstance->SetMatrix4x4(arg0_marshalled, arg1_marshalled);
+	nativeClassInstance->SetMatrix4x4(arg0_marshalled, arg1);
 }
 // ## Generated Code ##

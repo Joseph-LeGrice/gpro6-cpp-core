@@ -12,14 +12,14 @@ namespace GPro
 // ## Generated Code ##
 		extern void RegisterCalls();
 
-		MonoObject* Get_position(int managedInstanceId);
-		void Set_position(int managedInstanceId, MonoObject* val);
+		Vector3 Get_position(int managedInstanceId);
+		void Set_position(int managedInstanceId, Vector3 val);
 
-		MonoObject* Get_scale(int managedInstanceId);
-		void Set_scale(int managedInstanceId, MonoObject* val);
+		Vector3 Get_scale(int managedInstanceId);
+		void Set_scale(int managedInstanceId, Vector3 val);
 
-		MonoObject* Get_rotation(int managedInstanceId);
-		void Set_rotation(int managedInstanceId, MonoObject* val);
+		Quaternion Get_rotation(int managedInstanceId);
+		void Set_rotation(int managedInstanceId, Quaternion val);
 // ## Generated Code ##
 	};
 };
