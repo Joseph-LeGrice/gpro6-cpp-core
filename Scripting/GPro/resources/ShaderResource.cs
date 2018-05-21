@@ -2,5 +2,11 @@ using System.Runtime.CompilerServices;
 
 public class ShaderResource : ITypedObject
 {
-// ## Generated Code ##// ## Generated Code ##
+// ## Generated Code ##
+	public static string GetTypeID()
+	{
+		return "ShaderResource";
+	}
+
+// ## Generated Code ##
 }

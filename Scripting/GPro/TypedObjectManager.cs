@@ -3,6 +3,12 @@ using System.Runtime.CompilerServices;
 public class TypedObjectManager : ITypedObject
 {
 // ## Generated Code ##
+	public static string GetTypeID()
+	{
+		return "TypedObjectManager";
+	}
+
+
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
 	public extern static System.Object Create(string arg0);
 

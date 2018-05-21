@@ -1,8 +1,14 @@
 using System.Runtime.CompilerServices;
 
-public class MeshRenderer : ITypedObject
+public class MeshRenderer : IComponent
 {
 // ## Generated Code ##
+	public static string GetTypeID()
+	{
+		return "MeshRenderer";
+	}
+
+
 	[MethodImpl(MethodImplOptions.InternalCall)]
 	private extern int Get_MeshIndex(int instanceId);
 

@@ -1,6 +1,12 @@
 using System.Runtime.CompilerServices;
 
-public class Camera : ITypedObject
+public class Camera : IComponent
 {
-// ## Generated Code ##// ## Generated Code ##
+// ## Generated Code ##
+	public static string GetTypeID()
+	{
+		return "Camera";
+	}
+
+// ## Generated Code ##
 }

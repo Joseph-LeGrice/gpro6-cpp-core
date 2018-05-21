@@ -3,6 +3,12 @@ using System.Runtime.CompilerServices;
 public class Shader : ITypedObject
 {
 // ## Generated Code ##
+	public static string GetTypeID()
+	{
+		return "Shader";
+	}
+
+
 	[MethodImpl(MethodImplOptions.InternalCall)]
 	private extern static void InitVertexShader(int instanceid, string arg0, string arg1);
 

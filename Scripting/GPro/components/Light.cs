@@ -1,8 +1,14 @@
 using System.Runtime.CompilerServices;
 
-public class Light : ITypedObject
+public class Light : IComponent
 {
 // ## Generated Code ##
+	public static string GetTypeID()
+	{
+		return "Light";
+	}
+
+
 	[MethodImpl(MethodImplOptions.InternalCall)]
 	private extern float Get_Range(int instanceId);
 

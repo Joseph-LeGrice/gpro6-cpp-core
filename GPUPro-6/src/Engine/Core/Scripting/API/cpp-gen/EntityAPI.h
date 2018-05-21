@@ -11,6 +11,12 @@ namespace GPro
 	{
 // ## Generated Code ##
 		extern void RegisterCalls();
+
+		extern MonoObject* AddComponentInternal(MonoString* arg0);
+
+		extern MonoObject* RemoveComponentInternal(MonoString* arg0);
+
+		extern MonoObject* GetComponentInternal(MonoString* arg0);
 // ## Generated Code ##
 	};
 };

@@ -3,6 +3,12 @@ using System.Runtime.CompilerServices;
 public class Material : ITypedObject
 {
 // ## Generated Code ##
+	public static string GetTypeID()
+	{
+		return "Material";
+	}
+
+
 	[MethodImpl(MethodImplOptions.InternalCall)]
 	private extern static void SetShaderIndex(int instanceid, int arg0);
 

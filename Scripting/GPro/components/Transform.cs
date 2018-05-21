@@ -1,8 +1,14 @@
 using System.Runtime.CompilerServices;
 
-public class Transform : ITypedObject
+public class Transform : IComponent
 {
 // ## Generated Code ##
+	public static string GetTypeID()
+	{
+		return "Transform";
+	}
+
+
 	[MethodImpl(MethodImplOptions.InternalCall)]
 	private extern Vector3 Get_position(int instanceId);
 
