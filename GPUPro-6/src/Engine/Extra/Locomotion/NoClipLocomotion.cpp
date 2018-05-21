@@ -26,7 +26,7 @@ void NoClipLocomotion::VariableTick()
         return;
     }
 
-    Transform* playerTransform = player->GetComponent<Transform>(m_typedObjectManager);
+    Transform* playerTransform = player->GetComponent<Transform>();
     if (playerTransform == nullptr)
     {
         return;

@@ -33,45 +33,40 @@ class Program
 
         //------------------------------------------------------------------------------------
         Material simpleTestMaterial = TypedObjectManager.Create<Material>();
-        int simpleTestMaterialID = simpleTestMaterial.InstanceID;
         simpleTestMaterial.SetShaderIndex(materialShader.InstanceID);
         simpleTestMaterial.RegisterShaderResource(testImageTexture.GetResourceViewID(), 1 );
         // simpleTestMaterial.RegisterShaderResource(lightBuffer.GetMyResourceViewID(), 0);
         simpleTestMaterial.AddTextureSampler(textureSampler.InstanceID, 0);
 
-        MATERIAL_BUFFER mat;
-        mat.DiffuseColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        mat.SpecularColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        mat.SpecularPower = 10.0f;
-        mat.HasDiffuseTexture = TRUE;
-        MATERIAL_BUFFER_CONTAINER buf = new MATERIAL_BUFFER(mat);
-        simpleTestMaterial.SetData(buf);
+        simpleTestMaterial.SetFloat4("DiffuseColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+        simpleTestMaterial.SetFloat4("SpecularColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+        simpleTestMaterial.SetFloat("SpecularPower", 10.0f);
+        simpleTestMaterial.SetBoolean("HasDiffuseTexture", true);
         //------------------------------------------------------------------------------------
 		
         //------------------------------------------------------------------------------------
         // Ball Object
-        Mesh sphereMesh = MeshHelper::CreateSphereUV();
+        Mesh sphereMesh = MeshHelper.CreateSphereUV();
         int sphereMeshID = sphereMesh.InstanceID;
 
 		Entity sphereEntity = TypedObjectManager.Create<Entity>();
-        Transform sphereTransform = Entity::AddComponent<Transform>(sphereEntity);
-        // int sphereTransformIndex = sphereTransform.m_componentIndex;
-        //sphereTransform.rotation = Quaternion::FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+        Transform sphereTransform = sphereEntity.AddComponent<Transform>();
+        //sphereTransform.rotation = Quaternion.FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
         sphereTransform.position = new Vector3(50.0f, 1.0f, 1.0f);
         sphereTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
         sphereTransform.scale *= 10.0f;
-        MeshRenderer sphereRenderer = Entity::AddComponent<MeshRenderer>(sphereEntity);
+        MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();
         sphereRenderer.MeshIndex = sphereMeshID;
         sphereRenderer.DrawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>().ID();
-        sphereRenderer.MaterialIndex = simpleTestMaterialID;
+        sphereRenderer.MaterialIndex = simpleTestMaterial.InstanceID;
         //------------------------------------------------------------------------------------
         
         //------------------------------------------------------------------------------------
         // Light
         Entity lightEntity = TypedObjectManager.Create<Entity>();
-        Transform lightTransform = Entity::AddComponent<Transform>(lightEntity);
+        Transform lightTransform = lightEntity.AddComponent<Transform>();
         lightTransform.position = new Vector3(50.0f, 0.0f, 0.0f);
-        Light lightComponent = Entity::AddComponent<LightComponent>(lightEntity);
+        Light lightComponent = lightEntity.AddComponent<LightComponent>();
         lightComponent.Range = 250.0f;
         //------------------------------------------------------------------------------------
 /*
@@ -93,12 +88,12 @@ class Program
 
 		VoxelTerrain vt = new VoxelTerrain();
 		
-        Mesh marching_mesh = MarchingSquares2D::CreateMesh(2.5f, 64);
+        Mesh marching_mesh = MarchingSquares2D.CreateMesh(2.5f, 64);
 
         Entity quadEntity = TypedObjectManager.Create<Entity>();
-        Transform quadTransform = Entity::AddComponent<Transform>(quadEntity);
-        quadTransform.scale = 5 * Vector3::One();
-        MeshRenderer quadRenderer = Entity::AddComponent<MeshRenderer>(quadEntity);
+        Transform quadTransform = Entity.AddComponent<Transform>(quadEntity);
+        quadTransform.scale = 5 * Vector3.One();
+        MeshRenderer quadRenderer = Entity.AddComponent<MeshRenderer>(quadEntity);
         quadRenderer.MeshIndex = vt.GetMeshID(); //marching_mesh.InstanceID;
         quadRenderer.MaterialIndex = marchingSquaresMaterial.InstanceID;
         quadRenderer.DrawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>().ID();
@@ -107,11 +102,9 @@ class Program
         //------------------------------------------------------------------------------------
         // Camera
         Entity cameraEntity = TypedObjectManager.Create<Entity>();
-        // int cameraEntityId = cameraEntity.m_componentIndex;
-        Transform cameraTransform = Entity::AddComponent<Transform>(cameraEntity);
-        // int cameraTransformId = cameraTransform.m_componentIndex;
+        Transform cameraTransform = cameraEntity.AddComponent<Transform>();
         cameraTransform.position = new Vector3(0.0f, 0.0f, -15.0f);
-        Camera cameraComponent = Entity::AddComponent<CameraComponent>(cameraEntity);
+        Camera cameraComponent = cameraEntity.AddComponent<CameraComponent>();
         //------------------------------------------------------------------------------------
         
         //------------------------------------------------------------------------------------
@@ -137,7 +130,7 @@ class Program
         skyboxMat.RegisterShaderResource(testCubemap.GetResourceViewID(), 0);
 
         Entity skyboxEntity = TypedObjectManager.Create<Entity>();
-        MeshRenderer skyboxRenderer = Entity::AddComponent<MeshRenderer>(skyboxEntity);
+        MeshRenderer skyboxRenderer = skyboxEntity.AddComponent<MeshRenderer>();
         // skyboxRenderer.m_enabled = true;
         skyboxRenderer.MeshIndex = sphereMeshID;
         skyboxRenderer.DrawCommandIndex = GetCommandList().GetCommand<SkyboxDrawCommand>().ID();

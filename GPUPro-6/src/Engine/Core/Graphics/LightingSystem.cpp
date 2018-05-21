@@ -31,7 +31,7 @@ void LightingSystem::VariableTick()
     {
 		Light* light = allLights[i];
         Entity* lightEntity = m_typedObjectManager.GetInstance<Entity>(light->GetEntityIndex());
-        Transform* lightTransform = lightEntity->GetComponent<Transform>(m_typedObjectManager);
+        Transform* lightTransform = lightEntity->GetComponent<Transform>();
 
         lights[i].PositionWS = Vector4::FromVector3(lightTransform->m_position);
         lights[i].DirectionWS = { 0.0f, 0.0f, 0.0f, 0.0f };

@@ -37,7 +37,7 @@ void IDrawCommand::Draw(Matrix4x4 view, Matrix4x4 proj)
 
         if (mrc->m_drawCommandIndex == c_identifier && mrc->IsEnabled())
         {
-            Transform* modelTransform = meshEntity->GetComponent<Transform>(m_typedObjectManager);
+            Transform* modelTransform = meshEntity->GetComponent<Transform>();
 
             Matrix4x4 model;
             Matrix4x4::Identity(model);

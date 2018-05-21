@@ -1,8 +1,6 @@
 #pragma once
 #include "Engine/Core/RTTI/ITypedObject.h"
 
-typedef uint16_t ComponentTypeID;
-
 class IComponent : public ITypedObject
 {
 public:

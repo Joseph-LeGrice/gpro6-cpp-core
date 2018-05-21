@@ -260,7 +260,6 @@
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\RasterizerState.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceTypes\Mesh.cpp" />
-    <ClCompile Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceTypes\StructuredBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceTypes\Shader.cpp" />
@@ -334,18 +333,15 @@
     <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
     <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />
     <ClInclude Include="src\Engine\Core\Components\MeshRenderer.h" />
     <ClInclude Include="src\Engine\Core\DataStructures\Color.h" />
     <ClInclude Include="src\Engine\Core\Components\Camera.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Entity.h" />
     <ClInclude Include="src\Engine\Core\Components\Transform.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentArray.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\RasterizerState.h" />
     <ClInclude Include="src\Engine\Core\ResourceTypes\Mesh.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.h" />
     <ClInclude Include="src\Engine\Core\Graphics\VertexData.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.h" />

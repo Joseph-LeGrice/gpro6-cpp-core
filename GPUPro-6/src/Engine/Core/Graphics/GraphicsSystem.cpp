@@ -12,6 +12,7 @@
 #include "Engine/Core/WindowManagement/WindowManager.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 
 #include "FreeImage.h"
 
@@ -75,7 +76,7 @@ void GraphicsSystem::VariableTick()
 		Camera* cam = allCameras[cameraIndex];
 
         Entity* cameraEntity = m_typedObjectManager.GetInstance<Entity>(cam->GetEntityIndex());
-        Transform* cameraTransform = cameraEntity->GetComponent<Transform>(m_typedObjectManager);
+        Transform* cameraTransform = cameraEntity->GetComponent<Transform>();
 
 		Matrix4x4 view = cameraTransform->GetCameraViewMatrix();
 		Matrix4x4 proj = cam->m_projectionMatrix;

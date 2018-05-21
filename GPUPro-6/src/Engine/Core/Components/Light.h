@@ -26,8 +26,4 @@ REGISTER_TYPE(Light);
 		m_color = Color::White();
 		m_intensity = 1.0f;
 	}
-
-	static ComponentTypeID GetComponentType() {
-		return 3;
-	}
 };

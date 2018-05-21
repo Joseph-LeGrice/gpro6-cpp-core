@@ -26,11 +26,17 @@ public:
 	InstanceID GetNativeInstanceID(TypeID nativeTypeId, InstanceID managedInstanceId);
 	InstanceID GetManagedInstanceID(TypeID nativeTypeId,  InstanceID nativeInstanceId);
 	ManagedTypeID GetManagedTypeID(TypeID nativeTypeId);
+	TypeID GetNativeTypeID(ManagedTypeID managedTypeId);
 
 	void CreateTypeMapping(TypeID nativeTypeId, ManagedTypeID managedTypeId);
 	void CreateInstanceMapping(TypeID nativeTypeId, NativeToManagedInstance instanceMapping);
 
 private:
-	std::unordered_map<TypeID, ManagedTypeID> m_typeMapping;
+	struct TypeMapping
+	{
+		TypeID m_nativeTypeId;
+		ManagedTypeID m_managedTypeId;
+	};
+	std::vector<TypeMapping> m_typeMapping;
 	std::unordered_map<TypeID, std::vector<NativeToManagedInstance>> m_activeMappedInstances;
 };

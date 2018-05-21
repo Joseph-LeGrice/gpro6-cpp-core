@@ -51,12 +51,31 @@ InstanceID NativeToManagedInstanceMap::GetManagedInstanceID(TypeID nativeTypeId,
 
 ManagedTypeID NativeToManagedInstanceMap::GetManagedTypeID(TypeID nativeTypeId)
 {
-	return m_typeMapping[nativeTypeId];
+	for (int i = 0; i < m_typeMapping.size(); i++)
+	{
+		if (m_typeMapping[i].m_nativeTypeId == nativeTypeId)
+		{
+			return m_typeMapping[i].m_managedTypeId;
+		}
+	}
+	return nullptr;
+}
+
+TypeID NativeToManagedInstanceMap::GetNativeTypeID(ManagedTypeID managedTypeId)
+{
+	for (int i = 0; i < m_typeMapping.size(); i++)
+	{
+		if (m_typeMapping[i].m_managedTypeId == managedTypeId)
+		{
+			return m_typeMapping[i].m_nativeTypeId;
+		}
+	}
+	return nullptr;
 }
 
 void NativeToManagedInstanceMap::CreateTypeMapping(TypeID nativeTypeId, ManagedTypeID managedTypeId)
 {
-	m_typeMapping.insert({ nativeTypeId, managedTypeId });
+	m_typeMapping.push_back({ nativeTypeId, managedTypeId });
 }
 
 void NativeToManagedInstanceMap::CreateInstanceMapping(TypeID nativeTypeId, NativeToManagedInstance instanceMapping)

@@ -35,9 +35,6 @@
     <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp">
       <Filter>Engine\Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp">
       <Filter>Engine\Core\SceneGraph\Components</Filter>
     </ClCompile>
@@ -124,7 +121,6 @@
     <ClCompile Include="src\Engine\Core\Components\Transform.cpp">
       <Filter>Engine\Core\Graphics\Components</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\CameraAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\LightAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\MeshRendererAPI.cpp" />
@@ -141,6 +137,7 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\MaterialPropertyList.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities\HeapAllocation.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -183,15 +180,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Input\MouseInput.h">
       <Filter>Engine\Core\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentArray.hpp">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.h">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp">
-      <Filter>Engine\Core\SceneGraph\Components\Util</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Entity.h">
       <Filter>Engine\Core\SceneGraph\Components</Filter>
@@ -307,7 +295,6 @@
       <Filter>Engine\Core\Graphics\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
-    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\CameraAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\LightAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\MeshRendererAPI.h" />
@@ -328,6 +315,7 @@
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.h" />
     <ClInclude Include="src\Engine\Core\DataStructures\MaterialPropertyList.h" />
     <ClInclude Include="src\Engine\Core\Utilities\HeapAllocation.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

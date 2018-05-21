@@ -4,6 +4,15 @@
 #include "ScriptedSystemLoader.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 
+extern std::string MonoMarshall::GetUTF8String(MonoString* ms)
+{
+	std::stringstream ss;
+	char* monoString = mono_string_to_utf8_checked(ms, nullptr);
+	ss << monoString;
+	mono_free(static_cast<void*>(monoString));
+	return ss.str();
+}
+
 std::wstring MonoMarshall::GetUTF16String(MonoString* ms)
 {
 	mono_unichar2* pathStr = mono_string_to_utf16(ms);

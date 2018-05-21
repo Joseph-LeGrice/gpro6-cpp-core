@@ -317,7 +317,35 @@
       "name": "Entity",
       "subdirectory": "",
       "includePath": "Engine/Core/SceneGraph/Components/Entity.h",
-      "methods": [],
+      "methods": [
+        {
+          "methodType": "static",
+          "name": "AddComponentInternal",
+          "returnType": "object",
+          "args": [
+            "int",
+            "string"
+          ]
+        },
+        {
+          "methodType": "static",
+          "name": "RemoveComponentInternal",
+          "returnType": "void",
+          "args": [
+            "int",
+            "string"
+          ]
+        },
+        {
+          "methodType": "static",
+          "name": "GetComponentInternal",
+          "returnType": "object",
+          "args": [
+            "int",
+            "string"
+          ]
+        }
+      ],
       "properties": []
     },
     {

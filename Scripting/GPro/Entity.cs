@@ -10,33 +10,33 @@ public class Entity : ITypedObject
 
 
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
-	public extern static System.Object AddComponentInternal(string arg0);
+	public extern static System.Object AddComponentInternal(int arg0, string arg1);
 
 
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
-	public extern static System.Object RemoveComponentInternal(string arg0);
+	public extern static void RemoveComponentInternal(int arg0, string arg1);
 
 
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
-	public extern static System.Object GetComponentInternal(string arg0);
+	public extern static System.Object GetComponentInternal(int arg0, string arg1);
 
 // ## Generated Code ##
 
 	public T AddComponent<T>() where T : IComponent
 	{
 		string typeId = (string)typeof(T).GetMethod("GetTypeID").Invoke(null, new object[]{});
-		return (T)AddComponentInternal(typeId);
+		return (T)AddComponentInternal(InstanceID, typeId);
 	}
 
 	public void RemoveComponent<T>() where T : IComponent
 	{
 		string typeId = (string)typeof(T).GetMethod("GetTypeID").Invoke(null, new object[]{});
-		RemoveComponentInternal(typeId);
+		RemoveComponentInternal(InstanceID, typeId);
 	}
 
 	public T GetComponent<T>() where T : IComponent
 	{
 		string typeId = (string)typeof(T).GetMethod("GetTypeID").Invoke(null, new object[]{});
-		return (T)GetComponentInternal(typeId);
+		return (T)GetComponentInternal(InstanceID, typeId);
 	}
 }

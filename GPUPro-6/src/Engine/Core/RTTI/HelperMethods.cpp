@@ -31,10 +31,9 @@ void RegisterAllTypes()
 	RegisterManagedType<Material>("Material");
 	RegisterType<ManagedObject>();
 
-	RegisterType<Transform>();
-	RegisterType<Camera>();
-	RegisterType<MeshRenderer>();
-	RegisterType<Entity>();
-	RegisterType<Light>();
-
+	RegisterManagedType<Transform>("Transform");
+	RegisterManagedType<Camera>("Camera");
+	RegisterManagedType<MeshRenderer>("MeshRenderer");
+	RegisterManagedType<Entity>("Entity");
+	RegisterManagedType<Light>("Light");
 }

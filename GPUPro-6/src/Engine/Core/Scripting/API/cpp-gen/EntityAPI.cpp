@@ -6,6 +6,7 @@
 #include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 #include "Engine/Core/Scripting/MonoMarshallHelpers.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
+#include "Engine/Core/ResourceTypes/ManagedObject.h"
 
 // ## Generated Code ##
 void GPro::EntityAPI::RegisterCalls()
@@ -17,3 +18,50 @@ void GPro::EntityAPI::RegisterCalls()
 
 
 // ## Generated Code ##
+
+extern MonoObject* GPro::EntityAPI::AddComponentInternal(int arg0, MonoString* arg1)
+{
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	Entity* nativeEntityInstance = tom->GetInstance<Entity>(arg0);
+
+	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(arg1);
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	TypeID nativeComponentTypeId = ntmip->GetNativeTypeID(managedComponentTypeId);
+
+	IComponent* newComponentInstance = nativeEntityInstance->AddComponent(nativeComponentTypeId);
+	ManagedObject* managedComponent = ntmip->GetManagedObject(nativeComponentTypeId, newComponentInstance->GetInstanceID());
+	return managedComponent->GetManagedObject();
+}
+
+extern void GPro::EntityAPI::RemoveComponentInternal(int arg0, MonoString* arg1)
+{
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	Entity* nativeEntityInstance = tom->GetInstance<Entity>(arg0);
+
+	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(arg1);
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	TypeID nativeComponentTypeId = ntmip->GetNativeTypeID(managedComponentTypeId);
+
+	nativeEntityInstance->RemoveComponent(nativeComponentTypeId);
+}
+
+extern MonoObject* GPro::EntityAPI::GetComponentInternal(int arg0, MonoString* arg1)
+{
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	Entity* nativeEntityInstance = tom->GetInstance<Entity>(arg0);
+
+	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(arg1);
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	TypeID nativeComponentTypeId = ntmip->GetNativeTypeID(managedComponentTypeId);
+
+	IComponent* componentInstance = nativeEntityInstance->GetComponent(nativeComponentTypeId);
+	if (componentInstance != nullptr)
+	{
+		ManagedObject* managedComponent = ntmip->GetManagedObject(nativeComponentTypeId, componentInstance->GetInstanceID());
+		return managedComponent->GetManagedObject();
+	}
+	else
+	{
+		return nullptr;
+	}
+}
