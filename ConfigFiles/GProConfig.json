@@ -401,6 +401,22 @@
         }
       ],
       "properties": []
+    },
+    {
+      "name": "MeshHelper",
+      "subdirectory": "",
+      "methods": [
+        {
+          "methodType": "static",
+          "name": "CreateSphereUV_Internal",
+          "returnType": "object",
+          "args": [
+          ]
+        }
+      ],
+      "properties": [
+        
+      ]
     }
   ]
 }

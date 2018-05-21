@@ -16,6 +16,7 @@
 #include "TypedObjectManagerAPI.h"
 #include "ScriptedSystemInterfaceAPI.h"
 #include "LoggingAPI.h"
+#include "MeshHelperAPI.h"
 
 using namespace GPro;
 
@@ -37,4 +38,5 @@ void GPro::RegisterAllCalls()
 	TypedObjectManagerAPI::RegisterCalls();
 	ScriptedSystemInterfaceAPI::RegisterCalls();
 	LoggingAPI::RegisterCalls();
+	MeshHelperAPI::RegisterCalls();
 }

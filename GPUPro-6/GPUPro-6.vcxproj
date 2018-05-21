@@ -239,6 +239,7 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\MeshHelperAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MeshAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderAPI.cpp" />
@@ -319,6 +320,7 @@
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\MeshHelperAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MeshAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderAPI.h" />

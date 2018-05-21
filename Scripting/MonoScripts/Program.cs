@@ -57,7 +57,7 @@ class Program
         sphereTransform.scale *= 10.0f;
         MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();
         sphereRenderer.MeshIndex = sphereMeshID;
-        sphereRenderer.DrawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>().ID();
+        sphereRenderer.DrawCommandIndex = 1;
         sphereRenderer.MaterialIndex = simpleTestMaterial.InstanceID;
         //------------------------------------------------------------------------------------
         
@@ -66,7 +66,7 @@ class Program
         Entity lightEntity = TypedObjectManager.Create<Entity>();
         Transform lightTransform = lightEntity.AddComponent<Transform>();
         lightTransform.position = new Vector3(50.0f, 0.0f, 0.0f);
-        Light lightComponent = lightEntity.AddComponent<LightComponent>();
+        Light lightComponent = lightEntity.AddComponent<Light>();
         lightComponent.Range = 250.0f;
         //------------------------------------------------------------------------------------
 /*
@@ -96,7 +96,7 @@ class Program
         MeshRenderer quadRenderer = Entity.AddComponent<MeshRenderer>(quadEntity);
         quadRenderer.MeshIndex = vt.GetMeshID(); //marching_mesh.InstanceID;
         quadRenderer.MaterialIndex = marchingSquaresMaterial.InstanceID;
-        quadRenderer.DrawCommandIndex = GetCommandList().GetCommand<StandardOpaqueMaterialDrawCommand>().ID();
+        quadRenderer.DrawCommandIndex = 1;
         //------------------------------------------------------------------------------------
 */
         //------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ class Program
         Entity cameraEntity = TypedObjectManager.Create<Entity>();
         Transform cameraTransform = cameraEntity.AddComponent<Transform>();
         cameraTransform.position = new Vector3(0.0f, 0.0f, -15.0f);
-        Camera cameraComponent = cameraEntity.AddComponent<CameraComponent>();
+        Camera cameraComponent = cameraEntity.AddComponent<Camera>();
         //------------------------------------------------------------------------------------
         
         //------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ class Program
         MeshRenderer skyboxRenderer = skyboxEntity.AddComponent<MeshRenderer>();
         // skyboxRenderer.m_enabled = true;
         skyboxRenderer.MeshIndex = sphereMeshID;
-        skyboxRenderer.DrawCommandIndex = GetCommandList().GetCommand<SkyboxDrawCommand>().ID();
+        skyboxRenderer.DrawCommandIndex = 0;
         skyboxRenderer.MaterialIndex = skyboxMat.InstanceID;
         //------------------------------------------------------------------------------------
         
