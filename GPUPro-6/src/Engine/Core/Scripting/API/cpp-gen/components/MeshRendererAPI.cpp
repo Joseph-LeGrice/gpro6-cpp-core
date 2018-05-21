@@ -8,7 +8,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##
-void GPro::MeshRendererAPI::RegisterCalls()
+extern void GPro::MeshRendererAPI::RegisterCalls()
 {
 	mono_add_internal_call("MeshRenderer::Get_MeshIndex", GPro::MeshRendererAPI::Get_MeshIndex);
 	mono_add_internal_call("MeshRenderer::Set_MeshIndex", GPro::MeshRendererAPI::Set_MeshIndex);
@@ -18,7 +18,7 @@ void GPro::MeshRendererAPI::RegisterCalls()
 	mono_add_internal_call("MeshRenderer::Set_MaterialIndex", GPro::MeshRendererAPI::Set_MaterialIndex);
 }
 
-int GPro::MeshRendererAPI::Get_MeshIndex(int managedInstanceId)
+extern int GPro::MeshRendererAPI::Get_MeshIndex(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
@@ -27,7 +27,7 @@ int GPro::MeshRendererAPI::Get_MeshIndex(int managedInstanceId)
 	return nativeClassInstance->m_meshIndex;
 }
 
-void GPro::MeshRendererAPI::Set_MeshIndex(int managedInstanceId, int value)
+extern void GPro::MeshRendererAPI::Set_MeshIndex(int managedInstanceId, int value)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
@@ -36,7 +36,7 @@ void GPro::MeshRendererAPI::Set_MeshIndex(int managedInstanceId, int value)
 	nativeClassInstance->m_meshIndex = value;
 }
 
-int GPro::MeshRendererAPI::Get_DrawCommandIndex(int managedInstanceId)
+extern int GPro::MeshRendererAPI::Get_DrawCommandIndex(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
@@ -45,7 +45,7 @@ int GPro::MeshRendererAPI::Get_DrawCommandIndex(int managedInstanceId)
 	return nativeClassInstance->m_drawCommandIndex;
 }
 
-void GPro::MeshRendererAPI::Set_DrawCommandIndex(int managedInstanceId, int value)
+extern void GPro::MeshRendererAPI::Set_DrawCommandIndex(int managedInstanceId, int value)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
@@ -54,7 +54,7 @@ void GPro::MeshRendererAPI::Set_DrawCommandIndex(int managedInstanceId, int valu
 	nativeClassInstance->m_drawCommandIndex = value;
 }
 
-int GPro::MeshRendererAPI::Get_MaterialIndex(int managedInstanceId)
+extern int GPro::MeshRendererAPI::Get_MaterialIndex(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
@@ -63,7 +63,7 @@ int GPro::MeshRendererAPI::Get_MaterialIndex(int managedInstanceId)
 	return nativeClassInstance->m_materialIndex;
 }
 
-void GPro::MeshRendererAPI::Set_MaterialIndex(int managedInstanceId, int value)
+extern void GPro::MeshRendererAPI::Set_MaterialIndex(int managedInstanceId, int value)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);

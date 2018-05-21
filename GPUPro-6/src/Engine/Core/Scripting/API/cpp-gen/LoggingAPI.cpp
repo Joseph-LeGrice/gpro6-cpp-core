@@ -4,7 +4,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##
-void GPro::LoggingAPI::RegisterCalls()
+extern void GPro::LoggingAPI::RegisterCalls()
 {
 	mono_add_internal_call("Logging::LogMessage", GPro::LoggingAPI::LogMessage);
 }

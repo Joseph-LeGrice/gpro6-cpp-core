@@ -7,7 +7,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##
-void GPro::TextureSamplerAPI::RegisterCalls()
+extern void GPro::TextureSamplerAPI::RegisterCalls()
 {
 }
 // ## Generated Code ##

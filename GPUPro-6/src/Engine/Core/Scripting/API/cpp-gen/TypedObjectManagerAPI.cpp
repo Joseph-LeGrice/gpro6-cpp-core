@@ -6,7 +6,7 @@
 #include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 
 // ## Generated Code ##
-void GPro::TypedObjectManagerAPI::RegisterCalls()
+extern void GPro::TypedObjectManagerAPI::RegisterCalls()
 {
 	mono_add_internal_call("TypedObjectManager::Create", GPro::TypedObjectManagerAPI::Create);
 	mono_add_internal_call("TypedObjectManager::GetInstance", GPro::TypedObjectManagerAPI::GetInstance);

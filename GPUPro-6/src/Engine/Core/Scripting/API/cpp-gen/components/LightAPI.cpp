@@ -8,13 +8,13 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##
-void GPro::LightAPI::RegisterCalls()
+extern void GPro::LightAPI::RegisterCalls()
 {
 	mono_add_internal_call("Light::Get_Range", GPro::LightAPI::Get_Range);
 	mono_add_internal_call("Light::Set_Range", GPro::LightAPI::Set_Range);
 }
 
-float GPro::LightAPI::Get_Range(int managedInstanceId)
+extern float GPro::LightAPI::Get_Range(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Light::GetTypeID(), managedInstanceId);
@@ -23,7 +23,7 @@ float GPro::LightAPI::Get_Range(int managedInstanceId)
 	return nativeClassInstance->m_range;
 }
 
-void GPro::LightAPI::Set_Range(int managedInstanceId, float value)
+extern void GPro::LightAPI::Set_Range(int managedInstanceId, float value)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Light::GetTypeID(), managedInstanceId);

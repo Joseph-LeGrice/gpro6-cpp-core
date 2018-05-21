@@ -7,7 +7,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##
-void GPro::CameraAPI::RegisterCalls()
+extern void GPro::CameraAPI::RegisterCalls()
 {
 }
 // ## Generated Code ##

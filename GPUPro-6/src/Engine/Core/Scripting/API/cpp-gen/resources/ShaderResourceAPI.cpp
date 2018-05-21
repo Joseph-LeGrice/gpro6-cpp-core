@@ -7,7 +7,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##
-void GPro::ShaderResourceAPI::RegisterCalls()
+extern void GPro::ShaderResourceAPI::RegisterCalls()
 {
 }
 // ## Generated Code ##

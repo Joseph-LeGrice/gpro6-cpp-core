@@ -8,13 +8,13 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##
-void GPro::Texture2DAPI::RegisterCalls()
+extern void GPro::Texture2DAPI::RegisterCalls()
 {
 	mono_add_internal_call("Texture2D::InitializeWithBitmap(int,string)", GPro::Texture2DAPI::InitializeWithBitmap);
 	mono_add_internal_call("Texture2D::GetResourceViewID(int)", GPro::Texture2DAPI::GetResourceViewID);
 }
 
-void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString* arg0)
+extern void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString* arg0)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -24,7 +24,7 @@ void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString*
 	nativeClassInstance->InitializeWithBitmap(arg0_marshalled);
 }
 
-int GPro::Texture2DAPI::GetResourceViewID(int managedInstanceId)
+extern int GPro::Texture2DAPI::GetResourceViewID(int managedInstanceId)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Texture2D::GetTypeID(), managedInstanceId);

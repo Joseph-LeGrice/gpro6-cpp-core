@@ -9,7 +9,7 @@
 #include "Engine/Core/ResourceTypes/ManagedObject.h"
 
 // ## Generated Code ##
-void GPro::EntityAPI::RegisterCalls()
+extern void GPro::EntityAPI::RegisterCalls()
 {
 	mono_add_internal_call("Entity::AddComponentInternal", GPro::EntityAPI::AddComponentInternal);
 	mono_add_internal_call("Entity::RemoveComponentInternal", GPro::EntityAPI::RemoveComponentInternal);

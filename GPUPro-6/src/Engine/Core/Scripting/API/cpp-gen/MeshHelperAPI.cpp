@@ -9,7 +9,7 @@
 #include "Engine/Core/ResourceTypes/Mesh.h"
 
 // ## Generated Code ##
-void GPro::MeshHelperAPI::RegisterCalls()
+extern void GPro::MeshHelperAPI::RegisterCalls()
 {
 	mono_add_internal_call("MeshHelper::CreateSphereUV_Internal", GPro::MeshHelperAPI::CreateSphereUV_Internal);
 }

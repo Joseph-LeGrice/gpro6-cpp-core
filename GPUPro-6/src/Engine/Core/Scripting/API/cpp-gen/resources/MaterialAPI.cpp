@@ -8,7 +8,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 
 // ## Generated Code ##
-void GPro::MaterialAPI::RegisterCalls()
+extern void GPro::MaterialAPI::RegisterCalls()
 {
 	mono_add_internal_call("Material::SetShaderIndex(int,int)", GPro::MaterialAPI::SetShaderIndex);
 	mono_add_internal_call("Material::RegisterShaderResource(int,int,int)", GPro::MaterialAPI::RegisterShaderResource);
@@ -23,7 +23,7 @@ void GPro::MaterialAPI::RegisterCalls()
 	mono_add_internal_call("Material::SetMatrix4x4(int,string,Matrix4x4)", GPro::MaterialAPI::SetMatrix4x4);
 }
 
-void GPro::MaterialAPI::SetShaderIndex(int managedInstanceId, int arg0)
+extern void GPro::MaterialAPI::SetShaderIndex(int managedInstanceId, int arg0)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
@@ -32,7 +32,7 @@ void GPro::MaterialAPI::SetShaderIndex(int managedInstanceId, int arg0)
 	nativeClassInstance->SetShaderIndex(arg0);
 }
 
-void GPro::MaterialAPI::RegisterShaderResource(int managedInstanceId, int arg0, int arg1)
+extern void GPro::MaterialAPI::RegisterShaderResource(int managedInstanceId, int arg0, int arg1)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
@@ -41,7 +41,7 @@ void GPro::MaterialAPI::RegisterShaderResource(int managedInstanceId, int arg0, 
 	nativeClassInstance->RegisterShaderResource(arg0, arg1);
 }
 
-void GPro::MaterialAPI::AddTextureSampler(int managedInstanceId, int arg0, int arg1)
+extern void GPro::MaterialAPI::AddTextureSampler(int managedInstanceId, int arg0, int arg1)
 {
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
@@ -50,7 +50,7 @@ void GPro::MaterialAPI::AddTextureSampler(int managedInstanceId, int arg0, int a
 	nativeClassInstance->AddTextureSampler(arg0, arg1);
 }
 
-void GPro::MaterialAPI::SetInteger(int managedInstanceId, MonoString* arg0, int arg1)
+extern void GPro::MaterialAPI::SetInteger(int managedInstanceId, MonoString* arg0, int arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -60,7 +60,7 @@ void GPro::MaterialAPI::SetInteger(int managedInstanceId, MonoString* arg0, int 
 	nativeClassInstance->SetInteger(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetBoolean(int managedInstanceId, MonoString* arg0, bool arg1)
+extern void GPro::MaterialAPI::SetBoolean(int managedInstanceId, MonoString* arg0, bool arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -70,7 +70,7 @@ void GPro::MaterialAPI::SetBoolean(int managedInstanceId, MonoString* arg0, bool
 	nativeClassInstance->SetBoolean(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetFloat(int managedInstanceId, MonoString* arg0, float arg1)
+extern void GPro::MaterialAPI::SetFloat(int managedInstanceId, MonoString* arg0, float arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -80,7 +80,7 @@ void GPro::MaterialAPI::SetFloat(int managedInstanceId, MonoString* arg0, float 
 	nativeClassInstance->SetFloat(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetFloat2(int managedInstanceId, MonoString* arg0, Vector2 arg1)
+extern void GPro::MaterialAPI::SetFloat2(int managedInstanceId, MonoString* arg0, Vector2 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -90,7 +90,7 @@ void GPro::MaterialAPI::SetFloat2(int managedInstanceId, MonoString* arg0, Vecto
 	nativeClassInstance->SetFloat2(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetFloat3(int managedInstanceId, MonoString* arg0, Vector3 arg1)
+extern void GPro::MaterialAPI::SetFloat3(int managedInstanceId, MonoString* arg0, Vector3 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -100,7 +100,7 @@ void GPro::MaterialAPI::SetFloat3(int managedInstanceId, MonoString* arg0, Vecto
 	nativeClassInstance->SetFloat3(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetFloat4(int managedInstanceId, MonoString* arg0, Vector4 arg1)
+extern void GPro::MaterialAPI::SetFloat4(int managedInstanceId, MonoString* arg0, Vector4 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -110,7 +110,7 @@ void GPro::MaterialAPI::SetFloat4(int managedInstanceId, MonoString* arg0, Vecto
 	nativeClassInstance->SetFloat4(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetMatrix3x3(int managedInstanceId, MonoString* arg0, Matrix3x3 arg1)
+extern void GPro::MaterialAPI::SetMatrix3x3(int managedInstanceId, MonoString* arg0, Matrix3x3 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -120,7 +120,7 @@ void GPro::MaterialAPI::SetMatrix3x3(int managedInstanceId, MonoString* arg0, Ma
 	nativeClassInstance->SetMatrix3x3(arg0_marshalled, arg1);
 }
 
-void GPro::MaterialAPI::SetMatrix4x4(int managedInstanceId, MonoString* arg0, Matrix4x4 arg1)
+extern void GPro::MaterialAPI::SetMatrix4x4(int managedInstanceId, MonoString* arg0, Matrix4x4 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();

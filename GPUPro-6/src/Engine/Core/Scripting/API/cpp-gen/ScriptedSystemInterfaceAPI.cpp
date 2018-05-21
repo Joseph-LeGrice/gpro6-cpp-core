@@ -7,7 +7,7 @@
 #include "Engine/Core/SystemManagement/SystemContainer.h"
 
 // ## Generated Code ##
-void GPro::ScriptedSystemInterfaceAPI::RegisterCalls()
+extern void GPro::ScriptedSystemInterfaceAPI::RegisterCalls()
 {
 	mono_add_internal_call("ScriptedSystemInterface::RegisterSystemInstance", GPro::ScriptedSystemInterfaceAPI::RegisterSystemInstance);
 }
