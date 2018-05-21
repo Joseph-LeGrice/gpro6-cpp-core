@@ -19,13 +19,15 @@ void GPro::EntityAPI::RegisterCalls()
 
 // ## Generated Code ##
 
-extern MonoObject* GPro::EntityAPI::AddComponentInternal(int arg0, MonoString* arg1)
+extern MonoObject* GPro::EntityAPI::AddComponentInternal(int managedEntityInstanceId, MonoString* monoManagedComponentTypeId)
 {
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Entity* nativeEntityInstance = tom->GetInstance<Entity>(arg0);
-
-	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(arg1);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(Entity::GetTypeID(), managedEntityInstanceId);
+
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	Entity* nativeEntityInstance = tom->GetInstance<Entity>(nativeEntityInstanceId);
+
+	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(monoManagedComponentTypeId);
 	TypeID nativeComponentTypeId = ntmip->GetNativeTypeID(managedComponentTypeId);
 
 	IComponent* newComponentInstance = nativeEntityInstance->AddComponent(nativeComponentTypeId);
@@ -33,25 +35,29 @@ extern MonoObject* GPro::EntityAPI::AddComponentInternal(int arg0, MonoString* a
 	return managedComponent->GetManagedObject();
 }
 
-extern void GPro::EntityAPI::RemoveComponentInternal(int arg0, MonoString* arg1)
+extern void GPro::EntityAPI::RemoveComponentInternal(int managedEntityInstanceId, MonoString* monoManagedComponentTypeId)
 {
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Entity* nativeEntityInstance = tom->GetInstance<Entity>(arg0);
-
-	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(arg1);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(Entity::GetTypeID(), managedEntityInstanceId);
+	
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	Entity* nativeEntityInstance = tom->GetInstance<Entity>(nativeEntityInstanceId);
+
+	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(monoManagedComponentTypeId);
 	TypeID nativeComponentTypeId = ntmip->GetNativeTypeID(managedComponentTypeId);
 
 	nativeEntityInstance->RemoveComponent(nativeComponentTypeId);
 }
 
-extern MonoObject* GPro::EntityAPI::GetComponentInternal(int arg0, MonoString* arg1)
+extern MonoObject* GPro::EntityAPI::GetComponentInternal(int managedEntityInstanceId, MonoString* monoManagedComponentTypeId)
 {
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Entity* nativeEntityInstance = tom->GetInstance<Entity>(arg0);
-
-	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(arg1);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(Entity::GetTypeID(), managedEntityInstanceId);
+
+	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
+	Entity* nativeEntityInstance = tom->GetInstance<Entity>(nativeEntityInstanceId);
+
+	ManagedTypeID managedComponentTypeId = MonoMarshall::GetUTF8String(monoManagedComponentTypeId);
 	TypeID nativeComponentTypeId = ntmip->GetNativeTypeID(managedComponentTypeId);
 
 	IComponent* componentInstance = nativeEntityInstance->GetComponent(nativeComponentTypeId);

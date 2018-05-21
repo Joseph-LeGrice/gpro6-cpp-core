@@ -42,13 +42,13 @@ void ScriptedSystemLoader::Initialize()
 		};
 
 		mono_jit_exec(m_domain, m_assembly, argc, argv);
-		mono_domain_finalize(m_domain, 5);
 	}
 }
 
 void ScriptedSystemLoader::Deinitalize()
 {
 	ISystem::Deinitalize();
+	mono_domain_finalize(m_domain, 5);
 	mono_jit_cleanup(m_domain);
 	m_assembly = nullptr;
 	m_domain = nullptr;
