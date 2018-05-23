@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <iterator>
 #include "ITypedObject.h"
 
 class TypedObjectManager
@@ -53,7 +54,7 @@ std::vector<T*> TypedObjectManager::GetAllInstances()
 	TypeID typeId = T::GetTypeID();
 	std::vector<ITypedObject*> existing = GetAllInstances(typeId);
 	std::vector<T*> result;
-	std::transform(existing.begin(), existing.end(), result.begin(), CastComponent());
+	std::transform(existing.begin(), existing.end(), std::back_inserter(result), CastComponent());
 	return result;
 }
 
