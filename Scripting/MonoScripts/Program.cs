@@ -123,7 +123,7 @@ class Program
             Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Front.bmp"),
             Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
         };
-        testCubemap.InitializeWithBitmaps(bitmapPaths);
+        testCubemap.InitializeWithBitmaps(bitmapPaths.ToArray());
         
         Material skyboxMat = TypedObjectManager.Create<Material>();
         skyboxMat.SetShaderIndex(skyboxShader.InstanceID);

@@ -10,7 +10,7 @@
 // ## Generated Code ##
 extern void GPro::Texture2DArrayAPI::RegisterCalls()
 {
-	mono_add_internal_call("Texture2DArray::InitializeWithBitmaps(int,System.Collections.Generic.List<string>)", GPro::Texture2DArrayAPI::InitializeWithBitmaps);
+	mono_add_internal_call("Texture2DArray::InitializeWithBitmaps(int,string[])", GPro::Texture2DArrayAPI::InitializeWithBitmaps);
 	mono_add_internal_call("Texture2DArray::GetResourceViewID(int)", GPro::Texture2DArrayAPI::GetResourceViewID);
 }
 

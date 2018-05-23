@@ -10,9 +10,9 @@ public class Texture2DArray : ITypedObject
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void InitializeWithBitmaps(int instanceid, System.Collections.Generic.List<string> arg0);
+	private extern static void InitializeWithBitmaps(int instanceid, string[] arg0);
 
-	public void InitializeWithBitmaps(System.Collections.Generic.List<string> arg0)
+	public void InitializeWithBitmaps(string[] arg0)
 	{
 		InitializeWithBitmaps(InstanceID, arg0);
 	}
