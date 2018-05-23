@@ -10,10 +10,10 @@ public class Light : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern float Get_Range(int instanceId);
+	private extern static float Get_Range(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern void Set_Range(int instanceId, float val);
+	private extern static void Set_Range(int instanceId, float val);
 
 	public float Range
 	{

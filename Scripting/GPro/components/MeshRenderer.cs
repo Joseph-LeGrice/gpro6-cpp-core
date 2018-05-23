@@ -10,10 +10,10 @@ public class MeshRenderer : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern int Get_MeshIndex(int instanceId);
+	private extern static int Get_MeshIndex(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern void Set_MeshIndex(int instanceId, int val);
+	private extern static void Set_MeshIndex(int instanceId, int val);
 
 	public int MeshIndex
 	{
@@ -23,10 +23,10 @@ public class MeshRenderer : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern int Get_DrawCommandIndex(int instanceId);
+	private extern static int Get_DrawCommandIndex(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern void Set_DrawCommandIndex(int instanceId, int val);
+	private extern static void Set_DrawCommandIndex(int instanceId, int val);
 
 	public int DrawCommandIndex
 	{
@@ -36,10 +36,10 @@ public class MeshRenderer : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern int Get_MaterialIndex(int instanceId);
+	private extern static int Get_MaterialIndex(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern void Set_MaterialIndex(int instanceId, int val);
+	private extern static void Set_MaterialIndex(int instanceId, int val);
 
 	public int MaterialIndex
 	{

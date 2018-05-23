@@ -10,10 +10,10 @@ public class Transform : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern Vector3 Get_position(int instanceId);
+	private extern static Vector3 Get_position(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern void Set_position(int instanceId, Vector3 val);
+	private extern static void Set_position(int instanceId, Vector3 val);
 
 	public Vector3 position
 	{
@@ -23,10 +23,10 @@ public class Transform : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern Vector3 Get_scale(int instanceId);
+	private extern static Vector3 Get_scale(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern void Set_scale(int instanceId, Vector3 val);
+	private extern static void Set_scale(int instanceId, Vector3 val);
 
 	public Vector3 scale
 	{
@@ -36,10 +36,10 @@ public class Transform : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern Quaternion Get_rotation(int instanceId);
+	private extern static Quaternion Get_rotation(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern void Set_rotation(int instanceId, Quaternion val);
+	private extern static void Set_rotation(int instanceId, Quaternion val);
 
 	public Quaternion rotation
 	{

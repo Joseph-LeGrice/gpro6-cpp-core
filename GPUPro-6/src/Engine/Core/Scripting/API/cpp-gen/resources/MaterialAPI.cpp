@@ -15,7 +15,7 @@ extern void GPro::MaterialAPI::RegisterCalls()
 	mono_add_internal_call("Material::AddTextureSampler(int,int,int)", GPro::MaterialAPI::AddTextureSampler);
 	mono_add_internal_call("Material::SetInteger(int,string,int)", GPro::MaterialAPI::SetInteger);
 	mono_add_internal_call("Material::SetBoolean(int,string,bool)", GPro::MaterialAPI::SetBoolean);
-	mono_add_internal_call("Material::SetFloat(int,string,float)", GPro::MaterialAPI::SetFloat);
+	mono_add_internal_call("Material::SetFloat(int,string,single)", GPro::MaterialAPI::SetFloat);
 	mono_add_internal_call("Material::SetFloat2(int,string,Vector2)", GPro::MaterialAPI::SetFloat2);
 	mono_add_internal_call("Material::SetFloat3(int,string,Vector3)", GPro::MaterialAPI::SetFloat3);
 	mono_add_internal_call("Material::SetFloat4(int,string,Vector4)", GPro::MaterialAPI::SetFloat4);
