@@ -34,9 +34,9 @@ class Program
         //------------------------------------------------------------------------------------
         Material simpleTestMaterial = TypedObjectManager.Create<Material>();
         simpleTestMaterial.SetShader(materialShader);
-        simpleTestMaterial.RegisterShaderResource(testImageTexture.GetResourceViewID(), 1 );
+        simpleTestMaterial.RegisterShaderResource(testImageTexture.GetResource(), 1 );
         // simpleTestMaterial.RegisterShaderResource(lightBuffer.GetMyResourceViewID(), 0);
-        simpleTestMaterial.AddTextureSampler(textureSampler.InstanceID, 0);
+        simpleTestMaterial.AddTextureSampler(textureSampler, 0);
 
         simpleTestMaterial.SetFloat4("DiffuseColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
         simpleTestMaterial.SetFloat4("SpecularColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
@@ -72,8 +72,8 @@ class Program
         // MarchingSquares Testing
         Material marchingSquaresMaterial = TypedObjectManager.Create<Material>();
         marchingSquaresMaterial.SetShaderIndex(materialShader.InstanceID);
-        marchingSquaresMaterial.RegisterShaderResource(testImageTexture.GetResourceViewID(), 1);
-        // marchingSquaresMaterial.RegisterShaderResource(lightBuffer.GetMyResourceViewID(), 0);
+        marchingSquaresMaterial.RegisterShaderResource(testImageTexture.GetResource(), 1);
+        // marchingSquaresMaterial.RegisterShaderResource(lightBuffer.GetResource(), 0);
         marchingSquaresMaterial.AddTextureSampler(textureSampler.InstanceID, 0);
 
         MATERIAL_BUFFER marchinSquaresMatBuf;
@@ -126,7 +126,7 @@ class Program
         Material skyboxMat = TypedObjectManager.Create<Material>();
         skyboxMat.SetCullState(CullState.Front);
         skyboxMat.SetShader(skyboxShader);
-        skyboxMat.RegisterShaderResource(testCubemap.GetResourceViewID(), 0);
+        skyboxMat.RegisterShaderResource(testCubemap.GetResource(), 0);
 
         Entity skyboxEntity = TypedObjectManager.Create<Entity>();
         MeshRenderer skyboxRenderer = skyboxEntity.AddComponent<MeshRenderer>();

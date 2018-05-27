@@ -32,8 +32,8 @@
         },
         {
           "methodType": "instance",
-          "name": "GetResourceViewID",
-          "returnType": "int",
+          "name": "GetResource",
+          "returnType": "object",
           "args": []
         }
       ],
@@ -54,8 +54,8 @@
         },
         {
           "methodType": "instance",
-          "name": "GetResourceViewID",
-          "returnType": "int",
+          "name": "GetResource",
+          "returnType": "object",
           "args": []
         }
       ],
@@ -93,7 +93,7 @@
           "name": "RegisterShaderResource",
           "returnType": "void",
           "args": [
-            "int",
+            "object",
             "int"
           ]
         },
@@ -102,7 +102,7 @@
           "name": "AddTextureSampler",
           "returnType": "void",
           "args": [
-            "int",
+            "object",
             "int"
           ]
         },

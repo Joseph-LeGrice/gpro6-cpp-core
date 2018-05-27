@@ -10,7 +10,7 @@ public class ScriptedSystemInterface : ITypedObject
 
 
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
-	public extern static void RegisterSystemInstance(System.Object arg0);
+	public extern static void RegisterSystemInstance(ITypedObject arg0);
 
 // ## Generated Code ##
 }

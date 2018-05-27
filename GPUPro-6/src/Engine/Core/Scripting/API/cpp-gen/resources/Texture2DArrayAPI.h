@@ -16,7 +16,7 @@ namespace GPro
 
 		extern void InitializeWithBitmaps(InstanceID managedInstanceId, MonoArray* arg0);
 
-		extern int GetResourceViewID(InstanceID managedInstanceId);
+		extern MonoObject* GetResource(InstanceID managedInstanceId);
 // ## Generated Code ##
 	};
 };

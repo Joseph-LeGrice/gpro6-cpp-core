@@ -16,9 +16,9 @@ namespace GPro
 
 		extern void SetShader(InstanceID managedInstanceId, MonoObject* arg0);
 
-		extern void RegisterShaderResource(InstanceID managedInstanceId, int arg0, int arg1);
+		extern void RegisterShaderResource(InstanceID managedInstanceId, MonoObject* arg0, int arg1);
 
-		extern void AddTextureSampler(InstanceID managedInstanceId, int arg0, int arg1);
+		extern void AddTextureSampler(InstanceID managedInstanceId, MonoObject* arg0, int arg1);
 
 		extern void SetInteger(InstanceID managedInstanceId, MonoString* arg0, int arg1);
 

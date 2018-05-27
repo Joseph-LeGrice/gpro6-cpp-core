@@ -22,10 +22,9 @@ unsigned int Texture2D::Height()
     return FreeImage_GetHeight(m_bitmap);
 }
 
-int Texture2D::GetResourceViewID()
+ToPtr Texture2D::GetResource()
 {
-    custom_assert::is_true(m_myShaderResourceViewIndex > -1);
-    return m_myShaderResourceViewIndex;
+    return m_shaderResource;
 }
 
 void Texture2D::InitializeWithBitmap(std::wstring filepath)
@@ -111,12 +110,12 @@ void Texture2D::Creates()
     if (SUCCEEDED(createTextureResult))
     {
         ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetTypedObjectManager()->Create<ShaderResource>();
-		m_myShaderResourceViewIndex = static_cast<int>(myShaderResourceView->GetInstanceID());
+		m_shaderResource = myShaderResourceView;
 
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTexture, NULL);
         if (!createdView)
         {
-			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_myShaderResourceViewIndex);
+			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_shaderResource.GetInstanceID());
             LogError("Could not create resource view");
         }
     }

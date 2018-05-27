@@ -10,12 +10,12 @@ public class MeshRenderer : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static System.Object Get_Mesh(int instanceId);
+	private extern static ITypedObject Get_Mesh(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void Set_Mesh(int instanceId, System.Object val);
+	private extern static void Set_Mesh(int instanceId, ITypedObject val);
 
-	public System.Object Mesh
+	public ITypedObject Mesh
 	{
 		get { return Get_Mesh(InstanceID); }
 		set { Set_Mesh(InstanceID, value); }
@@ -23,12 +23,12 @@ public class MeshRenderer : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static System.Object Get_Material(int instanceId);
+	private extern static ITypedObject Get_Material(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void Set_Material(int instanceId, System.Object val);
+	private extern static void Set_Material(int instanceId, ITypedObject val);
 
-	public System.Object Material
+	public ITypedObject Material
 	{
 		get { return Get_Material(InstanceID); }
 		set { Set_Material(InstanceID, value); }

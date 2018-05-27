@@ -16,7 +16,7 @@ namespace GPro
 
 		extern void InitializeWithBitmap(InstanceID managedInstanceId, MonoString* arg0);
 
-		extern int GetResourceViewID(InstanceID managedInstanceId);
+		extern MonoObject* GetResource(InstanceID managedInstanceId);
 // ## Generated Code ##
 	};
 };

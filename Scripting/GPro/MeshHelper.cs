@@ -10,7 +10,7 @@ public class MeshHelper : ITypedObject
 
 
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
-	public extern static System.Object CreateSphereUV_Internal();
+	public extern static ITypedObject CreateSphereUV_Internal();
 
 // ## Generated Code ##
 

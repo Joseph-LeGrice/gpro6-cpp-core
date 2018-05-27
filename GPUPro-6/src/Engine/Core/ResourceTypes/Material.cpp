@@ -26,7 +26,7 @@ bool Material::BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerSt
 			for (size_t i = 0; i < m_shaderResources.size(); ++i)
 			{
 				ResourceDetails rd = m_shaderResources[i];
-				ShaderResource* tex = GlobalStaticReferences::Instance()->GetTypedObjectManager()->GetInstance<ShaderResource>(rd.m_resourceIndex);
+				ShaderResource* tex = rd.m_resourceIndex.Get<ShaderResource>();
 				if (tex != nullptr)
 				{
 					tex->BindResource(static_cast<UINT>(rd.m_slotIndex));
@@ -36,7 +36,7 @@ bool Material::BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerSt
 			for (size_t i = 0; i < m_textureSamplerIndexes.size(); ++i)
 			{
 				ResourceDetails rd = m_textureSamplerIndexes[i];
-				TextureSampler* ts = GlobalStaticReferences::Instance()->GetTypedObjectManager()->GetInstance<TextureSampler>(rd.m_resourceIndex);
+				TextureSampler* ts = rd.m_resourceIndex.Get<TextureSampler>();
 				if (ts != nullptr)
 				{
 					ts->BindTextureSampler(static_cast<UINT>(rd.m_slotIndex));
@@ -118,12 +118,12 @@ void Material::SetShader(ToPtr shader)
 	m_shader = shader;
 }
 
-void Material::RegisterShaderResource(int resourceIndex, int slotIndex)
+void Material::RegisterShaderResource(ToPtr resourceIndex, int slotIndex)
 {
 	m_shaderResources.push_back({ resourceIndex, slotIndex });
 }
 
-void Material::AddTextureSampler(int resourceIndex, int slotIndex)
+void Material::AddTextureSampler(ToPtr resourceIndex, int slotIndex)
 {
 	m_textureSamplerIndexes.push_back({ resourceIndex, slotIndex });
 }

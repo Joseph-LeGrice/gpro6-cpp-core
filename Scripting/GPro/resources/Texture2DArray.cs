@@ -19,11 +19,11 @@ public class Texture2DArray : ITypedObject
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static int GetResourceViewID(int instanceid);
+	private extern static ITypedObject GetResource(int instanceid);
 
-	public int GetResourceViewID()
+	public ITypedObject GetResource()
 	{
-		return GetResourceViewID(InstanceID);
+		return GetResource(InstanceID);
 	}
 
 // ## Generated Code ##

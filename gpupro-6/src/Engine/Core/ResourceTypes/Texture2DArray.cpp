@@ -10,9 +10,9 @@
 #include "Engine/Core/ResourceTypes/ShaderResource.h"
 
 
-InstanceID Texture2DArray::GetResourceViewID()
+ToPtr Texture2DArray::GetResource()
 {
-    return m_myShaderResourceViewId;
+    return m_shaderResource;
 }
 
 void Texture2DArray::InitializeWithBitmaps(std::vector<std::wstring> filepaths)
@@ -101,12 +101,12 @@ void Texture2DArray::Creates(UINT pitch, UINT width, UINT height)
     if (SUCCEEDED(createTextureResult))
     {
         ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetTypedObjectManager()->Create<ShaderResource>();
-		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetInstanceID());
+		m_shaderResource = myShaderResourceView;
 
         bool createdView = myShaderResourceView->CreateViewWithResource(m_pTextureArray, NULL);
         if (!createdView)
         {
-			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_myShaderResourceViewId);
+			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_shaderResource.GetInstanceID());
             LogError("Could not create resource view");
         }
     }

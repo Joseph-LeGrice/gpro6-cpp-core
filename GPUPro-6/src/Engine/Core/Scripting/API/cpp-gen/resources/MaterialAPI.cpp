@@ -10,9 +10,9 @@
 // ## Generated Code ##
 extern void GPro::MaterialAPI::RegisterCalls()
 {
-	mono_add_internal_call("Material::SetShader(int,object)", GPro::MaterialAPI::SetShader);
-	mono_add_internal_call("Material::RegisterShaderResource(int,int,int)", GPro::MaterialAPI::RegisterShaderResource);
-	mono_add_internal_call("Material::AddTextureSampler(int,int,int)", GPro::MaterialAPI::AddTextureSampler);
+	mono_add_internal_call("Material::SetShader(int,ITypedObject)", GPro::MaterialAPI::SetShader);
+	mono_add_internal_call("Material::RegisterShaderResource(int,ITypedObject,int)", GPro::MaterialAPI::RegisterShaderResource);
+	mono_add_internal_call("Material::AddTextureSampler(int,ITypedObject,int)", GPro::MaterialAPI::AddTextureSampler);
 	mono_add_internal_call("Material::SetInteger(int,string,int)", GPro::MaterialAPI::SetInteger);
 	mono_add_internal_call("Material::SetBoolean(int,string,bool)", GPro::MaterialAPI::SetBoolean);
 	mono_add_internal_call("Material::SetFloat(int,string,single)", GPro::MaterialAPI::SetFloat);
@@ -34,16 +34,18 @@ extern void GPro::MaterialAPI::SetShader(InstanceID managedInstanceId, MonoObjec
 	nativeClassInstance->SetShader(arg0_marshalled);
 }
 
-extern void GPro::MaterialAPI::RegisterShaderResource(InstanceID managedInstanceId, int arg0, int arg1)
+extern void GPro::MaterialAPI::RegisterShaderResource(InstanceID managedInstanceId, MonoObject* arg0, int arg1)
 {
+	ToPtr arg0_marshalled = MonoMarshall::GetNativePointer(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
-	nativeClassInstance->RegisterShaderResource(arg0, arg1);
+	nativeClassInstance->RegisterShaderResource(arg0_marshalled, arg1);
 }
 
-extern void GPro::MaterialAPI::AddTextureSampler(InstanceID managedInstanceId, int arg0, int arg1)
+extern void GPro::MaterialAPI::AddTextureSampler(InstanceID managedInstanceId, MonoObject* arg0, int arg1)
 {
+	ToPtr arg0_marshalled = MonoMarshall::GetNativePointer(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
-	nativeClassInstance->AddTextureSampler(arg0, arg1);
+	nativeClassInstance->AddTextureSampler(arg0_marshalled, arg1);
 }
 
 extern void GPro::MaterialAPI::SetInteger(InstanceID managedInstanceId, MonoString* arg0, int arg1)

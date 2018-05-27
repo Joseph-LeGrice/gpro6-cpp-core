@@ -11,7 +11,7 @@
 extern void GPro::Texture2DArrayAPI::RegisterCalls()
 {
 	mono_add_internal_call("Texture2DArray::InitializeWithBitmaps(int,string[])", GPro::Texture2DArrayAPI::InitializeWithBitmaps);
-	mono_add_internal_call("Texture2DArray::GetResourceViewID(int)", GPro::Texture2DArrayAPI::GetResourceViewID);
+	mono_add_internal_call("Texture2DArray::GetResource(int)", GPro::Texture2DArrayAPI::GetResource);
 }
 
 extern void GPro::Texture2DArrayAPI::InitializeWithBitmaps(InstanceID managedInstanceId, MonoArray* arg0)
@@ -21,9 +21,9 @@ extern void GPro::Texture2DArrayAPI::InitializeWithBitmaps(InstanceID managedIns
 	nativeClassInstance->InitializeWithBitmaps(arg0_marshalled);
 }
 
-extern int GPro::Texture2DArrayAPI::GetResourceViewID(InstanceID managedInstanceId)
+extern MonoObject* GPro::Texture2DArrayAPI::GetResource(InstanceID managedInstanceId)
 {
 	Texture2DArray* nativeClassInstance = MonoMarshall::GetNativeObject<Texture2DArray>(managedInstanceId);
-	return nativeClassInstance->GetResourceViewID();
+	return MonoMarshall::GetManagedObject(nativeClassInstance->GetResource());
 }
 // ## Generated Code ##

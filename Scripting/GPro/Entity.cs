@@ -10,7 +10,7 @@ public class Entity : ITypedObject
 
 
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
-	public extern static System.Object AddComponentInternal(int arg0, string arg1);
+	public extern static ITypedObject AddComponentInternal(int arg0, string arg1);
 
 
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -18,7 +18,7 @@ public class Entity : ITypedObject
 
 
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
-	public extern static System.Object GetComponentInternal(int arg0, string arg1);
+	public extern static ITypedObject GetComponentInternal(int arg0, string arg1);
 
 // ## Generated Code ##
 

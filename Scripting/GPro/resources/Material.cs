@@ -42,27 +42,27 @@ public class Material : ITypedObject
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void SetShader(int instanceid, System.Object arg0);
+	private extern static void SetShader(int instanceid, ITypedObject arg0);
 
-	public void SetShader(System.Object arg0)
+	public void SetShader(ITypedObject arg0)
 	{
 		SetShader(InstanceID, arg0);
 	}
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void RegisterShaderResource(int instanceid, int arg0, int arg1);
+	private extern static void RegisterShaderResource(int instanceid, ITypedObject arg0, int arg1);
 
-	public void RegisterShaderResource(int arg0, int arg1)
+	public void RegisterShaderResource(ITypedObject arg0, int arg1)
 	{
 		RegisterShaderResource(InstanceID, arg0, arg1);
 	}
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void AddTextureSampler(int instanceid, int arg0, int arg1);
+	private extern static void AddTextureSampler(int instanceid, ITypedObject arg0, int arg1);
 
-	public void AddTextureSampler(int arg0, int arg1)
+	public void AddTextureSampler(ITypedObject arg0, int arg1)
 	{
 		AddTextureSampler(InstanceID, arg0, arg1);
 	}

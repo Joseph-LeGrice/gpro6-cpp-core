@@ -1,5 +1,5 @@
 
-public abstract class ITypedObject
+public abstract class ITypedObject : System.Object
 {
     private int m_instanceId = -1;
     

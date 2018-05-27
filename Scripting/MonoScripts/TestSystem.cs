@@ -1,6 +1,6 @@
 using System;
 
-public class TestSystem
+public class TestSystem : ITypedObject
 {
     public TestSystem()
     {

@@ -65,13 +65,13 @@ public:
 	void SetAlphaBlending(BlendFactor src, BlendFactor dest, BlendOperation op);
 
     void SetShader(ToPtr shader);
-	void RegisterShaderResource(int resourceIndex, int slotIndex);
-	void AddTextureSampler(int resourceIndex, int slotIndex);
+	void RegisterShaderResource(ToPtr resourceIndex, int slotIndex);
+	void AddTextureSampler(ToPtr resourceIndex, int slotIndex);
 
 private:
 	struct ResourceDetails
 	{
-		int m_resourceIndex;
+		ToPtr m_resourceIndex;
 		int m_slotIndex;
 	};
 
