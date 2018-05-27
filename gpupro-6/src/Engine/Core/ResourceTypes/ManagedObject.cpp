@@ -24,3 +24,13 @@ void ManagedObject::SetFieldValue(const char* fieldName, void* value)
 	MonoClassField* field = mono_class_get_field_from_name(managedClass, fieldName);
 	mono_field_set_value(managedObject, field, value);
 }
+
+void* ManagedObject::GetFieldValue(const char* fieldName)
+{
+	void* result;
+	MonoObject* managedObject = GetManagedObject();
+	MonoClass* managedClass = mono_object_get_class(managedObject);
+	MonoClassField* field = mono_class_get_field_from_name(managedClass, fieldName);
+	mono_field_get_value(managedObject, field, &result);
+	return result;
+}

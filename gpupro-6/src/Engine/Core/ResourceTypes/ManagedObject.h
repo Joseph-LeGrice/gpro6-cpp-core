@@ -17,6 +17,7 @@ public:
 
 	MonoObject* GetManagedObject();
 	void SetFieldValue(const char* fieldName, void* value);
+	void* GetFieldValue(const char* fieldName);
 
 private:
 	//ManagedTypeID m_typeId;
