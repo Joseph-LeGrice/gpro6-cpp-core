@@ -6,6 +6,6 @@ struct MeshRenderer : public IComponent
 {
 REGISTER_TYPE(MeshRenderer);
 
-	int m_meshIndex = -1;
-    int m_materialIndex = -1;
+	ToPtr m_mesh;
+	ToPtr m_material;
 };

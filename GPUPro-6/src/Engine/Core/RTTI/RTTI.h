@@ -7,9 +7,36 @@ typedef std::string ManagedTypeID;
 typedef int32_t InstanceID;
 #define InvalidInstanceID -1
 
+class ITypedObject;
+
 #define REGISTER_TYPE(T) \
 public: \
-static TypeID GetTypeID() \
+virtual TypeID GetTypeID() override \
 { \
 	return std::string(TO_STRING(T)); \
+}
+
+class ToPtr
+{
+private:
+	TypeID m_typeId;
+	InstanceID m_instanceId;
+
+public:
+	ToPtr(TypeID typeId, InstanceID instanceId);
+
+	ToPtr(ITypedObject* obj);
+
+	template<class T>
+	T* Get();
+
+	operator ITypedObject*();
+	void operator=(ITypedObject* obj);
+};
+
+template<class T>
+T* ToPtr::Get()
+{
+	ITypedObject* typedObj = this;
+	return static_cast<T*>(typedObj);
 }

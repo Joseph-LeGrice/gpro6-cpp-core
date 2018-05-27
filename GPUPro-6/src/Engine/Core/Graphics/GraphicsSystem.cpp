@@ -105,7 +105,7 @@ void GraphicsSystem::VariableTick()
 			MeshRenderer* mrc = meshRenderers[i];
 			Entity* meshEntity = m_typedObjectManager.GetInstance<Entity>(mrc->GetEntityIndex());
 
-			Mesh* mesh = m_typedObjectManager.GetInstance<Mesh>(mrc->m_meshIndex);
+			Mesh* mesh = mrc->m_mesh.Get<Mesh>();
 			UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
 			UINT16 numberOfIndices = (UINT16)mesh->GetIndices().size();
 
@@ -126,7 +126,7 @@ void GraphicsSystem::VariableTick()
 
 				m_perObjectBuffer->UpdateBuffer(&pob, sizeof(PER_OBJECT_BUFFER));
 
-				Material* mat = m_typedObjectManager.GetInstance<Material>(mrc->m_materialIndex);
+				Material* mat = mrc->m_material.Get<Material>();
 				if (mat->BindIfValid(m_perObjectBuffer, &m_rasterizerState, &m_blendState))
 				{
 					deviceContext.IASetPrimitiveTopology(mesh->m_topology);
