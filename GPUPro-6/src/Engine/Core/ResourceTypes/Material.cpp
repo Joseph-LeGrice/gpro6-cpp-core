@@ -10,9 +10,9 @@
 
 bool Material::BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerState, BlendState* blendState)
 {
-	if (m_shaderIndex > -1)
+	if (m_shader)
 	{
-		Shader* s = GlobalStaticReferences::Instance()->GetTypedObjectManager()->GetInstance<Shader>(m_shaderIndex);
+		Shader* s = m_shader.Get<Shader>();
 		if (s != nullptr && s->SetCurrentIfValid())
 		{
 			blendState->SetState(m_blendState);
@@ -113,9 +113,9 @@ void Material::SetAlphaBlending(BlendFactor src, BlendFactor dest, BlendOperatio
 	m_blendState.m_alphaBlendOp = op;
 }
 
-void Material::SetShaderIndex(int shaderIndex)
+void Material::SetShader(ToPtr shader)
 {
-	m_shaderIndex = shaderIndex;
+	m_shader = shader;
 }
 
 void Material::RegisterShaderResource(int resourceIndex, int slotIndex)

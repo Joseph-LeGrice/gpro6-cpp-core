@@ -64,7 +64,7 @@ public:
 	void SetColorBlending(BlendFactor src, BlendFactor dest, BlendOperation op);
 	void SetAlphaBlending(BlendFactor src, BlendFactor dest, BlendOperation op);
 
-    void SetShaderIndex(int shaderIndex);
+    void SetShader(ToPtr shader);
 	void RegisterShaderResource(int resourceIndex, int slotIndex);
 	void AddTextureSampler(int resourceIndex, int slotIndex);
 
@@ -75,7 +75,7 @@ private:
 		int m_slotIndex;
 	};
 
-    int m_shaderIndex = -1;
+	ToPtr m_shader;
 	BlendStateDescriptor m_blendState;
 	RasterizerStateDescriptor m_rasterState;
 	MaterialPropertyList m_properties;

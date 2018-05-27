@@ -33,7 +33,7 @@ class Program
 
         //------------------------------------------------------------------------------------
         Material simpleTestMaterial = TypedObjectManager.Create<Material>();
-        simpleTestMaterial.SetShaderIndex(materialShader.InstanceID);
+        simpleTestMaterial.SetShader(materialShader);
         simpleTestMaterial.RegisterShaderResource(testImageTexture.GetResourceViewID(), 1 );
         // simpleTestMaterial.RegisterShaderResource(lightBuffer.GetMyResourceViewID(), 0);
         simpleTestMaterial.AddTextureSampler(textureSampler.InstanceID, 0);
@@ -125,7 +125,7 @@ class Program
         
         Material skyboxMat = TypedObjectManager.Create<Material>();
         skyboxMat.SetCullState(CullState.Front);
-        skyboxMat.SetShaderIndex(skyboxShader.InstanceID);
+        skyboxMat.SetShader(skyboxShader);
         skyboxMat.RegisterShaderResource(testCubemap.GetResourceViewID(), 0);
 
         Entity skyboxEntity = TypedObjectManager.Create<Entity>();

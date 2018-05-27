@@ -23,6 +23,11 @@ InstanceID ToPtr::GetInstanceID()
 	return m_instanceId;
 }
 
+ToPtr::operator bool()
+{
+	return m_instanceId > -1 && m_typeId != "";
+}
+
 ToPtr::operator ITypedObject*()
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();

@@ -82,10 +82,10 @@
       "methods": [
         {
           "methodType": "instance",
-          "name": "SetShaderIndex",
+          "name": "SetShader",
           "returnType": "void",
           "args": [
-            "int"
+            "object"
           ]
         },
         {

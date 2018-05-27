@@ -33,6 +33,7 @@ public:
 	template<class T>
 	T* Get();
 
+	operator bool();
 	operator ITypedObject*();
 	void operator=(ITypedObject* obj);
 };

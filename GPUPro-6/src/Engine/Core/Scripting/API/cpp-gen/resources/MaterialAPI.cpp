@@ -10,7 +10,7 @@
 // ## Generated Code ##
 extern void GPro::MaterialAPI::RegisterCalls()
 {
-	mono_add_internal_call("Material::SetShaderIndex(int,int)", GPro::MaterialAPI::SetShaderIndex);
+	mono_add_internal_call("Material::SetShader(int,object)", GPro::MaterialAPI::SetShader);
 	mono_add_internal_call("Material::RegisterShaderResource(int,int,int)", GPro::MaterialAPI::RegisterShaderResource);
 	mono_add_internal_call("Material::AddTextureSampler(int,int,int)", GPro::MaterialAPI::AddTextureSampler);
 	mono_add_internal_call("Material::SetInteger(int,string,int)", GPro::MaterialAPI::SetInteger);
@@ -27,10 +27,11 @@ extern void GPro::MaterialAPI::RegisterCalls()
 	mono_add_internal_call("Material::SetAlphaBlending_Internal", GPro::MaterialAPI::SetAlphaBlending_Internal);
 }
 
-extern void GPro::MaterialAPI::SetShaderIndex(InstanceID managedInstanceId, int arg0)
+extern void GPro::MaterialAPI::SetShader(InstanceID managedInstanceId, MonoObject* arg0)
 {
+	ToPtr arg0_marshalled = MonoMarshall::GetNativePointer(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
-	nativeClassInstance->SetShaderIndex(arg0);
+	nativeClassInstance->SetShader(arg0_marshalled);
 }
 
 extern void GPro::MaterialAPI::RegisterShaderResource(InstanceID managedInstanceId, int arg0, int arg1)

@@ -42,11 +42,11 @@ public class Material : ITypedObject
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void SetShaderIndex(int instanceid, int arg0);
+	private extern static void SetShader(int instanceid, System.Object arg0);
 
-	public void SetShaderIndex(int arg0)
+	public void SetShader(System.Object arg0)
 	{
-		SetShaderIndex(InstanceID, arg0);
+		SetShader(InstanceID, arg0);
 	}
 
 
