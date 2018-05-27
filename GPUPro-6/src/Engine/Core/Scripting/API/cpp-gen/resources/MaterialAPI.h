@@ -33,6 +33,14 @@ namespace GPro
 		extern void SetMatrix3x3(int managedInstanceId, MonoString* arg0, Matrix3x3 arg1);
 
 		extern void SetMatrix4x4(int managedInstanceId, MonoString* arg0, Matrix4x4 arg1);
+
+		extern void SetCullState_Internal(int arg0, int arg1);
+
+		extern void SetFillMode_Internal(int arg0, int arg1);
+
+		extern void SetColorBlending_Internal(int arg0, int arg1, int arg2, int arg3);
+
+		extern void SetAlphaBlending_Internal(int arg0, int arg1, int arg2, int arg3);
 // ## Generated Code ##
 	};
 };

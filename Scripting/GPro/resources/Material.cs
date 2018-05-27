@@ -1,5 +1,37 @@
 using System.Runtime.CompilerServices;
 
+public enum BlendFactor
+{
+    Zero = 0,
+    One = 1,
+    Src = 2,
+    SrcInverse = 3,
+    Dest = 4,
+    DestInverse = 5
+};
+
+public enum BlendOperation
+{
+    Add = 0,
+    Subtract = 1,
+    SubtractReverse = 2,
+    Min = 3,
+    Max = 4
+};
+
+public enum CullState
+{
+    None = 0,
+    Front = 1,
+    Back = 2
+};
+
+public enum FillMode
+{
+    Solid = 0,
+    Wireframe = 1
+};
+
 public class Material : ITypedObject
 {
 // ## Generated Code ##
@@ -107,5 +139,41 @@ public class Material : ITypedObject
 		SetMatrix4x4(InstanceID, arg0, arg1);
 	}
 
+
+	[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	public extern static void SetCullState_Internal(int arg0, int arg1);
+
+
+	[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	public extern static void SetFillMode_Internal(int arg0, int arg1);
+
+
+	[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	public extern static void SetColorBlending_Internal(int arg0, int arg1, int arg2, int arg3);
+
+
+	[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	public extern static void SetAlphaBlending_Internal(int arg0, int arg1, int arg2, int arg3);
+
 // ## Generated Code ##
+
+	public void SetCullState(CullState state)
+	{
+		SetCullState_Internal(InstanceID, (int)state);
+	}
+
+	public void SetFillMode(FillMode mode)
+	{
+		SetFillMode_Internal(InstanceID, (int)mode);
+	}
+
+	public void SetColorBlending(BlendFactor src, BlendFactor dest, BlendOperation op)
+	{
+		SetColorBlending_Internal(InstanceID, (int)src, (int)dest, (int)op);
+	}
+
+	public void SetAlphaBlending(BlendFactor src, BlendFactor dest, BlendOperation op)
+	{
+		SetAlphaBlending_Internal(InstanceID, (int)src, (int)dest, (int)op);
+	}
 }

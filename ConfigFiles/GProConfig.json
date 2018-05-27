@@ -169,6 +169,38 @@
           "args": [
             "string", "matrix4x4"
           ]
+        },
+        {
+          "methodType": "static",
+          "name": "SetCullState_Internal",
+          "returnType": "void",
+          "args": [
+            "int", "int"
+          ]
+        },
+        {
+          "methodType": "static",
+          "name": "SetFillMode_Internal",
+          "returnType": "void",
+          "args": [
+            "int", "int"
+          ]
+        },
+        {
+          "methodType": "static",
+          "name": "SetColorBlending_Internal",
+          "returnType": "void",
+          "args": [
+            "int", "int", "int", "int"
+          ]
+        },
+        {
+          "methodType": "static",
+          "name": "SetAlphaBlending_Internal",
+          "returnType": "void",
+          "args": [
+            "int", "int", "int", "int"
+          ]
         }
       ],
       "properties": []
