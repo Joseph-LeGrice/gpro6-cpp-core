@@ -32,11 +32,11 @@ ManualRelease<ID3D11BlendState>& BlendState::GetBlendStateForDescriptor(BlendSta
         
         rtbDesc.SrcBlend = BlendFactorToNative(bsd.m_srcColor, false);
         rtbDesc.DestBlend = BlendFactorToNative(bsd.m_destColor, false);
-        rtbDesc.BlendOp = static_cast<D3D11_BLEND_OP>(bsd.m_colorBlendOp);
+        rtbDesc.BlendOp = BlendOpToNative(bsd.m_colorBlendOp);
 
         rtbDesc.SrcBlendAlpha = BlendFactorToNative(bsd.m_srcAlpha, true);
         rtbDesc.DestBlendAlpha = BlendFactorToNative(bsd.m_destAlpha, true);
-        rtbDesc.BlendOpAlpha = static_cast<D3D11_BLEND_OP>(bsd.m_alphaBlendOp);
+        rtbDesc.BlendOpAlpha = BlendOpToNative(bsd.m_alphaBlendOp);
         
         rtbDesc.RenderTargetWriteMask = bsd.m_renderTargetWriteMask;
 
@@ -74,6 +74,25 @@ D3D11_BLEND BlendState::BlendFactorToNative(BlendFactor bf, bool isAlpha)
     }
 }
 
+
+D3D11_BLEND_OP BlendState::BlendOpToNative(BlendOperation op)
+{
+	switch (op)
+	{
+	default:
+	case kBlendOpAdd:
+		return D3D11_BLEND_OP_ADD;
+	case kBlendOpSubtract:
+		return D3D11_BLEND_OP_SUBTRACT;
+	case kBlendOpSubtractRev:
+		return D3D11_BLEND_OP_REV_SUBTRACT;
+	case kBlendOpMin:
+		return D3D11_BLEND_OP_MIN;
+	case kBlendOpMax:
+		return D3D11_BLEND_OP_MAX;
+	}
+}
+
 bool BlendStateDescriptor::operator==(const BlendStateDescriptor& other) const
 {
 	return m_blendEnabled == other.m_blendEnabled == true &&
@@ -103,4 +122,11 @@ m_srcColor(bf1), m_destColor(bf2), m_colorBlendOp(bop),
 m_srcAlpha(bf1), m_destAlpha(bf2), m_alphaBlendOp(bop)
 {
 	m_renderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+}
+
+BlendStateDescriptor::BlendStateDescriptor() : m_blendEnabled(TRUE), m_renderTargetWriteMask(D3D11_COLOR_WRITE_ENABLE_ALL),
+m_srcColor(kBlendOne), m_destColor(kBlendZero), m_colorBlendOp(kBlendOpAdd),
+m_srcAlpha(kBlendOne), m_destAlpha(kBlendZero), m_alphaBlendOp(kBlendOpAdd)
+{
+
 }

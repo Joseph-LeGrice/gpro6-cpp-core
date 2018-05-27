@@ -5,15 +5,16 @@
 struct ID3D11BlendState;
 class GraphicsDevice;
 enum D3D11_BLEND;
+enum D3D11_BLEND_OP;
 
 enum BlendFactor
 {
-    kBlendZero,
-    kBlendOne,
-    kBlendSrc,
-    kBlendSrcInv,
-    kBlendDest,
-    kBlendDestInv
+    kBlendZero = 0,
+    kBlendOne = 1,
+    kBlendSrc = 2,
+    kBlendSrcInv = 3,
+    kBlendDest = 4,
+    kBlendDestInv = 5
     //kBlendSrcAlphaSat = 11,
     //kBlendBlendFactor = 14,
     //kBlendBlendFactorInv = 15,
@@ -25,11 +26,11 @@ enum BlendFactor
 
 enum BlendOperation
 {
-    kBlendOpAdd = 1,
-    kBlendOpSubtract = 2,
-    kBlendOpSubtractRev = 3,
-    kBlendOpMin = 4,
-    kBlendOpMax = 5
+    kBlendOpAdd = 0,
+    kBlendOpSubtract = 1,
+    kBlendOpSubtractRev = 2,
+    kBlendOpMin = 3,
+    kBlendOpMax = 4
 };
 
 struct BlendStateDescriptor
@@ -46,7 +47,8 @@ struct BlendStateDescriptor
 
     UINT8 m_renderTargetWriteMask;
 
-    BlendStateDescriptor(BOOL enabled);
+	BlendStateDescriptor();
+	BlendStateDescriptor(BOOL enabled);
     BlendStateDescriptor(BlendFactor bf1, BlendFactor bf2, BlendOperation bop);
     BlendStateDescriptor(BlendFactor colBf1, BlendFactor coBf2, BlendOperation colBop,
         BlendFactor alphaBf1, BlendFactor alphaBf2, BlendOperation alphaBop);
@@ -95,6 +97,7 @@ private:
     std::unordered_map<BlendStateDescriptor, ManualRelease<ID3D11BlendState>> m_blendStates;
     
     ManualRelease<ID3D11BlendState>& GetBlendStateForDescriptor(BlendStateDescriptor& bsd);
-    D3D11_BLEND BlendFactorToNative(BlendFactor bf, bool isAlpha);
+	D3D11_BLEND BlendFactorToNative(BlendFactor bf, bool isAlpha);
+	D3D11_BLEND_OP BlendOpToNative(BlendOperation bf);
 };
 

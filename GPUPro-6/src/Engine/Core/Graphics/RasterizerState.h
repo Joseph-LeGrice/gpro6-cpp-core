@@ -7,15 +7,15 @@ struct ID3D11RasterizerState;
 
 enum CullState
 {
-    kCullStateNoCull = 1,
-    kCullStateFrontCull = 2,
-    kCullStateBackCull = 3
+    kCullStateNoCull = 0,
+    kCullStateFrontCull = 1,
+    kCullStateBackCull = 2
 };
 
 enum FillMode
 {
-    kFillModeSolid = 1,
-    kFillModeWireframe = 2
+    kFillModeSolid = 0,
+    kFillModeWireframe = 1
 };
 
 struct RasterizerStateDescriptor
@@ -23,6 +23,10 @@ struct RasterizerStateDescriptor
     CullState m_cullState = kCullStateBackCull;
     FillMode m_fillMode = kFillModeSolid;
     bool m_enableMSAA = false;
+
+	RasterizerStateDescriptor() : m_cullState(kCullStateBackCull),
+		m_fillMode(kFillModeSolid),
+		m_enableMSAA(false) { }
 
     RasterizerStateDescriptor(CullState cs, FillMode fm, bool msaa) :
         m_cullState(cs), m_fillMode(fm), m_enableMSAA(msaa) { }
