@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Engine/Core/RTTI/RTTI.h"
+#include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 
 #pragma warning(push)
 #pragma warning(disable:4201)

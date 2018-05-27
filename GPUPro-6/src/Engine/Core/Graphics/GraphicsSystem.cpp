@@ -106,7 +106,7 @@ void GraphicsSystem::VariableTick()
 			Entity* meshEntity = m_typedObjectManager.GetInstance<Entity>(mrc->GetEntityIndex());
 
 			Mesh* mesh = mrc->m_mesh.Get<Mesh>();
-			UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
+			//UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
 			UINT16 numberOfIndices = (UINT16)mesh->GetIndices().size();
 
 			if (mrc->IsEnabled())
@@ -133,8 +133,8 @@ void GraphicsSystem::VariableTick()
 					deviceContext.DrawIndexed(numberOfIndices, baseIndex, baseVertex);
 				}
 			}
-			baseVertex += numberOfVerts;
-			baseIndex += numberOfIndices;
+			//baseVertex += numberOfVerts;
+			//baseIndex += numberOfIndices;
 		}
 	}
 	m_gfxDevice.Present();

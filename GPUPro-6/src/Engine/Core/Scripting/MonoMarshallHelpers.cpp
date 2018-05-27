@@ -4,7 +4,6 @@
 #include "ScriptedSystemLoader.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/ResourceTypes/ManagedObject.h"
-#include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 
 extern std::string MonoMarshall::GetUTF8String(MonoString* ms)
 {

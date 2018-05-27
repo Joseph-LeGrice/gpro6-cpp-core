@@ -269,7 +269,24 @@
       "name": "Camera",
       "subdirectory": "components",
       "includePath": "Engine/Core/Components/Camera.h",
-      "methods": [],
+      "methods": [
+        {
+          "methodType": "instance",
+          "name": "SetOrthographic",
+          "returnType": "void",
+          "args": [
+            "float", "float", "float"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "SetPerspective",
+          "returnType": "void",
+          "args": [
+            "float", "float", "float", "float"
+          ]
+        }
+      ],
       "properties": []
     },
     {
