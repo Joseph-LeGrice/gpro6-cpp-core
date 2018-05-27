@@ -143,7 +143,7 @@ void GraphicsSystem::VariableTick()
 ConstantBuffer* GraphicsSystem::CreateConstantBuffer(UINT length)
 {
 	ConstantBuffer* newBuffer = new ConstantBuffer(m_gfxDevice); // FIXME: MANUAL ALLOCATION HERE
-	m_perCameraBuffer->InitBuffer(length);
+	newBuffer->InitBuffer(length);
 	m_allConstantBuffers.push_back(newBuffer);
 	return newBuffer;
 }

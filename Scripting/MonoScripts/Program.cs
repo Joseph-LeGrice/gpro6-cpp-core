@@ -57,7 +57,6 @@ class Program
         sphereTransform.scale *= 10.0f;
         MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();
         sphereRenderer.MeshIndex = sphereMeshID;
-        sphereRenderer.DrawCommandIndex = 1;
         sphereRenderer.MaterialIndex = simpleTestMaterial.InstanceID;
         //------------------------------------------------------------------------------------
         
@@ -126,6 +125,7 @@ class Program
         testCubemap.InitializeWithBitmaps(bitmapPaths.ToArray());
         
         Material skyboxMat = TypedObjectManager.Create<Material>();
+        skyboxMat.SetCullState(CullState.Front);
         skyboxMat.SetShaderIndex(skyboxShader.InstanceID);
         skyboxMat.RegisterShaderResource(testCubemap.GetResourceViewID(), 0);
 
@@ -133,7 +133,6 @@ class Program
         MeshRenderer skyboxRenderer = skyboxEntity.AddComponent<MeshRenderer>();
         // skyboxRenderer.m_enabled = true;
         skyboxRenderer.MeshIndex = sphereMeshID;
-        skyboxRenderer.DrawCommandIndex = 0;
         skyboxRenderer.MaterialIndex = skyboxMat.InstanceID;
         //------------------------------------------------------------------------------------
         
