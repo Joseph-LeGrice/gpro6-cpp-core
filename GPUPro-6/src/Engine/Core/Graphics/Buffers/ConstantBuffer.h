@@ -17,11 +17,8 @@ enum BindFlags
 
 class ConstantBuffer
 {
+friend class GraphicsSystem;
 public:
-    ConstantBuffer(GraphicsDevice& gfxDevice) :
-        m_gfxDevice(gfxDevice) { }
-    virtual ~ConstantBuffer();
-
 	void UpdateBuffer(void* data, size_t length);
     void BindBuffer(UINT bufferSlot, BindFlags bindFlags);
     void ReleaseBuffer();
@@ -32,6 +29,10 @@ protected:
 private:
 	GraphicsDevice& m_gfxDevice;
 	ManualRelease<ID3D11Buffer> m_buffer;
+
+	ConstantBuffer(GraphicsDevice& gfxDevice) :
+		m_gfxDevice(gfxDevice) { }
+	virtual ~ConstantBuffer();
 };
 
 #pragma warning(pop)

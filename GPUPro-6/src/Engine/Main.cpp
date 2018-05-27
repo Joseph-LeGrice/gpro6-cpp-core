@@ -16,11 +16,6 @@
 #include "Engine/Core/Scripting/ScriptedSystem.h"
 #include "Engine/Extra/Locomotion/NoClipLocomotion.h"
 
-// IDrawCommands
-#include "Engine/Core/Graphics/Drawing/SkyboxDrawCommand.h"
-#include "Engine/Core/Graphics/Drawing/StandardOpaqueMaterialDrawCommand.h"
-#include "Engine/Core/Graphics/Drawing/StandardTransparentMaterialDrawCommand.h"
-
 // Scene + IComponents
 #include "Engine/Core/SceneGraph/SceneGraph.hpp"
 #include "Engine/Core/SceneGraph/SceneGraphManager.h"
@@ -132,11 +127,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	int result = gameLoop->Run(*systemContainer);
 
 	for (auto it = allSystems->begin(); it != allSystems->end(); it++)
-	{
-		delete *it;
-	}
-
-	for (auto it = commands->begin(); it != commands->end(); it++)
 	{
 		delete *it;
 	}
