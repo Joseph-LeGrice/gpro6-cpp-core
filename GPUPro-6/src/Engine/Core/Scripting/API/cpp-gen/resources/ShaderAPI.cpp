@@ -21,10 +21,7 @@ extern void GPro::ShaderAPI::InitVertexShader(int managedInstanceId, MonoString*
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Shader::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Shader* nativeClassInstance = tom->GetInstance<Shader>(nativeInstanceId);
+	Shader* nativeClassInstance = MonoMarshall::GetNativeObject<Shader>(managedInstanceId);
 	nativeClassInstance->InitVertexShader(arg0_marshalled, arg1_marshalled);
 }
 
@@ -32,10 +29,7 @@ extern void GPro::ShaderAPI::InitPixelShader(int managedInstanceId, MonoString* 
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Shader::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Shader* nativeClassInstance = tom->GetInstance<Shader>(nativeInstanceId);
+	Shader* nativeClassInstance = MonoMarshall::GetNativeObject<Shader>(managedInstanceId);
 	nativeClassInstance->InitPixelShader(arg0_marshalled, arg1_marshalled);
 }
 
@@ -43,10 +37,7 @@ extern void GPro::ShaderAPI::InitGeometryShader(int managedInstanceId, MonoStrin
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Shader::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Shader* nativeClassInstance = tom->GetInstance<Shader>(nativeInstanceId);
+	Shader* nativeClassInstance = MonoMarshall::GetNativeObject<Shader>(managedInstanceId);
 	nativeClassInstance->InitGeometryShader(arg0_marshalled, arg1_marshalled);
 }
 
@@ -54,10 +45,7 @@ extern void GPro::ShaderAPI::InitHullShader(int managedInstanceId, MonoString* a
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Shader::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Shader* nativeClassInstance = tom->GetInstance<Shader>(nativeInstanceId);
+	Shader* nativeClassInstance = MonoMarshall::GetNativeObject<Shader>(managedInstanceId);
 	nativeClassInstance->InitHullShader(arg0_marshalled, arg1_marshalled);
 }
 
@@ -65,10 +53,7 @@ extern void GPro::ShaderAPI::InitDomainShader(int managedInstanceId, MonoString*
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Shader::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Shader* nativeClassInstance = tom->GetInstance<Shader>(nativeInstanceId);
+	Shader* nativeClassInstance = MonoMarshall::GetNativeObject<Shader>(managedInstanceId);
 	nativeClassInstance->InitDomainShader(arg0_marshalled, arg1_marshalled);
 }
 // ## Generated Code ##

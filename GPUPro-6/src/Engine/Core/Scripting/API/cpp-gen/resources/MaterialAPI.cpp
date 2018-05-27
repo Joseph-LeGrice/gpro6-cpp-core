@@ -29,108 +29,75 @@ extern void GPro::MaterialAPI::RegisterCalls()
 
 extern void GPro::MaterialAPI::SetShaderIndex(int managedInstanceId, int arg0)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetShaderIndex(arg0);
 }
 
 extern void GPro::MaterialAPI::RegisterShaderResource(int managedInstanceId, int arg0, int arg1)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->RegisterShaderResource(arg0, arg1);
 }
 
 extern void GPro::MaterialAPI::AddTextureSampler(int managedInstanceId, int arg0, int arg1)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->AddTextureSampler(arg0, arg1);
 }
 
 extern void GPro::MaterialAPI::SetInteger(int managedInstanceId, MonoString* arg0, int arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetInteger(arg0_marshalled, arg1);
 }
 
 extern void GPro::MaterialAPI::SetBoolean(int managedInstanceId, MonoString* arg0, bool arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetBoolean(arg0_marshalled, arg1);
 }
 
 extern void GPro::MaterialAPI::SetFloat(int managedInstanceId, MonoString* arg0, float arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFloat(arg0_marshalled, arg1);
 }
 
 extern void GPro::MaterialAPI::SetFloat2(int managedInstanceId, MonoString* arg0, Vector2 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFloat2(arg0_marshalled, arg1);
 }
 
 extern void GPro::MaterialAPI::SetFloat3(int managedInstanceId, MonoString* arg0, Vector3 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFloat3(arg0_marshalled, arg1);
 }
 
 extern void GPro::MaterialAPI::SetFloat4(int managedInstanceId, MonoString* arg0, Vector4 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFloat4(arg0_marshalled, arg1);
 }
 
 extern void GPro::MaterialAPI::SetMatrix3x3(int managedInstanceId, MonoString* arg0, Matrix3x3 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetMatrix3x3(arg0_marshalled, arg1);
 }
 
 extern void GPro::MaterialAPI::SetMatrix4x4(int managedInstanceId, MonoString* arg0, Matrix4x4 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetMatrix4x4(arg0_marshalled, arg1);
 }
 
@@ -138,36 +105,24 @@ extern void GPro::MaterialAPI::SetMatrix4x4(int managedInstanceId, MonoString* a
 
 extern void GPro::MaterialAPI::SetCullState_Internal(int managedInstanceId, int arg0)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetCullState(static_cast<CullState>(arg0));
 }
 
 extern void GPro::MaterialAPI::SetFillMode_Internal(int managedInstanceId, int arg0)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFillMode(static_cast<FillMode>(arg0));
 }
 
 extern void GPro::MaterialAPI::SetColorBlending_Internal(int managedInstanceId, int arg0, int arg1, int arg2)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetColorBlending(static_cast<BlendFactor>(arg0), static_cast<BlendFactor>(arg1), static_cast<BlendOperation>(arg2));
 }
 
 extern void GPro::MaterialAPI::SetAlphaBlending_Internal(int managedInstanceId, int arg0, int arg1, int arg2)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Material::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Material* nativeClassInstance = tom->GetInstance<Material>(nativeInstanceId);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetAlphaBlending(static_cast<BlendFactor>(arg0), static_cast<BlendFactor>(arg1), static_cast<BlendOperation>(arg2));
 }

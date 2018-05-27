@@ -18,37 +18,25 @@ extern void GPro::MeshRendererAPI::RegisterCalls()
 
 extern int GPro::MeshRendererAPI::Get_MeshIndex(int managedInstanceId)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	MeshRenderer* nativeClassInstance = tom->GetInstance<MeshRenderer>(nativeInstanceId);
+	MeshRenderer* nativeClassInstance = MonoMarshall::GetNativeObject<MeshRenderer>(managedInstanceId);
 	return nativeClassInstance->m_meshIndex;
 }
 
 extern void GPro::MeshRendererAPI::Set_MeshIndex(int managedInstanceId, int value)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	MeshRenderer* nativeClassInstance = tom->GetInstance<MeshRenderer>(nativeInstanceId);
+	MeshRenderer* nativeClassInstance = MonoMarshall::GetNativeObject<MeshRenderer>(managedInstanceId);
 	nativeClassInstance->m_meshIndex = value;
 }
 
 extern int GPro::MeshRendererAPI::Get_MaterialIndex(int managedInstanceId)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	MeshRenderer* nativeClassInstance = tom->GetInstance<MeshRenderer>(nativeInstanceId);
+	MeshRenderer* nativeClassInstance = MonoMarshall::GetNativeObject<MeshRenderer>(managedInstanceId);
 	return nativeClassInstance->m_materialIndex;
 }
 
 extern void GPro::MeshRendererAPI::Set_MaterialIndex(int managedInstanceId, int value)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(MeshRenderer::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	MeshRenderer* nativeClassInstance = tom->GetInstance<MeshRenderer>(nativeInstanceId);
+	MeshRenderer* nativeClassInstance = MonoMarshall::GetNativeObject<MeshRenderer>(managedInstanceId);
 	nativeClassInstance->m_materialIndex = value;
 }
 

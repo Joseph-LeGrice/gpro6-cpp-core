@@ -16,19 +16,13 @@ extern void GPro::LightAPI::RegisterCalls()
 
 extern float GPro::LightAPI::Get_Range(int managedInstanceId)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Light::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Light* nativeClassInstance = tom->GetInstance<Light>(nativeInstanceId);
+	Light* nativeClassInstance = MonoMarshall::GetNativeObject<Light>(managedInstanceId);
 	return nativeClassInstance->m_range;
 }
 
 extern void GPro::LightAPI::Set_Range(int managedInstanceId, float value)
 {
-	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeInstanceId = ntmip->GetNativeInstanceID(Light::GetTypeID(), managedInstanceId);
-	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	Light* nativeClassInstance = tom->GetInstance<Light>(nativeInstanceId);
+	Light* nativeClassInstance = MonoMarshall::GetNativeObject<Light>(managedInstanceId);
 	nativeClassInstance->m_range = value;
 }
 
