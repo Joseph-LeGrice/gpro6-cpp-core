@@ -6,7 +6,7 @@
 
 static const unsigned int c_numberOfComponentTypesAllowed = 10;
 
-struct Entity : public ITypedObject
+class Entity : public ITypedObject
 {
 	REGISTER_TYPE(Entity);
 public:

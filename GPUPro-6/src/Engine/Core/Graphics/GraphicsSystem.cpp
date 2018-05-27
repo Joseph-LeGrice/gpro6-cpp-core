@@ -78,7 +78,7 @@ void GraphicsSystem::VariableTick()
 	{
 		Camera* cam = allCameras[cameraIndex];
 
-        Entity* cameraEntity = m_typedObjectManager.GetInstance<Entity>(cam->GetEntityIndex());
+        Entity* cameraEntity = cam->entity.Get<Entity>();
         Transform* cameraTransform = cameraEntity->GetComponent<Transform>();
 
 		Matrix4x4 view = cameraTransform->GetCameraViewMatrix();
@@ -101,12 +101,12 @@ void GraphicsSystem::VariableTick()
 		for (size_t i = 0; i < meshRenderers.size(); ++i)
 		{
 			MeshRenderer* mrc = meshRenderers[i];
-			Entity* meshEntity = m_typedObjectManager.GetInstance<Entity>(mrc->GetEntityIndex());
+			Entity* meshEntity = mrc->entity.Get<Entity>();
 
 			Mesh* mesh = mrc->m_mesh.Get<Mesh>();
 			MeshInfo mi = m_meshManager.GetMapping(mesh);
 			
-			if (mrc->IsEnabled())
+			if (mrc->m_enabled)
 			{
 				Transform* modelTransform = meshEntity->GetComponent<Transform>();
 

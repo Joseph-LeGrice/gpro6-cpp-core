@@ -12,10 +12,12 @@ IComponent* Entity::AddComponent(TypeID type)
 	}
 
 	TypedObjectManager* typedObjectManager = GlobalStaticReferences::Instance()->GetTypedObjectManager();
-	ITypedObject* newComponent = typedObjectManager->Create(type);
+	IComponent* newComponent = static_cast<IComponent*>(typedObjectManager->Create(type));
+	newComponent->entity = this;
+
 	InstanceID iid = newComponent->GetInstanceID();
 	m_componentMap[type].push_back(iid);
-	return static_cast<IComponent*>(newComponent);
+	return newComponent;
 }
 
 void Entity::RemoveComponent(TypeID type)

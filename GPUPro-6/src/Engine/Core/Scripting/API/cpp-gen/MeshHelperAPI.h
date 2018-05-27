@@ -15,6 +15,8 @@ namespace GPro
 		extern void RegisterCalls();
 
 		extern MonoObject* CreateSphereUV_Internal();
+
+		extern MonoObject* CreateQuad_Internal();
 // ## Generated Code ##
 	};
 };

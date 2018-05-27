@@ -4,19 +4,6 @@
 class IComponent : public ITypedObject
 {
 public:
-	int GetEntityIndex() {
-		return m_entityIndex;
-	}
-
-	bool IsEnabled() {
-		return m_enabled;
-	}
-
-	void SetEnabled(bool enabled) {
-		m_enabled = enabled;
-	}
-
-private:
-	int m_entityIndex;
+	ToPtr entity;
 	bool m_enabled = true;
 };

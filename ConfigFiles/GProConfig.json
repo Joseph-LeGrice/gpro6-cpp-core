@@ -454,6 +454,13 @@
           "returnType": "object",
           "args": [
           ]
+        },
+        {
+          "methodType": "static",
+          "name": "CreateQuad_Internal",
+          "returnType": "object",
+          "args": [
+          ]
         }
       ],
       "properties": [

@@ -124,7 +124,7 @@ m_srcAlpha(bf1), m_destAlpha(bf2), m_alphaBlendOp(bop)
 	m_renderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 }
 
-BlendStateDescriptor::BlendStateDescriptor() : m_blendEnabled(TRUE), m_renderTargetWriteMask(D3D11_COLOR_WRITE_ENABLE_ALL),
+BlendStateDescriptor::BlendStateDescriptor() : m_blendEnabled(FALSE), m_renderTargetWriteMask(D3D11_COLOR_WRITE_ENABLE_ALL),
 m_srcColor(kBlendOne), m_destColor(kBlendZero), m_colorBlendOp(kBlendOpAdd),
 m_srcAlpha(kBlendOne), m_destAlpha(kBlendZero), m_alphaBlendOp(kBlendOpAdd)
 {

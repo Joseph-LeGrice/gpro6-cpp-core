@@ -30,7 +30,7 @@ void LightingSystem::VariableTick()
     for (size_t i = 0; i < min(allLights.size(), MAX_LIGHTS); ++i)
     {
 		Light* light = allLights[i];
-        Entity* lightEntity = m_typedObjectManager.GetInstance<Entity>(light->GetEntityIndex());
+        Entity* lightEntity = light->entity.Get<Entity>();
         Transform* lightTransform = lightEntity->GetComponent<Transform>();
 
         lights[i].PositionWS = Vector4::FromVector3(lightTransform->m_position);

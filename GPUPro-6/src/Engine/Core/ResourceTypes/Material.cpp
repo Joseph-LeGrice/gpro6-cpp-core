@@ -99,6 +99,11 @@ void Material::SetFillMode(FillMode fillMode)
 	m_rasterState.m_fillMode = fillMode;
 }
 
+void Material::SetBlendingEnabled(bool enabled)
+{
+	m_blendState.m_blendEnabled = enabled;
+}
+
 void Material::SetColorBlending(BlendFactor src, BlendFactor dest, BlendOperation op)
 {
 	m_blendState.m_srcColor = src;

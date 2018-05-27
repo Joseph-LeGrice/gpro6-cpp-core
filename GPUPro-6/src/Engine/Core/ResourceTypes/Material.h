@@ -61,6 +61,7 @@ public:
 	void SetCullState(CullState cullState);
 	void SetFillMode(FillMode fillMode);
 	
+	void SetBlendingEnabled(bool enabled);
 	void SetColorBlending(BlendFactor src, BlendFactor dest, BlendOperation op);
 	void SetAlphaBlending(BlendFactor src, BlendFactor dest, BlendOperation op);
 
