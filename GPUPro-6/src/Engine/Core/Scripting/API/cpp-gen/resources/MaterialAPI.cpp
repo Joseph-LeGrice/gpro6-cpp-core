@@ -27,74 +27,74 @@ extern void GPro::MaterialAPI::RegisterCalls()
 	mono_add_internal_call("Material::SetAlphaBlending_Internal", GPro::MaterialAPI::SetAlphaBlending_Internal);
 }
 
-extern void GPro::MaterialAPI::SetShaderIndex(int managedInstanceId, int arg0)
+extern void GPro::MaterialAPI::SetShaderIndex(InstanceID managedInstanceId, int arg0)
 {
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetShaderIndex(arg0);
 }
 
-extern void GPro::MaterialAPI::RegisterShaderResource(int managedInstanceId, int arg0, int arg1)
+extern void GPro::MaterialAPI::RegisterShaderResource(InstanceID managedInstanceId, int arg0, int arg1)
 {
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->RegisterShaderResource(arg0, arg1);
 }
 
-extern void GPro::MaterialAPI::AddTextureSampler(int managedInstanceId, int arg0, int arg1)
+extern void GPro::MaterialAPI::AddTextureSampler(InstanceID managedInstanceId, int arg0, int arg1)
 {
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->AddTextureSampler(arg0, arg1);
 }
 
-extern void GPro::MaterialAPI::SetInteger(int managedInstanceId, MonoString* arg0, int arg1)
+extern void GPro::MaterialAPI::SetInteger(InstanceID managedInstanceId, MonoString* arg0, int arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetInteger(arg0_marshalled, arg1);
 }
 
-extern void GPro::MaterialAPI::SetBoolean(int managedInstanceId, MonoString* arg0, bool arg1)
+extern void GPro::MaterialAPI::SetBoolean(InstanceID managedInstanceId, MonoString* arg0, bool arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetBoolean(arg0_marshalled, arg1);
 }
 
-extern void GPro::MaterialAPI::SetFloat(int managedInstanceId, MonoString* arg0, float arg1)
+extern void GPro::MaterialAPI::SetFloat(InstanceID managedInstanceId, MonoString* arg0, float arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFloat(arg0_marshalled, arg1);
 }
 
-extern void GPro::MaterialAPI::SetFloat2(int managedInstanceId, MonoString* arg0, Vector2 arg1)
+extern void GPro::MaterialAPI::SetFloat2(InstanceID managedInstanceId, MonoString* arg0, Vector2 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFloat2(arg0_marshalled, arg1);
 }
 
-extern void GPro::MaterialAPI::SetFloat3(int managedInstanceId, MonoString* arg0, Vector3 arg1)
+extern void GPro::MaterialAPI::SetFloat3(InstanceID managedInstanceId, MonoString* arg0, Vector3 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFloat3(arg0_marshalled, arg1);
 }
 
-extern void GPro::MaterialAPI::SetFloat4(int managedInstanceId, MonoString* arg0, Vector4 arg1)
+extern void GPro::MaterialAPI::SetFloat4(InstanceID managedInstanceId, MonoString* arg0, Vector4 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetFloat4(arg0_marshalled, arg1);
 }
 
-extern void GPro::MaterialAPI::SetMatrix3x3(int managedInstanceId, MonoString* arg0, Matrix3x3 arg1)
+extern void GPro::MaterialAPI::SetMatrix3x3(InstanceID managedInstanceId, MonoString* arg0, Matrix3x3 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->SetMatrix3x3(arg0_marshalled, arg1);
 }
 
-extern void GPro::MaterialAPI::SetMatrix4x4(int managedInstanceId, MonoString* arg0, Matrix4x4 arg1)
+extern void GPro::MaterialAPI::SetMatrix4x4(InstanceID managedInstanceId, MonoString* arg0, Matrix4x4 arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);

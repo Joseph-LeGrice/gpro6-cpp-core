@@ -14,14 +14,14 @@ extern void GPro::Texture2DAPI::RegisterCalls()
 	mono_add_internal_call("Texture2D::GetResourceViewID(int)", GPro::Texture2DAPI::GetResourceViewID);
 }
 
-extern void GPro::Texture2DAPI::InitializeWithBitmap(int managedInstanceId, MonoString* arg0)
+extern void GPro::Texture2DAPI::InitializeWithBitmap(InstanceID managedInstanceId, MonoString* arg0)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	Texture2D* nativeClassInstance = MonoMarshall::GetNativeObject<Texture2D>(managedInstanceId);
 	nativeClassInstance->InitializeWithBitmap(arg0_marshalled);
 }
 
-extern int GPro::Texture2DAPI::GetResourceViewID(int managedInstanceId)
+extern int GPro::Texture2DAPI::GetResourceViewID(InstanceID managedInstanceId)
 {
 	Texture2D* nativeClassInstance = MonoMarshall::GetNativeObject<Texture2D>(managedInstanceId);
 	return nativeClassInstance->GetResourceViewID();

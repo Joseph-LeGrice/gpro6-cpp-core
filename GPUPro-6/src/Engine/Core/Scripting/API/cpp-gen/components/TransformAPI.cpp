@@ -18,37 +18,37 @@ extern void GPro::TransformAPI::RegisterCalls()
 	mono_add_internal_call("Transform::Set_rotation", GPro::TransformAPI::Set_rotation);
 }
 
-extern Vector3 GPro::TransformAPI::Get_position(int managedInstanceId)
+extern Vector3 GPro::TransformAPI::Get_position(InstanceID managedInstanceId)
 {
 	Transform* nativeClassInstance = MonoMarshall::GetNativeObject<Transform>(managedInstanceId);
 	return nativeClassInstance->m_position;
 }
 
-extern void GPro::TransformAPI::Set_position(int managedInstanceId, Vector3 value)
+extern void GPro::TransformAPI::Set_position(InstanceID managedInstanceId, Vector3 value)
 {
 	Transform* nativeClassInstance = MonoMarshall::GetNativeObject<Transform>(managedInstanceId);
 	nativeClassInstance->m_position = value;
 }
 
-extern Vector3 GPro::TransformAPI::Get_scale(int managedInstanceId)
+extern Vector3 GPro::TransformAPI::Get_scale(InstanceID managedInstanceId)
 {
 	Transform* nativeClassInstance = MonoMarshall::GetNativeObject<Transform>(managedInstanceId);
 	return nativeClassInstance->m_scale;
 }
 
-extern void GPro::TransformAPI::Set_scale(int managedInstanceId, Vector3 value)
+extern void GPro::TransformAPI::Set_scale(InstanceID managedInstanceId, Vector3 value)
 {
 	Transform* nativeClassInstance = MonoMarshall::GetNativeObject<Transform>(managedInstanceId);
 	nativeClassInstance->m_scale = value;
 }
 
-extern Quaternion GPro::TransformAPI::Get_rotation(int managedInstanceId)
+extern Quaternion GPro::TransformAPI::Get_rotation(InstanceID managedInstanceId)
 {
 	Transform* nativeClassInstance = MonoMarshall::GetNativeObject<Transform>(managedInstanceId);
 	return nativeClassInstance->m_rotation;
 }
 
-extern void GPro::TransformAPI::Set_rotation(int managedInstanceId, Quaternion value)
+extern void GPro::TransformAPI::Set_rotation(InstanceID managedInstanceId, Quaternion value)
 {
 	Transform* nativeClassInstance = MonoMarshall::GetNativeObject<Transform>(managedInstanceId);
 	nativeClassInstance->m_rotation = value;

@@ -14,13 +14,13 @@ extern void GPro::LightAPI::RegisterCalls()
 	mono_add_internal_call("Light::Set_Range", GPro::LightAPI::Set_Range);
 }
 
-extern float GPro::LightAPI::Get_Range(int managedInstanceId)
+extern float GPro::LightAPI::Get_Range(InstanceID managedInstanceId)
 {
 	Light* nativeClassInstance = MonoMarshall::GetNativeObject<Light>(managedInstanceId);
 	return nativeClassInstance->m_range;
 }
 
-extern void GPro::LightAPI::Set_Range(int managedInstanceId, float value)
+extern void GPro::LightAPI::Set_Range(InstanceID managedInstanceId, float value)
 {
 	Light* nativeClassInstance = MonoMarshall::GetNativeObject<Light>(managedInstanceId);
 	nativeClassInstance->m_range = value;

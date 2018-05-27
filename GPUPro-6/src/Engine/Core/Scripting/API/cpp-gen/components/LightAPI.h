@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Engine/Core/RTTI/RTTI.h"
+
 #pragma warning(push)
 #pragma warning(disable:4201)
 #include <mono/metadata/object.h>
@@ -12,8 +14,8 @@ namespace GPro
 // ## Generated Code ##
 		extern void RegisterCalls();
 
-		float Get_Range(int managedInstanceId);
-		void Set_Range(int managedInstanceId, float val);
+		float Get_Range(InstanceID managedInstanceId);
+		void Set_Range(InstanceID managedInstanceId, float val);
 // ## Generated Code ##
 	};
 };

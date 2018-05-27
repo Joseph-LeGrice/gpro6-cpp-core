@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Engine/Core/RTTI/RTTI.h"
+
 #pragma warning(push)
 #pragma warning(disable:4201)
 #include <mono/metadata/object.h>
@@ -12,9 +14,9 @@ namespace GPro
 // ## Generated Code ##
 		extern void RegisterCalls();
 
-		extern void InitializeWithBitmap(int managedInstanceId, MonoString* arg0);
+		extern void InitializeWithBitmap(InstanceID managedInstanceId, MonoString* arg0);
 
-		extern int GetResourceViewID(int managedInstanceId);
+		extern int GetResourceViewID(InstanceID managedInstanceId);
 // ## Generated Code ##
 	};
 };

@@ -13,7 +13,7 @@ extern void GPro::StructuredBufferAPI::RegisterCalls()
 	mono_add_internal_call("StructuredBuffer::GetMyResourceViewID(int)", GPro::StructuredBufferAPI::GetMyResourceViewID);
 }
 
-extern int GPro::StructuredBufferAPI::GetMyResourceViewID(int managedInstanceId)
+extern int GPro::StructuredBufferAPI::GetMyResourceViewID(InstanceID managedInstanceId)
 {
 	StructuredBuffer* nativeClassInstance = MonoMarshall::GetNativeObject<StructuredBuffer>(managedInstanceId);
 	return nativeClassInstance->GetMyResourceViewID();

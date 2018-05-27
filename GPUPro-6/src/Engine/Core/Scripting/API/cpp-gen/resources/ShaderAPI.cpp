@@ -17,7 +17,7 @@ extern void GPro::ShaderAPI::RegisterCalls()
 	mono_add_internal_call("Shader::InitDomainShader(int,string,string)", GPro::ShaderAPI::InitDomainShader);
 }
 
-extern void GPro::ShaderAPI::InitVertexShader(int managedInstanceId, MonoString* arg0, MonoString* arg1)
+extern void GPro::ShaderAPI::InitVertexShader(InstanceID managedInstanceId, MonoString* arg0, MonoString* arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
@@ -25,7 +25,7 @@ extern void GPro::ShaderAPI::InitVertexShader(int managedInstanceId, MonoString*
 	nativeClassInstance->InitVertexShader(arg0_marshalled, arg1_marshalled);
 }
 
-extern void GPro::ShaderAPI::InitPixelShader(int managedInstanceId, MonoString* arg0, MonoString* arg1)
+extern void GPro::ShaderAPI::InitPixelShader(InstanceID managedInstanceId, MonoString* arg0, MonoString* arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
@@ -33,7 +33,7 @@ extern void GPro::ShaderAPI::InitPixelShader(int managedInstanceId, MonoString* 
 	nativeClassInstance->InitPixelShader(arg0_marshalled, arg1_marshalled);
 }
 
-extern void GPro::ShaderAPI::InitGeometryShader(int managedInstanceId, MonoString* arg0, MonoString* arg1)
+extern void GPro::ShaderAPI::InitGeometryShader(InstanceID managedInstanceId, MonoString* arg0, MonoString* arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
@@ -41,7 +41,7 @@ extern void GPro::ShaderAPI::InitGeometryShader(int managedInstanceId, MonoStrin
 	nativeClassInstance->InitGeometryShader(arg0_marshalled, arg1_marshalled);
 }
 
-extern void GPro::ShaderAPI::InitHullShader(int managedInstanceId, MonoString* arg0, MonoString* arg1)
+extern void GPro::ShaderAPI::InitHullShader(InstanceID managedInstanceId, MonoString* arg0, MonoString* arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
@@ -49,7 +49,7 @@ extern void GPro::ShaderAPI::InitHullShader(int managedInstanceId, MonoString* a
 	nativeClassInstance->InitHullShader(arg0_marshalled, arg1_marshalled);
 }
 
-extern void GPro::ShaderAPI::InitDomainShader(int managedInstanceId, MonoString* arg0, MonoString* arg1)
+extern void GPro::ShaderAPI::InitDomainShader(InstanceID managedInstanceId, MonoString* arg0, MonoString* arg1)
 {
 	std::wstring arg0_marshalled = MonoMarshall::GetUTF16String(arg0);
 	std::wstring arg1_marshalled = MonoMarshall::GetUTF16String(arg1);
