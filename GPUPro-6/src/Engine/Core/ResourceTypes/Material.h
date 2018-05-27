@@ -3,6 +3,8 @@
 #include <vector>
 
 #include "Engine/Core/RTTI/ITypedObject.h"
+#include "Engine/Core/Graphics/BlendState.h"
+#include "Engine/Core/Graphics/RasterizerState.h"
 #include "Engine/Core/DataStructures/MaterialPropertyList.h"
 
 //struct MATERIAL_BUFFER
@@ -45,7 +47,7 @@ class Material : public ITypedObject
 {
 REGISTER_TYPE(Material);
 public:
-	bool BindIfValid(ConstantBuffer* buffer);
+	bool BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerState, BlendState* blendState);
 
 	void SetInteger(std::wstring name, int value);
 	void SetBoolean(std::wstring name, bool value);
@@ -55,6 +57,12 @@ public:
 	void SetFloat4(std::wstring name, Vector4 value);
 	void SetMatrix3x3(std::wstring name, Matrix3x3 value);
 	void SetMatrix4x4(std::wstring name, Matrix4x4 value);
+
+	void SetCullState(CullState cullState);
+	void SetFillMode(FillMode fillMode);
+	
+	void SetColorBlending(BlendFactor src, BlendFactor dest, BlendOperation op);
+	void SetAlphaBlending(BlendFactor src, BlendFactor dest, BlendOperation op);
 
     void SetShaderIndex(int shaderIndex);
 	void RegisterShaderResource(int resourceIndex, int slotIndex);
@@ -68,6 +76,8 @@ private:
 	};
 
     int m_shaderIndex = -1;
+	BlendStateDescriptor m_blendState;
+	RasterizerStateDescriptor m_rasterState;
 	MaterialPropertyList m_properties;
 	std::vector<ResourceDetails> m_shaderResources;
 	std::vector<ResourceDetails> m_textureSamplerIndexes;

@@ -1,18 +1,20 @@
 #include "stdafx.h"
 #include "GraphicsSystem.h"
 
-#include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
-#include "Engine/Core/Components/Camera.h"
-#include "Engine/Core/SceneGraph/SceneGraphManager.h"
-#include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/Components/Transform.h"
-#include "Engine/Core/Graphics/Drawing/IDrawCommand.h"
-#include "Engine/Core/WindowManagement/WindowManager.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
+#include "Engine/Core/Mesh/MeshManager.h"
+#include "Engine/Core/SceneGraph/SceneGraphManager.h"
+#include "Engine/Core/SceneGraph/Components/Entity.h"
+#include "Engine/Core/WindowManagement/WindowManager.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
+#include "Engine/Core/ResourceTypes/Mesh.h"
+#include "Engine/Core/ResourceTypes/Material.h"
+#include "Engine/Core/Components/MeshRenderer.h"
+#include "Engine/Core/Components/Camera.h"
+#include "Engine/Core/Components/Transform.h"
 
 #include "FreeImage.h"
 
@@ -32,21 +34,22 @@ GraphicsSystem::GraphicsSystem(BlendState& blendState,
 	GraphicsDevice& gfxDevice,
 	DepthStencilBuffer& depthStencilBuffer,
 	TypedObjectManager& typedObjectManager,
-	ConstantBuffer& perCameraBuffer,
-    std::vector<IDrawCommand*>& commands) :
+	RasterizerState& rasterizerState) :
 	m_blendState(blendState),
 	m_meshManager(meshManager),
 	m_gfxDevice(gfxDevice),
 	m_depthStencilBuffer(depthStencilBuffer),
 	m_typedObjectManager(typedObjectManager),
-    m_perCameraBuffer(perCameraBuffer),
-    m_commands(commands) {
+	m_rasterizerState(rasterizerState) {
 	FreeImage_SetOutputMessage(FreeImageOutput);
 }
 
 void GraphicsSystem::Initialize()
 {
 	ISystem::Initialize();
+
+	m_perCameraBuffer = CreateConstantBuffer(sizeof(PER_CAMERA_BUFFER));
+	m_perObjectBuffer = CreateConstantBuffer(sizeof(PER_OBJECT_BUFFER));
 
 	//float viewportWidth = m_gfxDevice.GetViewportWidth();
 	//float viewportHeight = m_gfxDevice.GetViewportHeight();
@@ -65,7 +68,7 @@ void GraphicsSystem::VariableTick()
 {
 	m_meshManager.BindBuffers();
 	
-    m_perCameraBuffer.BindBuffer(0, BIND_ALL);
+    m_perCameraBuffer->BindBuffer(0, BIND_ALL);
 
     m_depthStencilBuffer.ClearBuffer();
     m_depthStencilBuffer.SetState();
@@ -88,12 +91,78 @@ void GraphicsSystem::VariableTick()
         pcb.EyePos.W = 1;
         pcb.View = view;
         pcb.Projection = proj;
-        m_perCameraBuffer.UpdateBuffer(&pcb, sizeof(PER_CAMERA_BUFFER));
+        m_perCameraBuffer->UpdateBuffer(&pcb, sizeof(PER_CAMERA_BUFFER));
 
-        for (int i = 0; i < m_commands.size(); i++)
-        {
-            m_commands[i]->Draw(view, proj);
-        }
+		m_perObjectBuffer->BindBuffer(1, BIND_ALL);
+
+		ID3D11DeviceContext& deviceContext = *m_gfxDevice.GetGraphicsDeviceContext();
+
+		UINT16 baseVertex = 0;
+		UINT16 baseIndex = 0;
+		std::vector<MeshRenderer*> meshRenderers = m_typedObjectManager.GetAllInstances<MeshRenderer>();
+		for (size_t i = 0; i < meshRenderers.size(); ++i)
+		{
+			MeshRenderer* mrc = meshRenderers[i];
+			Entity* meshEntity = m_typedObjectManager.GetInstance<Entity>(mrc->GetEntityIndex());
+
+			Mesh* mesh = m_typedObjectManager.GetInstance<Mesh>(mrc->m_meshIndex);
+			UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
+			UINT16 numberOfIndices = (UINT16)mesh->GetIndices().size();
+
+			if (mrc->IsEnabled())
+			{
+				Transform* modelTransform = meshEntity->GetComponent<Transform>();
+
+				Matrix4x4 model;
+				Matrix4x4::Identity(model);
+				if (modelTransform != nullptr)
+				{
+					model = modelTransform->GetMatrix();
+				}
+
+				PER_OBJECT_BUFFER pob;
+				pob.ModelViewProjection = proj * view * model;
+				pob.ModelView = view * model;
+
+				m_perObjectBuffer->UpdateBuffer(&pob, sizeof(PER_OBJECT_BUFFER));
+
+				Material* mat = m_typedObjectManager.GetInstance<Material>(mrc->m_materialIndex);
+				if (mat->BindIfValid(m_perObjectBuffer, &m_rasterizerState, &m_blendState))
+				{
+					deviceContext.IASetPrimitiveTopology(mesh->m_topology);
+					deviceContext.DrawIndexed(numberOfIndices, baseIndex, baseVertex);
+				}
+			}
+			baseVertex += numberOfVerts;
+			baseIndex += numberOfIndices;
+		}
 	}
 	m_gfxDevice.Present();
+}
+
+ConstantBuffer* GraphicsSystem::CreateConstantBuffer(UINT length)
+{
+	ConstantBuffer* newBuffer = new ConstantBuffer(m_gfxDevice); // FIXME: MANUAL ALLOCATION HERE
+	m_perCameraBuffer->InitBuffer(length);
+	m_allConstantBuffers.push_back(newBuffer);
+	return newBuffer;
+}
+
+void GraphicsSystem::Deinitalize()
+{
+	for (int i = 0; i < m_allConstantBuffers.size(); i++)
+	{
+		m_allConstantBuffers[i]->ReleaseBuffer();
+		delete m_allConstantBuffers[i]; // FIXME: MANUAL DEALLOCATION HERE
+	}
+}
+
+ConstantBuffer* GraphicsSystem::GetPerObjectBuffer()
+{
+	return m_perObjectBuffer;
+}
+
+ConstantBuffer* GraphicsSystem::GetPerCameraBuffer()
+{
+	return m_perCameraBuffer;
 }

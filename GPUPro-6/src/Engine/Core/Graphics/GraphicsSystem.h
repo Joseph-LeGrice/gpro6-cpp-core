@@ -6,7 +6,6 @@
 
 class BlendState;
 class MeshManager;
-class IDrawCommand;
 class GraphicsDevice;
 class ConstantBuffer;
 class RasterizerState;
@@ -20,6 +19,12 @@ struct PER_CAMERA_BUFFER
 	Matrix4x4 Projection;
 };
 
+struct PER_OBJECT_BUFFER
+{
+	Matrix4x4 ModelViewProjection;
+	Matrix4x4 ModelView;
+};
+
 class GraphicsSystem : public ISystem
 {
 public:
@@ -28,18 +33,26 @@ public:
         GraphicsDevice& gfxDevice,
         DepthStencilBuffer& depthStencilBuffer,
 		TypedObjectManager& typedObjectManager,
-		ConstantBuffer& perCameraBuffer,
-        std::vector<IDrawCommand*>& commands);
+		RasterizerState& rasterizerState);
 
 	virtual void Initialize() override;
     virtual void VariableTick() override;
+	virtual void Deinitalize() override;
+
+	ConstantBuffer* GetPerObjectBuffer();
+	ConstantBuffer* GetPerCameraBuffer();
+
+	ConstantBuffer* CreateConstantBuffer(UINT length);
 
 private:
 	TypedObjectManager& m_typedObjectManager;
 	BlendState& m_blendState;
 	MeshManager& m_meshManager;
 	GraphicsDevice& m_gfxDevice;
-    ConstantBuffer& m_perCameraBuffer;
+	RasterizerState& m_rasterizerState;
 	DepthStencilBuffer& m_depthStencilBuffer;
-    std::vector<IDrawCommand*>& m_commands;
+	std::vector<ConstantBuffer*> m_allConstantBuffers;
+    
+	ConstantBuffer* m_perObjectBuffer;
+	ConstantBuffer* m_perCameraBuffer;
 };

@@ -82,24 +82,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Buffers
 	IndexBuffer* indexBuffer = new IndexBuffer(*gfxDevice);
 	VertexBuffer* vertexBuffer = new VertexBuffer(*gfxDevice);
-	ConstantBuffer* perObjectBuffer = new ConstantBuffer(*gfxDevice);
-	ConstantBuffer* perCameraBuffer = new ConstantBuffer(*gfxDevice);
-	ConstantBuffer* standardConstantBuffer = new ConstantBuffer(*gfxDevice);
 
 	// Graphics State Helpers
 	BlendState* blendState = new BlendState(*gfxDevice);
 	MeshManager* meshManager = new MeshManager(*indexBuffer, *vertexBuffer, *typedObjectManager);
 	RasterizerState* rasterizerState = new RasterizerState(*gfxDevice);
 	DepthStencilBuffer* depthStencilBuffer = new DepthStencilBuffer(*windowManager, *gfxDevice);
-
-	// IDrawCommands
-	std::vector<IDrawCommand*>* commands = new std::vector<IDrawCommand*>();
-	SkyboxDrawCommand* skyboxDrawCommand = new SkyboxDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState);
-	commands->push_back(skyboxDrawCommand);
-	StandardOpaqueMaterialDrawCommand* standardOpaqueMaterialDrawCommand = new StandardOpaqueMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState, *standardConstantBuffer);
-	commands->push_back(standardOpaqueMaterialDrawCommand);
-	StandardTransparentMaterialDrawCommand* standardTransparentMaterialDrawCommand = new StandardTransparentMaterialDrawCommand(*gfxDevice, *perObjectBuffer, *typedObjectManager, *rasterizerState, *blendState, *standardConstantBuffer);
-	commands->push_back(standardTransparentMaterialDrawCommand);
 
 	// ISystems
 	std::vector<ISystem*>* allSystems = new std::vector<ISystem*>();
@@ -113,8 +101,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		*gfxDevice,
 		*depthStencilBuffer,
 		*typedObjectManager,
-		*perCameraBuffer,
-		*commands
+		*rasterizerState
 	);
 	allSystems->push_back(graphicSystem);
 
@@ -162,9 +149,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	delete meshManager;
 	delete blendState;
 
-	delete standardConstantBuffer;
-	delete perCameraBuffer;
-	delete perObjectBuffer;
 	delete vertexBuffer;
 	delete indexBuffer;
 

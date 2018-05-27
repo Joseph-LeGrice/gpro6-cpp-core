@@ -8,13 +8,16 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 
-bool Material::BindIfValid(ConstantBuffer* buffer)
+bool Material::BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerState, BlendState* blendState)
 {
 	if (m_shaderIndex > -1)
 	{
 		Shader* s = GlobalStaticReferences::Instance()->GetTypedObjectManager()->GetInstance<Shader>(m_shaderIndex);
 		if (s != nullptr && s->SetCurrentIfValid())
 		{
+			blendState->SetState(m_blendState);
+			rasterizerState->SetState(m_rasterState);
+
 			if (buffer != nullptr)
 			{
 				buffer->UpdateBuffer(m_properties.GetData(), m_properties.GetDataLength());
@@ -84,6 +87,30 @@ void Material::SetMatrix3x3(std::wstring name, Matrix3x3 value)
 void Material::SetMatrix4x4(std::wstring name, Matrix4x4 value)
 {
 	m_properties.SetMatrix4x4(name, value);
+}
+
+void Material::SetCullState(CullState cullState)
+{
+	m_rasterState.m_cullState = cullState;
+}
+
+void Material::SetFillMode(FillMode fillMode)
+{
+	m_rasterState.m_fillMode = fillMode;
+}
+
+void Material::SetColorBlending(BlendFactor src, BlendFactor dest, BlendOperation op)
+{
+	m_blendState.m_srcColor = src;
+	m_blendState.m_destColor = dest;
+	m_blendState.m_colorBlendOp= op;
+}
+
+void Material::SetAlphaBlending(BlendFactor src, BlendFactor dest, BlendOperation op)
+{
+	m_blendState.m_srcAlpha = src;
+	m_blendState.m_destAlpha = dest;
+	m_blendState.m_alphaBlendOp = op;
 }
 
 void Material::SetShaderIndex(int shaderIndex)
