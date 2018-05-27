@@ -53,17 +53,8 @@
     <ClCompile Include="src\Engine\Core\Application\Application.cpp">
       <Filter>Engine\Core\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp">
       <Filter>Engine\Core\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Utilities\Noise.cpp">
       <Filter>Engine\Core\Utilities</Filter>
@@ -75,7 +66,6 @@
     <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.cpp" />
     <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
     <ClCompile Include="src\Engine\Main.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.cpp" />
     <ClCompile Include="src\Engine\Core\SystemManagement\SystemContainer.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraphManager.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp">
@@ -215,20 +205,8 @@
     <ClInclude Include="src\Engine\Core\Application\Application.h">
       <Filter>Engine\Core\Application</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h">
       <Filter>Engine\Core\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.h">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.h">
-      <Filter>Engine\Core\Graphics\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Utilities\Noise.h">
       <Filter>Engine\Core\Utilities</Filter>
