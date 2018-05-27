@@ -10,10 +10,10 @@ class Mesh;
 
 struct MeshInfo
 {
-	size_t m_indexStart;
-	size_t m_vertexStart;
-	size_t m_indexCount;
-	size_t m_vertexCount;
+	unsigned int m_indexStart;
+	unsigned int m_vertexStart;
+	unsigned int m_indexCount;
+	unsigned int m_vertexCount;
 };
 
 class MeshManager

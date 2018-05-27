@@ -119,7 +119,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		monoSystemLoader,
 		gfxDevice,
 		typedObjectManager,
-		n2m
+		n2m,
+		meshManager
 	);
 
 	RegisterAllTypes();

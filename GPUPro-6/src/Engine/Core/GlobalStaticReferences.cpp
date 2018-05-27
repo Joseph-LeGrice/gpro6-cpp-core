@@ -7,12 +7,14 @@ GlobalStaticReferences::GlobalStaticReferences(SystemContainer* sysContainer,
 	ScriptedSystemLoader* monoSystemLoader,
 	GraphicsDevice* graphicsDevice,
 	TypedObjectManager* typedObjectManager,
-	NativeToManagedInstanceMap* nativeToManagedInstanceMap) :
+	NativeToManagedInstanceMap* nativeToManagedInstanceMap,
+	MeshManager* meshManager) :
 	m_systemContainer(sysContainer),
 	m_monoSystemLoader(monoSystemLoader),
 	m_graphicsDevice(graphicsDevice),
 	m_typedObjectManager(typedObjectManager),
-	m_nativeToManagedInstanceMap(nativeToManagedInstanceMap)
+	m_nativeToManagedInstanceMap(nativeToManagedInstanceMap),
+	m_meshManager(meshManager)
 {
 	s_instance = this;
 }
@@ -20,6 +22,11 @@ GlobalStaticReferences::GlobalStaticReferences(SystemContainer* sysContainer,
 GlobalStaticReferences* GlobalStaticReferences::Instance()
 {
 	return s_instance;
+}
+
+MeshManager* GlobalStaticReferences::GetMeshManager()
+{
+	return m_meshManager;
 }
 
 SystemContainer* GlobalStaticReferences::GetSystemContainer()

@@ -2,6 +2,8 @@
 #include "MeshHelper.h"
 #include "D3D11.h"
 
+#include "Engine/Core/GlobalStaticReferences.h"
+#include "Engine/Core/Mesh/MeshManager.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/Mesh.h"
 #include "MyMath/MathDefines.h"
@@ -21,6 +23,9 @@ Mesh* MeshHelper::Quad(TypedObjectManager& resourceManager)
 	else
 	{
 		Mesh* result = resourceManager.Create<Mesh>();
+		MeshManager* mm = GlobalStaticReferences::Instance()->GetMeshManager();
+		mm->RegisterMesh(result);
+
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 		std::vector<Vector3> verts = std::vector<Vector3>();
@@ -124,6 +129,9 @@ Mesh* MeshHelper::SphereUV(TypedObjectManager& resourceManager)
 		result->SetNormals(norms);
 		result->SetUVs(uvs);
 		result->SetIndices(indices);
+
+		MeshManager* mm = GlobalStaticReferences::Instance()->GetMeshManager();
+		mm->RegisterMesh(result);
 
 		g_sphereUvMeshId = static_cast<int>(result->GetInstanceID());
 
@@ -276,6 +284,9 @@ Mesh* MeshHelper::Cube(TypedObjectManager& resourceManager)
 		result->SetNormals(norms);
 		result->SetUVs(uvs);
 		result->SetIndices(indices);
+
+		MeshManager* mm = GlobalStaticReferences::Instance()->GetMeshManager();
+		mm->RegisterMesh(result);
 
 		g_cubeMeshId = static_cast<int>(result->GetInstanceID());
 

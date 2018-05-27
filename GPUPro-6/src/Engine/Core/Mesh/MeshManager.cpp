@@ -51,14 +51,14 @@ void MeshManager::RefreshBuffers()
 	{
 		Mesh* m = m_resourceManager.GetInstance<Mesh>(it->first);
 
-		size_t indexStart = indices.size(); 
-		size_t vertStart = verts.size();
+		unsigned int indexStart = static_cast<unsigned int>(indices.size());
+		unsigned int vertStart = static_cast<unsigned int>(verts.size());
 		
 		verts.insert(verts.end(), m->GetVertexData().begin(), m->GetVertexData().end());
 		indices.insert(indices.end(), m->GetIndices().begin(), m->GetIndices().end());
 
-		size_t numIndices = indices.size() - indexStart;
-		size_t numVerts = verts.size() - vertStart;
+		unsigned int numIndices = static_cast<unsigned int>(indices.size()) - indexStart;
+		unsigned int numVerts = static_cast<unsigned int>(verts.size()) - vertStart;
 
 		it->second = { indexStart, vertStart, numIndices, numVerts };
 	}

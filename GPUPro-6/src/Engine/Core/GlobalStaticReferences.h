@@ -1,5 +1,6 @@
 #pragma once
 
+class MeshManager;
 class GraphicsDevice;
 class TypedObjectManager;
 class SystemContainer;
@@ -14,10 +15,12 @@ public:
 		ScriptedSystemLoader* monoSystemLoader,
 		GraphicsDevice* graphicsDevice,
 		TypedObjectManager* typedObjectManager,
-		NativeToManagedInstanceMap* nativeToManagedInstanceMap);
+		NativeToManagedInstanceMap* nativeToManagedInstanceMap,
+		MeshManager* meshManager);
 
 	static GlobalStaticReferences* Instance();
-	
+
+	MeshManager* GetMeshManager();
 	GraphicsDevice* GetGraphicsDevice();
 	TypedObjectManager* GetTypedObjectManager();
 	SystemContainer* GetSystemContainer();
@@ -32,4 +35,5 @@ private:
 	ScriptedSystemLoader* m_monoSystemLoader;
 	TypedObjectManager* m_typedObjectManager;
 	NativeToManagedInstanceMap* m_nativeToManagedInstanceMap;
+	MeshManager* m_meshManager;
 };

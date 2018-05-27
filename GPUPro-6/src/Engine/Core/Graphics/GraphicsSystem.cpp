@@ -97,8 +97,6 @@ void GraphicsSystem::VariableTick()
 
 		ID3D11DeviceContext& deviceContext = *m_gfxDevice.GetGraphicsDeviceContext();
 
-		UINT16 baseVertex = 0;
-		UINT16 baseIndex = 0;
 		std::vector<MeshRenderer*> meshRenderers = m_typedObjectManager.GetAllInstances<MeshRenderer>();
 		for (size_t i = 0; i < meshRenderers.size(); ++i)
 		{
@@ -106,9 +104,8 @@ void GraphicsSystem::VariableTick()
 			Entity* meshEntity = m_typedObjectManager.GetInstance<Entity>(mrc->GetEntityIndex());
 
 			Mesh* mesh = mrc->m_mesh.Get<Mesh>();
-			//UINT16 numberOfVerts = (UINT16)mesh->GetVertexData().size();
-			UINT16 numberOfIndices = (UINT16)mesh->GetIndices().size();
-
+			MeshInfo mi = m_meshManager.GetMapping(mesh);
+			
 			if (mrc->IsEnabled())
 			{
 				Transform* modelTransform = meshEntity->GetComponent<Transform>();
@@ -130,11 +127,9 @@ void GraphicsSystem::VariableTick()
 				if (mat->BindIfValid(m_perObjectBuffer, &m_rasterizerState, &m_blendState))
 				{
 					deviceContext.IASetPrimitiveTopology(mesh->m_topology);
-					deviceContext.DrawIndexed(numberOfIndices, baseIndex, baseVertex);
+					deviceContext.DrawIndexed(mi.m_indexCount, mi.m_indexStart, mi.m_vertexStart);
 				}
 			}
-			//baseVertex += numberOfVerts;
-			//baseIndex += numberOfIndices;
 		}
 	}
 	m_gfxDevice.Present();
