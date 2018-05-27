@@ -303,13 +303,6 @@
         {
           "getter": true,
           "setter": true,
-          "name": "DrawCommandIndex",
-          "nativeName": "m_drawCommandIndex",
-          "returnType": "int"
-        },
-        {
-          "getter": true,
-          "setter": true,
           "name": "MaterialIndex",
           "nativeName": "m_materialIndex",
           "returnType": "int"

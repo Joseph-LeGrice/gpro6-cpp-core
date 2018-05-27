@@ -23,19 +23,6 @@ public class MeshRenderer : IComponent
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static int Get_DrawCommandIndex(int instanceId);
-
-	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static void Set_DrawCommandIndex(int instanceId, int val);
-
-	public int DrawCommandIndex
-	{
-		get { return Get_DrawCommandIndex(InstanceID); }
-		set { Set_DrawCommandIndex(InstanceID, value); }
-	}
-
-
-	[MethodImpl(MethodImplOptions.InternalCall)]
 	private extern static int Get_MaterialIndex(int instanceId);
 
 	[MethodImpl(MethodImplOptions.InternalCall)]

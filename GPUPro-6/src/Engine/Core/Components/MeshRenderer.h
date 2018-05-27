@@ -7,6 +7,5 @@ struct MeshRenderer : public IComponent
 REGISTER_TYPE(MeshRenderer);
 
 	int m_meshIndex = -1;
-    int m_drawCommandIndex = -1; // 'How to draw me'
-    int m_materialIndex = -1; // 'How I am special'
+    int m_materialIndex = -1;
 };
