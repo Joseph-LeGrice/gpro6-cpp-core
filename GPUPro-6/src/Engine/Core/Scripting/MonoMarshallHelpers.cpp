@@ -3,6 +3,8 @@
 
 #include "ScriptedSystemLoader.h"
 #include "Engine/Core/GlobalStaticReferences.h"
+#include "Engine/Core/ResourceTypes/ManagedObject.h"
+#include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 
 extern std::string MonoMarshall::GetUTF8String(MonoString* ms)
 {
@@ -38,4 +40,23 @@ extern std::vector<std::wstring> MonoMarshall::GetStringVector(MonoArray* ma)
 		result.push_back(strElement);
 	}
 	return result;
+}
+
+extern ToPtr MonoMarshall::GetNativePointer(MonoObject* obj)
+{
+	MonoClass* managedClass = mono_object_get_class(obj);
+	ManagedTypeID className = mono_class_get_name(managedClass);
+	MonoClassField* field = mono_class_get_field_from_name(managedClass, "m_instanceId");
+	InstanceID managedInstanceId = -1;
+	mono_field_get_value(obj, field, &managedInstanceId);
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	ITypedObject* nativeInstance = ntmip->GetNativeObject(className, managedInstanceId);
+	return ToPtr(nativeInstance);
+}
+
+extern MonoObject* MonoMarshall::GetManagedObject(ToPtr obj)
+{
+	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
+	ManagedObject* mo = ntmip->GetManagedObject(obj.GetTypeID(), obj.GetInstanceID());
+	return mo->GetManagedObject();
 }

@@ -22,6 +22,7 @@ class NativeToManagedInstanceMap
 {
 public:
 	ManagedObject* GetManagedObject(TypeID nativeTypeId, InstanceID nativeObjectId);
+	ITypedObject* GetNativeObject(ManagedTypeID managedTypeId, InstanceID managedObjectId);
 
 	InstanceID GetNativeInstanceID(TypeID nativeTypeId, InstanceID managedInstanceId);
 	InstanceID GetManagedInstanceID(TypeID nativeTypeId,  InstanceID nativeInstanceId);

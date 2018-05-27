@@ -47,7 +47,6 @@ class Program
         //------------------------------------------------------------------------------------
         // Ball Object
         Mesh sphereMesh = MeshHelper.CreateSphereUV();
-        int sphereMeshID = sphereMesh.InstanceID;
 
 		Entity sphereEntity = TypedObjectManager.Create<Entity>();
         Transform sphereTransform = sphereEntity.AddComponent<Transform>();
@@ -56,8 +55,8 @@ class Program
         sphereTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
         sphereTransform.scale *= 10.0f;
         MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();
-        sphereRenderer.MeshIndex = sphereMeshID;
-        sphereRenderer.MaterialIndex = simpleTestMaterial.InstanceID;
+        sphereRenderer.Mesh = sphereMesh;
+        sphereRenderer.Material = simpleTestMaterial;
         //------------------------------------------------------------------------------------
         
         //------------------------------------------------------------------------------------
@@ -132,8 +131,8 @@ class Program
         Entity skyboxEntity = TypedObjectManager.Create<Entity>();
         MeshRenderer skyboxRenderer = skyboxEntity.AddComponent<MeshRenderer>();
         // skyboxRenderer.m_enabled = true;
-        skyboxRenderer.MeshIndex = sphereMeshID;
-        skyboxRenderer.MaterialIndex = skyboxMat.InstanceID;
+        skyboxRenderer.Mesh = sphereMesh;
+        skyboxRenderer.Material = skyboxMat;
         //------------------------------------------------------------------------------------
         
         return 0;

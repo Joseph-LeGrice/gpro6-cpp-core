@@ -296,16 +296,16 @@
         {
           "getter": true,
           "setter": true,
-          "name": "MeshIndex",
-          "nativeName": "m_meshIndex",
-          "returnType": "int"
+          "name": "Mesh",
+          "nativeName": "m_mesh",
+          "returnType": "object"
         },
         {
           "getter": true,
           "setter": true,
-          "name": "MaterialIndex",
-          "nativeName": "m_materialIndex",
-          "returnType": "int"
+          "name": "Material",
+          "nativeName": "m_material",
+          "returnType": "object"
         }
       ]
     },

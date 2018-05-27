@@ -11,6 +11,18 @@ m_instanceId(instanceId) { }
 ToPtr::ToPtr(ITypedObject* obj) : m_typeId(obj->GetTypeID()),
 m_instanceId(obj->GetInstanceID()) { }
 
+ToPtr::ToPtr() : m_typeId(""), m_instanceId(-1) { }
+
+TypeID ToPtr::GetTypeID()
+{
+	return m_typeId;
+}
+
+InstanceID ToPtr::GetInstanceID()
+{
+	return m_instanceId;
+}
+
 ToPtr::operator ITypedObject*()
 {
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();

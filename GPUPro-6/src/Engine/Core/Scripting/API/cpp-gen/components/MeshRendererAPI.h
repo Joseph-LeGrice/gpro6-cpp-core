@@ -14,11 +14,11 @@ namespace GPro
 // ## Generated Code ##
 		extern void RegisterCalls();
 
-		int Get_MeshIndex(InstanceID managedInstanceId);
-		void Set_MeshIndex(InstanceID managedInstanceId, int val);
+		MonoObject* Get_Mesh(InstanceID managedInstanceId);
+		void Set_Mesh(InstanceID managedInstanceId, MonoObject* val);
 
-		int Get_MaterialIndex(InstanceID managedInstanceId);
-		void Set_MaterialIndex(InstanceID managedInstanceId, int val);
+		MonoObject* Get_Material(InstanceID managedInstanceId);
+		void Set_Material(InstanceID managedInstanceId, MonoObject* val);
 // ## Generated Code ##
 	};
 };

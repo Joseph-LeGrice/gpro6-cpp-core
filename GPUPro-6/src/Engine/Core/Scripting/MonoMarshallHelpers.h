@@ -6,6 +6,7 @@
 #pragma warning(push)
 #pragma warning(disable:4201)
 #include <mono/metadata/object.h>
+#include <mono/metadata/metadata.h>
 #pragma warning(pop)
 
 namespace MonoMarshall
@@ -14,6 +15,9 @@ namespace MonoMarshall
 	extern std::wstring GetUTF16String(MonoString* ms);
 	
 	extern std::vector<std::wstring> GetStringVector(MonoArray* ma);
+
+	extern ToPtr GetNativePointer(MonoObject* obj);
+	extern MonoObject* GetManagedObject(ToPtr obj);
 
 	template<class T>
 	T* GetNativeObject(InstanceID managedInstanceId)

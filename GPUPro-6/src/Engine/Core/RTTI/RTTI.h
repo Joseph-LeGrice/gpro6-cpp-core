@@ -23,9 +23,12 @@ private:
 	InstanceID m_instanceId;
 
 public:
+	ToPtr();
+	ToPtr(ITypedObject* obj);
 	ToPtr(TypeID typeId, InstanceID instanceId);
 
-	ToPtr(ITypedObject* obj);
+	TypeID GetTypeID();
+	InstanceID GetInstanceID();
 
 	template<class T>
 	T* Get();
@@ -37,6 +40,6 @@ public:
 template<class T>
 T* ToPtr::Get()
 {
-	ITypedObject* typedObj = this;
+	ITypedObject* typedObj = *this;
 	return static_cast<T*>(typedObj);
 }

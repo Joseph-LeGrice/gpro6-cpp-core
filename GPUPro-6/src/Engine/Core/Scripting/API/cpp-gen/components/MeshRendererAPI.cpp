@@ -10,34 +10,34 @@
 // ## Generated Code ##
 extern void GPro::MeshRendererAPI::RegisterCalls()
 {
-	mono_add_internal_call("MeshRenderer::Get_MeshIndex", GPro::MeshRendererAPI::Get_MeshIndex);
-	mono_add_internal_call("MeshRenderer::Set_MeshIndex", GPro::MeshRendererAPI::Set_MeshIndex);
-	mono_add_internal_call("MeshRenderer::Get_MaterialIndex", GPro::MeshRendererAPI::Get_MaterialIndex);
-	mono_add_internal_call("MeshRenderer::Set_MaterialIndex", GPro::MeshRendererAPI::Set_MaterialIndex);
+	mono_add_internal_call("MeshRenderer::Get_Mesh", GPro::MeshRendererAPI::Get_Mesh);
+	mono_add_internal_call("MeshRenderer::Set_Mesh", GPro::MeshRendererAPI::Set_Mesh);
+	mono_add_internal_call("MeshRenderer::Get_Material", GPro::MeshRendererAPI::Get_Material);
+	mono_add_internal_call("MeshRenderer::Set_Material", GPro::MeshRendererAPI::Set_Material);
 }
 
-extern int GPro::MeshRendererAPI::Get_MeshIndex(InstanceID managedInstanceId)
+extern MonoObject* GPro::MeshRendererAPI::Get_Mesh(InstanceID managedInstanceId)
 {
 	MeshRenderer* nativeClassInstance = MonoMarshall::GetNativeObject<MeshRenderer>(managedInstanceId);
-	return nativeClassInstance->m_meshIndex;
+	return MonoMarshall::GetManagedObject(nativeClassInstance->m_mesh);
 }
 
-extern void GPro::MeshRendererAPI::Set_MeshIndex(InstanceID managedInstanceId, int value)
+extern void GPro::MeshRendererAPI::Set_Mesh(InstanceID managedInstanceId, MonoObject* value)
 {
 	MeshRenderer* nativeClassInstance = MonoMarshall::GetNativeObject<MeshRenderer>(managedInstanceId);
-	nativeClassInstance->m_meshIndex = value;
+	nativeClassInstance->m_mesh = MonoMarshall::GetNativePointer(value);
 }
 
-extern int GPro::MeshRendererAPI::Get_MaterialIndex(InstanceID managedInstanceId)
+extern MonoObject* GPro::MeshRendererAPI::Get_Material(InstanceID managedInstanceId)
 {
 	MeshRenderer* nativeClassInstance = MonoMarshall::GetNativeObject<MeshRenderer>(managedInstanceId);
-	return nativeClassInstance->m_materialIndex;
+	return MonoMarshall::GetManagedObject(nativeClassInstance->m_material);
 }
 
-extern void GPro::MeshRendererAPI::Set_MaterialIndex(InstanceID managedInstanceId, int value)
+extern void GPro::MeshRendererAPI::Set_Material(InstanceID managedInstanceId, MonoObject* value)
 {
 	MeshRenderer* nativeClassInstance = MonoMarshall::GetNativeObject<MeshRenderer>(managedInstanceId);
-	nativeClassInstance->m_materialIndex = value;
+	nativeClassInstance->m_material = MonoMarshall::GetNativePointer(value);
 }
 
 // ## Generated Code ##
