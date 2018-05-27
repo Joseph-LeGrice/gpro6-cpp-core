@@ -22,6 +22,6 @@ extern MonoObject* GPro::MeshHelperAPI::CreateSphereUV_Internal()
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Mesh* sphereMesh = MeshHelper::SphereUV(*tom);
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	ManagedObject* sphereMeshManaged = ntmip->GetManagedObject(Mesh::GetTypeID(), sphereMesh->GetInstanceID());
+	ManagedObject* sphereMeshManaged = ntmip->GetManagedObject(sphereMesh->GetTypeID(), sphereMesh->GetInstanceID());
 	return sphereMeshManaged->GetManagedObject();
 }

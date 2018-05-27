@@ -32,7 +32,8 @@ template<class T>
 T* Entity::AddComponent()
 {
 	custom_assert::is_true(std::is_base_of<IComponent, T>::value);
-	TypeID type = T::GetTypeID();
+	T temp;
+	TypeID type = temp.GetTypeID();
 	return static_cast<T*>(AddComponent(type));
 }
 
@@ -40,7 +41,8 @@ template<class T>
 void Entity::RemoveComponent()
 {
 	custom_assert::is_true(std::is_base_of<IComponent, T>::value);
-	TypeID type = T::GetTypeID();
+	T temp;
+	TypeID type = temp.GetTypeID();
 	RemoveComponent(type);
 }
 
@@ -48,7 +50,8 @@ template<class T>
 T* Entity::GetComponent()
 {
 	custom_assert::is_true(std::is_base_of<IComponent, T>::value);
-	TypeID type = T::GetTypeID();
+	T temp;
+	TypeID type = temp.GetTypeID();
 	IComponent* result = GetComponent(type);
 	if (result != nullptr)
 	{

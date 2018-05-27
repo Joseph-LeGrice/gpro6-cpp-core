@@ -8,7 +8,6 @@ class GameLoop;
 
 class InputSystem : public ISystem
 {
-	REGISTER_TYPE(InputSystem);
 public:
 	InputSystem::InputSystem(GameLoop& gameLoop) : m_gameLoop(gameLoop) { }
     InputSystem(const InputSystem&) = delete;

@@ -17,7 +17,7 @@ template<class T>
 ITypedObject* CreateManagedInstance(InstanceID nativeInstanceId)
 {
 	T* obj = new T();
-	TypeID nativeTypeId = T::GetTypeID();
+	TypeID nativeTypeId = obj->GetTypeID();
 
 	ScriptedSystemLoader* ssl = GlobalStaticReferences::Instance()->GetMonoSystemLoader();
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
@@ -36,7 +36,8 @@ ITypedObject* CreateManagedInstance(InstanceID nativeInstanceId)
 template<typename T>
 static void RegisterType()
 {
-	TypeID typeId = T::GetTypeID();
+	T temp;
+	TypeID typeId = temp.GetTypeID();
 
 	TypeNameMappings& tnm = TypeNameMappings::Instance();
 	ScriptedTypeMap stm;
@@ -48,7 +49,8 @@ static void RegisterType()
 template<typename T>
 static void RegisterManagedType(ManagedTypeID managedTypeId)
 {
-	TypeID typeId = T::GetTypeID();
+	T temp;
+	TypeID typeId = temp.GetTypeID();
 
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
 	ntmip->CreateTypeMapping(typeId, managedTypeId);

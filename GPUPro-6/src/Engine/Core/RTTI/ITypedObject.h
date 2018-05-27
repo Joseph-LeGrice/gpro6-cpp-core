@@ -10,6 +10,7 @@ public:
 	virtual void Establish() { }
 	virtual void Finalize() { }
 
+	virtual TypeID GetTypeID() = 0;
 	InstanceID GetInstanceID()
 	{
 		return m_instanceId;

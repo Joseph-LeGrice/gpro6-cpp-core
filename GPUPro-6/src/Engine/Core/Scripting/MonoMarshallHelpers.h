@@ -26,7 +26,8 @@ namespace MonoMarshall
 	template<class T>
 	InstanceID GetNativeInstanceID(InstanceID managedInstanceId)
 	{
+		T temp;
 		NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-		return ntmip->GetNativeInstanceID(T::GetTypeID(), managedInstanceId);
+		return ntmip->GetNativeInstanceID(temp.GetTypeID(), managedInstanceId);
 	}
 }

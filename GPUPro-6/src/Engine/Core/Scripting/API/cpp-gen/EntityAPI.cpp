@@ -21,8 +21,9 @@ extern void GPro::EntityAPI::RegisterCalls()
 
 extern MonoObject* GPro::EntityAPI::AddComponentInternal(int managedEntityInstanceId, MonoString* monoManagedComponentTypeId)
 {
+	Entity temp;
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(Entity::GetTypeID(), managedEntityInstanceId);
+	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(temp.GetTypeID(), managedEntityInstanceId);
 
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Entity* nativeEntityInstance = tom->GetInstance<Entity>(nativeEntityInstanceId);
@@ -37,8 +38,9 @@ extern MonoObject* GPro::EntityAPI::AddComponentInternal(int managedEntityInstan
 
 extern void GPro::EntityAPI::RemoveComponentInternal(int managedEntityInstanceId, MonoString* monoManagedComponentTypeId)
 {
+	Entity temp;
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(Entity::GetTypeID(), managedEntityInstanceId);
+	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(temp.GetTypeID(), managedEntityInstanceId);
 	
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Entity* nativeEntityInstance = tom->GetInstance<Entity>(nativeEntityInstanceId);
@@ -51,8 +53,9 @@ extern void GPro::EntityAPI::RemoveComponentInternal(int managedEntityInstanceId
 
 extern MonoObject* GPro::EntityAPI::GetComponentInternal(int managedEntityInstanceId, MonoString* monoManagedComponentTypeId)
 {
+	Entity temp;
 	NativeToManagedInstanceMap* ntmip = GlobalStaticReferences::Instance()->GetNativeToManagedInstanceMap();
-	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(Entity::GetTypeID(), managedEntityInstanceId);
+	InstanceID nativeEntityInstanceId = ntmip->GetNativeInstanceID(temp.GetTypeID(), managedEntityInstanceId);
 
 	TypedObjectManager* tom = GlobalStaticReferences::Instance()->GetTypedObjectManager();
 	Entity* nativeEntityInstance = tom->GetInstance<Entity>(nativeEntityInstanceId);
