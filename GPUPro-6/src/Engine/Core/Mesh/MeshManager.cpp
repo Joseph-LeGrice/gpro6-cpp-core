@@ -62,4 +62,7 @@ void MeshManager::RefreshBuffers()
 
 		it->second = { indexStart, vertStart, numIndices, numVerts };
 	}
+
+	m_vertexBuffer.TrySetData(verts);
+	m_indexBuffer.TrySetData(indices);
 }

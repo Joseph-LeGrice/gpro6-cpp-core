@@ -22,32 +22,23 @@ Mesh* MeshHelper::Quad(TypedObjectManager& resourceManager)
 	}
 	else
 	{
-		Mesh* result = resourceManager.Create<Mesh>();
-		MeshManager* mm = GlobalStaticReferences::Instance()->GetMeshManager();
-		mm->RegisterMesh(result);
-
-		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-
 		std::vector<Vector3> verts = std::vector<Vector3>();
 		verts.push_back({ -1.0f, -1.0f, 0.0f });
 		verts.push_back({ -1.0f,  1.0f, 0.0f });
 		verts.push_back({ 1.0f,  1.0f, 0.0f });
 		verts.push_back({ 1.0f, -1.0f, 0.0f });
-		result->SetVertices(verts);
 
 		std::vector<Vector3> normals = std::vector<Vector3>();
 		normals.push_back({ 0.0f, 0.0f, 1.0f });
 		normals.push_back({ 0.0f, 0.0f, 1.0f });
 		normals.push_back({ 0.0f, 0.0f, 1.0f });
 		normals.push_back({ 0.0f, 0.0f, 1.0f });
-		result->SetNormals(normals);
 
 		std::vector<Vector2> uvs = std::vector<Vector2>();
 		uvs.push_back({ 0.0f, 1.0f });
 		uvs.push_back({ 0.0f, 0.0f });
 		uvs.push_back({ 1.0f, 0.0f });
 		uvs.push_back({ 1.0f, 1.0f });
-		result->SetUVs(uvs);
 
 		std::vector<UINT16> indices = std::vector<UINT16>();
 		indices.push_back(0);
@@ -56,7 +47,16 @@ Mesh* MeshHelper::Quad(TypedObjectManager& resourceManager)
 		indices.push_back(2);
 		indices.push_back(3);
 		indices.push_back(1);
+
+		Mesh* result = resourceManager.Create<Mesh>();
+		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+		result->SetVertices(verts);
+		result->SetNormals(normals);
+		result->SetUVs(uvs);
 		result->SetIndices(indices);
+
+		MeshManager* mm = GlobalStaticReferences::Instance()->GetMeshManager();
+		mm->RegisterMesh(result);
 
 		g_quadMeshId = static_cast<int>(result->GetInstanceID());
 
