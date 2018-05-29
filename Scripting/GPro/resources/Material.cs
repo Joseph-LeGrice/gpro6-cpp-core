@@ -1,5 +1,23 @@
 using System.Runtime.CompilerServices;
 
+public enum PropertyValueType
+{
+	Integer,
+	Boolean,
+	Float,
+	Float2,
+	Float3,
+	Float4,
+	Matrix3x3,
+	Matrix4x4
+};
+
+public struct PropertyInitializer
+{
+	string m_propertyName;
+	PropertyValueType m_valueType;
+};
+
 public enum BlendFactor
 {
     Zero = 0,
@@ -65,6 +83,15 @@ public class Material : ITypedObject
 	public void AddTextureSampler(ITypedObject arg0, int arg1)
 	{
 		AddTextureSampler(InstanceID, arg0, arg1);
+	}
+
+
+	[MethodImpl(MethodImplOptions.InternalCall)]
+	private extern static void InitProperties(int instanceid, PropertyInitializer[] arg0);
+
+	public void InitProperties(PropertyInitializer[] arg0)
+	{
+		InitProperties(InstanceID, arg0);
 	}
 
 

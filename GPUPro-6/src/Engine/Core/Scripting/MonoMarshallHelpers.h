@@ -14,12 +14,31 @@ namespace MonoMarshall
 {
 	extern std::string GetUTF8String(MonoString* ms);
 	extern std::wstring GetUTF16String(MonoString* ms);
-	
-	extern std::vector<std::wstring> GetStringVector(MonoArray* ma);
 
 	extern ToPtr GetNativePointer(MonoObject* obj);
 	extern MonoObject* GetManagedObject(ToPtr obj);
+	
+	extern std::vector<std::wstring> GetStringVector(MonoArray* ma);
+	//extern std::vector<std::wstring> GetManagedStringVector(MonoArray* ma); //TODO: Implement
+	
+	template<typename T>
+	extern std::vector<T> GetValueVector(MonoArray* ma)
+	{
+		std::vector<T> result;
+		uintptr_t l = mono_array_length(ma);
+		for (int i = 0; i < l; i++)
+		{
+			T element = mono_array_get(ma, T, i);
+			result.push_back(element);
+		}
+		return result;
+	}
 
+	//template<typename T>
+	//extern std::vector<MonoArray* ma> GetManagedValueVector(std::vector<T> na) //TODO: Implement
+	//{
+	//}
+	
 	template<class T>
 	T* GetNativeObject(InstanceID managedInstanceId)
 	{

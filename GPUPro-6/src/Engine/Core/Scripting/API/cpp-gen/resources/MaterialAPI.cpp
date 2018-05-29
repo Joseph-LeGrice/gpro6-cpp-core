@@ -2,6 +2,7 @@
 #include "MaterialAPI.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/ResourceTypes/Material.h"
+#include "Engine/Core/DataStructures/MaterialPropertyList.h"
 
 #include "Engine/Core/Scripting/NativeToManagedInstanceMap.h"
 #include "Engine/Core/Scripting/MonoMarshallHelpers.h"
@@ -13,6 +14,7 @@ extern void GPro::MaterialAPI::RegisterCalls()
 	mono_add_internal_call("Material::SetShader(int,ITypedObject)", GPro::MaterialAPI::SetShader);
 	mono_add_internal_call("Material::RegisterShaderResource(int,ITypedObject,int)", GPro::MaterialAPI::RegisterShaderResource);
 	mono_add_internal_call("Material::AddTextureSampler(int,ITypedObject,int)", GPro::MaterialAPI::AddTextureSampler);
+	mono_add_internal_call("Material::InitProperties(int,PropertyInitializer[])", GPro::MaterialAPI::InitProperties);
 	mono_add_internal_call("Material::SetInteger(int,string,int)", GPro::MaterialAPI::SetInteger);
 	mono_add_internal_call("Material::SetBoolean(int,string,bool)", GPro::MaterialAPI::SetBoolean);
 	mono_add_internal_call("Material::SetFloat(int,string,single)", GPro::MaterialAPI::SetFloat);
@@ -46,6 +48,13 @@ extern void GPro::MaterialAPI::AddTextureSampler(InstanceID managedInstanceId, M
 	ToPtr arg0_marshalled = MonoMarshall::GetNativePointer(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->AddTextureSampler(arg0_marshalled, arg1);
+}
+
+extern void GPro::MaterialAPI::InitProperties(InstanceID managedInstanceId, MonoArray* arg0)
+{
+	std::vector<MaterialPropertyList::PropertyInitializer> arg0_marshalled = MonoMarshall::GetValueVector<MaterialPropertyList::PropertyInitializer>(arg0);
+	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
+	nativeClassInstance->InitProperties(arg0_marshalled);
 }
 
 extern void GPro::MaterialAPI::SetInteger(InstanceID managedInstanceId, MonoString* arg0, int arg1)

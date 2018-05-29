@@ -4,21 +4,21 @@
   "outputCsDirectory": "../Scripting/GPro",
   "fileBindings": [
     {
-      "includePath": "Engine/Core/ResourceTypes/Mesh.h",
+      "includePaths": ["Engine/Core/ResourceTypes/Mesh.h"],
       "name": "Mesh",
       "subdirectory": "resources",
       "methods": [],
       "properties": []
     },
     {
-      "includePath": "Engine/Core/ResourceTypes/TextureSampler.h",
+      "includePaths": ["Engine/Core/ResourceTypes/TextureSampler.h"],
       "name": "TextureSampler",
       "subdirectory": "resources",
       "methods": [],
       "properties": []
     },
     {
-      "includePath": "Engine/Core/ResourceTypes/Texture2DArray.h",
+      "includePaths": ["Engine/Core/ResourceTypes/Texture2DArray.h"],
       "name": "Texture2DArray",
       "subdirectory": "resources",
       "methods": [
@@ -40,7 +40,7 @@
       "properties": []
     },
     {
-      "includePath": "Engine/Core/ResourceTypes/Texture2D.h",
+      "includePaths": ["Engine/Core/ResourceTypes/Texture2D.h"],
       "name": "Texture2D",
       "subdirectory": "resources",
       "methods": [
@@ -62,7 +62,7 @@
       "properties": []
     },
     {
-      "includePath": "Engine/Core/ResourceTypes/StructuredBuffer.h",
+      "includePaths": ["Engine/Core/ResourceTypes/StructuredBuffer.h"],
       "name": "StructuredBuffer",
       "subdirectory": "resources",
       "methods": [
@@ -76,7 +76,10 @@
       "properties": []
     },
     {
-      "includePath": "Engine/Core/ResourceTypes/Material.h",
+      "includePaths": [
+        "Engine/Core/ResourceTypes/Material.h",
+        "Engine/Core/DataStructures/MaterialPropertyList.h"
+      ],
       "name": "Material",
       "subdirectory": "resources",
       "methods": [
@@ -104,6 +107,14 @@
           "args": [
             "object",
             "int"
+          ]
+        },
+        {
+          "methodType": "instance",
+          "name": "InitProperties",
+          "returnType": "void",
+          "args": [
+            "array-PropertyInitializer"
           ]
         },
         {
@@ -206,14 +217,14 @@
       "properties": []
     },
     {
-      "includePath": "Engine/Core/ResourceTypes/ShaderResource.h",
+      "includePaths": ["Engine/Core/ResourceTypes/ShaderResource.h"],
       "name": "ShaderResource",
       "subdirectory": "resources",
       "methods": [],
       "properties": []
     },
     {
-      "includePath": "Engine/Core/ResourceTypes/Shader.h",
+      "includePaths": ["Engine/Core/ResourceTypes/Shader.h"],
       "name": "Shader",
       "subdirectory": "resources",
       "methods": [
@@ -268,7 +279,7 @@
     {
       "name": "Camera",
       "subdirectory": "components",
-      "includePath": "Engine/Core/Components/Camera.h",
+      "includePaths": ["Engine/Core/Components/Camera.h"],
       "methods": [
         {
           "methodType": "instance",
@@ -292,7 +303,7 @@
     {
       "name": "Light",
       "subdirectory": "components",
-      "includePath": "Engine/Core/Components/Light.h",
+      "includePaths": ["Engine/Core/Components/Light.h"],
       "methods": [],
       "properties": [
         {
@@ -307,7 +318,7 @@
     {
       "name": "MeshRenderer",
       "subdirectory": "components",
-      "includePath": "Engine/Core/Components/MeshRenderer.h",
+      "includePaths": ["Engine/Core/Components/MeshRenderer.h"],
       "methods": [],
       "properties": [
         {
@@ -329,7 +340,7 @@
     {
       "name": "Transform",
       "subdirectory": "components",
-      "includePath": "Engine/Core/Components/Transform.h",
+      "includePaths": ["Engine/Core/Components/Transform.h"],
       "methods": [],
       "properties": [
         {
@@ -358,7 +369,7 @@
     {
       "name": "Entity",
       "subdirectory": "",
-      "includePath": "Engine/Core/SceneGraph/Components/Entity.h",
+      "includePaths": ["Engine/Core/SceneGraph/Components/Entity.h"],
       "methods": [
         {
           "methodType": "static",

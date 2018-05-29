@@ -20,6 +20,8 @@ namespace GPro
 
 		extern void AddTextureSampler(InstanceID managedInstanceId, MonoObject* arg0, int arg1);
 
+		extern void InitProperties(InstanceID managedInstanceId, MonoArray* arg0);
+
 		extern void SetInteger(InstanceID managedInstanceId, MonoString* arg0, int arg1);
 
 		extern void SetBoolean(InstanceID managedInstanceId, MonoString* arg0, bool arg1);
