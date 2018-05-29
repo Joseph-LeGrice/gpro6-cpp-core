@@ -32,9 +32,9 @@ public:
     virtual void Initialize() override;
     virtual void VariableTick() override;
 
-    int GetBufferResourceIndex();
+	ToPtr GetBuffer();
 
 private:
 	TypedObjectManager& m_typedObjectManager;
-    int m_lightBufferIndex;
+    ToPtr m_lightBuffer;
 };

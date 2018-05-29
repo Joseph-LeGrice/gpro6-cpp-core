@@ -16,6 +16,12 @@ public struct PropertyInitializer
 {
 	string m_propertyName;
 	PropertyValueType m_valueType;
+
+	public PropertyInitializer(string name, PropertyValueType value)
+	{
+		m_propertyName = name;
+		m_valueType = value;
+	}
 };
 
 public enum BlendFactor

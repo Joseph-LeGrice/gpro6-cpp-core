@@ -95,52 +95,75 @@ class Program
         //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
-        // int lightBufferIndex = GetSystemManager().GetSystem<LightingSystem>().GetBufferResourceIndex();
-        // StructuredBuffer lightBuffer = TypedObjectManager.GetInstance<StructuredBuffer>(lightBufferIndex);
+        StructuredBuffer lightBuffer = TypedObjectManager.GetInstance<StructuredBuffer>(0); // FIXME: Cheating here - We should access the Lighting
         //------------------------------------------------------------------------------------
         
         //------------------------------------------------------------------------------------
         // Light
-        // Entity lightEntity = TypedObjectManager.Create<Entity>();
-        // Transform lightTransform = lightEntity.AddComponent<Transform>();
-        // lightTransform.position = new Vector3(50.0f, 0.0f, 0.0f);
-        // Light lightComponent = lightEntity.AddComponent<Light>();
-        // lightComponent.Range = 250.0f;
+        Entity lightEntity = TypedObjectManager.Create<Entity>();
+        Transform lightTransform = lightEntity.AddComponent<Transform>();
+        lightTransform.position = new Vector3(50.0f, 0.0f, 0.0f);
+        Light lightComponent = lightEntity.AddComponent<Light>();
+        lightComponent.Range = 250.0f;
         //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
-        // Shader materialShader = TypedObjectManager.Create<Shader>();
-        // string forwardRenderShaderPath = Path.Combine(Application.ResourcePath, "Shaders/ForwardRendering.hlsl");
-        // materialShader.InitVertexShader(forwardRenderShaderPath, "VShader");
-        // materialShader.InitPixelShader(forwardRenderShaderPath, "PShader");
+        Shader forwardRenderShader = TypedObjectManager.Create<Shader>();
+        string forwardRenderShaderPath = Path.Combine(Application.ResourcePath, "Shaders/ForwardRendering.hlsl");
+        forwardRenderShader.InitVertexShader(forwardRenderShaderPath, "VShader");
+        forwardRenderShader.InitPixelShader(forwardRenderShaderPath, "PShader");
         //------------------------------------------------------------------------------------
         
         //------------------------------------------------------------------------------------
         // Sphere Object
-        // Material sphereMaterial = TypedObjectManager.Create<Material>();
-        // sphereMaterial.SetShader(materialShader);
-        // sphereMaterial.RegisterShaderResource(testImageTexture.GetResource(), 1 );
-        // sphereMaterial.RegisterShaderResource(lightBuffer.GetMyResourceViewID(), 0);
-        // sphereMaterial.AddTextureSampler(textureSampler, 0);
+        Material sphereMaterial = TypedObjectManager.Create<Material>();
+        sphereMaterial.SetShader(forwardRenderShader);
+        sphereMaterial.RegisterShaderResource(testImageTexture.GetResource(), 1 );
+        sphereMaterial.RegisterShaderResource(lightBuffer.GetResourceView(), 0);
+        sphereMaterial.AddTextureSampler(textureSampler, 0);
 
-        // sphereMaterial.InitProperties({
-        //     {  }
-        // });
-        // sphereMaterial.SetFloat4("DiffuseColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-        // sphereMaterial.SetFloat4("SpecularColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-        // sphereMaterial.SetFloat("SpecularPower", 10.0f);
-        // sphereMaterial.SetBoolean("HasDiffuseTexture", true);
-        //------------------------------------------------------------------------------------
-		
-		// Entity sphereEntity = TypedObjectManager.Create<Entity>();
-        // Transform sphereTransform = sphereEntity.AddComponent<Transform>();
-        // //sphereTransform.rotation = Quaternion.FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-        // sphereTransform.position = new Vector3(50.0f, 1.0f, 1.0f);
-        // sphereTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
-        // sphereTransform.scale *= 10.0f;
-        // MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();
-        // sphereRenderer.Mesh = sphereMesh;
-        // sphereRenderer.Material = sphereMaterial;
+        List<PropertyInitializer> props = new List<PropertyInitializer>() {
+            new PropertyInitializer("GlobalAmbient", PropertyValueType.Float4),
+            new PropertyInitializer("AmbientColor", PropertyValueType.Float4),
+            new PropertyInitializer("DiffuseColor", PropertyValueType.Float4),
+            new PropertyInitializer("SpecularColor", PropertyValueType.Float4),
+            new PropertyInitializer("Reflectance", PropertyValueType.Float4),
+
+            new PropertyInitializer("Opacity", PropertyValueType.Float),
+            new PropertyInitializer("SpecularPower", PropertyValueType.Float),
+            new PropertyInitializer("IndexOfRefraction", PropertyValueType.Float),
+            new PropertyInitializer("HasAmbientTexture", PropertyValueType.Boolean),
+
+            new PropertyInitializer("HasEmissiveTexture", PropertyValueType.Boolean),
+            new PropertyInitializer("HasDiffuseTexture", PropertyValueType.Boolean),
+            new PropertyInitializer("HasSpecularTexture", PropertyValueType.Boolean),
+            new PropertyInitializer("HasSpecularPowerTexture", PropertyValueType.Boolean),
+
+            new PropertyInitializer("HasNormalTexture", PropertyValueType.Boolean),
+            new PropertyInitializer("HasBumpTexture", PropertyValueType.Boolean),
+            new PropertyInitializer("HasOpacityTexture", PropertyValueType.Boolean),
+            new PropertyInitializer("BumpIntensity", PropertyValueType.Float),
+
+            new PropertyInitializer("SpecularScale", PropertyValueType.Float),
+            new PropertyInitializer("AlphaThreshold", PropertyValueType.Float),
+            new PropertyInitializer("Padding", PropertyValueType.Float2),
+        };
+        sphereMaterial.InitProperties(props.ToArray());
+
+        sphereMaterial.SetFloat4("DiffuseColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+        sphereMaterial.SetFloat4("SpecularColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+        sphereMaterial.SetFloat("SpecularPower", 10.0f);
+        sphereMaterial.SetBoolean("HasDiffuseTexture", true);
+        
+        Entity sphereEntity = TypedObjectManager.Create<Entity>();
+        Transform sphereTransform = sphereEntity.AddComponent<Transform>();
+        //sphereTransform.rotation = Quaternion.FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+        sphereTransform.position = new Vector3(50.0f, 1.0f, 1.0f);
+        sphereTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
+        sphereTransform.scale *= 10.0f;
+        MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();
+        sphereRenderer.Mesh = sphereMesh;
+        sphereRenderer.Material = sphereMaterial;
         //------------------------------------------------------------------------------------
                 
         return 0;
@@ -151,7 +174,7 @@ class Program
         //------------------------------------------------------------------------------------
         // MarchingSquares Testing
         Material marchingSquaresMaterial = TypedObjectManager.Create<Material>();
-        marchingSquaresMaterial.SetShaderIndex(materialShader.InstanceID);
+        marchingSquaresMaterial.SetShaderIndex(forwardRenderShader.InstanceID);
         marchingSquaresMaterial.RegisterShaderResource(testImageTexture.GetResource(), 1);
         // marchingSquaresMaterial.RegisterShaderResource(lightBuffer.GetResource(), 0);
         marchingSquaresMaterial.AddTextureSampler(textureSampler.InstanceID, 0);

@@ -10,12 +10,12 @@
 // ## Generated Code ##
 extern void GPro::StructuredBufferAPI::RegisterCalls()
 {
-	mono_add_internal_call("StructuredBuffer::GetMyResourceViewID(int)", GPro::StructuredBufferAPI::GetMyResourceViewID);
+	mono_add_internal_call("StructuredBuffer::GetResourceView(int)", GPro::StructuredBufferAPI::GetResourceView);
 }
 
-extern int GPro::StructuredBufferAPI::GetMyResourceViewID(InstanceID managedInstanceId)
+extern MonoObject* GPro::StructuredBufferAPI::GetResourceView(InstanceID managedInstanceId)
 {
 	StructuredBuffer* nativeClassInstance = MonoMarshall::GetNativeObject<StructuredBuffer>(managedInstanceId);
-	return nativeClassInstance->GetMyResourceViewID();
+	return MonoMarshall::GetManagedObject(nativeClassInstance->GetResourceView());
 }
 // ## Generated Code ##

@@ -14,7 +14,7 @@ namespace GPro
 // ## Generated Code ##
 		extern void RegisterCalls();
 
-		extern int GetMyResourceViewID(InstanceID managedInstanceId);
+		extern MonoObject* GetResourceView(InstanceID managedInstanceId);
 // ## Generated Code ##
 	};
 };

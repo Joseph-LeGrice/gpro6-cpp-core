@@ -38,13 +38,13 @@ public:
         rvDesc.Buffer.ElementWidth = m_numberOfElements;
         
         ShaderResource* myShaderResourceView = GlobalStaticReferences::Instance()->GetTypedObjectManager()->Create<ShaderResource>();
-		m_myShaderResourceViewId = static_cast<int>(myShaderResourceView->GetInstanceID());
+		m_shaderResourceView = myShaderResourceView;
         
         bool createdView = myShaderResourceView->CreateViewWithResource(m_buffer, &rvDesc);
 		if (!createdView)
         {
             m_buffer.ReleasePointer();
-			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_myShaderResourceViewId);
+			GlobalStaticReferences::Instance()->GetTypedObjectManager()->Delete<ShaderResource>(m_shaderResourceView.GetInstanceID());
 
             return false;
         }
@@ -68,12 +68,12 @@ public:
 	
     virtual void Finalize() override;
 
-    int GetMyResourceViewID()
+	ToPtr GetResourceView()
     {
-        return m_myShaderResourceViewId;
+        return m_shaderResourceView;
     }
 
 private:
-    int m_myShaderResourceViewId = -1;
+    ToPtr m_shaderResourceView;
 	ManualRelease<ID3D11Buffer> m_buffer;
 };

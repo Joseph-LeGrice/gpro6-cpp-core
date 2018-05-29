@@ -10,11 +10,11 @@ public class StructuredBuffer : ITypedObject
 
 
 	[MethodImpl(MethodImplOptions.InternalCall)]
-	private extern static int GetMyResourceViewID(int instanceid);
+	private extern static ITypedObject GetResourceView(int instanceid);
 
-	public int GetMyResourceViewID()
+	public ITypedObject GetResourceView()
 	{
-		return GetMyResourceViewID(InstanceID);
+		return GetResourceView(InstanceID);
 	}
 
 // ## Generated Code ##

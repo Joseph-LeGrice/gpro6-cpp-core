@@ -68,8 +68,8 @@
       "methods": [
         {
           "methodType": "instance",
-          "name": "GetMyResourceViewID",
-          "returnType": "int",
+          "name": "GetResourceView",
+          "returnType": "object",
           "args": []
         }
       ],
