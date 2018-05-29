@@ -23,7 +23,8 @@ void* MaterialPropertyList::GetData()
 	{
 		Property& p = m_properties[i];
 		size_t propSize = GetPropertySize(p);
-		memcpy(&data[currentPosition], &p.m_value, propSize);
+		auto v = p.m_value;
+		memcpy(&data[currentPosition], &v, propSize);
 		currentPosition += propSize;
 	}
 

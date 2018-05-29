@@ -11,7 +11,7 @@ class Program
         // Camera
         Entity cameraEntity = TypedObjectManager.Create<Entity>();
         Transform cameraTransform = cameraEntity.AddComponent<Transform>();
-        cameraTransform.position = new Vector3(0.0f, 0.0f, -15.0f);
+        cameraTransform.position = new Vector3(0.0f, 0.0f, -50.0f);
         Camera cameraComponent = cameraEntity.AddComponent<Camera>();
         
         float viewportWidth = 800; //m_gfxDevice.GetViewportWidth();
@@ -24,7 +24,7 @@ class Program
         float fieldOfView = 60.0f * PI / 180.0f;
 
         cameraComponent.SetPerspective(fieldOfView, aspectRatio, screenNear, screenDepth);
-        // cameraComponent.SetOrthographic(1000, 500, aspectRatio);
+        // cameraComponent.SetOrthographic(2, 100, aspectRatio);
         //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
@@ -38,32 +38,29 @@ class Program
         //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
-        // Shader testQuadShader = TypedObjectManager.Create<Shader>();
-        // string testMatShaderPath = Path.Combine(Application.ResourcePath, "Shaders/TestShader.hlsl");
-        // testQuadShader.InitVertexShader(testMatShaderPath, "VShader");
-        // testQuadShader.InitPixelShader(testMatShaderPath, "PShader");
-        
-        // Material testQuadMat = TypedObjectManager.Create<Material>();
-        // testQuadMat.SetShader(testQuadShader);
-        // testQuadMat.RegisterShaderResource(testImageTexture.GetResource(), 0 );
-        // testQuadMat.AddTextureSampler(textureSampler, 0);
-        //------------------------------------------------------------------------------------
-
-        //------------------------------------------------------------------------------------
         Mesh sphereMesh = MeshHelper.CreateSphereUV();
         Mesh quadMesh = MeshHelper.CreateQuad();
         //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
         // Quad Object
-		// Entity quadEntity = TypedObjectManager.Create<Entity>();
-        // Transform quadTransform = quadEntity.AddComponent<Transform>();
-        // quadTransform.position = new Vector3(0.0f, 0.0f, 0.0f);
-        // quadTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
-        // quadTransform.scale *= 10.0f;
-        // MeshRenderer quadRenderer = quadEntity.AddComponent<MeshRenderer>();
-        // quadRenderer.Mesh = quadMesh;
-        // quadRenderer.Material = testQuadMat;
+        Shader testQuadShader = TypedObjectManager.Create<Shader>();
+        string testMatShaderPath = Path.Combine(Application.ResourcePath, "Shaders/TestShader.hlsl");
+        testQuadShader.InitVertexShader(testMatShaderPath, "VShader");
+        testQuadShader.InitPixelShader(testMatShaderPath, "PShader");
+        
+        Material testQuadMat = TypedObjectManager.Create<Material>();
+        testQuadMat.SetShader(testQuadShader);
+        testQuadMat.SetCullState(CullState.Back);
+        
+		Entity quadEntity = TypedObjectManager.Create<Entity>();
+        Transform quadTransform = quadEntity.AddComponent<Transform>();
+        quadTransform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        quadTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
+        quadTransform.scale *= 10.0f;
+        MeshRenderer quadRenderer = quadEntity.AddComponent<MeshRenderer>();
+        quadRenderer.Mesh = quadMesh;
+        quadRenderer.Material = testQuadMat;
         //------------------------------------------------------------------------------------
 
 
@@ -145,33 +142,33 @@ class Program
 */        
         //------------------------------------------------------------------------------------
         //Skybox
-        Shader skyboxShader = TypedObjectManager.Create<Shader>();
-        string envMapShaderPath = Path.Combine(Application.ResourcePath, "Shaders/EnvironmentMap.hlsl");
-        skyboxShader.InitVertexShader(envMapShaderPath, "VShader");
-        skyboxShader.InitPixelShader(envMapShaderPath, "PShader");
+        // Shader skyboxShader = TypedObjectManager.Create<Shader>();
+        // string envMapShaderPath = Path.Combine(Application.ResourcePath, "Shaders/EnvironmentMap.hlsl");
+        // skyboxShader.InitVertexShader(envMapShaderPath, "VShader");
+        // skyboxShader.InitPixelShader(envMapShaderPath, "PShader");
 
-        Texture2DArray testCubemap = TypedObjectManager.Create<Texture2DArray>();
-        List<string> bitmapPaths = new List<string>() {
-            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Right.bmp"),
-            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Left.bmp"),
-            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Bottom.bmp"),
-            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Top.bmp"),
-            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Front.bmp"),
-            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
-        };
-        testCubemap.InitializeWithBitmaps(bitmapPaths.ToArray());
+        // Texture2DArray testCubemap = TypedObjectManager.Create<Texture2DArray>();
+        // List<string> bitmapPaths = new List<string>() {
+        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Right.bmp"),
+        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Left.bmp"),
+        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Bottom.bmp"),
+        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Top.bmp"),
+        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Front.bmp"),
+        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
+        // };
+        // testCubemap.InitializeWithBitmaps(bitmapPaths.ToArray());
         
-        Material skyboxMat = TypedObjectManager.Create<Material>();
-        skyboxMat.SetCullState(CullState.None);
-        skyboxMat.SetShader(skyboxShader);
-        skyboxMat.RegisterShaderResource(testCubemap.GetResource(), 0);
-        skyboxMat.AddTextureSampler(textureSampler, 0);
+        // Material skyboxMat = TypedObjectManager.Create<Material>();
+        // skyboxMat.SetCullState(CullState.None);
+        // skyboxMat.SetShader(skyboxShader);
+        // skyboxMat.RegisterShaderResource(testCubemap.GetResource(), 0);
+        // skyboxMat.AddTextureSampler(textureSampler, 0);
 
-        Entity skyboxEntity = TypedObjectManager.Create<Entity>();
-        MeshRenderer skyboxRenderer = skyboxEntity.AddComponent<MeshRenderer>();
-        // skyboxRenderer.m_enabled = true;
-        skyboxRenderer.Mesh = sphereMesh;
-        skyboxRenderer.Material = skyboxMat;
+        // // Entity skyboxEntity = TypedObjectManager.Create<Entity>();
+        // MeshRenderer skyboxRenderer = cameraEntity.AddComponent<MeshRenderer>();
+        // // skyboxRenderer.m_enabled = true;
+        // skyboxRenderer.Mesh = sphereMesh;
+        // skyboxRenderer.Material = skyboxMat;
         //------------------------------------------------------------------------------------
         
         return 0;

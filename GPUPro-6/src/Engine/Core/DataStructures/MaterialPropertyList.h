@@ -23,6 +23,9 @@ public:
 	{
 		std::wstring m_propertyName;
 		PropertyValueType m_valueType;
+
+		PropertyInitializer(std::wstring propertyName, PropertyValueType valueType) :
+			m_propertyName(propertyName), m_valueType(valueType) { }
 	};
 
 	void Initalize(std::vector<PropertyInitializer> initialValues);

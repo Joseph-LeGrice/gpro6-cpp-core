@@ -38,7 +38,7 @@ void ConstantBuffer::UpdateBuffer(void* data, size_t length)
 	HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
 	if (SUCCEEDED(bufferMapResult))
 	{
-		memcpy(mappedData.pData, &data, length);
+		memcpy(mappedData.pData, data, length);
 		deviceContext->Unmap(m_buffer, 0);
 	}
 }

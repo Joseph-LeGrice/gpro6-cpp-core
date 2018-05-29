@@ -89,4 +89,5 @@ float4 PShader(VertexShaderOutput IN) : SV_TARGET
 
     return float4((ambient + emissive + diffuse + specular).rgb,
         alpha * mat.Opacity);
+	return float4(0, 1, 0, 1);
 }

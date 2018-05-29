@@ -24,7 +24,7 @@ cbuffer PerCameraBuffer : register(b0)
     float4x4 _Projection;
 };
 
-cbuffer ConstantBuffer : register(b1)
+cbuffer PerObjectBuffer : register(b1)
 {
     float4x4 ModelViewProjection;
     float4x4 ModelView;

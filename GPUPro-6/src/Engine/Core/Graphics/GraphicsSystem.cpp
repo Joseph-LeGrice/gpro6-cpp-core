@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "GraphicsSystem.h"
 
+#include <vector>
+
 #include "Engine/Core/Graphics/BlendState.h"
 #include "Engine/Core/Graphics/GraphicsDevice.h"
 #include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
@@ -49,7 +51,17 @@ void GraphicsSystem::Initialize()
 	ISystem::Initialize();
 
 	m_perCameraBuffer = CreateConstantBuffer(sizeof(PER_CAMERA_BUFFER));
+	m_perCameraBufferProperties.Initalize({
+		{ L"EyePos", MaterialPropertyList::kFloat4Property },
+		{ L"View", MaterialPropertyList::kMatrix4x4Property },
+		{ L"Projection", MaterialPropertyList::kMatrix4x4Property }
+	});
+
 	m_perObjectBuffer = CreateConstantBuffer(sizeof(PER_OBJECT_BUFFER));
+	m_perObjectBufferProperties.Initalize({
+		{ L"ModelViewProjection", MaterialPropertyList::kMatrix4x4Property },
+		{ L"ModelView", MaterialPropertyList::kMatrix4x4Property }
+	});
 
 	//float viewportWidth = m_gfxDevice.GetViewportWidth();
 	//float viewportHeight = m_gfxDevice.GetViewportHeight();
@@ -69,6 +81,7 @@ void GraphicsSystem::VariableTick()
 	m_meshManager.BindBuffers();
 	
     m_perCameraBuffer->BindBuffer(0, BIND_ALL);
+	m_perObjectBuffer->BindBuffer(1, BIND_ALL);
 
     m_depthStencilBuffer.ClearBuffer();
     m_depthStencilBuffer.SetState();
@@ -84,16 +97,9 @@ void GraphicsSystem::VariableTick()
 		Matrix4x4 view = cameraTransform->GetCameraViewMatrix();
 		Matrix4x4 proj = cam->m_projectionMatrix;
 
-        PER_CAMERA_BUFFER pcb;
-		pcb.EyePos.X = cameraTransform->m_position.X;
-		pcb.EyePos.Y = cameraTransform->m_position.Y;
-		pcb.EyePos.Z = cameraTransform->m_position.Z;
-        pcb.EyePos.W = 1;
-        pcb.View = view;
-        pcb.Projection = proj;
-        m_perCameraBuffer->UpdateBuffer(&pcb, sizeof(PER_CAMERA_BUFFER));
-
-		m_perObjectBuffer->BindBuffer(1, BIND_ALL);
+		m_perCameraBufferProperties.SetFloat4(L"EyePos", { 0.0f, 0.0f, 1.0f, 1.0f });
+		m_perCameraBufferProperties.SetMatrix4x4(L"Projection", proj);
+        m_perCameraBuffer->UpdateBuffer(m_perCameraBufferProperties.GetData(), m_perCameraBufferProperties.GetDataLength());
 
 		ID3D11DeviceContext& deviceContext = *m_gfxDevice.GetGraphicsDeviceContext();
 
@@ -117,14 +123,15 @@ void GraphicsSystem::VariableTick()
 					model = modelTransform->GetMatrix();
 				}
 
-				PER_OBJECT_BUFFER pob;
-				pob.ModelViewProjection = proj * view * model;
-				pob.ModelView = view * model;
+				Matrix4x4 mvp = proj * view * model;
+				m_perObjectBufferProperties.SetMatrix4x4(L"ModelViewProjection", mvp);
+				Matrix4x4 mv = view * model;
+				m_perObjectBufferProperties.SetMatrix4x4(L"ModelView", mv);
 
-				m_perObjectBuffer->UpdateBuffer(&pob, sizeof(PER_OBJECT_BUFFER));
+				m_perObjectBuffer->UpdateBuffer(m_perObjectBufferProperties.GetData(), m_perObjectBufferProperties.GetDataLength());
 
 				Material* mat = mrc->m_material.Get<Material>();
-				if (mat->BindIfValid(m_perObjectBuffer, &m_rasterizerState, &m_blendState))
+				if (mat->BindIfValid(nullptr, &m_rasterizerState, &m_blendState))
 				{
 					deviceContext.IASetPrimitiveTopology(mesh->m_topology);
 					deviceContext.DrawIndexed(mi.m_indexCount, mi.m_indexStart, mi.m_vertexStart);

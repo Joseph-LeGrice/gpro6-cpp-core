@@ -29,5 +29,5 @@ VertexShaderOutput VShader(AppData IN)
 
 float4 PShader(VertexShaderOutput IN) : SV_Target
 {
-    return EnvironmentMap.Sample(samTriLinear, IN.positionVS);
+	return EnvironmentMap.Sample(samTriLinear, IN.positionVS);
 }

@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Engine/Core/SystemManagement/ISystem.h"
+#include "Engine/Core/DataStructures/MaterialPropertyList.h"
 
 class BlendState;
 class MeshManager;
@@ -54,5 +55,8 @@ private:
 	std::vector<ConstantBuffer*> m_allConstantBuffers;
     
 	ConstantBuffer* m_perObjectBuffer;
+	MaterialPropertyList m_perObjectBufferProperties;
+
 	ConstantBuffer* m_perCameraBuffer;
+	MaterialPropertyList m_perCameraBufferProperties;
 };

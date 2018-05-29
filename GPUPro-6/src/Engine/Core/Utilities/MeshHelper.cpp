@@ -46,7 +46,7 @@ Mesh* MeshHelper::Quad(TypedObjectManager& resourceManager)
 		indices.push_back(2);
 		indices.push_back(2);
 		indices.push_back(3);
-		indices.push_back(1);
+		indices.push_back(0);
 
 		Mesh* result = resourceManager.Create<Mesh>();
 		result->m_topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
