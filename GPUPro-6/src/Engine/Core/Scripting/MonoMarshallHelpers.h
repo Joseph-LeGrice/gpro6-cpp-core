@@ -10,6 +10,11 @@
 #include <mono/metadata/metadata.h>
 #pragma warning(pop)
 
+namespace MaterialProperty
+{
+	struct Initializer;
+}
+
 namespace MonoMarshall
 {
 	extern std::string GetUTF8String(MonoString* ms);
@@ -19,7 +24,10 @@ namespace MonoMarshall
 	extern MonoObject* GetManagedObject(ToPtr obj);
 	
 	extern std::vector<std::wstring> GetStringVector(MonoArray* ma);
-	//extern std::vector<std::wstring> GetManagedStringVector(MonoArray* ma); //TODO: Implement
+	//extern std::vector<std::wstring> GetManagedStringVector(MonoArray* na); //TODO: Implement
+	
+	extern std::vector<MaterialProperty::Initializer> GetPropertyInitializerVector(MonoArray* ma);
+	//extern MonoArray* GetManagedPropertyInitializerVector(std::vector<MaterialProperty::Initializer> na); //TODO: Implement
 	
 	template<typename T>
 	extern std::vector<T> GetValueVector(MonoArray* ma)

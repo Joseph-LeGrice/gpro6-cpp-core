@@ -4,6 +4,7 @@
 #include "ScriptedSystemLoader.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/ResourceTypes/ManagedObject.h"
+#include "Engine/Core/DataStructures/MaterialPropertyList.h"
 
 extern std::string MonoMarshall::GetUTF8String(MonoString* ms)
 {
@@ -37,6 +38,25 @@ extern std::vector<std::wstring> MonoMarshall::GetStringVector(MonoArray* ma)
 		MonoString* element = mono_array_get(ma, MonoString*, i);
 		std::wstring strElement = GetUTF16String(element);
 		result.push_back(strElement);
+	}
+	return result;
+}
+
+extern std::vector<MaterialProperty::Initializer> MonoMarshall::GetPropertyInitializerVector(MonoArray* ma)
+{
+	struct M2N
+	{
+		MonoString* m_propertyName;
+		MaterialProperty::ValueType m_valueType;
+	};
+
+	std::vector<MaterialProperty::Initializer> result;
+	uintptr_t l = mono_array_length(ma);
+	for (int i = 0; i < l; i++)
+	{
+		M2N element = mono_array_get(ma, M2N, i);
+		std::wstring strElement = GetUTF16String(element.m_propertyName);
+		result.push_back({ strElement, element.m_valueType });
 	}
 	return result;
 }
