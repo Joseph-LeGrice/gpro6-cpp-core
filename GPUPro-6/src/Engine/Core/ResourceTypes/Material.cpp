@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Material.h"
 
+#include "Engine/Core/Graphics/GraphicsSystem.h"
+#include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
 #include "Engine/Core/ResourceTypes/Shader.h"
 #include "Engine/Core/ResourceTypes/ShaderResource.h"
@@ -8,7 +10,7 @@
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/GlobalStaticReferences.h"
 
-bool Material::BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerState, BlendState* blendState)
+bool Material::BindIfValid(RasterizerState* rasterizerState, BlendState* blendState)
 {
 	if (m_shader)
 	{
@@ -18,9 +20,9 @@ bool Material::BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerSt
 			blendState->SetState(m_blendState);
 			rasterizerState->SetState(m_rasterState);
 
-			if (buffer != nullptr)
+			if (m_buffer != nullptr)
 			{
-				buffer->UpdateBuffer(m_properties.GetData(), m_properties.GetDataLength());
+				m_buffer->UpdateBuffer(m_properties.GetData(), m_properties.GetDataLength());
 			}
 
 			for (size_t i = 0; i < m_shaderResources.size(); ++i)
@@ -46,6 +48,15 @@ bool Material::BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerSt
 		}
 	}
 	return false;
+}
+
+
+void Material::InitProperties(std::vector<MaterialPropertyList::PropertyInitializer> props)
+{
+	m_properties.Initalize(props);
+
+	GraphicsSystem* gs = GlobalStaticReferences::Instance()->GetGraphicsSystem();
+	m_buffer = gs->CreateConstantBuffer(m_properties.GetDataLength());
 }
 
 void Material::SetInteger(std::wstring name, int value)

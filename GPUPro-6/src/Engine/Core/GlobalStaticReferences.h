@@ -2,6 +2,7 @@
 
 class MeshManager;
 class GraphicsDevice;
+class GraphicsSystem;
 class TypedObjectManager;
 class SystemContainer;
 class ScriptedSystemLoader;
@@ -14,6 +15,7 @@ public:
 	GlobalStaticReferences(SystemContainer* sysContainer,
 		ScriptedSystemLoader* monoSystemLoader,
 		GraphicsDevice* graphicsDevice,
+		GraphicsSystem* graphicsSystem,
 		TypedObjectManager* typedObjectManager,
 		NativeToManagedInstanceMap* nativeToManagedInstanceMap,
 		MeshManager* meshManager);
@@ -22,6 +24,7 @@ public:
 
 	MeshManager* GetMeshManager();
 	GraphicsDevice* GetGraphicsDevice();
+	GraphicsSystem* GetGraphicsSystem();
 	TypedObjectManager* GetTypedObjectManager();
 	SystemContainer* GetSystemContainer();
 	ScriptedSystemLoader* GetMonoSystemLoader();
@@ -31,6 +34,7 @@ private:
 	static GlobalStaticReferences* s_instance;
 
 	GraphicsDevice* m_graphicsDevice;
+	GraphicsSystem* m_graphicsSystem;
 	SystemContainer* m_systemContainer;
 	ScriptedSystemLoader* m_monoSystemLoader;
 	TypedObjectManager* m_typedObjectManager;

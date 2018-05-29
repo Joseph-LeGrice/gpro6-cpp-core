@@ -18,7 +18,7 @@ public:
 		kMatrix3x3Property,
 		kMatrix4x4Property
 	};
-
+	
 	struct PropertyInitializer
 	{
 		std::wstring m_propertyName;

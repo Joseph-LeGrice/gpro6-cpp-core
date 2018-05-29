@@ -47,7 +47,9 @@ class Material : public ITypedObject
 {
 REGISTER_TYPE(Material);
 public:
-	bool BindIfValid(ConstantBuffer* buffer, RasterizerState* rasterizerState, BlendState* blendState);
+	bool BindIfValid(RasterizerState* rasterizerState, BlendState* blendState);
+
+	void InitProperties(std::vector<MaterialPropertyList::PropertyInitializer> props);
 
 	void SetInteger(std::wstring name, int value);
 	void SetBoolean(std::wstring name, bool value);
@@ -77,6 +79,7 @@ private:
 	};
 
 	ToPtr m_shader;
+	ConstantBuffer* m_buffer;
 	BlendStateDescriptor m_blendState;
 	RasterizerStateDescriptor m_rasterState;
 	MaterialPropertyList m_properties;
