@@ -51,15 +51,15 @@ void GraphicsSystem::Initialize()
 	ISystem::Initialize();
 
 	m_perCameraBufferProperties.Initalize({
-		{ L"EyePos", MaterialPropertyList::kFloat4Property },
-		{ L"_View", MaterialPropertyList::kMatrix4x4Property },
-		{ L"_Projection", MaterialPropertyList::kMatrix4x4Property }
+		{ L"EyePos", MaterialProperty::kFloat4Property },
+		{ L"_View", MaterialProperty::kMatrix4x4Property },
+		{ L"_Projection", MaterialProperty::kMatrix4x4Property }
 	});
 	m_perCameraBuffer = CreateConstantBuffer(m_perCameraBufferProperties.GetDataLength());
 
 	m_perObjectBufferProperties.Initalize({
-		{ L"ModelViewProjection", MaterialPropertyList::kMatrix4x4Property },
-		{ L"ModelView", MaterialPropertyList::kMatrix4x4Property }
+		{ L"ModelViewProjection", MaterialProperty::kMatrix4x4Property },
+		{ L"ModelView", MaterialProperty::kMatrix4x4Property }
 	});
 	m_perObjectBuffer = CreateConstantBuffer(m_perObjectBufferProperties.GetDataLength());
 

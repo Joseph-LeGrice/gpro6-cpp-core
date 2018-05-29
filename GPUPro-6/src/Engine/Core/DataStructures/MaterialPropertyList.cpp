@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "MaterialPropertyList.h"
 
-void MaterialPropertyList::Initalize(std::vector<PropertyInitializer> initialValues)
+using namespace MaterialProperty;
+
+void List::Initalize(std::vector<Initializer> initialValues)
 {
 	m_initialized = true;
 	m_properties.resize(initialValues.size());
@@ -18,7 +20,7 @@ void MaterialPropertyList::Initalize(std::vector<PropertyInitializer> initialVal
 	}
 }
 
-void* MaterialPropertyList::GetData()
+void* List::GetData()
 {
 	unsigned char* data = static_cast<unsigned char*>(m_propertyAlloc.GetPointer());
 	
@@ -35,7 +37,7 @@ void* MaterialPropertyList::GetData()
 	return data;
 }
 
-size_t MaterialPropertyList::GetDataLength()
+size_t List::GetDataLength()
 {
 	size_t size = 0;
 	for (int i = 0; i < m_properties.size(); i++)
@@ -46,9 +48,9 @@ size_t MaterialPropertyList::GetDataLength()
 	return size;
 }
 
-MaterialPropertyList::Property* MaterialPropertyList::GetProperty(std::wstring name)
+List::Property* List::GetProperty(std::wstring name)
 {
-	custom_assert::is_true(m_initialized, "MaterialPropertyList has not been initialized!");
+	custom_assert::is_true(m_initialized, "List has not been initialized!");
 	for (int i = 0; i < m_properties.size(); i++)
 	{
 		if (m_properties[i].m_propertyName == name)
@@ -59,7 +61,7 @@ MaterialPropertyList::Property* MaterialPropertyList::GetProperty(std::wstring n
 	return nullptr;
 }
 
-size_t MaterialPropertyList::GetPropertySize(Property p)
+size_t List::GetPropertySize(Property p)
 {
 	switch (p.m_valueType)
 	{
@@ -83,7 +85,7 @@ size_t MaterialPropertyList::GetPropertySize(Property p)
 	throw "Could not get property size";
 }
 
-void MaterialPropertyList::SetInteger(std::wstring name, int value)
+void List::SetInteger(std::wstring name, int value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kIntegerProperty)
@@ -93,7 +95,7 @@ void MaterialPropertyList::SetInteger(std::wstring name, int value)
 }
 
 
-void MaterialPropertyList::SetBoolean(std::wstring name, bool value)
+void List::SetBoolean(std::wstring name, bool value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kBooleanProperty)
@@ -102,7 +104,7 @@ void MaterialPropertyList::SetBoolean(std::wstring name, bool value)
 	}
 }
 
-void MaterialPropertyList::SetFloat(std::wstring name, float value)
+void List::SetFloat(std::wstring name, float value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kFloatProperty)
@@ -111,7 +113,7 @@ void MaterialPropertyList::SetFloat(std::wstring name, float value)
 	}
 }
 
-void MaterialPropertyList::SetFloat2(std::wstring name, Vector2 value)
+void List::SetFloat2(std::wstring name, Vector2 value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kFloat2Property)
@@ -120,7 +122,7 @@ void MaterialPropertyList::SetFloat2(std::wstring name, Vector2 value)
 	}
 }
 
-void MaterialPropertyList::SetFloat3(std::wstring name, Vector3 value)
+void List::SetFloat3(std::wstring name, Vector3 value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kFloat3Property)
@@ -129,7 +131,7 @@ void MaterialPropertyList::SetFloat3(std::wstring name, Vector3 value)
 	}
 }
 
-void MaterialPropertyList::SetFloat4(std::wstring name, Vector4 value)
+void List::SetFloat4(std::wstring name, Vector4 value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kFloat4Property)
@@ -138,7 +140,7 @@ void MaterialPropertyList::SetFloat4(std::wstring name, Vector4 value)
 	}
 }
 
-void MaterialPropertyList::SetMatrix3x3(std::wstring name, Matrix3x3 value)
+void List::SetMatrix3x3(std::wstring name, Matrix3x3 value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kMatrix3x3Property)
@@ -147,7 +149,7 @@ void MaterialPropertyList::SetMatrix3x3(std::wstring name, Matrix3x3 value)
 	}
 }
 
-void MaterialPropertyList::SetMatrix4x4(std::wstring name, Matrix4x4 value)
+void List::SetMatrix4x4(std::wstring name, Matrix4x4 value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kMatrix4x4Property)

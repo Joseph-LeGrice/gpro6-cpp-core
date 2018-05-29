@@ -7,40 +7,6 @@
 #include "Engine/Core/Graphics/RasterizerState.h"
 #include "Engine/Core/DataStructures/MaterialPropertyList.h"
 
-//struct MATERIAL_BUFFER
-//{
-//	Vector4 GlobalAmbient;
-//	Vector4 AmbientColor;
-//	Vector4 EmissiveColor;
-//	Vector4 DiffuseColor;
-//	Vector4 SpecularColor;
-//	Vector4 Reflectance;
-//
-//	FLOAT Opacity;
-//	FLOAT SpecularPower;
-//	FLOAT IndexOfRefraction;
-//	BOOL HasAmbientTexture;
-//
-//	BOOL HasEmissiveTexture;
-//	BOOL HasDiffuseTexture;
-//	BOOL HasSpecularTexture;
-//	BOOL HasSpecularPowerTexture;
-//
-//	BOOL HasNormalTexture;
-//	BOOL HasBumpTexture;
-//	BOOL HasOpacityTexture;
-//	FLOAT BumpIntensity;
-//
-//	FLOAT SpecularScale;
-//	FLOAT AlphaThreshold;
-//	Vector2 Padding;
-//};
-//
-//struct MATERIAL_BUFFER_CONTAINER
-//{
-//	MATERIAL_BUFFER buf;
-//};
-
 class ConstantBuffer;
 
 class Material : public ITypedObject
@@ -49,7 +15,7 @@ REGISTER_TYPE(Material);
 public:
 	bool BindIfValid(RasterizerState* rasterizerState, BlendState* blendState);
 
-	void InitProperties(std::vector<MaterialPropertyList::PropertyInitializer> props);
+	void InitProperties(std::vector<MaterialProperty::Initializer> props);
 
 	void SetInteger(std::wstring name, int value);
 	void SetBoolean(std::wstring name, bool value);
@@ -82,7 +48,7 @@ private:
 	ConstantBuffer* m_buffer;
 	BlendStateDescriptor m_blendState;
 	RasterizerStateDescriptor m_rasterState;
-	MaterialPropertyList m_properties;
+	MaterialProperty::List m_properties;
 	std::vector<ResourceDetails> m_shaderResources;
 	std::vector<ResourceDetails> m_textureSamplerIndexes;
 };

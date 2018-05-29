@@ -52,7 +52,7 @@ extern void GPro::MaterialAPI::AddTextureSampler(InstanceID managedInstanceId, M
 
 extern void GPro::MaterialAPI::InitProperties(InstanceID managedInstanceId, MonoArray* arg0)
 {
-	std::vector<MaterialPropertyList::PropertyInitializer> arg0_marshalled = MonoMarshall::GetValueVector<MaterialPropertyList::PropertyInitializer>(arg0);
+	std::vector<MaterialProperty::Initializer> arg0_marshalled = MonoMarshall::GetPropertyInitializerVector(arg0);
 	Material* nativeClassInstance = MonoMarshall::GetNativeObject<Material>(managedInstanceId);
 	nativeClassInstance->InitProperties(arg0_marshalled);
 }

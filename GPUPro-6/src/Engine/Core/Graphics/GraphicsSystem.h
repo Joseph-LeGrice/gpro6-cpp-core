@@ -55,8 +55,8 @@ private:
 	std::vector<ConstantBuffer*> m_allConstantBuffers;
     
 	ConstantBuffer* m_perObjectBuffer;
-	MaterialPropertyList m_perObjectBufferProperties;
+	MaterialProperty::List m_perObjectBufferProperties;
 
 	ConstantBuffer* m_perCameraBuffer;
-	MaterialPropertyList m_perCameraBufferProperties;
+	MaterialProperty::List m_perCameraBufferProperties;
 };
