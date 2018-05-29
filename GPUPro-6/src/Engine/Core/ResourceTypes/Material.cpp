@@ -22,6 +22,7 @@ bool Material::BindIfValid(RasterizerState* rasterizerState, BlendState* blendSt
 
 			if (m_buffer != nullptr)
 			{
+				m_buffer->BindBuffer(2, BIND_ALL);
 				m_buffer->UpdateBuffer(m_properties.GetData(), m_properties.GetDataLength());
 			}
 

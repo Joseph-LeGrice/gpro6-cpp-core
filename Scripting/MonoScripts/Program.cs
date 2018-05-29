@@ -55,7 +55,7 @@ class Program
         
 		Entity quadEntity = TypedObjectManager.Create<Entity>();
         Transform quadTransform = quadEntity.AddComponent<Transform>();
-        quadTransform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        quadTransform.position = new Vector3(-10.0f, 10.0f, 30.0f);
         quadTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
         quadTransform.scale *= 10.0f;
         MeshRenderer quadRenderer = quadEntity.AddComponent<MeshRenderer>();
@@ -125,6 +125,7 @@ class Program
         List<PropertyInitializer> props = new List<PropertyInitializer>() {
             new PropertyInitializer("GlobalAmbient", PropertyValueType.Float4),
             new PropertyInitializer("AmbientColor", PropertyValueType.Float4),
+            new PropertyInitializer("EmissiveColor", PropertyValueType.Float4),
             new PropertyInitializer("DiffuseColor", PropertyValueType.Float4),
             new PropertyInitializer("SpecularColor", PropertyValueType.Float4),
             new PropertyInitializer("Reflectance", PropertyValueType.Float4),
@@ -143,10 +144,9 @@ class Program
             new PropertyInitializer("HasBumpTexture", PropertyValueType.Boolean),
             new PropertyInitializer("HasOpacityTexture", PropertyValueType.Boolean),
             new PropertyInitializer("BumpIntensity", PropertyValueType.Float),
-
             new PropertyInitializer("SpecularScale", PropertyValueType.Float),
             new PropertyInitializer("AlphaThreshold", PropertyValueType.Float),
-            new PropertyInitializer("Padding", PropertyValueType.Float2),
+            new PropertyInitializer("Padding", PropertyValueType.Float2)
         };
         sphereMaterial.InitProperties(props.ToArray());
 
@@ -158,7 +158,7 @@ class Program
         Entity sphereEntity = TypedObjectManager.Create<Entity>();
         Transform sphereTransform = sphereEntity.AddComponent<Transform>();
         //sphereTransform.rotation = Quaternion.FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-        sphereTransform.position = new Vector3(50.0f, 1.0f, 1.0f);
+        sphereTransform.position = new Vector3(0.0f, 0.0f, 5.0f);
         sphereTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
         sphereTransform.scale *= 10.0f;
         MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();

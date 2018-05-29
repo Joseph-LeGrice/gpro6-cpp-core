@@ -11,6 +11,7 @@ void List::Initalize(std::vector<Initializer> initialValues)
 	{
 		m_properties[i].m_propertyName = initialValues[i].m_propertyName;
 		m_properties[i].m_valueType = initialValues[i].m_valueType;
+		m_properties[i].m_value = GetDefaultValue(initialValues[i].m_valueType);
 	}
 
 	size_t storageSize = GetDataLength();
@@ -68,7 +69,7 @@ size_t List::GetPropertySize(Property p)
 	case kIntegerProperty:
 		return sizeof(int);
 	case kBooleanProperty:
-		return sizeof(bool);
+		return sizeof(BOOL);
 	case kFloatProperty:
 		return sizeof(float);
 	case kFloat2Property:
@@ -95,7 +96,7 @@ void List::SetInteger(std::wstring name, int value)
 }
 
 
-void List::SetBoolean(std::wstring name, bool value)
+void List::SetBoolean(std::wstring name, BOOL value)
 {
 	Property* p = GetProperty(name);
 	if (p != nullptr && p->m_valueType == kBooleanProperty)
@@ -156,4 +157,43 @@ void List::SetMatrix4x4(std::wstring name, Matrix4x4 value)
 	{
 		p->m_value.matrix4x4Value = value;
 	}
+}
+
+MaterialProperty::List::PropertyValue MaterialProperty::List::GetDefaultValue(ValueType vt)
+{
+	PropertyValue pt;
+	switch (vt)
+	{
+	case kIntegerProperty:
+		pt.integerValue = 0;
+		break;
+	case kBooleanProperty:
+		pt.booleanValue = FALSE;
+		break;
+	case kFloatProperty:
+		pt.floatValue = 0.0f;
+		break;
+	case kFloat2Property:
+		pt.float2Value = { 0, 0 };
+		break;
+	case kFloat3Property:
+		pt.float3Value = { 0, 0, 0 };
+		break;
+	case kFloat4Property:
+		pt.float4Value = { 0, 0, 0, 0 };
+		break;
+	case kMatrix3x3Property:
+		Matrix3x3 m33;
+		Matrix3x3::Identity(m33);
+		pt.matrix3x3Value = m33;
+		break;
+	case kMatrix4x4Property:
+		Matrix4x4 m44;
+		Matrix4x4::Identity(m44);
+		pt.matrix4x4Value = m44;
+		break;
+	default:
+		throw "Could not get property size";
+	}
+	return pt;
 }

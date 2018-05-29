@@ -8,14 +8,14 @@ namespace MaterialProperty
 {
 	enum ValueType
 	{
-		kIntegerProperty,
-		kBooleanProperty,
-		kFloatProperty,
-		kFloat2Property,
-		kFloat3Property,
-		kFloat4Property,
-		kMatrix3x3Property,
-		kMatrix4x4Property
+		kIntegerProperty   = 0,
+		kBooleanProperty   = 1,
+		kFloatProperty     = 2,
+		kFloat2Property    = 3,
+		kFloat3Property    = 4,
+		kFloat4Property    = 5,
+		kMatrix3x3Property = 6,
+		kMatrix4x4Property = 7
 	};
 
 	struct Initializer
@@ -34,7 +34,7 @@ namespace MaterialProperty
 		void Initalize(std::vector<Initializer> initialValues);
 
 		void SetInteger(std::wstring name, int value);
-		void SetBoolean(std::wstring name, bool value);
+		void SetBoolean(std::wstring name, BOOL value);
 		void SetFloat(std::wstring name, float value);
 		void SetFloat2(std::wstring name, Vector2 value);
 		void SetFloat3(std::wstring name, Vector3 value);
@@ -49,7 +49,7 @@ namespace MaterialProperty
 		union PropertyValue
 		{
 			int integerValue;
-			bool booleanValue;
+			BOOL booleanValue;
 			float floatValue;
 			Vector4 float4Value;
 			Vector3 float3Value;
@@ -70,5 +70,6 @@ namespace MaterialProperty
 		std::vector<Property> m_properties;
 		Property* GetProperty(std::wstring name);
 		size_t GetPropertySize(Property p);
+		PropertyValue GetDefaultValue(ValueType vt);
 	};
 }

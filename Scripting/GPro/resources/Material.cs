@@ -2,14 +2,14 @@ using System.Runtime.CompilerServices;
 
 public enum PropertyValueType
 {
-	Integer,
-	Boolean,
-	Float,
-	Float2,
-	Float3,
-	Float4,
-	Matrix3x3,
-	Matrix4x4
+	Integer   = 0,
+	Boolean   = 1,
+	Float     = 2,
+	Float2    = 3,
+	Float3    = 4,
+	Float4    = 5,
+	Matrix3x3 = 6,
+	Matrix4x4 = 7
 };
 
 public struct PropertyInitializer
