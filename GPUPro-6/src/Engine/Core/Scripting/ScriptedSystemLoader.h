@@ -15,6 +15,7 @@ class ScriptedSystemLoader : public ISystem
 {
 public:
 	virtual void Initialize() override;
+	virtual void VariableTick() override;
 	virtual void Deinitalize() override;
 
 	ManagedObject* CreateObject(ManagedTypeID typeName);
@@ -27,4 +28,6 @@ private:
 
 	MonoImage* m_gproImage;
 	MonoAssembly* m_gproAssembly;
+
+	bool m_executedMainMethod = false;
 };

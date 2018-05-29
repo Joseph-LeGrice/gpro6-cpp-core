@@ -26,16 +26,20 @@ void ScriptedSystemLoader::Initialize()
 	m_image = mono_assembly_get_image(m_assembly);
 	
 	GPro::RegisterAllCalls();
+}
 
-	if (m_assembly != NULL)
+void ScriptedSystemLoader::VariableTick()
+{
+	if (m_assembly != NULL && !m_executedMainMethod)
 	{
-        // Notes for later:
-        //   Currently I have an entry point for C# here.
-        //   This is due to the fact I have no serialization.
-        //   I create the mono objects here, in this method call.
-        //   Ideally I will eventually remove this entry point.
-        //   Instead, all mono objects would be created via deserialization process.
-        
+		// Notes for later:
+		//   Currently I have an entry point for C# here.
+		//   This is due to the fact I have no serialization.
+		//   I create the mono objects here, in this method call.
+		//   Ideally I will eventually remove this entry point.
+		//   Instead, all mono objects would be created via deserialization process.
+		m_executedMainMethod = true;
+
 		const int argc = 1;
 		char* argv[argc] = {
 			"MonoSystemLoader"
