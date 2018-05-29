@@ -3,6 +3,7 @@
 
 void MaterialPropertyList::Initalize(std::vector<PropertyInitializer> initialValues)
 {
+	m_initialized = true;
 	m_properties.resize(initialValues.size());
 	for (int i = 0; i < initialValues.size(); i++)
 	{
@@ -11,7 +12,10 @@ void MaterialPropertyList::Initalize(std::vector<PropertyInitializer> initialVal
 	}
 
 	size_t storageSize = GetDataLength();
-	m_propertyAlloc.Allocate(storageSize);
+	if (storageSize > 0)
+	{
+		m_propertyAlloc.Allocate(storageSize);
+	}
 }
 
 void* MaterialPropertyList::GetData()
@@ -44,6 +48,7 @@ size_t MaterialPropertyList::GetDataLength()
 
 MaterialPropertyList::Property* MaterialPropertyList::GetProperty(std::wstring name)
 {
+	custom_assert::is_true(m_initialized, "MaterialPropertyList has not been initialized!");
 	for (int i = 0; i < m_properties.size(); i++)
 	{
 		if (m_properties[i].m_propertyName == name)

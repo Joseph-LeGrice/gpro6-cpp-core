@@ -62,6 +62,7 @@ private:
 		PropertyValueType m_valueType;
 	};
 
+	bool m_initialized;
 	HeapAllocation m_propertyAlloc;
 	std::vector<Property> m_properties;
 	Property* GetProperty(std::wstring name);

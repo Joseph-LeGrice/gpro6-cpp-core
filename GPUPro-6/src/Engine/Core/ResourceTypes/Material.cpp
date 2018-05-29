@@ -64,7 +64,6 @@ void Material::SetInteger(std::wstring name, int value)
 	m_properties.SetInteger(name, value);
 }
 
-
 void Material::SetBoolean(std::wstring name, bool value)
 {
 	m_properties.SetBoolean(name, value);
