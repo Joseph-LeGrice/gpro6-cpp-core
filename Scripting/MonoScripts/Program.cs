@@ -63,43 +63,40 @@ class Program
         quadRenderer.Material = testQuadMat;
         //------------------------------------------------------------------------------------
 
+        //------------------------------------------------------------------------------------
+        //Skybox
+        Shader skyboxShader = TypedObjectManager.Create<Shader>();
+        string envMapShaderPath = Path.Combine(Application.ResourcePath, "Shaders/EnvironmentMap.hlsl");
+        skyboxShader.InitVertexShader(envMapShaderPath, "VShader");
+        skyboxShader.InitPixelShader(envMapShaderPath, "PShader");
+
+        Texture2DArray testCubemap = TypedObjectManager.Create<Texture2DArray>();
+        List<string> bitmapPaths = new List<string>() {
+            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Right.bmp"),
+            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Left.bmp"),
+            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Bottom.bmp"),
+            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Top.bmp"),
+            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Front.bmp"),
+            Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
+        };
+        testCubemap.InitializeWithBitmaps(bitmapPaths.ToArray());
+        
+        Material skyboxMat = TypedObjectManager.Create<Material>();
+        skyboxMat.SetCullState(CullState.None);
+        skyboxMat.SetShader(skyboxShader);
+        skyboxMat.RegisterShaderResource(testCubemap.GetResource(), 0);
+        skyboxMat.AddTextureSampler(textureSampler, 0);
+
+        // Entity skyboxEntity = TypedObjectManager.Create<Entity>();
+        MeshRenderer skyboxRenderer = cameraEntity.AddComponent<MeshRenderer>();
+        // skyboxRenderer.m_enabled = true;
+        skyboxRenderer.Mesh = sphereMesh;
+        skyboxRenderer.Material = skyboxMat;
+        //------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------
         // int lightBufferIndex = GetSystemManager().GetSystem<LightingSystem>().GetBufferResourceIndex();
         // StructuredBuffer lightBuffer = TypedObjectManager.GetInstance<StructuredBuffer>(lightBufferIndex);
-        //------------------------------------------------------------------------------------
-
-        //------------------------------------------------------------------------------------
-        // Shader materialShader = TypedObjectManager.Create<Shader>();
-        // string forwardRenderShaderPath = Path.Combine(Application.ResourcePath, "Shaders/ForwardRendering.hlsl");
-        // materialShader.InitVertexShader(forwardRenderShaderPath, "VShader");
-        // materialShader.InitPixelShader(forwardRenderShaderPath, "PShader");
-        //------------------------------------------------------------------------------------
-
-        //------------------------------------------------------------------------------------
-        // Material simpleTestMaterial = TypedObjectManager.Create<Material>();
-        // simpleTestMaterial.SetShader(materialShader);
-        // simpleTestMaterial.RegisterShaderResource(testImageTexture.GetResource(), 1 );
-        // // simpleTestMaterial.RegisterShaderResource(lightBuffer.GetMyResourceViewID(), 0);
-        // simpleTestMaterial.AddTextureSampler(textureSampler, 0);
-
-        // simpleTestMaterial.SetFloat4("DiffuseColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-        // simpleTestMaterial.SetFloat4("SpecularColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-        // simpleTestMaterial.SetFloat("SpecularPower", 10.0f);
-        // simpleTestMaterial.SetBoolean("HasDiffuseTexture", true);
-        //------------------------------------------------------------------------------------
-		
-        //------------------------------------------------------------------------------------
-        // Ball Object
-		// Entity sphereEntity = TypedObjectManager.Create<Entity>();
-        // Transform sphereTransform = sphereEntity.AddComponent<Transform>();
-        // //sphereTransform.rotation = Quaternion.FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
-        // sphereTransform.position = new Vector3(50.0f, 1.0f, 1.0f);
-        // sphereTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
-        // sphereTransform.scale *= 10.0f;
-        // MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();
-        // sphereRenderer.Mesh = sphereMesh;
-        // sphereRenderer.Material = simpleTestMaterial;
         //------------------------------------------------------------------------------------
         
         //------------------------------------------------------------------------------------
@@ -110,6 +107,46 @@ class Program
         // Light lightComponent = lightEntity.AddComponent<Light>();
         // lightComponent.Range = 250.0f;
         //------------------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------------------
+        // Shader materialShader = TypedObjectManager.Create<Shader>();
+        // string forwardRenderShaderPath = Path.Combine(Application.ResourcePath, "Shaders/ForwardRendering.hlsl");
+        // materialShader.InitVertexShader(forwardRenderShaderPath, "VShader");
+        // materialShader.InitPixelShader(forwardRenderShaderPath, "PShader");
+        //------------------------------------------------------------------------------------
+        
+        //------------------------------------------------------------------------------------
+        // Sphere Object
+        // Material sphereMaterial = TypedObjectManager.Create<Material>();
+        // sphereMaterial.SetShader(materialShader);
+        // sphereMaterial.RegisterShaderResource(testImageTexture.GetResource(), 1 );
+        // sphereMaterial.RegisterShaderResource(lightBuffer.GetMyResourceViewID(), 0);
+        // sphereMaterial.AddTextureSampler(textureSampler, 0);
+
+        // sphereMaterial.InitProperties({
+        //     {  }
+        // });
+        // sphereMaterial.SetFloat4("DiffuseColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+        // sphereMaterial.SetFloat4("SpecularColor", new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+        // sphereMaterial.SetFloat("SpecularPower", 10.0f);
+        // sphereMaterial.SetBoolean("HasDiffuseTexture", true);
+        //------------------------------------------------------------------------------------
+		
+		// Entity sphereEntity = TypedObjectManager.Create<Entity>();
+        // Transform sphereTransform = sphereEntity.AddComponent<Transform>();
+        // //sphereTransform.rotation = Quaternion.FromAxisAngle({ 0.0f, 0.0f, 1.0f }, 0.75f * PI);
+        // sphereTransform.position = new Vector3(50.0f, 1.0f, 1.0f);
+        // sphereTransform.scale = new Vector3(1.0f, 1.0f, 1.0f);
+        // sphereTransform.scale *= 10.0f;
+        // MeshRenderer sphereRenderer = sphereEntity.AddComponent<MeshRenderer>();
+        // sphereRenderer.Mesh = sphereMesh;
+        // sphereRenderer.Material = sphereMaterial;
+        //------------------------------------------------------------------------------------
+                
+        return 0;
+    }
+}
+
 /*
         //------------------------------------------------------------------------------------
         // MarchingSquares Testing
@@ -140,37 +177,3 @@ class Program
         quadRenderer.DrawCommandIndex = 1;
         //------------------------------------------------------------------------------------
 */        
-        //------------------------------------------------------------------------------------
-        //Skybox
-        // Shader skyboxShader = TypedObjectManager.Create<Shader>();
-        // string envMapShaderPath = Path.Combine(Application.ResourcePath, "Shaders/EnvironmentMap.hlsl");
-        // skyboxShader.InitVertexShader(envMapShaderPath, "VShader");
-        // skyboxShader.InitPixelShader(envMapShaderPath, "PShader");
-
-        // Texture2DArray testCubemap = TypedObjectManager.Create<Texture2DArray>();
-        // List<string> bitmapPaths = new List<string>() {
-        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Right.bmp"),
-        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Left.bmp"),
-        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Bottom.bmp"),
-        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Top.bmp"),
-        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Front.bmp"),
-        //     Path.Combine(Application.ResourcePath, "GameResources/GPro_Test/TheSaMonstaSkyBox1_Back.bmp")
-        // };
-        // testCubemap.InitializeWithBitmaps(bitmapPaths.ToArray());
-        
-        // Material skyboxMat = TypedObjectManager.Create<Material>();
-        // skyboxMat.SetCullState(CullState.None);
-        // skyboxMat.SetShader(skyboxShader);
-        // skyboxMat.RegisterShaderResource(testCubemap.GetResource(), 0);
-        // skyboxMat.AddTextureSampler(textureSampler, 0);
-
-        // // Entity skyboxEntity = TypedObjectManager.Create<Entity>();
-        // MeshRenderer skyboxRenderer = cameraEntity.AddComponent<MeshRenderer>();
-        // // skyboxRenderer.m_enabled = true;
-        // skyboxRenderer.Mesh = sphereMesh;
-        // skyboxRenderer.Material = skyboxMat;
-        //------------------------------------------------------------------------------------
-        
-        return 0;
-    }
-}

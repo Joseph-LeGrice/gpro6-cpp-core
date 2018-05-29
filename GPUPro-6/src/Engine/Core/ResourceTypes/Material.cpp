@@ -50,7 +50,6 @@ bool Material::BindIfValid(RasterizerState* rasterizerState, BlendState* blendSt
 	return false;
 }
 
-
 void Material::InitProperties(std::vector<MaterialPropertyList::PropertyInitializer> props)
 {
 	m_properties.Initalize(props);

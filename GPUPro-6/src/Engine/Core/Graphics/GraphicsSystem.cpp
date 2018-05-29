@@ -52,8 +52,8 @@ void GraphicsSystem::Initialize()
 
 	m_perCameraBufferProperties.Initalize({
 		{ L"EyePos", MaterialPropertyList::kFloat4Property },
-		{ L"View", MaterialPropertyList::kMatrix4x4Property },
-		{ L"Projection", MaterialPropertyList::kMatrix4x4Property }
+		{ L"_View", MaterialPropertyList::kMatrix4x4Property },
+		{ L"_Projection", MaterialPropertyList::kMatrix4x4Property }
 	});
 	m_perCameraBuffer = CreateConstantBuffer(m_perCameraBufferProperties.GetDataLength());
 
@@ -97,8 +97,9 @@ void GraphicsSystem::VariableTick()
 		Matrix4x4 view = cameraTransform->GetCameraViewMatrix();
 		Matrix4x4 proj = cam->m_projectionMatrix;
 
-		m_perCameraBufferProperties.SetFloat4(L"EyePos", { 0.0f, 0.0f, 1.0f, 1.0f });
-		m_perCameraBufferProperties.SetMatrix4x4(L"Projection", proj);
+		m_perCameraBufferProperties.SetFloat4(L"EyePos", Vector4::FromVector3(cameraTransform->m_position));
+		m_perCameraBufferProperties.SetMatrix4x4(L"_View", view);
+		m_perCameraBufferProperties.SetMatrix4x4(L"_Projection", proj);
         m_perCameraBuffer->UpdateBuffer(m_perCameraBufferProperties.GetData(), m_perCameraBufferProperties.GetDataLength());
 
 		ID3D11DeviceContext& deviceContext = *m_gfxDevice.GetGraphicsDeviceContext();
