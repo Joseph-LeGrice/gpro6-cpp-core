@@ -50,18 +50,18 @@ void GraphicsSystem::Initialize()
 {
 	ISystem::Initialize();
 
-	m_perCameraBuffer = CreateConstantBuffer(sizeof(PER_CAMERA_BUFFER));
 	m_perCameraBufferProperties.Initalize({
 		{ L"EyePos", MaterialPropertyList::kFloat4Property },
 		{ L"View", MaterialPropertyList::kMatrix4x4Property },
 		{ L"Projection", MaterialPropertyList::kMatrix4x4Property }
 	});
+	m_perCameraBuffer = CreateConstantBuffer(m_perCameraBufferProperties.GetDataLength());
 
-	m_perObjectBuffer = CreateConstantBuffer(sizeof(PER_OBJECT_BUFFER));
 	m_perObjectBufferProperties.Initalize({
 		{ L"ModelViewProjection", MaterialPropertyList::kMatrix4x4Property },
 		{ L"ModelView", MaterialPropertyList::kMatrix4x4Property }
 	});
+	m_perObjectBuffer = CreateConstantBuffer(m_perObjectBufferProperties.GetDataLength());
 
 	//float viewportWidth = m_gfxDevice.GetViewportWidth();
 	//float viewportHeight = m_gfxDevice.GetViewportHeight();
@@ -131,7 +131,7 @@ void GraphicsSystem::VariableTick()
 				m_perObjectBuffer->UpdateBuffer(m_perObjectBufferProperties.GetData(), m_perObjectBufferProperties.GetDataLength());
 
 				Material* mat = mrc->m_material.Get<Material>();
-				if (mat->BindIfValid(nullptr, &m_rasterizerState, &m_blendState))
+				if (mat->BindIfValid(&m_rasterizerState, &m_blendState))
 				{
 					deviceContext.IASetPrimitiveTopology(mesh->m_topology);
 					deviceContext.DrawIndexed(mi.m_indexCount, mi.m_indexStart, mi.m_vertexStart);
@@ -142,7 +142,7 @@ void GraphicsSystem::VariableTick()
 	m_gfxDevice.Present();
 }
 
-ConstantBuffer* GraphicsSystem::CreateConstantBuffer(UINT length)
+ConstantBuffer* GraphicsSystem::CreateConstantBuffer(size_t length)
 {
 	ConstantBuffer* newBuffer = new ConstantBuffer(m_gfxDevice); // FIXME: MANUAL ALLOCATION HERE
 	newBuffer->InitBuffer(length);

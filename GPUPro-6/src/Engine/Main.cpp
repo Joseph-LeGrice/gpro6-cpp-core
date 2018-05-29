@@ -118,6 +118,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		systemContainer,
 		monoSystemLoader,
 		gfxDevice,
+		graphicSystem,
 		typedObjectManager,
 		n2m,
 		meshManager

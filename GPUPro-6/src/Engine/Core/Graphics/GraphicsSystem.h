@@ -43,7 +43,7 @@ public:
 	ConstantBuffer* GetPerObjectBuffer();
 	ConstantBuffer* GetPerCameraBuffer();
 
-	ConstantBuffer* CreateConstantBuffer(UINT length);
+	ConstantBuffer* CreateConstantBuffer(size_t length);
 
 private:
 	TypedObjectManager& m_typedObjectManager;

@@ -22,7 +22,7 @@ public:
 		m_gfxDevice(gfxDevice) { }
 	~ConstantBuffer();
 
-    void InitBuffer(UINT length);
+    void InitBuffer(size_t length);
 	void UpdateBuffer(void* data, size_t length);
 	void BindBuffer(UINT bufferSlot, BindFlags bindFlags);
 	void ReleaseBuffer();
