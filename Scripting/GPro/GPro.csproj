@@ -15,6 +15,10 @@
     <Compile Include="MeshHelper.cs" />
     <Compile Include="ScriptedSystemInterface.cs" />
     <Compile Include="TypedObjectManager.cs" />
+    <Compile Include="components\Camera.cs" />
+    <Compile Include="components\Light.cs" />
+    <Compile Include="components\MeshRenderer.cs" />
+    <Compile Include="components\Transform.cs" />
     <Compile Include="resources\Material.cs" />
     <Compile Include="resources\Mesh.cs" />
     <Compile Include="resources\Shader.cs" />
