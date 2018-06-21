@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+// using GPro;
 using System.Runtime.CompilerServices;
 
 class Program
@@ -93,7 +94,7 @@ class Program
         skyboxRenderer.Mesh = sphereMesh;
         skyboxRenderer.Material = skyboxMat;
         //------------------------------------------------------------------------------------
-
+        
         //------------------------------------------------------------------------------------
         StructuredBuffer lightBuffer = TypedObjectManager.GetInstance<StructuredBuffer>(0); // FIXME: Cheating here - We should access the Lighting
         //------------------------------------------------------------------------------------

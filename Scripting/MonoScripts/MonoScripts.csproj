@@ -1,15 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <!-- <TargetFramework>netstandard2.0</TargetFramework> -->
+    <AssemblyName>MonoScripts</AssemblyName>
+    <OutputPath>out/</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="GPro">
-      <HintPath>..\GPro\GPro.dll</HintPath>
-    </Reference>
+    <Reference Include="..\GPro\out\GPro.dll" />
+
+    <Compile Include="Program.cs" />
+    <Compile Include="TestSystem.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Program.cs" />  
-    <Compile Include="TestSystem.cs" />  
-  </ItemGroup>
-  <Target Name="Compile">
-    <Csc Sources="@(Compile)"/>    
+
+  <Target Name="Build">
+      <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
+      <Exec Command="C:\Mono\bin\csc /out:$(OutputPath)$(AssemblyName).exe /target:exe /r:%(Reference.FullPath) @(Compile, ' ')" />
   </Target>
 </Project>
