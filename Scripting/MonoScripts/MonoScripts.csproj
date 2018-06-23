@@ -1,20 +1,26 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <!-- <TargetFramework>netstandard2.0</TargetFramework> -->
     <AssemblyName>MonoScripts</AssemblyName>
     <OutputPath>out/</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="..\GPro\out\GPro.dll" />
+    <Reference Include="mscorlib" />
+    <Reference Include="GPro.dll">
+      <HintPath >..\GPro\out\GPro.dll</HintPath>
+    </Reference>
 
     <Compile Include="Program.cs" />
     <Compile Include="TestSystem.cs" />
   </ItemGroup>
-
+<!-- 
   <Target Name="Build">
       <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
-      <Exec Command="C:\Mono\bin\csc /out:$(OutputPath)$(AssemblyName).exe /target:exe /r:%(Reference.FullPath) @(Compile, ' ')" />
-  </Target>
+      <Exec Command="C:\Mono\bin\csc /out:$(OutputPath)$(AssemblyName).dll /target:library /r:%(Reference.FullPath) @(Compile, ' ')" />
+  </Target> -->
+
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" /> 
+  
 </Project>

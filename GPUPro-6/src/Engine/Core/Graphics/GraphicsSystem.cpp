@@ -62,18 +62,6 @@ void GraphicsSystem::Initialize()
 		{ L"ModelView", MaterialProperty::kMatrix4x4Property }
 	});
 	m_perObjectBuffer = CreateConstantBuffer(m_perObjectBufferProperties.GetDataLength());
-
-	//float viewportWidth = m_gfxDevice.GetViewportWidth();
-	//float viewportHeight = m_gfxDevice.GetViewportHeight();
-	//float aspectRatio = viewportWidth / viewportHeight;
-
-	//float screenNear = 0.1f;
-	//float screenDepth = 100.0f;
-	//float fieldOfView = 60.0f * MyMath::DegToRad;
-
-	//TODO: FIXME
-	//Camera& c = Camera::CreatePerspective(fieldOfView, aspectRatio, screenNear, screenDepth);
-	//m_sceneGraph.CreateComponent(c);
 }
 
 void GraphicsSystem::VariableTick()

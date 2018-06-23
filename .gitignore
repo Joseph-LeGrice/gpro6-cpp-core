@@ -25,3 +25,4 @@ BuildUtils/dist/
 BuildUtils/out/
 MonoScripts/bin/
 MonoScripts/obj/
+Scripting/MonoScripts/obj/
