@@ -2,15 +2,10 @@
 
 #include <string>
 #include <vector>
+#include <d3d11.h>
 #include "Engine/Core/RTTI/ITypedObject.h"
 
 class GraphicsDevice;
-struct ID3D11InputLayout;
-struct ID3D11VertexShader;
-struct ID3D11PixelShader;
-struct ID3D11GeometryShader;
-struct ID3D11HullShader;
-struct ID3D11DomainShader;
 
 class Shader : public ITypedObject
 {

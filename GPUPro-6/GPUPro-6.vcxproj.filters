@@ -390,8 +390,6 @@
     </None>
     <None Include="src\Engine\Main_BoostDI.cpp" />
     <None Include="src\Engine\Core\Scripting\Bindings\GProConfig.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="src\Engine\Shaders\TestShader.hlsl" />
+    <None Include="src\Engine\Shaders\TestShader.hlsl" />
   </ItemGroup>
 </Project>

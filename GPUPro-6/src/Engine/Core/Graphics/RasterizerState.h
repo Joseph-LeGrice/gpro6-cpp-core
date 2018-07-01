@@ -1,9 +1,10 @@
 #pragma once
 
 #include <unordered_map>
+#include <d3d11.h>
 
 class GraphicsDevice;
-struct ID3D11RasterizerState;
+
 
 enum CullState
 {

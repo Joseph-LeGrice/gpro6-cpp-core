@@ -3,6 +3,7 @@
 #include "Engine/Core/RTTI/ITypedObject.h"
 #include <vector>
 #include <string>
+#include <d3d11.h>
 
 struct ID3D11Texture2D;
 struct FIBITMAP;
