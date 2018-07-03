@@ -19,10 +19,10 @@ void ScriptedSystemLoader::Initialize()
 	mono_set_dirs("C:\\Mono\\lib", "C:\\Mono\\etc");
 	m_domain = mono_jit_init("GPUPro-6");
 	
-	m_gproAssembly = mono_domain_assembly_open(m_domain, "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\build\\x64-Debug\\GPro.dll");
+	m_gproAssembly = mono_domain_assembly_open(m_domain, "Assemblies\\GPro.dll");
 	m_gproImage = mono_assembly_get_image(m_gproAssembly);
 	 
-	m_assembly = mono_domain_assembly_open(m_domain, "C:\\Users\\Joe\\Development\\GPUPro-6\\GPUPro-6\\build\\x64-Debug\\MonoScripts.exe");
+	m_assembly = mono_domain_assembly_open(m_domain, "Assemblies\\Application-Assembly.exe");
 	m_image = mono_assembly_get_image(m_assembly);
 	
 	GPro::RegisterAllCalls();
