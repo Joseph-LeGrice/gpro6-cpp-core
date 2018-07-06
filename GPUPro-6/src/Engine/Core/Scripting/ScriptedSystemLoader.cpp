@@ -11,18 +11,28 @@
 #include "Engine/Core/GlobalStaticReferences.h"
 #include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/ResourceTypes/ManagedObject.h"
+#include "Engine/Core/Application/Application.h"
 
 void ScriptedSystemLoader::Initialize()
 {
 	ISystem::Initialize();
 
-	mono_set_dirs("C:\\Mono\\lib", "C:\\Mono\\etc");
+	mono_set_dirs(
+        ws2s(Application::GetRelativePath(L"Peripherals\\mono\\lib")).c_str(),
+        ws2s(Application::GetRelativePath(L"Peripherals\\mono\\etc")).c_str()
+    );
 	m_domain = mono_jit_init("GPUPro-6");
 	
-	m_gproAssembly = mono_domain_assembly_open(m_domain, "Assemblies\\GPro.dll");
+	m_gproAssembly = mono_domain_assembly_open(
+        m_domain,
+        ws2s(Application::GetRelativePath(L"Assemblies\\GPro.dll")).c_str()
+    );
 	m_gproImage = mono_assembly_get_image(m_gproAssembly);
 	 
-	m_assembly = mono_domain_assembly_open(m_domain, "Assemblies\\Application-Assembly.exe");
+	m_assembly = mono_domain_assembly_open(
+        m_domain,
+        ws2s(Application::GetRelativePath(L"Assemblies\\Application-Assembly.dll")).c_str()
+    );
 	m_image = mono_assembly_get_image(m_assembly);
 	
 	GPro::RegisterAllCalls();

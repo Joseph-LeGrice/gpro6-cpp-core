@@ -4,6 +4,18 @@
 StaticPointer<Application> Application::s_instance;
 std::wstring Application::s_resourceFullPath;
 
+std::wstring Application::GetInstallLocation()
+{
+    return s_instance->m_executablePath;
+}
+
+std::wstring Application::GetRelativePath(std::wstring relativePath)
+{
+    std::wstringstream ss;
+    ss << s_instance->m_executablePath << "\\" << relativePath;
+    return ss.str();
+}
+
 std::wstring Application::GetInstancePath(std::wstring relativePath)
 {
     std::wstringstream ss;

@@ -3,6 +3,8 @@
 class Application
 {
 public:
+    static std::wstring GetInstallLocation();
+    static std::wstring GetRelativePath(std::wstring relativePath);
     static std::wstring GetInstancePath(std::wstring relativePath);
     Application();
 
