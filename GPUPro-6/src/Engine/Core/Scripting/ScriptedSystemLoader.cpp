@@ -50,12 +50,14 @@ void ScriptedSystemLoader::VariableTick()
 		//   Instead, all mono objects would be created via deserialization process.
 		m_executedMainMethod = true;
 
+       MonoClass* programClass = mono_class_from_name(m_image, "", "Program");
+       MonoMethod* mainMethod = mono_class_get_method_from_name(programClass, "Main", 1);
+
 		const int argc = 1;
 		char* argv[argc] = {
 			"MonoSystemLoader"
 		};
-
-		mono_jit_exec(m_domain, m_assembly, argc, argv);
+        mono_runtime_invoke(mainMethod, NULL, (void**)(argv), NULL);
 	}
 }
 
