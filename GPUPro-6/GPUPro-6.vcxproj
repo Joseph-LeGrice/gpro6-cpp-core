@@ -230,6 +230,7 @@
     <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
     <ClCompile Include="src\Engine\Core\ResourceTypes\ManagedObject.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ApplicationAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\CameraAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\LightAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\MeshRendererAPI.cpp" />
@@ -307,6 +308,7 @@
     <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
     <ClInclude Include="src\Engine\Core\RTTI\ITypedObject.h" />
     <ClInclude Include="src\Engine\Core\ResourceTypes\ManagedObject.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ApplicationAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\CameraAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\LightAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\MeshRendererAPI.h" />

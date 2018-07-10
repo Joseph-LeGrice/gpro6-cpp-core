@@ -29,6 +29,11 @@ std::wstring MonoMarshall::GetUTF16String(MonoString* ms)
 	return ss.str();
 }
 
+extern MonoString* MonoMarshall::GetMonoString(std::wstring ws)
+{
+    return mono_string_from_utf16((mono_unichar2*)ws.c_str());
+}
+
 extern std::vector<std::wstring> MonoMarshall::GetStringVector(MonoArray* ma)
 {
 	std::vector<std::wstring> result;

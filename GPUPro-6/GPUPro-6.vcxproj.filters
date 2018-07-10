@@ -130,6 +130,7 @@
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\MeshHelperAPI.cpp" />
     <ClCompile Include="src\Engine\Core\RTTI\RTTI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ApplicationAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h" />
@@ -297,6 +298,7 @@
     <ClInclude Include="src\Engine\Core\Utilities\HeapAllocation.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.h" />
     <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\MeshHelperAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ApplicationAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

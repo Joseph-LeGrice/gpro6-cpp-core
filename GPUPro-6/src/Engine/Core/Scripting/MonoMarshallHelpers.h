@@ -20,6 +20,8 @@ namespace MonoMarshall
 	extern std::string GetUTF8String(MonoString* ms);
 	extern std::wstring GetUTF16String(MonoString* ms);
 
+    extern MonoString* GetMonoString(std::wstring ws);
+
 	extern ToPtr GetNativePointer(MonoObject* obj);
 	extern MonoObject* GetManagedObject(ToPtr obj);
 	

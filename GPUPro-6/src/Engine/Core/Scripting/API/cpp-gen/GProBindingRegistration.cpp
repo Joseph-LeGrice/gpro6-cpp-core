@@ -17,6 +17,7 @@
 #include "ScriptedSystemInterfaceAPI.h"
 #include "LoggingAPI.h"
 #include "MeshHelperAPI.h"
+#include "ApplicationAPI.h"
 
 using namespace GPro;
 
@@ -39,4 +40,5 @@ void GPro::RegisterAllCalls()
 	ScriptedSystemInterfaceAPI::RegisterCalls();
 	LoggingAPI::RegisterCalls();
 	MeshHelperAPI::RegisterCalls();
+	ApplicationAPI::RegisterCalls();
 }
