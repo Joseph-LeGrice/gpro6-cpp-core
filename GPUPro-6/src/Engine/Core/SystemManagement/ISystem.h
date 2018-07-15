@@ -35,7 +35,7 @@ public:
 	{
 		int systemIndex = system->m_systemIndex;
 		custom_assert::is_true(systemIndex >= 0, "Trying to unregister invalid system");
-		for (int i = 0; i < m_subsystems.size(); i++)
+		for (unsigned int i = 0; i < m_subsystems.size(); i++)
 		{
 			int subsystemIndex = m_subsystems[i];
 			if (subsystemIndex == systemIndex)

@@ -73,7 +73,7 @@ void SystemContainer::DeinitializeAll()
 	{
 		ISystem* system = *it;
 		std::vector<int> subsystemIndexes = system->m_subsystems;
-		for (int i = 0; i < subsystemIndexes.size(); i++)
+		for (unsigned int i = 0; i < subsystemIndexes.size(); i++)
 		{
 			int ssIndex = subsystemIndexes[i];
 			ISystem* sSystem = systems[ssIndex];

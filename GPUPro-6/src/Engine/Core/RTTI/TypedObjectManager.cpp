@@ -7,7 +7,7 @@ TypedObjectManager::~TypedObjectManager()
 	for (auto mapIt = m_instanceListMap.begin(); mapIt != m_instanceListMap.end(); mapIt++)
 	{
 		auto list = mapIt->second;
-		for (int i = 0; i < list.size(); i++)
+		for (unsigned int i = 0; i < list.size(); i++)
 		{
 			list[i]->Finalize();
 			delete list[i];
@@ -72,7 +72,7 @@ ITypedObject* TypedObjectManager::GetInstance(TypeID typeId, InstanceID objId)
 {
 	std::vector<ITypedObject*>& resources = GetInstanceList(typeId);
 
-	if (resources.size() > 0 && objId < resources.size())
+	if (resources.size() > 0 && objId < static_cast<int>(resources.size()))
 	{
 		return resources[objId];
 	}

@@ -11,7 +11,7 @@ TypeNameMappings& TypeNameMappings::Instance()
 
 ScriptedTypeMap* TypeNameMappings::GetMapObject(TypeID typeId)
 {
-	for (int i = 0; i < m_scriptedTypeMap.size(); i++)
+	for (unsigned int i = 0; i < m_scriptedTypeMap.size(); i++)
 	{
 		ScriptedTypeMap& srm = m_scriptedTypeMap[i];
 		if (srm.typeId == typeId)

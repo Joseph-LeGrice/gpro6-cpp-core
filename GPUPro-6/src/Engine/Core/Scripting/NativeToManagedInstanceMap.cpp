@@ -8,7 +8,7 @@
 ManagedObject* NativeToManagedInstanceMap::GetManagedObject(TypeID nativeTypeId, InstanceID nativeObjectId)
 {
 	std::vector<NativeToManagedInstance>& activeInstances = m_activeMappedInstances.at(nativeTypeId);
-	for (int i = 0; i < activeInstances.size(); i++)
+	for (unsigned int i = 0; i < activeInstances.size(); i++)
 	{
 		NativeToManagedInstance obj = activeInstances[i];
 		if (obj.m_nativeInstanceId == nativeObjectId)
@@ -25,7 +25,7 @@ ITypedObject* NativeToManagedInstanceMap::GetNativeObject(ManagedTypeID managedT
 {
 	TypeID nativeTypeId = GetNativeTypeID(managedTypeId);
 	std::vector<NativeToManagedInstance>& activeInstances = m_activeMappedInstances.at(nativeTypeId);
-	for (int i = 0; i < activeInstances.size(); i++)
+	for (unsigned int i = 0; i < activeInstances.size(); i++)
 	{
 		NativeToManagedInstance obj = activeInstances[i];
 		if (obj.m_managedObjectId == managedObjectId)
@@ -41,7 +41,7 @@ ITypedObject* NativeToManagedInstanceMap::GetNativeObject(ManagedTypeID managedT
 InstanceID NativeToManagedInstanceMap::GetNativeInstanceID(TypeID nativeTypeId, InstanceID managedInstanceId)
 {
 	std::vector<NativeToManagedInstance>& activeInstances = m_activeMappedInstances.at(nativeTypeId);
-	for (int i = 0; i < activeInstances.size(); i++)
+	for (unsigned int i = 0; i < activeInstances.size(); i++)
 	{
 		NativeToManagedInstance obj = activeInstances[i];
 		if (obj.m_managedObjectId == managedInstanceId)
@@ -55,7 +55,7 @@ InstanceID NativeToManagedInstanceMap::GetNativeInstanceID(TypeID nativeTypeId, 
 InstanceID NativeToManagedInstanceMap::GetManagedInstanceID(TypeID nativeTypeId, InstanceID nativeInstanceId)
 {
 	std::vector<NativeToManagedInstance>& activeInstances = m_activeMappedInstances.at(nativeTypeId);
-	for (int i = 0; i < activeInstances.size(); i++)
+	for (unsigned int i = 0; i < activeInstances.size(); i++)
 	{
 		NativeToManagedInstance obj = activeInstances[i];
 		if (obj.m_nativeInstanceId == nativeInstanceId)
@@ -68,7 +68,7 @@ InstanceID NativeToManagedInstanceMap::GetManagedInstanceID(TypeID nativeTypeId,
 
 ManagedTypeID NativeToManagedInstanceMap::GetManagedTypeID(TypeID nativeTypeId)
 {
-	for (int i = 0; i < m_typeMapping.size(); i++)
+	for (unsigned int i = 0; i < m_typeMapping.size(); i++)
 	{
 		if (m_typeMapping[i].m_nativeTypeId == nativeTypeId)
 		{
@@ -80,7 +80,7 @@ ManagedTypeID NativeToManagedInstanceMap::GetManagedTypeID(TypeID nativeTypeId)
 
 TypeID NativeToManagedInstanceMap::GetNativeTypeID(ManagedTypeID managedTypeId)
 {
-	for (int i = 0; i < m_typeMapping.size(); i++)
+	for (unsigned int i = 0; i < m_typeMapping.size(); i++)
 	{
 		if (m_typeMapping[i].m_managedTypeId == managedTypeId)
 		{

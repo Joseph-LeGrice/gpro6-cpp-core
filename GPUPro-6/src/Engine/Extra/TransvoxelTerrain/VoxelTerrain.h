@@ -45,7 +45,7 @@ struct EndpointVertexData
         return m_vertices[vertexIndex];
     }
 
-    Vector3 SetPosition(Vector3 pos) {
+    void SetPosition(Vector3 pos) {
         m_position = pos;
     }
 

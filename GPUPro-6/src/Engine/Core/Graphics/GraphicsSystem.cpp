@@ -141,7 +141,7 @@ ConstantBuffer* GraphicsSystem::CreateConstantBuffer(size_t length)
 
 void GraphicsSystem::Deinitalize()
 {
-	for (int i = 0; i < m_allConstantBuffers.size(); i++)
+	for (unsigned int i = 0; i < m_allConstantBuffers.size(); i++)
 	{
 		m_allConstantBuffers[i]->ReleaseBuffer();
 		delete m_allConstantBuffers[i]; // FIXME: MANUAL DEALLOCATION HERE

@@ -7,7 +7,7 @@ void List::Initalize(std::vector<Initializer> initialValues)
 {
 	m_initialized = true;
 	m_properties.resize(initialValues.size());
-	for (int i = 0; i < initialValues.size(); i++)
+	for (unsigned int i = 0; i < initialValues.size(); i++)
 	{
 		m_properties[i].m_propertyName = initialValues[i].m_propertyName;
 		m_properties[i].m_valueType = initialValues[i].m_valueType;
@@ -26,7 +26,7 @@ void* List::GetData()
 	unsigned char* data = static_cast<unsigned char*>(m_propertyAlloc.GetPointer());
 	
 	size_t currentPosition = 0;
-	for (int i = 0; i < m_properties.size(); i++)
+	for (unsigned int i = 0; i < m_properties.size(); i++)
 	{
 		Property& p = m_properties[i];
 		size_t propSize = GetPropertySize(p);
@@ -41,7 +41,7 @@ void* List::GetData()
 size_t List::GetDataLength()
 {
 	size_t size = 0;
-	for (int i = 0; i < m_properties.size(); i++)
+	for (unsigned int i = 0; i < m_properties.size(); i++)
 	{
 		Property& p = m_properties[i];
 		size += GetPropertySize(p);
@@ -52,7 +52,7 @@ size_t List::GetDataLength()
 List::Property* List::GetProperty(std::wstring name)
 {
 	custom_assert::is_true(m_initialized, "List has not been initialized!");
-	for (int i = 0; i < m_properties.size(); i++)
+	for (unsigned int i = 0; i < m_properties.size(); i++)
 	{
 		if (m_properties[i].m_propertyName == name)
 		{
