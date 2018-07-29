@@ -24,10 +24,10 @@ public:
 private:
 	MonoImage* m_image;
 	MonoDomain* m_domain;
-	MonoAssembly* m_assembly;
+	MonoAssembly* m_appAssembly;
 
 	MonoImage* m_gproImage;
-	MonoAssembly* m_gproAssembly;
+	MonoAssembly* m_apiAssembly;
 
 	bool m_executedMainMethod = false;
 };

@@ -23,24 +23,24 @@ void ScriptedSystemLoader::Initialize()
     );
 	m_domain = mono_jit_init("GPUPro-6");
 	
-	m_gproAssembly = mono_domain_assembly_open(
+	m_apiAssembly = mono_domain_assembly_open(
         m_domain,
-        ws2s(Application::GetRelativePath(L"Assemblies\\GPro.dll")).c_str()
+        ws2s(Application::GetRelativePath(L"Assemblies\\cs-api.dll")).c_str()
     );
-	m_gproImage = mono_assembly_get_image(m_gproAssembly);
+	m_gproImage = mono_assembly_get_image(m_apiAssembly);
 	 
-	m_assembly = mono_domain_assembly_open(
+	m_appAssembly = mono_domain_assembly_open(
         m_domain,
         ws2s(Application::GetRelativePath(L"Assemblies\\Application-Assembly.dll")).c_str()
     );
-	m_image = mono_assembly_get_image(m_assembly);
+	m_image = mono_assembly_get_image(m_appAssembly);
 	
 	GPro::RegisterAllCalls();
 }
 
 void ScriptedSystemLoader::VariableTick()
 {
-	if (m_assembly != NULL && !m_executedMainMethod)
+	if (m_appAssembly != NULL && !m_executedMainMethod)
 	{
 		// Notes for later:
 		//   Currently I have an entry point for C# here.
@@ -66,7 +66,7 @@ void ScriptedSystemLoader::Deinitalize()
 	ISystem::Deinitalize();
 	mono_domain_finalize(m_domain, 5);
 	mono_jit_cleanup(m_domain);
-	m_assembly = nullptr;
+	m_appAssembly = nullptr;
 	m_domain = nullptr;
 }
 
