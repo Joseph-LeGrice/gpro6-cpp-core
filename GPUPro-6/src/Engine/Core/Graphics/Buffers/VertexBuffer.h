@@ -1,22 +1,25 @@
 #pragma once
 
-#include "D3D11.h"
 #include <vector>
 
 struct VertexData;
+struct ID3D11Buffer;
+class GraphicsDevice;
+
+const size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
 
 class VertexBuffer
 {
 public:
-	static VertexBuffer* Create(size_t bufferSize);
+	VertexBuffer(GraphicsDevice& gfxDevice);
+	VertexBuffer(const VertexBuffer& other) = delete;
 	~VertexBuffer();
 
 	bool SetCurrentIfValid(); 
 	bool TrySetData(const std::vector<VertexData>& data);
 
 private:
-	VertexBuffer();
-
+	GraphicsDevice& m_gfxDevice;
 	AutoRelease<ID3D11Buffer> m_vertexBuffer;
 };
 

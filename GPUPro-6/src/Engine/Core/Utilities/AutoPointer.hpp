@@ -4,6 +4,7 @@ template<class T>
 class AutoPointer
 {
 public:
+    AutoPointer(T* pointer) : m_pointer(pointer) { }
     AutoPointer()
     {
         m_pointer = nullptr;
@@ -31,6 +32,7 @@ public:
 
     operator T*() { return m_pointer; }
     operator T**() { return &m_pointer; }
+    operator T&() { return *m_pointer; }
 
 private:
     T* m_pointer;

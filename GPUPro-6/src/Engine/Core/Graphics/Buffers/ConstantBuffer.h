@@ -3,10 +3,7 @@
 #pragma warning(disable: 4127)
 
 #include "D3D11.h"
-#include "D3D10.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
-#include "Engine/Core/Graphics/GraphicsSystem.h"
-#include "Engine/Core/Utilities/Logging.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
 
 enum BindFlags
 {
@@ -18,116 +15,21 @@ enum BindFlags
 	BIND_ALL    = BIND_VERTEX | BIND_HULL | BIND_DOMAIN | BIND_GEOM | BIND_PIXEL
 };
 
-template<class T, UINT m_bufferSlot, BindFlags m_bindFlags>
 class ConstantBuffer
-{	
-	static_assert(sizeof(T) % 16 == 0, "Constant Buffer size must be divisible by 16");
-	static_assert(sizeof(T) <= D3D11_REQ_CONSTANT_BUFFER_ELEMENT_COUNT, "Constant Buffer size must be less than or equal to D3D11_REQ_CONSTANT_BUFFER_ELEMENT_COUNT");
-
-public:
-	void UpdateBuffer(const T& data)
-	{
-		D3D11_MAPPED_SUBRESOURCE mappedData;
-		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-		HRESULT bufferMapResult = deviceContext->Map(m_buffer, NULL, D3D11_MAP_WRITE_DISCARD, D3D11_USAGE_DEFAULT, &mappedData);
-		if (SUCCEEDED(bufferMapResult))
-		{
-			memcpy(mappedData.pData, &data, sizeof(T));
-			deviceContext->Unmap(m_buffer, 0);
-		}
-	}
-
-	void BindBuffer()
-	{
-		ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
-		if ((m_bindFlags & BIND_VERTEX) == BIND_VERTEX)
-		{
-			deviceContext->VSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
-		}
-		if ((m_bindFlags & BIND_HULL) == BIND_HULL)
-		{
-			deviceContext->HSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
-		}
-		if ((m_bindFlags & BIND_DOMAIN) == BIND_DOMAIN)
-		{
-			deviceContext->DSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
-		}
-		if ((m_bindFlags & BIND_GEOM) == BIND_GEOM)
-		{
-			deviceContext->GSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
-		}
-		if ((m_bindFlags & BIND_PIXEL) == BIND_PIXEL)
-		{
-			deviceContext->PSSetConstantBuffers(m_bufferSlot, 1, m_buffer);
-		}
-	}
-    
-    void ReleaseBuffer()
-    {
-        m_buffer.ReleasePointer();
-    }
-
-	ConstantBuffer()
-	{
-		T initialData;
-		ZeroMemory(&initialData, sizeof(T));
-
-		D3D11_BUFFER_DESC desc;
-		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
-		desc.ByteWidth = sizeof(T);
-		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-		D3D11_SUBRESOURCE_DATA data;
-		ZeroMemory(&data, sizeof(data));
-		data.pSysMem = &initialData;
-
-		ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
-		if (!SUCCEEDED(device->CreateBuffer(&desc, &data, m_buffer)))
-		{
-			LogError("[ConstantBuffer] Could not Create Buffer!");
-		}
-	}
-
-	~ConstantBuffer()
-	{
-	}
-
-private:
-	ManualRelease<ID3D11Buffer> m_buffer;
-};
-
-
-template<typename... Types>
-class ConstantBufferInterfaceImpl
 {
 public:
-    template<class T>
-    T& GetBuffer()
-    {
-        return std::get<T>(m_constantBuffers);
-    }
+	ConstantBuffer(GraphicsDevice& gfxDevice) :
+		m_gfxDevice(gfxDevice) { }
+	~ConstantBuffer();
 
-    ConstantBufferInterfaceImpl() = default;
-    ~ConstantBufferInterfaceImpl() = default;
-    ConstantBufferInterfaceImpl(ConstantBufferInterfaceImpl&) = delete;
-
-    template<int I>
-    inline typename std::enable_if<I == sizeof...(Types), void>::type
-        ReleaseAll() { }
-
-    template<int I = 0>
-    inline typename std::enable_if < I < sizeof...(Types)>::type
-        ReleaseAll()
-    {
-        auto buf = std::get<I>(m_constantBuffers);
-        buf.ReleaseBuffer();
-        ReleaseAll<I + 1>();
-    }
+    void InitBuffer(size_t length);
+	void UpdateBuffer(void* data, size_t length);
+	void BindBuffer(UINT bufferSlot, BindFlags bindFlags);
+	void ReleaseBuffer();
 
 private:
-    std::tuple<Types...> m_constantBuffers;
+	GraphicsDevice& m_gfxDevice;
+	ManualRelease<ID3D11Buffer> m_buffer;
 };
 
 #pragma warning(pop)

@@ -1,23 +1,12 @@
 #include "stdafx.h"
 #include "NoClipLocomotion.h"
 
+#include "Engine/Core/RTTI/TypedObjectManager.h"
 #include "Engine/Core/SceneGraph/Components/Entity.h"
-#include "Engine/Core/SceneGraph/Components/Util/EntityUtil.hpp"
-#include "Engine/Core/Graphics/Components/Transform.h"
-#include "Engine/Core/SceneGraph/SceneGraph.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
+#include "Engine/Core/Components/Transform.h"
+
 #include "Engine/Core/Input/InputSystem.h"
 #include "Engine/Core/Time/Time.h"
-#include "MyMath/MathDefines.h"
-
-NoClipLocomotion::NoClipLocomotion()
-{
-}
-
-
-NoClipLocomotion::~NoClipLocomotion()
-{
-}
 
 void NoClipLocomotion::SetPlayer(int entityId)
 {
@@ -31,44 +20,43 @@ void NoClipLocomotion::VariableTick()
         return;
     }
 
-    EntityComponent* player = GetSceneGraph().GetComponent<EntityComponent>(m_playerEntityId);
+    Entity* player = m_typedObjectManager.GetInstance<Entity>(m_playerEntityId);
     if (player == nullptr)
     {
         return;
     }
 
-    TransformComponent* playerTransform = EntityUtil::GetComponent<TransformComponent>(*player);
+    Transform* playerTransform = player->GetComponent<Transform>();
     if (playerTransform == nullptr)
     {
         return;
     }
     
-    InputSystem* inputSys = GetSystemManager().GetSystem<InputSystem>();
-    const MouseInput& mouseInput = inputSys->GetMouse();
+    const MouseInput& mouseInput = m_inputSystem.GetMouse();
     if (mouseInput.GetMouseButton(0))
     {
         Vector2 mouseDelta = mouseInput.GetDeltaMousePosition();
 #if 1
-        Vector3 currentUp = playerTransform->m_data.WorldUp();
-        Vector3 currentRight = playerTransform->m_data.WorldRight();
-        Vector3 currentForward = playerTransform->m_data.WorldForward();
+        Vector3 currentUp = playerTransform->WorldUp();
+        Vector3 currentRight = playerTransform->WorldRight();
+        Vector3 currentForward = playerTransform->WorldForward();
 
         Vector3 upComponent = currentUp * m_sensitivity * -mouseDelta.Y * Time::DeltaTimeStep();
         Vector3 rightComponent = currentRight * m_sensitivity * mouseDelta.X * Time::DeltaTimeStep();
         Vector3 newForward = currentForward + upComponent + rightComponent;
 
-        playerTransform->m_data.SetRotation(Quaternion::FromLookRotation(newForward));
+        playerTransform->SetRotation(Quaternion::FromLookRotation(newForward));
 #else
-        Vector3 eulerAngle = Quaternion::ToEuler(playerTransform->m_data.m_rotation);
+        Vector3 eulerAngle = Quaternion::ToEuler(playerTransform->m_rotation);
         eulerAngle.X += m_sensitivity * mouseDelta.Y * Time::DeltaTimeStep();
         eulerAngle.Y += m_sensitivity * mouseDelta.X * Time::DeltaTimeStep();
         eulerAngle.Z = 0;
         
-        playerTransform->m_data.m_rotation = Quaternion::FromEuler(eulerAngle);
+        playerTransform->m_rotation = Quaternion::FromEuler(eulerAngle);
 #endif
     }
 
-    const KeyboardInput& keyboardInput = inputSys->GetKeyboard();
+    const KeyboardInput& keyboardInput = m_inputSystem.GetKeyboard();
     Vector3 moveDelta = { 0, 0, 0 };
     if (keyboardInput.GetKey(kInputKey_W))
     {
@@ -97,7 +85,7 @@ void NoClipLocomotion::VariableTick()
         moveDelta.Y = -1.0f;
     }
 
-    Vector3::Normalize(moveDelta);
+    moveDelta.Normalize();
 
     if (keyboardInput.GetKey(kInputKey_SHIFT))
     {
@@ -110,11 +98,11 @@ void NoClipLocomotion::VariableTick()
 
     if (keyboardInput.GetKey(kInputKey_R))
     {
-        playerTransform->m_data.m_position = { 0,0,0 };
+        playerTransform->m_position = { 0,0,0 };
     }
 
     moveDelta *= Time::DeltaTimeStep();
-    moveDelta *= playerTransform->m_data.m_rotation;
+    moveDelta *= playerTransform->m_rotation;
     
-    playerTransform->m_data.m_position += moveDelta;
+    playerTransform->m_position += moveDelta;
 }

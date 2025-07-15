@@ -1,58 +1,62 @@
 #pragma once
-
-#include "D3D11.h"
-#include "D3D10.h"
-
+#include <memory>
 #include <vector>
-#include "Engine/Core/SystemManagement/ISystem.h"
-#include "RasterizerState.h"
-#include "BlendState.h"
 
-class VertexBuffer;
-class IndexBuffer;
-class DepthStencilBuffer;
+#include "Engine/Core/SystemManagement/ISystem.h"
+#include "Engine/Core/DataStructures/MaterialPropertyList.h"
+
+class BlendState;
+class MeshManager;
+class GraphicsDevice;
+class ConstantBuffer;
 class RasterizerState;
+class TypedObjectManager;
+class DepthStencilBuffer;
+
+struct PER_CAMERA_BUFFER
+{
+	Vector4 EyePos;
+	Matrix4x4 View;
+	Matrix4x4 Projection;
+};
+
+struct PER_OBJECT_BUFFER
+{
+	Matrix4x4 ModelViewProjection;
+	Matrix4x4 ModelView;
+};
 
 class GraphicsSystem : public ISystem
 {
 public:
-    IDXGISwapChain* GetSwapChain();
-    ID3D11Device* GetGraphicsDevice();
-	ID3D11DeviceContext* GetGraphicsDeviceContext();
-    DepthStencilBuffer* GetDepthStencilBuffer();
-    RasterizerState* GetRasterizerState();
-    BlendState* GetBlendState();
+    GraphicsSystem(BlendState& blendState,
+        MeshManager& meshManager,
+        GraphicsDevice& gfxDevice,
+        DepthStencilBuffer& depthStencilBuffer,
+		TypedObjectManager& typedObjectManager,
+		RasterizerState& rasterizerState);
 
-    void SetDirty();
-
-    GraphicsSystem();
-    GraphicsSystem(const GraphicsSystem&) = delete;
-    virtual ~GraphicsSystem();
-
-    virtual bool Initialize() override;
-    virtual void Deinitalize() override;
+	virtual void Initialize() override;
     virtual void VariableTick() override;
+	virtual void Deinitalize() override;
 
-	float GetViewportWidth();
-	float GetViewportHeight();
+	ConstantBuffer* GetPerObjectBuffer();
+	ConstantBuffer* GetPerCameraBuffer();
+
+	ConstantBuffer* CreateConstantBuffer(size_t length);
 
 private:
-    ManualRelease<ID3D11Device> m_device;
-    ManualRelease<ID3D11DeviceContext> m_deviceContext;
-    ManualRelease<IDXGISwapChain> m_swapchain;
-
-#if defined(_DEBUG)
-    ManualRelease<ID3D11Debug> m_debugInterface;
-#endif
-
-	bool m_isDirty;
-    AutoPointer<IndexBuffer> m_myIndexBuffer;
-    AutoPointer<VertexBuffer> m_myVertexBuffer;
-    AutoPointer<RasterizerState> m_rasterizerState;
-    AutoPointer<BlendState> m_blendState;
-    AutoPointer<DepthStencilBuffer> m_depthStencilBuffer;
+	TypedObjectManager& m_typedObjectManager;
+	BlendState& m_blendState;
+	MeshManager& m_meshManager;
+	GraphicsDevice& m_gfxDevice;
+	RasterizerState& m_rasterizerState;
+	DepthStencilBuffer& m_depthStencilBuffer;
+	std::vector<ConstantBuffer*> m_allConstantBuffers;
     
-	float m_viewportWidth, m_viewportHeight;
-	
-	void UpdateIfDirty();
+	ConstantBuffer* m_perObjectBuffer;
+	MaterialProperty::List m_perObjectBufferProperties;
+
+	ConstantBuffer* m_perCameraBuffer;
+	MaterialProperty::List m_perCameraBufferProperties;
 };

@@ -22,3 +22,7 @@
 #include "Engine/Core/Utilities/StaticPointer.hpp"
 #include "Engine/Core/Utilities/AutoPointer.hpp"
 #include "MyMath/MyMath.h"
+
+#define TO_STRING(T) #T
+
+extern std::string ws2s(const std::wstring& wstr);

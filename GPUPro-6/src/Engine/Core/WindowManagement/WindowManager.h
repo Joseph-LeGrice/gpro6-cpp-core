@@ -2,23 +2,20 @@
 class WindowManager
 {
 public:
-    static void InitializeWindow();
-    static void ShutdownWindow();
-    
-    static HWND& GetHWND();
-    static UINT GetWindowWidth();
-    static UINT GetWindowHeight();
+	WindowManager();
+	~WindowManager();
+	WindowManager(const WindowManager&) = delete;
+	
+    HWND& GetHWND();
+    UINT GetWindowWidth();
+    UINT GetWindowHeight();
 
 private:
-    WindowManager() = delete;
-    WindowManager(const WindowManager&) = delete;
-    ~WindowManager() = delete;
+	UINT m_windowWidth;
+    UINT m_windowHeight;
 
-    static UINT s_windowWidth;
-    static UINT s_windowHeight;
-
-    static HWND s_hwnd;
-    static LPCWSTR s_applicationName;
-    static HINSTANCE s_hInstance;
+    HWND m_hwnd;
+    LPCWSTR m_applicationName;
+    HINSTANCE m_hInstance;
 };
 

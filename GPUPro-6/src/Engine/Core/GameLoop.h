@@ -1,18 +1,19 @@
 #pragma once
 
+class Time;
+class SystemContainer;
+
 class GameLoop
 {
 public:
-    GameLoop() = default;
+	GameLoop::GameLoop(Time& time) : m_time(time) { }
+	GameLoop(const GameLoop&) = delete;
     ~GameLoop() = default;
 
-    static int Run();
-    static void Stop();
+	int Run(SystemContainer& systems);
+	void Stop();
 
 private:
-    static StaticPointer<GameLoop> s_instance;
-
-    bool m_running;
-    int InternalRun();
-    void InternalStop();
+	Time& m_time;
+	bool m_running;
 };

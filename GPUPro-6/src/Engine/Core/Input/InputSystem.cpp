@@ -2,14 +2,6 @@
 #include "InputSystem.h"
 #include "Engine/Core/GameLoop.h"
 
-InputSystem::InputSystem()
-{
-}
-
-InputSystem::~InputSystem()
-{
-}
-
 void InputSystem::SetHWND(HWND hwnd)
 {
 	m_hwnd = hwnd;
@@ -30,7 +22,7 @@ void InputSystem::VariableTick()
 
 		if (msg.message == WM_QUIT)
 		{
-			GameLoop::Stop();
+			m_gameLoop.Stop();
 		}
 
 		m_mouseInput.HandleInput(msg);

@@ -1,11 +1,8 @@
 #include "stdafx.h"
 #include "RasterizerState.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
-#include "Engine/Core/Graphics/GraphicsSystem.h"
 
-RasterizerState::RasterizerState()
-{
-}
+#include "D3D11.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
 
 RasterizerState::~RasterizerState()
 {
@@ -18,7 +15,7 @@ RasterizerState::~RasterizerState()
 void RasterizerState::SetState(RasterizerStateDescriptor rsd)
 {
     ManualRelease<ID3D11RasterizerState>& rasterState = GetStateForDescriptor(rsd);
-    ID3D11DeviceContext* deviceContext = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDeviceContext();
+    ID3D11DeviceContext* deviceContext = m_gfxDevice.GetGraphicsDeviceContext();
     deviceContext->RSSetState(rasterState);
 }
 
@@ -27,7 +24,6 @@ ManualRelease<ID3D11RasterizerState>& RasterizerState::GetStateForDescriptor(Ras
     if (m_rasterStates.count(rsd) == 0)
     {
         D3D11_RASTERIZER_DESC desc;
-        desc.FillMode = D3D11_FILL_SOLID;
 
         switch (rsd.m_cullState)
         {
@@ -43,6 +39,17 @@ ManualRelease<ID3D11RasterizerState>& RasterizerState::GetStateForDescriptor(Ras
                 break;
         }
 
+        switch (rsd.m_fillMode)
+        {
+            default:
+            case kFillModeSolid:
+                desc.FillMode = D3D11_FILL_SOLID;
+                break;
+            case kFillModeWireframe:
+                desc.FillMode = D3D11_FILL_WIREFRAME;
+                break;
+        }
+
         desc.FrontCounterClockwise = FALSE;
         desc.DepthBias = 0;
         desc.SlopeScaledDepthBias = 0.0f;
@@ -53,7 +60,7 @@ ManualRelease<ID3D11RasterizerState>& RasterizerState::GetStateForDescriptor(Ras
         desc.AntialiasedLineEnable = FALSE;
 
         ManualRelease<ID3D11RasterizerState> rasterState;
-        ID3D11Device* device = GetSystemManager().GetSystem<GraphicsSystem>()->GetGraphicsDevice();
+        ID3D11Device* device = m_gfxDevice.GetGraphicsDevice();
         device->CreateRasterizerState(&desc, rasterState);
         m_rasterStates[rsd] = rasterState;
     }

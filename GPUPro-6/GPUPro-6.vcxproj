@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -27,28 +27,28 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -72,32 +72,34 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)\MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\x32</LibraryPath>
-    <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
-    <IntDir>$(OutDir)temp\</IntDir>
+    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_SDK_ROOT)\include\mono-2.0</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_SDK_ROOT)\lib</LibraryPath>
+    <OutDir>$(SolutionDir)..\editor\build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\editor\artifacts\$(Platform)-$(Configuration)\</IntDir>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)\MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\x64</LibraryPath>
-    <ExecutablePath>C:\Program Files (x86)\BullseyeCoverage\bin;$(ExecutablePath)</ExecutablePath>
-    <OutDir>$(ProjectDir)build\$(Platform)-$(Configuration)\</OutDir>
-    <IntDir>$(OutDir)temp\</IntDir>
+    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_SDK_ROOT)\include\mono-2.0</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_SDK_ROOT)\lib</LibraryPath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <OutDir>$(SolutionDir)..\editor\build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\editor\artifacts\$(Platform)-$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)\MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)lib\FreeImage\x32</LibraryPath>
-    <OutDir>$(ProjectDir)build\output\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)build\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_SDK_ROOT)\include\mono-2.0</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_SDK_ROOT)\lib</LibraryPath>
+    <OutDir>$(SolutionDir)..\editor\build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\editor\artifacts\$(Platform)-$(Configuration)\</IntDir>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)\MyMath\src;$(SolutionDir)lib\FreeImage\Include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\output\$(Platform)\$(Configuration);$(SolutionDir)lib\FreeImage\x64</LibraryPath>
-    <OutDir>$(ProjectDir)build\output\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)build\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath);$(ProjectDir)src;$(SolutionDir)MyMath\src;$(SolutionDir)lib\FreeImage\Include;$(SolutionDir)boost-di\include;$(SolutionDir)boost-di\extension\include;C:\Users\Joe\Development\Frameworks\mono\mono\eglib;$(MONO_SDK_ROOT)\include\mono-2.0</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)MyMath\build\$(Platform)-$(Configuration);$(SolutionDir)lib\FreeImage\$(Platform);$(MONO_SDK_ROOT)\lib</LibraryPath>
+    <OutDir>$(SolutionDir)..\editor\build\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\editor\artifacts\$(Platform)-$(Configuration)\</IntDir>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -107,16 +109,16 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;d3dx10.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;D3DCompiler.lib;ws2_32.lib;psapi.lib;ole32.lib;winmm.lib;oleaut32.lib;advapi32.lib;version.lib;mswsock.lib;libmono-static-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>"$(SolutionDir)..\build-utils\out\main-win.exe" -a x86 --build-directory "$(OutDir)\" --config-file "$(SolutionDir)..\config\resource-copy-config.json"</Command>
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -133,16 +135,17 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;d3dx10.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;D3DCompiler.lib;ws2_32.lib;psapi.lib;ole32.lib;winmm.lib;oleaut32.lib;advapi32.lib;version.lib;mswsock.lib;libmono-static-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>"$(SolutionDir)..\build-utils\out\main-win.exe" -a x64 --build-directory "$(OutDir)\" --config-file "$(SolutionDir)..\config\resource-copy-config.json"</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -156,12 +159,11 @@
       <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -170,11 +172,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
-      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;d3dx10.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;D3DCompiler.lib;ws2_32.lib;psapi.lib;ole32.lib;winmm.lib;oleaut32.lib;advapi32.lib;version.lib;mswsock.lib;libmono-static-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>"$(SolutionDir)..\build-utils\out\main-win.exe" -a x86 --build-directory "$(OutDir)\" --config-file "$(SolutionDir)..\config\resource-copy-config.json"</Command>
     </PostBuildEvent>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -188,33 +190,24 @@
       <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>
       </AdditionalOptions>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
-      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;d3d10.lib;d3dx10.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
-      <LinkStatus>true</LinkStatus>
+      <AdditionalDependencies>MyMath.lib;FreeImage.lib;d3d11.lib;D3DCompiler.lib;ws2_32.lib;psapi.lib;ole32.lib;winmm.lib;oleaut32.lib;advapi32.lib;version.lib;mswsock.lib;libmono-static-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>"$(SolutionDir)..\build-utils\out\main-win.exe" -a x64 --build-directory "$(OutDir)\" --config-file "$(SolutionDir)..\config\resource-copy-config.json"</Command>
     </PostBuildEvent>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
+    <ProjectReference />
     <Lib>
       <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
@@ -222,44 +215,76 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\DataStructures\MaterialPropertyList.cpp" />
+    <ClCompile Include="src\Engine\Core\GlobalStaticReferences.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\BlendState.cpp" />
     <ClCompile Include="src\Engine\Core\Application\Application.cpp" />
     <ClCompile Include="src\Engine\Core\GameLoop.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.cpp" />
+    <ClCompile Include="src\Engine\Core\Graphics\GraphicsDevice.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Material.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\ShaderResource.cpp" />
+    <ClCompile Include="src\Engine\Core\Mesh\MeshManager.cpp" />
+    <ClCompile Include="src\Engine\Core\RTTI\HelperMethods.cpp" />
+    <ClCompile Include="src\Engine\Core\RTTI\RTTI.cpp" />
+    <ClCompile Include="src\Engine\Core\RTTI\TypedObjectManager.cpp" />
+    <ClCompile Include="src\Engine\Core\RTTI\TypeNameMapping.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\ManagedObject.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ApplicationAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\CameraAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\LightAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\MeshRendererAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\components\TransformAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\MeshHelperAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MeshAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderResourceAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\StructuredBufferAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\Texture2DAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\Texture2DArrayAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\resources\TextureSamplerAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\MonoMarshallHelpers.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\Scripting\ScriptedSystemLoader.cpp" />
     <ClCompile Include="src\Engine\Core\SceneGraph\Components\Entity.cpp" />
     <ClCompile Include="src\Engine\Core\DataStructures\Color.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Components\Camera.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Components\Transform.cpp" />
+    <ClCompile Include="src\Engine\Core\Components\Camera.cpp" />
+    <ClCompile Include="src\Engine\Core\Components\Transform.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\RasterizerState.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.cpp" />
-    <ClCompile Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Mesh.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Shader.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\StructuredBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Shader.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Texture2D.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\TextureSampler.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Input\KeyboardInput.cpp" />
     <ClCompile Include="src\Engine\Core\Input\MouseInput.cpp" />
-    <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraph.cpp" />
-    <ClCompile Include="src\Engine\Core\SystemManagement\SystemManager.cpp" />
+    <ClCompile Include="src\Engine\Core\SceneGraph\SceneGraphManager.cpp" />
+    <ClCompile Include="src\Engine\Core\SystemManagement\SystemContainer.cpp" />
+    <ClCompile Include="src\Engine\Core\Utilities\HeapAllocation.cpp" />
     <ClCompile Include="src\Engine\Extra\Locomotion\NoClipLocomotion.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\GraphicsSystem.cpp" />
     <ClCompile Include="src\Engine\Core\Input\InputSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\SystemManagement\ISystem.cpp" />
     <ClCompile Include="src\Engine\Core\Graphics\LightingSystem.cpp" />
-    <ClCompile Include="src\Engine\Core\ResourceManagement\ResourceManager.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.cpp" />
     <ClCompile Include="src\Engine\Core\Time\Time.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.cpp" />
-    <ClCompile Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.cpp" />
+    <ClCompile Include="src\Engine\Core\ResourceTypes\Texture2DArray.cpp" />
+    <ClCompile Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.cpp" />
     <ClCompile Include="src\Engine\Core\Utilities\MeshHelper.cpp" />
-    <ClCompile Include="src\Engine\Core\Utilities\PerlinNoise.cpp" />
+    <ClCompile Include="src\Engine\Core\Utilities\Noise.cpp" />
+    <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\Transvoxel.cpp" />
+    <ClCompile Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.cpp" />
+    <ClCompile Include="src\Engine\Main.cpp" />
+    <None Include="src\Engine\Core\Scripting\Bindings\GProConfig.json" />
+    <None Include="src\Engine\Main_BoostDI.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -267,72 +292,90 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\WindowManagement\WindowManager.cpp" />
-    <ClCompile Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Core\DataStructures\MaterialPropertyList.h" />
+    <ClInclude Include="src\Engine\Core\GlobalStaticReferences.h" />
     <ClInclude Include="src\Engine\Core\Graphics\BlendState.h" />
     <ClInclude Include="src\Engine\Core\Application\Application.h" />
     <ClInclude Include="src\Engine\Core\GameLoop.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\DrawCommandList.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\IDrawCommand.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\SkyboxDrawCommand.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardOpaqueMaterialDrawCommand.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\SimpleMaterial.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\ShaderResource.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\StandardMaterial.hpp" />
-    <ClInclude Include="src\Engine\Core\ResourceManagement\IResource.h" />
-    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManagerDefinition.hpp" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentType.hpp" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\EntityUtil.hpp" />
-    <ClInclude Include="src\Engine\Core\Graphics\Components\MeshRenderer.h" />
+    <ClInclude Include="src\Engine\Core\Graphics\GraphicsDevice.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\ShaderResource.h" />
+    <ClInclude Include="src\Engine\Core\Mesh\MeshManager.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\HelperMethods.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\RTTI.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\TypedObjectManager.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\TypeNameMapping.h" />
+    <ClInclude Include="src\Engine\Core\RTTI\ITypedObject.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\ManagedObject.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ApplicationAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\CameraAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\LightAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\MeshRendererAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\components\TransformAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\EntityAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\GProBindingRegistration.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\LoggingAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\MeshHelperAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MaterialAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\MeshAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\ShaderResourceAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\StructuredBufferAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\Texture2DAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\Texture2DArrayAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\resources\TextureSamplerAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\ScriptedSystemInterfaceAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\API\cpp-gen\TypedObjectManagerAPI.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\MonoMarshallHelpers.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\NativeToManagedInstanceMap.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystem.h" />
+    <ClInclude Include="src\Engine\Core\Scripting\ScriptedSystemLoader.h" />
+    <ClInclude Include="src\Engine\Core\Components\MeshRenderer.h" />
     <ClInclude Include="src\Engine\Core\DataStructures\Color.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Camera.h" />
+    <ClInclude Include="src\Engine\Core\Components\Camera.h" />
     <ClInclude Include="src\Engine\Core\SceneGraph\Components\Entity.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Transform.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentArray.hpp" />
+    <ClInclude Include="src\Engine\Core\Components\Transform.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\DepthStencilBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\RasterizerState.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Mesh.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphDefinition.hpp" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\Components\Util\ComponentReferenceNode.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Mesh.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\IComponent.h" />
     <ClInclude Include="src\Engine\Core\Graphics\VertexData.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBuffer.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\IndexBuffer.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Material\Material.hpp" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Shader.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\StructuredBuffer.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2D.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\TextureSampler.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Material.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Shader.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\StructuredBuffer.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Texture2D.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\TextureSampler.h" />
     <ClInclude Include="src\Engine\Core\Graphics\Buffers\VertexBuffer.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Components\Light.h" />
-    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.h" />
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManagerDefinition.hpp" />
+    <ClInclude Include="src\Engine\Core\Components\Light.h" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraph.hpp" />
+    <ClInclude Include="src\Engine\Core\SceneGraph\SceneGraphManager.h" />
+    <ClInclude Include="src\Engine\Core\SystemManagement\SystemContainer.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\HeapAllocation.h" />
+    <ClInclude Include="src\Engine\di.hpp" />
     <ClInclude Include="src\Engine\Extra\Locomotion\NoClipLocomotion.h" />
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemConfiguration.hpp" />
     <ClInclude Include="src\Engine\Core\Graphics\GraphicsSystem.h" />
     <ClInclude Include="src\Engine\Core\Graphics\LightingSystem.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\Buffers\ConstantBufferInterface.h" />
     <ClInclude Include="src\Engine\Core\Input\InputSystem.h" />
     <ClInclude Include="src\Engine\Core\SystemManagement\ISystem.h" />
-    <ClInclude Include="src\Engine\Core\ResourceManagement\ResourceManager.h" />
-    <ClInclude Include="src\Engine\Core\SystemManagement\SystemManager.h" />
     <ClInclude Include="src\Engine\Core\Time\Time.h" />
     <ClInclude Include="src\Engine\Core\Input\KeyboardInput.h" />
     <ClInclude Include="src\Engine\Core\Input\MouseInput.h" />
-    <ClInclude Include="src\Engine\Core\Graphics\ResourceTypes\Texture2DArray.h" />
-    <ClInclude Include="src\Engine\Extra\TransformSync\TransfromSyncSystem.h" />
-    <ClInclude Include="src\Engine\Extra\TransformSync\TranslationSync.h" />
+    <ClInclude Include="src\Engine\Core\ResourceTypes\Texture2DArray.h" />
+    <ClInclude Include="src\Engine\Extra\MarchingCubes2D\MarchingSquares2D.h" />
     <ClInclude Include="src\Engine\Core\Utilities\AutoPointer.hpp" />
     <ClInclude Include="src\Engine\Core\Utilities\PointerRelease.hpp" />
     <ClInclude Include="src\Engine\Core\Utilities\Logging.h" />
     <ClInclude Include="src\Engine\Core\Utilities\MeshHelper.h" />
-    <ClInclude Include="src\Engine\Core\Utilities\PerlinNoise.h" />
+    <ClInclude Include="src\Engine\Core\Utilities\Noise.h" />
+    <ClInclude Include="src\Engine\Extra\TransvoxelTerrain\VoxelTerrain.h" />
     <ClInclude Include="src\Resource.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
     <ClInclude Include="src\Engine\Core\WindowManagement\WindowManager.h" />
     <ClInclude Include="src\Engine\Core\Utilities\StaticPointer.hpp" />
-    <ClInclude Include="src\Engine\Core\Graphics\Drawing\StandardTransparentMaterialDrawCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Engine\Shaders\CommonInclude.hlsl">
@@ -377,7 +420,25 @@
       <FileType>Document</FileType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Engine\Shaders\TestShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

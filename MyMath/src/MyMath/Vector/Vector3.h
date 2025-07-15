@@ -15,10 +15,15 @@ struct Vector3
     static Vector3 Right();
     static Vector3 Forward();
 
-    static float Magnitude(Vector3& v);
-    static void Normalize(Vector3& v);
-    static float Dot(Vector3 a, Vector3 b);
-    static Vector3 Cross(Vector3 a, Vector3 b);
+    static Vector3 One();
+    static Vector3 Zero();
+    
+    static float Dot(const Vector3& a, const Vector3& b);
+    static Vector3 Cross(const Vector3& a, const Vector3& b);
+    static Vector3 Lerp(const Vector3& a, const Vector3& b, float time);
+
+    void Normalize();
+    float Magnitude() const;
 
     operator Vector4();
     operator std::string();

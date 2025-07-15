@@ -1,46 +1,64 @@
 #pragma once
 
-#include "Engine/Core/SceneGraph/Components/Util/ComponentType.hpp"
-#include "Engine/Core/SceneGraph/Components/Util/ComponentReferenceNode.h"
-
 #include <vector>
+#include <unordered_map>
+#include "Engine/Core/SceneGraph/IComponent.h"
 
 static const unsigned int c_numberOfComponentTypesAllowed = 10;
 
-struct Entity
+class Entity : public ITypedObject
 {
-    ComponentReferenceNode* m_rootNode;
-    ComponentReferenceNode m_nodePool[c_numberOfComponentTypesAllowed];
-    bool m_activeNodeIndexPool[c_numberOfComponentTypesAllowed];
-    unsigned int m_currentNumberOfNodesActive;
+	REGISTER_TYPE(Entity);
+public:
+
+	IComponent* AddComponent(TypeID type);
+	void RemoveComponent(TypeID type);
+	IComponent* GetComponent(TypeID type);
+
+	template<class T>
+	T* AddComponent();
+
+	template<class T>
+	void RemoveComponent();
+
+	template<class T>
+	T* GetComponent();
+
+private:
+	std::unordered_map<TypeID, std::vector<InstanceID>> m_componentMap;
 };
 
-namespace EntityInternal
+template<class T>
+T* Entity::AddComponent()
 {
-    ComponentReferenceNode* GetNextNode(Entity& e);
-    void ReturnNode(Entity& e, ComponentReferenceNode* node);
-
-    ComponentReferenceNode* Insert(Entity& e, ComponentType ct, size_t i, ComponentReferenceNode* currentNode);
-    ComponentReferenceNode* Delete(Entity& e, ComponentType ct, size_t i, ComponentReferenceNode* currentNode);
-    ComponentReferenceNode* Find(ComponentType ct, ComponentReferenceNode* currentNode);
-    ComponentReferenceNode* Rebalance(ComponentReferenceNode* currentNode);
-
-    struct InitEntity
-    {
-        Entity operator()()
-        {
-            Entity e;
-            for (size_t i = 0; i < c_numberOfComponentTypesAllowed; i++)
-            {
-                e.m_activeNodeIndexPool[i] = false;
-                InitComponentReferenceNode(e.m_nodePool[i]);
-            }
-
-            e.m_currentNumberOfNodesActive = 0;
-            e.m_rootNode = nullptr;
-            return e;
-        }
-    };
+	custom_assert::is_true(std::is_base_of<IComponent, T>::value);
+	T temp;
+	TypeID type = temp.GetTypeID();
+	return static_cast<T*>(AddComponent(type));
 }
 
-typedef ComponentRegistrationInfo<Entity, 5, EntityInternal::InitEntity> EntityComponent;
+template<class T>
+void Entity::RemoveComponent()
+{
+	custom_assert::is_true(std::is_base_of<IComponent, T>::value);
+	T temp;
+	TypeID type = temp.GetTypeID();
+	RemoveComponent(type);
+}
+
+template<class T>
+T* Entity::GetComponent()
+{
+	custom_assert::is_true(std::is_base_of<IComponent, T>::value);
+	T temp;
+	TypeID type = temp.GetTypeID();
+	IComponent* result = GetComponent(type);
+	if (result != nullptr)
+	{
+		return static_cast<T*>(result);
+	}
+	else
+	{
+		return nullptr;
+	}
+}

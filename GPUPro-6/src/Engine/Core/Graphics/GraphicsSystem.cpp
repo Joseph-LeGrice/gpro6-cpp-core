@@ -1,21 +1,24 @@
 #include "stdafx.h"
-#include "Engine/Core/ResourceManagement/ResourceManager.h"
-#include "Engine/Core/SceneGraph/Components/Util/EntityUtil.hpp"
-#include "Engine/Core/Graphics/Components/Camera.h"
-#include "Engine/Core/SceneGraph/SceneGraph.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
-#include "Engine/Core/WindowManagement/WindowManager.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
-#include "Engine/Core/Graphics/Buffers/ConstantBufferInterface.h"
-#include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
-#include "Engine/Core/Graphics/Buffers/IndexBuffer.h"
-#include "Engine/Core/Graphics/Buffers/VertexBuffer.h"
-#include "Engine/Core/Graphics/Components/MeshRenderer.h"
+#include "GraphicsSystem.h"
 
-#include "Drawing/DrawCommandList.h"
+#include <vector>
+
+#include "Engine/Core/Graphics/BlendState.h"
+#include "Engine/Core/Graphics/GraphicsDevice.h"
+#include "Engine/Core/Graphics/Buffers/DepthStencilBuffer.h"
+#include "Engine/Core/Graphics/Buffers/ConstantBuffer.h"
+#include "Engine/Core/Mesh/MeshManager.h"
+#include "Engine/Core/SceneGraph/SceneGraphManager.h"
+#include "Engine/Core/SceneGraph/Components/Entity.h"
+#include "Engine/Core/WindowManagement/WindowManager.h"
+#include "Engine/Core/RTTI/TypedObjectManager.h"
+#include "Engine/Core/ResourceTypes/Mesh.h"
+#include "Engine/Core/ResourceTypes/Material.h"
+#include "Engine/Core/Components/MeshRenderer.h"
+#include "Engine/Core/Components/Camera.h"
+#include "Engine/Core/Components/Transform.h"
 
 #include "FreeImage.h"
-#include <iostream>
 
 void FreeImageOutput(FREE_IMAGE_FORMAT fif, const char* message)
 {
@@ -28,231 +31,129 @@ void FreeImageOutput(FREE_IMAGE_FORMAT fif, const char* message)
     std::cout << "***" << std::endl;
 }
 
-GraphicsSystem::GraphicsSystem()
-{
-    FreeImage_SetOutputMessage(FreeImageOutput);
+GraphicsSystem::GraphicsSystem(BlendState& blendState,
+	MeshManager& meshManager,
+	GraphicsDevice& gfxDevice,
+	DepthStencilBuffer& depthStencilBuffer,
+	TypedObjectManager& typedObjectManager,
+	RasterizerState& rasterizerState) :
+	m_blendState(blendState),
+	m_meshManager(meshManager),
+	m_gfxDevice(gfxDevice),
+	m_depthStencilBuffer(depthStencilBuffer),
+	m_typedObjectManager(typedObjectManager),
+	m_rasterizerState(rasterizerState) {
+	FreeImage_SetOutputMessage(FreeImageOutput);
 }
 
-GraphicsSystem::~GraphicsSystem()
+void GraphicsSystem::Initialize()
 {
-}
+	ISystem::Initialize();
 
+	m_perCameraBufferProperties.Initalize({
+		{ L"EyePos", MaterialProperty::kFloat4Property },
+		{ L"_View", MaterialProperty::kMatrix4x4Property },
+		{ L"_Projection", MaterialProperty::kMatrix4x4Property }
+	});
+	m_perCameraBuffer = CreateConstantBuffer(m_perCameraBufferProperties.GetDataLength());
 
-bool GraphicsSystem::Initialize()
-{
-    m_viewportWidth = static_cast<float>(WindowManager::GetWindowWidth());
-    m_viewportHeight = static_cast<float>(WindowManager::GetWindowHeight());
-
-    // Initialize Direct3D
-    DXGI_SWAP_CHAIN_DESC scd;
-    ZeroMemory(&scd, sizeof(DXGI_SWAP_CHAIN_DESC));
-
-    scd.BufferCount = 1;
-    scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    scd.BufferDesc.Width = WindowManager::GetWindowWidth();
-    scd.BufferDesc.Height = WindowManager::GetWindowHeight();
-    scd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    scd.OutputWindow = WindowManager::GetHWND();
-    scd.SampleDesc.Count = 1;
-    scd.SampleDesc.Quality = 0;
-    scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-    scd.Windowed = TRUE;
-    //scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-
-    UINT creationFlags = 0;
-#if defined(_DEBUG)
-    creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
-#endif
-
-    HRESULT createDeviceResult = D3D11CreateDeviceAndSwapChain(NULL,
-        D3D_DRIVER_TYPE_HARDWARE,
-        NULL,
-        creationFlags,
-        NULL,
-        NULL,
-        D3D11_SDK_VERSION,
-        &scd,
-        m_swapchain,
-        m_device,
-        NULL,
-        m_deviceContext);
-
-    if (SUCCEEDED(createDeviceResult))
-    {
-#if defined(_DEBUG)
-        void* debugInterface;
-        HRESULT hr = m_device->QueryInterface(__uuidof(ID3D11Debug), &debugInterface);
-        if (SUCCEEDED(hr))
-        {
-            m_debugInterface = static_cast<ID3D11Debug*>(debugInterface);
-        }
-#endif
-
-        // Initialize Viewport
-        D3D11_VIEWPORT viewportDesc;
-        ZeroMemory(&viewportDesc, sizeof(D3D11_VIEWPORT));
-        viewportDesc.TopLeftX = 0;
-        viewportDesc.TopLeftY = 0;
-        viewportDesc.Width = m_viewportWidth;
-        viewportDesc.Height = m_viewportHeight;
-        viewportDesc.MinDepth = 0.0f;
-        viewportDesc.MaxDepth = 1.0f;
-
-        m_deviceContext->RSSetViewports(1, &viewportDesc);
-
-        // Initialize Buffers
-        size_t INDEX_BUFFER_SIZE = (size_t)pow(1024, 2);
-        size_t VERTEX_BUFFER_SIZE = (size_t)pow(1024, 2);
-
-        m_myIndexBuffer = IndexBuffer::Create(INDEX_BUFFER_SIZE);
-        m_myVertexBuffer = VertexBuffer::Create(VERTEX_BUFFER_SIZE);
-            
-        m_rasterizerState = new RasterizerState();
-        m_rasterizerState->SetState({ kCullStateBackCull, true });
-
-        m_depthStencilBuffer = new DepthStencilBuffer(WindowManager::GetWindowWidth(), WindowManager::GetWindowHeight());
-
-        m_blendState = new BlendState();
-        m_blendState->SetState({ false });
-
-        return m_myIndexBuffer != nullptr && m_myVertexBuffer != nullptr;
-    }
-
-    return false;
-}
-
-void GraphicsSystem::Deinitalize()
-{
-    m_swapchain->SetFullscreenState(FALSE, NULL);
-
-    m_swapchain.ReleasePointer();
-    m_device.ReleasePointer();
-    m_deviceContext.ReleasePointer();
-
-    m_myVertexBuffer.DeletePointer();
-    m_myIndexBuffer.DeletePointer();
-    m_rasterizerState.DeletePointer();
-    m_depthStencilBuffer.DeletePointer();
-
-#if defined(_DEBUG)
-    m_debugInterface->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
-    m_debugInterface.ReleasePointer();
-#endif
-}
-
-IDXGISwapChain* GraphicsSystem::GetSwapChain()
-{
-    return m_swapchain;
-}
-
-ID3D11Device* GraphicsSystem::GetGraphicsDevice()
-{
-	return m_device;
-}
-
-ID3D11DeviceContext* GraphicsSystem::GetGraphicsDeviceContext()
-{
-	return m_deviceContext;
-}
-
-DepthStencilBuffer* GraphicsSystem::GetDepthStencilBuffer()
-{
-    return m_depthStencilBuffer;
-}
-
-RasterizerState* GraphicsSystem::GetRasterizerState()
-{
-    return m_rasterizerState;
-}
-
-BlendState* GraphicsSystem::GetBlendState()
-{
-    return m_blendState;
-}
-
-float GraphicsSystem::GetViewportWidth()
-{
-	return m_viewportWidth;
-}
-
-float GraphicsSystem::GetViewportHeight()
-{
-	return m_viewportHeight;
-}
-
-void GraphicsSystem::SetDirty()
-{
-	m_isDirty = true;
-}
-
-void GraphicsSystem::UpdateIfDirty()
-{
-	if (m_isDirty)
-	{
-		std::vector<VertexData> allVerts;
-		std::vector<UINT16> allIndices;
-
-        MeshRendererComponent* const meshRenderers = GetSceneGraph().GetComponentArrayPointer<MeshRendererComponent>();
-        size_t numberOfMeshRenderers = GetSceneGraph().GetNumberOfComponents<MeshRendererComponent>();
-
-        for (size_t i=0; i< numberOfMeshRenderers; i++)
-		{
-            int meshIndex = meshRenderers[i].m_data.m_meshIndex;
-			Mesh& m = *GetResourceManager().GetAsset<Mesh>(meshIndex);
-
-			const std::vector<VertexData>& vertexData = m.GetVertexData();
-			allVerts.insert(allVerts.end(), vertexData.begin(), vertexData.end());
-
-			const std::vector<UINT16>& indexData = m.GetIndices();
-			allIndices.insert(allIndices.end(), indexData.begin(), indexData.end());
-		}
-
-		if (m_myVertexBuffer->TrySetData(allVerts) &&
-			m_myIndexBuffer->TrySetData(allIndices))
-		{
-			m_isDirty = false;
-		}
-	}
+	m_perObjectBufferProperties.Initalize({
+		{ L"ModelViewProjection", MaterialProperty::kMatrix4x4Property },
+		{ L"ModelView", MaterialProperty::kMatrix4x4Property }
+	});
+	m_perObjectBuffer = CreateConstantBuffer(m_perObjectBufferProperties.GetDataLength());
 }
 
 void GraphicsSystem::VariableTick()
 {
-	UpdateIfDirty(); 
+	m_meshManager.BindBuffers();
 	
-	m_myVertexBuffer->SetCurrentIfValid();
-	m_myIndexBuffer->SetCurrentIfValid();
+    m_perCameraBuffer->BindBuffer(0, BIND_ALL);
+	m_perObjectBuffer->BindBuffer(1, BIND_ALL);
 
-    PerObjectBuffer& perObjectBuffer = GetConstantBufferInterface().GetBuffer<PerObjectBuffer>();
-    perObjectBuffer.BindBuffer();
+    m_depthStencilBuffer.ClearBuffer();
+    m_depthStencilBuffer.SetState();
 
-    PerCameraBuffer& perCameraBuffer = GetConstantBufferInterface().GetBuffer<PerCameraBuffer>();
-    perCameraBuffer.BindBuffer();
-
-    m_depthStencilBuffer->ClearBuffer();
-    m_depthStencilBuffer->SetState();
-
-    size_t allCamerasSize = GetSceneGraph().GetNumberOfComponents<CameraComponent>();
-	for (size_t cameraIndex = 0; cameraIndex < allCamerasSize; ++cameraIndex)
+	std::vector<Camera*> allCameras = m_typedObjectManager.GetAllInstances<Camera>();
+    for (size_t cameraIndex = 0; cameraIndex < allCameras.size(); ++cameraIndex)
 	{
-        CameraComponent& cam = *GetSceneGraph().GetComponent<CameraComponent>(static_cast<int>(cameraIndex));
+		Camera* cam = allCameras[cameraIndex];
 
-        EntityComponent& cameraEntity = *GetSceneGraph().GetComponent<EntityComponent>(cam.m_entityIndex);
-        TransformComponent& cameraTransform = *EntityUtil::GetComponent<TransformComponent>(cameraEntity);
+        Entity* cameraEntity = cam->entity.Get<Entity>();
+        Transform* cameraTransform = cameraEntity->GetComponent<Transform>();
 
-		Matrix4x4 view = Transform::GetCameraViewMatrix(cameraTransform.m_data);
-		Matrix4x4 proj = cam.m_data.m_projectionMatrix;
+		Matrix4x4 view = cameraTransform->GetCameraViewMatrix();
+		Matrix4x4 proj = cam->m_projectionMatrix;
 
-        PER_CAMERA_BUFFER pcb;
-        pcb.EyePos.X = cameraTransform.m_data.m_position.X;
-        pcb.EyePos.Y = cameraTransform.m_data.m_position.Y;
-        pcb.EyePos.Z = cameraTransform.m_data.m_position.Z;
-        pcb.EyePos.W = 1;
-        pcb.View = view;
-        pcb.Projection = proj;
-        perCameraBuffer.UpdateBuffer(pcb);
+		m_perCameraBufferProperties.SetFloat4(L"EyePos", Vector4::FromVector3(cameraTransform->m_position));
+		m_perCameraBufferProperties.SetMatrix4x4(L"_View", view);
+		m_perCameraBufferProperties.SetMatrix4x4(L"_Projection", proj);
+        m_perCameraBuffer->UpdateBuffer(m_perCameraBufferProperties.GetData(), m_perCameraBufferProperties.GetDataLength());
 
-        //TODO: Chaining of draw commands?
-        GetCommandList().ExecuteAllCommands(view, proj);
+		ID3D11DeviceContext& deviceContext = *m_gfxDevice.GetGraphicsDeviceContext();
+
+		std::vector<MeshRenderer*> meshRenderers = m_typedObjectManager.GetAllInstances<MeshRenderer>();
+		for (size_t i = 0; i < meshRenderers.size(); ++i)
+		{
+			MeshRenderer* mrc = meshRenderers[i];
+			Entity* meshEntity = mrc->entity.Get<Entity>();
+
+			Mesh* mesh = mrc->m_mesh.Get<Mesh>();
+			MeshInfo mi = m_meshManager.GetMapping(mesh);
+			
+			if (mrc->m_enabled)
+			{
+				Transform* modelTransform = meshEntity->GetComponent<Transform>();
+
+				Matrix4x4 model;
+				Matrix4x4::Identity(model);
+				if (modelTransform != nullptr)
+				{
+					model = modelTransform->GetMatrix();
+				}
+
+				Matrix4x4 mvp = proj * view * model;
+				m_perObjectBufferProperties.SetMatrix4x4(L"ModelViewProjection", mvp);
+				Matrix4x4 mv = view * model;
+				m_perObjectBufferProperties.SetMatrix4x4(L"ModelView", mv);
+
+				m_perObjectBuffer->UpdateBuffer(m_perObjectBufferProperties.GetData(), m_perObjectBufferProperties.GetDataLength());
+
+				Material* mat = mrc->m_material.Get<Material>();
+				if (mat->BindIfValid(&m_rasterizerState, &m_blendState))
+				{
+					deviceContext.IASetPrimitiveTopology(mesh->m_topology);
+					deviceContext.DrawIndexed(mi.m_indexCount, mi.m_indexStart, mi.m_vertexStart);
+				}
+			}
+		}
 	}
-	m_swapchain->Present(0, 0);
+	m_gfxDevice.Present();
+}
+
+ConstantBuffer* GraphicsSystem::CreateConstantBuffer(size_t length)
+{
+	ConstantBuffer* newBuffer = new ConstantBuffer(m_gfxDevice); // FIXME: MANUAL ALLOCATION HERE
+	newBuffer->InitBuffer(length);
+	m_allConstantBuffers.push_back(newBuffer);
+	return newBuffer;
+}
+
+void GraphicsSystem::Deinitalize()
+{
+	for (unsigned int i = 0; i < m_allConstantBuffers.size(); i++)
+	{
+		m_allConstantBuffers[i]->ReleaseBuffer();
+		delete m_allConstantBuffers[i]; // FIXME: MANUAL DEALLOCATION HERE
+	}
+}
+
+ConstantBuffer* GraphicsSystem::GetPerObjectBuffer()
+{
+	return m_perObjectBuffer;
+}
+
+ConstantBuffer* GraphicsSystem::GetPerCameraBuffer()
+{
+	return m_perCameraBuffer;
 }

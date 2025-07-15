@@ -1,67 +1,41 @@
 #include "stdafx.h"
 #include "GameLoop.h"
+
 #include "Engine/Core/Time/Time.h"
-#include "Engine/Core/SystemManagement/SystemManager.h"
+#include "Engine/Core/SystemManagement/SystemContainer.h"
 
-StaticPointer<GameLoop> GameLoop::s_instance;
-
-int GameLoop::Run()
+int GameLoop::Run(SystemContainer& systems)
 {
-    return s_instance->InternalRun();
-}
-
-void GameLoop::Stop()
-{
-    s_instance->InternalStop();
-}
-
-void DoFixed(ISystem* system)
-{
-    system->FixedTick();
-}
-
-void DoEarlyVariable(ISystem* system)
-{
-    system->EarlyVariableTick();
-}
-
-void DoVariable(ISystem* system)
-{
-    system->VariableTick();
-}
-
-void DoLateVariable(ISystem* system)
-{
-    system->LateVariableTick();
-}
-
-int GameLoop::InternalRun()
-{
-    try
+	m_running = true;
+    while (m_running)
     {
-        m_running = true;
-        while (m_running)
-        {
-            Time::s_instance->AdvanceFrame();
+		try
+		{
+			systems.InitializeAll();
 
-            while (Time::s_instance->ShouldAdvanceFixedStep())
-            {
-                GetSystemManager().ForEachSystem(DoFixed);
-            }
+			m_time.AdvanceFrame();
 
-            GetSystemManager().ForEachSystem(DoEarlyVariable);
-            GetSystemManager().ForEachSystem(DoVariable);
-            GetSystemManager().ForEachSystem(DoLateVariable);
+			while (m_time.ShouldAdvanceFixedStep())
+			{
+				systems.FixedTickAll();
+			}
+
+			systems.EarlyVariableTickAll();
+			systems.VariableTickAll();
+			systems.LateVariableTickAll();
         }
-    }
-    catch (...)
-    {
+		catch (const custom_assert::custom_assert_error& e)
+		{
+			Log(e.m_message);
+		}
+	}
 
-    }
+	systems.DeinitializeAll();
+
     return 0;
 }
 
-void GameLoop::InternalStop()
+void GameLoop::Stop()
 {
     m_running = false;
 }

@@ -1,11 +1,11 @@
 #pragma once
 
 class Mesh;
+class TypedObjectManager;
 
 namespace MeshHelper
 {
-	Mesh* CreateQuad();
-	Mesh* CreateSphereICO();
-	Mesh* CreateSphereUV();
-	Mesh* CreateCube();
+	Mesh* Quad(TypedObjectManager& resourceManager);
+	Mesh* SphereUV(TypedObjectManager& resourceManager);
+	Mesh* Cube(TypedObjectManager& resourceManager);
 };

@@ -1,39 +1,52 @@
 #pragma once
+#include <stdexcept>
 
 namespace custom_assert
 {
-    inline void is_true(bool x, const char* message = "custom_assert::is_true failed!")
+	struct custom_assert_error
+	{
+		const char* m_message;
+		custom_assert_error(const char* message) : m_message(message) { }
+	};
+
+	__forceinline void is_true(const bool& x, const char* msg = "Assertion Failed!")
     {
-        if (!x) throw message;
+		if (!x) throw custom_assert_error(msg);
     }
     
     template<typename N>
-    inline void range(N x, N xMin, N xMax, const char* message = "custom_assert::range failed!")
+    __forceinline void range(const N& x, const N& xMin, const N& xMax, const char* msg = "Assertion Failed!")
     {
-        is_true(x >= xMin && x < xMax, message);
+        is_true(x >= xMin && x < xMax, msg);
+    }
+
+    template<typename N, typename A>
+    __forceinline void in_range(const N& x, const A& y, const char* msg = "Assertion Failed!")
+    {
+        is_true(x >= 0 && x < y.size(), msg);
     }
 
     template<typename N>
-    inline void equal(N x, N y, const char* message = "custom_assert::equal failed!")
+    __forceinline void equal(const N& x, const N& y, const char* msg = "Assertion Failed!")
     {
-        is_true(x == y, message);
+        is_true(x == y, msg);
     }
 
     template<typename N>
-    inline void not_equal(N x, N y, const char* message = "custom_assert::not_equal failed!")
+    __forceinline void not_equal(const N& x, const N& y, const char* msg = "Assertion Failed!")
     {
-        is_true(x != y, message);
+        is_true(x != y, msg);
     }
 
     template<typename N>
-    inline void not_nan(N x)
+    __forceinline void not_nan(const N& x, const char* msg = "Assertion Failed!")
     {
-        is_true(!isnan(x));
+        is_true(!isnan(x), msg);
     }
 
     template<typename N>
-    inline void not_inf(N x)
+    __forceinline void not_inf(const N& x, const char* msg = "Assertion Failed!")
     {
-        is_true(!isinf(x));
+        is_true(!isinf(x), msg);
     }
 }

@@ -1,12 +1,18 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include "MyMath/Complex/Quaternion.h"
+#include "MyMath/MathDefines.h"
 
 #include <sstream>
 
 Vector3::operator Vector4()
 {
-    return Vector4(X, Y, Z, 0);
+	Vector4 v;
+	v.X = X;
+	v.Y = Y;
+	v.Z = Z;
+	v.W = 0;
+	return v;
 }
 
 Vector3::operator std::string()
@@ -104,32 +110,49 @@ Vector3 Vector3::Forward()
     return { 0, 0, 1 };
 }
 
-float Vector3::Magnitude(Vector3& v)
+Vector3 Vector3::One()
 {
-	return sqrtf(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
+    return{ 1, 1, 1 };
 }
 
-void Vector3::Normalize(Vector3& v)
+Vector3 Vector3::Zero()
 {
-    float mag = Vector3::Magnitude(v);
+    return{ 0, 0, 0 };
+}
+float Vector3::Magnitude() const
+{
+	return sqrtf(X * X + Y * Y + Z * Z);
+}
+
+void Vector3::Normalize()
+{
+    float mag = Magnitude();
     if (mag > 0)
     {
-        v.X /= mag;
-        v.Y /= mag;
-        v.Z /= mag;
+        X /= mag;
+        Y /= mag;
+        Z /= mag;
     }
 }
 
-float Vector3::Dot(Vector3 a, Vector3 b)
+float Vector3::Dot(const Vector3& a, const Vector3& b)
 {
 	return a.X * b.X + a.Y * b.Y * a.Z * b.Z;
 }
 
-Vector3 Vector3::Cross(Vector3 a, Vector3 b)
+Vector3 Vector3::Cross(const Vector3& a, const Vector3& b)
 {
 	Vector3 result;
 	result.X = a.Y * b.Z - a.Z * b.Y;
 	result.Y = a.Z * b.X - a.X * b.Z;
 	result.Z = a.X * b.Y - a.Y * b.X;
 	return result;
+}
+
+Vector3 Vector3::Lerp(const Vector3& a, const Vector3& b, float time)
+{
+    time = MyMath::Clamp01(time);
+    Vector3 offset = b - a;
+    offset.Normalize();
+    return a + offset * time;
 }
